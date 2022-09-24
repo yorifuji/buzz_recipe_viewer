@@ -1,0 +1,36 @@
+name: workflow for deliver
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: |
+      startsWith(github.event.pull_request.head.ref, 'releases/') &&
+      github.event.review.state == 'approved' &&
+      contains(github.event.pull_request.labels.*.name, 'ready-deliver') == false
+    steps:
+      - name: Invoke next job
+        run: exit 0
+
+  label:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Add Label
+        uses: pullreminders/label-when-approved-action@master
+        env:
+          APPROVALS: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "ready-deliver"
+
+  # use absolute path for uses if project is public.
+  # https://github.com/orgs/github-community/discussions/14306
+  deliver-ios:
+    needs: label
+    uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.ios.job.yaml@main
+    secrets: inherit

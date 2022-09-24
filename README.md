@@ -24,3 +24,10 @@
   - Manual managing signing を選択する
   - 先ほど作成したプロファイルを指定する
   - Export したフォルダに入っている ExportOptions.plist をプロジェクトの ios フォルダに追加する
+- GitHub Actions
+  - .github フォルダに Workflow を追加
+  - 修正
+    - deliver.ios.job.yaml
+      - IOS_IPA_PATH のファイル名を修正
+    - deliver.workflow.yaml
+      - deliver-ios: の uses を修正

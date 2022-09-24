@@ -1,0 +1,30 @@
+name: workflow for release branch
+
+on:
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+
+jobs:
+  analyze-job:
+    if: startsWith(github.head_ref, 'releases/')
+    uses: ./.github/workflows/analyze.job.yaml
+    secrets: inherit
+
+  test-job:
+    if: startsWith(github.head_ref, 'releases/')
+    uses: ./.github/workflows/test.job.yaml
+    secrets: inherit
+
+  deliver-ios-job:
+    needs: [analyze-job, test-job]
+    if: startsWith(github.head_ref, 'releases/')
+    uses: ./.github/workflows/deliver.ios.job.yaml
+    secrets: inherit
+
+  deliver-android-job:
+    needs: [analyze-job, test-job]
+    if: startsWith(github.head_ref, 'releases/')
+    uses: ./.github/workflows/deliver.android.job.yaml
+    secrets: inherit

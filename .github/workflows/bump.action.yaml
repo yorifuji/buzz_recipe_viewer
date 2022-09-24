@@ -1,0 +1,81 @@
+name: action bump
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        type: choice
+        description: Please Choice Bump Up Target
+        options:
+          - build
+          - patch
+          - minor
+          - major
+
+env:
+  GIT_USER_EMAIL: "yorifuji@users.noreply.github.com"
+  GIT_USER_NAME: "github-actions[bot]"
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - name: Run flutter version
+        run: flutter --version
+      - name: Run flutter pub get
+        run: flutter pub get
+      - name: Init Git config
+        run: |
+          git config --local user.name $GIT_USER_NAME
+          git config --local user.email $GIT_USER_EMAIL
+      - name: Bump up version
+        id: bump
+        run: |
+          echo choice: ${{ github.event.inputs.bump }}
+          flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
+          echo "::set-output name=BUMP_VERSION::$(flutter pub run cider version)"
+      - name: Commit pubspec.yaml
+        env:
+          BUMP_VERSION: ${{ steps.bump.outputs.BUMP_VERSION }}
+        run: |
+          git add -u pubspec.yaml
+          echo "Bumped version number to $BUMP_VERSION" | git commit --file=-
+      - name: Create Branch
+        id: branch
+        env:
+          BUMP_VERSION: ${{ steps.bump.outputs.BUMP_VERSION }}
+        run: |
+          git checkout -b releases/$BUMP_VERSION
+          echo "::set-output name=RELEASE_BRANCH::releases/$BUMP_VERSION"
+      - name: Push Branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.branch.outputs.RELEASE_BRANCH }}
+      - name: Create Pull Request
+        run: |
+          gh pr create -B main -t "Release $BUMP_VERSION" -b "Release $BUMP_VERSION" --head $RELEASE_BRANCH
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMP_VERSION: ${{ steps.bump.outputs.BUMP_VERSION }}
+          RELEASE_BRANCH: ${{ steps.branch.outputs.RELEASE_BRANCH }}
+      - name: Send Notification
+        uses: rtCamp/action-slack-notify@v2
+        if: always()
+        env:
+          SLACK_CHANNEL: github-actions
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
+          SLACK_TITLE: Job
+          SLACK_MESSAGE: ${{ github.job }}
