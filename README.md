@@ -44,3 +44,21 @@
 | APPLE_CERTIFICATES_P12     | ipa に署名する際に使用する証明書（秘密鍵を含む） | https://zenn.dev/pressedkonbu/articles/254ca2fc3cd1ab    |
 | APPLE_CERTIFICATE_PASSWORD | 証明書にセットしたパスワード                     | https://zenn.dev/pressedkonbu/articles/254ca2fc3cd1ab    |
 | APPLE_PROVISIONING_PROFILE | 配布用プロビジョニングプロファイル               | https://zenn.dev/pressedkonbu/articles/254ca2fc3cd1ab    |
+
+- GitHub でブランチ保護を設定する
+
+  - BumpUp の PR の Approve をトリガーにバイナリのビルドを実行するため main ブランチに対する保護を設定する
+  - 詳細
+    - Branch name pattern
+      - main
+    - Protect matching branches / Require a pull request before merging / Require approvals
+      - 1
+    - ref: https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule
+
+- CD の動作確認
+  - GitHub Actions を開く
+  - action bump から Run workflow を選択
+  - 'Please Choice Bump Up Target' で適当なターゲットを選択して実行
+  - 成功すると PR が作成される
+  - PR に対して Approve する
+  - CD が起動してビルドが行われる
