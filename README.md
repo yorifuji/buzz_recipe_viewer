@@ -1,16 +1,26 @@
 # buzz_recipe_viewer
 
-A new Flutter project.
+# What
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- flutter project を作成
+- Initial Commit
+- Bundle Identifier の変更
+  - Runner.xcwrokspace を開いて com.exmaple.... を変更する
+  - 変更すると ADC に Identifier が登録される（Automatically manage signing のため）
+- プロビジョニングプロファイルの作成
+  - ADC にログイン
+  - Register a New Provisioning Profile
+    - Distribution / App Store
+    - 登録されている App ID を選択する
+    - 適当な名前（'MyApp for App Store' など）を入力して Generate
+- Automatically manage signing を Off にする（Manual に変更）
+  - Runner.xcwrokspace を開く
+  - Signing and Capabilities を開いて Automatically manage signing のチェックを外す
+  - Provisioning profile に先ほど作成したプロファイルを指定する
+- Product / Archive を実行
+  - Export を選択
+  - App Store Connect に登録するアプリ名を入力する
+    - App Store Connect にアプリが登録される
+  - Manual managing signing を選択する
+  - 先ほど作成したプロファイルを指定する
+  - Export したフォルダに入っている ExportOptions.plist をプロジェクトの ios フォルダに追加する
