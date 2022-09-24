@@ -1,0 +1,38 @@
+name: job analyze
+
+on:
+  workflow_call:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create .env
+        shell: bash
+        run: |
+          touch .env
+          echo "APPLICATION_ID=${{ secrets.APPLICATION_ID }}" >> .env
+          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - name: Run flutter version
+        run: flutter --version
+      - name: Run flutter pub get
+        run: flutter pub get
+      - name: Run flutter analyze
+        run: flutter analyze
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        if: always()
+        env:
+          SLACK_CHANNEL: github-actions
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
+          SLACK_TITLE: Job
+          SLACK_MESSAGE: ${{ github.job }}
