@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  IOS_IPA_PATH: "build/ios/ipa/your_app.ipa"
+  IOS_IPA_PATH: "build/ios/ipa/buzz_recipe_viewer.ipa"
 
 jobs:
   deliver-ios:

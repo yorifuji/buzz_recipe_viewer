@@ -32,5 +32,5 @@ jobs:
   # https://github.com/orgs/github-community/discussions/14306
   deliver-ios:
     needs: label
-    # uses: {owner}/{repository}/.github/workflows/deliver.ios.job.yaml@main
+    uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.ios.job.yaml@main
     secrets: inherit
