@@ -49,11 +49,6 @@ class SearchHitsWidget extends HookConsumerWidget {
     );
     final viewModel = ref.watch(searchHitsProvider.notifier);
 
-    if (scrollController.hasClients) {
-      SchedulerBinding.instance
-          .addPostFrameCallback((_) => scrollController.jumpTo(0.0));
-    }
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -99,6 +94,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                   viewModel.updateQuery(queryEditController.text);
                   viewModel.search();
                   FocusManager.instance.primaryFocus?.unfocus();
+                  _scrollToTop(scrollController);
                 },
                 controller: queryEditController,
                 decoration: InputDecoration(
@@ -110,6 +106,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                             onPressed: () async {
                               viewModel.updateQuery('');
                               viewModel.search();
+                              _scrollToTop(scrollController);
                             },
                             icon: const Icon(Icons.clear),
                           )
@@ -120,6 +117,13 @@ class SearchHitsWidget extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  _scrollToTop(ScrollController controller) {
+    if (controller.hasClients) {
+      SchedulerBinding.instance
+          .addPostFrameCallback((_) => controller.jumpTo(0.0));
+    }
   }
 }
 
