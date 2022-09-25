@@ -87,6 +87,7 @@ class SearchHitsWidget extends HookConsumerWidget {
               ],
             ),
             const SizedBox(height: 8),
+            const Divider(height: 1),
             SizedBox(
               height: 44,
               child: TextField(
@@ -99,7 +100,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                 controller: queryEditController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Enter a search term',
+                    hintText: '検索ワード（例：から揚げ　ナス）',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: query.isNotEmpty
                         ? IconButton(
@@ -220,7 +221,7 @@ class SearchHitWidget extends HookConsumerWidget {
               viewModel.toogleDescription(item);
             },
             child: Column(children: [
-              const Divider(),
+              const Divider(height: 1),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(item.searchHit.description),
