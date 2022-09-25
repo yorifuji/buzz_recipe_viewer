@@ -24,9 +24,9 @@ class SearchHit with _$SearchHit {
 }
 
 @freezed
-class SearchHitViewItem with _$SearchHitViewItem {
-  const factory SearchHitViewItem({
+class SearchHitItem with _$SearchHitItem {
+  const factory SearchHitItem({
     required SearchHit searchHit,
     @Default(false) bool isDescriptionExpanded,
-  }) = _SearchHitViewItem;
+  }) = _SearchHitItem;
 }

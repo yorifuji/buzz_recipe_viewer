@@ -362,33 +362,33 @@ abstract class _SearchHit implements SearchHit {
 }
 
 /// @nodoc
-mixin _$SearchHitViewItem {
+mixin _$SearchHitItem {
   SearchHit get searchHit => throw _privateConstructorUsedError;
   bool get isDescriptionExpanded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SearchHitViewItemCopyWith<SearchHitViewItem> get copyWith =>
+  $SearchHitItemCopyWith<SearchHitItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchHitViewItemCopyWith<$Res> {
-  factory $SearchHitViewItemCopyWith(
-          SearchHitViewItem value, $Res Function(SearchHitViewItem) then) =
-      _$SearchHitViewItemCopyWithImpl<$Res>;
+abstract class $SearchHitItemCopyWith<$Res> {
+  factory $SearchHitItemCopyWith(
+          SearchHitItem value, $Res Function(SearchHitItem) then) =
+      _$SearchHitItemCopyWithImpl<$Res>;
   $Res call({SearchHit searchHit, bool isDescriptionExpanded});
 
   $SearchHitCopyWith<$Res> get searchHit;
 }
 
 /// @nodoc
-class _$SearchHitViewItemCopyWithImpl<$Res>
-    implements $SearchHitViewItemCopyWith<$Res> {
-  _$SearchHitViewItemCopyWithImpl(this._value, this._then);
+class _$SearchHitItemCopyWithImpl<$Res>
+    implements $SearchHitItemCopyWith<$Res> {
+  _$SearchHitItemCopyWithImpl(this._value, this._then);
 
-  final SearchHitViewItem _value;
+  final SearchHitItem _value;
   // ignore: unused_field
-  final $Res Function(SearchHitViewItem) _then;
+  final $Res Function(SearchHitItem) _then;
 
   @override
   $Res call({
@@ -416,11 +416,11 @@ class _$SearchHitViewItemCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_SearchHitViewItemCopyWith<$Res>
-    implements $SearchHitViewItemCopyWith<$Res> {
-  factory _$$_SearchHitViewItemCopyWith(_$_SearchHitViewItem value,
-          $Res Function(_$_SearchHitViewItem) then) =
-      __$$_SearchHitViewItemCopyWithImpl<$Res>;
+abstract class _$$_SearchHitItemCopyWith<$Res>
+    implements $SearchHitItemCopyWith<$Res> {
+  factory _$$_SearchHitItemCopyWith(
+          _$_SearchHitItem value, $Res Function(_$_SearchHitItem) then) =
+      __$$_SearchHitItemCopyWithImpl<$Res>;
   @override
   $Res call({SearchHit searchHit, bool isDescriptionExpanded});
 
@@ -429,22 +429,22 @@ abstract class _$$_SearchHitViewItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchHitViewItemCopyWithImpl<$Res>
-    extends _$SearchHitViewItemCopyWithImpl<$Res>
-    implements _$$_SearchHitViewItemCopyWith<$Res> {
-  __$$_SearchHitViewItemCopyWithImpl(
-      _$_SearchHitViewItem _value, $Res Function(_$_SearchHitViewItem) _then)
-      : super(_value, (v) => _then(v as _$_SearchHitViewItem));
+class __$$_SearchHitItemCopyWithImpl<$Res>
+    extends _$SearchHitItemCopyWithImpl<$Res>
+    implements _$$_SearchHitItemCopyWith<$Res> {
+  __$$_SearchHitItemCopyWithImpl(
+      _$_SearchHitItem _value, $Res Function(_$_SearchHitItem) _then)
+      : super(_value, (v) => _then(v as _$_SearchHitItem));
 
   @override
-  _$_SearchHitViewItem get _value => super._value as _$_SearchHitViewItem;
+  _$_SearchHitItem get _value => super._value as _$_SearchHitItem;
 
   @override
   $Res call({
     Object? searchHit = freezed,
     Object? isDescriptionExpanded = freezed,
   }) {
-    return _then(_$_SearchHitViewItem(
+    return _then(_$_SearchHitItem(
       searchHit: searchHit == freezed
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
@@ -459,10 +459,8 @@ class __$$_SearchHitViewItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchHitViewItem
-    with DiagnosticableTreeMixin
-    implements _SearchHitViewItem {
-  const _$_SearchHitViewItem(
+class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
+  const _$_SearchHitItem(
       {required this.searchHit, this.isDescriptionExpanded = false});
 
   @override
@@ -473,14 +471,14 @@ class _$_SearchHitViewItem
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SearchHitViewItem(searchHit: $searchHit, isDescriptionExpanded: $isDescriptionExpanded)';
+    return 'SearchHitItem(searchHit: $searchHit, isDescriptionExpanded: $isDescriptionExpanded)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SearchHitViewItem'))
+      ..add(DiagnosticsProperty('type', 'SearchHitItem'))
       ..add(DiagnosticsProperty('searchHit', searchHit))
       ..add(
           DiagnosticsProperty('isDescriptionExpanded', isDescriptionExpanded));
@@ -490,7 +488,7 @@ class _$_SearchHitViewItem
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchHitViewItem &&
+            other is _$_SearchHitItem &&
             const DeepCollectionEquality().equals(other.searchHit, searchHit) &&
             const DeepCollectionEquality()
                 .equals(other.isDescriptionExpanded, isDescriptionExpanded));
@@ -504,15 +502,14 @@ class _$_SearchHitViewItem
 
   @JsonKey(ignore: true)
   @override
-  _$$_SearchHitViewItemCopyWith<_$_SearchHitViewItem> get copyWith =>
-      __$$_SearchHitViewItemCopyWithImpl<_$_SearchHitViewItem>(
-          this, _$identity);
+  _$$_SearchHitItemCopyWith<_$_SearchHitItem> get copyWith =>
+      __$$_SearchHitItemCopyWithImpl<_$_SearchHitItem>(this, _$identity);
 }
 
-abstract class _SearchHitViewItem implements SearchHitViewItem {
-  const factory _SearchHitViewItem(
+abstract class _SearchHitItem implements SearchHitItem {
+  const factory _SearchHitItem(
       {required final SearchHit searchHit,
-      final bool isDescriptionExpanded}) = _$_SearchHitViewItem;
+      final bool isDescriptionExpanded}) = _$_SearchHitItem;
 
   @override
   SearchHit get searchHit;
@@ -520,6 +517,6 @@ abstract class _SearchHitViewItem implements SearchHitViewItem {
   bool get isDescriptionExpanded;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchHitViewItemCopyWith<_$_SearchHitViewItem> get copyWith =>
+  _$$_SearchHitItemCopyWith<_$_SearchHitItem> get copyWith =>
       throw _privateConstructorUsedError;
 }

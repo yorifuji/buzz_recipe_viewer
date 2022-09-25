@@ -1,13 +1,17 @@
-import 'package:algolia/algolia.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/model/search_hits_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
   await dotenv.load();
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,57 +24,40 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: const MyHomePage(),
+      home: const SearchHitsWidget(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class SearchHitsWidget extends HookConsumerWidget {
+  const SearchHitsWidget({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final queryEditController = useTextEditingController();
+    final hitList = ref.watch(
+      searchHitsProvider.select(
+        (value) => value.hitList,
+      ),
+    );
+    final query = ref.watch(
+      searchHitsProvider.select(
+        (value) => value.query,
+      ),
+    );
+    final viewModel = ref.watch(searchHitsProvider.notifier);
 
-class _MyHomePageState extends State<MyHomePage> {
-  final Algolia _algoliaClient = Algolia.init(
-    applicationId: dotenv.env["ALGOLIA_APPLICATION_ID"]!,
-    apiKey: dotenv.env["ALGOLIA_API_KEY"]!,
-  );
-
-  String _searchText = "";
-  List<SearchHitViewItem> _searchHitViewItemList = [];
-  final _textFieldController = TextEditingController();
-
-  Future<void> _getSearchResult(String query) async {
-    AlgoliaQuery algoliaQuery = _algoliaClient.instance
-        .index("recipe_views_desc")
-        .setHitsPerPage(100)
-        .query(query);
-    AlgoliaQuerySnapshot snapshot = await algoliaQuery.getObjects();
-    final hits = snapshot.toMap()['hits'] as List;
-    final searchHitList =
-        List<SearchHit>.from(hits.map((hit) => SearchHit.fromJson(hit)));
-    setState(() {
-      _searchHitViewItemList =
-          searchHitList.map((e) => SearchHitViewItem(searchHit: e)).toList();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: _searchHitViewItemList.isEmpty
+              child: hitList.isEmpty
                   ? const Center(child: Text('No results'))
                   : ListView.builder(
-                      itemCount: _searchHitViewItemList.length,
+                      itemCount: hitList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return SearchHitView(
-                            searchHitViewItem: _searchHitViewItemList[index]);
+                        return SearchHitWidget(item: hitList[index]);
                       },
                     ),
             ),
@@ -100,29 +87,20 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 44,
               child: TextField(
-                onEditingComplete: () {
-                  if (_searchText != _textFieldController.text) {
-                    setState(() {
-                      _searchText = _textFieldController.text;
-                    });
-                    _getSearchResult(_searchText);
-                  }
+                onEditingComplete: () async {
+                  viewModel.updateQuery(queryEditController.text);
+                  viewModel.search();
                 },
-                controller: _textFieldController,
+                controller: queryEditController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter a search term',
                     prefixIcon: const Icon(Icons.search),
-                    suffixIcon: _searchText.isNotEmpty
+                    suffixIcon: query.isNotEmpty
                         ? IconButton(
-                            onPressed: () {
-                              _textFieldController.clear();
-                              setState(
-                                () {
-                                  _searchText = '';
-                                  _getSearchResult(_searchText);
-                                },
-                              );
+                            onPressed: () async {
+                              viewModel.updateQuery('');
+                              viewModel.search();
                             },
                             icon: const Icon(Icons.clear),
                           )
@@ -134,98 +112,108 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  @override
-  void initState() {
-    super.initState();
-    _getSearchResult('');
-  }
-
-  @override
-  void dispose() {
-    _textFieldController.dispose();
-    super.dispose();
-  }
 }
 
-class SearchHitView extends StatelessWidget {
-  const SearchHitView({super.key, required this.searchHitViewItem});
+class SearchHitWidget extends HookConsumerWidget {
+  const SearchHitWidget({super.key, required this.item});
 
-  final SearchHitViewItem searchHitViewItem;
+  final SearchHitItem item;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(searchHitsProvider.notifier);
     return Column(
       children: [
         InkWell(
           onTap: () async {
-            final Uri url = Uri.parse(searchHitViewItem.searchHit.url);
+            final Uri url = Uri.parse(item.searchHit.url);
             if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
               throw 'Could not launch $url';
             }
           },
           child: Column(
             children: [
-              Image.network(searchHitViewItem.searchHit.image),
+              Image.network(item.searchHit.image),
               const SizedBox(height: 8),
             ],
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            viewModel.toogleDescription(item);
+          },
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(searchHitViewItem.searchHit.title),
+                child: Text(item.searchHit.title),
               ),
               const SizedBox(height: 8),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 16,
-                height: 16,
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Icon(
-                    Icons.thumb_up,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(
+                          Icons.thumb_up,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                        '${NumberFormat("#,###").format(item.searchHit.likes)} likes'),
+                    const SizedBox(width: 16),
+                    const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(
+                          Icons.trending_up,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                        '${NumberFormat("#,###").format(item.searchHit.views)} views'),
+                    if (!item.isDescriptionExpanded) ...[
+                      const Spacer(),
+                      const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(
+                            Icons.expand_more,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
-              const SizedBox(width: 8),
-              Text(
-                  '${NumberFormat("#,###").format(searchHitViewItem.searchHit.likes)} likes'),
-              const SizedBox(width: 16),
-              const SizedBox(
-                width: 16,
-                height: 16,
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Icon(
-                    Icons.trending_up,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                  '${NumberFormat("#,###").format(searchHitViewItem.searchHit.views)} views'),
             ],
           ),
         ),
         const SizedBox(height: 8),
-        // if (searchHitViewItem.isDescriptionExpanded || true) ...[
-        //   const Divider(),
-        //   Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 8),
-        //     child: Text(searchHitViewItem.searchHit.description),
-        //   ),
-        //   const SizedBox(height: 8),
-        // ]
+        if (item.isDescriptionExpanded)
+          InkWell(
+            onTap: () {
+              viewModel.toogleDescription(item);
+            },
+            child: Column(children: [
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(item.searchHit.description),
+              ),
+              const SizedBox(height: 8),
+            ]),
+          ),
       ],
     );
   }
