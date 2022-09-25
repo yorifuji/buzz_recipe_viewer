@@ -3,6 +3,7 @@ import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
   await dotenv.load();
@@ -157,11 +158,11 @@ class SearchHitView extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          onTap: () {
-            // final Uri url = Uri.parse(searchHitViewItem.searchHit.url);
-            // if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-            //   throw 'Could not launch $url';
-            // }
+          onTap: () async {
+            final Uri url = Uri.parse(searchHitViewItem.searchHit.url);
+            if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+              throw 'Could not launch $url';
+            }
           },
           child: Column(
             children: [
