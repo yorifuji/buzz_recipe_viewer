@@ -42,3 +42,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment file
+.env*
+
+# CocoaPods
+ios/Podfile
+ios/Podfile.lock

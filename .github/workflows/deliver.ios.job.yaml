@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  IOS_IPA_PATH: "build/ios/ipa/buzz_recipe_viewer.ipa"
+  IOS_IPA_PATH: 'build/ios/ipa/buzz_recipe_viewer.ipa'
 
 jobs:
   deliver-ios:
@@ -18,8 +18,8 @@ jobs:
         shell: bash
         run: |
           touch .env
-          echo "APPLICATION_ID=${{ secrets.APPLICATION_ID }}" >> .env
-          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+          echo "ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
+          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
 
       - name: Import Provisioning Profile
         run: |
@@ -35,7 +35,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: 'stable'
           cache: true
 
       - name: Run flutter version
@@ -54,7 +54,7 @@ jobs:
         uses: 8398a7/action-slack@v3.8.0
         with:
           status: ${{ job.status }}
-          author_name: "deliver-ios"
+          author_name: 'deliver-ios'
           fields: repo,message,commit,author,action,eventName,ref,workflow,pullRequest
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}

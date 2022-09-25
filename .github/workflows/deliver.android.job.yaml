@@ -13,20 +13,20 @@ jobs:
 
       - uses: actions/setup-java@v2
         with:
-          distribution: "zulu"
-          java-version: "11"
+          distribution: 'zulu'
+          java-version: '11'
 
       - name: Create .env
         shell: bash
         run: |
           touch .env
-          echo "APPLICATION_ID=${{ secrets.APPLICATION_ID }}" >> .env
-          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+          echo "ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
+          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: 'stable'
           cache: true
 
       - name: Run flutter version
@@ -43,7 +43,7 @@ jobs:
         uses: 8398a7/action-slack@v3.8.0
         with:
           status: ${{ job.status }}
-          author_name: "deliver-android"
+          author_name: 'deliver-android'
           fields: repo,message,commit,author,action,eventName,ref,workflow,pullRequest
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}

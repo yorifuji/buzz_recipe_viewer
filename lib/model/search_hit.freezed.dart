@@ -24,6 +24,7 @@ mixin _$SearchHit {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get published => throw _privateConstructorUsedError;
+  @JsonKey(name: 'published_timestamp')
   int get publishedTimestamp => throw _privateConstructorUsedError;
   int get views => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
@@ -46,7 +47,7 @@ abstract class $SearchHitCopyWith<$Res> {
       String title,
       String description,
       String published,
-      int publishedTimestamp,
+      @JsonKey(name: 'published_timestamp') int publishedTimestamp,
       int views,
       int likes,
       String image,
@@ -131,7 +132,7 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
       String title,
       String description,
       String published,
-      int publishedTimestamp,
+      @JsonKey(name: 'published_timestamp') int publishedTimestamp,
       int views,
       int likes,
       String image,
@@ -215,7 +216,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       required this.title,
       required this.description,
       required this.published,
-      required this.publishedTimestamp,
+      @JsonKey(name: 'published_timestamp') required this.publishedTimestamp,
       required this.views,
       required this.likes,
       required this.image,
@@ -234,6 +235,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
   @override
   final String published;
   @override
+  @JsonKey(name: 'published_timestamp')
   final int publishedTimestamp;
   @override
   final int views;
@@ -321,7 +323,8 @@ abstract class _SearchHit implements SearchHit {
       required final String title,
       required final String description,
       required final String published,
-      required final int publishedTimestamp,
+      @JsonKey(name: 'published_timestamp')
+          required final int publishedTimestamp,
       required final int views,
       required final int likes,
       required final String image,
@@ -340,6 +343,7 @@ abstract class _SearchHit implements SearchHit {
   @override
   String get published;
   @override
+  @JsonKey(name: 'published_timestamp')
   int get publishedTimestamp;
   @override
   int get views;

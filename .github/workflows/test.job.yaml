@@ -14,12 +14,12 @@ jobs:
         shell: bash
         run: |
           touch .env
-          echo "APPLICATION_ID=${{ secrets.APPLICATION_ID }}" >> .env
-          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+          echo "ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
+          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: 'stable'
           cache: true
       - name: Run flutter version
         run: flutter --version

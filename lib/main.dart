@@ -1,115 +1,262 @@
+import 'package:algolia/algolia.dart';
+import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Buzz Recipe Viewer',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final Algolia _algoliaClient = Algolia.init(
+    applicationId: dotenv.env["ALGOLIA_APPLICATION_ID"]!,
+    apiKey: dotenv.env["ALGOLIA_API_KEY"]!,
+  );
 
-  void _incrementCounter() {
+  String _searchText = "";
+  List<SearchHitViewItem> _searchHitViewItemList = [];
+  final _textFieldController = TextEditingController();
+
+  Future<void> _getSearchResult(String query) async {
+    AlgoliaQuery algoliaQuery = _algoliaClient.instance
+        .index("recipe_views_desc")
+        .setHitsPerPage(100)
+        .query(query);
+    AlgoliaQuerySnapshot snapshot = await algoliaQuery.getObjects();
+    final hits = snapshot.toMap()['hits'] as List;
+    final searchHitList =
+        List<SearchHit>.from(hits.map((hit) => SearchHit.fromJson(hit)));
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _searchHitViewItemList =
+          searchHitList.map((e) => SearchHitViewItem(searchHit: e)).toList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SafeArea(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            Expanded(
+              child: _searchHitViewItemList.isEmpty
+                  ? const Center(child: Text('No results'))
+                  : ListView.builder(
+                      itemCount: _searchHitViewItemList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return SearchHitView(
+                            searchHitViewItem: _searchHitViewItemList[index]);
+                      },
+                    ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: SizedBox(
+                    height: 24,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.0),
+                          ),
+                        ),
+                        onPressed: () => openBottomSheet(context),
+                        child: const Text(
+                          '人気順（閲覧数）',
+                          style: TextStyle(fontSize: 12),
+                        )),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 44,
+              child: TextField(
+                onEditingComplete: () {
+                  if (_searchText != _textFieldController.text) {
+                    setState(() {
+                      _searchText = _textFieldController.text;
+                    });
+                    _getSearchResult(_searchText);
+                  }
+                },
+                controller: _textFieldController,
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Enter a search term',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: _searchText.isNotEmpty
+                        ? IconButton(
+                            onPressed: () {
+                              _textFieldController.clear();
+                              setState(
+                                () {
+                                  _searchText = '';
+                                  _getSearchResult(_searchText);
+                                },
+                              );
+                            },
+                            icon: const Icon(Icons.clear),
+                          )
+                        : null),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _getSearchResult('');
+  }
+
+  @override
+  void dispose() {
+    _textFieldController.dispose();
+    super.dispose();
+  }
+}
+
+class SearchHitView extends StatelessWidget {
+  const SearchHitView({super.key, required this.searchHitViewItem});
+
+  final SearchHitViewItem searchHitViewItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () async {
+            final Uri url = Uri.parse(searchHitViewItem.searchHit.url);
+            if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+              throw 'Could not launch $url';
+            }
+          },
+          child: Column(
+            children: [
+              Image.network(searchHitViewItem.searchHit.image),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () {},
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(searchHitViewItem.searchHit.title),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 16,
+                height: 16,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Icon(
+                    Icons.thumb_up,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                  '${NumberFormat("#,###").format(searchHitViewItem.searchHit.likes)} likes'),
+              const SizedBox(width: 16),
+              const SizedBox(
+                width: 16,
+                height: 16,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Icon(
+                    Icons.trending_up,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                  '${NumberFormat("#,###").format(searchHitViewItem.searchHit.views)} views'),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        // if (searchHitViewItem.isDescriptionExpanded || true) ...[
+        //   const Divider(),
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 8),
+        //     child: Text(searchHitViewItem.searchHit.description),
+        //   ),
+        //   const SizedBox(height: 8),
+        // ]
+      ],
+    );
+  }
+}
+
+openBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.calendar_month),
+              title: const Text("追加日（新しい順）"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.thumb_up),
+              title: const Text("人気順（いいね）"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.trending_up),
+              title: const Text("人気順（閲覧数）"),
+              onTap: () {},
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
