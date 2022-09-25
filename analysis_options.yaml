@@ -29,5 +29,6 @@ linter:
 # https://dart.dev/guides/language/analysis-options
 
 analyzer:
-  errors:
-    invalid_annotation_target: ignore # freezed
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
