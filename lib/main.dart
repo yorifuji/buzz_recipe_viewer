@@ -34,8 +34,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final Algolia _algoliaClient = Algolia.init(
-    applicationId: dotenv.env["APPLICATION_ID"]!,
-    apiKey: dotenv.env["API_KEY"]!,
+    applicationId: dotenv.env["ALGOLIA_APPLICATION_ID"]!,
+    apiKey: dotenv.env["ALGOLIA_API_KEY"]!,
   );
 
   String _searchText = "";
