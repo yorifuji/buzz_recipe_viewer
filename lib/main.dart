@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/search_hits_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,6 +35,7 @@ class SearchHitsWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = useScrollController();
     final queryEditController = useTextEditingController();
     final hitList = ref.watch(
       searchHitsProvider.select(
@@ -47,6 +49,11 @@ class SearchHitsWidget extends HookConsumerWidget {
     );
     final viewModel = ref.watch(searchHitsProvider.notifier);
 
+    if (scrollController.hasClients) {
+      SchedulerBinding.instance
+          .addPostFrameCallback((_) => scrollController.jumpTo(0.0));
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -55,6 +62,7 @@ class SearchHitsWidget extends HookConsumerWidget {
               child: hitList.isEmpty
                   ? const Center(child: Text('No results'))
                   : ListView.builder(
+                      controller: scrollController,
                       itemCount: hitList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return SearchHitWidget(item: hitList[index]);
@@ -90,6 +98,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                 onEditingComplete: () async {
                   viewModel.updateQuery(queryEditController.text);
                   viewModel.search();
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 controller: queryEditController,
                 decoration: InputDecoration(
