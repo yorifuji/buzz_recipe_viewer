@@ -104,6 +104,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                     suffixIcon: query.isNotEmpty
                         ? IconButton(
                             onPressed: () async {
+                              queryEditController.text = '';
                               viewModel.updateQuery('');
                               viewModel.search();
                               _scrollToTop(scrollController);
