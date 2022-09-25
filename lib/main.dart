@@ -214,7 +214,7 @@ class SearchHitWidget extends HookConsumerWidget {
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         if (item.isDescriptionExpanded)
           InkWell(
             onTap: () {
@@ -223,7 +223,7 @@ class SearchHitWidget extends HookConsumerWidget {
             child: Column(children: [
               const Divider(height: 1),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                 child: Text(item.searchHit.description),
               ),
               const SizedBox(height: 8),
