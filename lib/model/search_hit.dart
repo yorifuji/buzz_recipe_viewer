@@ -11,7 +11,7 @@ class SearchHit with _$SearchHit {
     required String title,
     required String description,
     required String published,
-    required int publishedTimestamp,
+    @JsonKey(name: 'published_timestamp') required int publishedTimestamp,
     required int views,
     required int likes,
     required String image,
