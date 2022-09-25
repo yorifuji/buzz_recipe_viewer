@@ -90,6 +90,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                 onEditingComplete: () async {
                   viewModel.updateQuery(queryEditController.text);
                   viewModel.search();
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 controller: queryEditController,
                 decoration: InputDecoration(
