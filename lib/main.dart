@@ -195,19 +195,19 @@ class SearchHitWidget extends HookConsumerWidget {
                     const SizedBox(width: 8),
                     Text(
                         '${NumberFormat("#,###").format(item.searchHit.views)} views'),
-                    if (!item.isDescriptionExpanded) ...[
-                      const Spacer(),
-                      const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: FittedBox(
-                          fit: BoxFit.fill,
-                          child: Icon(
-                            Icons.expand_more,
-                          ),
+                    const Spacer(),
+                    SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(
+                          item.isDescriptionExpanded
+                              ? Icons.expand_less
+                              : Icons.expand_more,
                         ),
                       ),
-                    ],
+                    ),
                   ],
                 ),
               ),
