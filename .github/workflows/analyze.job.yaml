@@ -25,8 +25,12 @@ jobs:
         run: flutter --version
       - name: Run flutter pub get
         run: flutter pub get
+      - name: Install matcher
+        run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
       - name: Run flutter analyze
         run: flutter analyze
+      - name: Remove matcher
+        run: echo "::remove-matcher owner=dart-analyzer::"
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         if: always()
