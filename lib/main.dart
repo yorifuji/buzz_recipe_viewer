@@ -50,6 +50,8 @@ class SearchHitsWidget extends HookConsumerWidget {
     final state = ref.watch(searchHitsProvider);
     final viewModel = ref.watch(searchHitsProvider.notifier);
 
+    final i = 0;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
