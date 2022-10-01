@@ -47,6 +47,7 @@ class SearchHitsWidget extends HookConsumerWidget {
         (value) => value.query,
       ),
     );
+    final state = ref.watch(searchHitsProvider);
     final viewModel = ref.watch(searchHitsProvider.notifier);
 
     return Scaffold(
@@ -77,16 +78,26 @@ class SearchHitsWidget extends HookConsumerWidget {
                             borderRadius: BorderRadius.circular(24.0),
                           ),
                         ),
-                        onPressed: () => openBottomSheet(context),
-                        child: const Text(
-                          '人気順（閲覧数）',
-                          style: TextStyle(fontSize: 12),
+                        onPressed: () => openBottomSheet(
+                              context,
+                              state.sortType,
+                              (sortType) {
+                                Navigator.pop(context);
+                                viewModel.updateSortType(sortType);
+                                viewModel.search();
+                                _scrollToTop(scrollController);
+                              },
+                            ),
+                        child: Text(
+                          state.sortType.title,
+                          style: const TextStyle(fontSize: 12),
                         )),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
+            const Divider(height: 1),
             SizedBox(
               height: 44,
               child: TextField(
@@ -99,7 +110,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                 controller: queryEditController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Enter a search term',
+                    hintText: '検索ワード（例：から揚げ　ナス）',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: query.isNotEmpty
                         ? IconButton(
@@ -194,35 +205,35 @@ class SearchHitWidget extends HookConsumerWidget {
                     const SizedBox(width: 8),
                     Text(
                         '${NumberFormat("#,###").format(item.searchHit.views)} views'),
-                    if (!item.isDescriptionExpanded) ...[
-                      const Spacer(),
-                      const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: FittedBox(
-                          fit: BoxFit.fill,
-                          child: Icon(
-                            Icons.expand_more,
-                          ),
+                    const Spacer(),
+                    SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(
+                          item.isDescriptionExpanded
+                              ? Icons.expand_less
+                              : Icons.expand_more,
                         ),
                       ),
-                    ],
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         if (item.isDescriptionExpanded)
           InkWell(
             onTap: () {
               viewModel.toogleDescription(item);
             },
             child: Column(children: [
-              const Divider(),
+              const Divider(height: 1),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                 child: Text(item.searchHit.description),
               ),
               const SizedBox(height: 8),
@@ -233,30 +244,24 @@ class SearchHitWidget extends HookConsumerWidget {
   }
 }
 
-openBottomSheet(BuildContext context) {
+openBottomSheet(
+    BuildContext context, SortType sortType, void Function(SortType) onTap) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
       return SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: const Icon(Icons.calendar_month),
-              title: const Text("追加日（新しい順）"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.thumb_up),
-              title: const Text("人気順（いいね）"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.trending_up),
-              title: const Text("人気順（閲覧数）"),
-              onTap: () {},
-            ),
-          ],
+          children: SortType.values
+              .map(
+                (e) => ListTile(
+                  leading: e.icon,
+                  title: Text(e.title),
+                  trailing: e == sortType ? const Icon(Icons.check) : null,
+                  onTap: () => onTap(e),
+                ),
+              )
+              .toList(),
         ),
       );
     },
