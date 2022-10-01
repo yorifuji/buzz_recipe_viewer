@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SearchHitsState {
   String get query => throw _privateConstructorUsedError;
   List<SearchHitItem> get hitList => throw _privateConstructorUsedError;
+  SortType get sortType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchHitsStateCopyWith<SearchHitsState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SearchHitsStateCopyWith<$Res> {
   factory $SearchHitsStateCopyWith(
           SearchHitsState value, $Res Function(SearchHitsState) then) =
       _$SearchHitsStateCopyWithImpl<$Res>;
-  $Res call({String query, List<SearchHitItem> hitList});
+  $Res call({String query, List<SearchHitItem> hitList, SortType sortType});
 }
 
 /// @nodoc
@@ -45,6 +46,7 @@ class _$SearchHitsStateCopyWithImpl<$Res>
   $Res call({
     Object? query = freezed,
     Object? hitList = freezed,
+    Object? sortType = freezed,
   }) {
     return _then(_value.copyWith(
       query: query == freezed
@@ -55,6 +57,10 @@ class _$SearchHitsStateCopyWithImpl<$Res>
           ? _value.hitList
           : hitList // ignore: cast_nullable_to_non_nullable
               as List<SearchHitItem>,
+      sortType: sortType == freezed
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortType,
     ));
   }
 }
@@ -66,7 +72,7 @@ abstract class _$$_SearchHitsStateCopyWith<$Res>
           _$_SearchHitsState value, $Res Function(_$_SearchHitsState) then) =
       __$$_SearchHitsStateCopyWithImpl<$Res>;
   @override
-  $Res call({String query, List<SearchHitItem> hitList});
+  $Res call({String query, List<SearchHitItem> hitList, SortType sortType});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
   $Res call({
     Object? query = freezed,
     Object? hitList = freezed,
+    Object? sortType = freezed,
   }) {
     return _then(_$_SearchHitsState(
       query: query == freezed
@@ -94,6 +101,10 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
           ? _value._hitList
           : hitList // ignore: cast_nullable_to_non_nullable
               as List<SearchHitItem>,
+      sortType: sortType == freezed
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortType,
     ));
   }
 }
@@ -103,7 +114,8 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
 class _$_SearchHitsState implements _SearchHitsState {
   const _$_SearchHitsState(
       {this.query = '',
-      final List<SearchHitItem> hitList = const <SearchHitItem>[]})
+      final List<SearchHitItem> hitList = const <SearchHitItem>[],
+      this.sortType = SortType.timestamp})
       : _hitList = hitList;
 
   @override
@@ -118,8 +130,12 @@ class _$_SearchHitsState implements _SearchHitsState {
   }
 
   @override
+  @JsonKey()
+  final SortType sortType;
+
+  @override
   String toString() {
-    return 'SearchHitsState(query: $query, hitList: $hitList)';
+    return 'SearchHitsState(query: $query, hitList: $hitList, sortType: $sortType)';
   }
 
   @override
@@ -128,14 +144,16 @@ class _$_SearchHitsState implements _SearchHitsState {
         (other.runtimeType == runtimeType &&
             other is _$_SearchHitsState &&
             const DeepCollectionEquality().equals(other.query, query) &&
-            const DeepCollectionEquality().equals(other._hitList, _hitList));
+            const DeepCollectionEquality().equals(other._hitList, _hitList) &&
+            const DeepCollectionEquality().equals(other.sortType, sortType));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(query),
-      const DeepCollectionEquality().hash(_hitList));
+      const DeepCollectionEquality().hash(_hitList),
+      const DeepCollectionEquality().hash(sortType));
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +164,15 @@ class _$_SearchHitsState implements _SearchHitsState {
 abstract class _SearchHitsState implements SearchHitsState {
   const factory _SearchHitsState(
       {final String query,
-      final List<SearchHitItem> hitList}) = _$_SearchHitsState;
+      final List<SearchHitItem> hitList,
+      final SortType sortType}) = _$_SearchHitsState;
 
   @override
   String get query;
   @override
   List<SearchHitItem> get hitList;
+  @override
+  SortType get sortType;
   @override
   @JsonKey(ignore: true)
   _$$_SearchHitsStateCopyWith<_$_SearchHitsState> get copyWith =>

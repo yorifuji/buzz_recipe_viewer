@@ -47,6 +47,7 @@ class SearchHitsWidget extends HookConsumerWidget {
         (value) => value.query,
       ),
     );
+    final state = ref.watch(searchHitsProvider);
     final viewModel = ref.watch(searchHitsProvider.notifier);
 
     return Scaffold(
@@ -77,10 +78,19 @@ class SearchHitsWidget extends HookConsumerWidget {
                             borderRadius: BorderRadius.circular(24.0),
                           ),
                         ),
-                        onPressed: () => openBottomSheet(context),
-                        child: const Text(
-                          '人気順（閲覧数）',
-                          style: TextStyle(fontSize: 12),
+                        onPressed: () => openBottomSheet(
+                              context,
+                              state.sortType,
+                              (sortType) {
+                                Navigator.pop(context);
+                                viewModel.updateSortType(sortType);
+                                viewModel.search();
+                                _scrollToTop(scrollController);
+                              },
+                            ),
+                        child: Text(
+                          state.sortType.title,
+                          style: const TextStyle(fontSize: 12),
                         )),
                   ),
                 ),
@@ -234,30 +244,24 @@ class SearchHitWidget extends HookConsumerWidget {
   }
 }
 
-openBottomSheet(BuildContext context) {
+openBottomSheet(
+    BuildContext context, SortType sortType, void Function(SortType) onTap) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
       return SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: const Icon(Icons.calendar_month),
-              title: const Text("追加日（新しい順）"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.thumb_up),
-              title: const Text("人気順（いいね）"),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.trending_up),
-              title: const Text("人気順（閲覧数）"),
-              onTap: () {},
-            ),
-          ],
+          children: SortType.values
+              .map(
+                (e) => ListTile(
+                  leading: e.icon,
+                  title: Text(e.title),
+                  trailing: e == sortType ? const Icon(Icons.check) : null,
+                  onTap: () => onTap(e),
+                ),
+              )
+              .toList(),
         ),
       );
     },

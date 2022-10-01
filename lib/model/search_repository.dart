@@ -6,13 +6,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final searchRepositoryProvider = Provider((ref) => SearchRepository());
 
 class SearchRepository {
-  Future<List<SearchHit>> search(String query) async {
+  Future<List<SearchHit>> search(String query, String indexName) async {
     final Algolia algoliaClient = Algolia.init(
       applicationId: dotenv.env["ALGOLIA_APPLICATION_ID"]!,
       apiKey: dotenv.env["ALGOLIA_API_KEY"]!,
     );
     AlgoliaQuery algoliaQuery = algoliaClient.instance
-        .index("recipe_views_desc")
+        .index(indexName)
         .setHitsPerPage(100)
         .query(query);
     AlgoliaQuerySnapshot snapshot = await algoliaQuery.getObjects();
