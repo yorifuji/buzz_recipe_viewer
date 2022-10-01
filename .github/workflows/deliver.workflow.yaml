@@ -11,7 +11,7 @@ jobs:
     if: |
       startsWith(github.event.pull_request.head.ref, 'releases/') &&
       github.event.review.state == 'approved' &&
-      contains(github.event.pull_request.labels.*.name, 'ready-deliver') == false
+      contains(github.event.pull_request.labels.*.name, 'deliver') == false
     steps:
       - name: Invoke next job
         run: exit 0
@@ -24,9 +24,9 @@ jobs:
       - name: Add Label
         uses: pullreminders/label-when-approved-action@master
         env:
-          APPROVALS: "1"
+          APPROVALS: '1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ADD_LABEL: "ready-deliver"
+          ADD_LABEL: 'deliver'
 
   # use absolute path for uses if project is public.
   # https://github.com/orgs/github-community/discussions/14306
