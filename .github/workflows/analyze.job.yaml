@@ -23,6 +23,8 @@ jobs:
           cache: true
       - name: Run flutter version
         run: flutter --version
+      - name: Install matcher
+        run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
       - name: Run flutter pub get
         run: flutter pub get
       - name: Install matcher
