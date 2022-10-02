@@ -45,13 +45,14 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       return;
     }
     state = state.copyWith(
-        hitList: searchHitList
-            .map(
-              (e) => SearchHitItem(
-                searchHit: e,
-              ),
-            )
-            .toList());
+      hitList: searchHitList
+          .map(
+            (e) => SearchHitItem(
+              searchHit: e,
+            ),
+          )
+          .toList(),
+    );
   }
 
   void toogleDescription(SearchHitItem item) {

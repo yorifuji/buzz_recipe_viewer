@@ -50,28 +50,30 @@ class SearchHitsWidget extends HookConsumerWidget {
                   child: SizedBox(
                     height: 24,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24.0),
-                          ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24.0),
                         ),
-                        onPressed: () => openBottomSheet(
-                              context,
-                              state.sortType,
-                              (sortType) {
-                                Navigator.pop(context);
-                                viewModel.updateSortType(sortType);
-                                viewModel.search();
-                                _scrollToTop(scrollController);
-                              },
-                            ),
-                        child: Text(
-                          SortListTile.values
-                              .firstWhere((element) =>
-                                  element.sortType == state.sortType)
-                              .title,
-                          style: const TextStyle(fontSize: 12),
-                        )),
+                      ),
+                      onPressed: () => openBottomSheet(
+                        context,
+                        state.sortType,
+                        (sortType) {
+                          Navigator.pop(context);
+                          viewModel.updateSortType(sortType);
+                          viewModel.search();
+                          _scrollToTop(scrollController);
+                        },
+                      ),
+                      child: Text(
+                        SortListTile.values
+                            .firstWhere(
+                              (element) => element.sortType == state.sortType,
+                            )
+                            .title,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -89,20 +91,21 @@ class SearchHitsWidget extends HookConsumerWidget {
                 },
                 controller: queryEditController,
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: '検索ワード（例：から揚げ　ナス）',
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: query.isNotEmpty
-                        ? IconButton(
-                            onPressed: () async {
-                              queryEditController.text = '';
-                              viewModel.updateQuery('');
-                              viewModel.search();
-                              _scrollToTop(scrollController);
-                            },
-                            icon: const Icon(Icons.clear),
-                          )
-                        : null),
+                  border: InputBorder.none,
+                  hintText: '検索ワード（例：から揚げ　ナス）',
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: query.isNotEmpty
+                      ? IconButton(
+                          onPressed: () async {
+                            queryEditController.text = '';
+                            viewModel.updateQuery('');
+                            viewModel.search();
+                            _scrollToTop(scrollController);
+                          },
+                          icon: const Icon(Icons.clear),
+                        )
+                      : null,
+                ),
               ),
             ),
           ],
@@ -170,7 +173,8 @@ class SearchHitWidget extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                        '${NumberFormat("#,###").format(item.searchHit.likes)} likes'),
+                      '${NumberFormat("#,###").format(item.searchHit.likes)} likes',
+                    ),
                     const SizedBox(width: 16),
                     const SizedBox(
                       width: 16,
@@ -184,7 +188,8 @@ class SearchHitWidget extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                        '${NumberFormat("#,###").format(item.searchHit.views)} views'),
+                      '${NumberFormat("#,###").format(item.searchHit.views)} views',
+                    ),
                     const Spacer(),
                     SizedBox(
                       width: 16,
@@ -210,14 +215,16 @@ class SearchHitWidget extends HookConsumerWidget {
             onTap: () {
               viewModel.toogleDescription(item);
             },
-            child: Column(children: [
-              const Divider(height: 1),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                child: Text(item.searchHit.description),
-              ),
-              const SizedBox(height: 8),
-            ]),
+            child: Column(
+              children: [
+                const Divider(height: 1),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                  child: Text(item.searchHit.description),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
           ),
       ],
     );
@@ -248,7 +255,10 @@ enum SortListTile {
 }
 
 openBottomSheet(
-    BuildContext context, SortIndex sortType, void Function(SortIndex) onTap) {
+  BuildContext context,
+  SortIndex sortType,
+  void Function(SortIndex) onTap,
+) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
