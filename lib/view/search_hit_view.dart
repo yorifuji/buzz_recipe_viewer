@@ -13,18 +13,12 @@ class SearchHitsWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final queryEditController = useTextEditingController();
-    final hitList = ref.watch(
-      searchHitsProvider.select(
-        (value) => value.hitList,
-      ),
-    );
-    final query = ref.watch(
-      searchHitsProvider.select(
-        (value) => value.query,
-      ),
-    );
-    final state = ref.watch(searchHitsProvider);
+    final queryController = useTextEditingController();
+    final hitList =
+        ref.watch(searchHitsProvider.select((value) => value.hitList));
+    final query = ref.watch(searchHitsProvider.select((value) => value.query));
+    final sortType =
+        ref.watch(searchHitsProvider.select((value) => value.sortType));
     final viewModel = ref.watch(searchHitsProvider.notifier);
 
     return Scaffold(
@@ -57,7 +51,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                       ),
                       onPressed: () => openBottomSheet(
                         context,
-                        state.sortType,
+                        sortType,
                         (sortType) {
                           Navigator.pop(context);
                           viewModel.updateSortType(sortType);
@@ -68,7 +62,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                       child: Text(
                         SortListTile.values
                             .firstWhere(
-                              (element) => element.sortType == state.sortType,
+                              (element) => element.sortType == sortType,
                             )
                             .title,
                         style: const TextStyle(fontSize: 12),
@@ -84,12 +78,12 @@ class SearchHitsWidget extends HookConsumerWidget {
               height: 44,
               child: TextField(
                 onEditingComplete: () async {
-                  viewModel.updateQuery(queryEditController.text);
+                  viewModel.updateQuery(queryController.text);
                   viewModel.search();
                   FocusManager.instance.primaryFocus?.unfocus();
                   _scrollToTop(scrollController);
                 },
-                controller: queryEditController,
+                controller: queryController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: '検索ワード（例：から揚げ　ナス）',
@@ -97,7 +91,7 @@ class SearchHitsWidget extends HookConsumerWidget {
                   suffixIcon: query.isNotEmpty
                       ? IconButton(
                           onPressed: () async {
-                            queryEditController.text = '';
+                            queryController.text = '';
                             viewModel.updateQuery('');
                             viewModel.search();
                             _scrollToTop(scrollController);
