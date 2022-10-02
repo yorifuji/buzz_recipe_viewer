@@ -8,8 +8,8 @@ final searchRepositoryProvider = Provider((ref) => SearchRepository());
 class SearchRepository {
   Future<List<SearchHit>> search(String query, String indexName) async {
     final Algolia algoliaClient = Algolia.init(
-      applicationId: dotenv.env["ALGOLIA_APPLICATION_ID"]!,
-      apiKey: dotenv.env["ALGOLIA_API_KEY"]!,
+      applicationId: dotenv.env['ALGOLIA_APPLICATION_ID']!,
+      apiKey: dotenv.env['ALGOLIA_API_KEY']!,
     );
     AlgoliaQuery algoliaQuery = algoliaClient.instance
         .index(indexName)
@@ -17,7 +17,6 @@ class SearchRepository {
         .query(query);
     AlgoliaQuerySnapshot snapshot = await algoliaQuery.getObjects();
     final hits = snapshot.toMap()['hits'] as List;
-    // print(hits.length);
     return List<SearchHit>.from(hits.map((hit) => SearchHit.fromJson(hit)));
   }
 }
