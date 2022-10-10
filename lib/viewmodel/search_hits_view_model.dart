@@ -24,7 +24,7 @@ enum SortIndex {
 class SearchHitsState with _$SearchHitsState {
   const factory SearchHitsState({
     @Default('') String query,
-    @Default(<SearchHitItem>[]) List<SearchHitItem> hitList,
+    @Default(AsyncValue.loading()) AsyncValue<List<SearchHitItem>> hitList,
     @Default(SortIndex.timestamp) SortIndex sortType,
   }) = _SearchHitsState;
 }
@@ -37,26 +37,40 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
   final SearchRepository repository;
 
   Future<void> search() async {
-    final searchHitList = await repository.search(
+    state = state.copyWith(hitList: const AsyncValue.loading());
+
+    final searchHitResult = await repository.search(
       state.query,
       state.sortType.indexName,
     );
     if (!mounted) {
       return;
     }
-    state = state.copyWith(
-      hitList: searchHitList
-          .map(
-            (e) => SearchHitItem(
-              searchHit: e,
-            ),
-          )
-          .toList(),
+
+    searchHitResult.when(
+      success: (hitList) {
+        state = state.copyWith(
+          hitList: AsyncValue.data(
+            hitList
+                .map(
+                  (e) => SearchHitItem(
+                    searchHit: e,
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      },
+      failure: (error) {
+        state = state.copyWith(
+          hitList: AsyncValue.error(error, StackTrace.current),
+        );
+      },
     );
   }
 
   void toogleDescription(SearchHitItem item) {
-    final newHitList = state.hitList.map((e) {
+    final newHitList = state.hitList.valueOrNull?.map((e) {
       if (e.searchHit.id == item.searchHit.id) {
         return SearchHitItem(
           searchHit: e.searchHit,
@@ -67,7 +81,9 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       }
     }).toList();
 
-    state = state.copyWith(hitList: newHitList);
+    if (newHitList != null) {
+      state = state.copyWith(hitList: AsyncValue.data(newHitList));
+    }
   }
 
   void updateQuery(String query) {

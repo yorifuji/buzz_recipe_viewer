@@ -1,4 +1,6 @@
 
+.PHONY: analyze build
+
 analyze:
 	flutter analyze
 
