@@ -1,7 +1,6 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/viewmodel/search_hits_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -107,13 +106,13 @@ class _Contents extends HookConsumerWidget {
     return Expanded(child: body);
   }
 
-  _scrollToTop(ScrollController controller) {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (controller.hasClients) {
-        controller.jumpTo(0.0);
-      }
-    });
-  }
+  // _scrollToTop(ScrollController controller) {
+  //   SchedulerBinding.instance.addPostFrameCallback((_) {
+  //     if (controller.hasClients) {
+  //       controller.jumpTo(0.0);
+  //     }
+  //   });
+  // }
 }
 
 class _LabelBox extends HookConsumerWidget {
