@@ -20,12 +20,22 @@ enum SortIndex {
   const SortIndex(this.indexName);
 }
 
+enum LoadingState {
+  loadable,
+  loading,
+  success,
+  failure,
+}
+
 @freezed
 class SearchHitsState with _$SearchHitsState {
   const factory SearchHitsState({
     @Default('') String query,
-    @Default(AsyncValue.loading()) AsyncValue<List<SearchHitItem>> hitList,
+    @Default(<SearchHitItem>[]) List<SearchHitItem> hitList,
     @Default(SortIndex.timestamp) SortIndex sortType,
+    @Default(0) int nextPage,
+    @Default(LoadingState.loadable) LoadingState loadingState,
+    @Default(LoadingState.loadable) LoadingState moreLoadingState,
   }) = _SearchHitsState;
 }
 
@@ -37,40 +47,84 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
   final SearchRepository repository;
 
   Future<void> search() async {
-    state = state.copyWith(hitList: const AsyncValue.loading());
+    state = state.copyWith(
+      loadingState: LoadingState.loading,
+      nextPage: 0,
+      hitList: [],
+    );
 
     final searchHitResult = await repository.search(
       state.query,
       state.sortType.indexName,
+      state.nextPage,
     );
     if (!mounted) {
       return;
     }
 
     searchHitResult.when(
-      success: (hitList) {
+      success: (result) {
         state = state.copyWith(
-          hitList: AsyncValue.data(
-            hitList
+          loadingState: LoadingState.success,
+          hitList: result.searchHits
+              .map(
+                (e) => SearchHitItem(
+                  searchHit: e,
+                ),
+              )
+              .toList(),
+          nextPage: result.nextPage,
+        );
+      },
+      failure: (error) {
+        state = state.copyWith(
+          loadingState: LoadingState.failure,
+        );
+      },
+    );
+  }
+
+  Future<void> searchMore() async {
+    state = state.copyWith(
+      moreLoadingState: LoadingState.loading,
+    );
+
+    final searchHitResult = await repository.search(
+      state.query,
+      state.sortType.indexName,
+      state.nextPage,
+    );
+    if (!mounted) {
+      return;
+    }
+
+    searchHitResult.when(
+      success: (result) {
+        state = state.copyWith(
+          moreLoadingState: LoadingState.success,
+          hitList: [
+            ...state.hitList,
+            ...result.searchHits
                 .map(
                   (e) => SearchHitItem(
                     searchHit: e,
                   ),
                 )
-                .toList(),
-          ),
+                .toList()
+          ],
+          nextPage: result.nextPage,
         );
       },
       failure: (error) {
         state = state.copyWith(
-          hitList: AsyncValue.error(error, StackTrace.current),
+          moreLoadingState: LoadingState.failure,
         );
       },
     );
   }
 
   void toogleDescription(SearchHitItem item) {
-    final newHitList = state.hitList.valueOrNull?.map((e) {
+    final newHitList = state.hitList.map((e) {
       if (e.searchHit.id == item.searchHit.id) {
         return SearchHitItem(
           searchHit: e.searchHit,
@@ -81,9 +135,7 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       }
     }).toList();
 
-    if (newHitList != null) {
-      state = state.copyWith(hitList: AsyncValue.data(newHitList));
-    }
+    state = state.copyWith(hitList: newHitList);
   }
 
   void updateQuery(String query) {

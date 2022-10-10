@@ -1,15 +1,17 @@
 import 'package:algolia/algolia.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/model/search_result.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final searchRepositoryProvider = Provider((ref) => SearchRepository());
 
 class SearchRepository {
-  Future<Result<List<SearchHit>>> search(
+  Future<Result<SearchResult>> search(
     String query,
     String indexName,
+    int page,
   ) async {
     return Result.guardFuture(() async {
       try {
@@ -20,10 +22,16 @@ class SearchRepository {
         AlgoliaQuery algoliaQuery = algoliaClient.instance
             .index(indexName)
             .setHitsPerPage(100)
+            .setPage(page)
             .query(query);
         AlgoliaQuerySnapshot snapshot = await algoliaQuery.getObjects();
+
         final hits = snapshot.toMap()['hits'] as List;
-        return List<SearchHit>.from(hits.map((hit) => SearchHit.fromJson(hit)));
+        final searchHits =
+            List<SearchHit>.from(hits.map((hit) => SearchHit.fromJson(hit)));
+        final nextPage =
+            snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
+        return SearchResult(searchHits: searchHits, nextPage: nextPage);
       } catch (e) {
         throw Exception(); // FIXME:
       }

@@ -1,7 +1,6 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/viewmodel/search_hits_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -44,42 +43,76 @@ class _Contents extends HookConsumerWidget {
     final scrollController = useScrollController();
     final hitList =
         ref.watch(searchHitsProvider.select((value) => value.hitList));
+    final loadingState =
+        ref.watch(searchHitsProvider.select((value) => value.loadingState));
+    final moreLoadingState =
+        ref.watch(searchHitsProvider.select((value) => value.moreLoadingState));
+    final nextPage =
+        ref.watch(searchHitsProvider.select((value) => value.nextPage));
+    final viewModel = ref.watch(searchHitsProvider.notifier);
 
-    final body = hitList.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('データを取得できませんでした'),
-          ElevatedButton(
-            onPressed: () => ref.refresh(searchHitsProvider),
-            child: const Text('再読み込み'),
-          ),
-        ],
-      ),
-      data: (hitList) {
-        _scrollToTop(scrollController);
-        return hitList.isEmpty
+    final Widget body;
+    switch (loadingState) {
+      case LoadingState.loadable:
+        body = const SizedBox.shrink();
+        break;
+      case LoadingState.loading:
+        body = const Center(child: CircularProgressIndicator());
+        break;
+      case LoadingState.success:
+        // _scrollToTop(scrollController);
+        body = hitList.isEmpty
             ? const Center(child: Text('検索結果は0件です'))
             : ListView.builder(
                 controller: scrollController,
-                itemCount: hitList.length,
+                itemCount: nextPage != 0 ? hitList.length + 1 : hitList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SearchHitWidget(item: hitList[index]);
+                  if (index == hitList.length) {
+                    return moreLoadingState == LoadingState.loading
+                        ? const SizedBox(
+                            height: 64,
+                            child: Center(child: CircularProgressIndicator()),
+                          )
+                        : SizedBox(
+                            height: 64,
+                            child: ElevatedButton(
+                              onPressed: viewModel.searchMore,
+                              // style: ElevatedButton.styleFrom(
+                              //   backgroundColor: Colors.white,
+                              //   foregroundColor: Colors.black,
+                              // ),
+                              child: const Text('もっとみる'),
+                            ),
+                          );
+                  } else {
+                    return SearchHitWidget(item: hitList[index]);
+                  }
                 },
               );
-      },
-    );
+        break;
+      case LoadingState.failure:
+        body = Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('データを取得できませんでした'),
+            ElevatedButton(
+              onPressed: () => ref.refresh(searchHitsProvider),
+              child: const Text('再読み込み'),
+            ),
+          ],
+        );
+        break;
+    }
     return Expanded(child: body);
   }
 
-  _scrollToTop(ScrollController controller) {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (controller.hasClients) {
-        controller.jumpTo(0.0);
-      }
-    });
-  }
+  // _scrollToTop(ScrollController controller) {
+  //   SchedulerBinding.instance.addPostFrameCallback((_) {
+  //     if (controller.hasClients) {
+  //       controller.jumpTo(0.0);
+  //     }
+  //   });
+  // }
 }
 
 class _LabelBox extends HookConsumerWidget {
@@ -213,11 +246,11 @@ class SearchHitWidget extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 2),
                     Text(
                       '${NumberFormat("#,###").format(item.searchHit.likes)} likes',
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 6),
                     const SizedBox(
                       width: 16,
                       height: 16,
@@ -228,11 +261,11 @@ class SearchHitWidget extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 2),
                     Text(
                       '${NumberFormat("#,###").format(item.searchHit.views)} views',
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 6),
                     const SizedBox(
                       width: 16,
                       height: 16,
@@ -243,7 +276,7 @@ class SearchHitWidget extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 2),
                     Text(
                       DateFormat('yyyy-MM-dd').format(
                         DateTime.fromMillisecondsSinceEpoch(
