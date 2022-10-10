@@ -39,7 +39,7 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
   Future<void> search() async {
     state = state.copyWith(hitList: const AsyncValue.loading());
 
-    final searchHitList = await repository.search(
+    final searchHitResult = await repository.search(
       state.query,
       state.sortType.indexName,
     );
@@ -47,14 +47,25 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       return;
     }
 
-    state = state.copyWith(
-      hitList: AsyncValue.data(searchHitList
-          .map(
-            (e) => SearchHitItem(
-              searchHit: e,
-            ),
-          )
-          .toList()),
+    searchHitResult.when(
+      success: (hitList) {
+        state = state.copyWith(
+          hitList: AsyncValue.data(
+            hitList
+                .map(
+                  (e) => SearchHitItem(
+                    searchHit: e,
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      },
+      failure: (error) {
+        state = state.copyWith(
+          hitList: AsyncValue.error(error, StackTrace.current),
+        );
+      },
     );
   }
 

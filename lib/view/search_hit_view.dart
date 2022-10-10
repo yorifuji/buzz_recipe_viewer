@@ -47,11 +47,20 @@ class _Contents extends HookConsumerWidget {
 
     final body = hitList.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => const Text('ERROR'),
+      error: (error, stackTrace) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('データを取得できませんでした'),
+          ElevatedButton(
+            onPressed: () => ref.refresh(searchHitsProvider),
+            child: const Text('再読み込み'),
+          ),
+        ],
+      ),
       data: (hitList) {
         _scrollToTop(scrollController);
         return hitList.isEmpty
-            ? const Center(child: Text('No results'))
+            ? const Center(child: Text('検索結果は0件です'))
             : ListView.builder(
                 controller: scrollController,
                 itemCount: hitList.length,
