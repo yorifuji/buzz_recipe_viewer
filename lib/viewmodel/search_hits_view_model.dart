@@ -24,7 +24,7 @@ enum SortIndex {
 class SearchHitsState with _$SearchHitsState {
   const factory SearchHitsState({
     @Default('') String query,
-    @Default(<SearchHitItem>[]) List<SearchHitItem> hitList,
+    @Default(AsyncValue.loading()) AsyncValue<List<SearchHitItem>> hitList,
     @Default(SortIndex.timestamp) SortIndex sortType,
   }) = _SearchHitsState;
 }
@@ -37,6 +37,8 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
   final SearchRepository repository;
 
   Future<void> search() async {
+    state = state.copyWith(hitList: const AsyncValue.loading());
+
     final searchHitList = await repository.search(
       state.query,
       state.sortType.indexName,
@@ -44,19 +46,20 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
     if (!mounted) {
       return;
     }
+
     state = state.copyWith(
-      hitList: searchHitList
+      hitList: AsyncValue.data(searchHitList
           .map(
             (e) => SearchHitItem(
               searchHit: e,
             ),
           )
-          .toList(),
+          .toList()),
     );
   }
 
   void toogleDescription(SearchHitItem item) {
-    final newHitList = state.hitList.map((e) {
+    final newHitList = state.hitList.valueOrNull?.map((e) {
       if (e.searchHit.id == item.searchHit.id) {
         return SearchHitItem(
           searchHit: e.searchHit,
@@ -67,7 +70,9 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       }
     }).toList();
 
-    state = state.copyWith(hitList: newHitList);
+    if (newHitList != null) {
+      state = state.copyWith(hitList: AsyncValue.data(newHitList));
+    }
   }
 
   void updateQuery(String query) {

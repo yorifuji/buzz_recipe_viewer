@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SearchHitsState {
   String get query => throw _privateConstructorUsedError;
-  List<SearchHitItem> get hitList => throw _privateConstructorUsedError;
+  AsyncValue<List<SearchHitItem>> get hitList =>
+      throw _privateConstructorUsedError;
   SortIndex get sortType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,10 @@ abstract class $SearchHitsStateCopyWith<$Res> {
   factory $SearchHitsStateCopyWith(
           SearchHitsState value, $Res Function(SearchHitsState) then) =
       _$SearchHitsStateCopyWithImpl<$Res>;
-  $Res call({String query, List<SearchHitItem> hitList, SortIndex sortType});
+  $Res call(
+      {String query,
+      AsyncValue<List<SearchHitItem>> hitList,
+      SortIndex sortType});
 }
 
 /// @nodoc
@@ -56,7 +60,7 @@ class _$SearchHitsStateCopyWithImpl<$Res>
       hitList: hitList == freezed
           ? _value.hitList
           : hitList // ignore: cast_nullable_to_non_nullable
-              as List<SearchHitItem>,
+              as AsyncValue<List<SearchHitItem>>,
       sortType: sortType == freezed
           ? _value.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
@@ -72,7 +76,10 @@ abstract class _$$_SearchHitsStateCopyWith<$Res>
           _$_SearchHitsState value, $Res Function(_$_SearchHitsState) then) =
       __$$_SearchHitsStateCopyWithImpl<$Res>;
   @override
-  $Res call({String query, List<SearchHitItem> hitList, SortIndex sortType});
+  $Res call(
+      {String query,
+      AsyncValue<List<SearchHitItem>> hitList,
+      SortIndex sortType});
 }
 
 /// @nodoc
@@ -98,9 +105,9 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
           : query // ignore: cast_nullable_to_non_nullable
               as String,
       hitList: hitList == freezed
-          ? _value._hitList
+          ? _value.hitList
           : hitList // ignore: cast_nullable_to_non_nullable
-              as List<SearchHitItem>,
+              as AsyncValue<List<SearchHitItem>>,
       sortType: sortType == freezed
           ? _value.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
@@ -114,21 +121,15 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
 class _$_SearchHitsState implements _SearchHitsState {
   const _$_SearchHitsState(
       {this.query = '',
-      final List<SearchHitItem> hitList = const <SearchHitItem>[],
-      this.sortType = SortIndex.timestamp})
-      : _hitList = hitList;
+      this.hitList = const AsyncValue.loading(),
+      this.sortType = SortIndex.timestamp});
 
   @override
   @JsonKey()
   final String query;
-  final List<SearchHitItem> _hitList;
   @override
   @JsonKey()
-  List<SearchHitItem> get hitList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_hitList);
-  }
-
+  final AsyncValue<List<SearchHitItem>> hitList;
   @override
   @JsonKey()
   final SortIndex sortType;
@@ -144,7 +145,7 @@ class _$_SearchHitsState implements _SearchHitsState {
         (other.runtimeType == runtimeType &&
             other is _$_SearchHitsState &&
             const DeepCollectionEquality().equals(other.query, query) &&
-            const DeepCollectionEquality().equals(other._hitList, _hitList) &&
+            const DeepCollectionEquality().equals(other.hitList, hitList) &&
             const DeepCollectionEquality().equals(other.sortType, sortType));
   }
 
@@ -152,7 +153,7 @@ class _$_SearchHitsState implements _SearchHitsState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(query),
-      const DeepCollectionEquality().hash(_hitList),
+      const DeepCollectionEquality().hash(hitList),
       const DeepCollectionEquality().hash(sortType));
 
   @JsonKey(ignore: true)
@@ -164,13 +165,13 @@ class _$_SearchHitsState implements _SearchHitsState {
 abstract class _SearchHitsState implements SearchHitsState {
   const factory _SearchHitsState(
       {final String query,
-      final List<SearchHitItem> hitList,
+      final AsyncValue<List<SearchHitItem>> hitList,
       final SortIndex sortType}) = _$_SearchHitsState;
 
   @override
   String get query;
   @override
-  List<SearchHitItem> get hitList;
+  AsyncValue<List<SearchHitItem>> get hitList;
   @override
   SortIndex get sortType;
   @override

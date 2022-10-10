@@ -12,107 +12,146 @@ class SearchHitsWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scrollController = useScrollController();
-    final queryController = useTextEditingController();
-    final hitList =
-        ref.watch(searchHitsProvider.select((value) => value.hitList));
-    final query = ref.watch(searchHitsProvider.select((value) => value.query));
-    final sortType =
-        ref.watch(searchHitsProvider.select((value) => value.sortType));
-    final viewModel = ref.watch(searchHitsProvider.notifier);
-
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [
-            Expanded(
-              child: hitList.isEmpty
-                  ? const Center(child: Text('No results'))
-                  : ListView.builder(
-                      controller: scrollController,
-                      itemCount: hitList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return SearchHitWidget(item: hitList[index]);
-                      },
-                    ),
+          children: const [
+            _Contents(),
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: _LabelBox(),
             ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: SizedBox(
-                    height: 24,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24.0),
-                        ),
-                      ),
-                      onPressed: () => openBottomSheet(
-                        context,
-                        sortType,
-                        (sortType) {
-                          Navigator.pop(context);
-                          viewModel.updateSortType(sortType);
-                          viewModel.search();
-                          _scrollToTop(scrollController);
-                        },
-                      ),
-                      child: Text(
-                        SortListTile.values
-                            .firstWhere(
-                              (element) => element.sortType == sortType,
-                            )
-                            .title,
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Divider(height: 1),
             ),
-            const SizedBox(height: 8),
-            const Divider(height: 1),
-            SizedBox(
-              height: 44,
-              child: TextField(
-                onEditingComplete: () async {
-                  viewModel.updateQuery(queryController.text);
-                  viewModel.search();
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  _scrollToTop(scrollController);
-                },
-                controller: queryController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: '検索ワード（例：から揚げ　ナス）',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: query.isNotEmpty
-                      ? IconButton(
-                          onPressed: () async {
-                            queryController.text = '';
-                            viewModel.updateQuery('');
-                            viewModel.search();
-                            _scrollToTop(scrollController);
-                          },
-                          icon: const Icon(Icons.clear),
-                        )
-                      : null,
-                ),
-              ),
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: _SearchBox(),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+class _Contents extends HookConsumerWidget {
+  const _Contents();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = useScrollController();
+    final hitList =
+        ref.watch(searchHitsProvider.select((value) => value.hitList));
+
+    final body = hitList.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => const Text('ERROR'),
+      data: (hitList) {
+        _scrollToTop(scrollController);
+        return hitList.isEmpty
+            ? const Center(child: Text('No results'))
+            : ListView.builder(
+                controller: scrollController,
+                itemCount: hitList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SearchHitWidget(item: hitList[index]);
+                },
+              );
+      },
+    );
+    return Expanded(child: body);
+  }
 
   _scrollToTop(ScrollController controller) {
-    if (controller.hasClients) {
-      SchedulerBinding.instance
-          .addPostFrameCallback((_) => controller.jumpTo(0.0));
-    }
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (controller.hasClients) {
+        controller.jumpTo(0.0);
+      }
+    });
+  }
+}
+
+class _LabelBox extends HookConsumerWidget {
+  const _LabelBox();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sortType =
+        ref.watch(searchHitsProvider.select((value) => value.sortType));
+    final viewModel = ref.watch(searchHitsProvider.notifier);
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: SizedBox(
+            height: 24,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+              ),
+              onPressed: () => openBottomSheet(
+                context,
+                sortType,
+                (sortType) {
+                  Navigator.pop(context);
+                  viewModel.updateSortType(sortType);
+                  viewModel.search();
+                },
+              ),
+              child: Text(
+                SortListTile.values
+                    .firstWhere(
+                      (element) => element.sortType == sortType,
+                    )
+                    .title,
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SearchBox extends HookConsumerWidget {
+  const _SearchBox();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final query = ref.watch(searchHitsProvider.select((value) => value.query));
+    final queryEditController = useTextEditingController();
+    final viewModel = ref.watch(searchHitsProvider.notifier);
+    return SizedBox(
+      height: 44,
+      child: TextField(
+        onEditingComplete: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          viewModel.updateQuery(queryEditController.text);
+          viewModel.search();
+        },
+        controller: queryEditController,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: '検索ワード（例：から揚げ　ナス）',
+          prefixIcon: const Icon(Icons.search),
+          suffixIcon: query.isNotEmpty
+              ? IconButton(
+                  onPressed: () {
+                    queryEditController.text = '';
+                    viewModel.updateQuery('');
+                    viewModel.search();
+                  },
+                  icon: const Icon(Icons.clear),
+                )
+              : null,
+        ),
+      ),
+    );
   }
 }
 
@@ -165,11 +204,11 @@ class SearchHitWidget extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 6),
                     Text(
                       '${NumberFormat("#,###").format(item.searchHit.likes)} likes',
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 12),
                     const SizedBox(
                       width: 16,
                       height: 16,
@@ -180,9 +219,28 @@ class SearchHitWidget extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 6),
                     Text(
                       '${NumberFormat("#,###").format(item.searchHit.views)} views',
+                    ),
+                    const SizedBox(width: 12),
+                    const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(
+                          Icons.calendar_month,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      DateFormat('yyyy-MM-dd').format(
+                        DateTime.fromMillisecondsSinceEpoch(
+                          item.searchHit.publishedTimestamp * 1000,
+                        ),
+                      ),
                     ),
                     const Spacer(),
                     SizedBox(
