@@ -13,7 +13,7 @@ final searchHitsProvider =
 
 enum SortIndex {
   relevance('recipe'),
-  timestamp('recipe_published_timestamp_desc'),
+  timestamp('recipe_timestamp_desc'),
   likes('recipe_likes_desc'),
   views('recipe_views_desc');
 
