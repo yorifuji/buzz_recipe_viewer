@@ -24,8 +24,7 @@ mixin _$SearchHit {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get published => throw _privateConstructorUsedError;
-  @JsonKey(name: 'published_timestamp')
-  int get publishedTimestamp => throw _privateConstructorUsedError;
+  int get timestamp => throw _privateConstructorUsedError;
   int get views => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
@@ -47,7 +46,7 @@ abstract class $SearchHitCopyWith<$Res> {
       String title,
       String description,
       String published,
-      @JsonKey(name: 'published_timestamp') int publishedTimestamp,
+      int timestamp,
       int views,
       int likes,
       String image,
@@ -69,7 +68,7 @@ class _$SearchHitCopyWithImpl<$Res> implements $SearchHitCopyWith<$Res> {
     Object? title = freezed,
     Object? description = freezed,
     Object? published = freezed,
-    Object? publishedTimestamp = freezed,
+    Object? timestamp = freezed,
     Object? views = freezed,
     Object? likes = freezed,
     Object? image = freezed,
@@ -93,9 +92,9 @@ class _$SearchHitCopyWithImpl<$Res> implements $SearchHitCopyWith<$Res> {
           ? _value.published
           : published // ignore: cast_nullable_to_non_nullable
               as String,
-      publishedTimestamp: publishedTimestamp == freezed
-          ? _value.publishedTimestamp
-          : publishedTimestamp // ignore: cast_nullable_to_non_nullable
+      timestamp: timestamp == freezed
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as int,
       views: views == freezed
           ? _value.views
@@ -132,7 +131,7 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
       String title,
       String description,
       String published,
-      @JsonKey(name: 'published_timestamp') int publishedTimestamp,
+      int timestamp,
       int views,
       int likes,
       String image,
@@ -156,7 +155,7 @@ class __$$_SearchHitCopyWithImpl<$Res> extends _$SearchHitCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? published = freezed,
-    Object? publishedTimestamp = freezed,
+    Object? timestamp = freezed,
     Object? views = freezed,
     Object? likes = freezed,
     Object? image = freezed,
@@ -180,9 +179,9 @@ class __$$_SearchHitCopyWithImpl<$Res> extends _$SearchHitCopyWithImpl<$Res>
           ? _value.published
           : published // ignore: cast_nullable_to_non_nullable
               as String,
-      publishedTimestamp: publishedTimestamp == freezed
-          ? _value.publishedTimestamp
-          : publishedTimestamp // ignore: cast_nullable_to_non_nullable
+      timestamp: timestamp == freezed
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as int,
       views: views == freezed
           ? _value.views
@@ -216,7 +215,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       required this.title,
       required this.description,
       required this.published,
-      @JsonKey(name: 'published_timestamp') required this.publishedTimestamp,
+      required this.timestamp,
       required this.views,
       required this.likes,
       required this.image,
@@ -235,8 +234,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
   @override
   final String published;
   @override
-  @JsonKey(name: 'published_timestamp')
-  final int publishedTimestamp;
+  final int timestamp;
   @override
   final int views;
   @override
@@ -250,7 +248,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SearchHit(id: $id, title: $title, description: $description, published: $published, publishedTimestamp: $publishedTimestamp, views: $views, likes: $likes, image: $image, url: $url, objectID: $objectID)';
+    return 'SearchHit(id: $id, title: $title, description: $description, published: $published, timestamp: $timestamp, views: $views, likes: $likes, image: $image, url: $url, objectID: $objectID)';
   }
 
   @override
@@ -262,7 +260,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('published', published))
-      ..add(DiagnosticsProperty('publishedTimestamp', publishedTimestamp))
+      ..add(DiagnosticsProperty('timestamp', timestamp))
       ..add(DiagnosticsProperty('views', views))
       ..add(DiagnosticsProperty('likes', likes))
       ..add(DiagnosticsProperty('image', image))
@@ -280,8 +278,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.published, published) &&
-            const DeepCollectionEquality()
-                .equals(other.publishedTimestamp, publishedTimestamp) &&
+            const DeepCollectionEquality().equals(other.timestamp, timestamp) &&
             const DeepCollectionEquality().equals(other.views, views) &&
             const DeepCollectionEquality().equals(other.likes, likes) &&
             const DeepCollectionEquality().equals(other.image, image) &&
@@ -297,7 +294,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(published),
-      const DeepCollectionEquality().hash(publishedTimestamp),
+      const DeepCollectionEquality().hash(timestamp),
       const DeepCollectionEquality().hash(views),
       const DeepCollectionEquality().hash(likes),
       const DeepCollectionEquality().hash(image),
@@ -323,8 +320,7 @@ abstract class _SearchHit implements SearchHit {
       required final String title,
       required final String description,
       required final String published,
-      @JsonKey(name: 'published_timestamp')
-          required final int publishedTimestamp,
+      required final int timestamp,
       required final int views,
       required final int likes,
       required final String image,
@@ -343,8 +339,7 @@ abstract class _SearchHit implements SearchHit {
   @override
   String get published;
   @override
-  @JsonKey(name: 'published_timestamp')
-  int get publishedTimestamp;
+  int get timestamp;
   @override
   int get views;
   @override
