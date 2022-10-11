@@ -12,7 +12,8 @@ final searchHitsProvider =
 });
 
 enum SortIndex {
-  timestamp('recipe_published_timestamp_desc'),
+  relevance('recipe'),
+  timestamp('recipe_timestamp_desc'),
   likes('recipe_likes_desc'),
   views('recipe_views_desc');
 

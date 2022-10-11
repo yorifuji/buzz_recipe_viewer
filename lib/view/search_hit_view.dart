@@ -326,6 +326,11 @@ class SearchHitWidget extends HookConsumerWidget {
 }
 
 enum SortListTile {
+  relevance(
+    '関連度順',
+    Icon(Icons.abc),
+    SortIndex.relevance,
+  ),
   timestamp(
     '追加日（新しい順）',
     Icon(Icons.calendar_month),
@@ -364,7 +369,9 @@ openBottomSheet(
                 (e) => ListTile(
                   leading: e.icon,
                   title: Text(e.title),
-                  trailing: e == sortType ? const Icon(Icons.check) : null,
+                  trailing: e.sortType.indexName == sortType.indexName
+                      ? const Icon(Icons.check)
+                      : null,
                   onTap: () => onTap(e.sortType),
                 ),
               )
