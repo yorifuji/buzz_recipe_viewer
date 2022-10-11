@@ -280,7 +280,7 @@ class SearchHitWidget extends HookConsumerWidget {
                     Text(
                       DateFormat('yyyy-MM-dd').format(
                         DateTime.fromMillisecondsSinceEpoch(
-                          item.searchHit.publishedTimestamp * 1000,
+                          item.searchHit.timestamp * 1000,
                         ),
                       ),
                     ),
