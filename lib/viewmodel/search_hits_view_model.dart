@@ -124,21 +124,6 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
     );
   }
 
-  void toogleDescription(SearchHitItem item) {
-    final newHitList = state.hitList.map((e) {
-      if (e.searchHit.id == item.searchHit.id) {
-        return SearchHitItem(
-          searchHit: e.searchHit,
-          isDescriptionExpanded: !e.isDescriptionExpanded,
-        );
-      } else {
-        return e;
-      }
-    }).toList();
-
-    state = state.copyWith(hitList: newHitList);
-  }
-
   void updateQuery(String query) {
     state = state.copyWith(query: query);
   }
