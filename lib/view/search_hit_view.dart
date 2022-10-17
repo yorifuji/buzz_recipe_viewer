@@ -237,8 +237,13 @@ class _TextInformationWidget extends StatefulWidget {
   State<_TextInformationWidget> createState() => __TextInformationWidgetState();
 }
 
-class __TextInformationWidgetState extends State<_TextInformationWidget> {
+class __TextInformationWidgetState extends State<_TextInformationWidget>
+    with AutomaticKeepAliveClientMixin {
   bool _isExpanded = false;
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return Column(
