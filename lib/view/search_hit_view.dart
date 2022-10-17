@@ -246,6 +246,8 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Column(
       children: [
         InkWell(
