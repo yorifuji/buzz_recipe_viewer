@@ -15,7 +15,7 @@ class SearchHitsWidget extends HookConsumerWidget {
       body: SafeArea(
         child: Column(
           children: const [
-            _Contents(),
+            _SearchHitResult(),
             Padding(
               padding: EdgeInsets.only(top: 8),
               child: _LabelBox(),
@@ -35,8 +35,8 @@ class SearchHitsWidget extends HookConsumerWidget {
   }
 }
 
-class _Contents extends HookConsumerWidget {
-  const _Contents();
+class _SearchHitResult extends HookConsumerWidget {
+  const _SearchHitResult();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -85,7 +85,7 @@ class _Contents extends HookConsumerWidget {
                             ),
                           );
                   } else {
-                    return SearchHitWidget(item: hitList[index]);
+                    return _SearchHitWidget(item: hitList[index]);
                   }
                 },
               );
@@ -197,8 +197,8 @@ class _SearchBox extends HookConsumerWidget {
   }
 }
 
-class SearchHitWidget extends HookConsumerWidget {
-  const SearchHitWidget({super.key, required this.item});
+class _SearchHitWidget extends HookConsumerWidget {
+  const _SearchHitWidget({required this.item});
 
   final SearchHitItem item;
 
