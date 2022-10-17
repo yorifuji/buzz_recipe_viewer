@@ -359,7 +359,6 @@ abstract class _SearchHit implements SearchHit {
 /// @nodoc
 mixin _$SearchHitItem {
   SearchHit get searchHit => throw _privateConstructorUsedError;
-  bool get isDescriptionExpanded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchHitItemCopyWith<SearchHitItem> get copyWith =>
@@ -371,7 +370,7 @@ abstract class $SearchHitItemCopyWith<$Res> {
   factory $SearchHitItemCopyWith(
           SearchHitItem value, $Res Function(SearchHitItem) then) =
       _$SearchHitItemCopyWithImpl<$Res>;
-  $Res call({SearchHit searchHit, bool isDescriptionExpanded});
+  $Res call({SearchHit searchHit});
 
   $SearchHitCopyWith<$Res> get searchHit;
 }
@@ -388,17 +387,12 @@ class _$SearchHitItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchHit = freezed,
-    Object? isDescriptionExpanded = freezed,
   }) {
     return _then(_value.copyWith(
       searchHit: searchHit == freezed
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
               as SearchHit,
-      isDescriptionExpanded: isDescriptionExpanded == freezed
-          ? _value.isDescriptionExpanded
-          : isDescriptionExpanded // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 
@@ -417,7 +411,7 @@ abstract class _$$_SearchHitItemCopyWith<$Res>
           _$_SearchHitItem value, $Res Function(_$_SearchHitItem) then) =
       __$$_SearchHitItemCopyWithImpl<$Res>;
   @override
-  $Res call({SearchHit searchHit, bool isDescriptionExpanded});
+  $Res call({SearchHit searchHit});
 
   @override
   $SearchHitCopyWith<$Res> get searchHit;
@@ -437,17 +431,12 @@ class __$$_SearchHitItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchHit = freezed,
-    Object? isDescriptionExpanded = freezed,
   }) {
     return _then(_$_SearchHitItem(
       searchHit: searchHit == freezed
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
               as SearchHit,
-      isDescriptionExpanded: isDescriptionExpanded == freezed
-          ? _value.isDescriptionExpanded
-          : isDescriptionExpanded // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -455,18 +444,14 @@ class __$$_SearchHitItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
-  const _$_SearchHitItem(
-      {required this.searchHit, this.isDescriptionExpanded = false});
+  const _$_SearchHitItem({required this.searchHit});
 
   @override
   final SearchHit searchHit;
-  @override
-  @JsonKey()
-  final bool isDescriptionExpanded;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SearchHitItem(searchHit: $searchHit, isDescriptionExpanded: $isDescriptionExpanded)';
+    return 'SearchHitItem(searchHit: $searchHit)';
   }
 
   @override
@@ -474,9 +459,7 @@ class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SearchHitItem'))
-      ..add(DiagnosticsProperty('searchHit', searchHit))
-      ..add(
-          DiagnosticsProperty('isDescriptionExpanded', isDescriptionExpanded));
+      ..add(DiagnosticsProperty('searchHit', searchHit));
   }
 
   @override
@@ -484,16 +467,12 @@ class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchHitItem &&
-            const DeepCollectionEquality().equals(other.searchHit, searchHit) &&
-            const DeepCollectionEquality()
-                .equals(other.isDescriptionExpanded, isDescriptionExpanded));
+            const DeepCollectionEquality().equals(other.searchHit, searchHit));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(searchHit),
-      const DeepCollectionEquality().hash(isDescriptionExpanded));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchHit));
 
   @JsonKey(ignore: true)
   @override
@@ -502,14 +481,11 @@ class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
 }
 
 abstract class _SearchHitItem implements SearchHitItem {
-  const factory _SearchHitItem(
-      {required final SearchHit searchHit,
-      final bool isDescriptionExpanded}) = _$_SearchHitItem;
+  const factory _SearchHitItem({required final SearchHit searchHit}) =
+      _$_SearchHitItem;
 
   @override
   SearchHit get searchHit;
-  @override
-  bool get isDescriptionExpanded;
   @override
   @JsonKey(ignore: true)
   _$$_SearchHitItemCopyWith<_$_SearchHitItem> get copyWith =>

@@ -15,7 +15,7 @@ class SearchHitsWidget extends HookConsumerWidget {
       body: SafeArea(
         child: Column(
           children: const [
-            _Contents(),
+            _SearchHitResult(),
             Padding(
               padding: EdgeInsets.only(top: 8),
               child: _LabelBox(),
@@ -35,8 +35,8 @@ class SearchHitsWidget extends HookConsumerWidget {
   }
 }
 
-class _Contents extends HookConsumerWidget {
-  const _Contents();
+class _SearchHitResult extends HookConsumerWidget {
+  const _SearchHitResult();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -85,7 +85,7 @@ class _Contents extends HookConsumerWidget {
                             ),
                           );
                   } else {
-                    return SearchHitWidget(item: hitList[index]);
+                    return _SearchHitWidget(item: hitList[index]);
                   }
                 },
               );
@@ -197,14 +197,13 @@ class _SearchBox extends HookConsumerWidget {
   }
 }
 
-class SearchHitWidget extends HookConsumerWidget {
-  const SearchHitWidget({super.key, required this.item});
+class _SearchHitWidget extends HookConsumerWidget {
+  const _SearchHitWidget({required this.item});
 
   final SearchHitItem item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(searchHitsProvider.notifier);
     return Column(
       children: [
         InkWell(
@@ -221,15 +220,43 @@ class SearchHitWidget extends HookConsumerWidget {
             ],
           ),
         ),
+        _TextInformationWidget(
+          item: item,
+        ),
+      ],
+    );
+  }
+}
+
+class _TextInformationWidget extends StatefulWidget {
+  const _TextInformationWidget({required this.item});
+
+  final SearchHitItem item;
+
+  @override
+  State<_TextInformationWidget> createState() => __TextInformationWidgetState();
+}
+
+class __TextInformationWidgetState extends State<_TextInformationWidget>
+    with AutomaticKeepAliveClientMixin {
+  bool _isExpanded = false;
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    return Column(
+      children: [
         InkWell(
-          onTap: () {
-            viewModel.toogleDescription(item);
-          },
+          onTap: _toggle,
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(item.searchHit.title),
+                child: Text(widget.item.searchHit.title),
               ),
               const SizedBox(height: 8),
               Padding(
@@ -248,7 +275,7 @@ class SearchHitWidget extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      '${NumberFormat("#,###").format(item.searchHit.likes)} likes',
+                      '${NumberFormat("#,###").format(widget.item.searchHit.likes)} likes',
                     ),
                     const SizedBox(width: 6),
                     const SizedBox(
@@ -263,7 +290,7 @@ class SearchHitWidget extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      '${NumberFormat("#,###").format(item.searchHit.views)} views',
+                      '${NumberFormat("#,###").format(widget.item.searchHit.views)} views',
                     ),
                     const SizedBox(width: 6),
                     const SizedBox(
@@ -280,7 +307,7 @@ class SearchHitWidget extends HookConsumerWidget {
                     Text(
                       DateFormat('yyyy-MM-dd').format(
                         DateTime.fromMillisecondsSinceEpoch(
-                          item.searchHit.timestamp * 1000,
+                          widget.item.searchHit.timestamp * 1000,
                         ),
                       ),
                     ),
@@ -291,9 +318,7 @@ class SearchHitWidget extends HookConsumerWidget {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Icon(
-                          item.isDescriptionExpanded
-                              ? Icons.expand_less
-                              : Icons.expand_more,
+                          _isExpanded ? Icons.expand_less : Icons.expand_more,
                         ),
                       ),
                     ),
@@ -304,17 +329,15 @@ class SearchHitWidget extends HookConsumerWidget {
           ),
         ),
         const SizedBox(height: 16),
-        if (item.isDescriptionExpanded)
+        if (_isExpanded)
           InkWell(
-            onTap: () {
-              viewModel.toogleDescription(item);
-            },
+            onTap: _toggle,
             child: Column(
               children: [
                 const Divider(height: 1),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                  child: Text(item.searchHit.description),
+                  child: Text(widget.item.searchHit.description),
                 ),
                 const SizedBox(height: 8),
               ],
@@ -322,6 +345,10 @@ class SearchHitWidget extends HookConsumerWidget {
           ),
       ],
     );
+  }
+
+  _toggle() {
+    setState(() => _isExpanded = !_isExpanded);
   }
 }
 

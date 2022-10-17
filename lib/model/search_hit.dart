@@ -27,6 +27,5 @@ class SearchHit with _$SearchHit {
 class SearchHitItem with _$SearchHitItem {
   const factory SearchHitItem({
     required SearchHit searchHit,
-    @Default(false) bool isDescriptionExpanded,
   }) = _SearchHitItem;
 }
