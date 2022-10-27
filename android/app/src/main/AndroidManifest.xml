@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.buzz_recipe_viewer">
+    package="dev.yorifuji.buzz_recipe_viewer">
    <application
-        android:label="buzz_recipe_viewer"
+        android:label="BuzzRecipeViewer"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -31,4 +31,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
