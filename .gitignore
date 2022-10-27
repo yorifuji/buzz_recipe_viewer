@@ -45,7 +45,3 @@ app.*.map.json
 
 # Environment file
 .env*
-
-# CocoaPods
-ios/Podfile
-ios/Podfile.lock

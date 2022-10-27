@@ -1,4 +1,4 @@
-package com.example.buzz_recipe_viewer
+package dev.yorifuji.buzz_recipe_viewer
 
 import io.flutter.embedding.android.FlutterActivity
 
