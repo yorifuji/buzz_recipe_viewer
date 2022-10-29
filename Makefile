@@ -22,4 +22,3 @@ create-key-properties-file:
 	echo "storePassword=$${ANDROID_STORE_PASSWORD}" >> android/key.properties
 	echo "keyPassword=$${ANDROID_KEY_PASSWORD}" >> android/key.properties
 	echo "keyAlias=$${ANDROID_KEY_ALIAS}" >> android/key.properties
-	echo "serviceAccountFile=service-account-ke.json" >> android/key.properties
