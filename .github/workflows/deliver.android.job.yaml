@@ -4,6 +4,9 @@ on:
   workflow_call:
   workflow_dispatch:
 
+env:
+  ANDROID_PACKAGE_NAME: 'dev.yorifuji.buzz_recipe_viewer'
+
 jobs:
   deliver-android:
     runs-on: ubuntu-latest
@@ -58,8 +61,8 @@ jobs:
         uses: r0adkll/upload-google-play@v1.0.19
         with:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
-          serviceAccountJson: android/service-account-ke.json
-          packageName: dev.yorifuji.buzz_recipe_viewer
+          serviceAccountJson: android/service-account.json
+          packageName: ${{ env.ANDROID_PACKAGE_NAME }}
           track: internal
           status: draft
 

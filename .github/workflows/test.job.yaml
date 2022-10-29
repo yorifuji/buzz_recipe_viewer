@@ -2,6 +2,7 @@ name: job test
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   test:

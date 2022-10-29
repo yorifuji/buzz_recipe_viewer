@@ -2,6 +2,7 @@ name: job deliver-ios
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 env:
   IOS_IPA_PATH: 'build/ios/ipa/buzz_recipe_viewer.ipa'

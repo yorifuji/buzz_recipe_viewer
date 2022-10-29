@@ -3,6 +3,7 @@ name: workflow for deliver
 on:
   pull_request_review:
     types: [submitted]
+  workflow_dispatch:
 
 jobs:
   check:
