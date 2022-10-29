@@ -15,7 +15,7 @@ create-keystore-file:
 	echo $${ANDROID_KEY_JKS_BASE64} | base64 --decode > android/app/upload.jks
 
 create-service-account-file:
-	echo $${GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64} | base64 --decode > android/service-account-ke.json
+	echo $${GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64} | base64 --decode > android/service-account.json
 
 create-key-properties-file:
 	echo "storeFile=./upload.jks" > android/key.properties
