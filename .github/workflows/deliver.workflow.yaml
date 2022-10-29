@@ -31,12 +31,12 @@ jobs:
 
   # use absolute path for uses if project is public.
   # https://github.com/orgs/github-community/discussions/14306
-  deliver-ios:
+  ios:
     needs: label
     uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.ios.job.yaml@main
     secrets: inherit
 
-  deliver-android:
+  android:
     needs: label
     uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.android.job.yaml@main
     secrets: inherit
