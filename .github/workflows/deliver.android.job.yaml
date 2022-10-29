@@ -12,17 +12,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Create environment files
+      - name: Create .env
+        env:
+          ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        run: |
+          make create-env-file
+
+      - name: Create keystore file
         env:
           ANDROID_KEY_JKS_BASE64: ${{ secrets.ANDROID_KEY_JKS_BASE64 }}
+        run: |
+          make create-keystore-file
+
+      - name: Create key.properties file
+        env:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+        run: |
+          make create-key-properties-file
+
+      - name: Create google service account file
+        env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
         run: |
-          make create-env-file
-          make create-keystore-file
-          make create-key-properties-file
           make create-service-account-file
 
       - name: Install Flutter
