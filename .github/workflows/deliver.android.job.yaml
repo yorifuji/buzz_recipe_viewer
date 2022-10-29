@@ -21,13 +21,13 @@ jobs:
 
       - name: Create upload keystore file
         env:
-          CERTIFICATE_BASE64: ${{ secrets.ANDROID_KEY_JKS_BASE64 }}
+          ANDROID_KEY_JKS_BASE64: ${{ secrets.ANDROID_KEY_JKS_BASE64 }}
         run: |
           echo $ANDROID_KEY_JKS_BASE64 | base64 --decode > android/app/upload.jks
 
       - name: Create google service account file
         env:
-          CERTIFICATE_BASE64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
         run: |
           echo $GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 | base64 --decode > android/service-account-ke.json
 
