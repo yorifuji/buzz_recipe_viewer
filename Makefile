@@ -1,5 +1,10 @@
 
-.PHONY: analyze build
+.PHONY: analyze \
+	build \
+	create-env-file \
+	create-keystore-file \
+	create-service-account-file \
+	create-key-properties-file
 
 analyze:
 	flutter analyze
