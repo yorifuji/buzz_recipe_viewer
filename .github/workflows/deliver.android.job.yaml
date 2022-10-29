@@ -61,6 +61,7 @@ jobs:
           serviceAccountJson: android/service-account-ke.json
           packageName: dev.yorifuji.buzz_recipe_viewer
           track: internal
+          status: completed
 
       - name: Notify Slack
         uses: 8398a7/action-slack@v3.8.0
