@@ -1,4 +1,4 @@
-name: job analyze
+name: Job analyze
 
 on:
   workflow_call:

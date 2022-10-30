@@ -1,4 +1,4 @@
-name: workflow for deliver
+name: Workflow for deliver
 
 on:
   pull_request_review:
