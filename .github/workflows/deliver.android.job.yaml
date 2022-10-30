@@ -54,6 +54,10 @@ jobs:
       - name: Run flutter pub get
         run: flutter pub get
 
+      - name: Get Version Number
+        run: |
+          echo "APP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+
       - name: Build app bundle
         run: flutter build appbundle
 
@@ -63,6 +67,7 @@ jobs:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           serviceAccountJson: android/service-account.json
           packageName: ${{ env.ANDROID_PACKAGE_NAME }}
+          releaseName: ${{ env.APP_VERSION }}
           track: internal
           status: draft
 
