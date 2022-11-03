@@ -63,13 +63,27 @@ jobs:
         run: flutter pub get
 
       - name: Build ipa
+        id: build
         run: flutter build ipa --export-options-plist=./ios/ExportOptions.plist
 
       - name: Upload to App Store Connect
+        id: upload
         env:
           APPLE_APPLE_ID: ${{ secrets.APPLE_APPLE_ID }}
           APPLE_APP_PASS: ${{ secrets.APPLE_APP_PASS }}
         run: xcrun altool --upload-app --type ios -f "$IOS_IPA_PATH" -u "$APPLE_APPLE_ID" -p "$APPLE_APP_PASS"
+
+      - name: PR Comment Success
+        if: ${{ steps.build == 'success' && steps.upload == 'success' }}
+        env:
+          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "🙆‍♂️"
+
+      - name: PR Comment Failure
+        if: ${{ steps.build != 'success' || steps.upload != 'success' }}
+        env:
+          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "🙅‍♂️"
 
       - name: Notify Slack
         uses: 8398a7/action-slack@v3.8.0

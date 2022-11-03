@@ -23,41 +23,50 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
+
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           cache: true
+
       - name: Run flutter version
         run: flutter --version
+
       - name: Run flutter pub get
         run: flutter pub get
+
       - name: Init Git config
         run: |
           git config --local user.name $GIT_USER_NAME
           git config --local user.email $GIT_USER_EMAIL
+
       - name: Bump up version
         run: |
           echo choice: ${{ github.event.inputs.bump }}
           flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
           echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+
       - name: Commit pubspec.yaml
         env:
           BUMP_VERSION: ${{ env.BUMP_VERSION }}
         run: |
           git add -u pubspec.yaml
           echo "Bumped version number to $BUMP_VERSION" | git commit --file=-
+
       - name: Create Branch
         env:
           BUMP_VERSION: ${{ env.BUMP_VERSION }}
         run: |
           git checkout -b releases/$BUMP_VERSION
           echo "RELEASE_BRANCH=releases/$BUMP_VERSION" >> $GITHUB_ENV
+
       - name: Push Branch
         env:
           RELEASE_BRANCH: ${{ env.RELEASE_BRANCH }}
         run: |
           git push -u origin $RELEASE_BRANCH
+
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,6 +74,7 @@ jobs:
           RELEASE_BRANCH: ${{ env.RELEASE_BRANCH }}
         run: |
           gh pr create -B main -t "Release $BUMP_VERSION" -b "Release $BUMP_VERSION" --head $RELEASE_BRANCH
+
       - name: Send Notification
         uses: rtCamp/action-slack-notify@v2
         if: always()
