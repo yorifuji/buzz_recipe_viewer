@@ -59,9 +59,11 @@ jobs:
           echo "APP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
       - name: Build app bundle
+        id: build
         run: flutter build appbundle
 
       - name: Upload to Google Play
+        id: upload
         uses: r0adkll/upload-google-play@v1.0.19
         with:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
@@ -70,6 +72,20 @@ jobs:
           releaseName: ${{ env.APP_VERSION }}
           track: internal
           status: draft
+
+      - name: PR Comment Success
+        if: ${{ steps.build.conclusion == 'success' && steps.upload.conclusion == 'success' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "deliver Android 🙆‍♂️"
+
+      - name: PR Comment Failure
+        if: ${{ steps.build.conclusion != 'success' || steps.upload.conclusion != 'success' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "deliver Android 🙅‍♂️"
 
       - name: Notify Slack
         uses: 8398a7/action-slack@v3.8.0
