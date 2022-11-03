@@ -71,16 +71,6 @@ jobs:
           APPLE_APP_PASS: ${{ secrets.APPLE_APP_PASS }}
         run: xcrun altool --upload-app --type ios -f "$IOS_IPA_PATH" -u "$APPLE_APPLE_ID" -p "$APPLE_APP_PASS"
 
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: job.status == 'success' ? '🙆‍♂️' : '🙅‍♂️'
-            })
-
       - name: Notify Slack
         uses: 8398a7/action-slack@v3.8.0
         with:
