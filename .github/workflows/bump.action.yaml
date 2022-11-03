@@ -57,10 +57,10 @@ jobs:
           git checkout -b releases/$BUMP_VERSION
           echo "RELEASE_BRANCH=releases/$BUMP_VERSION" >> $GITHUB_ENV
       - name: Push Branch
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ env.RELEASE_BRANCH }}
+        env:
+          RELEASE_BRANCH: ${{ env.RELEASE_BRANCH }}
+        run: |
+          git push -u origin $RELEASE_BRANCH
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
