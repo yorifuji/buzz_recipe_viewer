@@ -34,11 +34,11 @@ jobs:
   ios:
     needs: label
     # uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.ios.job.yaml@main
-    uses: ./.github/workflows/deliver.ios.job.yaml@main
+    uses: ./.github/workflows/deliver.ios.job.yaml
     secrets: inherit
 
   android:
     needs: label
     #uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.android.job.yaml@main
-    uses: ./.github/workflows/deliver.android.job.yaml@main
+    uses: ./.github/workflows/deliver.android.job.yaml
     secrets: inherit
