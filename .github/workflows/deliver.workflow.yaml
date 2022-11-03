@@ -29,16 +29,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ADD_LABEL: 'deliver'
 
-  # use absolute path for uses if project is public.
-  # https://github.com/orgs/github-community/discussions/14306
   ios:
     needs: label
-    # uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.ios.job.yaml@main
     uses: ./.github/workflows/deliver.ios.job.yaml
     secrets: inherit
 
   android:
     needs: label
-    #uses: yorifuji/buzz_recipe_viewer/.github/workflows/deliver.android.job.yaml@main
     uses: ./.github/workflows/deliver.android.job.yaml
     secrets: inherit
