@@ -1,0 +1,52 @@
+name: Workflow for dependabot
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    if: startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Run flutter version
+        run: flutter --version
+
+      - name: Run flutter pub get
+        run: flutter pub get
+
+      - name: Run flutter test
+        run: flutter test
+
+  analyze:
+    if: startsWith(github.head_ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Run flutter version
+        run: flutter --version
+
+      - name: Run flutter pub get
+        run: flutter pub get
+
+      - name: Run flutter analyze
+        run: flutter analyze
