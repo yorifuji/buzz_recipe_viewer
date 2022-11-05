@@ -334,7 +334,7 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
             onTap: _toggle,
             child: Column(
               children: [
-                const Divider(height: 1),
+                Divider(height: 1),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                   child: Text(widget.item.searchHit.description),
