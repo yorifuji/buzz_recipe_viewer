@@ -359,7 +359,7 @@ enum SortListTile {
     SortIndex.relevance,
   ),
   timestamp(
-    '追加日（新しい順）',
+    '登録日（新しい順）',
     Icon(Icons.calendar_month),
     SortIndex.timestamp,
   ),
