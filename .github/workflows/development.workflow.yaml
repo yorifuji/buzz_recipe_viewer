@@ -9,6 +9,10 @@ jobs:
     if: ${{ !startsWith(github.head_ref, 'dependabot/') && !startsWith(github.head_ref, 'releases/') }}
     uses: ./.github/workflows/analyze.job.yaml
     secrets: inherit
+  danger-job:
+    if: ${{ !startsWith(github.head_ref, 'dependabot/') && !startsWith(github.head_ref, 'releases/') }}
+    uses: ./.github/workflows/danger.job.yaml
+    secrets: inherit
   test-job:
     if: ${{ !startsWith(github.head_ref, 'dependabot/') && !startsWith(github.head_ref, 'releases/') }}
     uses: ./.github/workflows/test.job.yaml

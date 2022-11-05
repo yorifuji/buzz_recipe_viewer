@@ -1,4 +1,4 @@
-name: Job analyze
+name: Job danger
 
 on:
   workflow_call:
@@ -24,14 +24,23 @@ jobs:
           cache: true
       - name: Run flutter version
         run: flutter --version
-      - name: Install matcher
-        run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
       - name: Run flutter pub get
         run: flutter pub get
       - name: Run flutter analyze
-        run: flutter analyze
-      - name: Remove matcher
-        run: echo "::remove-matcher owner=dart-analyzer::"
+        run: flutter analyze > flutter_analyze_report.txt
+      - uses: actions/setup-ruby@v1
+        if: always()
+        with:
+          ruby-version: '2.6'
+      - uses: MeilCli/danger-action@v5.6.1
+        if: always()
+        with:
+          plugins_file: 'Gemfile'
+          install_path: 'vendor/bundle'
+          danger_file: 'Dangerfile'
+          danger_id: 'danger-pr'
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         if: always()
