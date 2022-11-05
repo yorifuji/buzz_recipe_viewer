@@ -1,0 +1,15 @@
+name: check
+
+on:
+  pull_request:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+      - run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: echo "::remove-matcher owner=dart-analyzer::"
