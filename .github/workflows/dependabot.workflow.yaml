@@ -5,58 +5,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  analyze-job:
     if: startsWith(github.head_ref, 'dependabot/')
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Create dummy .env
-        shell: bash
-        run: |
-          touch .env
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      - name: Run flutter version
-        run: flutter --version
-
-      - name: Run flutter pub get
-        run: flutter pub get
-
-      - name: Run flutter test
-        run: flutter test
-
-  analyze:
+    uses: ./.github/workflows/analyze.job.yaml
+    secrets: inherit
+  danger-job:
     if: startsWith(github.head_ref, 'dependabot/')
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Create dummy .env
-        shell: bash
-        run: |
-          touch .env
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      - name: Run flutter version
-        run: flutter --version
-
-      - name: Run flutter pub get
-        run: flutter pub get
-
-      - name: Run flutter analyze
-        run: flutter analyze
+    uses: ./.github/workflows/danger.job.yaml
+    secrets: inherit
+  test-job:
+    if: startsWith(github.head_ref, 'dependabot/')
+    uses: ./.github/workflows/test.job.yaml
+    secrets: inherit
