@@ -311,7 +311,7 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
                         ),
                       ),
                     ),
-                    const Spacer(),
+                    Spacer(),
                     SizedBox(
                       width: 16,
                       height: 16,
