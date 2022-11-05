@@ -4,15 +4,16 @@ on:
   push:
     branches:
       - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  analyze-job:
+  analyze:
     uses: ./.github/workflows/analyze.job.yaml
     secrets: inherit
-  danger-job:
+  danger:
     uses: ./.github/workflows/danger.job.yaml
     secrets: inherit
-  test-job:
+  test:
     uses: ./.github/workflows/test.job.yaml
     secrets: inherit
