@@ -25,4 +25,16 @@ class MyApp extends StatelessWidget {
       home: const SearchHitsWidget(),
     );
   }
+
+  int? invalid_null_aware_operator(String s) {
+    // This line violates invalid_null_aware_operator
+    return s?.length;
+  }
+
+  void invalid_assignment() {
+    int i = 0;
+    // This line violates invalid_assignment
+    String s = i;
+    debugPrint(s);
+  }
 }
