@@ -350,6 +350,13 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
   _toggle() {
     setState(() => _isExpanded = !_isExpanded);
   }
+
+  void invalidAssignment() {
+    int i = 0;
+    // This line violates invalid_assignment
+    String s = i;
+    debugPrint(s);
+  }
 }
 
 enum SortListTile {
