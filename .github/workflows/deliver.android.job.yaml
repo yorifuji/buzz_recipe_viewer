@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload to Google Play
         id: upload
-        uses: r0adkll/upload-google-play@v1.0.19
+        uses: r0adkll/upload-google-play@78c9e796b1035c94169c101d8e46cb880194bfc3
         with:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           serviceAccountJson: android/service-account.json

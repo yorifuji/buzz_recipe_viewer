@@ -32,7 +32,7 @@ jobs:
         if: always()
         with:
           ruby-version: '2.6'
-      - uses: MeilCli/danger-action@v5.6.1
+      - uses: MeilCli/danger-action@47eeda371752fb02c03596d2ad11527e3e5cba2d
         if: always()
         with:
           plugins_file: 'Gemfile'
