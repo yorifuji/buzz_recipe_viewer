@@ -26,7 +26,7 @@ jobs:
         env:
           ANDROID_KEY_JKS_BASE64: ${{ secrets.ANDROID_KEY_JKS_BASE64 }}
         run: |
-          make create-keystore-file
+        	echo $ANDROID_KEY_JKS_BASE64 | base64 --decode > android/app/upload.jks
 
       - name: Create key.properties file
         env:
@@ -34,13 +34,16 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
         run: |
-          make create-key-properties-file
+          echo "storeFile=./upload.jks" > android/key.properties
+          echo "storePassword=$ANDROID_STORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
 
       - name: Create google service account file
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
         run: |
-          make create-service-account-file
+          echo $GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 | base64 --decode > android/service-account.json
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
