@@ -80,7 +80,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUMP_VERSION: ${{ env.BUMP_VERSION }}
         run: |
-          gh release create $BUMP_VERSION --generate-notes
+          gh release create v$BUMP_VERSION --generate-notes
 
       - name: Send Notification
         uses: rtCamp/action-slack-notify@v2
