@@ -29,10 +29,10 @@ jobs:
       - name: Run flutter analyze
         run: flutter analyze > flutter_analyze_report.txt
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         if: always()
         with:
-          ruby-version: '2.6'
+          ruby-version: '2.7'
       - name: Danger
         uses: MeilCli/danger-action@47eeda371752fb02c03596d2ad11527e3e5cba2d
         if: always()
