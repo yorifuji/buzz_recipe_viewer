@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload to Google Play
         id: upload
-        uses: r0adkll/upload-google-play@v1.0.19
+        uses: r0adkll/upload-google-play@78c9e796b1035c94169c101d8e46cb880194bfc3
         with:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           serviceAccountJson: android/service-account.json
@@ -91,7 +91,7 @@ jobs:
         run: gh pr comment $PULL_REQUERST_NUMBER --body "deliver Android 🙅‍♂️"
 
       - name: Notify Slack
-        uses: 8398a7/action-slack@v3.8.0
+        uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
           author_name: 'deliver-android'

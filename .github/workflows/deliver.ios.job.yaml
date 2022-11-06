@@ -88,7 +88,7 @@ jobs:
         run: gh pr comment $PULL_REQUERST_NUMBER --body "deliver iOS 🙅‍♂️"
 
       - name: Notify Slack
-        uses: 8398a7/action-slack@v3.8.0
+        uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
           author_name: 'deliver-ios'
