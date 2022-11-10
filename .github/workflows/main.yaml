@@ -1,4 +1,4 @@
-name: Workflow for main
+name: Main
 
 on:
   push:
@@ -9,11 +9,11 @@ on:
 
 jobs:
   analyze:
-    uses: ./.github/workflows/analyze.job.yaml
+    uses: ./.github/actions/analyze.yaml
     secrets: inherit
   danger:
-    uses: ./.github/workflows/danger.job.yaml
+    uses: ./.github/actions/danger.yaml
     secrets: inherit
   test:
-    uses: ./.github/workflows/test.job.yaml
+    uses: ./.github/actions/test.yaml
     secrets: inherit

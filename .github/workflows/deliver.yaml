@@ -1,4 +1,4 @@
-name: Workflow for deliver
+name: Deliver
 
 on:
   pull_request_review:
@@ -31,10 +31,10 @@ jobs:
 
   ios:
     needs: label
-    uses: ./.github/workflows/deliver.ios.job.yaml
+    uses: ./.github/actions/deliver.ios.yaml
     secrets: inherit
 
   android:
     needs: label
-    uses: ./.github/workflows/deliver.android.job.yaml
+    uses: ./.github/actions/deliver.android.yaml
     secrets: inherit

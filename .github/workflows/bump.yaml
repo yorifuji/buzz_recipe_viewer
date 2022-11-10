@@ -1,4 +1,4 @@
-name: Action bump
+name: Bump
 
 on:
   workflow_dispatch:
