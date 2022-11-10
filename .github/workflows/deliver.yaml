@@ -31,10 +31,10 @@ jobs:
 
   ios:
     needs: label
-    uses: ./.github/actions/deliver.ios.yaml
+    uses: ./.github/actions/deliver.ios.yaml@main
     secrets: inherit
 
   android:
     needs: label
-    uses: ./.github/actions/deliver.android.yaml
+    uses: ./.github/actions/deliver.android.yaml@main
     secrets: inherit
