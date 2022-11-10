@@ -9,11 +9,11 @@ on:
 
 jobs:
   analyze:
-    uses: ./.github/actions/analyze.yaml@main
+    uses: ./.github/actions/analyze
     secrets: inherit
   danger:
-    uses: ./.github/actions/danger.yaml@main
+    uses: ./.github/actions/danger
     secrets: inherit
   test:
-    uses: ./.github/actions/test.yaml@main
+    uses: ./.github/actions/test
     secrets: inherit
