@@ -6,21 +6,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  check:
+  check-label:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: |
       startsWith(github.event.pull_request.head.ref, 'releases/') &&
       github.event.review.state == 'approved' &&
       contains(github.event.pull_request.labels.*.name, 'deliver') == false
-    steps:
-      - name: Invoke next job
-        run: exit 0
-
-  label:
-    needs: check
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - name: Add Label
         uses: pullreminders/label-when-approved-action@9d8dd03e30f605a3bf687cde6614c1862862d466
@@ -30,11 +22,11 @@ jobs:
           ADD_LABEL: 'deliver'
 
   ios:
-    needs: label
+    needs: check-label
     uses: ./.github/workflows/deliver.ios.job.yaml
     secrets: inherit
 
   android:
-    needs: label
+    needs: check-label
     uses: ./.github/workflows/deliver.android.job.yaml
     secrets: inherit
