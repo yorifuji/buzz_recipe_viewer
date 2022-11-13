@@ -81,13 +81,3 @@ jobs:
           BUMP_VERSION: ${{ env.BUMP_VERSION }}
         run: |
           gh release create v$BUMP_VERSION --generate-notes
-
-      - name: Send Notification
-        uses: rtCamp/action-slack-notify@v2
-        if: always()
-        env:
-          SLACK_CHANNEL: github-actions
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
-          SLACK_TITLE: Job
-          SLACK_MESSAGE: ${{ github.job }}
