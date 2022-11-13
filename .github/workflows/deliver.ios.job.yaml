@@ -78,11 +78,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
-        run: gh pr comment $PULL_REQUERST_NUMBER --body "Upload to TestFlight 🙆‍♂️"
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "Successfully uploaded to TestFlight. 🙆‍♂️"
 
       - name: PR Comment Failure
         if: ${{ steps.build.conclusion != 'success' || steps.upload.conclusion != 'success' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
-        run: gh pr comment $PULL_REQUERST_NUMBER --body "Upload to TestFlight 🙅‍♂️"
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "Failed to upload to TestFlight. 🙅‍♂️"
