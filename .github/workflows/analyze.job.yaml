@@ -28,14 +28,36 @@ jobs:
       - name: Run flutter version
         run: flutter --version
 
-      - name: Install matcher
-        run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
-
       - name: Run flutter pub get
         run: flutter pub get
 
+      - name: Install matcher
+        run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
+
       - name: Run flutter analyze
-        run: flutter analyze
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter analyze | tee ./flutter_analyze_report.txt
+          set +o pipefail
 
       - name: Remove matcher
+        if: always()
         run: echo "::remove-matcher owner=dart-analyzer::"
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        if: always()
+        with:
+          ruby-version: '2.7'
+
+      - name: Danger
+        uses: MeilCli/danger-action@47eeda371752fb02c03596d2ad11527e3e5cba2d
+        if: always()
+        with:
+          plugins_file: 'Gemfile'
+          install_path: 'vendor/bundle'
+          danger_file: 'Dangerfile'
+          danger_id: 'danger-pr'
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
