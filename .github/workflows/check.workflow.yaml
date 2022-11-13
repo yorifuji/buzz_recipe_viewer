@@ -1,4 +1,4 @@
-name: Workflow for main
+name: Workflow for check
 
 on:
   push:
