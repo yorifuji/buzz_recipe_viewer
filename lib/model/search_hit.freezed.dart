@@ -40,7 +40,8 @@ mixin _$SearchHit {
 /// @nodoc
 abstract class $SearchHitCopyWith<$Res> {
   factory $SearchHitCopyWith(SearchHit value, $Res Function(SearchHit) then) =
-      _$SearchHitCopyWithImpl<$Res>;
+      _$SearchHitCopyWithImpl<$Res, SearchHit>;
+  @useResult
   $Res call(
       {String id,
       String title,
@@ -55,68 +56,71 @@ abstract class $SearchHitCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchHitCopyWithImpl<$Res> implements $SearchHitCopyWith<$Res> {
+class _$SearchHitCopyWithImpl<$Res, $Val extends SearchHit>
+    implements $SearchHitCopyWith<$Res> {
   _$SearchHitCopyWithImpl(this._value, this._then);
 
-  final SearchHit _value;
   // ignore: unused_field
-  final $Res Function(SearchHit) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? published = freezed,
-    Object? timestamp = freezed,
-    Object? views = freezed,
-    Object? likes = freezed,
-    Object? image = freezed,
-    Object? url = freezed,
-    Object? objectID = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? description = null,
+    Object? published = null,
+    Object? timestamp = null,
+    Object? views = null,
+    Object? likes = null,
+    Object? image = null,
+    Object? url = null,
+    Object? objectID = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      published: published == freezed
+      published: null == published
           ? _value.published
           : published // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: timestamp == freezed
+      timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      views: views == freezed
+      views: null == views
           ? _value.views
           : views // ignore: cast_nullable_to_non_nullable
               as int,
-      likes: likes == freezed
+      likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
               as int,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      objectID: objectID == freezed
+      objectID: null == objectID
           ? _value.objectID
           : objectID // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -126,6 +130,7 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
           _$_SearchHit value, $Res Function(_$_SearchHit) then) =
       __$$_SearchHitCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String title,
@@ -140,66 +145,65 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SearchHitCopyWithImpl<$Res> extends _$SearchHitCopyWithImpl<$Res>
+class __$$_SearchHitCopyWithImpl<$Res>
+    extends _$SearchHitCopyWithImpl<$Res, _$_SearchHit>
     implements _$$_SearchHitCopyWith<$Res> {
   __$$_SearchHitCopyWithImpl(
       _$_SearchHit _value, $Res Function(_$_SearchHit) _then)
-      : super(_value, (v) => _then(v as _$_SearchHit));
+      : super(_value, _then);
 
-  @override
-  _$_SearchHit get _value => super._value as _$_SearchHit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? published = freezed,
-    Object? timestamp = freezed,
-    Object? views = freezed,
-    Object? likes = freezed,
-    Object? image = freezed,
-    Object? url = freezed,
-    Object? objectID = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? description = null,
+    Object? published = null,
+    Object? timestamp = null,
+    Object? views = null,
+    Object? likes = null,
+    Object? image = null,
+    Object? url = null,
+    Object? objectID = null,
   }) {
     return _then(_$_SearchHit(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      published: published == freezed
+      published: null == published
           ? _value.published
           : published // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: timestamp == freezed
+      timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      views: views == freezed
+      views: null == views
           ? _value.views
           : views // ignore: cast_nullable_to_non_nullable
               as int,
-      likes: likes == freezed
+      likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
               as int,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      objectID: objectID == freezed
+      objectID: null == objectID
           ? _value.objectID
           : objectID // ignore: cast_nullable_to_non_nullable
               as String,
@@ -273,36 +277,30 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchHit &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.published, published) &&
-            const DeepCollectionEquality().equals(other.timestamp, timestamp) &&
-            const DeepCollectionEquality().equals(other.views, views) &&
-            const DeepCollectionEquality().equals(other.likes, likes) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.objectID, objectID));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.published, published) ||
+                other.published == published) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.views, views) || other.views == views) &&
+            (identical(other.likes, likes) || other.likes == likes) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.objectID, objectID) ||
+                other.objectID == objectID));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(published),
-      const DeepCollectionEquality().hash(timestamp),
-      const DeepCollectionEquality().hash(views),
-      const DeepCollectionEquality().hash(likes),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(objectID));
+  int get hashCode => Object.hash(runtimeType, id, title, description,
+      published, timestamp, views, likes, image, url, objectID);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchHitCopyWith<_$_SearchHit> get copyWith =>
       __$$_SearchHitCopyWithImpl<_$_SearchHit>(this, _$identity);
 
@@ -369,37 +367,41 @@ mixin _$SearchHitItem {
 abstract class $SearchHitItemCopyWith<$Res> {
   factory $SearchHitItemCopyWith(
           SearchHitItem value, $Res Function(SearchHitItem) then) =
-      _$SearchHitItemCopyWithImpl<$Res>;
+      _$SearchHitItemCopyWithImpl<$Res, SearchHitItem>;
+  @useResult
   $Res call({SearchHit searchHit});
 
   $SearchHitCopyWith<$Res> get searchHit;
 }
 
 /// @nodoc
-class _$SearchHitItemCopyWithImpl<$Res>
+class _$SearchHitItemCopyWithImpl<$Res, $Val extends SearchHitItem>
     implements $SearchHitItemCopyWith<$Res> {
   _$SearchHitItemCopyWithImpl(this._value, this._then);
 
-  final SearchHitItem _value;
   // ignore: unused_field
-  final $Res Function(SearchHitItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchHit = freezed,
+    Object? searchHit = null,
   }) {
     return _then(_value.copyWith(
-      searchHit: searchHit == freezed
+      searchHit: null == searchHit
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
               as SearchHit,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SearchHitCopyWith<$Res> get searchHit {
     return $SearchHitCopyWith<$Res>(_value.searchHit, (value) {
-      return _then(_value.copyWith(searchHit: value));
+      return _then(_value.copyWith(searchHit: value) as $Val);
     });
   }
 }
@@ -411,6 +413,7 @@ abstract class _$$_SearchHitItemCopyWith<$Res>
           _$_SearchHitItem value, $Res Function(_$_SearchHitItem) then) =
       __$$_SearchHitItemCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({SearchHit searchHit});
 
   @override
@@ -419,21 +422,19 @@ abstract class _$$_SearchHitItemCopyWith<$Res>
 
 /// @nodoc
 class __$$_SearchHitItemCopyWithImpl<$Res>
-    extends _$SearchHitItemCopyWithImpl<$Res>
+    extends _$SearchHitItemCopyWithImpl<$Res, _$_SearchHitItem>
     implements _$$_SearchHitItemCopyWith<$Res> {
   __$$_SearchHitItemCopyWithImpl(
       _$_SearchHitItem _value, $Res Function(_$_SearchHitItem) _then)
-      : super(_value, (v) => _then(v as _$_SearchHitItem));
+      : super(_value, _then);
 
-  @override
-  _$_SearchHitItem get _value => super._value as _$_SearchHitItem;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchHit = freezed,
+    Object? searchHit = null,
   }) {
     return _then(_$_SearchHitItem(
-      searchHit: searchHit == freezed
+      searchHit: null == searchHit
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
               as SearchHit,
@@ -467,15 +468,16 @@ class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchHitItem &&
-            const DeepCollectionEquality().equals(other.searchHit, searchHit));
+            (identical(other.searchHit, searchHit) ||
+                other.searchHit == searchHit));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchHit));
+  int get hashCode => Object.hash(runtimeType, searchHit);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchHitItemCopyWith<_$_SearchHitItem> get copyWith =>
       __$$_SearchHitItemCopyWithImpl<_$_SearchHitItem>(this, _$identity);
 }
