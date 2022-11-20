@@ -37,9 +37,7 @@ jobs:
       - name: Run flutter analyze
         shell: bash
         run: |
-          set -o pipefail
           flutter analyze | tee ./flutter_analyze_report.txt
-          set +o pipefail
 
       - name: Remove matcher
         if: always()
