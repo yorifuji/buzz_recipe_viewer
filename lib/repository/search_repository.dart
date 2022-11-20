@@ -15,25 +15,25 @@ class SearchRepository {
   ) async {
     return Result.guardFuture(() async {
       try {
-        final Algolia algoliaClient = Algolia.init(
+        final algoliaClient = Algolia.init(
           applicationId: dotenv.env['ALGOLIA_APPLICATION_ID']!,
           apiKey: dotenv.env['ALGOLIA_API_KEY']!,
         );
-        AlgoliaQuery algoliaQuery = algoliaClient.instance
+        final algoliaQuery = algoliaClient.instance
             .index(indexName)
             .setHitsPerPage(100)
             .setPage(page)
             .query(query);
-        AlgoliaQuerySnapshot snapshot = await algoliaQuery.getObjects();
+        final snapshot = await algoliaQuery.getObjects();
 
-        final hits = snapshot.toMap()['hits'] as List;
+        final hits = snapshot.toMap()['hits'] as List<Map<String, Object?>>;
         final searchHits =
-            List<SearchHit>.from(hits.map((hit) => SearchHit.fromJson(hit)));
+            List<SearchHit>.from(hits.map<SearchHit>(SearchHit.fromJson));
         final nextPage =
             snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
         return SearchResult(searchHits: searchHits, nextPage: nextPage);
-      } catch (e) {
-        throw Exception(); // FIXME:
+      } on Exception catch (_) {
+        throw Exception(); // FIXME: use error
       }
     });
   }

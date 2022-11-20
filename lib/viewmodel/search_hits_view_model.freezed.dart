@@ -32,7 +32,8 @@ mixin _$SearchHitsState {
 abstract class $SearchHitsStateCopyWith<$Res> {
   factory $SearchHitsStateCopyWith(
           SearchHitsState value, $Res Function(SearchHitsState) then) =
-      _$SearchHitsStateCopyWithImpl<$Res>;
+      _$SearchHitsStateCopyWithImpl<$Res, SearchHitsState>;
+  @useResult
   $Res call(
       {String query,
       List<SearchHitItem> hitList,
@@ -43,49 +44,51 @@ abstract class $SearchHitsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchHitsStateCopyWithImpl<$Res>
+class _$SearchHitsStateCopyWithImpl<$Res, $Val extends SearchHitsState>
     implements $SearchHitsStateCopyWith<$Res> {
   _$SearchHitsStateCopyWithImpl(this._value, this._then);
 
-  final SearchHitsState _value;
   // ignore: unused_field
-  final $Res Function(SearchHitsState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = freezed,
-    Object? hitList = freezed,
-    Object? sortType = freezed,
-    Object? nextPage = freezed,
-    Object? loadingState = freezed,
-    Object? moreLoadingState = freezed,
+    Object? query = null,
+    Object? hitList = null,
+    Object? sortType = null,
+    Object? nextPage = null,
+    Object? loadingState = null,
+    Object? moreLoadingState = null,
   }) {
     return _then(_value.copyWith(
-      query: query == freezed
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
-      hitList: hitList == freezed
+      hitList: null == hitList
           ? _value.hitList
           : hitList // ignore: cast_nullable_to_non_nullable
               as List<SearchHitItem>,
-      sortType: sortType == freezed
+      sortType: null == sortType
           ? _value.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
               as SortIndex,
-      nextPage: nextPage == freezed
+      nextPage: null == nextPage
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
-      loadingState: loadingState == freezed
+      loadingState: null == loadingState
           ? _value.loadingState
           : loadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
-      moreLoadingState: moreLoadingState == freezed
+      moreLoadingState: null == moreLoadingState
           ? _value.moreLoadingState
           : moreLoadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +99,7 @@ abstract class _$$_SearchHitsStateCopyWith<$Res>
           _$_SearchHitsState value, $Res Function(_$_SearchHitsState) then) =
       __$$_SearchHitsStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String query,
       List<SearchHitItem> hitList,
@@ -107,46 +111,44 @@ abstract class _$$_SearchHitsStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SearchHitsStateCopyWithImpl<$Res>
-    extends _$SearchHitsStateCopyWithImpl<$Res>
+    extends _$SearchHitsStateCopyWithImpl<$Res, _$_SearchHitsState>
     implements _$$_SearchHitsStateCopyWith<$Res> {
   __$$_SearchHitsStateCopyWithImpl(
       _$_SearchHitsState _value, $Res Function(_$_SearchHitsState) _then)
-      : super(_value, (v) => _then(v as _$_SearchHitsState));
+      : super(_value, _then);
 
-  @override
-  _$_SearchHitsState get _value => super._value as _$_SearchHitsState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = freezed,
-    Object? hitList = freezed,
-    Object? sortType = freezed,
-    Object? nextPage = freezed,
-    Object? loadingState = freezed,
-    Object? moreLoadingState = freezed,
+    Object? query = null,
+    Object? hitList = null,
+    Object? sortType = null,
+    Object? nextPage = null,
+    Object? loadingState = null,
+    Object? moreLoadingState = null,
   }) {
     return _then(_$_SearchHitsState(
-      query: query == freezed
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
-      hitList: hitList == freezed
+      hitList: null == hitList
           ? _value._hitList
           : hitList // ignore: cast_nullable_to_non_nullable
               as List<SearchHitItem>,
-      sortType: sortType == freezed
+      sortType: null == sortType
           ? _value.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
               as SortIndex,
-      nextPage: nextPage == freezed
+      nextPage: null == nextPage
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
-      loadingState: loadingState == freezed
+      loadingState: null == loadingState
           ? _value.loadingState
           : loadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
-      moreLoadingState: moreLoadingState == freezed
+      moreLoadingState: null == moreLoadingState
           ? _value.moreLoadingState
           : moreLoadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
@@ -200,28 +202,31 @@ class _$_SearchHitsState implements _SearchHitsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchHitsState &&
-            const DeepCollectionEquality().equals(other.query, query) &&
+            (identical(other.query, query) || other.query == query) &&
             const DeepCollectionEquality().equals(other._hitList, _hitList) &&
-            const DeepCollectionEquality().equals(other.sortType, sortType) &&
-            const DeepCollectionEquality().equals(other.nextPage, nextPage) &&
-            const DeepCollectionEquality()
-                .equals(other.loadingState, loadingState) &&
-            const DeepCollectionEquality()
-                .equals(other.moreLoadingState, moreLoadingState));
+            (identical(other.sortType, sortType) ||
+                other.sortType == sortType) &&
+            (identical(other.nextPage, nextPage) ||
+                other.nextPage == nextPage) &&
+            (identical(other.loadingState, loadingState) ||
+                other.loadingState == loadingState) &&
+            (identical(other.moreLoadingState, moreLoadingState) ||
+                other.moreLoadingState == moreLoadingState));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(query),
+      query,
       const DeepCollectionEquality().hash(_hitList),
-      const DeepCollectionEquality().hash(sortType),
-      const DeepCollectionEquality().hash(nextPage),
-      const DeepCollectionEquality().hash(loadingState),
-      const DeepCollectionEquality().hash(moreLoadingState));
+      sortType,
+      nextPage,
+      loadingState,
+      moreLoadingState);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchHitsStateCopyWith<_$_SearchHitsState> get copyWith =>
       __$$_SearchHitsStateCopyWithImpl<_$_SearchHitsState>(this, _$identity);
 }

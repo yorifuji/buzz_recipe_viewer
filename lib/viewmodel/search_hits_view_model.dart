@@ -1,7 +1,7 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'search_hits_view_model.freezed.dart';
 
@@ -17,8 +17,8 @@ enum SortIndex {
   likes('recipe_likes_desc'),
   views('recipe_views_desc');
 
-  final String indexName;
   const SortIndex(this.indexName);
+  final String indexName;
 }
 
 enum LoadingState {
@@ -105,13 +105,11 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
           moreLoadingState: LoadingState.success,
           hitList: [
             ...state.hitList,
-            ...result.searchHits
-                .map(
-                  (e) => SearchHitItem(
-                    searchHit: e,
-                  ),
-                )
-                .toList()
+            ...result.searchHits.map(
+              (e) => SearchHitItem(
+                searchHit: e,
+              ),
+            )
           ],
           nextPage: result.nextPage,
         );

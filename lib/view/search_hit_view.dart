@@ -132,7 +132,7 @@ class _LabelBox extends HookConsumerWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24.0),
+                  borderRadius: BorderRadius.circular(24),
                 ),
               ),
               onPressed: () => openBottomSheet(
@@ -140,8 +140,9 @@ class _LabelBox extends HookConsumerWidget {
                 sortType,
                 (sortType) {
                   Navigator.pop(context);
-                  viewModel.updateSortType(sortType);
-                  viewModel.search();
+                  viewModel
+                    ..updateSortType(sortType)
+                    ..search();
                 },
               ),
               child: Text(
@@ -173,8 +174,9 @@ class _SearchBox extends HookConsumerWidget {
       child: TextField(
         onEditingComplete: () {
           FocusManager.instance.primaryFocus?.unfocus();
-          viewModel.updateQuery(queryEditController.text);
-          viewModel.search();
+          viewModel
+            ..updateQuery(queryEditController.text)
+            ..search();
         },
         controller: queryEditController,
         decoration: InputDecoration(
@@ -185,8 +187,9 @@ class _SearchBox extends HookConsumerWidget {
               ? IconButton(
                   onPressed: () {
                     queryEditController.text = '';
-                    viewModel.updateQuery('');
-                    viewModel.search();
+                    viewModel
+                      ..updateQuery('')
+                      ..search();
                   },
                   icon: const Icon(Icons.clear),
                 )
@@ -208,8 +211,10 @@ class _SearchHitWidget extends HookConsumerWidget {
       children: [
         InkWell(
           onTap: () async {
-            final Uri url = Uri.parse(item.searchHit.url);
+            final url = Uri.parse(item.searchHit.url);
             if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+              // FIXME:
+              // ignore: only_throw_errors
               throw 'Could not launch $url';
             }
           },
@@ -275,7 +280,7 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      '${NumberFormat("#,###").format(widget.item.searchHit.likes)} likes',
+                      '''${NumberFormat("#,###").format(widget.item.searchHit.likes)} likes''',
                     ),
                     const SizedBox(width: 6),
                     const SizedBox(
@@ -290,7 +295,7 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      '${NumberFormat("#,###").format(widget.item.searchHit.views)} views',
+                      '''${NumberFormat("#,###").format(widget.item.searchHit.views)} views''',
                     ),
                     const SizedBox(width: 6),
                     const SizedBox(
@@ -347,7 +352,7 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
     );
   }
 
-  _toggle() {
+  void _toggle() {
     setState(() => _isExpanded = !_isExpanded);
   }
 }
@@ -374,18 +379,18 @@ enum SortListTile {
     SortIndex.views,
   );
 
+  const SortListTile(this.title, this.icon, this.sortType);
   final String title;
   final Widget icon;
   final SortIndex sortType;
-  const SortListTile(this.title, this.icon, this.sortType);
 }
 
-openBottomSheet(
+void openBottomSheet(
   BuildContext context,
   SortIndex sortType,
   void Function(SortIndex) onTap,
 ) {
-  showModalBottomSheet(
+  showModalBottomSheet<void>(
     context: context,
     builder: (BuildContext context) {
       return SafeArea(

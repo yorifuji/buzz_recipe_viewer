@@ -28,33 +28,37 @@ mixin _$SearchResult {
 abstract class $SearchResultCopyWith<$Res> {
   factory $SearchResultCopyWith(
           SearchResult value, $Res Function(SearchResult) then) =
-      _$SearchResultCopyWithImpl<$Res>;
+      _$SearchResultCopyWithImpl<$Res, SearchResult>;
+  @useResult
   $Res call({List<SearchHit> searchHits, int nextPage});
 }
 
 /// @nodoc
-class _$SearchResultCopyWithImpl<$Res> implements $SearchResultCopyWith<$Res> {
+class _$SearchResultCopyWithImpl<$Res, $Val extends SearchResult>
+    implements $SearchResultCopyWith<$Res> {
   _$SearchResultCopyWithImpl(this._value, this._then);
 
-  final SearchResult _value;
   // ignore: unused_field
-  final $Res Function(SearchResult) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchHits = freezed,
-    Object? nextPage = freezed,
+    Object? searchHits = null,
+    Object? nextPage = null,
   }) {
     return _then(_value.copyWith(
-      searchHits: searchHits == freezed
+      searchHits: null == searchHits
           ? _value.searchHits
           : searchHits // ignore: cast_nullable_to_non_nullable
               as List<SearchHit>,
-      nextPage: nextPage == freezed
+      nextPage: null == nextPage
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,31 +69,30 @@ abstract class _$$_SearchResultCopyWith<$Res>
           _$_SearchResult value, $Res Function(_$_SearchResult) then) =
       __$$_SearchResultCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<SearchHit> searchHits, int nextPage});
 }
 
 /// @nodoc
 class __$$_SearchResultCopyWithImpl<$Res>
-    extends _$SearchResultCopyWithImpl<$Res>
+    extends _$SearchResultCopyWithImpl<$Res, _$_SearchResult>
     implements _$$_SearchResultCopyWith<$Res> {
   __$$_SearchResultCopyWithImpl(
       _$_SearchResult _value, $Res Function(_$_SearchResult) _then)
-      : super(_value, (v) => _then(v as _$_SearchResult));
+      : super(_value, _then);
 
-  @override
-  _$_SearchResult get _value => super._value as _$_SearchResult;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchHits = freezed,
-    Object? nextPage = freezed,
+    Object? searchHits = null,
+    Object? nextPage = null,
   }) {
     return _then(_$_SearchResult(
-      searchHits: searchHits == freezed
+      searchHits: null == searchHits
           ? _value._searchHits
           : searchHits // ignore: cast_nullable_to_non_nullable
               as List<SearchHit>,
-      nextPage: nextPage == freezed
+      nextPage: null == nextPage
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
@@ -129,17 +132,17 @@ class _$_SearchResult implements _SearchResult {
             other is _$_SearchResult &&
             const DeepCollectionEquality()
                 .equals(other._searchHits, _searchHits) &&
-            const DeepCollectionEquality().equals(other.nextPage, nextPage));
+            (identical(other.nextPage, nextPage) ||
+                other.nextPage == nextPage));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_searchHits),
-      const DeepCollectionEquality().hash(nextPage));
+      runtimeType, const DeepCollectionEquality().hash(_searchHits), nextPage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchResultCopyWith<_$_SearchResult> get copyWith =>
       __$$_SearchResultCopyWithImpl<_$_SearchResult>(this, _$identity);
 }
