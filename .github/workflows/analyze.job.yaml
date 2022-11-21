@@ -50,7 +50,7 @@ jobs:
           ruby-version: '2.7'
 
       - name: Danger
-        uses: MeilCli/danger-action@47eeda371752fb02c03596d2ad11527e3e5cba2d
+        uses: MeilCli/danger-action@47bd2506a5831d304c0b2daf34033e021b264b03
         if: always()
         with:
           plugins_file: 'Gemfile'
