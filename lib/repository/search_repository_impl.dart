@@ -28,14 +28,13 @@ class SearchRepositoryImpl implements SearchRepository {
             .setPage(page)
             .query(query);
         final snapshot = await algoliaQuery.getObjects();
-
-        final hits = snapshot.toMap()['hits'] as List<Map<String, Object?>>;
         final searchHits =
-            List<SearchHit>.from(hits.map<SearchHit>(SearchHit.fromJson));
+            snapshot.hits.map((e) => SearchHit.fromJson(e.toMap())).toList();
         final nextPage =
             snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
         return SearchResult(searchHits: searchHits, nextPage: nextPage);
-      } on Exception catch (_) {
+        // ignore: avoid_catches_without_on_clauses
+      } catch (_) {
         throw Exception(); // FIXME: use error
       }
     });

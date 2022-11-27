@@ -10,7 +10,7 @@ final searchHitsProvider =
     StateNotifierProvider<SearchHitsViewModel, SearchHitsState>((ref) {
   final repository = ref.watch(searchRepositoryProvider);
   return SearchHitsViewModel(repository);
-});
+}, dependencies: [searchRepositoryProvider]);
 
 enum SortIndex {
   relevance('recipe'),
