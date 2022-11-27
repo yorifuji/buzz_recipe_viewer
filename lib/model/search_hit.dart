@@ -21,6 +21,19 @@ class SearchHit with _$SearchHit {
 
   factory SearchHit.fromJson(Map<String, Object?> json) =>
       _$SearchHitFromJson(json);
+
+  factory SearchHit.createDummy() => const SearchHit(
+        id: 'id',
+        title: 'タイトルタイトルタイトルタイトルタイトルタイトルタイトル',
+        description: '説明説明説明説明説明説明説明説明説明説明説明',
+        published: 'published',
+        timestamp: 0,
+        views: 12345,
+        likes: 12345,
+        image: 'https://yorifuji.github.io/public/images/1920x1080_black.png',
+        objectID: 'objectID',
+        url: 'https://yorifuji.github.io/public/images/1920x1080.png',
+      );
 }
 
 @freezed
