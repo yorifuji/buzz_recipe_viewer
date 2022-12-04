@@ -75,17 +75,3 @@ jobs:
           releaseName: ${{ env.APP_VERSION }}
           track: internal
           status: draft
-
-      - name: PR Comment Success
-        if: ${{ steps.build.conclusion == 'success' && steps.upload.conclusion == 'success' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
-        run: gh pr comment $PULL_REQUERST_NUMBER --body "Successfully uploaded to Google Play Console. 🙆‍♂️"
-
-      - name: PR Comment Failure
-        if: ${{ steps.build.conclusion != 'success' || steps.upload.conclusion != 'success' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
-        run: gh pr comment $PULL_REQUERST_NUMBER --body "Failed to upload to Google Play Console 🙅‍♂️"
