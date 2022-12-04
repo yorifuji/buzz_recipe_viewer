@@ -36,11 +36,11 @@ jobs:
     secrets: inherit
 
   ios:
-    needs: check-approved
+    needs: tag
     uses: ./.github/workflows/deliver.ios.yaml
     secrets: inherit
 
   android:
-    needs: check-approved
+    needs: tag
     uses: ./.github/workflows/deliver.android.yaml
     secrets: inherit
