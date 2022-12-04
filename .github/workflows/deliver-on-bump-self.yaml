@@ -9,18 +9,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  tag:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    uses: ./.github/workflows/tag.yaml
-    secrets: inherit
-
   android:
-    needs: tag
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     uses: ./.github/workflows/deliver.android.yaml
     secrets: inherit
 
   ios:
-    needs: tag
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     uses: ./.github/workflows/deliver.ios.yaml
     secrets: inherit
 
+  tag:
+    needs: [ios, android]
+    uses: ./.github/workflows/tag.yaml
+    secrets: inherit
