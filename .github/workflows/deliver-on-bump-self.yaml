@@ -1,9 +1,9 @@
-name: deliver-on-bump
+name: deliver on bump self
 
 on:
   workflow_run:
     workflows:
-      - bump
+      - bump self
     types:
       - completed
   workflow_dispatch:

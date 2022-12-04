@@ -1,0 +1,46 @@
+name: deliver on approved
+
+on:
+  pull_request_review:
+    types: [submitted]
+  workflow_dispatch:
+
+jobs:
+  check-approved:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: |
+      startsWith(github.event.pull_request.head.ref, 'releases/') &&
+      github.event.review.state == 'approved' &&
+      contains(github.event.pull_request.labels.*.name, 'deliver') == false
+    steps:
+      - name: add deliver label to pull request
+        uses: pullreminders/label-when-approved-action@9d8dd03e30f605a3bf687cde6614c1862862d466
+        env:
+          APPROVALS: '1'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: 'deliver'
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: add comment to pull requset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment $PULL_REQUERST_NUMBER --body "Going to delivery... 🏃‍♂️"
+
+  tag:
+    needs: check-approved
+    uses: ./.github/workflows/tag.yaml
+    secrets: inherit
+
+  ios:
+    needs: check-approved
+    uses: ./.github/workflows/deliver.ios.yaml
+    secrets: inherit
+
+  android:
+    needs: check-approved
+    uses: ./.github/workflows/deliver.android.yaml
+    secrets: inherit

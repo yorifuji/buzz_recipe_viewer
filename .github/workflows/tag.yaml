@@ -1,4 +1,4 @@
-name: tag
+name: tag and release note
 
 on:
   workflow_call:
