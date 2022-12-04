@@ -1,4 +1,4 @@
-name: bump pull request
+name: create release branch
 
 on:
   workflow_dispatch:
