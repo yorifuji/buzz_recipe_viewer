@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Buzz Recipe Viewer',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: const SearchHitsWidget(),
+      home: SearchHitsWidget.show(),
     );
   }
 }

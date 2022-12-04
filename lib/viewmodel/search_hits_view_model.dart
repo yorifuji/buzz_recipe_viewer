@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
+import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,7 +10,7 @@ final searchHitsProvider =
     StateNotifierProvider<SearchHitsViewModel, SearchHitsState>((ref) {
   final repository = ref.watch(searchRepositoryProvider);
   return SearchHitsViewModel(repository);
-});
+}, dependencies: [searchRepositoryProvider]);
 
 enum SortIndex {
   relevance('recipe'),
