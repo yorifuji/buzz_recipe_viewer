@@ -14,8 +14,13 @@ jobs:
     uses: ./.github/workflows/tag.yaml
     secrets: inherit
 
-  deliver:
+  android:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    uses: ./.github/workflows/deliver.yaml
+    uses: ./.github/workflows/deliver.android.yaml
+    secrets: inherit
+
+  ios:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/deliver.ios.yaml
     secrets: inherit
 
