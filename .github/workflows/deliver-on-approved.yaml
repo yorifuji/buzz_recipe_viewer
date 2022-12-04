@@ -49,8 +49,12 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
       - if: needs.ios.result == 'success'
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🙆‍♂️ Successfully uploaded to TestFlight."
+
       - if: needs.ios.result != 'success'
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🙅‍♂️ Failed to upload to TestFlight."
 
@@ -68,8 +72,12 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
       - if: needs.android.result == 'success'
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🙆‍♂️ Successfully uploaded to Google Play Console."
+
       - if: needs.android.result != 'success'
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🙅‍♂️ Failed to upload to Google Play Console."
 
