@@ -12,21 +12,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: install flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      - name: run flutter version
-        run: flutter --version
-
-      - name: run flutter pub get
-        run: flutter pub get
-
-      - name: get version
+      - name: get version from pubspec.yaml
         run: |
-          echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+          echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' pubspec.yaml)" >> $GITHUB_ENV
 
       - name: create tag and release note
         env:
