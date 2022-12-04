@@ -1,4 +1,4 @@
-name: Job deliver-android
+name: deliver android
 
 on:
   workflow_call:
