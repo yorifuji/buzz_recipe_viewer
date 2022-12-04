@@ -64,8 +64,7 @@ jobs:
 
       - name: Get Package name
         run: |
-          echo "PACKAGE_NAME=$(sed -n 's/package="\([^"]*\)">/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_ENV
-          echo "$PACKAGE_NAME"
+          echo "PACKAGE_NAME=$(sed -n 's/ *package="\([^"]*\)">/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_ENV
 
       - name: Upload to Google Play
         id: upload

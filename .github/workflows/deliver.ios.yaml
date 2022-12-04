@@ -66,7 +66,6 @@ jobs:
       - name: Detect path for ipa file
         run: |
           echo "IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
-          echo "$IPA_PATH"
 
       - name: Upload to App Store Connect
         id: upload
