@@ -7,10 +7,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 part 'search_hits_view_model.freezed.dart';
 
 final searchHitsProvider =
-    StateNotifierProvider<SearchHitsViewModel, SearchHitsState>((ref) {
-  final repository = ref.watch(searchRepositoryProvider);
-  return SearchHitsViewModel(repository);
-}, dependencies: [searchRepositoryProvider]);
+    StateNotifierProvider<SearchHitsViewModel, SearchHitsState>(
+  (ref) {
+    final repository = ref.watch(searchRepositoryProvider);
+    return SearchHitsViewModel(repository);
+  },
+  dependencies: [searchRepositoryProvider],
+);
 
 enum SortIndex {
   relevance('recipe'),
