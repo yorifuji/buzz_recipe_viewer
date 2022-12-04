@@ -1,0 +1,36 @@
+name: tag
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: install flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: run flutter version
+        run: flutter --version
+
+      - name: run flutter pub get
+        run: flutter pub get
+
+      - name: get version
+        run: |
+          echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+
+      - name: create tag and release note
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMP_VERSION: ${{ env.BUMP_VERSION }}
+        run: |
+          gh release create v$BUMP_VERSION --generate-notes

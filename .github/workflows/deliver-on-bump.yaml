@@ -1,0 +1,21 @@
+name: deliver-on-bump
+
+on:
+  workflow_run:
+    workflows:
+      - bump
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  tag:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/tag.yaml
+    secrets: inherit
+
+  deliver:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/deliver.yaml
+    secrets: inherit
+
