@@ -4,9 +4,6 @@ on:
   workflow_call:
   workflow_dispatch:
 
-env:
-  IOS_IPA_PATH: 'build/ios/ipa/buzz_recipe_viewer.ipa'
-
 jobs:
   deliver:
     runs-on: macos-latest
@@ -66,9 +63,14 @@ jobs:
         id: build
         run: flutter build ipa --export-options-plist=./ios/ExportOptions.plist
 
+      - name: Detect path for ipa file
+        run: |
+          echo "IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
+          echo "$IPA_PATH"
+
       - name: Upload to App Store Connect
         id: upload
         env:
           APPLE_APPLE_ID: ${{ secrets.APPLE_APPLE_ID }}
           APPLE_APP_PASS: ${{ secrets.APPLE_APP_PASS }}
-        run: xcrun altool --upload-app --type ios -f "$IOS_IPA_PATH" -u "$APPLE_APPLE_ID" -p "$APPLE_APP_PASS"
+        run: xcrun altool --upload-app --type ios -f "$IPA_PATH" -u "$APPLE_APPLE_ID" -p "$APPLE_APP_PASS"

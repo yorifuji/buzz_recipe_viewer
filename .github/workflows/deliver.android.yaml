@@ -4,9 +4,6 @@ on:
   workflow_call:
   workflow_dispatch:
 
-env:
-  ANDROID_PACKAGE_NAME: 'dev.yorifuji.buzz_recipe_viewer'
-
 jobs:
   deliver:
     runs-on: ubuntu-latest
@@ -65,13 +62,18 @@ jobs:
         id: build
         run: flutter build appbundle
 
+      - name: Get Package name
+        run: |
+          echo "PACKAGE_NAME=$(sed -n 's/package="\([^"]*\)">/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_ENV
+          echo "$PACKAGE_NAME"
+
       - name: Upload to Google Play
         id: upload
         uses: r0adkll/upload-google-play@78c9e796b1035c94169c101d8e46cb880194bfc3
         with:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           serviceAccountJson: android/service-account.json
-          packageName: ${{ env.ANDROID_PACKAGE_NAME }}
+          packageName: ${{ env.PACKAGE_NAME }}
           releaseName: ${{ env.APP_VERSION }}
           track: internal
           status: draft
