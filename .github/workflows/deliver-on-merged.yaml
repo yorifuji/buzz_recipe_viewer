@@ -7,18 +7,21 @@ on:
     types: [closed]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  ios:
+  tag:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')
+    uses: ./.github/workflows/tag.yaml
+    secrets: inherit
+
+  ios:
+    needs: tag
     uses: ./.github/workflows/deliver.ios.yaml
     secrets: inherit
 
   android:
-    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')
+    needs: tag
     uses: ./.github/workflows/deliver.android.yaml
-    secrets: inherit
-
-  tag:
-    needs: [ios, android]
-    uses: ./.github/workflows/tag.yaml
     secrets: inherit

@@ -35,8 +35,14 @@ jobs:
           PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🏃‍♂️ Going to delivery..."
 
-  ios:
+
+  tag:
     needs: check-approved
+    uses: ./.github/workflows/tag.yaml
+    secrets: inherit
+
+  ios:
+    needs: tag
     uses: ./.github/workflows/deliver.ios.yaml
     secrets: inherit
 
@@ -59,7 +65,7 @@ jobs:
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🙅‍♂️ Failed to upload to TestFlight."
 
   android:
-    needs: check-approved
+    needs: tag
     uses: ./.github/workflows/deliver.android.yaml
     secrets: inherit
 
@@ -80,9 +86,3 @@ jobs:
 
       - if: needs.android.result != 'success'
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🙅‍♂️ Failed to upload to Google Play Console."
-
-  tag:
-    needs: [ios, android]
-    uses: ./.github/workflows/tag.yaml
-    secrets: inherit
-
