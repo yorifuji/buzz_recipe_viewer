@@ -7,6 +7,9 @@ on:
     types: [closed]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   ios:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')
