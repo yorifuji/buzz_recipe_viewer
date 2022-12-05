@@ -16,6 +16,10 @@ env:
   GIT_USER_EMAIL: 'yorifuji@users.noreply.github.com'
   GIT_USER_NAME: 'github-actions[bot]'
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   bump:
     runs-on: ubuntu-latest
