@@ -59,7 +59,7 @@ jobs:
 
       - name: Get Version Number
         run: |
-          echo "APP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+          echo "RELEASE_NAME=$(flutter pub run cider version | sed -E 's/([0-9.]+)\+([0-9]+)/\2(\1)/g')" >> $GITHUB_ENV
 
       - name: Build app bundle
         id: build
@@ -67,7 +67,7 @@ jobs:
 
       - name: Get Package name
         run: |
-          echo "PACKAGE_NAME=$(sed -n 's/ *package="\([^"]*\)">/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_ENV
+          echo "PACKAGE_NAME=$(sed -nE 's/.*package="(.*)".*/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_ENV
 
       - name: Upload to Google Play
         id: upload
@@ -76,6 +76,6 @@ jobs:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           serviceAccountJson: android/service-account.json
           packageName: ${{ env.PACKAGE_NAME }}
-          releaseName: ${{ env.APP_VERSION }}
+          releaseName: ${{ env.RELEASE_NAME }}
           track: production
           status: completed
