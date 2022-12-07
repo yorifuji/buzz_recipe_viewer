@@ -60,6 +60,7 @@ jobs:
         if: always()
         with:
           ruby-version: '2.7'
+          bundler-cache: true
 
       - name: Danger
         uses: MeilCli/danger-action@1996610a4c089e3a79bf3131a70c3c1b311e32f9

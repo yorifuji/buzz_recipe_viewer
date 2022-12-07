@@ -14,12 +14,12 @@ jobs:
     uses: ./.github/workflows/tag.yaml
     secrets: inherit
 
-  android:
-    needs: tag
-    uses: ./.github/workflows/deliver-android.yaml
-    secrets: inherit
+  # android:
+  #   needs: tag
+  #   uses: ./.github/workflows/deliver-android.yaml
+  #   secrets: inherit
 
-  ios:
-    needs: tag
-    uses: ./.github/workflows/deliver-ios.yaml
-    secrets: inherit
+  # ios:
+  #   needs: tag
+  #   uses: ./.github/workflows/deliver-ios.yaml
+  #   secrets: inherit
