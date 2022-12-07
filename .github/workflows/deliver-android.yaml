@@ -77,5 +77,5 @@ jobs:
           serviceAccountJson: android/service-account.json
           packageName: ${{ env.PACKAGE_NAME }}
           releaseName: ${{ env.APP_VERSION }}
-          track: internal
-          status: draft
+          track: production
+          status: completed
