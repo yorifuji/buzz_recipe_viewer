@@ -43,7 +43,7 @@ jobs:
 
   ios:
     needs: tag
-    uses: ./.github/workflows/deliver.ios.yaml
+    uses: ./.github/workflows/deliver-ios.yaml
     secrets: inherit
 
   post-ios:
@@ -66,7 +66,7 @@ jobs:
 
   android:
     needs: tag
-    uses: ./.github/workflows/deliver.android.yaml
+    uses: ./.github/workflows/deliver-android.yaml
     secrets: inherit
 
   post-android:

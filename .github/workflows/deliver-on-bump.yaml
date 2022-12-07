@@ -8,9 +8,6 @@ on:
       - completed
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   tag:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -19,10 +16,10 @@ jobs:
 
   android:
     needs: tag
-    uses: ./.github/workflows/deliver.android.yaml
+    uses: ./.github/workflows/deliver-android.yaml
     secrets: inherit
 
   ios:
     needs: tag
-    uses: ./.github/workflows/deliver.ios.yaml
+    uses: ./.github/workflows/deliver-ios.yaml
     secrets: inherit
