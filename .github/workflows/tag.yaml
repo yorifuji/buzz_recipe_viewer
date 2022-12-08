@@ -1,4 +1,4 @@
-name: craete tag and release note
+name: tag
 
 on:
   workflow_call:
