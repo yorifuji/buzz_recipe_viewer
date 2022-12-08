@@ -57,3 +57,10 @@ jobs:
           git add -u pubspec.yaml
           echo "Bumped version number to $BUMP_VERSION" | git commit --file=-
           git push
+
+      - name: create tag and release note
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMP_VERSION: ${{ env.BUMP_VERSION }}
+        run: |
+          gh release create v$BUMP_VERSION --generate-notes

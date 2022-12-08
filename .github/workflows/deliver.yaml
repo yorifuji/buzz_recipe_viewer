@@ -1,0 +1,16 @@
+name: deliver
+
+on:
+  push:
+    tags:
+      - v**
+  workflow_dispatch:
+
+jobs:
+  android:
+    uses: ./.github/workflows/deliver-android.yaml
+    secrets: inherit
+
+  ios:
+    uses: ./.github/workflows/deliver-ios.yaml
+    secrets: inherit

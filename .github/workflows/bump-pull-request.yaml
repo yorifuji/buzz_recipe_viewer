@@ -1,4 +1,4 @@
-name: create pull request
+name: bump pull request
 
 on:
   workflow_dispatch:
