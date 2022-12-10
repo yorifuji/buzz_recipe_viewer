@@ -17,11 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Create .env
+      - name: Run pre-process script
+        shell: bash
+        env:
+          PREPROCESS_SCRIPT: ${{ secrets.PREPROCESS_SCRIPT }}
         run: |
-          touch .env
-          echo "ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
-          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
+          if [ -n "$PREPROCESS_SCRIPT" ]; then
+            echo $PREPROCESS_SCRIPT | base64 --decode > ./pre-process.sh
+            bash ./pre-process.sh
+          fi
 
       - name: Create keystore file
         env:
@@ -88,11 +92,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Create .env
+      - name: Run pre-process script
+        shell: bash
+        env:
+          PREPROCESS_SCRIPT: ${{ secrets.PREPROCESS_SCRIPT }}
         run: |
-          touch .env
-          echo "ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
-          echo "ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
+          if [ -n "$PREPROCESS_SCRIPT" ]; then
+            echo $PREPROCESS_SCRIPT | base64 --decode > ./pre-process.sh
+            bash ./pre-process.sh
+          fi
 
       - name: Import Provisioning Profile
         env:
