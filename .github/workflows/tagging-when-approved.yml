@@ -1,4 +1,4 @@
-name: tag on approved pull request
+name: tagging when approved
 
 on:
   pull_request_review:
