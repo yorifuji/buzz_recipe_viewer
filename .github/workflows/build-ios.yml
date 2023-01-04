@@ -3,6 +3,11 @@ name: build ios
 on:
   workflow_dispatch:
     inputs:
+      code-sign-style:
+        description: 'Code signing style, auto or manual'
+        required: true
+        type: string
+        default: auto
       upload-artifact:
         description: 'Upload artifact'
         required: true

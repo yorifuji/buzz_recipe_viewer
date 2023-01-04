@@ -5,7 +5,7 @@ on:
     inputs:
       bump:
         type: choice
-        description: Please Choice Bump Target
+        description: Bump Target
         options:
           - build
           - patch
