@@ -86,11 +86,9 @@ jobs:
       - name: Get Job Output info
         id: info
         run: |
-          echo "RELEASE_NAME=$(flutter pub run cider version | sed -E 's/([0-9.]+)\+([0-9]+)/\2(\1)/g')" >> $GITHUB_ENV
-          echo "PACKAGE_NAME=$(sed -nE 's/.*package="(.*)".*/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_ENV
-          echo "release-name=$RELEASE_NAME" >> $GITHUB_OUTPUT
-          echo "package-name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-          echo "aab-filename=app-release.aab" >> $GITHUB_OUTPUT # fixed name, app-release.aab
+          echo "release-name=$(flutter pub run cider version | sed -E 's/([0-9.]+)\+([0-9]+)/\2(\1)/g')" >> $GITHUB_OUTPUT
+          echo "package-name=$(sed -nE 's/.*package="(.*)".*/\1/p' android/app/src/main/AndroidManifest.xml)" >> $GITHUB_OUTPUT
+          echo "aab-filename=app-release.aab" >> $GITHUB_OUTPUT
 
       - name: Upload aab to artifact
         if: ${{ inputs.upload-artifact }}
