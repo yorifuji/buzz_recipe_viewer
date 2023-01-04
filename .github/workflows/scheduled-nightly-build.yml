@@ -1,0 +1,25 @@
+name: nightly build
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: read
+
+permissions:
+  contents: read
+
+jobs:
+  build-android:
+    uses: ./.github/workflows/build-android.yml
+    secrets: inherit
+    with:
+      upload-artifact: false
+
+  build-ios:
+    uses: ./.github/workflows/build-ios.yml
+    secrets: inherit
+    with:
+      upload-artifact: false

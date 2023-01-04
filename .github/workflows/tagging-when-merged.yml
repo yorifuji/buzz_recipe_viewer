@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+env:
+  GIT_USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  GIT_USER_NAME: 'github-actions[bot]'
+
 jobs:
   tagged:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')
@@ -18,6 +22,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+
+      - name: init git config
+        run: |
+          git config --local user.name $GIT_USER_NAME
+          git config --local user.email $GIT_USER_EMAIL
 
       - name: get version from pubspec.yaml
         run: |
