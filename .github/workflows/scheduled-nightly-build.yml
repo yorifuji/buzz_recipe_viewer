@@ -19,5 +19,5 @@ jobs:
     uses: ./.github/workflows/build-ios.yml
     secrets: inherit
     with:
-      code-sign-style: manual
+      code-sign-style: auto
       upload-artifact: false
