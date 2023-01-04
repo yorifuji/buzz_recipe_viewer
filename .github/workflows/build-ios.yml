@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       upload-artifact:
-        description: 'Upload ipa to artifact'
+        description: 'Upload artifact'
         required: true
         type: boolean
         default: false
@@ -16,7 +16,7 @@ on:
         type: string
         default: auto
       upload-artifact:
-        description: 'Upload ipa to artifact'
+        description: 'Upload artifact'
         required: true
         type: boolean
         default: false
@@ -150,7 +150,7 @@ jobs:
         env:
           APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
           APPLE_DISTRIBUTION_P12_BASE64: ${{ secrets.APPLE_DISTRIBUTION_P12_BASE64 }}
-          APPLE_DISTRIBUTION_P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_P12_PASSWORD }}
+          APPLE_DISTRIBUTION_P12_PASSWORD: ${{ secrets.APPLE_DISTRIBUTION_P12_PASSWORD }}
         run: |
           DISTRIBUTION_CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
@@ -205,6 +205,8 @@ jobs:
       always() &&
       ((needs.build-auto-signing.result == 'success' && needs.build-manual-signing.result == 'skipped') ||
       (needs.build-auto-signing.result == 'skipped' && needs.build-manual-signing.result == 'success'))
+    outputs:
+      ipa-filename: ${{ steps.result.outputs.ipa-filename }}
     steps:
       - id: result
         if: needs.build-auto-signing.result == 'success'
@@ -212,5 +214,3 @@ jobs:
           [ ${{ needs.build-auto-signing.result }} == 'success' ] && \
           echo "ipa-filename=${{ needs.build-auto-signing.outputs.ipa-filename }}" >> $GITHUB_OUTPUT || \
           echo "ipa-filename=${{ needs.build-manual-signing.outputs.ipa-filename }}" >> $GITHUB_OUTPUT
-    outputs:
-      ipa-filename: ${{ steps.result.outputs.ipa-filename }}

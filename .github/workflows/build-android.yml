@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       upload-artifact:
-        description: 'Upload aab to artifact'
+        description: 'Upload artifact'
         required: true
         type: boolean
         default: false
   workflow_call:
     inputs:
       upload-artifact:
-        description: 'Upload aab to artifact'
+        description: 'Upload artifact'
         required: true
         type: boolean
         default: false
