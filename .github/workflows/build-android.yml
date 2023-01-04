@@ -18,13 +18,13 @@ on:
     outputs:
       filename:
         description: 'aab filename for uploaded to artifact'
-        value: ${{ jobs.info.outputs.aab-filename }}
+        value: ${{ jobs.build.outputs.aab-filename }}
       release-name:
         description: 'release name'
-        value: ${{ jobs.info.outputs.release-name }}
+        value: ${{ jobs.build.outputs.release-name }}
       package-name:
         description: 'package name'
-        value: ${{ jobs.info.outputs.package-name }}
+        value: ${{ jobs.build.outputs.package-name }}
 
 permissions:
   contents: read
