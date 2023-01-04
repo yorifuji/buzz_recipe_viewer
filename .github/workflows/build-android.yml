@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       upload-artifact:
-        description: 'Whether upload aab to artifact'
+        description: 'Upload aab to artifact'
         required: true
         type: boolean
         default: false
   workflow_call:
     inputs:
       upload-artifact:
-        description: 'Whether upload aab to artifact'
+        description: 'Upload aab to artifact'
         required: true
         type: boolean
         default: false
@@ -89,9 +89,6 @@ jobs:
           echo "release-name=$RELEASE_NAME" >> $GITHUB_OUTPUT
           echo "package-name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
           echo "aab-filename=app-release.aab" >> $GITHUB_OUTPUT # fixed name, app-release.aab
-
-      - name: Get Package name
-        run: |
 
       - name: Upload aab to artifact
         if: ${{ inputs.upload-artifact }}

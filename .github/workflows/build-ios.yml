@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       upload-artifact:
-        description: 'Whether upload ipa to artifact'
+        description: 'Upload ipa to artifact'
         required: true
         type: boolean
         default: false
   workflow_call:
     inputs:
       upload-artifact:
-        description: 'Whether upload ipa to artifact'
+        description: 'Upload ipa to artifact'
         required: true
         type: boolean
         default: false
@@ -157,9 +157,9 @@ jobs:
 
       - name: Import Certificate
         env:
+          APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
           APPLE_DISTRIBUTION_P12_BASE64: ${{ secrets.APPLE_DISTRIBUTION_P12_BASE64 }}
           APPLE_DISTRIBUTION_P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_P12_PASSWORD }}
-          IOS_KEYCHAIN_PASSWORD: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
         run: |
           DISTRIBUTION_CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
@@ -168,9 +168,9 @@ jobs:
           echo -n "$APPLE_DISTRIBUTION_P12_BASE64" | base64 --decode --output $DISTRIBUTION_CERTIFICATE_PATH
 
           # create temporary keychain
-          security create-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security create-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security unlock-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
           # import certificate to keychain
           security import $DISTRIBUTION_CERTIFICATE_PATH -P "$APPLE_DISTRIBUTION_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
