@@ -24,7 +24,7 @@ permissions:
   contents: read
 
 env:
-  CODE_SIGN_STYLE: auto # auto or manual
+  CODE_SIGN_STYLE: manual # auto or manual
 
 jobs:
   pre-build:
