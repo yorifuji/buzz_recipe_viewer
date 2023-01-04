@@ -34,7 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:
-      aab-filename: ${{ steps.build.outputs.aab-filename }}
+      aab-filename: ${{ steps.info.outputs.aab-filename }}
+      release-name: ${{ steps.info.outputs.release-name }}
+      package-name: ${{ steps.info.outputs.package-name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
