@@ -5,18 +5,11 @@
 	<key>destination</key>
 	<string>export</string>
 	<key>manageAppVersionAndBuildNumber</key>
-	<true/>
+	<false/>
 	<key>method</key>
 	<string>app-store</string>
-	<key>provisioningProfiles</key>
-	<dict>
-		<key>dev.yorifuji.buzzRecipeViewer</key>
-		<string>BuzzRecipeViewer for App Store</string>
-	</dict>
-	<key>signingCertificate</key>
-	<string>Apple Distribution</string>
 	<key>signingStyle</key>
-	<string>manual</string>
+	<string>automatic</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
