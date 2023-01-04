@@ -209,7 +209,6 @@ jobs:
       ipa-filename: ${{ steps.result.outputs.ipa-filename }}
     steps:
       - id: result
-        if: needs.build-auto-signing.result == 'success'
         run: |
           [ ${{ needs.build-auto-signing.result }} == 'success' ] && \
           echo "ipa-filename=${{ needs.build-auto-signing.outputs.ipa-filename }}" >> $GITHUB_OUTPUT || \
