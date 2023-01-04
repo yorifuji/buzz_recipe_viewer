@@ -32,9 +32,6 @@ jobs:
         with:
           name: aab
 
-      - name: Display structure of downloaded files
-        run: ls -R
-
       - name: Create google service account file
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
