@@ -8,9 +8,6 @@ on:
 permissions:
   contents: read
 
-permissions:
-  contents: read
-
 jobs:
   build-android:
     uses: ./.github/workflows/build-android.yml
