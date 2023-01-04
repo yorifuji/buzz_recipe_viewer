@@ -54,7 +54,7 @@ jobs:
       - name: commit pubspec.yaml
         run: |
           git add -u pubspec.yaml
-          echo "Bumped version number to $BUMP_VERSION" | git commit --file=-
+          echo "Bumped version: $BUMP_VERSION" | git commit --file=-
 
       - name: create releaser branch
         run: |
