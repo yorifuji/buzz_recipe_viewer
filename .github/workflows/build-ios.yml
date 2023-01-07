@@ -138,14 +138,12 @@ jobs:
       - name: Detect ipa filename and path
         id: ipa-info
         run: |
-          IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')
-          IPA_FILENAME=$(basename "$IPA_PATH")
-          echo "ipa-path=$IPA_PATH" >> $GITHUB_ENV
-          echo "ipa-filename=$IPA_FILENAME" >> $GITHUB_OUTPUT
+          echo "ipa-path=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_OUTPUT
+          echo "ipa-filename=$(basename $(find build/ios/ipa -type f -name '*.ipa'))" >> $GITHUB_OUTPUT
 
       - name: Upload ipa to artifact
         if: ${{ inputs.upload-artifact }}
         uses: actions/upload-artifact@v3
         with:
           name: ipa
-          path: ${{ env.ipa-path }}
+          path: ${{ steps.ipa-info.outputs.ipa-filename }}
