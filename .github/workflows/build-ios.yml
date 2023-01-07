@@ -28,21 +28,19 @@ on:
     outputs:
       filename:
         description: 'ipa filename for uploaded to artifact'
-        value: ${{ jobs.post-build.outputs.ipa-filename }}
+        value: ${{ jobs.build.outputs.ipa-filename }}
 
 permissions:
   contents: read
 
 jobs:
-  build-auto-signing:
+  build:
     runs-on: macos-12
-    if: inputs.code-sign-style == 'auto'
     timeout-minutes: 60
     outputs:
       ipa-filename: ${{ steps.ipa-info.outputs.ipa-filename }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Run pre-process script
         shell: bash
@@ -54,6 +52,7 @@ jobs:
           fi
 
       - name: Import Apple Development Certificate
+        if: inputs.code-sign-style == 'auto'
         env:
           APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
           APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64: ${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64 }}
@@ -75,6 +74,7 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
 
       - name: Extract App Store Connect API Private Key in ./private_keys
+        if: inputs.code-sign-style == 'auto'
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_AUTHKEY_P8_BASE64: ${{ secrets.APPLE_API_AUTHKEY_P8_BASE64 }}
@@ -82,69 +82,8 @@ jobs:
           mkdir ./private_keys
           echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode --output ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      - name: Run flutter version
-        run: flutter --version
-
-      - name: Run flutter pub get
-        run: flutter pub get
-
-      - name: Run flutter build
-        id: build
-        run: flutter build ios --release --no-codesign
-
-      - name: Archive by xcodebuild
-        env:
-          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
-          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-        run: xcodebuild archive -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
-
-      - name: Export by xcodebuild
-        env:
-          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
-          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-        run: xcodebuild -verbose -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
-
-      - name: Detect ipa filename and path
-        id: ipa-info
-        run: |
-          IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')
-          IPA_FILENAME=$(basename "$IPA_PATH")
-          echo "ipa-path=$IPA_PATH" >> $GITHUB_ENV
-          echo "ipa-filename=$IPA_FILENAME" >> $GITHUB_OUTPUT
-
-      - name: Upload ipa to artifact
-        if: ${{ inputs.upload-artifact }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa
-          path: ${{ env.ipa-path }}
-
-  build-manual-signing:
-    runs-on: macos-12
-    if: inputs.code-sign-style == 'manual'
-    timeout-minutes: 60
-    outputs:
-      ipa-filename: ${{ steps.ipa-info.outputs.ipa-filename }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Run pre-process script
-        shell: bash
-        env:
-          PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
-        run: |
-          if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ./pre-process.sh && bash ./pre-process.sh
-          fi
-
-      - name: Import Provisioning Profile
+      - name: Import Apple Distribution Certificate
+        if: inputs.code-sign-style == 'manual'
         env:
           APPLE_PROVISIONING_PROFILE_BASE64: ${{ secrets.APPLE_PROVISIONING_PROFILE_BASE64 }}
         run: |
@@ -152,6 +91,7 @@ jobs:
           echo -n "$APPLE_PROVISIONING_PROFILE_BASE64" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/distribution.mobileprovision
 
       - name: Import Certificate
+        if: inputs.code-sign-style == 'manual'
         env:
           APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
           APPLE_DISTRIBUTION_P12_BASE64: ${{ secrets.APPLE_DISTRIBUTION_P12_BASE64 }}
@@ -172,20 +112,35 @@ jobs:
           security import $DISTRIBUTION_CERTIFICATE_PATH -P "$APPLE_DISTRIBUTION_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           cache: true
 
-      - name: Run flutter version
-        run: flutter --version
+      - run: flutter --version
 
-      - name: Run flutter pub get
-        run: flutter pub get
+      - run: flutter pub get
 
-      - name: Build ipa
-        id: build
+      - name: flutter build ios
+        if: inputs.code-sign-style == 'auto'
+        run: flutter build ios --release --no-codesign
+
+      - name: Archive by xcodebuild
+        if: inputs.code-sign-style == 'auto'
+        env:
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+        run: xcodebuild archive -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
+
+      - name: Export by xcodebuild
+        if: inputs.code-sign-style == 'auto'
+        env:
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+        run: xcodebuild -verbose -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
+
+      - name: flutter build ipa
+        if: inputs.code-sign-style == 'manual'
         run: flutter build ipa --export-options-plist=./ios/ExportOptions.plist
 
       - name: Detect ipa filename and path
@@ -202,19 +157,3 @@ jobs:
         with:
           name: ipa
           path: ${{ env.ipa-path }}
-
-  post-build:
-    runs-on: ubuntu-latest
-    needs: [build-auto-signing, build-manual-signing]
-    if: |
-      always() &&
-      ((needs.build-auto-signing.result == 'success' && needs.build-manual-signing.result == 'skipped') ||
-      (needs.build-auto-signing.result == 'skipped' && needs.build-manual-signing.result == 'success'))
-    outputs:
-      ipa-filename: ${{ steps.result.outputs.ipa-filename }}
-    steps:
-      - id: result
-        run: |
-          [ ${{ needs.build-auto-signing.result }} == 'success' ] && \
-          echo "ipa-filename=${{ needs.build-auto-signing.outputs.ipa-filename }}" >> $GITHUB_OUTPUT || \
-          echo "ipa-filename=${{ needs.build-manual-signing.outputs.ipa-filename }}" >> $GITHUB_OUTPUT
