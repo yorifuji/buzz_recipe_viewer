@@ -21,9 +21,6 @@ jobs:
         with:
           name: ipa
 
-      - name: Display structure of downloaded files
-        run: ls -R
-
       - name: Extract App Store Connect API Private Key in ./private_keys
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
