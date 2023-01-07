@@ -121,25 +121,17 @@ jobs:
 
       - run: flutter pub get
 
-      - name: flutter build ios
-        if: inputs.automatically-signing
-        run: flutter build ios --release --no-codesign
-
-      - name: Archive by xcodebuild
+      - name: build(automatically signing)
         if: inputs.automatically-signing
         env:
           APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-        run: xcodebuild archive -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
+        run: |
+          flutter build ios --release --no-codesign
+          xcodebuild archive -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
+          xcodebuild -verbose -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
 
-      - name: Export by xcodebuild
-        if: inputs.automatically-signing
-        env:
-          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
-          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-        run: xcodebuild -verbose -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
-
-      - name: flutter build ipa
+      - name: build(manually signing)
         if: inputs.automatically-signing == false
         run: flutter build ipa --export-options-plist=./ios/ExportOptions.plist
 
