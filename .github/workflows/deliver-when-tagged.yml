@@ -13,8 +13,6 @@ jobs:
   android:
     uses: ./.github/workflows/build-android.yml
     secrets: inherit
-    with:
-      upload-artifact: true
 
   google-play:
     needs: android
@@ -28,8 +26,6 @@ jobs:
   ios:
     uses: ./.github/workflows/build-ios.yml
     secrets: inherit
-    with:
-      upload-artifact: true
 
   app-store:
     needs: ios

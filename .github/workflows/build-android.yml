@@ -5,16 +5,14 @@ on:
     inputs:
       upload-artifact:
         description: 'Upload artifact'
-        required: true
         type: boolean
-        default: false
+        default: true
   workflow_call:
     inputs:
       upload-artifact:
         description: 'Upload artifact'
-        required: true
         type: boolean
-        default: false
+        default: true
     outputs:
       filename:
         description: 'aab filename for uploaded to artifact'

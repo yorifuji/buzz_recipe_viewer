@@ -5,26 +5,22 @@ on:
     inputs:
       automatically-signing:
         description: 'Use Automatically manage signing'
-        required: true
         type: boolean
         default: true
       upload-artifact:
         description: 'Upload artifact'
-        required: true
         type: boolean
-        default: false
+        default: true
   workflow_call:
     inputs:
       automatically-signing:
         description: 'Use Automatically manage signing'
-        required: true
         type: boolean
         default: true
       upload-artifact:
         description: 'Upload artifact'
-        required: true
         type: boolean
-        default: false
+        default: true
     outputs:
       filename:
         description: 'ipa filename for uploaded to artifact'
