@@ -5,7 +5,7 @@ on:
   workflow_call:
     inputs:
       filename:
-        description: 'aab filename to download from artifact'
+        description: 'filename of abb to download from artifact'
         required: true
         type: string
       release-name:

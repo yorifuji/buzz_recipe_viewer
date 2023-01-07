@@ -10,31 +10,31 @@ permissions:
   contents: read
 
 jobs:
-  build-android:
+  android:
     uses: ./.github/workflows/build-android.yml
     secrets: inherit
     with:
       upload-artifact: true
 
-  upload-android:
-    needs: build-android
+  google-play:
+    needs: android
     uses: ./.github/workflows/upload-android.yml
     secrets: inherit
     with:
-      filename: ${{ needs.build-android.outputs.filename }}
-      release-name: ${{ needs.build-android.outputs.release-name }}
-      package-name: ${{ needs.build-android.outputs.package-name }}
+      filename: ${{ needs.android.outputs.filename }}
+      release-name: ${{ needs.android.outputs.release-name }}
+      package-name: ${{ needs.android.outputs.package-name }}
 
-  build-ios:
+  ios:
     uses: ./.github/workflows/build-ios.yml
     secrets: inherit
     with:
       code-sign-style: auto
       upload-artifact: true
 
-  upload-ios:
-    needs: build-ios
+  app-store:
+    needs: ios
     uses: ./.github/workflows/upload-ios.yml
     secrets: inherit
     with:
-      filename: ${{ needs.build-ios.outputs.filename }}
+      filename: ${{ needs.ios.outputs.filename }}
