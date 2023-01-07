@@ -34,7 +34,7 @@ jobs:
     runs-on: macos-12
     timeout-minutes: 60
     outputs:
-      ipa-filename: ${{ steps.ipa-info.outputs.ipa-filename }}
+      ipa-filename: ${{ steps.ipa.outputs.ipa-filename }}
     steps:
       - uses: actions/checkout@v3
 
@@ -132,7 +132,7 @@ jobs:
         run: flutter build ipa --export-options-plist=./ios/ExportOptions.plist
 
       - name: Detect ipa filename and path
-        id: ipa-info
+        id: ipa
         run: |
           echo "ipa-path=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_OUTPUT
           echo "ipa-filename=$(basename $(find build/ios/ipa -type f -name '*.ipa'))" >> $GITHUB_OUTPUT
@@ -142,4 +142,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ipa
-          path: ${{ steps.ipa-info.outputs.ipa-filename }}
+          path: ${{ steps.ipa.outputs.ipa-path }}
