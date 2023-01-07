@@ -1,4 +1,4 @@
-name: deliver
+name: deliver when tagged
 
 on:
   push:
@@ -11,25 +11,9 @@ permissions:
 
 jobs:
   android:
-    uses: ./.github/workflows/build-android.yml
+    uses: ./.github/workflows/deliver-android.yml
     secrets: inherit
-
-  google-play:
-    needs: android
-    uses: ./.github/workflows/upload-android.yml
-    secrets: inherit
-    with:
-      filename: ${{ needs.android.outputs.filename }}
-      release-name: ${{ needs.android.outputs.release-name }}
-      package-name: ${{ needs.android.outputs.package-name }}
 
   ios:
-    uses: ./.github/workflows/build-ios.yml
+    uses: ./.github/workflows/deliver-ios.yml
     secrets: inherit
-
-  app-store:
-    needs: ios
-    uses: ./.github/workflows/upload-ios.yml
-    secrets: inherit
-    with:
-      filename: ${{ needs.ios.outputs.filename }}
