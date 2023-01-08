@@ -10,13 +10,13 @@ permissions:
 
 jobs:
   android:
-    uses: ./.github/workflows/build-android.yml
+    uses: ./.github/workflows/deliver-android.yml
     secrets: inherit
     with:
       upload-artifact: false
 
   ios:
-    uses: ./.github/workflows/build-ios.yml
+    uses: ./.github/workflows/deliver-ios.yml
     secrets: inherit
     with:
       upload-artifact: false
