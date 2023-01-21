@@ -35,3 +35,6 @@ Runner/GeneratedPluginRegistrant.*
 
 # CocoaPods
 Podfile
+
+# dart-defines
+Flutter/DartDefines.xcconfig
