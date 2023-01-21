@@ -69,7 +69,7 @@ jobs:
 
       - name: Build app bundle
         run: |
-          flutter build appbundle
+          flutter build appbundle --dart-define=FLAVOR=prod
 
       - name: Get Job Output info
         id: info

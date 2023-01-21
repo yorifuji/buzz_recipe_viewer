@@ -4,6 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
+  // const flavor = String.fromEnvironment('FLAVOR');
+  // print(flavor); // dev
   await dotenv.load();
   runApp(
     const ProviderScope(
