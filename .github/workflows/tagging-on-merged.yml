@@ -1,4 +1,4 @@
-name: tagging when merged
+name: tagging on merged
 
 on:
   pull_request:
