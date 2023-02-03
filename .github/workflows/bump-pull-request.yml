@@ -56,7 +56,7 @@ jobs:
           git add -u pubspec.yaml
           echo "Bumped version: $BUMP_VERSION" | git commit --file=-
 
-      - name: create releaser branch
+      - name: create release branch
         run: |
           git checkout -b releases/$BUMP_VERSION
           echo "RELEASE_BRANCH=releases/$BUMP_VERSION" >> $GITHUB_ENV
