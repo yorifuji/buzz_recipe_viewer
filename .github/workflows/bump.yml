@@ -60,4 +60,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          gh release create v$BUMP_VERSION --generate-notes
+          gh release create v$BUMP_VERSION --target ${{ github.ref_name }} --generate-notes
