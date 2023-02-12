@@ -1,4 +1,4 @@
-name: deliver for staging
+name: 03 deliver for staging
 
 on:
   workflow_dispatch:
