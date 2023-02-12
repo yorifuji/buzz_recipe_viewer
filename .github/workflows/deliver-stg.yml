@@ -1,0 +1,16 @@
+name: deliver for staging
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    uses: ./.github/workflows/deliver-stg-android.yml
+    secrets: inherit
+
+  ios:
+    uses: ./.github/workflows/deliver-stg-ios.yml
+    secrets: inherit
