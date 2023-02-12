@@ -104,6 +104,6 @@ jobs:
         uses: wzieba/Firebase-Distribution-Github-Action@0d0bad2ef0f6c55afb1fbf95260538844cd33c77
         with:
           appId: $FIREBASE_APP_ID
-          serviceCredentialsFileContent: ./firebase_service_account.json
+          serviceCredentialsFile: ./firebase_service_account.json
           testers: yorifuji@gmail.com
           file: app-release.apk
