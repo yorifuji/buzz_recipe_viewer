@@ -87,7 +87,6 @@ jobs:
     if: ${{ inputs.upload-artifact }}
     timeout-minutes: 30
     env:
-      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       FIREBASE_SERVICE_ACCOUNT_KEY_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
     steps:
       - uses: actions/checkout@v3
@@ -103,7 +102,7 @@ jobs:
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@0d0bad2ef0f6c55afb1fbf95260538844cd33c77
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
+          appId: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
           serviceCredentialsFile: ./firebase_service_account.json
           testers: yorifuji@gmail.com
           file: app-release.apk
