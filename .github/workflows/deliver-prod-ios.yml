@@ -54,7 +54,7 @@ jobs:
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # import certificate from secrets
-          echo -n "$APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64" | base64 --decode --output $DEVELOPMENT_CERTIFICATE_PATH
+          echo -n "$APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64" | base64 --decode > $DEVELOPMENT_CERTIFICATE_PATH
 
           # create temporary keychain
           security create-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -72,7 +72,7 @@ jobs:
           APPLE_API_AUTHKEY_P8_BASE64: ${{ secrets.APPLE_API_AUTHKEY_P8_BASE64 }}
         run: |
           mkdir ./private_keys
-          echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode --output ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
+          echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode > ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
 
       - name: Import Provisioning Profile
         if: inputs.automatically-signing == false
@@ -93,7 +93,7 @@ jobs:
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # import certificate from secrets
-          echo -n "$APPLE_DISTRIBUTION_CERTIFICATE_P12_BASE64" | base64 --decode --output $DISTRIBUTION_CERTIFICATE_PATH
+          echo -n "$APPLE_DISTRIBUTION_CERTIFICATE_P12_BASE64" | base64 --decode > $DISTRIBUTION_CERTIFICATE_PATH
 
           # create temporary keychain
           security create-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -168,7 +168,7 @@ jobs:
           APPLE_API_AUTHKEY_P8_BASE64: ${{ secrets.APPLE_API_AUTHKEY_P8_BASE64 }}
         run: |
           mkdir ./private_keys
-          echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode --output ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
+          echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode > ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
 
       - name: Upload to App Store Connect
         env:

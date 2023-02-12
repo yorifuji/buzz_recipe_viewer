@@ -96,7 +96,7 @@ jobs:
 
       - name: Extract Google Service Account file
         run: |
-          echo -n "$FIREBASE_SERVICE_ACCOUNT_KEY_JSON_BASE64" | base64 --decode --output ./firebase_service_account.json
+          echo -n "$FIREBASE_SERVICE_ACCOUNT_KEY_JSON_BASE64" | base64 --decode > ./firebase_service_account.json
 
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@0d0bad2ef0f6c55afb1fbf95260538844cd33c77
