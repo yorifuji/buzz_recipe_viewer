@@ -103,7 +103,7 @@ jobs:
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@0d0bad2ef0f6c55afb1fbf95260538844cd33c77
         with:
-          appId: $FIREBASE_APP_ID
+          appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFile: ./firebase_service_account.json
           testers: yorifuji@gmail.com
           file: app-release.apk
