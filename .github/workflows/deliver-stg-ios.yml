@@ -30,7 +30,7 @@ jobs:
     runs-on: macos-12
     timeout-minutes: 60
     outputs:
-      ipa-filename: ${{ steps.ipa.outputs.ipa-filename }}
+      app-filename: ${{ steps.ipa.outputs.app-filename }}
     env:
       PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
       APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
@@ -135,15 +135,15 @@ jobs:
       - name: Detect ipa filename and path
         id: ipa
         run: |
-          echo "ipa-path=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_OUTPUT
-          echo "ipa-filename=$(basename $(find build/ios/ipa -type f -name '*.ipa'))" >> $GITHUB_OUTPUT
+          echo "app-path=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_OUTPUT
+          echo "app-filename=$(basename $(find build/ios/ipa -type f -name '*.ipa'))" >> $GITHUB_OUTPUT
 
       - name: Upload ipa to artifact
         if: ${{ inputs.upload-artifact }}
         uses: actions/upload-artifact@v3
         with:
           name: ipa
-          path: ${{ steps.ipa.outputs.ipa-path }}
+          path: ${{ steps.ipa.outputs.app-path }}
 
   upload:
     runs-on: ubuntu-latest
@@ -169,4 +169,4 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID_IOS }}
           serviceCredentialsFile: ./firebase_service_account.json
           testers: yorifuji@gmail.com
-          file: '${{ needs.build.outputs.ipa-filename }}'
+          file: '${{ needs.build.outputs.app-filename }}'
