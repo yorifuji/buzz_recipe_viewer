@@ -84,7 +84,7 @@ jobs:
         if: ${{ always() }}
         run: |
           rm -f ./pre-process.sh
-          rm -f ./android/upload.jks
+          rm -f ./android/app/release.jks
           rm -f ./android/key.properties
 
   upload:
