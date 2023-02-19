@@ -42,7 +42,7 @@ jobs:
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
         run: |
-          echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > android/release.jks
+          echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > android/app/release.jks
 
       - name: Extract key.properties file
         env:
