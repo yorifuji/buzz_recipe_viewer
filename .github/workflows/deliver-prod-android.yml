@@ -80,6 +80,13 @@ jobs:
           name: aab
           path: build/app/outputs/bundle/release/app-release.aab
 
+      - name: Clean up
+        if: ${{ always() }}
+        run: |
+          rm -f ./pre-process.sh
+          rm -f ./android/upload.jks
+          rm -f ./android/key.properties
+
   upload:
     runs-on: ubuntu-latest
     needs: build
@@ -107,3 +114,8 @@ jobs:
           releaseName: ${{ needs.build.outputs.release-name }}
           track: production
           status: completed
+
+      - name: Clean up
+        if: ${{ always() }}
+        run: |
+          rm -f ./android/service-account.json
