@@ -1,4 +1,4 @@
-name: deliver ios
+name: deliver prod ios
 
 on:
   workflow_dispatch:
