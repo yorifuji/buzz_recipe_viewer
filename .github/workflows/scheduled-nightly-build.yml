@@ -1,5 +1,7 @@
 name: scheduled nightly build
 
+run-name: Nightly Build ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub hosted)') || '(on self-hosted)' }}
+
 on:
   workflow_dispatch:
   schedule:
@@ -9,14 +11,8 @@ permissions:
   contents: read
 
 jobs:
-  android:
-    uses: ./.github/workflows/deliver-prod-android.yml
+  build:
+    uses: ./.github/workflows/deliver-prod.yml
     secrets: inherit
     with:
-      upload-artifact: false
-
-  ios:
-    uses: ./.github/workflows/deliver-prod-ios.yml
-    secrets: inherit
-    with:
-      upload-artifact: false
+      upload: false

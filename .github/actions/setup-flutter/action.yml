@@ -1,0 +1,36 @@
+name: Setup Flutter
+description: Setup Flutter
+inputs:
+  version:
+    description: Flutter version
+runs:
+  using: composite
+  steps:
+    - name: Install Flutter
+      shell: bash
+      run: |
+        git clone https://github.com/flutter/flutter.git --depth 1 --branch ${{ inputs.version }} ${{ runner.temp }}/flutter
+        cat ${{ runner.temp }}/flutter/.git/shallow
+
+    - name: Set global path and environment
+      shell: bash
+      run: |
+        echo "${{ runner.temp }}/flutter/bin" >> $GITHUB_PATH
+        echo "${{ runner.temp }}/flutter/.pub-cache/bin" >> $GITHUB_PATH
+        echo "PUB_CACHE=${{ runner.temp }}/flutter/.pub-cache" >> $GITHUB_ENV
+
+    - name: Cache
+      uses: actions/cache@v3
+      env:
+        FLUTTER_PATH: ${{ runner.temp }}/flutter
+      with:
+        path: |
+          ${{ env.FLUTTER_PATH }}/bin/cache
+          ${{ env.FLUTTER_PATH }}/.pub-cache
+        key: flutter-setup-cache-${{ runner.os }}-${{ runner.arch }}-${{ inputs.version }}-${{ hashFiles(format('{0}/.git/shallow', env.FLUTTER_PATH), 'pubspec.lock') }}
+
+    - shell: bash
+      run: flutter --version
+
+    - shell: bash
+      run: flutter pub get

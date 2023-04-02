@@ -1,0 +1,16 @@
+name: deliver on tagged
+
+run-name: Deliver for production on Tagged ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub hosted)') || '(on self-hosted)' }}
+
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: read
+
+jobs:
+  deliver:
+    uses: ./.github/workflows/deliver-prod.yml
+    secrets: inherit
