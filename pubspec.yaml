@@ -39,7 +39,7 @@ dependencies:
   json_annotation: ^4.8.0
   algolia: ^1.1.1
   flutter_dotenv: ^5.0.2
-  intl: ^0.18.0
+  intl: ^0.18.1
   url_launcher: ^6.1.8
   flutter_hooks: ^0.18.5+1
   hooks_riverpod: ^2.3.4
