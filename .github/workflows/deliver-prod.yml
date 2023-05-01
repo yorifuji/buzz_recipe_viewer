@@ -21,6 +21,8 @@ permissions:
 
 env:
   FLUTTER_VERSION: ${{ (vars.FLUTTER_VERSION == '' && 'stable') || vars.FLUTTER_VERSION }}
+  GOOGLE_PLAY_TRACK: ${{ (vars.GOOGLE_PLAY_TRACK == '' && 'internal') || vars.GOOGLE_PLAY_TRACK }}
+  GOOGLE_PLAY_STATUS: ${{ (vars.GOOGLE_PLAY_STATUS == '' && 'draft') || vars.GOOGLE_PLAY_STATUS }}
 
 jobs:
   android:
@@ -76,8 +78,8 @@ jobs:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           packageName: ${{ steps.info.outputs.package-name }}
           releaseName: ${{ steps.info.outputs.release-name }}
-          track: internal
-          status: draft
+          track: ${{ env.GOOGLE_PLAY_TRACK }}
+          status: ${{ env.GOOGLE_PLAY_STATUS }}
 
       - name: Clean up
         if: ${{ always() }}
