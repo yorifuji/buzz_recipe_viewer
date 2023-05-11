@@ -19,9 +19,7 @@ runs:
         FLUTTER_PATH: ${{ runner.temp }}/flutter
       run: |
         git clone https://github.com/flutter/flutter.git --depth 1 --branch ${{ inputs.version }} ${{ env.FLUTTER_PATH }}
-        cd ${{ env.FLUTTER_PATH }} && pwd
-        cd ${{ env.FLUTTER_PATH }} && git rev-parse HEAD
-        cd ${{ env.FLUTTER_PATH }} && echo "FLUTTER_HASH=`git rev-parse HEAD`" >> $GITHUB_ENV
+         echo "FLUTTER_GIT_HASH=`cd ${{ env.FLUTTER_PATH }} && git rev-parse HEAD`" >> $GITHUB_ENV
 
     - name: Cache
       uses: actions/cache@v3
@@ -31,7 +29,7 @@ runs:
         path: |
           ${{ env.FLUTTER_PATH }}/bin/cache
           ${{ env.FLUTTER_PATH }}/.pub-cache
-        key: flutter-setup-cache-${{ runner.os }}-${{ runner.arch }}-${{ inputs.version }}-${{ env.FLUTTER_HASH }}-${{ hashFiles('pubspec.lock') }}
+        key: flutter-setup-cache-${{ runner.os }}-${{ runner.arch }}-${{ inputs.version }}-${{ env.FLUTTER_GIT_HASH }}-${{ hashFiles('pubspec.lock') }}
 
     - shell: bash
       run: flutter --version
