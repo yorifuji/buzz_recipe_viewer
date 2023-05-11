@@ -9,26 +9,24 @@ runs:
     - name: Set path and env
       shell: bash
       run: |
-        echo "${{ runner.temp }}/flutter/bin" >> $GITHUB_PATH
-        echo "${{ runner.temp }}/flutter/.pub-cache/bin" >> $GITHUB_PATH
+        echo "FLUTTER_ROOT=${{ runner.temp }}/flutter" >> $GITHUB_ENV
         echo "PUB_CACHE=${{ runner.temp }}/flutter/.pub-cache" >> $GITHUB_ENV
+        echo "${{ runner.temp }}/flutter/bin" >> $GITHUB_PATH
+        echo "${{ runner.temp }}/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
+        echo "${{ runner.temp }}/flutter/.pub-cache/bin" >> $GITHUB_PATH
 
     - name: Install Flutter
       shell: bash
-      env:
-        FLUTTER_PATH: ${{ runner.temp }}/flutter
       run: |
-        git clone https://github.com/flutter/flutter.git --depth 1 --branch ${{ inputs.version }} ${{ env.FLUTTER_PATH }}
-        echo "FLUTTER_GIT_HASH=`cd ${{ env.FLUTTER_PATH }} && git rev-parse HEAD`" >> $GITHUB_ENV
+        git clone https://github.com/flutter/flutter.git --depth 1 --branch ${{ inputs.version }} ${{ env.FLUTTER_ROOT }}
+        echo "FLUTTER_GIT_HASH=`cd ${{ env.FLUTTER_ROOT }} && git rev-parse HEAD`" >> $GITHUB_ENV
 
     - name: Cache
       uses: actions/cache@v3
-      env:
-        FLUTTER_PATH: ${{ runner.temp }}/flutter
       with:
         path: |
-          ${{ env.FLUTTER_PATH }}/bin/cache
-          ${{ env.FLUTTER_PATH }}/.pub-cache
+          ${{ env.FLUTTER_ROOT }}/bin/cache
+          ${{ env.FLUTTER_ROOT }}/.pub-cache
         key: flutter-setup-cache-${{ runner.os }}-${{ runner.arch }}-${{ inputs.version }}-${{ env.FLUTTER_GIT_HASH }}-${{ hashFiles('pubspec.lock') }}
 
     - shell: bash
