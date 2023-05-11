@@ -19,7 +19,7 @@ runs:
         FLUTTER_PATH: ${{ runner.temp }}/flutter
       run: |
         git clone https://github.com/flutter/flutter.git --depth 1 --branch ${{ inputs.version }} ${{ env.FLUTTER_PATH }}
-         echo "FLUTTER_GIT_HASH=`cd ${{ env.FLUTTER_PATH }} && git rev-parse HEAD`" >> $GITHUB_ENV
+        echo "FLUTTER_GIT_HASH=`cd ${{ env.FLUTTER_PATH }} && git rev-parse HEAD`" >> $GITHUB_ENV
 
     - name: Cache
       uses: actions/cache@v3
