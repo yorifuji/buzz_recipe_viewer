@@ -5,8 +5,6 @@ inputs:
     description: Flutter version
 runs:
   using: composite
-  env:
-    FLUTTER_PATH: ${{ runner.temp }}/flutter
   steps:
     - name: Set path and env
       shell: bash
@@ -17,12 +15,16 @@ runs:
 
     - name: Install Flutter
       shell: bash
+      env:
+        FLUTTER_PATH: ${{ runner.temp }}/flutter
       run: |
         git clone https://github.com/flutter/flutter.git --depth 1 --branch ${{ inputs.version }} ${{ env.FLUTTER_PATH }}
         echo "FLUTTER_HASH=`git rev-parse HEAD`" >> $GITHUB_ENV
 
     - name: Cache
       uses: actions/cache@v3
+      env:
+        FLUTTER_PATH: ${{ runner.temp }}/flutter
       with:
         path: |
           ${{ env.FLUTTER_PATH }}/bin/cache
