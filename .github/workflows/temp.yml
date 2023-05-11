@@ -63,5 +63,5 @@ jobs:
       - name: Clean up
         if: ${{ always() }}
         run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          [ -f "$RUNNER_TEMP/app-signing.keychain-db" ] && security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm -rf ~/Library/MobileDevice/Provisioning\ Profiles
