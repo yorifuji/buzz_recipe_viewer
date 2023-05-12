@@ -11,5 +11,5 @@ class SearchResult with _$SearchResult {
   }) = _SearchResult;
 
   factory SearchResult.createDummy() =>
-      SearchResult(searchHits: [SearchHit.createDummy()], nextPage: 0);
+      SearchResult(searchHits: [SearchHit.createDummy()]);
 }

@@ -22,10 +22,10 @@ class SearchHitsWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
-          children: const [
+          children: [
             _SearchHitResult(),
             Padding(
               padding: EdgeInsets.only(top: 8),
