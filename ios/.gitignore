@@ -34,7 +34,7 @@ Runner/GeneratedPluginRegistrant.*
 !default.perspectivev3
 
 # CocoaPods
-Podfile
+# Podfile
 
 # dart-defines
 Flutter/DartDefines.xcconfig
