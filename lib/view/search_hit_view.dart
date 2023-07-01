@@ -369,11 +369,6 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
 }
 
 enum SortListTile {
-  relevance(
-    '関連度順',
-    Icon(Icons.abc),
-    SortIndex.relevance,
-  ),
   timestamp(
     '登録日（新しい順）',
     Icon(Icons.calendar_month),

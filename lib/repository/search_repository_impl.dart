@@ -20,7 +20,7 @@ class SearchRepositoryImpl implements SearchRepository {
       try {
         final algoliaClient = Algolia.init(
           applicationId: dotenv.env['ALGOLIA_APPLICATION_ID']!,
-          apiKey: dotenv.env['ALGOLIA_API_KEY']!,
+          apiKey: dotenv.env['ALGOLIA_SEARCH_ONLY_API_KEY']!,
         );
         final algoliaQuery = algoliaClient.instance
             .index(indexName)

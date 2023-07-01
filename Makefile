@@ -11,4 +11,4 @@ build:
 
 create-env-file:
 	echo "ALGOLIA_APPLICATION_ID=$${ALGOLIA_APPLICATION_ID}" > .env
-	echo "ALGOLIA_API_KEY=$${ALGOLIA_API_KEY}" >> .env
+	echo "ALGOLIA_SEARCH_ONLY_API_KEY=$${ALGOLIA_SEARCH_ONLY_API_KEY}" >> .env
