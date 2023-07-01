@@ -34,7 +34,7 @@ jobs:
 
       - run: flutter pub get
 
-      - run: dart format -l 120 --set-exit-if-changed .
+      - run: dart format -l 80 --set-exit-if-changed .
 
   analyze:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
