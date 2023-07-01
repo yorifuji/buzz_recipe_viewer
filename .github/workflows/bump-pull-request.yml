@@ -1,6 +1,6 @@
 name: 02 bump pull request
 
-run-name: Bump with Pull Request ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub hosted)') || '(on self-hosted)' }}
+run-name: Bump with Pull Request ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   workflow_dispatch:
@@ -15,9 +15,8 @@ on:
           - major
 
 env:
-  GIT_USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
-  GIT_USER_NAME: 'github-actions[bot]'
-  FLUTTER_VERSION: ${{ (vars.FLUTTER_VERSION == '' && 'stable') || vars.FLUTTER_VERSION }}
+  GIT_USER_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
+  GIT_USER_NAME: "github-actions[bot]"
 
 permissions:
   contents: write
@@ -31,9 +30,13 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - uses: ./.github/actions/setup-flutter
+      - uses: subosito/flutter-action@v2
         with:
-          version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
 
       - name: init git config
         run: |

@@ -1,12 +1,12 @@
 name: 03 deliver for staging
 
-run-name: Deliver for staging ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub hosted)') || '(on self-hosted)' }}
+run-name: Deliver for staging ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   workflow_dispatch:
     inputs:
       upload:
-        description: 'Upload'
+        description: "Upload"
         type: boolean
         default: true
 
@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 env:
-  FLUTTER_VERSION: ${{ (vars.FLUTTER_VERSION == '' && 'stable') || vars.FLUTTER_VERSION }}
+  DEVELOPER_DIR: /Applications/Xcode_${{ (vars.XCODE_VERSION == null && '14.3.1') || vars.XCODE_VERSION }}.app
 
 jobs:
   android:
@@ -32,9 +32,13 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: ./.github/actions/setup-flutter
+      - uses: subosito/flutter-action@v2
         with:
-          version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
 
       - name: Extract key.properties file
         env:
@@ -70,7 +74,7 @@ jobs:
           rm -f ./android/key.properties
 
   ios:
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-latest') || 'self-hosted' }}
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-13') || 'self-hosted' }}
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v3
@@ -84,30 +88,13 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: ./.github/actions/setup-flutter
+      - uses: subosito/flutter-action@v2
         with:
-          version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - name: Import Apple Development Certificate
-        env:
-          APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
-          APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64: ${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64 }}
-          APPLE_DEVELOPMENT_CERTIFICATE_P12_PASSWORD: ${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE_P12_PASSWORD }}
-        run: |
-          DEVELOPMENT_CERTIFICATE_PATH=$RUNNER_TEMP/development_certificate.p12
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-
-          # import certificate from secrets
-          echo -n "$APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64" | base64 --decode > $DEVELOPMENT_CERTIFICATE_PATH
-
-          # create temporary keychain
-          security create-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-          # import certificate to keychain
-          security import $DEVELOPMENT_CERTIFICATE_PATH -P "$APPLE_DEVELOPMENT_CERTIFICATE_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
+      - run: flutter pub get
 
       - name: Extract App Store Connect API Private Key
         env:
@@ -116,25 +103,32 @@ jobs:
         run: |
           echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode > ${{ runner.temp }}/AuthKey_$APPLE_API_KEY_ID.p8
 
+      - name: Create ExportOptions.plist
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          cat << EOS > ./ios/ExportOptions.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+            <dict>
+              <key>compileBitcode</key>
+              <false/>
+              <key>method</key>
+              <string>ad-hoc</string>
+              <key>teamID</key>
+              <string>${APPLE_TEAM_ID}</string>
+            </dict>
+          </plist>
+          EOS
+
       - name: Build
         env:
           APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
         run: |
           flutter build ios --release --no-codesign --dart-define=FLAVOR=stg
-          xcodebuild archive -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath ${{ runner.temp }}/AuthKey_$APPLE_API_KEY_ID.p8
-          cat << EOS > ./ios/ExportOptions.plist
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>compileBitcode</key>
-            <false/>
-            <key>method</key>
-            <string>ad-hoc</string>
-          </dict>
-          </plist>
-          EOS
+          xcodebuild archive CODE_SIGNING_ALLOWED=NO -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive
           xcodebuild -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath ${{ runner.temp }}/AuthKey_$APPLE_API_KEY_ID.p8
 
       - name: Find ipa file path
@@ -157,9 +151,3 @@ jobs:
         run: |
           which firebase || curl -sL https://firebase.tools | bash
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute $APP_PATH --app $FIREBASE_APP_ID_IOS --testers "yorifuji@gmail.com"
-
-      - name: Clean up
-        if: ${{ always() }}
-        run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm -rf ~/Library/MobileDevice/Provisioning\ Profiles

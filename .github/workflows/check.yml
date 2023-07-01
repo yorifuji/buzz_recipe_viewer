@@ -1,16 +1,16 @@
 name: check
 
-run-name: Check ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub hosted)') || '(on self-hosted)' }}
+run-name: Check ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   push:
     branches:
       - main
     paths-ignore:
-      - '**.md'
+      - "**.md"
   pull_request:
     paths-ignore:
-      - '**.md'
+      - "**.md"
   workflow_dispatch:
 
 permissions:
@@ -18,10 +18,24 @@ permissions:
   issues: write
   pull-requests: write
 
-env:
-  FLUTTER_VERSION: ${{ (vars.FLUTTER_VERSION == '' && 'stable') || vars.FLUTTER_VERSION }}
-
 jobs:
+  format:
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
+
+      - run: dart format -l 120 --set-exit-if-changed .
+
   analyze:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
@@ -38,9 +52,13 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: ./.github/actions/setup-flutter
+      - uses: subosito/flutter-action@v2
         with:
-          version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
 
       - name: Install matcher
         run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
@@ -58,17 +76,17 @@ jobs:
         uses: ruby/setup-ruby@v1
         if: ${{ always() && vars.RUNS_ON_SELF_HOSTED == null }}
         with:
-          ruby-version: '2.7'
+          ruby-version: "2.7"
           bundler-cache: true
 
       - name: Danger
-        uses: MeilCli/danger-action@ca22c01eb01d0cb1ae6d2844166be17ed0c29616
+        uses: MeilCli/danger-action@7983790813ddae0e2abb2a981f11ee5aac88b0fe
         if: always()
         with:
-          plugins_file: 'Gemfile'
-          install_path: 'vendor/bundle'
-          danger_file: 'Dangerfile'
-          danger_id: 'danger-pr'
+          plugins_file: "Gemfile"
+          install_path: "vendor/bundle"
+          danger_file: "Dangerfile"
+          danger_id: "danger-pr"
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -76,8 +94,7 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Run pre-process script
         shell: bash
@@ -88,9 +105,12 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: ./.github/actions/setup-flutter
+      - uses: subosito/flutter-action@v2
         with:
-          version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - name: Run flutter test
-        run: flutter test
+      - run: flutter pub get
+
+      - run: flutter test
