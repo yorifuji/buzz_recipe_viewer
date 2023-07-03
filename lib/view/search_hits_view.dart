@@ -1,4 +1,5 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/repository/mock_search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:buzz_recipe_viewer/viewmodel/search_hits_view_model.dart';
 import 'package:flutter/material.dart';
@@ -7,17 +8,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../repository/mock_search_repository.dart';
+class SearchHitsPage extends HookConsumerWidget {
+  const SearchHitsPage({super.key});
 
-class SearchHitsWidget extends HookConsumerWidget {
-  const SearchHitsWidget({super.key});
-
-  static Widget show() => const SearchHitsWidget();
+  static Widget show() => const SearchHitsPage();
   static Widget showWithMock() => ProviderScope(
         overrides: [
           searchRepositoryProvider.overrideWithValue(MockSearchRepository())
         ],
-        child: const SearchHitsWidget(),
+        child: const SearchHitsPage(),
       );
 
   @override
@@ -66,10 +65,8 @@ class _SearchHitResult extends HookConsumerWidget {
     switch (loadingState) {
       case LoadingState.loadable:
         body = const SizedBox.shrink();
-        break;
       case LoadingState.loading:
         body = const Center(child: CircularProgressIndicator());
-        break;
       case LoadingState.success:
         // _scrollToTop(scrollController);
         body = hitList.isEmpty
@@ -100,7 +97,6 @@ class _SearchHitResult extends HookConsumerWidget {
                   }
                 },
               );
-        break;
       case LoadingState.failure:
         body = Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +108,6 @@ class _SearchHitResult extends HookConsumerWidget {
             ),
           ],
         );
-        break;
     }
     return Expanded(child: body);
   }
