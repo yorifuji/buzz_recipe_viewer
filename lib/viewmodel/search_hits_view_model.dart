@@ -1,35 +1,13 @@
+import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_hits_view_model.freezed.dart';
-
-final searchHitsProvider =
-    StateNotifierProvider<SearchHitsViewModel, SearchHitsState>(
-  (ref) {
-    final repository = ref.watch(searchRepositoryProvider);
-    return SearchHitsViewModel(repository);
-  },
-  dependencies: [searchRepositoryProvider],
-);
-
-enum SortIndex {
-  timestamp('recipe_timestamp_desc'),
-  likes('recipe_likes_desc'),
-  views('recipe_views_desc');
-
-  const SortIndex(this.indexName);
-  final String indexName;
-}
-
-enum LoadingState {
-  loadable,
-  loading,
-  success,
-  failure,
-}
+part 'search_hits_view_model.g.dart';
 
 @freezed
 class SearchHitsState with _$SearchHitsState {
@@ -43,12 +21,14 @@ class SearchHitsState with _$SearchHitsState {
   }) = _SearchHitsState;
 }
 
-class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
-  SearchHitsViewModel(this.repository) : super(const SearchHitsState()) {
-    search();
+@riverpod
+class SearchHitsViewModel extends _$SearchHitsViewModel {
+  late final SearchRepository _searchRepository;
+  @override
+  SearchHitsState build() {
+    _searchRepository = ref.read(searchRepositoryProvider);
+    return const SearchHitsState();
   }
-
-  final SearchRepository repository;
 
   Future<void> search() async {
     state = state.copyWith(
@@ -57,14 +37,11 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       hitList: [],
     );
 
-    final searchHitResult = await repository.search(
+    final searchHitResult = await _searchRepository.search(
       state.query,
       state.sortType.indexName,
       state.nextPage,
     );
-    if (!mounted) {
-      return;
-    }
 
     searchHitResult.when(
       success: (result) {
@@ -93,14 +70,11 @@ class SearchHitsViewModel extends StateNotifier<SearchHitsState> {
       moreLoadingState: LoadingState.loading,
     );
 
-    final searchHitResult = await repository.search(
+    final searchHitResult = await _searchRepository.search(
       state.query,
       state.sortType.indexName,
       state.nextPage,
     );
-    if (!mounted) {
-      return;
-    }
 
     searchHitResult.when(
       success: (result) {

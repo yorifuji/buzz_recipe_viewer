@@ -4,10 +4,14 @@ import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/search_result.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final searchRepositoryProvider =
-    Provider<SearchRepository>((ref) => SearchRepositoryImpl());
+part 'search_repository_impl.g.dart';
+
+@riverpod
+SearchRepository searchRepository(SearchRepositoryRef ref) {
+  return SearchRepositoryImpl();
+}
 
 class SearchRepositoryImpl implements SearchRepository {
   @override

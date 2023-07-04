@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/view/histories_page.dart';
-import 'package:buzz_recipe_viewer/view/search_hits_view.dart';
+import 'package:buzz_recipe_viewer/view/search_hits_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -32,7 +32,7 @@ class NavigationBarPage extends ConsumerWidget {
         children: AppTab.values.map((tab) {
           switch (tab) {
             case AppTab.search:
-              return const SearchHitsPage();
+              return SearchHitsPage.show();
             case AppTab.favorites:
               return const HistoriesPage();
             case AppTab.histories:
