@@ -7,6 +7,7 @@ final currentAppTab = StateProvider((ref) => AppTab.search);
 
 enum AppTab {
   search('Search', Icon(Icons.search)),
+  favorites('Favorite', Icon(Icons.favorite)),
   histories('History', Icon(Icons.history));
 
   const AppTab(this.title, this.icon);
@@ -32,6 +33,8 @@ class NavigationBarPage extends ConsumerWidget {
           switch (tab) {
             case AppTab.search:
               return const SearchHitsPage();
+            case AppTab.favorites:
+              return const HistoriesPage();
             case AppTab.histories:
               return const HistoriesPage();
           }
