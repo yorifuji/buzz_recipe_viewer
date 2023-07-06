@@ -2,22 +2,22 @@ import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/repository/mock_search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
+import 'package:buzz_recipe_viewer/ui/search/search_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
-import 'package:buzz_recipe_viewer/ui/search_hits/search_hits_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SearchHitsPage extends StatelessWidget {
-  const SearchHitsPage({super.key});
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
 
-  static Widget show() => const SearchHitsPage();
+  static Widget show() => const SearchPage();
   static Widget showWithMock() => ProviderScope(
         overrides: [
           searchRepositoryProvider.overrideWithValue(MockSearchRepository())
         ],
-        child: const SearchHitsPage(),
+        child: const SearchPage(),
       );
 
   @override
@@ -54,16 +54,16 @@ class _SearchHitResult extends HookConsumerWidget {
     final scrollController = useScrollController();
 
     final hitList =
-        ref.watch(searchHitsViewModelProvider.select((value) => value.hitList));
+        ref.watch(searchViewModelProvider.select((value) => value.hitList));
     final loadingState = ref.watch(
-      searchHitsViewModelProvider.select((value) => value.loadingState),
+      searchViewModelProvider.select((value) => value.loadingState),
     );
     final moreLoadingState = ref.watch(
-      searchHitsViewModelProvider.select((value) => value.moreLoadingState),
+      searchViewModelProvider.select((value) => value.moreLoadingState),
     );
-    final nextPage = ref
-        .watch(searchHitsViewModelProvider.select((value) => value.nextPage));
-    final viewModel = ref.watch(searchHitsViewModelProvider.notifier);
+    final nextPage =
+        ref.watch(searchViewModelProvider.select((value) => value.nextPage));
+    final viewModel = ref.watch(searchViewModelProvider.notifier);
 
     final Widget body;
     switch (loadingState) {
@@ -138,7 +138,7 @@ class _SearchHitResult extends HookConsumerWidget {
           children: [
             const Text('データを取得できませんでした'),
             ElevatedButton(
-              onPressed: () => ref.refresh(searchHitsViewModelProvider),
+              onPressed: () => ref.refresh(searchViewModelProvider),
               child: const Text('再読み込み'),
             ),
           ],
@@ -161,9 +161,9 @@ class _LabelBox extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sortType = ref
-        .watch(searchHitsViewModelProvider.select((value) => value.sortType));
-    final viewModel = ref.watch(searchHitsViewModelProvider.notifier);
+    final sortType =
+        ref.watch(searchViewModelProvider.select((value) => value.sortType));
+    final viewModel = ref.watch(searchViewModelProvider.notifier);
 
     useEffect(
       () {
@@ -179,12 +179,12 @@ class _LabelBox extends HookConsumerWidget {
           padding: const EdgeInsets.only(left: 8),
           child: SizedBox(
             height: 24,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-              ),
+            child: FloatingActionButton.extended(
+              // style: ElevatedButton.styleFrom(
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.circular(24),
+              //   ),
+              // ),
               onPressed: () => openBottomSheet(
                 context,
                 sortType,
@@ -195,7 +195,7 @@ class _LabelBox extends HookConsumerWidget {
                     ..search();
                 },
               ),
-              child: Text(
+              label: Text(
                 SortListTile.values
                     .firstWhere(
                       (element) => element.sortType == sortType,
@@ -217,9 +217,9 @@ class _SearchBox extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final query =
-        ref.watch(searchHitsViewModelProvider.select((value) => value.query));
+        ref.watch(searchViewModelProvider.select((value) => value.query));
     final queryEditController = useTextEditingController();
-    final viewModel = ref.watch(searchHitsViewModelProvider.notifier);
+    final viewModel = ref.watch(searchViewModelProvider.notifier);
     return SizedBox(
       height: 44,
       child: TextField(

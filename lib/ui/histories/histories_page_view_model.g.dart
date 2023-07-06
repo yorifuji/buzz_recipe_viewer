@@ -9,7 +9,7 @@ part of 'histories_page_view_model.dart';
 // **************************************************************************
 
 String _$historiesViewModelHash() =>
-    r'0017b2975669af626609b07e773fc88e24c772db';
+    r'6e157806592f0a1e00fb372318ddf88975d973ef';
 
 /// See also [HistoriesViewModel].
 @ProviderFor(HistoriesViewModel)

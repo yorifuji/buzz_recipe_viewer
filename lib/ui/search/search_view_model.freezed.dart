@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'search_hits_view_model.dart';
+part of 'search_view_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SearchHitsState {
+mixin _$SearchState {
   String get query => throw _privateConstructorUsedError;
   List<SearchHitItem> get hitList => throw _privateConstructorUsedError;
   SortIndex get sortType => throw _privateConstructorUsedError;
@@ -24,15 +24,15 @@ mixin _$SearchHitsState {
   LoadingState get moreLoadingState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SearchHitsStateCopyWith<SearchHitsState> get copyWith =>
+  $SearchStateCopyWith<SearchState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchHitsStateCopyWith<$Res> {
-  factory $SearchHitsStateCopyWith(
-          SearchHitsState value, $Res Function(SearchHitsState) then) =
-      _$SearchHitsStateCopyWithImpl<$Res, SearchHitsState>;
+abstract class $SearchStateCopyWith<$Res> {
+  factory $SearchStateCopyWith(
+          SearchState value, $Res Function(SearchState) then) =
+      _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
   $Res call(
       {String query,
@@ -44,9 +44,9 @@ abstract class $SearchHitsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchHitsStateCopyWithImpl<$Res, $Val extends SearchHitsState>
-    implements $SearchHitsStateCopyWith<$Res> {
-  _$SearchHitsStateCopyWithImpl(this._value, this._then);
+class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
+    implements $SearchStateCopyWith<$Res> {
+  _$SearchStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -93,11 +93,11 @@ class _$SearchHitsStateCopyWithImpl<$Res, $Val extends SearchHitsState>
 }
 
 /// @nodoc
-abstract class _$$_SearchHitsStateCopyWith<$Res>
-    implements $SearchHitsStateCopyWith<$Res> {
-  factory _$$_SearchHitsStateCopyWith(
-          _$_SearchHitsState value, $Res Function(_$_SearchHitsState) then) =
-      __$$_SearchHitsStateCopyWithImpl<$Res>;
+abstract class _$$_SearchStateCopyWith<$Res>
+    implements $SearchStateCopyWith<$Res> {
+  factory _$$_SearchStateCopyWith(
+          _$_SearchState value, $Res Function(_$_SearchState) then) =
+      __$$_SearchStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_SearchHitsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchHitsStateCopyWithImpl<$Res>
-    extends _$SearchHitsStateCopyWithImpl<$Res, _$_SearchHitsState>
-    implements _$$_SearchHitsStateCopyWith<$Res> {
-  __$$_SearchHitsStateCopyWithImpl(
-      _$_SearchHitsState _value, $Res Function(_$_SearchHitsState) _then)
+class __$$_SearchStateCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$_SearchState>
+    implements _$$_SearchStateCopyWith<$Res> {
+  __$$_SearchStateCopyWithImpl(
+      _$_SearchState _value, $Res Function(_$_SearchState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
     Object? loadingState = null,
     Object? moreLoadingState = null,
   }) {
-    return _then(_$_SearchHitsState(
+    return _then(_$_SearchState(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_SearchHitsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchHitsState implements _SearchHitsState {
-  const _$_SearchHitsState(
+class _$_SearchState implements _SearchState {
+  const _$_SearchState(
       {this.query = '',
       final List<SearchHitItem> hitList = const <SearchHitItem>[],
       this.sortType = SortIndex.timestamp,
@@ -195,14 +195,14 @@ class _$_SearchHitsState implements _SearchHitsState {
 
   @override
   String toString() {
-    return 'SearchHitsState(query: $query, hitList: $hitList, sortType: $sortType, nextPage: $nextPage, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
+    return 'SearchState(query: $query, hitList: $hitList, sortType: $sortType, nextPage: $nextPage, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchHitsState &&
+            other is _$_SearchState &&
             (identical(other.query, query) || other.query == query) &&
             const DeepCollectionEquality().equals(other._hitList, _hitList) &&
             (identical(other.sortType, sortType) ||
@@ -228,18 +228,18 @@ class _$_SearchHitsState implements _SearchHitsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchHitsStateCopyWith<_$_SearchHitsState> get copyWith =>
-      __$$_SearchHitsStateCopyWithImpl<_$_SearchHitsState>(this, _$identity);
+  _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>
+      __$$_SearchStateCopyWithImpl<_$_SearchState>(this, _$identity);
 }
 
-abstract class _SearchHitsState implements SearchHitsState {
-  const factory _SearchHitsState(
+abstract class _SearchState implements SearchState {
+  const factory _SearchState(
       {final String query,
       final List<SearchHitItem> hitList,
       final SortIndex sortType,
       final int nextPage,
       final LoadingState loadingState,
-      final LoadingState moreLoadingState}) = _$_SearchHitsState;
+      final LoadingState moreLoadingState}) = _$_SearchState;
 
   @override
   String get query;
@@ -255,6 +255,6 @@ abstract class _SearchHitsState implements SearchHitsState {
   LoadingState get moreLoadingState;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchHitsStateCopyWith<_$_SearchHitsState> get copyWith =>
+  _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>
       throw _privateConstructorUsedError;
 }

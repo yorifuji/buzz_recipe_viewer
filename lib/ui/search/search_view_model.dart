@@ -9,30 +9,30 @@ import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'search_hits_view_model.freezed.dart';
-part 'search_hits_view_model.g.dart';
+part 'search_view_model.freezed.dart';
+part 'search_view_model.g.dart';
 
 @freezed
-class SearchHitsState with _$SearchHitsState {
-  const factory SearchHitsState({
+class SearchState with _$SearchState {
+  const factory SearchState({
     @Default('') String query,
     @Default(<SearchHitItem>[]) List<SearchHitItem> hitList,
     @Default(SortIndex.timestamp) SortIndex sortType,
     @Default(0) int nextPage,
     @Default(LoadingState.loadable) LoadingState loadingState,
     @Default(LoadingState.loadable) LoadingState moreLoadingState,
-  }) = _SearchHitsState;
+  }) = _SearchState;
 }
 
 @riverpod
-class SearchHitsViewModel extends _$SearchHitsViewModel {
+class SearchViewModel extends _$SearchViewModel {
   late final SearchRepository _searchRepository;
   late final DatabaseRepository _databaseRepository;
   @override
-  SearchHitsState build() {
+  SearchState build() {
     _searchRepository = ref.read(searchRepositoryProvider);
     _databaseRepository = ref.read(databaseRepositoryProvider);
-    return const SearchHitsState();
+    return const SearchState();
   }
 
   Future<void> search() async {

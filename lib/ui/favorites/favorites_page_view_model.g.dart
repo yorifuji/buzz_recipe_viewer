@@ -9,7 +9,7 @@ part of 'favorites_page_view_model.dart';
 // **************************************************************************
 
 String _$favoritesViewModelHash() =>
-    r'6c4c62add44a810a9c9c3c5d21d599c7afc6d78b';
+    r'1c0fa3b6385b7bbb70a2f9744543906b53e210ed';
 
 /// See also [FavoritesViewModel].
 @ProviderFor(FavoritesViewModel)
