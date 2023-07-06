@@ -42,24 +42,20 @@ class NavigationBarPage extends ConsumerWidget {
           }
         }).toList(),
       ),
-      bottomNavigationBar: Theme(
-        data: theme.copyWith(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        child: BottomNavigationBar(
-          items: AppTab.values
-              .map(
-                (tab) =>
-                    BottomNavigationBarItem(icon: tab.icon, label: tab.title),
-              )
-              .toList(),
-          currentIndex: currentTab.index,
-          fixedColor: Colors.blueAccent,
-          onTap: (value) {
-            ref.read(currentAppTab.notifier).state = AppTab.fromIndex(value);
-          },
-        ),
+      bottomNavigationBar: NavigationBar(
+        destinations: AppTab.values
+            .map(
+              (tab) => NavigationDestination(
+                icon: tab.icon,
+                label: tab.title,
+              ),
+            )
+            .toList(),
+        onDestinationSelected: (value) {
+          ref.read(currentAppTab.notifier).state = AppTab.fromIndex(value);
+        },
+        selectedIndex: currentTab.index,
+        indicatorColor: theme.colorScheme.primaryContainer,
       ),
     );
   }
