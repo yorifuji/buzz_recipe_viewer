@@ -26,6 +26,7 @@ class NavigationBarPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final currentTab = ref.watch(currentAppTab);
     return Scaffold(
       body: IndexedStack(
@@ -41,19 +42,24 @@ class NavigationBarPage extends ConsumerWidget {
           }
         }).toList(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: AppTab.values
-            .map(
-              (tab) =>
-                  BottomNavigationBarItem(icon: tab.icon, label: tab.title),
-            )
-            .toList(),
-        currentIndex: currentTab.index,
-        fixedColor: Colors.blueAccent,
-        onTap: (value) {
-          ref.read(currentAppTab.notifier).state = AppTab.fromIndex(value);
-        },
-        // type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: Theme(
+        data: theme.copyWith(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          items: AppTab.values
+              .map(
+                (tab) =>
+                    BottomNavigationBarItem(icon: tab.icon, label: tab.title),
+              )
+              .toList(),
+          currentIndex: currentTab.index,
+          fixedColor: Colors.blueAccent,
+          onTap: (value) {
+            ref.read(currentAppTab.notifier).state = AppTab.fromIndex(value);
+          },
+        ),
       ),
     );
   }
