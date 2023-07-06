@@ -60,7 +60,10 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(widget.searchHit.title),
+                child: Text(
+                  widget.searchHit.title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(height: 8),
               Padding(
