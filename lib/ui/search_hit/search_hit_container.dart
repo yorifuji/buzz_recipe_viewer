@@ -59,75 +59,78 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  widget.searchHit.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Row(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Column(
                   children: [
-                    const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(
-                          Icons.thumb_up,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 2),
                     Text(
-                      '''${NumberFormat("#,###").format(widget.searchHit.likes)} likes''',
+                      widget.searchHit.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(width: 6),
-                    const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(
-                          Icons.trending_up,
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Icon(
+                              Icons.thumb_up,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 2),
-                    Text(
-                      '''${NumberFormat("#,###").format(widget.searchHit.views)} views''',
-                    ),
-                    const SizedBox(width: 6),
-                    const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(
-                          Icons.calendar_month,
+                        const SizedBox(width: 2),
+                        Text(
+                          '''${NumberFormat("#,###").format(widget.searchHit.likes)} likes''',
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 2),
-                    Text(
-                      DateFormat('yyyy-MM-dd').format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                          widget.searchHit.timestamp * 1000,
+                        const SizedBox(width: 6),
+                        const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Icon(
+                              Icons.trending_up,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const Spacer(),
-                    SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(
-                          _isExpanded ? Icons.expand_less : Icons.expand_more,
+                        const SizedBox(width: 2),
+                        Text(
+                          '''${NumberFormat("#,###").format(widget.searchHit.views)} views''',
                         ),
-                      ),
+                        const SizedBox(width: 6),
+                        const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Icon(
+                              Icons.calendar_month,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          DateFormat('yyyy-MM-dd').format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                              widget.searchHit.timestamp * 1000,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Icon(
+                              _isExpanded
+                                  ? Icons.expand_less
+                                  : Icons.expand_more,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -135,7 +138,7 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         if (_isExpanded)
           InkWell(
             onTap: _toggle,
