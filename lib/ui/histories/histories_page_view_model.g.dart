@@ -2,27 +2,27 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'search_hits_view_model.dart';
+part of 'histories_page_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchHitsViewModelHash() =>
-    r'b504a5ad2079da51725f0c9016a8725cba184449';
+String _$historiesViewModelHash() =>
+    r'0017b2975669af626609b07e773fc88e24c772db';
 
-/// See also [SearchHitsViewModel].
-@ProviderFor(SearchHitsViewModel)
-final searchHitsViewModelProvider =
-    AutoDisposeNotifierProvider<SearchHitsViewModel, SearchHitsState>.internal(
-  SearchHitsViewModel.new,
-  name: r'searchHitsViewModelProvider',
+/// See also [HistoriesViewModel].
+@ProviderFor(HistoriesViewModel)
+final historiesViewModelProvider =
+    AutoDisposeNotifierProvider<HistoriesViewModel, HistoriesState>.internal(
+  HistoriesViewModel.new,
+  name: r'historiesViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$searchHitsViewModelHash,
+      : _$historiesViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SearchHitsViewModel = AutoDisposeNotifier<SearchHitsState>;
+typedef _$HistoriesViewModel = AutoDisposeNotifier<HistoriesState>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
