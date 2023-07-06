@@ -23,35 +23,52 @@ class FavoritesPage extends HookConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: favorites
-                .map(
-                  (e) => Dismissible(
-                    key: UniqueKey(),
-                    child: InkWell(
-                      child: SearchHitWidget(searchHit: e.searchHit),
-                      onTap: () async {
-                        final url = Uri.parse(e.searchHit.url);
-                        if (await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        )) {
-                        } else {
-                          // FIXME:
-                          // ignore: only_throw_errors
-                          throw 'Could not launch $url';
-                        }
-                      },
+        child: favorites.isEmpty
+            ? const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.videogame_asset,
+                      size: 32,
                     ),
-                    onDismissed: (direction) {
-                      viewModel.deleteFavorite(e);
-                    },
-                  ),
-                )
-                .toList(),
-          ),
-        ),
+                    Text(
+                      'Sorry\nNo Faves',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: favorites
+                      .map(
+                        (e) => Dismissible(
+                          key: UniqueKey(),
+                          child: InkWell(
+                            child: SearchHitWidget(searchHit: e.searchHit),
+                            onTap: () async {
+                              final url = Uri.parse(e.searchHit.url);
+                              if (await launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication,
+                              )) {
+                              } else {
+                                // FIXME:
+                                // ignore: only_throw_errors
+                                throw 'Could not launch $url';
+                              }
+                            },
+                          ),
+                          onDismissed: (direction) {
+                            viewModel.deleteFavorite(e);
+                          },
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
       ),
     );
   }

@@ -23,35 +23,52 @@ class HistoriesPage extends HookConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: histories
-                .map(
-                  (e) => Dismissible(
-                    key: UniqueKey(),
-                    child: InkWell(
-                      child: SearchHitWidget(searchHit: e.searchHit),
-                      onTap: () async {
-                        final url = Uri.parse(e.searchHit.url);
-                        if (await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        )) {
-                        } else {
-                          // FIXME:
-                          // ignore: only_throw_errors
-                          throw 'Could not launch $url';
-                        }
-                      },
+        child: histories.isEmpty
+            ? const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.smart_toy,
+                      size: 32,
                     ),
-                    onDismissed: (direction) {
-                      viewModel.deleteFavorite(e);
-                    },
-                  ),
-                )
-                .toList(),
-          ),
-        ),
+                    Text(
+                      'Oops!\nNo Traces',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: histories
+                      .map(
+                        (e) => Dismissible(
+                          key: UniqueKey(),
+                          child: InkWell(
+                            child: SearchHitWidget(searchHit: e.searchHit),
+                            onTap: () async {
+                              final url = Uri.parse(e.searchHit.url);
+                              if (await launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication,
+                              )) {
+                              } else {
+                                // FIXME:
+                                // ignore: only_throw_errors
+                                throw 'Could not launch $url';
+                              }
+                            },
+                          ),
+                          onDismissed: (direction) {
+                            viewModel.deleteFavorite(e);
+                          },
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
       ),
     );
   }
