@@ -3,6 +3,7 @@ import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HistoriesPage extends HookConsumerWidget {
   const HistoriesPage({super.key});
@@ -28,7 +29,21 @@ class HistoriesPage extends HookConsumerWidget {
                 .map(
                   (e) => Dismissible(
                     key: UniqueKey(),
-                    child: SearchHitWidget(searchHit: e.searchHit),
+                    child: InkWell(
+                      child: SearchHitWidget(searchHit: e.searchHit),
+                      onTap: () async {
+                        final url = Uri.parse(e.searchHit.url);
+                        if (await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        )) {
+                        } else {
+                          // FIXME:
+                          // ignore: only_throw_errors
+                          throw 'Could not launch $url';
+                        }
+                      },
+                    ),
                     onDismissed: (direction) {
                       viewModel.deleteFavorite(e);
                     },

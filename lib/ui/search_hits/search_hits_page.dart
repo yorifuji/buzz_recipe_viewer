@@ -100,9 +100,6 @@ class _SearchHitResult extends HookConsumerWidget {
                     return InkWell(
                       child: SearchHitWidget(
                         searchHit: hitList[index].searchHit,
-                        onTapFavorite: () async {
-                          await viewModel.addFavorite(hitList[index].searchHit);
-                        },
                       ),
                       onTap: () async {
                         final url = Uri.parse(hitList[index].searchHit.url);
@@ -117,6 +114,19 @@ class _SearchHitResult extends HookConsumerWidget {
                           // ignore: only_throw_errors
                           throw 'Could not launch $url';
                         }
+                      },
+                      onLongPress: () async {
+                        await viewModel.addFavorite(hitList[index].searchHit);
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'お気に入りに追加しました',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
                       },
                     );
                   }

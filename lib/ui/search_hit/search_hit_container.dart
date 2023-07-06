@@ -16,32 +16,11 @@ class SearchHitWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       children: [
         Column(
           children: [
-            Stack(
-              children: [
-                Image.network(searchHit.image),
-                if (onTapFavorite != null)
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: InkWell(
-                      onTap: onTapFavorite,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.favorite,
-                          size: 32,
-                          // color: isFavorite ? Colors.orange : Colors.white,
-                          color: theme.colorScheme.onPrimary,
-                        ),
-                      ),
-                    ),
-                  )
-              ],
-            ),
+            Image.network(searchHit.image),
             const SizedBox(height: 8),
           ],
         ),
