@@ -1,6 +1,9 @@
+import 'package:buzz_recipe_viewer/model/favorite.dart';
+import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
+import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,9 +27,11 @@ class SearchHitsState with _$SearchHitsState {
 @riverpod
 class SearchHitsViewModel extends _$SearchHitsViewModel {
   late final SearchRepository _searchRepository;
+  late final DatabaseRepository _databaseRepository;
   @override
   SearchHitsState build() {
     _searchRepository = ref.read(searchRepositoryProvider);
+    _databaseRepository = ref.read(databaseRepositoryProvider);
     return const SearchHitsState();
   }
 
@@ -105,5 +110,14 @@ class SearchHitsViewModel extends _$SearchHitsViewModel {
 
   void updateSortType(SortIndex sortType) {
     state = state.copyWith(sortType: sortType);
+  }
+
+  // insert item to database
+  Future<void> insertHistory(SearchHit searchHit) async {
+    await _databaseRepository.insertHistory(History.from(searchHit));
+  }
+
+  Future<void> addFavorite(SearchHit searchHit) async {
+    await _databaseRepository.insertFavorite(Favorite.from(searchHit));
   }
 }
