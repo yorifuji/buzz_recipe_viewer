@@ -9,6 +9,12 @@ on:
         description: "Upload"
         type: boolean
         default: true
+  workflow_call:
+    inputs:
+      upload:
+        description: "Upload"
+        type: boolean
+        default: true
 
 permissions:
   contents: read

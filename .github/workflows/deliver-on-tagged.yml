@@ -11,6 +11,10 @@ permissions:
   contents: read
 
 jobs:
-  deliver:
+  prod:
     uses: ./.github/workflows/deliver-prod.yml
+    secrets: inherit
+
+  stg:
+    uses: ./.github/workflows/deliver-stg.yml
     secrets: inherit
