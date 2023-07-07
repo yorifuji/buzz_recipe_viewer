@@ -4,6 +4,8 @@ import 'package:buzz_recipe_viewer/repository/mock_search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -64,6 +66,9 @@ class _SearchHitResult extends HookConsumerWidget {
     final nextPage =
         ref.watch(searchViewModelProvider.select((value) => value.nextPage));
     final viewModel = ref.watch(searchViewModelProvider.notifier);
+    final useInternalPlayer = ref.watch(
+      settingsViewModelProvider.select((value) => value.useInternalPlayer),
+    );
 
     final Widget body;
     switch (loadingState) {
@@ -102,18 +107,30 @@ class _SearchHitResult extends HookConsumerWidget {
                         searchHit: hitList[index].searchHit,
                       ),
                       onTap: () async {
-                        final url = Uri.parse(hitList[index].searchHit.url);
-                        if (await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        )) {
-                          await viewModel
-                              .insertHistory(hitList[index].searchHit);
+                        if (useInternalPlayer) {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) {
+                                return VideoPlayerPage(
+                                  searchHit: hitList[index].searchHit,
+                                );
+                              },
+                            ),
+                          );
                         } else {
-                          // FIXME:
-                          // ignore: only_throw_errors
-                          throw 'Could not launch $url';
+                          final url = Uri.parse(hitList[index].searchHit.url);
+                          if (await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          )) {
+                          } else {
+                            // FIXME:
+                            // ignore: only_throw_errors
+                            throw 'Could not launch $url';
+                          }
                         }
+                        await viewModel.insertHistory(hitList[index].searchHit);
                       },
                       onLongPress: () async {
                         await viewModel.addFavorite(hitList[index].searchHit);
