@@ -1,7 +1,7 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
-import 'package:buzz_recipe_viewer/ui/navigation_bar/navigation_bar_page.dart';
+import 'package:buzz_recipe_viewer/ui/navigation/navigation_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
