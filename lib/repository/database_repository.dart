@@ -1,11 +1,15 @@
-// isarのインスタンスを生成するDatabaseRepositoryのprovider
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:isar/isar.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final databaseRepositoryProvider =
-    Provider<DatabaseRepository>((_) => throw UnimplementedError());
+part 'database_repository.g.dart';
+
+@riverpod
+DatabaseRepository databaseRepository(DatabaseRepositoryRef ref) {
+  return DatabaseRepository(ref.watch(isarProvider));
+}
 
 class DatabaseRepository {
   DatabaseRepository(this._isar);

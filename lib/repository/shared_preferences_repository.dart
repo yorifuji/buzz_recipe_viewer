@@ -1,11 +1,15 @@
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final sharedPreferencesRepositoryProvider =
-    Provider<SharedPreferencesRepository>(
-  (ref) => SharedPreferencesRepository(ref.watch(sharedPreferencesProvider)),
-);
+part 'shared_preferences_repository.g.dart';
+
+@riverpod
+SharedPreferencesRepository sharedPreferencesRepository(
+  SharedPreferencesRepositoryRef ref,
+) {
+  return SharedPreferencesRepository(ref.watch(sharedPreferencesProvider));
+}
 
 class SharedPreferencesRepository {
   SharedPreferencesRepository(this._sharedPreferences);

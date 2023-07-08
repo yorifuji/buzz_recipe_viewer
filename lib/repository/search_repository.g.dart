@@ -2,13 +2,13 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'search_repository_impl.dart';
+part of 'search_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchRepositoryHash() => r'dce413b49a4764c078627c2e8fb043b5b44865f8';
+String _$searchRepositoryHash() => r'8af75049dc278e6405e935f009af698a3f6214aa';
 
 /// See also [searchRepository].
 @ProviderFor(searchRepository)

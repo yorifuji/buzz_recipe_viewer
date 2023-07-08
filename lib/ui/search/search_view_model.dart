@@ -5,7 +5,6 @@ import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
-import 'package:buzz_recipe_viewer/repository/search_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

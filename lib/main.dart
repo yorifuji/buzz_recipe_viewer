@@ -1,8 +1,8 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
-import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -14,20 +14,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // const flavor = String.fromEnvironment('FLAVOR');
-  // print(flavor); // dev
+
+  // dotenv
   await dotenv.load();
+  // Isar
   final dir = await getApplicationDocumentsDirectory();
   final isar =
       await Isar.open([HistorySchema, FavoriteSchema], directory: dir.path);
-  final database = DatabaseRepository(isar);
+  // PackageInfo
   final packageInfo = await PackageInfo.fromPlatform();
+  // SharedPreferences
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(
     ProviderScope(
       overrides: [
-        databaseRepositoryProvider.overrideWithValue(database),
+        isarProvider.overrideWithValue(isar),
         packageInfoProvider.overrideWithValue(packageInfo),
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],
