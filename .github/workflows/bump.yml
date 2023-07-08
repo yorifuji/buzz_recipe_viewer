@@ -8,6 +8,7 @@ on:
       bump:
         type: choice
         description: Bump Target
+        default: "build"
         options:
           - build
           - patch
