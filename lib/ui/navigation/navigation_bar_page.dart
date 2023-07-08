@@ -26,39 +26,36 @@ enum AppTab {
 class NavigationBarPage extends ConsumerWidget {
   const NavigationBarPage({super.key});
 
+  static final searchPageNavigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final currentTab = ref.watch(currentAppTab);
-    final searchPageNavigatorKey = GlobalKey<NavigatorState>();
     return WillPopScope(
       // 検索画面でスタックが存在する場合は検索画面に戻るが他の画面ではアプリを終了する（バックグラウンドに移動する）
       onWillPop: () async =>
           !(await searchPageNavigatorKey.currentState?.maybePop() ?? true),
       child: Scaffold(
-        // body: IndexedStack(
-        //   index: currentTab.index,
-        //   children: AppTab.values.map((tab) {
-        //     switch (tab) {
-        //       case AppTab.search:
-        //         return SearchPage.show();
-        //       case AppTab.favorites:
-        //         return const FavoritesPage();
-        //       case AppTab.histories:
-        //         return const HistoriesPage();
-        //     }
-        //   }).toList(),
-        // ),
-        body: switch (currentTab) {
-          AppTab.search => Navigator(
-              key: searchPageNavigatorKey,
-              onGenerateRoute: (_) =>
-                  MaterialPageRoute(builder: (_) => SearchPage.show()),
-            ),
-          AppTab.favorites => const FavoritesPage(),
-          AppTab.histories => const HistoriesPage(),
-          AppTab.settings => const SettingsPage(),
-        },
+        body: IndexedStack(
+          index: currentTab.index,
+          children: AppTab.values.map((tab) {
+            switch (tab) {
+              case AppTab.search:
+                return Navigator(
+                  key: searchPageNavigatorKey,
+                  onGenerateRoute: (_) =>
+                      MaterialPageRoute(builder: (_) => SearchPage.show()),
+                );
+              case AppTab.favorites:
+                return const FavoritesPage();
+              case AppTab.histories:
+                return const HistoriesPage();
+              case AppTab.settings:
+                return const SettingsPage();
+            }
+          }).toList(),
+        ),
         bottomNavigationBar: NavigationBar(
           destinations: AppTab.values
               .map(
@@ -70,8 +67,7 @@ class NavigationBarPage extends ConsumerWidget {
               .toList(),
           onDestinationSelected: (value) {
             if (AppTab.fromIndex(value) == AppTab.search &&
-                searchPageNavigatorKey.currentState != null &&
-                searchPageNavigatorKey.currentState!.canPop()) {
+                (searchPageNavigatorKey.currentState?.canPop() ?? false)) {
               searchPageNavigatorKey.currentState?.pop();
             }
             ref.read(currentAppTab.notifier).state = AppTab.fromIndex(value);
