@@ -15,16 +15,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // dotenv
-  await dotenv.load();
-  // Isar
-  final dir = await getApplicationDocumentsDirectory();
-  final isar =
-      await Isar.open([HistorySchema, FavoriteSchema], directory: dir.path);
-  // PackageInfo
-  final packageInfo = await PackageInfo.fromPlatform();
-  // SharedPreferences
-  final sharedPreferences = await SharedPreferences.getInstance();
+  final (_, isar, packageInfo, sharedPreferences) = await (
+    // dotenv
+    dotenv.load(),
+    // Isar
+    Isar.open(
+      [HistorySchema, FavoriteSchema],
+      directory: (await getApplicationDocumentsDirectory()).path,
+    ),
+    // PackageInfo
+    PackageInfo.fromPlatform(),
+    // SharedPreferences
+    SharedPreferences.getInstance()
+  ).wait;
 
   runApp(
     ProviderScope(
