@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Buzz Recipe Viewer',
+      title: 'レシピ検索',
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
