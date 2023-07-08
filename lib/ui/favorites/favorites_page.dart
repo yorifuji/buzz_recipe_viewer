@@ -33,7 +33,7 @@ class FavoritesPage extends HookConsumerWidget {
                       size: 32,
                     ),
                     Text(
-                      'Sorry\nNo Faves',
+                      'Love a video?\nLong-press to make it your fave!',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18),
                     ),
