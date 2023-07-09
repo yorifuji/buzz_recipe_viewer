@@ -10,7 +10,7 @@
 
 - Flutter
   - MVVM + Repository
-  - Dependencies
+  - dependencies
     - [Riverpod](https://riverpod.dev/)
     - [Isar Database](https://isar.dev/ja/)
     - [freezed | Dart Package](https://pub.dev/packages/freezed)
@@ -23,7 +23,7 @@
 - Data Source
   - [YouTube Data API](https://developers.google.com/youtube/v3)
 - CI/CD
-  - GitHub Actions
+  - [GitHub Actions](https://github.com/yorifuji/buzz_recipe_viewer/actions)
 
 # Related repository
 
