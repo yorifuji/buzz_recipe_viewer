@@ -1,6 +1,8 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchHitWidget extends StatelessWidget {
   const SearchHitWidget({
@@ -147,7 +149,23 @@ class __TextInformationWidgetState extends State<_TextInformationWidget>
                 const Divider(height: 1),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                  child: Text(widget.searchHit.description),
+                  child: CustomText(
+                    widget.searchHit.description,
+                    definitions: const [
+                      TextDefinition(matcher: UrlMatcher()),
+                      TextDefinition(matcher: EmailMatcher()),
+                    ],
+                    matchStyle: const TextStyle(
+                      color: Colors.lightBlue,
+                    ),
+                    onTap: (details) async {
+                      final url = Uri.parse(details.actionText);
+                      await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 8),
               ],

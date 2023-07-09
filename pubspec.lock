@@ -249,6 +249,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.0"
+  custom_text:
+    dependency: "direct main"
+    description:
+      name: custom_text
+      sha256: "51dd6a3c4c8d6f1fbd27fe65a1f25803218c750a085c47f9923eefab4dc236e9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   dart_style:
     dependency: transitive
     description:
@@ -949,6 +957,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  text_parser:
+    dependency: transitive
+    description:
+      name: text_parser
+      sha256: "3cd3c808c5fa60e7c2d65b062cc1327c273f28680e05e86d0aac8479dfecaf34"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   time:
     dependency: transitive
     description:
@@ -1143,4 +1159,4 @@ packages:
     version: "8.1.2"
 sdks:
   dart: ">=3.0.0 <4.0.0"
-  flutter: ">=3.3.0"
+  flutter: ">=3.7.0"
