@@ -50,11 +50,13 @@ class NavigationBarPage extends ConsumerWidget {
         body: IndexedStack(
           index: currentTab.index,
           children: AppTab.values
-              .map((tab) => Navigator(
-                    key: navigatorKeys[tab.index],
-                    onGenerateRoute: (_) =>
-                        MaterialPageRoute(builder: (_) => tab.pageGenerator()),
-                  ))
+              .map(
+                (tab) => Navigator(
+                  key: navigatorKeys[tab.index],
+                  onGenerateRoute: (_) =>
+                      MaterialPageRoute(builder: (_) => tab.pageGenerator()),
+                ),
+              )
               .toList(),
         ),
         bottomNavigationBar: isPortrait
