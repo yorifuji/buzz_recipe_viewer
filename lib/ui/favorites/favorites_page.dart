@@ -1,5 +1,7 @@
 import 'package:buzz_recipe_viewer/ui/favorites/favorites_page_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class FavoritesPage extends HookConsumerWidget {
   const FavoritesPage({super.key});
+
+  static Widget show() => const FavoritesPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,6 +23,9 @@ class FavoritesPage extends HookConsumerWidget {
         return null;
       },
       const [],
+    );
+    final useInternalPlayer = ref.watch(
+      settingsViewModelProvider.select((value) => value.useInternalPlayer),
     );
 
     return Scaffold(
@@ -49,15 +56,28 @@ class FavoritesPage extends HookConsumerWidget {
                           child: InkWell(
                             child: SearchHitWidget(searchHit: e.searchHit),
                             onTap: () async {
-                              final url = Uri.parse(e.searchHit.url);
-                              if (await launchUrl(
-                                url,
-                                mode: LaunchMode.externalApplication,
-                              )) {
+                              if (useInternalPlayer) {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) {
+                                      return VideoPlayerPage(
+                                        searchHit: e.searchHit,
+                                      );
+                                    },
+                                  ),
+                                );
                               } else {
-                                // FIXME:
-                                // ignore: only_throw_errors
-                                throw 'Could not launch $url';
+                                final url = Uri.parse(e.searchHit.url);
+                                if (await launchUrl(
+                                  url,
+                                  mode: LaunchMode.externalApplication,
+                                )) {
+                                } else {
+                                  // FIXME:
+                                  // ignore: only_throw_errors
+                                  throw 'Could not launch $url';
+                                }
                               }
                             },
                           ),

@@ -7,6 +7,8 @@ import 'package:settings_ui/settings_ui.dart';
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
+  static Widget show() => const SettingsPage();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final packageInfo = ref.watch(packageInfoProvider);
