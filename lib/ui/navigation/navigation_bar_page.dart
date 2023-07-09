@@ -32,6 +32,8 @@ class NavigationBarPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final currentTab = ref.watch(currentAppTab);
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
       // 検索画面でスタックが存在する場合は検索画面に戻るが他の画面ではアプリを終了する（バックグラウンドに移動する）
       onWillPop: () async =>
@@ -56,25 +58,29 @@ class NavigationBarPage extends ConsumerWidget {
             }
           }).toList(),
         ),
-        bottomNavigationBar: NavigationBar(
-          destinations: AppTab.values
-              .map(
-                (tab) => NavigationDestination(
-                  icon: tab.icon,
-                  label: tab.title,
-                ),
+        bottomNavigationBar: isPortrait
+            ? NavigationBar(
+                destinations: AppTab.values
+                    .map(
+                      (tab) => NavigationDestination(
+                        icon: tab.icon,
+                        label: tab.title,
+                      ),
+                    )
+                    .toList(),
+                onDestinationSelected: (value) {
+                  if (AppTab.fromIndex(value) == AppTab.search &&
+                      (searchPageNavigatorKey.currentState?.canPop() ??
+                          false)) {
+                    searchPageNavigatorKey.currentState?.pop();
+                  }
+                  ref.read(currentAppTab.notifier).state =
+                      AppTab.fromIndex(value);
+                },
+                selectedIndex: currentTab.index,
+                indicatorColor: theme.colorScheme.primaryContainer,
               )
-              .toList(),
-          onDestinationSelected: (value) {
-            if (AppTab.fromIndex(value) == AppTab.search &&
-                (searchPageNavigatorKey.currentState?.canPop() ?? false)) {
-              searchPageNavigatorKey.currentState?.pop();
-            }
-            ref.read(currentAppTab.notifier).state = AppTab.fromIndex(value);
-          },
-          selectedIndex: currentTab.index,
-          indicatorColor: theme.colorScheme.primaryContainer,
-        ),
+            : null,
       ),
     );
   }

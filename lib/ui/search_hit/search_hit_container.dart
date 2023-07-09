@@ -1,8 +1,6 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:custom_text/custom_text.dart';
+import 'package:buzz_recipe_viewer/ui/search_hit/video_information_container.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SearchHitWidget extends StatelessWidget {
   const SearchHitWidget({
@@ -26,156 +24,10 @@ class SearchHitWidget extends StatelessWidget {
             const SizedBox(height: 8),
           ],
         ),
-        _TextInformationWidget(
+        VideoInformationContainer(
           searchHit: searchHit,
         ),
       ],
     );
-  }
-}
-
-class _TextInformationWidget extends StatefulWidget {
-  const _TextInformationWidget({required this.searchHit});
-
-  final SearchHit searchHit;
-
-  @override
-  State<_TextInformationWidget> createState() => __TextInformationWidgetState();
-}
-
-class __TextInformationWidgetState extends State<_TextInformationWidget>
-    with AutomaticKeepAliveClientMixin {
-  bool _isExpanded = false;
-
-  @override
-  bool get wantKeepAlive => true;
-
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-
-    return Column(
-      children: [
-        InkWell(
-          onTap: _toggle,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                child: Column(
-                  children: [
-                    Text(
-                      widget.searchHit.title,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: Icon(
-                              Icons.thumb_up,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          '''${NumberFormat("#,###").format(widget.searchHit.likes)} likes''',
-                        ),
-                        const SizedBox(width: 6),
-                        const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: Icon(
-                              Icons.trending_up,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          '''${NumberFormat("#,###").format(widget.searchHit.views)} views''',
-                        ),
-                        const SizedBox(width: 6),
-                        const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: Icon(
-                              Icons.calendar_month,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          DateFormat('yyyy-MM-dd').format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                              widget.searchHit.timestamp * 1000,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: Icon(
-                              _isExpanded
-                                  ? Icons.expand_less
-                                  : Icons.expand_more,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        if (_isExpanded)
-          InkWell(
-            onTap: _toggle,
-            child: Column(
-              children: [
-                const Divider(height: 1),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                  child: CustomText(
-                    widget.searchHit.description,
-                    definitions: const [
-                      TextDefinition(matcher: UrlMatcher()),
-                      TextDefinition(matcher: EmailMatcher()),
-                    ],
-                    matchStyle: const TextStyle(
-                      color: Colors.lightBlue,
-                    ),
-                    onTap: (details) async {
-                      final url = Uri.parse(details.actionText);
-                      await launchUrl(
-                        url,
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
-          ),
-      ],
-    );
-  }
-
-  void _toggle() {
-    setState(() => _isExpanded = !_isExpanded);
   }
 }
