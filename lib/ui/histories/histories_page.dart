@@ -80,6 +80,19 @@ class HistoriesPage extends HookConsumerWidget {
                                 }
                               }
                             },
+                            onLongPress: () async {
+                              await viewModel.addFavorite(e.searchHit);
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'お気に入りに追加しました',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  duration: Duration(seconds: 1),
+                                ),
+                              );
+                            },
                           ),
                           onDismissed: (direction) {
                             viewModel.deleteFavorite(e);

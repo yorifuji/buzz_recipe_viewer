@@ -1,4 +1,6 @@
+import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -32,6 +34,10 @@ class HistoriesViewModel extends _$HistoriesViewModel {
   Future<void> initialLoad() async {
     final histories = await _databaseRepository.getHistorys();
     state = state.copyWith(histories: histories);
+  }
+
+  Future<void> addFavorite(SearchHit searchHit) async {
+    await _databaseRepository.insertFavorite(Favorite.from(searchHit));
   }
 
   // delete history from database
