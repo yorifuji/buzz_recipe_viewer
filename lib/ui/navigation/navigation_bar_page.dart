@@ -9,16 +9,15 @@ final currentAppTab = StateProvider((ref) => AppTab.search);
 
 enum AppTab {
   search('Search', Icon(Icons.search), SearchPage.show),
-  favorites('Favorite', Icon(Icons.favorite), FavoritesPage.show),
-  histories('History', Icon(Icons.history), HistoriesPage.show),
-  settings('Settings', Icon(Icons.settings), SettingsPage.show);
+  favorite('Favorite', Icon(Icons.favorite), FavoritesPage.show),
+  history('History', Icon(Icons.history), HistoriesPage.show),
+  setting('Settings', Icon(Icons.settings), SettingsPage.show);
 
   const AppTab(this.title, this.icon, this.pageGenerator);
   final String title;
   final Icon icon;
   final Widget Function() pageGenerator;
 
-  // indexからAppTabを取得する
   static AppTab fromIndex(int index) {
     return AppTab.values[index];
   }
