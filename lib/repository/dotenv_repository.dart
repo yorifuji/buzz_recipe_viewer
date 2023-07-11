@@ -3,6 +3,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dotenv_repository.g.dart';
 
+enum EnvKey {
+  algoliaApplicationId('ALGOLIA_APPLICATION_ID'),
+  algoliaSearchOnlyApiKey('ALGOLIA_SEARCH_ONLY_API_KEY'),
+  ;
+
+  const EnvKey(this.value);
+  final String value;
+}
+
 @riverpod
 DotEnvRepository dotEnvRepository(
   DotEnvRepositoryRef ref,
@@ -10,7 +19,8 @@ DotEnvRepository dotEnvRepository(
     DotEnvRepository();
 
 class DotEnvRepository {
-  String get algoliaApplicationId => dotenv.env['ALGOLIA_APPLICATION_ID'] ?? '';
+  String get algoliaApplicationId =>
+      dotenv.env[EnvKey.algoliaApplicationId.value] ?? '';
   String get algoliaSearchOnlyApiKey =>
-      dotenv.env['ALGOLIA_SEARCH_ONLY_API_KEY'] ?? '';
+      dotenv.env[EnvKey.algoliaSearchOnlyApiKey.value] ?? '';
 }
