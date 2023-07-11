@@ -8,18 +8,10 @@ enum Flavor {
   prod,
   ;
 
-  static Flavor fromString(String flavor) {
-    switch (flavor) {
-      case 'dev':
-        return Flavor.dev;
-      case 'stg':
-        return Flavor.stg;
-      case 'prod':
-        return Flavor.prod;
-      default:
-        throw ArgumentError('Unknown flavor: $flavor');
-    }
-  }
+  static Flavor fromString(String value) => values.firstWhere(
+        (e) => e.name == value,
+        orElse: () => throw ArgumentError('Invalid flavor: $value'),
+      );
 }
 
 @riverpod
