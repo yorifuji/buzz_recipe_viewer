@@ -1,5 +1,5 @@
-import 'package:buzz_recipe_viewer/ui/favorites/favorites_page.dart';
-import 'package:buzz_recipe_viewer/ui/histories/histories_page.dart';
+import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
+import 'package:buzz_recipe_viewer/ui/history/history_page.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +23,14 @@ enum AppTab {
 
   Widget Function() get show => switch (this) {
         AppTab.search => SearchPage.show,
-        AppTab.favorite => FavoritesPage.show,
-        AppTab.history => HistoriesPage.show,
+        AppTab.favorite => FavoritePage.show,
+        AppTab.history => HistoryPage.show,
         AppTab.setting => SettingsPage.show,
       };
 }
 
-class NavigationBarPage extends ConsumerWidget {
-  const NavigationBarPage({super.key});
+class NavigationPage extends ConsumerWidget {
+  const NavigationPage({super.key});
 
   static final List<GlobalKey<NavigatorState>> navigatorKeys = [
     GlobalKey<NavigatorState>(),

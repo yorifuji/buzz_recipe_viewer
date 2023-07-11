@@ -1,5 +1,5 @@
-import 'package:buzz_recipe_viewer/ui/favorites/favorites_page_view_model.dart';
-import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/favorite/favorite_page_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +7,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FavoritesPage extends HookConsumerWidget {
-  const FavoritesPage({super.key});
+class FavoritePage extends HookConsumerWidget {
+  const FavoritePage({super.key});
 
-  static Widget show() => const FavoritesPage();
+  static Widget show() => const FavoritePage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(favoritesViewModelProvider.notifier);
-    final favorites = ref
-        .watch(favoritesViewModelProvider.select((value) => value.favorites));
+    final viewModel = ref.watch(favoriteViewModelProvider.notifier);
+    final favorites =
+        ref.watch(favoriteViewModelProvider.select((value) => value.favorites));
     useEffect(
       () {
         Future.microtask(viewModel.initialLoad);

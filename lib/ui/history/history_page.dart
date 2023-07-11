@@ -1,5 +1,5 @@
-import 'package:buzz_recipe_viewer/ui/histories/histories_page_view_model.dart';
-import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/history/history_page_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +7,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HistoriesPage extends HookConsumerWidget {
-  const HistoriesPage({super.key});
+class HistoryPage extends HookConsumerWidget {
+  const HistoryPage({super.key});
 
-  static Widget show() => const HistoriesPage();
+  static Widget show() => const HistoryPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(historiesViewModelProvider.notifier);
-    final histories = ref
-        .watch(historiesViewModelProvider.select((value) => value.histories));
+    final viewModel = ref.watch(historyViewModelProvider.notifier);
+    final histories =
+        ref.watch(historyViewModelProvider.select((value) => value.histories));
     useEffect(
       () {
         Future.microtask(viewModel.initialLoad);

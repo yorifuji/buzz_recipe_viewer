@@ -3,21 +3,21 @@ import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'favorites_page_view_model.freezed.dart';
-part 'favorites_page_view_model.g.dart';
+part 'favorite_page_view_model.freezed.dart';
+part 'favorite_page_view_model.g.dart';
 
 @freezed
-class FavoritesState with _$FavoritesState {
-  const factory FavoritesState({
+class FavoriteState with _$FavoriteState {
+  const factory FavoriteState({
     @Default(<Favorite>[]) List<Favorite> favorites,
-  }) = _FavoritesState;
+  }) = _FavoriteState;
 }
 
 @riverpod
-class FavoritesViewModel extends _$FavoritesViewModel {
+class FavoriteViewModel extends _$FavoriteViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
-  FavoritesState build() {
+  FavoriteState build() {
     _databaseRepository = ref.read(databaseRepositoryProvider);
     _databaseRepository.watchFavorites(
       onChange: (_) async {
@@ -25,7 +25,7 @@ class FavoritesViewModel extends _$FavoritesViewModel {
         state = state.copyWith(favorites: favorites);
       },
     );
-    return const FavoritesState();
+    return const FavoriteState();
   }
 
   Future<void> initialLoad() async {

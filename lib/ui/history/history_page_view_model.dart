@@ -5,21 +5,21 @@ import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'histories_page_view_model.freezed.dart';
-part 'histories_page_view_model.g.dart';
+part 'history_page_view_model.freezed.dart';
+part 'history_page_view_model.g.dart';
 
 @freezed
-class HistoriesState with _$HistoriesState {
-  const factory HistoriesState({
+class HistoryState with _$HistoryState {
+  const factory HistoryState({
     @Default(<History>[]) List<History> histories,
-  }) = _HistoriesState;
+  }) = _HistoryState;
 }
 
 @riverpod
-class HistoriesViewModel extends _$HistoriesViewModel {
+class HistoryViewModel extends _$HistoryViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
-  HistoriesState build() {
+  HistoryState build() {
     _databaseRepository = ref.read(databaseRepositoryProvider);
     _databaseRepository.watchHistorys(
       onChange: (_) async {
@@ -28,7 +28,7 @@ class HistoriesViewModel extends _$HistoriesViewModel {
       },
     );
 
-    return const HistoriesState();
+    return const HistoryState();
   }
 
   Future<void> initialLoad() async {
