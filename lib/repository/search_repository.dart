@@ -13,6 +13,15 @@ SearchRepository searchRepository(SearchRepositoryRef ref) {
 }
 
 class SearchRepository {
+  SearchRepository() {
+    dotenv.load();
+    _algoliaClient = Algolia.init(
+      applicationId: dotenv.env['ALGOLIA_APPLICATION_ID']!,
+      apiKey: dotenv.env['ALGOLIA_SEARCH_ONLY_API_KEY']!,
+    ).instance;
+  }
+  late final Algolia _algoliaClient;
+
   Future<Result<SearchResult>> search(
     String query,
     String indexName,
@@ -20,11 +29,7 @@ class SearchRepository {
   ) async {
     return Result.guardFuture(() async {
       try {
-        final algoliaClient = Algolia.init(
-          applicationId: dotenv.env['ALGOLIA_APPLICATION_ID']!,
-          apiKey: dotenv.env['ALGOLIA_SEARCH_ONLY_API_KEY']!,
-        );
-        final algoliaQuery = algoliaClient.instance
+        final algoliaQuery = _algoliaClient
             .index(indexName)
             .setHitsPerPage(100)
             .setPage(page)
