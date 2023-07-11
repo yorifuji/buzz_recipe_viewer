@@ -20,7 +20,7 @@ class HistoryViewModel extends _$HistoryViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
   HistoryState build() {
-    _databaseRepository = ref.read(databaseRepositoryProvider);
+    _databaseRepository = ref.watch(databaseRepositoryProvider);
     _databaseRepository.watchHistorys(
       onChange: (_) async {
         final histories = await _databaseRepository.getHistorys();

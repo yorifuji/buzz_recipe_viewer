@@ -18,7 +18,7 @@ class SettingsViewModel extends _$SettingsViewModel {
   @override
   SettingsState build() {
     _sharedPreferencesRepository =
-        ref.read(sharedPreferencesRepositoryProvider);
+        ref.watch(sharedPreferencesRepositoryProvider);
     return SettingsState(
       useInternalPlayer: _sharedPreferencesRepository.getUseInternalPlayer(),
     );

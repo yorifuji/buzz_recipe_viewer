@@ -18,7 +18,7 @@ class FavoriteViewModel extends _$FavoriteViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
   FavoriteState build() {
-    _databaseRepository = ref.read(databaseRepositoryProvider);
+    _databaseRepository = ref.watch(databaseRepositoryProvider);
     _databaseRepository.watchFavorites(
       onChange: (_) async {
         final favorites = await _databaseRepository.getFavorites();

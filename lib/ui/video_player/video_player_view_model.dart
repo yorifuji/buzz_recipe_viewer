@@ -10,7 +10,7 @@ class VideoPlayerViewModel extends _$VideoPlayerViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
   void build() {
-    _databaseRepository = ref.read(databaseRepositoryProvider);
+    _databaseRepository = ref.watch(databaseRepositoryProvider);
   }
 
   Future<void> addFavorite(SearchHit searchHit) async {

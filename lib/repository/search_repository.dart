@@ -9,7 +9,7 @@ part 'search_repository.g.dart';
 
 @riverpod
 SearchRepository searchRepository(SearchRepositoryRef ref) =>
-    SearchRepository(ref.read(dotEnvRepositoryProvider));
+    SearchRepository(ref.watch(dotEnvRepositoryProvider));
 
 class SearchRepository {
   SearchRepository(this._dotEnvRepository);

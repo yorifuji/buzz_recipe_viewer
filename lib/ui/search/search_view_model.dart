@@ -32,13 +32,13 @@ class SearchViewModel extends _$SearchViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
   SearchState build() {
-    final flavor = ref.read(flavorProvider);
-    _searchRepository = ref.read(
+    final flavor = ref.watch(flavorProvider);
+    _searchRepository = ref.watch(
       flavor == Flavor.dev
           ? searchRepositoryMockProvider
           : searchRepositoryProvider,
     );
-    _databaseRepository = ref.read(databaseRepositoryProvider);
+    _databaseRepository = ref.watch(databaseRepositoryProvider);
     return const SearchState();
   }
 
