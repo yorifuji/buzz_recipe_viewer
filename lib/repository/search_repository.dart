@@ -2,25 +2,24 @@ import 'package:algolia/algolia.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/search_result.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:buzz_recipe_viewer/repository/dotenv_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_repository.g.dart';
 
 @riverpod
-SearchRepository searchRepository(SearchRepositoryRef ref) {
-  return SearchRepository();
-}
+SearchRepository searchRepository(SearchRepositoryRef ref) =>
+    SearchRepository(ref.read(dotEnvRepositoryProvider));
 
 class SearchRepository {
-  SearchRepository() {
-    dotenv.load();
-    _algoliaClient = Algolia.init(
-      applicationId: dotenv.env['ALGOLIA_APPLICATION_ID']!,
-      apiKey: dotenv.env['ALGOLIA_SEARCH_ONLY_API_KEY']!,
-    ).instance;
-  }
-  late final Algolia _algoliaClient;
+  SearchRepository(this._dotEnvRepository);
+
+  late final Algolia _algoliaClient = Algolia.init(
+    applicationId: _dotEnvRepository.algoliaApplicationId,
+    apiKey: _dotEnvRepository.algoliaSearchOnlyApiKey,
+  ).instance;
+
+  final DotEnvRepository _dotEnvRepository;
 
   Future<Result<SearchResult>> search(
     String query,

@@ -2,27 +2,25 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'search_repository_mock.dart';
+part of 'dotenv_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchRepositoryMockHash() =>
-    r'0682117e7b9f0b172b02027f74eb3941e172e41b';
+String _$dotEnvRepositoryHash() => r'0d8d1e273d49e602ce2159b94f287bdc0f82591e';
 
-/// See also [searchRepositoryMock].
-@ProviderFor(searchRepositoryMock)
-final searchRepositoryMockProvider =
-    AutoDisposeProvider<SearchRepositoryMock>.internal(
-  searchRepositoryMock,
-  name: r'searchRepositoryMockProvider',
+/// See also [dotEnvRepository].
+@ProviderFor(dotEnvRepository)
+final dotEnvRepositoryProvider = AutoDisposeProvider<DotEnvRepository>.internal(
+  dotEnvRepository,
+  name: r'dotEnvRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$searchRepositoryMockHash,
+      : _$dotEnvRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef SearchRepositoryMockRef = AutoDisposeProviderRef<SearchRepositoryMock>;
+typedef DotEnvRepositoryRef = AutoDisposeProviderRef<DotEnvRepository>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

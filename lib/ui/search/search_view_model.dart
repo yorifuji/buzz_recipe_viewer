@@ -3,6 +3,7 @@ import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
+import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_mock.dart';
@@ -31,8 +32,11 @@ class SearchViewModel extends _$SearchViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
   SearchState build() {
+    final flavor = ref.read(flavorProvider);
     _searchRepository = ref.read(
-      kDebugMode ? mockSearchRepositoryProvider : searchRepositoryProvider,
+      flavor == Flavor.dev
+          ? searchRepositoryMockProvider
+          : searchRepositoryProvider,
     );
     _databaseRepository = ref.read(databaseRepositoryProvider);
     return const SearchState();

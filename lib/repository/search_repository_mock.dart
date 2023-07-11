@@ -7,10 +7,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'search_repository_mock.g.dart';
 
 @riverpod
-MockSearchRepository mockSearchRepository(MockSearchRepositoryRef ref) =>
-    MockSearchRepository();
+SearchRepositoryMock searchRepositoryMock(SearchRepositoryMockRef ref) =>
+    SearchRepositoryMock();
 
-class MockSearchRepository implements SearchRepository {
+class SearchRepositoryMock implements SearchRepository {
   @override
   Future<Result<SearchResult>> search(
     String query,
