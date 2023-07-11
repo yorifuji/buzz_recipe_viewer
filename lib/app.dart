@@ -11,12 +11,12 @@ class App extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
-        colorSchemeSeed: Colors.indigo,
+        colorSchemeSeed: Colors.orange,
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorSchemeSeed: Colors.indigo,
+        colorSchemeSeed: Colors.orange,
       ),
       home: const NavigationPage(),
     );
