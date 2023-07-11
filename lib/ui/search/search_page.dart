@@ -1,7 +1,5 @@
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
-import 'package:buzz_recipe_viewer/repository/search_repository.dart';
-import 'package:buzz_recipe_viewer/repository/search_repository_mock.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/search_hit/search_hit_container.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
@@ -15,12 +13,6 @@ class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   static Widget show() => const SearchPage();
-  static Widget showWithMock() => ProviderScope(
-        overrides: [
-          searchRepositoryProvider.overrideWithValue(MockSearchRepository())
-        ],
-        child: const SearchPage(),
-      );
 
   @override
   Widget build(BuildContext context) {

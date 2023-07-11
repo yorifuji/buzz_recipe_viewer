@@ -158,7 +158,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchState implements _SearchState {
+class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
   const _$_SearchState(
       {this.query = '',
       final List<SearchHitItem> hitList = const <SearchHitItem>[],
@@ -194,8 +194,21 @@ class _$_SearchState implements _SearchState {
   final LoadingState moreLoadingState;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SearchState(query: $query, hitList: $hitList, sortType: $sortType, nextPage: $nextPage, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SearchState'))
+      ..add(DiagnosticsProperty('query', query))
+      ..add(DiagnosticsProperty('hitList', hitList))
+      ..add(DiagnosticsProperty('sortType', sortType))
+      ..add(DiagnosticsProperty('nextPage', nextPage))
+      ..add(DiagnosticsProperty('loadingState', loadingState))
+      ..add(DiagnosticsProperty('moreLoadingState', moreLoadingState));
   }
 
   @override

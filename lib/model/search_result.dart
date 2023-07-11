@@ -9,7 +9,4 @@ class SearchResult with _$SearchResult {
     @Default(<SearchHit>[]) List<SearchHit> searchHits,
     @Default(0) int nextPage,
   }) = _SearchResult;
-
-  factory SearchResult.createDummy() =>
-      SearchResult(searchHits: [SearchHit.createDummy()]);
 }

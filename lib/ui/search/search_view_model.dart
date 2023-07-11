@@ -5,6 +5,8 @@ import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
+import 'package:buzz_recipe_viewer/repository/search_repository_mock.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -29,7 +31,9 @@ class SearchViewModel extends _$SearchViewModel {
   late final DatabaseRepository _databaseRepository;
   @override
   SearchState build() {
-    _searchRepository = ref.read(searchRepositoryProvider);
+    _searchRepository = ref.read(
+      kDebugMode ? mockSearchRepositoryProvider : searchRepositoryProvider,
+    );
     _databaseRepository = ref.read(databaseRepositoryProvider);
     return const SearchState();
   }

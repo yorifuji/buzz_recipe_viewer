@@ -126,22 +126,25 @@ class __TextInformationWidgetState extends State<VideoInformationContainer>
                 const Divider(height: 1),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                  child: CustomText(
-                    widget.searchHit.description,
-                    definitions: const [
-                      TextDefinition(matcher: UrlMatcher()),
-                      TextDefinition(matcher: EmailMatcher()),
-                    ],
-                    matchStyle: const TextStyle(
-                      color: Colors.lightBlue,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: CustomText(
+                      widget.searchHit.description,
+                      definitions: const [
+                        TextDefinition(matcher: UrlMatcher()),
+                        TextDefinition(matcher: EmailMatcher()),
+                      ],
+                      matchStyle: const TextStyle(
+                        color: Colors.lightBlue,
+                      ),
+                      onTap: (details) async {
+                        final url = Uri.parse(details.actionText);
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      },
                     ),
-                    onTap: (details) async {
-                      final url = Uri.parse(details.actionText);
-                      await launchUrl(
-                        url,
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
                   ),
                 ),
                 const SizedBox(height: 8),

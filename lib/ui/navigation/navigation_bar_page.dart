@@ -8,19 +8,25 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentAppTab = StateProvider((ref) => AppTab.search);
 
 enum AppTab {
-  search('Search', Icon(Icons.search), SearchPage.show),
-  favorite('Favorite', Icon(Icons.favorite), FavoritesPage.show),
-  history('History', Icon(Icons.history), HistoriesPage.show),
-  setting('Settings', Icon(Icons.settings), SettingsPage.show);
+  search('Search', Icon(Icons.search)),
+  favorite('Favorite', Icon(Icons.favorite)),
+  history('History', Icon(Icons.history)),
+  setting('Settings', Icon(Icons.settings));
 
-  const AppTab(this.title, this.icon, this.pageGenerator);
+  const AppTab(this.title, this.icon);
   final String title;
   final Icon icon;
-  final Widget Function() pageGenerator;
 
   static AppTab fromIndex(int index) {
     return AppTab.values[index];
   }
+
+  Widget Function() get show => switch (this) {
+        AppTab.search => SearchPage.show,
+        AppTab.favorite => FavoritesPage.show,
+        AppTab.history => HistoriesPage.show,
+        AppTab.setting => SettingsPage.show,
+      };
 }
 
 class NavigationBarPage extends ConsumerWidget {
@@ -52,8 +58,9 @@ class NavigationBarPage extends ConsumerWidget {
               .map(
                 (tab) => Navigator(
                   key: navigatorKeys[tab.index],
-                  onGenerateRoute: (_) =>
-                      MaterialPageRoute(builder: (_) => tab.pageGenerator()),
+                  onGenerateRoute: (_) => MaterialPageRoute(
+                    builder: (_) => tab.show(),
+                  ),
                 ),
               )
               .toList(),
