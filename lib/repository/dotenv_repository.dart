@@ -13,9 +13,7 @@ enum EnvKey {
 }
 
 @riverpod
-DotEnvRepository dotEnvRepository(
-  DotEnvRepositoryRef ref,
-) =>
+DotEnvRepository dotEnvRepository(DotEnvRepositoryRef ref) =>
     DotEnvRepository();
 
 class DotEnvRepository {
