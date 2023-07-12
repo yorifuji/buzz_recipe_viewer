@@ -19,8 +19,5 @@ DotEnvRepository dotEnvRepository(
     DotEnvRepository();
 
 class DotEnvRepository {
-  String get algoliaApplicationId =>
-      dotenv.env[EnvKey.algoliaApplicationId.value] ?? '';
-  String get algoliaSearchOnlyApiKey =>
-      dotenv.env[EnvKey.algoliaSearchOnlyApiKey.value] ?? '';
+  String call(EnvKey key) => dotenv.env[key.value] ?? '';
 }

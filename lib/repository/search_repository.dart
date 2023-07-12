@@ -15,8 +15,8 @@ class SearchRepository {
   SearchRepository(this._dotEnvRepository);
 
   late final Algolia _algoliaClient = Algolia.init(
-    applicationId: _dotEnvRepository.algoliaApplicationId,
-    apiKey: _dotEnvRepository.algoliaSearchOnlyApiKey,
+    applicationId: _dotEnvRepository(EnvKey.algoliaApplicationId),
+    apiKey: _dotEnvRepository(EnvKey.algoliaSearchOnlyApiKey),
   ).instance;
 
   final DotEnvRepository _dotEnvRepository;
