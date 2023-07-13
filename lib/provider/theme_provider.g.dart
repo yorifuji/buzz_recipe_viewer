@@ -2,26 +2,24 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'settings_view_model.dart';
+part of 'theme_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsViewModelHash() => r'8d3eaff7dcbf32f81e95215b6d07db76c3b1b1f2';
+String _$themeHash() => r'029a1d997fe6e1d3f20adbfa1a4b9d01a699fe0e';
 
-/// See also [SettingsViewModel].
-@ProviderFor(SettingsViewModel)
-final settingsViewModelProvider =
-    AutoDisposeNotifierProvider<SettingsViewModel, SettingsState>.internal(
-  SettingsViewModel.new,
-  name: r'settingsViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$settingsViewModelHash,
+/// See also [Theme].
+@ProviderFor(Theme)
+final themeProvider = AutoDisposeNotifierProvider<Theme, ThemeMode>.internal(
+  Theme.new,
+  name: r'themeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$themeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SettingsViewModel = AutoDisposeNotifier<SettingsState>;
+typedef _$Theme = AutoDisposeNotifier<ThemeMode>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

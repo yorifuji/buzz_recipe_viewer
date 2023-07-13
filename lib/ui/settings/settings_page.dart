@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -22,6 +23,24 @@ class SettingsPage extends ConsumerWidget {
       ),
       body: SettingsList(
         sections: [
+          SettingsSection(
+            title: const Text('全般'),
+            tiles: <SettingsTile>[
+              SettingsTile.navigation(
+                title: const Text('テーマ'),
+                onPressed: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) {
+                        return const ThemeSettingPage();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
           SettingsSection(
             title: const Text('動画'),
             tiles: <SettingsTile>[
