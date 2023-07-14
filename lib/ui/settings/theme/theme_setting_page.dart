@@ -1,6 +1,5 @@
-import 'package:buzz_recipe_viewer/provider/theme_provider.dart';
+import 'package:buzz_recipe_viewer/provider/theme_selector_provider.dart';
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
-import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -12,8 +11,8 @@ class ThemeSettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(themeProvider.notifier);
-    final theme = ref.watch(themeProvider);
+    final viewModel = ref.watch(themeSelectorProvider.notifier);
+    final theme = ref.watch(themeSelectorProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Theme'),
@@ -28,8 +27,7 @@ class ThemeSettingPage extends ConsumerWidget {
                     title: Text(e.title),
                     trailing:
                         theme == e.themeMode ? const Icon(Icons.check) : null,
-                    onPressed: (context) =>
-                        viewModel.changeAndSave(e.themeMode),
+                    onPressed: (context) => viewModel.change(e.themeMode),
                   ),
                 )
                 .toList(),

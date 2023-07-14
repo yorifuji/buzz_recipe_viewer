@@ -2,11 +2,11 @@ import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'theme_provider.g.dart';
+part 'theme_selector_provider.g.dart';
 
 @riverpod
-class Theme extends _$Theme {
-  static const seedColor = Colors.orange;
+class ThemeSelector extends _$ThemeSelector {
+  static const _seedColor = Colors.orange;
 
   late final SharedPreferencesRepository _sharedPreferencesRepository;
 
@@ -17,7 +17,7 @@ class Theme extends _$Theme {
     return _sharedPreferencesRepository.getThemeMode();
   }
 
-  Future<void> changeAndSave(ThemeMode theme) async {
+  Future<void> change(ThemeMode theme) async {
     await _sharedPreferencesRepository.setThemeMode(theme);
     state = theme;
   }
@@ -26,7 +26,7 @@ class Theme extends _$Theme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorSchemeSeed: seedColor,
+      colorSchemeSeed: _seedColor,
     );
   }
 
@@ -34,7 +34,7 @@ class Theme extends _$Theme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorSchemeSeed: seedColor,
+      colorSchemeSeed: _seedColor,
     );
   }
 }
