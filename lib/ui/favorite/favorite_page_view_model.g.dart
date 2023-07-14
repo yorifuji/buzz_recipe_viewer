@@ -8,12 +8,12 @@ part of 'favorite_page_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favoriteViewModelHash() => r'b29d6d59466af78f7b25d2c2dad85890f9d1a817';
+String _$favoriteViewModelHash() => r'c8f3f9e9b0d9c6854970595016dae31e437b2efc';
 
 /// See also [FavoriteViewModel].
 @ProviderFor(FavoriteViewModel)
 final favoriteViewModelProvider =
-    AutoDisposeNotifierProvider<FavoriteViewModel, FavoriteState>.internal(
+    AutoDisposeNotifierProvider<FavoriteViewModel, List<Favorite>>.internal(
   FavoriteViewModel.new,
   name: r'favoriteViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,5 +23,5 @@ final favoriteViewModelProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$FavoriteViewModel = AutoDisposeNotifier<FavoriteState>;
+typedef _$FavoriteViewModel = AutoDisposeNotifier<List<Favorite>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

@@ -8,12 +8,12 @@ part of 'history_page_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$historyViewModelHash() => r'2b76428b4cde682bac9ee3308212be13255336a5';
+String _$historyViewModelHash() => r'47344e39764564b6e974847946c3f27598b1c643';
 
 /// See also [HistoryViewModel].
 @ProviderFor(HistoryViewModel)
 final historyViewModelProvider =
-    AutoDisposeNotifierProvider<HistoryViewModel, HistoryState>.internal(
+    AutoDisposeNotifierProvider<HistoryViewModel, List<History>>.internal(
   HistoryViewModel.new,
   name: r'historyViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,5 +23,5 @@ final historyViewModelProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$HistoryViewModel = AutoDisposeNotifier<HistoryState>;
+typedef _$HistoryViewModel = AutoDisposeNotifier<List<History>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

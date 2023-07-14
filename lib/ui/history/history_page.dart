@@ -15,17 +15,17 @@ class HistoryPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(historyViewModelProvider.notifier);
-    final histories =
-        ref.watch(historyViewModelProvider.select((value) => value.histories));
+    final histories = ref.watch(historyViewModelProvider);
+    final useInternalPlayer = ref.watch(
+      settingsViewModelProvider.select((value) => value.useInternalPlayer),
+    );
+
     useEffect(
       () {
         Future.microtask(viewModel.initialLoad);
         return null;
       },
       const [],
-    );
-    final useInternalPlayer = ref.watch(
-      settingsViewModelProvider.select((value) => value.useInternalPlayer),
     );
 
     return Scaffold(

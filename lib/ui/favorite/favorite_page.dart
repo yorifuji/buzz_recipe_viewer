@@ -15,17 +15,17 @@ class FavoritePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(favoriteViewModelProvider.notifier);
-    final favorites =
-        ref.watch(favoriteViewModelProvider.select((value) => value.favorites));
+    final favorites = ref.watch(favoriteViewModelProvider);
+    final useInternalPlayer = ref.watch(
+      settingsViewModelProvider.select((value) => value.useInternalPlayer),
+    );
+
     useEffect(
       () {
         Future.microtask(viewModel.initialLoad);
         return null;
       },
       const [],
-    );
-    final useInternalPlayer = ref.watch(
-      settingsViewModelProvider.select((value) => value.useInternalPlayer),
     );
 
     return Scaffold(
