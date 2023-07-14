@@ -28,8 +28,8 @@ class SearchState with _$SearchState {
 
 @riverpod
 class SearchViewModel extends _$SearchViewModel {
-  late final SearchRepository _searchRepository;
-  late final DatabaseRepository _databaseRepository;
+  late SearchRepository _searchRepository;
+  late DatabaseRepository _databaseRepository;
   @override
   SearchState build() {
     final flavor = ref.watch(flavorProvider);

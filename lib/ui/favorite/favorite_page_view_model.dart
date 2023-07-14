@@ -15,7 +15,7 @@ class FavoriteState with _$FavoriteState {
 
 @riverpod
 class FavoriteViewModel extends _$FavoriteViewModel {
-  late final DatabaseRepository _databaseRepository;
+  late DatabaseRepository _databaseRepository;
   @override
   FavoriteState build() {
     _databaseRepository = ref.watch(databaseRepositoryProvider);

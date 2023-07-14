@@ -8,18 +8,12 @@ part 'theme_selector_provider.g.dart';
 class ThemeSelector extends _$ThemeSelector {
   static const _seedColor = Colors.orange;
 
-  late final SharedPreferencesRepository _sharedPreferencesRepository;
-
   @override
   ThemeMode build() {
-    _sharedPreferencesRepository =
-        ref.watch(sharedPreferencesRepositoryProvider);
-    return _sharedPreferencesRepository.getThemeMode();
-  }
-
-  Future<void> change(ThemeMode theme) async {
-    await _sharedPreferencesRepository.setThemeMode(theme);
-    state = theme;
+    return ref
+        .watch(sharedPreferencesRepositoryProvider)
+        .getThemeModePreference()
+        .themeMode;
   }
 
   static ThemeData lightTheme() {

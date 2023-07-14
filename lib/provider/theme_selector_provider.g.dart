@@ -8,7 +8,7 @@ part of 'theme_selector_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeSelectorHash() => r'ac659bd5f0b6b944e4ae044495357f910654dcde';
+String _$themeSelectorHash() => r'63bd5e40e7dc9a2888a3e6e03c343013d5e39e6b';
 
 /// See also [ThemeSelector].
 @ProviderFor(ThemeSelector)

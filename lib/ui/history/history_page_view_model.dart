@@ -17,7 +17,7 @@ class HistoryState with _$HistoryState {
 
 @riverpod
 class HistoryViewModel extends _$HistoryViewModel {
-  late final DatabaseRepository _databaseRepository;
+  late DatabaseRepository _databaseRepository;
   @override
   HistoryState build() {
     _databaseRepository = ref.watch(databaseRepositoryProvider);

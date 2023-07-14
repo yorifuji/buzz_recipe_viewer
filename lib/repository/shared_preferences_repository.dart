@@ -11,20 +11,12 @@ enum ThemeModePreference {
   dark('ダーク', ThemeMode.dark);
 
   const ThemeModePreference(this.title, this.themeMode);
+
+  factory ThemeModePreference.fromIndex(int index) =>
+      ThemeModePreference.values[index];
+
   final String title;
   final ThemeMode themeMode;
-
-  static ThemeMode fromIndex(int index) {
-    return ThemeModePreference.values[index].themeMode;
-  }
-
-  static ThemeMode fromTheme(ThemeMode themeMode) {
-    return ThemeModePreference.values
-        .firstWhere(
-          (element) => element.themeMode == themeMode,
-        )
-        .themeMode;
-  }
 }
 
 @riverpod
@@ -50,15 +42,14 @@ class SharedPreferencesRepository {
     await _sharedPreferences.setBool(_useInternalPlayerKey, useInternalPlayer);
   }
 
-  ThemeMode getThemeMode() {
+  ThemeModePreference getThemeModePreference() {
     final index = _sharedPreferences.getInt('theme_mode') ?? 0;
     return ThemeModePreference.fromIndex(index);
   }
 
-  Future<void> setThemeMode(ThemeMode themeMode) async {
-    await _sharedPreferences.setInt(
-      'theme_mode',
-      ThemeModePreference.fromTheme(themeMode).index,
-    );
+  Future<void> setThemeModePreference(
+    ThemeModePreference themeModePreference,
+  ) async {
+    await _sharedPreferences.setInt('theme_mode', themeModePreference.index);
   }
 }

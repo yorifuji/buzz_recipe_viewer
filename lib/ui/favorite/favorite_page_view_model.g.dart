@@ -8,7 +8,7 @@ part of 'favorite_page_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favoriteViewModelHash() => r'0a71cd1c7e7aa7344c10b0ca7512348465c37bc4';
+String _$favoriteViewModelHash() => r'b29d6d59466af78f7b25d2c2dad85890f9d1a817';
 
 /// See also [FavoriteViewModel].
 @ProviderFor(FavoriteViewModel)

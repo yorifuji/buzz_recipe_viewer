@@ -11,8 +11,9 @@ class ThemeSettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(themeSelectorProvider.notifier);
     final theme = ref.watch(themeSelectorProvider);
+    final sharedPreferencesRepository =
+        ref.watch(sharedPreferencesRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Theme'),
@@ -27,7 +28,11 @@ class ThemeSettingPage extends ConsumerWidget {
                     title: Text(e.title),
                     trailing:
                         theme == e.themeMode ? const Icon(Icons.check) : null,
-                    onPressed: (context) => viewModel.change(e.themeMode),
+                    onPressed: (context) async {
+                      await sharedPreferencesRepository
+                          .setThemeModePreference(e);
+                      ref.invalidate(themeSelectorProvider);
+                    },
                   ),
                 )
                 .toList(),

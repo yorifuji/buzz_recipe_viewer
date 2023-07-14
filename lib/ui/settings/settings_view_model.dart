@@ -14,20 +14,18 @@ class SettingsState with _$SettingsState {
 
 @riverpod
 class SettingsViewModel extends _$SettingsViewModel {
-  late final SharedPreferencesRepository _sharedPreferencesRepository;
   @override
   SettingsState build() {
-    _sharedPreferencesRepository =
-        ref.watch(sharedPreferencesRepositoryProvider);
     return SettingsState(
-      useInternalPlayer: _sharedPreferencesRepository.getUseInternalPlayer(),
+      useInternalPlayer:
+          ref.read(sharedPreferencesRepositoryProvider).getUseInternalPlayer(),
     );
   }
 
   void setUseInternalPlayer({required bool useInternalPlayer}) {
-    _sharedPreferencesRepository.setUseInternalPlayer(
-      useInternalPlayer: useInternalPlayer,
-    );
+    ref.read(sharedPreferencesRepositoryProvider).setUseInternalPlayer(
+          useInternalPlayer: useInternalPlayer,
+        );
     state = state.copyWith(useInternalPlayer: useInternalPlayer);
   }
 }
