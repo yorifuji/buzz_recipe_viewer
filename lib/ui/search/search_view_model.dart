@@ -1,10 +1,7 @@
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
-import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository.dart';
 import 'package:buzz_recipe_viewer/repository/search_repository_mock.dart';
 import 'package:flutter/foundation.dart';
@@ -29,7 +26,6 @@ class SearchState with _$SearchState {
 @riverpod
 class SearchViewModel extends _$SearchViewModel {
   late SearchRepository _searchRepository;
-  late DatabaseRepository _databaseRepository;
   @override
   SearchState build() {
     final flavor = ref.watch(flavorProvider);
@@ -38,7 +34,6 @@ class SearchViewModel extends _$SearchViewModel {
           ? searchRepositoryMockProvider
           : searchRepositoryProvider,
     );
-    _databaseRepository = ref.watch(databaseRepositoryProvider);
     return const SearchState();
   }
 
@@ -117,14 +112,5 @@ class SearchViewModel extends _$SearchViewModel {
 
   void updateSortType(SortIndex sortType) {
     state = state.copyWith(sortType: sortType);
-  }
-
-  // insert item to database
-  Future<void> insertHistory(SearchHit searchHit) async {
-    await _databaseRepository.insertHistory(History.from(searchHit));
-  }
-
-  Future<void> addFavorite(SearchHit searchHit) async {
-    await _databaseRepository.insertFavorite(Favorite.from(searchHit));
   }
 }

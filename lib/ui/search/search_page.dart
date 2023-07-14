@@ -1,5 +1,7 @@
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
+import 'package:buzz_recipe_viewer/provider/favorite_list_provider.dart';
+import 'package:buzz_recipe_viewer/provider/history_list_provider.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
@@ -141,10 +143,15 @@ class _SearchResultContainer extends HookConsumerWidget {
                   throw 'Could not launch $url';
                 }
               }
-              await viewModel.insertHistory(hitList[index].searchHit);
+              await ref
+                  .read(historyListProvider.notifier)
+                  .addHistory(hitList[index].searchHit);
             },
             onLongPress: () async {
-              await viewModel.addFavorite(hitList[index].searchHit);
+              await ref
+                  .read(favoriteListProvider.notifier)
+                  .addFavorite(hitList[index].searchHit);
+
               // ignore: use_build_context_synchronously
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
