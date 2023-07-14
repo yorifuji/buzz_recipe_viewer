@@ -9,7 +9,7 @@ part of 'video_player_view_model.dart';
 // **************************************************************************
 
 String _$videoPlayerViewModelHash() =>
-    r'8f0aff0dd599b9a4ea6b2dab610013d80ab312b8';
+    r'33822a50175fbcc9f3efc487179b79ede1ba0d21';
 
 /// See also [VideoPlayerViewModel].
 @ProviderFor(VideoPlayerViewModel)
