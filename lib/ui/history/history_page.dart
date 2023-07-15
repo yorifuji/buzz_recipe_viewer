@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/provider/favorite_list_provider.dart';
 import 'package:buzz_recipe_viewer/provider/history_list_provider.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/error/error_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class HistoryPage extends ConsumerWidget {
     final body = ref.watch(historyListProvider).when(
           loading: () => const CircularProgressIndicator(),
           data: (value) => _HistoryListContainer(histories: value),
-          error: (error, stackTrace) => const CircularProgressIndicator(),
+          error: (_, __) => const ErrorPage(),
         );
     return Scaffold(body: SafeArea(child: body));
   }
