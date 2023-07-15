@@ -2,26 +2,24 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'search_view_model.dart';
+part of 'algolia_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchViewModelHash() => r'368ab87301569570f68e8cba27fe8f79550a78b6';
+String _$algoliaHash() => r'fbacdd2862f6b2d964b7357090ab05f0d9c87d26';
 
-/// See also [SearchViewModel].
-@ProviderFor(SearchViewModel)
-final searchViewModelProvider =
-    AutoDisposeNotifierProvider<SearchViewModel, SearchState>.internal(
-  SearchViewModel.new,
-  name: r'searchViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$searchViewModelHash,
+/// See also [algolia].
+@ProviderFor(algolia)
+final algoliaProvider = AutoDisposeProvider<Algolia>.internal(
+  algolia,
+  name: r'algoliaProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$algoliaHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SearchViewModel = AutoDisposeNotifier<SearchState>;
+typedef AlgoliaRef = AutoDisposeProviderRef<Algolia>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

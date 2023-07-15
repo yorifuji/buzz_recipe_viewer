@@ -1,16 +1,16 @@
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/search_result.dart';
-import 'package:buzz_recipe_viewer/repository/search_repository.dart';
+import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'search_repository_mock.g.dart';
+part 'recipe_repository_mock.g.dart';
 
 @riverpod
-SearchRepositoryMock searchRepositoryMock(SearchRepositoryMockRef ref) =>
-    SearchRepositoryMock();
+RecipeRepositoryMock recipeRepositoryMock(RecipeRepositoryMockRef ref) =>
+    RecipeRepositoryMock();
 
-class SearchRepositoryMock implements SearchRepository {
+class RecipeRepositoryMock implements RecipeRepository {
   @override
   Future<Result<SearchResult>> search(
     String query,

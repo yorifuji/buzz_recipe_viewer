@@ -2,8 +2,8 @@ import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
-import 'package:buzz_recipe_viewer/repository/search_repository.dart';
-import 'package:buzz_recipe_viewer/repository/search_repository_mock.dart';
+import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/repository/recipe_repository_mock.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -25,14 +25,14 @@ class SearchState with _$SearchState {
 
 @riverpod
 class SearchViewModel extends _$SearchViewModel {
-  late SearchRepository _searchRepository;
+  late RecipeRepository _recipeRepository;
   @override
   SearchState build() {
     final flavor = ref.watch(flavorProvider);
-    _searchRepository = ref.watch(
+    _recipeRepository = ref.watch(
       flavor == Flavor.dev
-          ? searchRepositoryMockProvider
-          : searchRepositoryProvider,
+          ? recipeRepositoryMockProvider
+          : recipeRepositoryProvider,
     );
     return const SearchState();
   }
@@ -44,7 +44,7 @@ class SearchViewModel extends _$SearchViewModel {
       hitList: [],
     );
 
-    final searchHitResult = await _searchRepository.search(
+    final searchHitResult = await _recipeRepository.search(
       state.query,
       state.sortType.indexName,
       state.nextPage,
@@ -77,7 +77,7 @@ class SearchViewModel extends _$SearchViewModel {
       moreLoadingState: LoadingState.loading,
     );
 
-    final searchHitResult = await _searchRepository.search(
+    final searchHitResult = await _recipeRepository.search(
       state.query,
       state.sortType.indexName,
       state.nextPage,

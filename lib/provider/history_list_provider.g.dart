@@ -8,7 +8,7 @@ part of 'history_list_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$historyListHash() => r'd8265990d54bf9b0f1a3989938d500ef181aa73b';
+String _$historyListHash() => r'c437b2a7961d9a94dad228ff82f0d7b3fb96a934';
 
 /// See also [HistoryList].
 @ProviderFor(HistoryList)
