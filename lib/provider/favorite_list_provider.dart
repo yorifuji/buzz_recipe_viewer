@@ -7,25 +7,28 @@ part 'favorite_list_provider.g.dart';
 
 @riverpod
 class FavoriteList extends _$FavoriteList {
+  @override
+  Future<List<Favorite>> build() => _fetchFavorite();
+
   Future<List<Favorite>> _fetchFavorite() {
     final databaseRepository = ref.read(databaseRepositoryProvider);
     databaseRepository.watchFavorites(
       onChange: (_) async {
         state = AsyncData(
-          await databaseRepository.getFavorites(),
+          await databaseRepository.getFavorites,
         );
       },
     );
-    return databaseRepository.getFavorites();
+    return databaseRepository.getFavorites;
   }
 
-  @override
-  Future<List<Favorite>> build() => _fetchFavorite();
+  Future<List<Favorite>> getFavorites() =>
+      ref.read(databaseRepositoryProvider).getFavorites;
 
-  Future<void> addFavorite(SearchHit searchHit) async => ref
+  Future<void> addFavorite(SearchHit searchHit) => ref
       .read(databaseRepositoryProvider)
       .insertFavorite(Favorite.from(searchHit));
 
-  Future<void> deleteFavorite(Favorite favorite) async =>
+  Future<void> deleteFavorite(Favorite favorite) =>
       ref.read(databaseRepositoryProvider).deleteFavorite(favorite);
 }

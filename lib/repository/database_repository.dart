@@ -17,14 +17,12 @@ class DatabaseRepository {
   final Isar _isar;
 
   // get historys
-  Future<List<History>> getHistorys() {
-    return _isar.historys.where().sortByCreatedAtDesc().findAll();
-  }
+  Future<List<History>> get getHistorys =>
+      _isar.historys.where().sortByCreatedAtDesc().findAll();
 
   // get favorites
-  Future<List<Favorite>> getFavorites() {
-    return _isar.favorites.where().sortByCreatedAtDesc().findAll();
-  }
+  Future<List<Favorite>> get getFavorites =>
+      _isar.favorites.where().sortByCreatedAtDesc().findAll();
 
   // put history
   Future<void> insertHistory(History history) async {

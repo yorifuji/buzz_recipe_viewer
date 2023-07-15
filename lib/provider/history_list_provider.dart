@@ -12,20 +12,20 @@ class HistoryList extends _$HistoryList {
     databaseRepository.watchHistorys(
       onChange: (_) async {
         state = AsyncData(
-          await databaseRepository.getHistorys(),
+          await databaseRepository.getHistorys,
         );
       },
     );
-    return databaseRepository.getHistorys();
+    return databaseRepository.getHistorys;
   }
 
   @override
   Future<List<History>> build() => _fetchHistory();
 
-  Future<void> addHistory(SearchHit searchHit) async => ref
+  Future<void> addHistory(SearchHit searchHit) => ref
       .read(databaseRepositoryProvider)
       .insertHistory(History.from(searchHit));
 
-  Future<void> deleteHistory(History history) async =>
+  Future<void> deleteHistory(History history) =>
       ref.read(databaseRepositoryProvider).deleteHistory(history);
 }
