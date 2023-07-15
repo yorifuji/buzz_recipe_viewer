@@ -65,7 +65,7 @@ class _SearchHitResult extends HookConsumerWidget {
             ? const Center(child: Text('検索結果は0件です'))
             : RefreshIndicator(
                 onRefresh: viewModel.search,
-                child: _SearchResultContainer(),
+                child: _GetRecipeResultContainer(),
               );
       case LoadingState.failure:
         body = Column(
@@ -83,7 +83,7 @@ class _SearchHitResult extends HookConsumerWidget {
   }
 }
 
-class _SearchResultContainer extends HookConsumerWidget {
+class _GetRecipeResultContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(searchViewModelProvider.notifier);

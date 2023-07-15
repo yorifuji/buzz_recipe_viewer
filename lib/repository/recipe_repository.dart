@@ -1,7 +1,7 @@
 import 'package:algolia/algolia.dart';
+import 'package:buzz_recipe_viewer/model/get_recipe_result.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/model/search_result.dart';
 import 'package:buzz_recipe_viewer/provider/algolia_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,7 +15,7 @@ class RecipeRepository {
   RecipeRepository(this._algoliaClient);
   final Algolia _algoliaClient;
 
-  Future<Result<SearchResult>> search(
+  Future<Result<GetRecipeResult>> getRecipe(
     String query,
     String indexName,
     int page,
@@ -32,7 +32,7 @@ class RecipeRepository {
             snapshot.hits.map((e) => SearchHit.fromJson(e.toMap())).toList();
         final nextPage =
             snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
-        return SearchResult(searchHits: searchHits, nextPage: nextPage);
+        return GetRecipeResult(searchHits: searchHits, nextPage: nextPage);
         // ignore: avoid_catches_without_on_clauses
       } catch (_) {
         throw Exception(); // FIXME: use error

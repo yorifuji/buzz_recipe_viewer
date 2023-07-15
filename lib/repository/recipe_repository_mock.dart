@@ -1,6 +1,6 @@
+import 'package:buzz_recipe_viewer/model/get_recipe_result.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/model/search_result.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,14 +12,14 @@ RecipeRepositoryMock recipeRepositoryMock(RecipeRepositoryMockRef ref) =>
 
 class RecipeRepositoryMock implements RecipeRepository {
   @override
-  Future<Result<SearchResult>> search(
+  Future<Result<GetRecipeResult>> getRecipe(
     String query,
     String indexName,
     int page,
   ) async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return Result.success(
-      data: SearchResult(
+      data: GetRecipeResult(
         searchHits: List.generate(
           10,
           (index) => SearchHit(

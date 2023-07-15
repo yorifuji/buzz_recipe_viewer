@@ -44,13 +44,13 @@ class SearchViewModel extends _$SearchViewModel {
       hitList: [],
     );
 
-    final searchHitResult = await _recipeRepository.search(
+    final getRecipeResult = await _recipeRepository.getRecipe(
       state.query,
       state.sortType.indexName,
       state.nextPage,
     );
 
-    searchHitResult.when(
+    getRecipeResult.when(
       success: (result) {
         state = state.copyWith(
           loadingState: LoadingState.success,
@@ -77,13 +77,13 @@ class SearchViewModel extends _$SearchViewModel {
       moreLoadingState: LoadingState.loading,
     );
 
-    final searchHitResult = await _recipeRepository.search(
+    final getRecipeResult = await _recipeRepository.getRecipe(
       state.query,
       state.sortType.indexName,
       state.nextPage,
     );
 
-    searchHitResult.when(
+    getRecipeResult.when(
       success: (result) {
         state = state.copyWith(
           moreLoadingState: LoadingState.success,

@@ -1,12 +1,12 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'search_result.freezed.dart';
+part 'get_recipe_result.freezed.dart';
 
 @freezed
-class SearchResult with _$SearchResult {
-  const factory SearchResult({
+class GetRecipeResult with _$GetRecipeResult {
+  const factory GetRecipeResult({
     @Default(<SearchHit>[]) List<SearchHit> searchHits,
     @Default(0) int nextPage,
-  }) = _SearchResult;
+  }) = _GetRecipeResult;
 }
