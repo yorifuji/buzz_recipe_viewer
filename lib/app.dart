@@ -11,8 +11,8 @@ class App extends ConsumerWidget {
     final theme = ref.watch(themeSelectorProvider);
     return MaterialApp(
       title: 'レシピ検索',
-      theme: ThemeSelector.lightTheme(),
-      darkTheme: ThemeSelector.darkTheme(),
+      theme: ref.read(themeSelectorProvider.notifier).lightTheme(),
+      darkTheme: ref.read(themeSelectorProvider.notifier).darkTheme(),
       themeMode: theme,
       home: const NavigationPage(),
     );

@@ -16,7 +16,7 @@ class ThemeSelector extends _$ThemeSelector {
         .themeMode;
   }
 
-  static ThemeData lightTheme() {
+  ThemeData lightTheme() {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -24,7 +24,7 @@ class ThemeSelector extends _$ThemeSelector {
     );
   }
 
-  static ThemeData darkTheme() {
+  ThemeData darkTheme() {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
