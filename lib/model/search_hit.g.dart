@@ -10,6 +10,7 @@ part of 'search_hit.dart';
 
 _$_SearchHit _$$_SearchHitFromJson(Map<String, dynamic> json) => _$_SearchHit(
       id: json['id'] as String,
+      videoId: json['videoId'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       published: json['published'] as String,
@@ -18,12 +19,12 @@ _$_SearchHit _$$_SearchHitFromJson(Map<String, dynamic> json) => _$_SearchHit(
       likes: json['likes'] as int,
       image: json['image'] as String,
       url: json['url'] as String,
-      objectID: json['objectID'] as String,
     );
 
 Map<String, dynamic> _$$_SearchHitToJson(_$_SearchHit instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'videoId': instance.videoId,
       'title': instance.title,
       'description': instance.description,
       'published': instance.published,
@@ -32,5 +33,4 @@ Map<String, dynamic> _$$_SearchHitToJson(_$_SearchHit instance) =>
       'likes': instance.likes,
       'image': instance.image,
       'url': instance.url,
-      'objectID': instance.objectID,
     };

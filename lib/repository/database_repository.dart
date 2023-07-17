@@ -1,5 +1,7 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/model/search_hit_embedded.dart';
 import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -49,6 +51,16 @@ class DatabaseRepository {
   Future<void> deleteFavorite(Favorite favorite) async {
     await _isar.writeTxn(() async {
       await _isar.favorites.delete(favorite.id);
+    });
+  }
+
+  // delete favorite
+  Future<void> deleteFavoriteBySearchHit(SearchHit searchHit) async {
+    await _isar.writeTxn(() async {
+      await _isar.favorites
+          .filter()
+          .searchHitEmbedded((q) => q.idEqualTo(searchHit.id))
+          .deleteAll();
     });
   }
 

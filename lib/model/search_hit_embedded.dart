@@ -7,6 +7,7 @@ part 'search_hit_embedded.g.dart';
 class SearchHitEmbedded {
   SearchHit searchHit() => SearchHit(
         id: id!,
+        videoId: videoId!,
         title: title!,
         description: description!,
         published: published!,
@@ -15,11 +16,11 @@ class SearchHitEmbedded {
         likes: likes!,
         image: image!,
         url: url!,
-        objectID: objectID!,
       );
 
   void update(SearchHit searchHit) {
     id = searchHit.id;
+    videoId = searchHit.videoId;
     title = searchHit.title;
     description = searchHit.description;
     published = searchHit.published;
@@ -28,10 +29,10 @@ class SearchHitEmbedded {
     likes = searchHit.likes;
     image = searchHit.image;
     url = searchHit.url;
-    objectID = searchHit.objectID;
   }
 
   String? id;
+  String? videoId;
   String? title;
   String? description;
   String? published;
@@ -40,5 +41,4 @@ class SearchHitEmbedded {
   int? likes;
   String? image;
   String? url;
-  String? objectID;
 }

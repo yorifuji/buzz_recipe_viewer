@@ -8,6 +8,7 @@ part 'search_hit.g.dart';
 class SearchHit with _$SearchHit {
   const factory SearchHit({
     required String id,
+    required String videoId,
     required String title,
     required String description,
     required String published,
@@ -16,7 +17,6 @@ class SearchHit with _$SearchHit {
     required int likes,
     required String image,
     required String url,
-    required String objectID,
   }) = _SearchHit;
 
   factory SearchHit.fromJson(Map<String, Object?> json) =>

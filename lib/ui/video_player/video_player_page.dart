@@ -1,5 +1,6 @@
+import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/provider/favorite_list_provider.dart';
+import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -62,8 +63,8 @@ class VideoPlayerPage extends HookConsumerWidget {
                 ),
                 onLongPress: () async {
                   await ref
-                      .read(favoriteListProvider.notifier)
-                      .addFavorite(searchHit);
+                      .read(favoriteServiceProvider)
+                      .add(Favorite.from(searchHit));
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -83,7 +84,7 @@ class VideoPlayerPage extends HookConsumerWidget {
 
   Widget _videoPlayer() => YoutubePlayer(
         controller: YoutubePlayerController(
-          initialVideoId: searchHit.objectID,
+          initialVideoId: searchHit.videoId,
           flags: const YoutubePlayerFlags(
             captionLanguage: 'ja',
             showLiveFullscreenButton: false,

@@ -24,7 +24,7 @@ class RecipeRepository {
       try {
         final algoliaQuery = _algoliaClient
             .index(indexName)
-            .setHitsPerPage(100)
+            .setHitsPerPage(50)
             .setPage(page)
             .query(query);
         final snapshot = await algoliaQuery.getObjects();

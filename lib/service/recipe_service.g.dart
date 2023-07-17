@@ -2,26 +2,25 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'search_view_model.dart';
+part of 'recipe_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchViewModelHash() => r'23bb9639da8dc38d01c5fe094c8965db9c4c89e6';
+String _$recipeServiceHash() => r'f19d0600d94db4d6416f5b07b6a8f7b381903cd9';
 
-/// See also [SearchViewModel].
-@ProviderFor(SearchViewModel)
-final searchViewModelProvider =
-    AutoDisposeNotifierProvider<SearchViewModel, SearchState>.internal(
-  SearchViewModel.new,
-  name: r'searchViewModelProvider',
+/// See also [recipeService].
+@ProviderFor(recipeService)
+final recipeServiceProvider = AutoDisposeProvider<RecipeService>.internal(
+  recipeService,
+  name: r'recipeServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$searchViewModelHash,
+      : _$recipeServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SearchViewModel = AutoDisposeNotifier<SearchState>;
+typedef RecipeServiceRef = AutoDisposeProviderRef<RecipeService>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

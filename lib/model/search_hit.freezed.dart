@@ -21,6 +21,7 @@ SearchHit _$SearchHitFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SearchHit {
   String get id => throw _privateConstructorUsedError;
+  String get videoId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get published => throw _privateConstructorUsedError;
@@ -29,7 +30,6 @@ mixin _$SearchHit {
   int get likes => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  String get objectID => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,6 +44,7 @@ abstract class $SearchHitCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String videoId,
       String title,
       String description,
       String published,
@@ -51,8 +52,7 @@ abstract class $SearchHitCopyWith<$Res> {
       int views,
       int likes,
       String image,
-      String url,
-      String objectID});
+      String url});
 }
 
 /// @nodoc
@@ -69,6 +69,7 @@ class _$SearchHitCopyWithImpl<$Res, $Val extends SearchHit>
   @override
   $Res call({
     Object? id = null,
+    Object? videoId = null,
     Object? title = null,
     Object? description = null,
     Object? published = null,
@@ -77,12 +78,15 @@ class _$SearchHitCopyWithImpl<$Res, $Val extends SearchHit>
     Object? likes = null,
     Object? image = null,
     Object? url = null,
-    Object? objectID = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoId: null == videoId
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -115,10 +119,6 @@ class _$SearchHitCopyWithImpl<$Res, $Val extends SearchHit>
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      objectID: null == objectID
-          ? _value.objectID
-          : objectID // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -133,6 +133,7 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String videoId,
       String title,
       String description,
       String published,
@@ -140,8 +141,7 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
       int views,
       int likes,
       String image,
-      String url,
-      String objectID});
+      String url});
 }
 
 /// @nodoc
@@ -156,6 +156,7 @@ class __$$_SearchHitCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? videoId = null,
     Object? title = null,
     Object? description = null,
     Object? published = null,
@@ -164,12 +165,15 @@ class __$$_SearchHitCopyWithImpl<$Res>
     Object? likes = null,
     Object? image = null,
     Object? url = null,
-    Object? objectID = null,
   }) {
     return _then(_$_SearchHit(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoId: null == videoId
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -203,10 +207,6 @@ class __$$_SearchHitCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      objectID: null == objectID
-          ? _value.objectID
-          : objectID // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -216,6 +216,7 @@ class __$$_SearchHitCopyWithImpl<$Res>
 class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
   const _$_SearchHit(
       {required this.id,
+      required this.videoId,
       required this.title,
       required this.description,
       required this.published,
@@ -223,14 +224,15 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       required this.views,
       required this.likes,
       required this.image,
-      required this.url,
-      required this.objectID});
+      required this.url});
 
   factory _$_SearchHit.fromJson(Map<String, dynamic> json) =>
       _$$_SearchHitFromJson(json);
 
   @override
   final String id;
+  @override
+  final String videoId;
   @override
   final String title;
   @override
@@ -247,12 +249,10 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
   final String image;
   @override
   final String url;
-  @override
-  final String objectID;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SearchHit(id: $id, title: $title, description: $description, published: $published, timestamp: $timestamp, views: $views, likes: $likes, image: $image, url: $url, objectID: $objectID)';
+    return 'SearchHit(id: $id, videoId: $videoId, title: $title, description: $description, published: $published, timestamp: $timestamp, views: $views, likes: $likes, image: $image, url: $url)';
   }
 
   @override
@@ -261,6 +261,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
     properties
       ..add(DiagnosticsProperty('type', 'SearchHit'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('videoId', videoId))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('published', published))
@@ -268,8 +269,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       ..add(DiagnosticsProperty('views', views))
       ..add(DiagnosticsProperty('likes', likes))
       ..add(DiagnosticsProperty('image', image))
-      ..add(DiagnosticsProperty('url', url))
-      ..add(DiagnosticsProperty('objectID', objectID));
+      ..add(DiagnosticsProperty('url', url));
   }
 
   @override
@@ -278,6 +278,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
         (other.runtimeType == runtimeType &&
             other is _$_SearchHit &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.videoId, videoId) || other.videoId == videoId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -288,15 +289,13 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
             (identical(other.views, views) || other.views == views) &&
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.objectID, objectID) ||
-                other.objectID == objectID));
+            (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description,
-      published, timestamp, views, likes, image, url, objectID);
+  int get hashCode => Object.hash(runtimeType, id, videoId, title, description,
+      published, timestamp, views, likes, image, url);
 
   @JsonKey(ignore: true)
   @override
@@ -315,6 +314,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
 abstract class _SearchHit implements SearchHit {
   const factory _SearchHit(
       {required final String id,
+      required final String videoId,
       required final String title,
       required final String description,
       required final String published,
@@ -322,14 +322,15 @@ abstract class _SearchHit implements SearchHit {
       required final int views,
       required final int likes,
       required final String image,
-      required final String url,
-      required final String objectID}) = _$_SearchHit;
+      required final String url}) = _$_SearchHit;
 
   factory _SearchHit.fromJson(Map<String, dynamic> json) =
       _$_SearchHit.fromJson;
 
   @override
   String get id;
+  @override
+  String get videoId;
   @override
   String get title;
   @override
@@ -346,8 +347,6 @@ abstract class _SearchHit implements SearchHit {
   String get image;
   @override
   String get url;
-  @override
-  String get objectID;
   @override
   @JsonKey(ignore: true)
   _$$_SearchHitCopyWith<_$_SearchHit> get copyWith =>

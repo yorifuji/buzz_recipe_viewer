@@ -35,29 +35,29 @@ const SearchHitEmbeddedSchema = Schema(
       name: r'likes',
       type: IsarType.long,
     ),
-    r'objectID': PropertySchema(
-      id: 4,
-      name: r'objectID',
-      type: IsarType.string,
-    ),
     r'published': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'published',
       type: IsarType.string,
     ),
     r'timestamp': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'timestamp',
       type: IsarType.long,
     ),
     r'title': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'title',
       type: IsarType.string,
     ),
     r'url': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'url',
+      type: IsarType.string,
+    ),
+    r'videoId': PropertySchema(
+      id: 8,
+      name: r'videoId',
       type: IsarType.string,
     ),
     r'views': PropertySchema(
@@ -97,12 +97,6 @@ int _searchHitEmbeddedEstimateSize(
     }
   }
   {
-    final value = object.objectID;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.published;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -120,6 +114,12 @@ int _searchHitEmbeddedEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.videoId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -133,11 +133,11 @@ void _searchHitEmbeddedSerialize(
   writer.writeString(offsets[1], object.id);
   writer.writeString(offsets[2], object.image);
   writer.writeLong(offsets[3], object.likes);
-  writer.writeString(offsets[4], object.objectID);
-  writer.writeString(offsets[5], object.published);
-  writer.writeLong(offsets[6], object.timestamp);
-  writer.writeString(offsets[7], object.title);
-  writer.writeString(offsets[8], object.url);
+  writer.writeString(offsets[4], object.published);
+  writer.writeLong(offsets[5], object.timestamp);
+  writer.writeString(offsets[6], object.title);
+  writer.writeString(offsets[7], object.url);
+  writer.writeString(offsets[8], object.videoId);
   writer.writeLong(offsets[9], object.views);
 }
 
@@ -152,11 +152,11 @@ SearchHitEmbedded _searchHitEmbeddedDeserialize(
   object.id = reader.readStringOrNull(offsets[1]);
   object.image = reader.readStringOrNull(offsets[2]);
   object.likes = reader.readLongOrNull(offsets[3]);
-  object.objectID = reader.readStringOrNull(offsets[4]);
-  object.published = reader.readStringOrNull(offsets[5]);
-  object.timestamp = reader.readLongOrNull(offsets[6]);
-  object.title = reader.readStringOrNull(offsets[7]);
-  object.url = reader.readStringOrNull(offsets[8]);
+  object.published = reader.readStringOrNull(offsets[4]);
+  object.timestamp = reader.readLongOrNull(offsets[5]);
+  object.title = reader.readStringOrNull(offsets[6]);
+  object.url = reader.readStringOrNull(offsets[7]);
+  object.videoId = reader.readStringOrNull(offsets[8]);
   object.views = reader.readLongOrNull(offsets[9]);
   return object;
 }
@@ -179,9 +179,9 @@ P _searchHitEmbeddedDeserializeProp<P>(
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
-    case 6:
       return (reader.readLongOrNull(offset)) as P;
+    case 6:
+      return (reader.readStringOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
@@ -732,160 +732,6 @@ extension SearchHitEmbeddedQueryFilter
   }
 
   QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'objectID',
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'objectID',
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'objectID',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'objectID',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'objectID',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'objectID',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'objectID',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'objectID',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'objectID',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'objectID',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'objectID',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
-      objectIDIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'objectID',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
       publishedIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1416,6 +1262,160 @@ extension SearchHitEmbeddedQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'url',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'videoId',
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'videoId',
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'videoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'videoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'videoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'videoId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'videoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'videoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'videoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'videoId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'videoId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SearchHitEmbedded, SearchHitEmbedded, QAfterFilterCondition>
+      videoIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'videoId',
         value: '',
       ));
     });

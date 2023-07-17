@@ -1,9 +1,6 @@
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
-import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
-import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
-import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
-import 'package:buzz_recipe_viewer/repository/recipe_repository_mock.dart';
+import 'package:buzz_recipe_viewer/service/recipe_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,9 +12,7 @@ part 'search_view_model.g.dart';
 class SearchState with _$SearchState {
   const factory SearchState({
     @Default('') String query,
-    @Default(<SearchHitItem>[]) List<SearchHitItem> hitList,
     @Default(SortIndex.timestamp) SortIndex sortType,
-    @Default(0) int nextPage,
     @Default(LoadingState.loadable) LoadingState loadingState,
     @Default(LoadingState.loadable) LoadingState moreLoadingState,
   }) = _SearchState;
@@ -25,50 +20,22 @@ class SearchState with _$SearchState {
 
 @riverpod
 class SearchViewModel extends _$SearchViewModel {
-  late RecipeRepository _recipeRepository;
+  late RecipeService _recipeService;
   @override
   SearchState build() {
-    final flavor = ref.watch(flavorProvider);
-    _recipeRepository = ref.watch(
-      flavor == Flavor.dev
-          ? recipeRepositoryMockProvider
-          : recipeRepositoryProvider,
-    );
+    _recipeService = ref.watch(recipeServiceProvider);
     return const SearchState();
   }
 
   Future<void> search() async {
     state = state.copyWith(
       loadingState: LoadingState.loading,
-      nextPage: 0,
-      hitList: [],
     );
 
-    final getRecipeResult = await _recipeRepository.getRecipe(
-      state.query,
-      state.sortType.indexName,
-      state.nextPage,
-    );
+    final result = await _recipeService.getRecipe(state.query, state.sortType);
 
-    getRecipeResult.when(
-      success: (result) {
-        state = state.copyWith(
-          loadingState: LoadingState.success,
-          hitList: result.searchHits
-              .map(
-                (e) => SearchHitItem(
-                  searchHit: e,
-                ),
-              )
-              .toList(),
-          nextPage: result.nextPage,
-        );
-      },
-      failure: (error) {
-        state = state.copyWith(
-          loadingState: LoadingState.failure,
-        );
-      },
+    state = state.copyWith(
+      loadingState: result ? LoadingState.success : LoadingState.failure,
     );
   }
 
@@ -77,32 +44,10 @@ class SearchViewModel extends _$SearchViewModel {
       moreLoadingState: LoadingState.loading,
     );
 
-    final getRecipeResult = await _recipeRepository.getRecipe(
-      state.query,
-      state.sortType.indexName,
-      state.nextPage,
-    );
+    final result = await _recipeService.getRecipeMore();
 
-    getRecipeResult.when(
-      success: (result) {
-        state = state.copyWith(
-          moreLoadingState: LoadingState.success,
-          hitList: [
-            ...state.hitList,
-            ...result.searchHits.map(
-              (e) => SearchHitItem(
-                searchHit: e,
-              ),
-            )
-          ],
-          nextPage: result.nextPage,
-        );
-      },
-      failure: (error) {
-        state = state.copyWith(
-          moreLoadingState: LoadingState.failure,
-        );
-      },
+    state = state.copyWith(
+      moreLoadingState: result ? LoadingState.success : LoadingState.failure,
     );
   }
 

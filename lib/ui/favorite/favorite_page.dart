@@ -1,8 +1,9 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/provider/favorite_list_provider.dart';
-import 'package:buzz_recipe_viewer/provider/history_list_provider.dart';
+import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/service/favorite_service.dart';
+import 'package:buzz_recipe_viewer/service/history_service.dart';
+import 'package:buzz_recipe_viewer/store/favorite_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
-import 'package:buzz_recipe_viewer/ui/error/error_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +17,8 @@ class FavoritePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final body = ref.watch(favoriteListProvider).when(
-          loading: () => const CircularProgressIndicator(),
-          data: (value) => _FavoriteListContainer(favorites: value),
-          error: (_, __) => const ErrorPage(),
-        );
-    return Scaffold(body: SafeArea(child: body));
-  }
-}
-
-class _FavoriteListContainer extends ConsumerWidget {
-  const _FavoriteListContainer({required this.favorites});
-
-  final List<Favorite> favorites;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return favorites.isEmpty
+    final favorites = ref.watch(favoriteStoreProvider);
+    final body = favorites.isEmpty
         ? const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +28,7 @@ class _FavoriteListContainer extends ConsumerWidget {
                   size: 32,
                 ),
                 Text(
-                  'Love a video?\nLong-press to make it your fave!',
+                  'Love a video?\nTap the heart to make it your fave!',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 18),
                 ),
@@ -54,6 +40,8 @@ class _FavoriteListContainer extends ConsumerWidget {
               children: favorites.map(_FavoriteContainer.new).toList(),
             ),
           );
+
+    return Scaffold(body: SafeArea(child: body));
   }
 }
 
@@ -97,12 +85,12 @@ class _FavoriteContainer extends ConsumerWidget {
             }
           }
           await ref
-              .read(historyListProvider.notifier)
-              .addHistory(favorite.searchHit);
+              .read(historyServiceProvider)
+              .delete(History.from(favorite.searchHit));
         },
       ),
       onDismissed: (direction) async {
-        await ref.read(favoriteListProvider.notifier).deleteFavorite(favorite);
+        await ref.read(favoriteServiceProvider).delete(favorite);
       },
     );
   }

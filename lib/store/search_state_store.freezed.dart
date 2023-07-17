@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'search_view_model.dart';
+part of 'search_state_store.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -18,8 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SearchState {
   String get query => throw _privateConstructorUsedError;
   SortIndex get sortType => throw _privateConstructorUsedError;
-  LoadingState get loadingState => throw _privateConstructorUsedError;
-  LoadingState get moreLoadingState => throw _privateConstructorUsedError;
+  int get nextPage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchStateCopyWith<SearchState> get copyWith =>
@@ -32,11 +31,7 @@ abstract class $SearchStateCopyWith<$Res> {
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
-  $Res call(
-      {String query,
-      SortIndex sortType,
-      LoadingState loadingState,
-      LoadingState moreLoadingState});
+  $Res call({String query, SortIndex sortType, int nextPage});
 }
 
 /// @nodoc
@@ -54,8 +49,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   $Res call({
     Object? query = null,
     Object? sortType = null,
-    Object? loadingState = null,
-    Object? moreLoadingState = null,
+    Object? nextPage = null,
   }) {
     return _then(_value.copyWith(
       query: null == query
@@ -66,14 +60,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
               as SortIndex,
-      loadingState: null == loadingState
-          ? _value.loadingState
-          : loadingState // ignore: cast_nullable_to_non_nullable
-              as LoadingState,
-      moreLoadingState: null == moreLoadingState
-          ? _value.moreLoadingState
-          : moreLoadingState // ignore: cast_nullable_to_non_nullable
-              as LoadingState,
+      nextPage: null == nextPage
+          ? _value.nextPage
+          : nextPage // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -86,11 +76,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
       __$$_SearchStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String query,
-      SortIndex sortType,
-      LoadingState loadingState,
-      LoadingState moreLoadingState});
+  $Res call({String query, SortIndex sortType, int nextPage});
 }
 
 /// @nodoc
@@ -106,8 +92,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
     Object? sortType = null,
-    Object? loadingState = null,
-    Object? moreLoadingState = null,
+    Object? nextPage = null,
   }) {
     return _then(_$_SearchState(
       query: null == query
@@ -118,26 +103,21 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
               as SortIndex,
-      loadingState: null == loadingState
-          ? _value.loadingState
-          : loadingState // ignore: cast_nullable_to_non_nullable
-              as LoadingState,
-      moreLoadingState: null == moreLoadingState
-          ? _value.moreLoadingState
-          : moreLoadingState // ignore: cast_nullable_to_non_nullable
-              as LoadingState,
+      nextPage: null == nextPage
+          ? _value.nextPage
+          : nextPage // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
+class _$_SearchState implements _SearchState {
   const _$_SearchState(
       {this.query = '',
       this.sortType = SortIndex.timestamp,
-      this.loadingState = LoadingState.loadable,
-      this.moreLoadingState = LoadingState.loadable});
+      this.nextPage = 0});
 
   @override
   @JsonKey()
@@ -147,25 +127,11 @@ class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
   final SortIndex sortType;
   @override
   @JsonKey()
-  final LoadingState loadingState;
-  @override
-  @JsonKey()
-  final LoadingState moreLoadingState;
+  final int nextPage;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SearchState(query: $query, sortType: $sortType, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'SearchState'))
-      ..add(DiagnosticsProperty('query', query))
-      ..add(DiagnosticsProperty('sortType', sortType))
-      ..add(DiagnosticsProperty('loadingState', loadingState))
-      ..add(DiagnosticsProperty('moreLoadingState', moreLoadingState));
+  String toString() {
+    return 'SearchState(query: $query, sortType: $sortType, nextPage: $nextPage)';
   }
 
   @override
@@ -176,15 +142,12 @@ class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
             (identical(other.query, query) || other.query == query) &&
             (identical(other.sortType, sortType) ||
                 other.sortType == sortType) &&
-            (identical(other.loadingState, loadingState) ||
-                other.loadingState == loadingState) &&
-            (identical(other.moreLoadingState, moreLoadingState) ||
-                other.moreLoadingState == moreLoadingState));
+            (identical(other.nextPage, nextPage) ||
+                other.nextPage == nextPage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, query, sortType, loadingState, moreLoadingState);
+  int get hashCode => Object.hash(runtimeType, query, sortType, nextPage);
 
   @JsonKey(ignore: true)
   @override
@@ -197,17 +160,14 @@ abstract class _SearchState implements SearchState {
   const factory _SearchState(
       {final String query,
       final SortIndex sortType,
-      final LoadingState loadingState,
-      final LoadingState moreLoadingState}) = _$_SearchState;
+      final int nextPage}) = _$_SearchState;
 
   @override
   String get query;
   @override
   SortIndex get sortType;
   @override
-  LoadingState get loadingState;
-  @override
-  LoadingState get moreLoadingState;
+  int get nextPage;
   @override
   @JsonKey(ignore: true)
   _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>

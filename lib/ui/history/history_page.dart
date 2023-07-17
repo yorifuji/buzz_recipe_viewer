@@ -1,8 +1,9 @@
+import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
-import 'package:buzz_recipe_viewer/provider/favorite_list_provider.dart';
-import 'package:buzz_recipe_viewer/provider/history_list_provider.dart';
+import 'package:buzz_recipe_viewer/service/favorite_service.dart';
+import 'package:buzz_recipe_viewer/service/history_service.dart';
+import 'package:buzz_recipe_viewer/store/history_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
-import 'package:buzz_recipe_viewer/ui/error/error_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +17,8 @@ class HistoryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final body = ref.watch(historyListProvider).when(
-          loading: () => const CircularProgressIndicator(),
-          data: (value) => _HistoryListContainer(histories: value),
-          error: (_, __) => const ErrorPage(),
-        );
-    return Scaffold(body: SafeArea(child: body));
-  }
-}
-
-class _HistoryListContainer extends StatelessWidget {
-  const _HistoryListContainer({required this.histories});
-
-  final List<History> histories;
-
-  @override
-  Widget build(BuildContext context) {
-    return histories.isEmpty
+    final histories = ref.watch(historyStoreProvider);
+    final body = histories.isEmpty
         ? const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -54,6 +40,7 @@ class _HistoryListContainer extends StatelessWidget {
               children: histories.map(_HistoryContainer.new).toList(),
             ),
           );
+    return Scaffold(body: SafeArea(child: body));
   }
 }
 
@@ -98,8 +85,8 @@ class _HistoryContainer extends ConsumerWidget {
         },
         onLongPress: () async {
           await ref
-              .read(favoriteListProvider.notifier)
-              .addFavorite(history.searchHit);
+              .read(favoriteServiceProvider)
+              .add(Favorite.from(history.searchHit));
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -113,7 +100,7 @@ class _HistoryContainer extends ConsumerWidget {
         },
       ),
       onDismissed: (direction) {
-        ref.read(historyListProvider.notifier).deleteHistory(history);
+        ref.read(historyServiceProvider).delete(history);
       },
     );
   }

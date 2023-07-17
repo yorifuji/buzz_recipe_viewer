@@ -9,26 +9,20 @@ class ThemeSelector extends _$ThemeSelector {
   static const _seedColor = Colors.orange;
 
   @override
-  ThemeMode build() {
-    return ref
-        .watch(sharedPreferencesRepositoryProvider)
-        .getThemeModePreference()
-        .themeMode;
-  }
+  ThemeMode build() => ref
+      .watch(sharedPreferencesRepositoryProvider)
+      .getThemeModePreference()
+      .themeMode;
 
-  ThemeData lightTheme() {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.light,
-      colorSchemeSeed: _seedColor,
-    );
-  }
+  ThemeData lightTheme() => ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.light,
+        colorSchemeSeed: _seedColor,
+      );
 
-  ThemeData darkTheme() {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.dark,
-      colorSchemeSeed: _seedColor,
-    );
-  }
+  ThemeData darkTheme() => ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorSchemeSeed: _seedColor,
+      );
 }

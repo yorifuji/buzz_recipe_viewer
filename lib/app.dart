@@ -9,10 +9,11 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeSelectorProvider);
+    final themeSelector = ref.read(themeSelectorProvider.notifier);
     return MaterialApp(
       title: 'レシピ検索',
-      theme: ref.read(themeSelectorProvider.notifier).lightTheme(),
-      darkTheme: ref.read(themeSelectorProvider.notifier).darkTheme(),
+      theme: themeSelector.lightTheme(),
+      darkTheme: themeSelector.darkTheme(),
       themeMode: theme,
       home: const NavigationPage(),
     );

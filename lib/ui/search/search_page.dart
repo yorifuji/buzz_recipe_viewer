@@ -1,8 +1,13 @@
+import 'package:buzz_recipe_viewer/model/favorite.dart';
+import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
-import 'package:buzz_recipe_viewer/provider/favorite_list_provider.dart';
-import 'package:buzz_recipe_viewer/provider/history_list_provider.dart';
-import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/service/favorite_service.dart';
+import 'package:buzz_recipe_viewer/service/history_service.dart';
+import 'package:buzz_recipe_viewer/store/recipe_store.dart';
+import 'package:buzz_recipe_viewer/store/search_state_store.dart';
+import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
+import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
@@ -11,27 +16,47 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});
 
   static Widget show() => const SearchPage();
 
   @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loadingState = ref.watch(
+      searchViewModelProvider.select((value) => value.loadingState),
+    );
+
+    final body = switch (loadingState) {
+      LoadingState.loadable => const SizedBox.shrink(),
+      LoadingState.loading => const Center(child: CircularProgressIndicator()),
+      LoadingState.success => _VideoListContainer(),
+      LoadingState.failure => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('データを取得できませんでした'),
+            ElevatedButton(
+              onPressed: () => ref.refresh(searchViewModelProvider),
+              child: const Text('再読み込み'),
+            ),
+          ],
+        )
+    };
+
+    return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            _SearchHitResult(),
-            Padding(
+            Expanded(child: body),
+            const Padding(
               padding: EdgeInsets.only(top: 8),
-              child: _LabelBox(),
+              child: _SortLabelButton(),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 8),
               child: Divider(height: 1),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 8),
               child: _SearchBox(),
             ),
@@ -42,136 +67,110 @@ class SearchPage extends StatelessWidget {
   }
 }
 
-class _SearchHitResult extends HookConsumerWidget {
-  const _SearchHitResult();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final hitList =
-        ref.watch(searchViewModelProvider.select((value) => value.hitList));
-    final loadingState = ref.watch(
-      searchViewModelProvider.select((value) => value.loadingState),
-    );
-    final viewModel = ref.watch(searchViewModelProvider.notifier);
-
-    final Widget body;
-    switch (loadingState) {
-      case LoadingState.loadable:
-        body = const SizedBox.shrink();
-      case LoadingState.loading:
-        body = const Center(child: CircularProgressIndicator());
-      case LoadingState.success:
-        body = hitList.isEmpty
-            ? const Center(child: Text('検索結果は0件です'))
-            : RefreshIndicator(
-                onRefresh: viewModel.search,
-                child: _GetRecipeResultContainer(),
-              );
-      case LoadingState.failure:
-        body = Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('データを取得できませんでした'),
-            ElevatedButton(
-              onPressed: () => ref.refresh(searchViewModelProvider),
-              child: const Text('再読み込み'),
-            ),
-          ],
-        );
-    }
-    return Expanded(child: body);
-  }
-}
-
-class _GetRecipeResultContainer extends HookConsumerWidget {
+class _VideoListContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(searchViewModelProvider.notifier);
-    final hitList =
-        ref.watch(searchViewModelProvider.select((value) => value.hitList));
+    final hitList = ref.watch(recipeStoreProvider);
     final moreLoadingState = ref.watch(
       searchViewModelProvider.select((value) => value.moreLoadingState),
     );
     final nextPage =
-        ref.watch(searchViewModelProvider.select((value) => value.nextPage));
+        ref.watch(searchStateStoreProvider.select((value) => value.nextPage));
     final useInternalPlayer = ref.watch(
       settingsViewModelProvider.select((value) => value.useInternalPlayer),
     );
 
-    return ListView.builder(
-      itemCount: nextPage != 0 ? hitList.length + 1 : hitList.length,
-      itemBuilder: (BuildContext context, int index) {
-        if (index == hitList.length) {
-          return moreLoadingState == LoadingState.loading
-              ? const SizedBox(
-                  height: 48,
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              : SizedBox(
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: viewModel.searchMore,
-                    child: const Text('もっとみる'),
-                  ),
-                );
-        } else {
-          return InkWell(
-            child: SearchHitWidget(
-              searchHit: hitList[index].searchHit,
-            ),
-            onTap: () async {
-              if (useInternalPlayer) {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return VideoPlayerPage(
-                        searchHit: hitList[index].searchHit,
-                      );
-                    },
-                  ),
-                );
-              } else {
-                final url = Uri.parse(hitList[index].searchHit.url);
-                if (await launchUrl(
-                  url,
-                  mode: LaunchMode.externalApplication,
-                )) {
-                } else {
-                  // FIXME:
-                  // ignore: only_throw_errors
-                  throw 'Could not launch $url';
-                }
-              }
-              await ref
-                  .read(historyListProvider.notifier)
-                  .addHistory(hitList[index].searchHit);
-            },
-            onLongPress: () async {
-              await ref
-                  .read(favoriteListProvider.notifier)
-                  .addFavorite(hitList[index].searchHit);
+    if (hitList.isEmpty) {
+      return const Center(child: Text('検索結果は0件です'));
+    }
 
-              // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                    'お気に入りに追加しました',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  duration: Duration(seconds: 1),
+    return RefreshIndicator(
+      onRefresh: viewModel.search,
+      child: ListView.builder(
+        itemCount: nextPage != 0 ? hitList.length + 1 : hitList.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (index == hitList.length) {
+            return moreLoadingState == LoadingState.loading
+                ? const SizedBox(
+                    height: 48,
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                : SizedBox(
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: viewModel.searchMore,
+                      child: const Text('もっとみる'),
+                    ),
+                  );
+          } else {
+            return Column(
+              children: [
+                VideoImageContainer(
+                  searchHit: hitList[index].searchHit,
+                  isLiked: hitList[index].isFavorite,
+                  onTap: () async {
+                    await ref
+                        .read(historyServiceProvider)
+                        .add(History.from(hitList[index].searchHit));
+                    if (useInternalPlayer) {
+                      // ignore: use_build_context_synchronously
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return VideoPlayerPage(
+                              searchHit: hitList[index].searchHit,
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      final url = Uri.parse(hitList[index].searchHit.url);
+                      if (await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      )) {
+                      } else {
+                        // FIXME:
+                        // ignore: only_throw_errors
+                        throw 'Could not launch $url';
+                      }
+                    }
+                  },
+                  onTapLike: (isLiked) {
+                    if (isLiked) {
+                      ref
+                          .read(favoriteServiceProvider)
+                          .add(Favorite.from(hitList[index].searchHit));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'お気に入りに追加しました',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    } else {
+                      ref
+                          .read(favoriteServiceProvider)
+                          .deleteBySearchHit(hitList[index].searchHit);
+                    }
+                  },
                 ),
-              );
-            },
-          );
-        }
-      },
+                VideoInformationContainer(searchHit: hitList[index].searchHit)
+              ],
+            );
+          }
+        },
+      ),
     );
   }
 }
 
-class _LabelBox extends HookConsumerWidget {
-  const _LabelBox();
+class _SortLabelButton extends HookConsumerWidget {
+  const _SortLabelButton();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -199,7 +198,7 @@ class _LabelBox extends HookConsumerWidget {
               //     borderRadius: BorderRadius.circular(24),
               //   ),
               // ),
-              onPressed: () => openBottomSheet(
+              onPressed: () => _openBottomSheet(
                 context,
                 sortType,
                 (sortType) {
@@ -288,7 +287,7 @@ enum SortListTile {
   final SortIndex sortType;
 }
 
-void openBottomSheet(
+void _openBottomSheet(
   BuildContext context,
   SortIndex sortType,
   void Function(SortIndex) onTap,

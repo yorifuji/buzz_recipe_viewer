@@ -24,6 +24,7 @@ class RecipeRepositoryMock implements RecipeRepository {
           10,
           (index) => SearchHit(
             id: 'id${index + page}',
+            videoId: 'B2D3lGOrdVQ',
             title: '一度食べたら忘れられない！家庭で作れる究極の美味しさ、超・至高の唐揚げレシピ',
             description: '動画を見て楽しんで頂けましたら\n'
                 '高評価、コメントをお願いします！\n'
@@ -58,7 +59,6 @@ class RecipeRepositoryMock implements RecipeRepository {
             likes: 12345,
             image:
                 'https://yorifuji.github.io/public/images/video_dummy_image.00${index % 2}.png',
-            objectID: 'B2D3lGOrdVQ',
             url: 'https://www.youtube.com/embed/B2D3lGOrdVQ',
           ),
         ),
