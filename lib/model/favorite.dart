@@ -8,7 +8,8 @@ part 'favorite.g.dart';
 class Favorite {
   Favorite(this.searchHitEmbedded)
       : createdAt = DateTime.now(),
-        updatedAt = DateTime.now();
+        updatedAt = DateTime.now(),
+        searchHitId = searchHitEmbedded.id!;
   factory Favorite.from(SearchHit searchHit) =>
       Favorite(SearchHitEmbedded()..update(searchHit));
 
@@ -18,5 +19,7 @@ class Favorite {
   Id id = Isar.autoIncrement;
   DateTime createdAt;
   DateTime updatedAt;
+  @Index()
+  String searchHitId;
   SearchHitEmbedded searchHitEmbedded;
 }

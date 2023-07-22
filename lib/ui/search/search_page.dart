@@ -108,7 +108,7 @@ class _VideoListContainer extends HookConsumerWidget {
               children: [
                 VideoImageContainer(
                   searchHit: hitList[index].searchHit,
-                  isLiked: hitList[index].isFavorite,
+                  isLiked: hitList[index].favorite != null,
                   onTap: () async {
                     await ref
                         .read(historyServiceProvider)

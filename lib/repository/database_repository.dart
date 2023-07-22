@@ -29,14 +29,16 @@ class DatabaseRepository {
   // put history
   Future<void> insertHistory(History history) async {
     await _isar.writeTxn(() async {
-      await _isar.historys.put(history);
+      final x = await _isar.historys.put(history);
+      print(x);
     });
   }
 
   // put favorite
   Future<void> insertFavorite(Favorite favorite) async {
     await _isar.writeTxn(() async {
-      await _isar.favorites.put(favorite);
+      final x = await _isar.favorites.put(favorite);
+      print(x);
     });
   }
 
@@ -58,8 +60,8 @@ class DatabaseRepository {
   Future<void> deleteFavoriteBySearchHit(SearchHit searchHit) async {
     await _isar.writeTxn(() async {
       await _isar.favorites
-          .filter()
-          .searchHitEmbedded((q) => q.idEqualTo(searchHit.id))
+          .where()
+          .searchHitIdEqualTo(searchHit.id)
           .deleteAll();
     });
   }

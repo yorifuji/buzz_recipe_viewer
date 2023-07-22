@@ -30,8 +30,13 @@ const HistorySchema = CollectionSchema(
       type: IsarType.object,
       target: r'SearchHitEmbedded',
     ),
-    r'updatedAt': PropertySchema(
+    r'searchHitId': PropertySchema(
       id: 2,
+      name: r'searchHitId',
+      type: IsarType.string,
+    ),
+    r'updatedAt': PropertySchema(
+      id: 3,
       name: r'updatedAt',
       type: IsarType.dateTime,
     )
@@ -41,7 +46,21 @@ const HistorySchema = CollectionSchema(
   deserialize: _historyDeserialize,
   deserializeProp: _historyDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'searchHitId': IndexSchema(
+      id: 4716662227405893562,
+      name: r'searchHitId',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'searchHitId',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {r'SearchHitEmbedded': SearchHitEmbeddedSchema},
   getId: _historyGetId,
@@ -59,6 +78,7 @@ int _historyEstimateSize(
   bytesCount += 3 +
       SearchHitEmbeddedSchema.estimateSize(
           object.searchHitEmbedded, allOffsets[SearchHitEmbedded]!, allOffsets);
+  bytesCount += 3 + object.searchHitId.length * 3;
   return bytesCount;
 }
 
@@ -75,7 +95,8 @@ void _historySerialize(
     SearchHitEmbeddedSchema.serialize,
     object.searchHitEmbedded,
   );
-  writer.writeDateTime(offsets[2], object.updatedAt);
+  writer.writeString(offsets[2], object.searchHitId);
+  writer.writeDateTime(offsets[3], object.updatedAt);
 }
 
 History _historyDeserialize(
@@ -94,7 +115,8 @@ History _historyDeserialize(
   );
   object.createdAt = reader.readDateTime(offsets[0]);
   object.id = id;
-  object.updatedAt = reader.readDateTime(offsets[2]);
+  object.searchHitId = reader.readString(offsets[2]);
+  object.updatedAt = reader.readDateTime(offsets[3]);
   return object;
 }
 
@@ -115,6 +137,8 @@ P _historyDeserializeProp<P>(
           ) ??
           SearchHitEmbedded()) as P;
     case 2:
+      return (reader.readString(offset)) as P;
+    case 3:
       return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -204,6 +228,51 @@ extension HistoryQueryWhere on QueryBuilder<History, History, QWhereClause> {
         upper: upperId,
         includeUpper: includeUpper,
       ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterWhereClause> searchHitIdEqualTo(
+      String searchHitId) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'searchHitId',
+        value: [searchHitId],
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterWhereClause> searchHitIdNotEqualTo(
+      String searchHitId) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [],
+              upper: [searchHitId],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [searchHitId],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [searchHitId],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [],
+              upper: [searchHitId],
+              includeUpper: false,
+            ));
+      }
     });
   }
 }
@@ -315,6 +384,137 @@ extension HistoryQueryFilter
     });
   }
 
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'searchHitId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'searchHitId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition> searchHitIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchHitId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<History, History, QAfterFilterCondition>
+      searchHitIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'searchHitId',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<History, History, QAfterFilterCondition> updatedAtEqualTo(
       DateTime value) {
     return QueryBuilder.apply(this, (query) {
@@ -395,6 +595,18 @@ extension HistoryQuerySortBy on QueryBuilder<History, History, QSortBy> {
     });
   }
 
+  QueryBuilder<History, History, QAfterSortBy> sortBySearchHitId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<History, History, QAfterSortBy> sortBySearchHitIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.desc);
+    });
+  }
+
   QueryBuilder<History, History, QAfterSortBy> sortByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.asc);
@@ -434,6 +646,18 @@ extension HistoryQuerySortThenBy
     });
   }
 
+  QueryBuilder<History, History, QAfterSortBy> thenBySearchHitId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<History, History, QAfterSortBy> thenBySearchHitIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.desc);
+    });
+  }
+
   QueryBuilder<History, History, QAfterSortBy> thenByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.asc);
@@ -452,6 +676,13 @@ extension HistoryQueryWhereDistinct
   QueryBuilder<History, History, QDistinct> distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'createdAt');
+    });
+  }
+
+  QueryBuilder<History, History, QDistinct> distinctBySearchHitId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'searchHitId', caseSensitive: caseSensitive);
     });
   }
 
@@ -480,6 +711,12 @@ extension HistoryQueryProperty
       searchHitEmbeddedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'searchHitEmbedded');
+    });
+  }
+
+  QueryBuilder<History, String, QQueryOperations> searchHitIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'searchHitId');
     });
   }
 

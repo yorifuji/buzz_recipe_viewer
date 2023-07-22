@@ -8,7 +8,8 @@ part 'history.g.dart';
 class History {
   History(this.searchHitEmbedded)
       : createdAt = DateTime.now(),
-        updatedAt = DateTime.now();
+        updatedAt = DateTime.now(),
+        searchHitId = searchHitEmbedded.id!;
   factory History.from(SearchHit searchHit) =>
       History(SearchHitEmbedded()..update(searchHit));
 
@@ -18,5 +19,7 @@ class History {
   Id id = Isar.autoIncrement;
   DateTime createdAt;
   DateTime updatedAt;
+  @Index()
+  String searchHitId;
   SearchHitEmbedded searchHitEmbedded;
 }

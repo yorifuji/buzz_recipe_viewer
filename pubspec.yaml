@@ -53,6 +53,7 @@ dependencies:
   shared_preferences: ^2.2.0
   custom_text: ^1.0.0
   like_button: ^2.0.5
+  collection: ^1.17.1
 
 dev_dependencies:
   flutter_test:

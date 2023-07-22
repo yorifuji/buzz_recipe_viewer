@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Recipe {
   SearchHit get searchHit => throw _privateConstructorUsedError;
-  bool get isFavorite => throw _privateConstructorUsedError;
+  Favorite? get favorite => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RecipeCopyWith<Recipe> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ abstract class $RecipeCopyWith<$Res> {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) then) =
       _$RecipeCopyWithImpl<$Res, Recipe>;
   @useResult
-  $Res call({SearchHit searchHit, bool isFavorite});
+  $Res call({SearchHit searchHit, Favorite? favorite});
 
   $SearchHitCopyWith<$Res> get searchHit;
 }
@@ -47,17 +47,17 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
   @override
   $Res call({
     Object? searchHit = null,
-    Object? isFavorite = null,
+    Object? favorite = freezed,
   }) {
     return _then(_value.copyWith(
       searchHit: null == searchHit
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
               as SearchHit,
-      isFavorite: null == isFavorite
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
+      favorite: freezed == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as Favorite?,
     ) as $Val);
   }
 
@@ -76,7 +76,7 @@ abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       __$$_RecipeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SearchHit searchHit, bool isFavorite});
+  $Res call({SearchHit searchHit, Favorite? favorite});
 
   @override
   $SearchHitCopyWith<$Res> get searchHit;
@@ -93,17 +93,17 @@ class __$$_RecipeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchHit = null,
-    Object? isFavorite = null,
+    Object? favorite = freezed,
   }) {
     return _then(_$_Recipe(
       searchHit: null == searchHit
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
               as SearchHit,
-      isFavorite: null == isFavorite
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
+      favorite: freezed == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as Favorite?,
     ));
   }
 }
@@ -111,17 +111,17 @@ class __$$_RecipeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Recipe implements _Recipe {
-  const _$_Recipe({required this.searchHit, this.isFavorite = false});
+  const _$_Recipe({required this.searchHit, this.favorite = null});
 
   @override
   final SearchHit searchHit;
   @override
   @JsonKey()
-  final bool isFavorite;
+  final Favorite? favorite;
 
   @override
   String toString() {
-    return 'Recipe(searchHit: $searchHit, isFavorite: $isFavorite)';
+    return 'Recipe(searchHit: $searchHit, favorite: $favorite)';
   }
 
   @override
@@ -131,12 +131,12 @@ class _$_Recipe implements _Recipe {
             other is _$_Recipe &&
             (identical(other.searchHit, searchHit) ||
                 other.searchHit == searchHit) &&
-            (identical(other.isFavorite, isFavorite) ||
-                other.isFavorite == isFavorite));
+            (identical(other.favorite, favorite) ||
+                other.favorite == favorite));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchHit, isFavorite);
+  int get hashCode => Object.hash(runtimeType, searchHit, favorite);
 
   @JsonKey(ignore: true)
   @override
@@ -147,12 +147,13 @@ class _$_Recipe implements _Recipe {
 
 abstract class _Recipe implements Recipe {
   const factory _Recipe(
-      {required final SearchHit searchHit, final bool isFavorite}) = _$_Recipe;
+      {required final SearchHit searchHit,
+      final Favorite? favorite}) = _$_Recipe;
 
   @override
   SearchHit get searchHit;
   @override
-  bool get isFavorite;
+  Favorite? get favorite;
   @override
   @JsonKey(ignore: true)
   _$$_RecipeCopyWith<_$_Recipe> get copyWith =>

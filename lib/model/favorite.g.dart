@@ -30,8 +30,13 @@ const FavoriteSchema = CollectionSchema(
       type: IsarType.object,
       target: r'SearchHitEmbedded',
     ),
-    r'updatedAt': PropertySchema(
+    r'searchHitId': PropertySchema(
       id: 2,
+      name: r'searchHitId',
+      type: IsarType.string,
+    ),
+    r'updatedAt': PropertySchema(
+      id: 3,
       name: r'updatedAt',
       type: IsarType.dateTime,
     )
@@ -41,7 +46,21 @@ const FavoriteSchema = CollectionSchema(
   deserialize: _favoriteDeserialize,
   deserializeProp: _favoriteDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'searchHitId': IndexSchema(
+      id: 4716662227405893562,
+      name: r'searchHitId',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'searchHitId',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {r'SearchHitEmbedded': SearchHitEmbeddedSchema},
   getId: _favoriteGetId,
@@ -59,6 +78,7 @@ int _favoriteEstimateSize(
   bytesCount += 3 +
       SearchHitEmbeddedSchema.estimateSize(
           object.searchHitEmbedded, allOffsets[SearchHitEmbedded]!, allOffsets);
+  bytesCount += 3 + object.searchHitId.length * 3;
   return bytesCount;
 }
 
@@ -75,7 +95,8 @@ void _favoriteSerialize(
     SearchHitEmbeddedSchema.serialize,
     object.searchHitEmbedded,
   );
-  writer.writeDateTime(offsets[2], object.updatedAt);
+  writer.writeString(offsets[2], object.searchHitId);
+  writer.writeDateTime(offsets[3], object.updatedAt);
 }
 
 Favorite _favoriteDeserialize(
@@ -94,7 +115,8 @@ Favorite _favoriteDeserialize(
   );
   object.createdAt = reader.readDateTime(offsets[0]);
   object.id = id;
-  object.updatedAt = reader.readDateTime(offsets[2]);
+  object.searchHitId = reader.readString(offsets[2]);
+  object.updatedAt = reader.readDateTime(offsets[3]);
   return object;
 }
 
@@ -115,6 +137,8 @@ P _favoriteDeserializeProp<P>(
           ) ??
           SearchHitEmbedded()) as P;
     case 2:
+      return (reader.readString(offset)) as P;
+    case 3:
       return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -204,6 +228,51 @@ extension FavoriteQueryWhere on QueryBuilder<Favorite, Favorite, QWhereClause> {
         upper: upperId,
         includeUpper: includeUpper,
       ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterWhereClause> searchHitIdEqualTo(
+      String searchHitId) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'searchHitId',
+        value: [searchHitId],
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterWhereClause> searchHitIdNotEqualTo(
+      String searchHitId) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [],
+              upper: [searchHitId],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [searchHitId],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [searchHitId],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'searchHitId',
+              lower: [],
+              upper: [searchHitId],
+              includeUpper: false,
+            ));
+      }
     });
   }
 }
@@ -315,6 +384,138 @@ extension FavoriteQueryFilter
     });
   }
 
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition>
+      searchHitIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'searchHitId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'searchHitId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'searchHitId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition> searchHitIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchHitId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterFilterCondition>
+      searchHitIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'searchHitId',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Favorite, Favorite, QAfterFilterCondition> updatedAtEqualTo(
       DateTime value) {
     return QueryBuilder.apply(this, (query) {
@@ -395,6 +596,18 @@ extension FavoriteQuerySortBy on QueryBuilder<Favorite, Favorite, QSortBy> {
     });
   }
 
+  QueryBuilder<Favorite, Favorite, QAfterSortBy> sortBySearchHitId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterSortBy> sortBySearchHitIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.desc);
+    });
+  }
+
   QueryBuilder<Favorite, Favorite, QAfterSortBy> sortByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.asc);
@@ -434,6 +647,18 @@ extension FavoriteQuerySortThenBy
     });
   }
 
+  QueryBuilder<Favorite, Favorite, QAfterSortBy> thenBySearchHitId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QAfterSortBy> thenBySearchHitIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchHitId', Sort.desc);
+    });
+  }
+
   QueryBuilder<Favorite, Favorite, QAfterSortBy> thenByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAt', Sort.asc);
@@ -452,6 +677,13 @@ extension FavoriteQueryWhereDistinct
   QueryBuilder<Favorite, Favorite, QDistinct> distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'createdAt');
+    });
+  }
+
+  QueryBuilder<Favorite, Favorite, QDistinct> distinctBySearchHitId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'searchHitId', caseSensitive: caseSensitive);
     });
   }
 
@@ -480,6 +712,12 @@ extension FavoriteQueryProperty
       searchHitEmbeddedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'searchHitEmbedded');
+    });
+  }
+
+  QueryBuilder<Favorite, String, QQueryOperations> searchHitIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'searchHitId');
     });
   }
 

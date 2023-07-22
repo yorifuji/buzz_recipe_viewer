@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/store/favorite_store.dart';
 import 'package:buzz_recipe_viewer/store/search_hit_store.dart';
+import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_store.g.dart';
@@ -16,12 +17,12 @@ class RecipeStore extends _$RecipeStore {
       return searchHitList.map((e) => Recipe(searchHit: e)).toList();
     } else {
       return searchHitList.map((searchHit) {
-        final isFavorite = favoriteList.any(
-          (favorite) => favorite.searchHitEmbedded.id == searchHit.id,
+        final favorite = favoriteList.firstWhereOrNull(
+          (favorite) => favorite.searchHitId == searchHit.id,
         );
         return Recipe(
           searchHit: searchHit,
-          isFavorite: isFavorite,
+          favorite: favorite,
         );
       }).toList();
     }

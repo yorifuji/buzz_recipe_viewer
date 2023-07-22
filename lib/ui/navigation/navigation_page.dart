@@ -76,8 +76,9 @@ class NavigationPage extends ConsumerWidget {
                     )
                     .toList(),
                 onDestinationSelected: (value) {
-                  if (navigatorKeys[value].currentState?.canPop() ?? false) {
-                    navigatorKeys[value].currentState?.pop();
+                  if (navigatorKeys[currentTab.index].currentState?.canPop() ??
+                      false) {
+                    navigatorKeys[currentTab.index].currentState?.pop();
                   }
                   ref.read(currentAppTab.notifier).state =
                       AppTab.fromIndex(value);
