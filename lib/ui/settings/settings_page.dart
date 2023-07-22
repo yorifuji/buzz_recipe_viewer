@@ -1,6 +1,8 @@
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
+import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -62,6 +64,20 @@ class SettingsPage extends ConsumerWidget {
               )
             ],
           ),
+          if (kDebugMode)
+            SettingsSection(
+              title: const Text('デバッグメニュー'),
+              tiles: <SettingsTile>[
+                SettingsTile(
+                  title: const Text('ダミーデータ'),
+                  onPressed: (_) async {
+                    await ref
+                        .read(recipeNoteServiceProvider)
+                        .createDummyRecipeNote();
+                  },
+                ),
+              ],
+            ),
         ],
       ),
     );

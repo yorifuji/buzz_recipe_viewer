@@ -10,11 +10,11 @@ class FavoriteStore extends _$FavoriteStore {
   List<Favorite> build() {
     final databaseRepository = ref.read(databaseRepositoryProvider);
     ref.onAddListener(() async {
-      state = await databaseRepository.getFavorites;
+      state = await databaseRepository.getFavoriteList;
     });
     databaseRepository.watchFavorites(
       onChange: (_) async {
-        state = await databaseRepository.getFavorites;
+        state = await databaseRepository.getFavoriteList;
       },
     );
     return [];

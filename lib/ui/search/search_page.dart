@@ -155,7 +155,7 @@ class _VideoListContainer extends HookConsumerWidget {
                     } else {
                       ref
                           .read(favoriteServiceProvider)
-                          .deleteBySearchHit(hitList[index].searchHit);
+                          .delete(hitList[index].favorite!);
                     }
                   },
                 ),

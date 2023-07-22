@@ -1,6 +1,6 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
-import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,12 +18,16 @@ class DatabaseRepository {
   final Isar _isar;
 
   // get historys
-  Future<List<History>> get getHistorys =>
+  Future<List<History>> get getHistoryList =>
       _isar.historys.where().sortByCreatedAtDesc().findAll();
 
   // get favorites
-  Future<List<Favorite>> get getFavorites =>
+  Future<List<Favorite>> get getFavoriteList =>
       _isar.favorites.where().sortByCreatedAtDesc().findAll();
+
+  // get recipe note list
+  Future<List<RecipeNote>> get getRecipeNoteList =>
+      _isar.recipeNotes.where().sortByCreatedAtDesc().findAll();
 
   // put history
   Future<void> insertHistory(History history) async {
@@ -36,6 +40,13 @@ class DatabaseRepository {
   Future<void> insertFavorite(Favorite favorite) async {
     await _isar.writeTxn(() async {
       await _isar.favorites.put(favorite);
+    });
+  }
+
+  // put recipe
+  Future<void> insertRecipeNote(RecipeNote recipeNote) async {
+    await _isar.writeTxn(() async {
+      await _isar.recipeNotes.put(recipeNote);
     });
   }
 
@@ -53,13 +64,10 @@ class DatabaseRepository {
     });
   }
 
-  // delete favorite
-  Future<void> deleteFavoriteBySearchHit(SearchHit searchHit) async {
+  // delete recipe
+  Future<void> deleteRecipeNote(RecipeNote recipeNote) async {
     await _isar.writeTxn(() async {
-      await _isar.favorites
-          .where()
-          .searchHitIdEqualTo(searchHit.id)
-          .deleteAll();
+      await _isar.recipeNotes.delete(recipeNote.id);
     });
   }
 
@@ -71,5 +79,10 @@ class DatabaseRepository {
   // watch favorite
   void watchFavorites({required void Function(void) onChange}) {
     _isar.favorites.watchLazy().listen(onChange);
+  }
+
+  // watch recipe
+  void watchRecipeNotes({required void Function(void) onChange}) {
+    _isar.recipeNotes.watchLazy().listen(onChange);
   }
 }

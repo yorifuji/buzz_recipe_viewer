@@ -1,6 +1,8 @@
 import 'package:buzz_recipe_viewer/app.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/provider/is_first_run_provider.dart';
 import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
@@ -20,7 +22,7 @@ void main() async {
     dotenv.load(),
     // Isar
     Isar.open(
-      [HistorySchema, FavoriteSchema],
+      [HistorySchema, FavoriteSchema, RecipeNoteSchema],
       directory: (await getApplicationDocumentsDirectory()).path,
     ),
     // PackageInfo
@@ -29,10 +31,14 @@ void main() async {
     SharedPreferences.getInstance()
   ).wait;
 
+  // 初回起動かどうか
+  final isFirstRun = await isar.getSize() == 0;
+
   runApp(
     ProviderScope(
       overrides: [
         isarProvider.overrideWithValue(isar),
+        isFirstRunProvider.overrideWithValue(isFirstRun),
         packageInfoProvider.overrideWithValue(packageInfo),
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],

@@ -1,5 +1,4 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -18,7 +17,4 @@ class FavoriteService {
 
   Future<void> delete(Favorite favorite) =>
       _databaseRepository.deleteFavorite(favorite);
-
-  Future<void> deleteBySearchHit(SearchHit searchHit) =>
-      _databaseRepository.deleteFavoriteBySearchHit(searchHit);
 }

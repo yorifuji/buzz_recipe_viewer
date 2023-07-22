@@ -2,28 +2,26 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'shared_preferences_repository.dart';
+part of 'recipe_note_store.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sharedPreferencesRepositoryHash() =>
-    r'fde8330b98dc9185ca6c9c87b9b51acd41624a33';
+String _$recipeNoteStoreHash() => r'd5c8b1694e71879944128dbabe798798ceaec0e1';
 
-/// See also [sharedPreferencesRepository].
-@ProviderFor(sharedPreferencesRepository)
-final sharedPreferencesRepositoryProvider =
-    AutoDisposeProvider<SharedPreferencesRepository>.internal(
-  sharedPreferencesRepository,
-  name: r'sharedPreferencesRepositoryProvider',
+/// See also [RecipeNoteStore].
+@ProviderFor(RecipeNoteStore)
+final recipeNoteStoreProvider =
+    AutoDisposeNotifierProvider<RecipeNoteStore, List<RecipeNote>>.internal(
+  RecipeNoteStore.new,
+  name: r'recipeNoteStoreProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$sharedPreferencesRepositoryHash,
+      : _$recipeNoteStoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef SharedPreferencesRepositoryRef
-    = AutoDisposeProviderRef<SharedPreferencesRepository>;
+typedef _$RecipeNoteStore = AutoDisposeNotifier<List<RecipeNote>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

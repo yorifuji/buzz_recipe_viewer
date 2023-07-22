@@ -8,7 +8,7 @@ part of 'history_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$historyStoreHash() => r'98b81373d120d686dde7ede05974994c707ce2ed';
+String _$historyStoreHash() => r'3a54c9c31c9ac125537f3ec8eccc53f527b68877';
 
 /// See also [HistoryStore].
 @ProviderFor(HistoryStore)

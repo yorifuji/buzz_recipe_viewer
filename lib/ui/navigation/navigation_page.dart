@@ -1,16 +1,17 @@
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
-import 'package:buzz_recipe_viewer/ui/history/history_page.dart';
+import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final currentAppTab = StateProvider((ref) => AppTab.search);
+final currentAppTab = StateProvider((ref) => AppTab.recipe);
 
 enum AppTab {
+  recipe('Recipe', Icon(Icons.note)),
   search('Search', Icon(Icons.search)),
   favorite('Favorite', Icon(Icons.favorite)),
-  history('History', Icon(Icons.history)),
+  // history('History', Icon(Icons.history)),
   setting('Settings', Icon(Icons.settings));
 
   const AppTab(this.title, this.icon);
@@ -22,9 +23,10 @@ enum AppTab {
   }
 
   Widget Function() get show => switch (this) {
+        AppTab.recipe => RecipeNotePage.show,
         AppTab.search => SearchPage.show,
         AppTab.favorite => FavoritePage.show,
-        AppTab.history => HistoryPage.show,
+        // AppTab.history => HistoryPage.show,
         AppTab.setting => SettingsPage.show,
       };
 }
@@ -32,12 +34,8 @@ enum AppTab {
 class NavigationPage extends ConsumerWidget {
   const NavigationPage({super.key});
 
-  static final List<GlobalKey<NavigatorState>> navigatorKeys = [
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-  ];
+  static final List<GlobalKey<NavigatorState>> navigatorKeys =
+      AppTab.values.map((tab) => GlobalKey<NavigatorState>()).toList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

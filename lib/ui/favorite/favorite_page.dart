@@ -89,7 +89,7 @@ class _FavoriteContainer extends ConsumerWidget {
               .delete(History.from(favorite.searchHit));
         },
       ),
-      onDismissed: (direction) async {
+      onDismissed: (_) async {
         await ref.read(favoriteServiceProvider).delete(favorite);
       },
     );

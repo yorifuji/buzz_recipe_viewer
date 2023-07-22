@@ -22,9 +22,8 @@ enum ThemeModePreference {
 @riverpod
 SharedPreferencesRepository sharedPreferencesRepository(
   SharedPreferencesRepositoryRef ref,
-) {
-  return SharedPreferencesRepository(ref.watch(sharedPreferencesProvider));
-}
+) =>
+    SharedPreferencesRepository(ref.watch(sharedPreferencesProvider));
 
 class SharedPreferencesRepository {
   SharedPreferencesRepository(this._sharedPreferences);
@@ -52,4 +51,13 @@ class SharedPreferencesRepository {
   ) async {
     await _sharedPreferences.setInt('theme_mode', themeModePreference.index);
   }
+
+  Future<bool> getIsFirstRun() async {
+    final result = _sharedPreferences.getBool('is_first_run') ?? true;
+    await _sharedPreferences.setBool('is_first_run', false);
+    return result;
+  }
 }
+
+final sharedPreferencesRepositoryIsFirstRun =
+    Provider((ref) => throw UnimplementedError());
