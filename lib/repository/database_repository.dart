@@ -1,7 +1,6 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/model/search_hit_embedded.dart';
 import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -29,16 +28,14 @@ class DatabaseRepository {
   // put history
   Future<void> insertHistory(History history) async {
     await _isar.writeTxn(() async {
-      final x = await _isar.historys.put(history);
-      print(x);
+      await _isar.historys.put(history);
     });
   }
 
   // put favorite
   Future<void> insertFavorite(Favorite favorite) async {
     await _isar.writeTxn(() async {
-      final x = await _isar.favorites.put(favorite);
-      print(x);
+      await _isar.favorites.put(favorite);
     });
   }
 
