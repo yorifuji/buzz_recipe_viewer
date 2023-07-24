@@ -41,11 +41,12 @@ class VideoImageContainer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: LikeButton(
+                  size: 48,
                   likeBuilder: (bool isLiked) {
                     return Icon(
                       Icons.favorite,
                       color: isLiked ? Colors.orange : Colors.grey,
-                      size: 30,
+                      size: 32,
                     );
                   },
                   isLiked: isLiked,

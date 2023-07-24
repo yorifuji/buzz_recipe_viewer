@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
