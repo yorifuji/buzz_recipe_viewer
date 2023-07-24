@@ -10,14 +10,19 @@
 
 - Flutter
   - MVVM + Repository
-  - dependencies
+  - DI
     - [Riverpod](https://riverpod.dev/)
+  - Database
     - [Isar Database](https://isar.dev/ja/)
+    - [shared_preferences | Flutter Package](https://pub.dev/packages/shared_preferences)
+  - Model
     - [freezed | Dart Package](https://pub.dev/packages/freezed)
+  - UI
     - [youtube_player_flutter | Flutter Package](https://pub.dev/packages/youtube_player_flutter)
     - [settings_ui | Flutter Package](https://pub.dev/packages/settings_ui)
+    - [like_button | Flutter Package](https://pub.dev/packages/like_button)
+  - Other
     - [package_info_plus | Flutter Package](https://pub.dev/packages/package_info_plus)
-    - [shared_preferences | Flutter Package](https://pub.dev/packages/shared_preferences)
 - Backend
   - [Algolia](https://www.algolia.com/)
 - Data Source
