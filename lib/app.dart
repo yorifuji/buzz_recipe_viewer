@@ -16,6 +16,7 @@ class App extends ConsumerWidget {
       darkTheme: themeSelector.darkTheme(),
       themeMode: theme,
       home: const NavigationPage(),
+      // debugShowCheckedModeBanner: false,
     );
   }
 }
