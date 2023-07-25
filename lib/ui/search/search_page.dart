@@ -26,6 +26,7 @@ class SearchPage extends ConsumerWidget {
     final loadingState = ref.watch(
       searchViewModelProvider.select((value) => value.loadingState),
     );
+    final viewModel = ref.watch(searchViewModelProvider.notifier);
 
     final body = switch (loadingState) {
       LoadingState.loadable => const SizedBox.shrink(),
@@ -36,7 +37,7 @@ class SearchPage extends ConsumerWidget {
           children: [
             const Text('データを取得できませんでした'),
             ElevatedButton(
-              onPressed: () => ref.refresh(searchViewModelProvider),
+              onPressed: viewModel.search,
               child: const Text('再読み込み'),
             ),
           ],
