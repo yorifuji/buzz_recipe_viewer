@@ -69,7 +69,7 @@ class SettingsPage extends ConsumerWidget {
               title: const Text('デバッグメニュー'),
               tiles: <SettingsTile>[
                 SettingsTile(
-                  title: const Text('ダミーデータ'),
+                  title: const Text('ダミーレシピを登録'),
                   onPressed: (_) async {
                     await ref
                         .read(recipeNoteServiceProvider)
