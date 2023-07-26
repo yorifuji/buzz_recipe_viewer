@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
@@ -41,8 +42,8 @@ class NavigationPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final currentTab = ref.watch(currentAppTab);
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    final fullscreenVideoPlayingState =
+        ref.watch(fullscreenVideoPlayingStateProvider);
 
     return WillPopScope(
       // スタックが存在しない場合はアプリを終了する（バックグラウンドに移動する）
@@ -63,8 +64,9 @@ class NavigationPage extends ConsumerWidget {
               )
               .toList(),
         ),
-        bottomNavigationBar: isPortrait
-            ? NavigationBar(
+        bottomNavigationBar: fullscreenVideoPlayingState
+            ? null
+            : NavigationBar(
                 destinations: AppTab.values
                     .map(
                       (tab) => NavigationDestination(
@@ -83,8 +85,7 @@ class NavigationPage extends ConsumerWidget {
                 },
                 selectedIndex: currentTab.index,
                 indicatorColor: theme.colorScheme.primaryContainer,
-              )
-            : null,
+              ),
       ),
     );
   }

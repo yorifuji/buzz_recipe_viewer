@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class VideoPlayerPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final didInitStateDone = useState(false);
     final isMounted = useIsMounted();
+    final fullscreenVideoPlayingState =
+        ref.watch(fullscreenVideoPlayingStateProvider);
+
     useEffect(
       () {
         if (isMounted()) {
@@ -30,11 +34,10 @@ class VideoPlayerPage extends HookConsumerWidget {
       },
       [],
     );
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
 
-    return isPortrait
-        ? Scaffold(
+    return fullscreenVideoPlayingState
+        ? Scaffold(body: SafeArea(child: _VideoPlayer(searchHit.videoId)))
+        : Scaffold(
             body: SafeArea(
               child: InkWell(
                 child: SingleChildScrollView(
@@ -43,7 +46,7 @@ class VideoPlayerPage extends HookConsumerWidget {
                       Column(
                         children: [
                           if (didInitStateDone.value)
-                            _videoPlayer()
+                            _VideoPlayer(searchHit.videoId)
                           else
                             const AspectRatio(
                               aspectRatio: 16 / 9,
@@ -78,18 +81,33 @@ class VideoPlayerPage extends HookConsumerWidget {
                 },
               ),
             ),
-          )
-        : Scaffold(body: SafeArea(child: _videoPlayer()));
+          );
   }
+}
 
-  Widget _videoPlayer() => YoutubePlayer(
-        controller: YoutubePlayerController(
-          initialVideoId: searchHit.videoId,
-          flags: const YoutubePlayerFlags(
-            captionLanguage: 'ja',
-            showLiveFullscreenButton: false,
-          ),
-        ),
-        showVideoProgressIndicator: true,
-      );
+class _VideoPlayer extends ConsumerWidget {
+  const _VideoPlayer(this.videoId);
+
+  final String videoId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = YoutubePlayerController(
+      initialVideoId: videoId,
+      flags: const YoutubePlayerFlags(
+        captionLanguage: 'ja',
+      ),
+    );
+
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(controller: controller),
+      onEnterFullScreen: () {
+        ref.read(fullscreenVideoPlayingStateProvider.notifier).state = true;
+      },
+      onExitFullScreen: () {
+        ref.read(fullscreenVideoPlayingStateProvider.notifier).state = false;
+      },
+      builder: (context, player) => player,
+    );
+  }
 }
