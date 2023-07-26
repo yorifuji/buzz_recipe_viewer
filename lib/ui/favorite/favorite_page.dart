@@ -3,7 +3,8 @@ import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/service/history_service.dart';
 import 'package:buzz_recipe_viewer/store/favorite_store.dart';
-import 'package:buzz_recipe_viewer/ui/common/search_hit/search_hit_container.dart';
+import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
+import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/material.dart';
@@ -58,36 +59,42 @@ class _FavoriteContainer extends ConsumerWidget {
 
     return Dismissible(
       key: UniqueKey(),
-      child: InkWell(
-        child: SearchHitWidget(searchHit: favorite.searchHit),
-        onTap: () async {
-          if (useInternalPlayer) {
-            await Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext context) {
-                  return VideoPlayerPage(
-                    searchHit: favorite.searchHit,
+      child: Column(
+        children: [
+          VideoImageContainer(
+            searchHit: favorite.searchHit,
+            onTap: () async {
+              await ref.read(historyServiceProvider).add(
+                    History.from(favorite.searchHit),
                   );
-                },
-              ),
-            );
-          } else {
-            final url = Uri.parse(favorite.searchHit.url);
-            if (await launchUrl(
-              url,
-              mode: LaunchMode.externalApplication,
-            )) {
-            } else {
-              // FIXME:
-              // ignore: only_throw_errors
-              throw 'Could not launch $url';
-            }
-          }
-          await ref
-              .read(historyServiceProvider)
-              .delete(History.from(favorite.searchHit));
-        },
+              if (useInternalPlayer) {
+                // ignore: use_build_context_synchronously
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return VideoPlayerPage(
+                        searchHit: favorite.searchHit,
+                      );
+                    },
+                  ),
+                );
+              } else {
+                final url = Uri.parse(favorite.searchHit.url);
+                if (await launchUrl(
+                  url,
+                  mode: LaunchMode.externalApplication,
+                )) {
+                } else {
+                  // FIXME:
+                  // ignore: only_throw_errors
+                  throw 'Could not launch $url';
+                }
+              }
+            },
+          ),
+          VideoInformationContainer(searchHit: favorite.searchHit)
+        ],
       ),
       onDismissed: (_) async {
         await ref.read(favoriteServiceProvider).delete(favorite);
