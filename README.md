@@ -19,8 +19,9 @@
     - [freezed | Dart Package](https://pub.dev/packages/freezed)
   - UI
     - [youtube_player_flutter | Flutter Package](https://pub.dev/packages/youtube_player_flutter)
-    - [settings_ui | Flutter Package](https://pub.dev/packages/settings_ui)
     - [like_button | Flutter Package](https://pub.dev/packages/like_button)
+    - [custom_text | Flutter Package](https://pub.dev/packages/custom_text)
+    - [settings_ui | Flutter Package](https://pub.dev/packages/settings_ui)
   - Other
     - [package_info_plus | Flutter Package](https://pub.dev/packages/package_info_plus)
 - Backend
