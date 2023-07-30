@@ -99,15 +99,17 @@ class _VideoPlayer extends ConsumerWidget {
       ),
     );
 
-    return YoutubePlayerBuilder(
-      player: YoutubePlayer(controller: controller),
-      onEnterFullScreen: () {
-        ref.read(fullscreenVideoPlayingStateProvider.notifier).state = true;
-      },
-      onExitFullScreen: () {
-        ref.read(fullscreenVideoPlayingStateProvider.notifier).state = false;
-      },
-      builder: (context, player) => player,
+    return YoutubePlayer(
+      controller: controller,
+      showVideoProgressIndicator: true,
+      bottomActions: [
+        CurrentPosition(),
+        ProgressBar(
+          isExpanded: true,
+        ),
+        RemainingDuration(),
+        const PlaybackSpeedButton(),
+      ],
     );
   }
 }
