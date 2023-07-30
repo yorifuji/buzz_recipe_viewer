@@ -12,24 +12,23 @@
   - MVVM + Repository
   - DI
     - [Riverpod](https://riverpod.dev/)
-  - Database
+  - Data store
     - [Isar Database](https://isar.dev/ja/)
-    - [shared_preferences | Flutter Package](https://pub.dev/packages/shared_preferences)
+    - [shared_preferences](https://pub.dev/packages/shared_preferences)
   - Model
-    - [freezed | Dart Package](https://pub.dev/packages/freezed)
+    - [freezed](https://pub.dev/packages/freezed)
   - UI
-    - [youtube_player_flutter | Flutter Package](https://pub.dev/packages/youtube_player_flutter)
-    - [like_button | Flutter Package](https://pub.dev/packages/like_button)
-    - [custom_text | Flutter Package](https://pub.dev/packages/custom_text)
-    - [settings_ui | Flutter Package](https://pub.dev/packages/settings_ui)
+    - [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
+    - [settings_ui](https://pub.dev/packages/settings_ui)
+    - [like_button](https://pub.dev/packages/like_button)
   - Other
-    - [package_info_plus | Flutter Package](https://pub.dev/packages/package_info_plus)
+    - [package_info_plus](https://pub.dev/packages/package_info_plus)
 - Backend
   - [Algolia](https://www.algolia.com/)
 - Data Source
   - [YouTube Data API](https://developers.google.com/youtube/v3)
 - CI/CD
-  - [GitHub Actions](https://github.com/yorifuji/buzz_recipe_viewer/actions)
+  - [GitHub Actions](https://github.co.jp/features/actions)
 
 # Related repository
 
