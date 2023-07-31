@@ -1,4 +1,5 @@
-import 'package:buzz_recipe_viewer/provider/theme_selector_provider.dart';
+import 'package:buzz_recipe_viewer/provider/theme_mode_preference_provider.dart';
+import 'package:buzz_recipe_viewer/ui/common/app_theme.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,15 +9,13 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeSelectorProvider);
-    final themeSelector = ref.read(themeSelectorProvider.notifier);
     return MaterialApp(
-      title: 'レシピ検索',
-      theme: themeSelector.lightTheme(),
-      darkTheme: themeSelector.darkTheme(),
-      themeMode: theme,
-      home: const NavigationPage(),
       // debugShowCheckedModeBanner: false,
+      title: 'レシピ検索',
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ref.watch(themeModePreferenceProvider),
+      home: const NavigationPage(),
     );
   }
 }
