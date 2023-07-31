@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
+import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
 import 'package:flutter/foundation.dart';
@@ -36,6 +37,19 @@ class SettingsPage extends ConsumerWidget {
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) {
                         return const ThemeSettingPage();
+                      },
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.navigation(
+                title: const Text('言語'),
+                onPressed: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) {
+                        return const LocaleSettingPage();
                       },
                     ),
                   );

@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -50,6 +51,17 @@ class SharedPreferencesRepository {
     ThemeModePreference themeModePreference,
   ) async {
     await _sharedPreferences.setInt('theme_mode', themeModePreference.index);
+  }
+
+  // get LocalePreference
+  LocalePreference getLocalePreference() {
+    final index = _sharedPreferences.getInt('locale') ?? 0;
+    return LocalePreference.fromIndex(index);
+  }
+
+  // set LocalePreference
+  Future<void> setLocalePreference(LocalePreference localePreference) async {
+    await _sharedPreferences.setInt('locale', localePreference.index);
   }
 
   Future<bool> getIsFirstRun() async {
