@@ -19,6 +19,7 @@
     - [freezed](https://pub.dev/packages/freezed)
   - UI
     - [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
+    - [custom_text](https://pub.dev/packages/custom_text)
     - [settings_ui](https://pub.dev/packages/settings_ui)
     - [like_button](https://pub.dev/packages/like_button)
   - Other
