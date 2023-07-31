@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_view_model.dart';
 import 'package:collection/collection.dart';
@@ -20,7 +21,7 @@ class RecipeNoteEditPage extends ConsumerWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Recipe'),
+        title: Text(t.recipe.newRecipe.title),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -34,7 +35,7 @@ class RecipeNoteEditPage extends ConsumerWidget {
               const SizedBox(height: 16),
               _StepListContainer(recipeNote),
               const SizedBox(height: 16),
-              const Center(child: Text('タイトルと概要は必須です')),
+              Center(child: Text(t.recipe.newRecipe.input.caution)),
               const SizedBox(height: 16),
               Center(
                 child: FilledButton(
@@ -54,7 +55,7 @@ class RecipeNoteEditPage extends ConsumerWidget {
                           }
                         }
                       : null,
-                  child: const Text('保存'),
+                  child: Text(t.recipe.newRecipe.input.save),
                 ),
               ),
             ],
@@ -90,13 +91,16 @@ class _HeadlineContainer extends ConsumerWidget {
           children: [
             TextFormField(
               initialValue: title,
-              decoration: const InputDecoration(hintText: 'タイトル'),
+              decoration:
+                  InputDecoration(hintText: t.recipe.newRecipe.input.title),
               onChanged: viewModel.updateTitle,
             ),
             const SizedBox(height: 8),
             TextFormField(
               initialValue: description,
-              decoration: const InputDecoration(hintText: '概要'),
+              decoration: InputDecoration(
+                hintText: t.recipe.newRecipe.input.description,
+              ),
               onChanged: viewModel.updateDescription,
             ),
           ],
@@ -127,7 +131,7 @@ class _FoodListContainer extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '食材',
+              t.recipe.newRecipe.input.ingredients,
               style: Theme.of(context).textTheme.labelLarge,
             ),
             Column(
@@ -139,7 +143,9 @@ class _FoodListContainer extends ConsumerWidget {
                         key: ValueKey(food.dateTime),
                         initialValue: food.text,
                         decoration: InputDecoration(
-                          hintText: index == 0 ? '例）トマト 2個' : null,
+                          hintText: index == 0
+                              ? t.recipe.newRecipe.input.ingredients_example
+                              : null,
                           prefixIcon: index == 0
                               ? null
                               : InkWell(
@@ -157,7 +163,7 @@ class _FoodListContainer extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: viewModel.extendFoodList,
-              child: const Text('追加'),
+              child: Text(t.recipe.newRecipe.input.add),
             ),
           ],
         ),
@@ -185,7 +191,10 @@ class _StepListContainer extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('手順', style: Theme.of(context).textTheme.labelLarge),
+            Text(
+              t.recipe.newRecipe.input.steps,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             Column(
               children: stepList
                   .mapIndexed(
@@ -195,7 +204,9 @@ class _StepListContainer extends ConsumerWidget {
                         key: ValueKey(step.dateTime),
                         initialValue: step.text,
                         decoration: InputDecoration(
-                          hintText: index == 0 ? '例）トマトを4等分に切ります...' : null,
+                          hintText: index == 0
+                              ? t.recipe.newRecipe.input.steps_example
+                              : null,
                           prefixIcon: index == 0
                               ? null
                               : InkWell(
@@ -213,7 +224,7 @@ class _StepListContainer extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: viewModel.extendStepList,
-              child: const Text('追加'),
+              child: Text(t.recipe.newRecipe.input.add),
             ),
           ],
         ),

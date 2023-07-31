@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/store/recipe_note_store.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_page.dart';
@@ -12,8 +13,9 @@ class RecipeNotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Recipe')),
+      appBar: AppBar(title: Text(t.recipe.title)),
       body: _RecipeNoteListContainer(),
     );
   }
@@ -23,6 +25,24 @@ class _RecipeNoteListContainer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final recipeNoteList = ref.watch(recipeNoteStoreProvider);
+
+    // return Column(
+    //   children: [
+    //     TextButton(
+    //       onPressed: () {
+    //         print(t.recipe.title);
+    //       },
+    //       child: Text(t.recipe.title),
+    //     ),
+    //     CalendarDatePicker(
+    //       initialDate: DateTime.now(),
+    //       firstDate: DateTime(1900),
+    //       lastDate: DateTime(2100),
+    //       onDateChanged: (value) {},
+    //     ),
+    //   ],
+    // );
+
     return recipeNoteList.isEmpty
         ? Center(
             child: Column(
@@ -32,10 +52,10 @@ class _RecipeNoteListContainer extends ConsumerWidget {
                   Icons.note_alt_outlined,
                   size: 32,
                 ),
-                const Text(
-                  'We\'ve got no recipes.\nAdd your best ones!',
+                Text(
+                  t.recipe.empty,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 FilledButton(
                   onPressed: () async {
@@ -48,7 +68,7 @@ class _RecipeNoteListContainer extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: const Text('Add Recipe'),
+                  child: Text(t.recipe.addRecipe),
                 ),
               ],
             ),
@@ -111,7 +131,7 @@ class _RecipeNoteListContainer extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: const Text('Add Recipe'),
+                  child: Text(t.recipe.addRecipe),
                 ),
                 const SizedBox(height: 32),
               ],

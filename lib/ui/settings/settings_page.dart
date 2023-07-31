@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
@@ -20,17 +21,19 @@ class SettingsPage extends ConsumerWidget {
       settingsViewModelProvider.select((value) => value.useInternalPlayer),
     );
     final viewModel = ref.watch(settingsViewModelProvider.notifier);
+    final t = Translations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(t.settings.title),
       ),
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: const Text('全般'),
+            title: Text(t.settings.general.header),
             tiles: <SettingsTile>[
               SettingsTile.navigation(
-                title: const Text('テーマ'),
+                title: Text(t.settings.general.row.theme.title),
                 onPressed: (context) {
                   Navigator.push(
                     context,
@@ -43,7 +46,7 @@ class SettingsPage extends ConsumerWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: const Text('言語'),
+                title: Text(t.settings.general.row.language.title),
                 onPressed: (context) {
                   Navigator.push(
                     context,
@@ -58,10 +61,10 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: const Text('動画'),
+            title: Text(t.settings.video.header),
             tiles: <SettingsTile>[
               SettingsTile.switchTile(
-                title: const Text('アプリ内で再生する'),
+                title: Text(t.settings.video.row.playWithinApp.title),
                 initialValue: useInternalPlayer,
                 onToggle: (value) =>
                     viewModel.setUseInternalPlayer(useInternalPlayer: value),
@@ -69,10 +72,10 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: const Text('このアプリについて'),
+            title: Text(t.settings.about.header),
             tiles: <SettingsTile>[
               SettingsTile(
-                title: const Text('バージョン'),
+                title: Text(t.settings.about.row.version.title),
                 value:
                     Text('${packageInfo.version}(${packageInfo.buildNumber})'),
               )
@@ -80,10 +83,10 @@ class SettingsPage extends ConsumerWidget {
           ),
           if (kDebugMode)
             SettingsSection(
-              title: const Text('デバッグメニュー'),
+              title: Text(t.settings.debug.header),
               tiles: <SettingsTile>[
                 SettingsTile(
-                  title: const Text('ダミーレシピを登録'),
+                  title: Text(t.settings.debug.row.dummyRecipe.title),
                   onPressed: (_) async {
                     await ref
                         .read(recipeNoteServiceProvider)

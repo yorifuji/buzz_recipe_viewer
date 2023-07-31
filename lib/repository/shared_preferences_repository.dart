@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,13 @@ class SharedPreferencesRepository {
   // get LocalePreference
   LocalePreference getLocalePreference() {
     final index = _sharedPreferences.getInt('locale') ?? 0;
+    if (index == 0) {
+      LocaleSettings.useDeviceLocale();
+    } else {
+      LocaleSettings.setLocaleRaw(
+        LocalePreference.fromIndex(index).languageCode,
+      );
+    }
     return LocalePreference.fromIndex(index);
   }
 

@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
@@ -23,6 +24,7 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = Translations.of(context);
     final loadingState = ref.watch(
       searchViewModelProvider.select((value) => value.loadingState),
     );
@@ -35,10 +37,10 @@ class SearchPage extends ConsumerWidget {
       LoadingState.failure => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('データを取得できませんでした'),
+            Text(t.common.fetchFailed),
             ElevatedButton(
               onPressed: viewModel.search,
-              child: const Text('再読み込み'),
+              child: Text(t.common.reload),
             ),
           ],
         )
@@ -83,7 +85,7 @@ class _VideoListContainer extends HookConsumerWidget {
     );
 
     if (hitList.isEmpty) {
-      return const Center(child: Text('検索結果は0件です'));
+      return Center(child: Text(t.common.searchEmpty));
     }
 
     return RefreshIndicator(
@@ -101,7 +103,7 @@ class _VideoListContainer extends HookConsumerWidget {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: viewModel.searchMore,
-                      child: const Text('もっとみる'),
+                      child: Text(t.common.more),
                     ),
                   );
           } else {
@@ -145,12 +147,12 @@ class _VideoListContainer extends HookConsumerWidget {
                           .read(favoriteServiceProvider)
                           .add(Favorite.from(hitList[index].searchHit));
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
+                        SnackBar(
                           content: Text(
-                            'お気に入りに追加しました',
-                            style: TextStyle(fontSize: 12),
+                            t.common.addFavorite,
+                            style: const TextStyle(fontSize: 12),
                           ),
-                          duration: Duration(seconds: 1),
+                          duration: const Duration(seconds: 1),
                         ),
                       );
                     } else {
@@ -230,6 +232,7 @@ class _SearchBox extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = Translations.of(context);
     final query =
         ref.watch(searchViewModelProvider.select((value) => value.query));
     final queryEditController = useTextEditingController();
@@ -246,7 +249,7 @@ class _SearchBox extends HookConsumerWidget {
         controller: queryEditController,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: '検索ワード（例：から揚げ　ナス）',
+          hintText: t.common.searchQuery,
           prefixIcon: const Icon(Icons.search),
           suffixIcon: query.isNotEmpty
               ? IconButton(
@@ -267,25 +270,27 @@ class _SearchBox extends HookConsumerWidget {
 
 enum SortListTile {
   timestamp(
-    '登録日（新しい順）',
     Icon(Icons.calendar_month),
     SortIndex.timestamp,
   ),
   likes(
-    '人気順（いいね）',
     Icon(Icons.thumb_up),
     SortIndex.likes,
   ),
   views(
-    '人気順（閲覧数）',
     Icon(Icons.trending_up),
     SortIndex.views,
   );
 
-  const SortListTile(this.title, this.icon, this.sortType);
-  final String title;
+  const SortListTile(this.icon, this.sortType);
   final Widget icon;
   final SortIndex sortType;
+
+  String get title => switch (this) {
+        timestamp => t.common.sortByDate,
+        likes => t.common.sortByLikes,
+        views => t.common.sortByViews,
+      };
 }
 
 void _openBottomSheet(

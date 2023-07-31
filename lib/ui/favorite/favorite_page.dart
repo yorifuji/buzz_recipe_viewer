@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/history.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
@@ -18,20 +19,21 @@ class FavoritePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = Translations.of(context);
     final favorites = ref.watch(favoriteStoreProvider);
     final body = favorites.isEmpty
-        ? const Center(
+        ? Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.videogame_asset,
                   size: 32,
                 ),
                 Text(
-                  'Love a video?\nTap the heart to make it your fave!',
+                  t.favorite.empty,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),

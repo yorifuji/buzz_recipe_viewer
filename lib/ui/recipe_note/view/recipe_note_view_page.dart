@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_page.dart';
@@ -14,7 +15,7 @@ class RecipeNoteViewPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recipe'),
+        title: Text(t.recipe.viewRecipe.title),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -81,7 +82,7 @@ class RecipeNoteViewPage extends ConsumerWidget {
                         ),
                       );
                     },
-                    child: const Text('編集'),
+                    child: Text(t.recipe.viewRecipe.edit),
                   ),
                   const SizedBox(width: 16),
                   FilledButton(
@@ -92,7 +93,7 @@ class RecipeNoteViewPage extends ConsumerWidget {
                       // ignore: use_build_context_synchronously
                       Navigator.pop(context);
                     },
-                    child: const Text('削除'),
+                    child: Text(t.recipe.viewRecipe.delete),
                   ),
                 ],
               ),

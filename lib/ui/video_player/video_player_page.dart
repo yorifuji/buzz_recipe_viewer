@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
@@ -70,12 +71,12 @@ class VideoPlayerPage extends HookConsumerWidget {
                       .add(Favorite.from(searchHit));
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
+                    SnackBar(
                       content: Text(
-                        'お気に入りに追加しました',
-                        style: TextStyle(fontSize: 12),
+                        t.common.addFavorite,
+                        style: const TextStyle(fontSize: 12),
                       ),
-                      duration: Duration(seconds: 1),
+                      duration: const Duration(seconds: 1),
                     ),
                   );
                 },

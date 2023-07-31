@@ -1,21 +1,20 @@
 import 'dart:ui';
 
 enum LocalePreference {
-  system('システム設定を利用', ''),
-  en('ENGLISH', 'en'),
-  jp('日本語', 'ja'),
+  system(''),
+  en('en'),
+  ja('ja'),
   ;
 
-  const LocalePreference(this.title, this.languageCode);
+  const LocalePreference(this.languageCode);
   factory LocalePreference.fromIndex(int index) =>
       LocalePreference.values[index];
 
-  final String title;
   final String languageCode;
 
   Locale? get toLocale => switch (this) {
         system => null,
-        jp => const Locale('ja'),
+        ja => const Locale('ja'),
         en => const Locale('en'),
       };
 

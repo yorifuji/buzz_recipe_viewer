@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
@@ -9,14 +10,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final currentAppTab = StateProvider((ref) => AppTab.recipe);
 
 enum AppTab {
-  recipe('Recipe', Icon(Icons.note)),
-  search('Search', Icon(Icons.search)),
-  favorite('Favorite', Icon(Icons.favorite)),
-  // history('History', Icon(Icons.history)),
-  setting('Settings', Icon(Icons.settings));
+  recipe(Icon(Icons.note)),
+  video(Icon(Icons.ondemand_video)),
+  favorite(Icon(Icons.favorite)),
+  // history(Icon(Icons.history)),
+  setting(Icon(Icons.settings));
 
-  const AppTab(this.title, this.icon);
-  final String title;
+  const AppTab(this.icon);
   final Icon icon;
 
   static AppTab fromIndex(int index) {
@@ -25,10 +25,17 @@ enum AppTab {
 
   Widget Function() get show => switch (this) {
         AppTab.recipe => RecipeNotePage.show,
-        AppTab.search => SearchPage.show,
+        AppTab.video => SearchPage.show,
         AppTab.favorite => FavoritePage.show,
         // AppTab.history => HistoryPage.show,
         AppTab.setting => SettingsPage.show,
+      };
+
+  String get title => switch (this) {
+        recipe => t.tab.recipe,
+        video => t.tab.video,
+        favorite => t.tab.favorite,
+        setting => t.tab.settings,
       };
 }
 

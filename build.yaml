@@ -8,3 +8,6 @@ targets:
             - implicit_dynamic_type
             - implicit_dynamic_method
             - strict_raw_type
+      slang_build_runner:
+        options:
+          input_directory: lib/i18n

@@ -1,0 +1,105 @@
+{
+    "appTitle" : "シンプルレシピ検索",
+    "tab" : {
+        "recipe" : "レシピ",
+        "video" : "ビデオ",
+        "favorite" : "お気に入り",
+        "settings" : "設定"
+    },
+    "recipe" : {
+        "title" : "レシピ",
+        "empty" : "レシピが登録されていません\n新しいレシピを登録しましょう！",
+        "addRecipe" : "レシピを追加",
+        "newRecipe" : {
+            "title" : "新しいレシピ",
+            "input" : {
+                "title" : "タイトル",
+                "description" : "概要",
+                "ingredients" : "食材",
+                "ingredients_example" : "例）トマト 2個",
+                "steps" : "手順",
+                "steps_example" : "例）トマトを4等分に切ります...",
+                "add" : "追加",
+                "caution" : "タイトルと概要は必須です",
+                "save" : "保存"
+            }
+        },
+        "viewRecipe" : {
+            "title" : "レシピ",
+            "edit" : "編集",
+            "delete" : "削除"
+        }
+    },
+    "video" : {
+        "title" : ""
+    },
+    "favorite" : {
+        "title" : "",
+        "empty" : "動画をお気に入りに追加しよう！"
+    },
+    "settings" : {
+        "title" : "設定",
+        "general" : {
+            "header" : "一般",
+            "row" : {
+                "theme" : {
+                    "title" : "テーマ",
+                    "theme" : {
+                        "header" : "テーマ",
+                        "row" : [
+                            "自動（デバイスの設定に従う）",
+                            "ライト",
+                            "ダーク"
+                        ]
+                    }
+                },
+                "language" : {
+                    "title" : "言語",
+                    "language" : {
+                        "header" : "言語",
+                        "row" : [
+                            "自動（デバイスの設定に従う）",
+                            "English",
+                            "日本語"
+                        ]
+                    }
+                }
+            }
+        },
+        "video" : {
+            "header" : "ビデオ",
+            "row" : {
+                "playWithinApp" : {
+                    "title" : "アプリ内で再生する"
+                }
+            }
+        },
+        "about" : {
+            "header" : "このアプリについて",
+            "row" : {
+                "version" : {
+                    "title" : "バージョン"
+                }
+            }
+        },
+        "debug" : {
+            "header" : "デバッグ",
+            "row" : {
+                "dummyRecipe" : {
+                    "title" : "ダミーレシピを登録"
+                }
+            }
+        }
+    },
+    "common" : {
+        "addFavorite" : "お気に入りに追加しました",
+        "fetchFailed" : "データを取得できませんでした",
+        "reload" : "再読み込み",
+        "searchEmpty" : "検索結果は0件です",
+        "more" : "もっと見る",
+        "searchQuery" : "検索ワード（例：から揚げ　ナス）",
+        "sortByDate" : "登録日（新しい順）",
+        "sortByLikes" : "人気順（いいね）",
+        "sortByViews" : "人気順（閲覧数）"
+    }
+}
