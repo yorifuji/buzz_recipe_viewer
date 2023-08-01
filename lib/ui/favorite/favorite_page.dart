@@ -19,7 +19,6 @@ class FavoritePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final t = Translations.of(context);
     final favorites = ref.watch(favoriteStoreProvider);
     final body = favorites.isEmpty
         ? Center(

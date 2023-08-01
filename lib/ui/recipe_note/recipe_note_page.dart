@@ -13,7 +13,6 @@ class RecipeNotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = Translations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(t.recipe.title)),
       body: _RecipeNoteListContainer(),

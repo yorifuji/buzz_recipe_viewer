@@ -24,7 +24,6 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final t = Translations.of(context);
     final loadingState = ref.watch(
       searchViewModelProvider.select((value) => value.loadingState),
     );
@@ -232,7 +231,6 @@ class _SearchBox extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final t = Translations.of(context);
     final query =
         ref.watch(searchViewModelProvider.select((value) => value.query));
     final queryEditController = useTextEditingController();

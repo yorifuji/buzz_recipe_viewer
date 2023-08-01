@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
+import 'package:buzz_recipe_viewer/provider/locale_preference_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
@@ -51,6 +52,7 @@ class NavigationPage extends ConsumerWidget {
     final currentTab = ref.watch(currentAppTab);
     final fullscreenVideoPlayingState =
         ref.watch(fullscreenVideoPlayingStateProvider);
+    final locale = ref.watch(localePreferenceProvider);
 
     return WillPopScope(
       // スタックが存在しない場合はアプリを終了する（バックグラウンドに移動する）
@@ -59,6 +61,7 @@ class NavigationPage extends ConsumerWidget {
               true),
       child: Scaffold(
         body: IndexedStack(
+          key: ValueKey(locale?.languageCode),
           index: currentTab.index,
           children: AppTab.values
               .map(

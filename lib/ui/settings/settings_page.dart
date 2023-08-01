@@ -21,7 +21,6 @@ class SettingsPage extends ConsumerWidget {
       settingsViewModelProvider.select((value) => value.useInternalPlayer),
     );
     final viewModel = ref.watch(settingsViewModelProvider.notifier);
-    final t = Translations.of(context);
 
     return Scaffold(
       appBar: AppBar(
