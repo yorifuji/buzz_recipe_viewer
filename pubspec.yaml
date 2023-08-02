@@ -49,7 +49,7 @@ dependencies:
   path_provider: ^2.0.15
   youtube_player_flutter: ^8.1.2
   settings_ui: ^2.0.2
-  package_info_plus: ^4.0.2
+  package_info_plus: ^4.1.0
   shared_preferences: ^2.2.0
   custom_text: ^1.0.0
   like_button: ^2.0.5
