@@ -22,6 +22,8 @@
     - [custom_text](https://pub.dev/packages/custom_text)
     - [settings_ui](https://pub.dev/packages/settings_ui)
     - [like_button](https://pub.dev/packages/like_button)
+  - i18n
+    - [slang](https://pub.dev/packages/slang)
   - Other
     - [package_info_plus](https://pub.dev/packages/package_info_plus)
 - Backend
