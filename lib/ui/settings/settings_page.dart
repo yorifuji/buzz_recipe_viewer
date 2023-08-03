@@ -77,6 +77,10 @@ class SettingsPage extends ConsumerWidget {
                 title: Text(t.settings.about.row.version.title),
                 value:
                     Text('${packageInfo.version}(${packageInfo.buildNumber})'),
+              ),
+              SettingsTile(
+                title: Text(t.settings.about.row.license.title),
+                onPressed: (context) => showLicensePage(context: context),
               )
             ],
           ),

@@ -79,6 +79,9 @@
             "row" : {
                 "version" : {
                     "title" : "Version"
+                },
+                "license" : {
+                    "title" : "License"
                 }
             }
         },

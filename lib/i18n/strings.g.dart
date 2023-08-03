@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 102 (51 per locale)
+/// Strings: 104 (52 per locale)
 ///
-/// Built on 2023-08-03 at 03:58 UTC
+/// Built on 2023-08-03 at 23:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -401,6 +401,8 @@ class _StringsSettingsAboutRowEn {
   // Translations
   late final _StringsSettingsAboutRowVersionEn version =
       _StringsSettingsAboutRowVersionEn._(_root);
+  late final _StringsSettingsAboutRowLicenseEn license =
+      _StringsSettingsAboutRowLicenseEn._(_root);
 }
 
 // Path: settings.debug.row
@@ -456,6 +458,16 @@ class _StringsSettingsAboutRowVersionEn {
 
   // Translations
   String get title => 'Version';
+}
+
+// Path: settings.about.row.license
+class _StringsSettingsAboutRowLicenseEn {
+  _StringsSettingsAboutRowLicenseEn._(this._root);
+
+  final _StringsEn _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'License';
 }
 
 // Path: settings.debug.row.dummyRecipe
@@ -819,6 +831,9 @@ class _StringsSettingsAboutRowJa implements _StringsSettingsAboutRowEn {
   @override
   late final _StringsSettingsAboutRowVersionJa version =
       _StringsSettingsAboutRowVersionJa._(_root);
+  @override
+  late final _StringsSettingsAboutRowLicenseJa license =
+      _StringsSettingsAboutRowLicenseJa._(_root);
 }
 
 // Path: settings.debug.row
@@ -890,6 +905,19 @@ class _StringsSettingsAboutRowVersionJa
   // Translations
   @override
   String get title => 'バージョン';
+}
+
+// Path: settings.about.row.license
+class _StringsSettingsAboutRowLicenseJa
+    implements _StringsSettingsAboutRowLicenseEn {
+  _StringsSettingsAboutRowLicenseJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'ライセンス';
 }
 
 // Path: settings.debug.row.dummyRecipe
@@ -1029,6 +1057,8 @@ extension on _StringsEn {
         return 'About';
       case 'settings.about.row.version.title':
         return 'Version';
+      case 'settings.about.row.license.title':
+        return 'License';
       case 'settings.debug.header':
         return 'Debug';
       case 'settings.debug.row.dummyRecipe.title':
@@ -1140,6 +1170,8 @@ extension on _StringsJa {
         return 'このアプリについて';
       case 'settings.about.row.version.title':
         return 'バージョン';
+      case 'settings.about.row.license.title':
+        return 'ライセンス';
       case 'settings.debug.header':
         return 'デバッグ';
       case 'settings.debug.row.dummyRecipe.title':
