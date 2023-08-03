@@ -34,7 +34,7 @@
         "title" : ""
     },
     "favorite" : {
-        "title" : "",
+        "title" : "お気に入り",
         "empty" : "動画をお気に入りに追加しよう！"
     },
     "settings" : {

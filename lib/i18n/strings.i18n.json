@@ -34,7 +34,7 @@
         "title" : ""
     },
     "favorite" : {
-        "title" : "",
+        "title" : "Favorite",
         "empty" : "Love a video?\nTap the heart to make it your fave!"
     },
     "settings" : {

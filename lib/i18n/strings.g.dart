@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 102 (51 per locale)
 ///
-/// Built on 2023-08-01 at 09:32 UTC
+/// Built on 2023-08-03 at 03:58 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -241,7 +241,7 @@ class _StringsFavoriteEn {
   final _StringsEn _root; // ignore: unused_field
 
   // Translations
-  String get title => '';
+  String get title => 'Favorite';
   String get empty => 'Love a video?\nTap the heart to make it your fave!';
 }
 
@@ -606,7 +606,7 @@ class _StringsFavoriteJa implements _StringsFavoriteEn {
 
   // Translations
   @override
-  String get title => '';
+  String get title => 'お気に入り';
   @override
   String get empty => '動画をお気に入りに追加しよう！';
 }
@@ -994,7 +994,7 @@ extension on _StringsEn {
       case 'video.title':
         return '';
       case 'favorite.title':
-        return '';
+        return 'Favorite';
       case 'favorite.empty':
         return 'Love a video?\nTap the heart to make it your fave!';
       case 'settings.title':
@@ -1105,7 +1105,7 @@ extension on _StringsJa {
       case 'video.title':
         return '';
       case 'favorite.title':
-        return '';
+        return 'お気に入り';
       case 'favorite.empty':
         return '動画をお気に入りに追加しよう！';
       case 'settings.title':

@@ -1,4 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/store/recipe_note_store.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_page.dart';
@@ -6,135 +7,131 @@ import 'package:buzz_recipe_viewer/ui/recipe_note/view/recipe_note_view_page.dar
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RecipeNotePage extends StatelessWidget {
+class RecipeNotePage extends ConsumerWidget {
   const RecipeNotePage({super.key});
 
   static Widget show() => const RecipeNotePage();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final recipeNoteList = ref.watch(recipeNoteStoreProvider);
     return Scaffold(
       appBar: AppBar(title: Text(t.recipe.title)),
-      body: _RecipeNoteListContainer(),
+      body: recipeNoteList.isEmpty
+          ? const _EmptyRecipeNoteListContainer()
+          : _RecipeNoteListContainer(recipeNoteList),
+    );
+  }
+}
+
+class _EmptyRecipeNoteListContainer extends StatelessWidget {
+  const _EmptyRecipeNoteListContainer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.note_alt_outlined,
+            size: 32,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            t.recipe.empty,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18),
+          ),
+          const SizedBox(height: 16),
+          FilledButton(
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return const RecipeNoteEditPage();
+                  },
+                ),
+              );
+            },
+            child: Text(t.recipe.addRecipe),
+          ),
+        ],
+      ),
     );
   }
 }
 
 class _RecipeNoteListContainer extends ConsumerWidget {
+  const _RecipeNoteListContainer(this.recipeNoteList);
+
+  final List<RecipeNote> recipeNoteList;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final recipeNoteList = ref.watch(recipeNoteStoreProvider);
-
-    // return Column(
-    //   children: [
-    //     TextButton(
-    //       onPressed: () {
-    //         print(t.recipe.title);
-    //       },
-    //       child: Text(t.recipe.title),
-    //     ),
-    //     CalendarDatePicker(
-    //       initialDate: DateTime.now(),
-    //       firstDate: DateTime(1900),
-    //       lastDate: DateTime(2100),
-    //       onDateChanged: (value) {},
-    //     ),
-    //   ],
-    // );
-
-    return recipeNoteList.isEmpty
-        ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.note_alt_outlined,
-                  size: 32,
-                ),
-                Text(
-                  t.recipe.empty,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 18),
-                ),
-                FilledButton(
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) {
-                          return const RecipeNoteEditPage();
-                        },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: recipeNoteList.length,
+            itemBuilder: (context, index) {
+              final recipeNote = recipeNoteList[index];
+              return Padding(
+                padding: const EdgeInsets.all(8),
+                child: Dismissible(
+                  key: ValueKey(recipeNote),
+                  child: Card(
+                    child: ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 8, bottom: 8),
+                        child: Text(
+                          recipeNote.title,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
                       ),
-                    );
-                  },
-                  child: Text(t.recipe.addRecipe),
-                ),
-              ],
-            ),
-          )
-        : SingleChildScrollView(
-            child: Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: recipeNoteList.length,
-                  itemBuilder: (context, index) {
-                    final recipeNote = recipeNoteList[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Dismissible(
-                        key: ValueKey(recipeNote),
-                        child: Card(
-                          child: ListTile(
-                            title: Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Text(
-                                recipeNote.title,
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
-                            ),
-                            subtitle: Text(
-                              recipeNote.description,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return RecipeNoteViewPage(recipeNote);
-                                  },
-                                ),
-                              );
+                      subtitle: Text(
+                        recipeNote.description,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) {
+                              return RecipeNoteViewPage(recipeNote);
                             },
                           ),
-                        ),
-                        onDismissed: (_) async {
-                          await ref
-                              .read(recipeNoteServiceProvider)
-                              .delete(recipeNote);
-                        },
-                      ),
-                    );
+                        );
+                      },
+                    ),
+                  ),
+                  onDismissed: (_) async {
+                    await ref
+                        .read(recipeNoteServiceProvider)
+                        .delete(recipeNote);
                   },
                 ),
-                FilledButton(
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) {
-                          return const RecipeNoteEditPage();
-                        },
-                      ),
-                    );
+              );
+            },
+          ),
+          FilledButton(
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return const RecipeNoteEditPage();
                   },
-                  child: Text(t.recipe.addRecipe),
                 ),
-                const SizedBox(height: 32),
-              ],
-            ),
-          );
+              );
+            },
+            child: Text(t.recipe.addRecipe),
+          ),
+          const SizedBox(height: 32),
+        ],
+      ),
+    );
   }
 }

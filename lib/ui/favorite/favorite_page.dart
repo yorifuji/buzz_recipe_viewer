@@ -20,30 +20,53 @@ class FavoritePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favorites = ref.watch(favoriteStoreProvider);
-    final body = favorites.isEmpty
-        ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.videogame_asset,
-                  size: 32,
-                ),
-                Text(
-                  t.favorite.empty,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-          )
-        : SingleChildScrollView(
-            child: Column(
-              children: favorites.map(_FavoriteContainer.new).toList(),
-            ),
-          );
 
-    return Scaffold(body: SafeArea(child: body));
+    return Scaffold(
+      appBar: AppBar(title: Text(t.favorite.title)),
+      body: favorites.isEmpty
+          ? const _EmptyFavoriteContainer()
+          : _FavoriteListContainer(favorites),
+    );
+  }
+}
+
+class _EmptyFavoriteContainer extends StatelessWidget {
+  const _EmptyFavoriteContainer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.videogame_asset,
+            size: 32,
+          ),
+          Text(
+            t.favorite.empty,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FavoriteListContainer extends StatelessWidget {
+  const _FavoriteListContainer(this.favoriteList);
+
+  final List<Favorite> favoriteList;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: favoriteList.map(_FavoriteContainer.new).toList(),
+        ),
+      ),
+    );
   }
 }
 
