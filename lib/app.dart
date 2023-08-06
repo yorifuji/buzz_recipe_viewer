@@ -1,8 +1,8 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/locale_preference_provider.dart';
+import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
 import 'package:buzz_recipe_viewer/provider/theme_mode_preference_provider.dart';
-import 'package:buzz_recipe_viewer/ui/common/app_theme.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,8 +17,8 @@ class App extends ConsumerWidget {
       child: MaterialApp(
         // debugShowCheckedModeBanner: false,
         title: 'レシピ検索',
-        theme: AppTheme.light(),
-        darkTheme: AppTheme.dark(),
+        theme: ref.watch(themeDataProvider()),
+        darkTheme: ref.watch(themeDataProvider(isDarkMode: true)),
         themeMode: ref.watch(themeModePreferenceProvider),
         locale: ref.watch(localePreferenceProvider),
         localizationsDelegates: const [

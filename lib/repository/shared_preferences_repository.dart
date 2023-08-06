@@ -1,4 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/model/app_color.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,15 @@ class SharedPreferencesRepository {
     await _sharedPreferences.setBool('is_first_run', false);
     return result;
   }
-}
 
-final sharedPreferencesRepositoryIsFirstRun =
-    Provider((ref) => throw UnimplementedError());
+  // set AppColor
+  Future<void> setAppColor(AppColor appColor) async {
+    await _sharedPreferences.setString('app_color', appColor.name);
+  }
+
+  // get AppColor
+  AppColor getAppColor() {
+    final appColor = _sharedPreferences.getString('app_color');
+    return AppColor.fromName(appColor);
+  }
+}

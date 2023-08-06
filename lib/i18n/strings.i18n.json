@@ -53,6 +53,12 @@
                         ]
                     }
                 },
+                "color" : {
+                    "title" : "Color",
+                    "color" : {
+                        "header" : "Color"
+                    }
+                },
                 "language" : {
                     "title" : "Language",
                     "language" : {

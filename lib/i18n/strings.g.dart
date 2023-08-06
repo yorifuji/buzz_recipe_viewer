@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 104 (52 per locale)
+/// Strings: 108 (54 per locale)
 ///
-/// Built on 2023-08-03 at 23:33 UTC
+/// Built on 2023-08-06 at 23:21 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -377,6 +377,8 @@ class _StringsSettingsGeneralRowEn {
   // Translations
   late final _StringsSettingsGeneralRowThemeEn theme =
       _StringsSettingsGeneralRowThemeEn._(_root);
+  late final _StringsSettingsGeneralRowColorEn color =
+      _StringsSettingsGeneralRowColorEn._(_root);
   late final _StringsSettingsGeneralRowLanguageEn language =
       _StringsSettingsGeneralRowLanguageEn._(_root);
 }
@@ -426,6 +428,18 @@ class _StringsSettingsGeneralRowThemeEn {
   String get title => 'Theme';
   late final _StringsSettingsGeneralRowThemeThemeEn theme =
       _StringsSettingsGeneralRowThemeThemeEn._(_root);
+}
+
+// Path: settings.general.row.color
+class _StringsSettingsGeneralRowColorEn {
+  _StringsSettingsGeneralRowColorEn._(this._root);
+
+  final _StringsEn _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Color';
+  late final _StringsSettingsGeneralRowColorColorEn color =
+      _StringsSettingsGeneralRowColorColorEn._(_root);
 }
 
 // Path: settings.general.row.language
@@ -493,6 +507,16 @@ class _StringsSettingsGeneralRowThemeThemeEn {
         'Light',
         'Dark',
       ];
+}
+
+// Path: settings.general.row.color.color
+class _StringsSettingsGeneralRowColorColorEn {
+  _StringsSettingsGeneralRowColorColorEn._(this._root);
+
+  final _StringsEn _root; // ignore: unused_field
+
+  // Translations
+  String get header => 'Color';
 }
 
 // Path: settings.general.row.language.language
@@ -803,6 +827,9 @@ class _StringsSettingsGeneralRowJa implements _StringsSettingsGeneralRowEn {
   late final _StringsSettingsGeneralRowThemeJa theme =
       _StringsSettingsGeneralRowThemeJa._(_root);
   @override
+  late final _StringsSettingsGeneralRowColorJa color =
+      _StringsSettingsGeneralRowColorJa._(_root);
+  @override
   late final _StringsSettingsGeneralRowLanguageJa language =
       _StringsSettingsGeneralRowLanguageJa._(_root);
 }
@@ -863,6 +890,22 @@ class _StringsSettingsGeneralRowThemeJa
   @override
   late final _StringsSettingsGeneralRowThemeThemeJa theme =
       _StringsSettingsGeneralRowThemeThemeJa._(_root);
+}
+
+// Path: settings.general.row.color
+class _StringsSettingsGeneralRowColorJa
+    implements _StringsSettingsGeneralRowColorEn {
+  _StringsSettingsGeneralRowColorJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'カラー';
+  @override
+  late final _StringsSettingsGeneralRowColorColorJa color =
+      _StringsSettingsGeneralRowColorColorJa._(_root);
 }
 
 // Path: settings.general.row.language
@@ -952,6 +995,19 @@ class _StringsSettingsGeneralRowThemeThemeJa
       ];
 }
 
+// Path: settings.general.row.color.color
+class _StringsSettingsGeneralRowColorColorJa
+    implements _StringsSettingsGeneralRowColorColorEn {
+  _StringsSettingsGeneralRowColorColorJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get header => 'カラー';
+}
+
 // Path: settings.general.row.language.language
 class _StringsSettingsGeneralRowLanguageLanguageJa
     implements _StringsSettingsGeneralRowLanguageLanguageEn {
@@ -1039,6 +1095,10 @@ extension on _StringsEn {
         return 'Light';
       case 'settings.general.row.theme.theme.row.2':
         return 'Dark';
+      case 'settings.general.row.color.title':
+        return 'Color';
+      case 'settings.general.row.color.color.header':
+        return 'Color';
       case 'settings.general.row.language.title':
         return 'Language';
       case 'settings.general.row.language.language.header':
@@ -1152,6 +1212,10 @@ extension on _StringsJa {
         return 'ライト';
       case 'settings.general.row.theme.theme.row.2':
         return 'ダーク';
+      case 'settings.general.row.color.title':
+        return 'カラー';
+      case 'settings.general.row.color.color.header':
+        return 'カラー';
       case 'settings.general.row.language.title':
         return '言語';
       case 'settings.general.row.language.language.header':

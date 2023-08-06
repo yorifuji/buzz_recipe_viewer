@@ -53,6 +53,12 @@
                         ]
                     }
                 },
+                "color" : {
+                    "title" : "カラー",
+                    "color" : {
+                        "header" : "カラー"
+                    }
+                },
                 "language" : {
                     "title" : "言語",
                     "language" : {
