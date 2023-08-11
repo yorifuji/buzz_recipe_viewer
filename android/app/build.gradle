@@ -97,3 +97,11 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+task copySources(type: Copy) {
+   from "src/${dartEnvironmentVariables.FLAVOR}/res"
+   into 'src/main/res'
+}
+tasks.whenTaskAdded { task ->
+   task.dependsOn copySources
+}
