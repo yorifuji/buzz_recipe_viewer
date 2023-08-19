@@ -19,6 +19,32 @@ permissions:
   pull-requests: write
 
 jobs:
+  diff:
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
+
+      - run: make build-runner
+
+      - name: Check for changes
+        run: |
+          GIT_STATUS=`git status --porcelain`
+          if [ $GIT_STATUS ]; then
+            echo "There are changes in the working tree, please commit them before running this action."
+            echo "$GIT_STATUS"
+            exit 1
+          fi
+
   format:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
