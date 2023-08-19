@@ -117,7 +117,7 @@ class _FavoriteContainer extends ConsumerWidget {
               }
             },
           ),
-          VideoInformationContainer(searchHit: favorite.searchHit)
+          VideoInformationContainer(searchHit: favorite.searchHit),
         ],
       ),
       onDismissed: (_) async {

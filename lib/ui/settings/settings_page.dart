@@ -81,7 +81,7 @@ class SettingsPage extends ConsumerWidget {
                 initialValue: useInternalPlayer,
                 onToggle: (value) =>
                     viewModel.setUseInternalPlayer(useInternalPlayer: value),
-              )
+              ),
             ],
           ),
           SettingsSection(
@@ -95,7 +95,7 @@ class SettingsPage extends ConsumerWidget {
               SettingsTile(
                 title: Text(t.settings.about.row.license.title),
                 onPressed: (context) => showLicensePage(context: context),
-              )
+              ),
             ],
           ),
           if (kDebugMode)

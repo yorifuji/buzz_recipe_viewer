@@ -161,7 +161,7 @@ class _VideoListContainer extends HookConsumerWidget {
                     }
                   },
                 ),
-                VideoInformationContainer(searchHit: hitList[index].searchHit)
+                VideoInformationContainer(searchHit: hitList[index].searchHit),
               ],
             );
           }
