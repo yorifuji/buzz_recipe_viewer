@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/model/favorite.dart';
+import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

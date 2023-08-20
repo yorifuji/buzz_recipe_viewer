@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_page.dart';
 import 'package:collection/collection.dart';

@@ -1,6 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,7 +19,9 @@ class RecipeNoteService {
 
   Future<void> delete(RecipeNote recipeNote) =>
       _databaseRepository.deleteRecipeNote(recipeNote);
+}
 
+extension RecipeNoteServiceDebug on RecipeNoteService {
   Future<void> createDummyRecipeNote() async {
     final recipeNote = RecipeNote(
       '星空のフルーツタルト',
@@ -90,10 +92,4 @@ class RecipeNoteService {
       ),
     );
   }
-}
-
-@riverpod
-Future<void> initRecipeNoteService(InitRecipeNoteServiceRef ref) async {
-  final recipeNoteService = ref.read(recipeNoteServiceProvider);
-  await recipeNoteService.createDummyRecipeNote();
 }

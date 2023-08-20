@@ -1,6 +1,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
+import 'package:buzz_recipe_viewer/model/isar/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';

@@ -21,12 +21,12 @@ class SearchStateStore extends _$SearchStateStore {
   @override
   SearchState build() => const SearchState();
 
-  String get query => state.query;
-  SortIndex get sortType => state.sortType;
-  int get nextPage => state.nextPage;
-
-  set query(String query) => state = state.copyWith(query: query);
-  set sortType(SortIndex sortType) =>
+  void setQuery(String query) => state = state.copyWith(query: query);
+  void setSortType(SortIndex sortType) =>
       state = state.copyWith(sortType: sortType);
-  set nextPage(int nextPage) => state = state.copyWith(nextPage: nextPage);
+  void setNextPage(int nextPage) => state = state.copyWith(nextPage: nextPage);
+
+  String query() => state.query;
+  SortIndex sortType() => state.sortType;
+  int nextPage() => state.nextPage;
 }

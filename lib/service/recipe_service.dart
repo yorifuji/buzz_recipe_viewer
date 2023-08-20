@@ -9,18 +9,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'recipe_service.g.dart';
 
 @riverpod
-RecipeService recipeService(RecipeServiceRef ref) {
-  final flavor = ref.watch(flavorProvider);
-  return RecipeService(
-    ref.watch(
-      flavor == Flavor.dev
-          ? recipeRepositoryMockProvider
-          : recipeRepositoryProvider,
-    ),
-    ref.watch(searchHitStoreProvider.notifier),
-    ref.watch(searchStateStoreProvider.notifier),
-  );
-}
+RecipeService recipeService(RecipeServiceRef ref) => RecipeService(
+      ref.watch(flavorProvider) == Flavor.dev
+          ? ref.watch(recipeRepositoryMockProvider)
+          : ref.watch(recipeRepositoryProvider),
+      ref.watch(searchHitStoreProvider.notifier),
+      ref.watch(searchStateStoreProvider.notifier),
+    );
 
 class RecipeService {
   RecipeService(
@@ -40,9 +35,9 @@ class RecipeService {
     getRecipeResult.when(
       success: (data) {
         _searchStateStore
-          ..query = query
-          ..sortType = sortIndex
-          ..nextPage = data.nextPage;
+          ..setQuery(query)
+          ..setSortType(sortIndex)
+          ..setNextPage(data.nextPage);
         _searchHitStore.set(data.searchHits);
       },
       failure: (error) {},
@@ -53,14 +48,14 @@ class RecipeService {
 
   Future<bool> getRecipeMore() async {
     final getRecipeResult = await _recipeRepository.getRecipe(
-      _searchStateStore.query,
-      _searchStateStore.sortType.indexName,
-      _searchStateStore.nextPage,
+      _searchStateStore.query(),
+      _searchStateStore.sortType().indexName,
+      _searchStateStore.nextPage(),
     );
 
     getRecipeResult.when(
       success: (data) {
-        _searchStateStore.nextPage = data.nextPage;
+        _searchStateStore.setNextPage(data.nextPage);
         _searchHitStore.add(data.searchHits);
       },
       failure: (error) {},

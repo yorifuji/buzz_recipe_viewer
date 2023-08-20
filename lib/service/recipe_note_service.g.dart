@@ -24,21 +24,5 @@ final recipeNoteServiceProvider =
 );
 
 typedef RecipeNoteServiceRef = AutoDisposeProviderRef<RecipeNoteService>;
-String _$initRecipeNoteServiceHash() =>
-    r'2d8cf83f4e359da1f4ff08f36a2018bfe09fefe4';
-
-/// See also [initRecipeNoteService].
-@ProviderFor(initRecipeNoteService)
-final initRecipeNoteServiceProvider = AutoDisposeFutureProvider<void>.internal(
-  initRecipeNoteService,
-  name: r'initRecipeNoteServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$initRecipeNoteServiceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef InitRecipeNoteServiceRef = AutoDisposeFutureProviderRef<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

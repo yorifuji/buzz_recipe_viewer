@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

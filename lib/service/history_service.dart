@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/model/isar/history.dart';
 import 'package:buzz_recipe_viewer/repository/database_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

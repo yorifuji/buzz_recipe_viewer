@@ -1,6 +1,6 @@
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/history.dart';
-import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
+import 'package:buzz_recipe_viewer/model/isar/history.dart';
+import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
 import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

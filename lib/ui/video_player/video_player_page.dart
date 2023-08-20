@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/favorite.dart';
+import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';

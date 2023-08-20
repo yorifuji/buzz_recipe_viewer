@@ -1,7 +1,7 @@
 import 'package:buzz_recipe_viewer/app.dart';
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/history.dart';
-import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
+import 'package:buzz_recipe_viewer/model/isar/history.dart';
+import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
 import 'package:buzz_recipe_viewer/provider/is_first_run_provider.dart';
 import 'package:buzz_recipe_viewer/provider/isar_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';

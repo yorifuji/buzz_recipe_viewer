@@ -1,5 +1,5 @@
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/history.dart';
+import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
+import 'package:buzz_recipe_viewer/model/isar/history.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/service/history_service.dart';
 import 'package:buzz_recipe_viewer/store/history_store.dart';
