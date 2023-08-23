@@ -73,7 +73,7 @@ dev_dependencies:
   freezed: ^2.4.1
   build_runner: ^2.4.6
   json_serializable: ^6.7.1
-  pedantic_mono: ^1.23.0
+  pedantic_mono: ^1.24.0
   riverpod_generator: ^2.2.4
   riverpod_lint: ^1.4.0
   custom_lint: ^0.4.0
