@@ -16,7 +16,7 @@ class App extends ConsumerWidget {
     return TranslationProvider(
       child: MaterialApp(
         // debugShowCheckedModeBanner: false,
-        title: 'レシピ検索',
+        title: t.appTitle,
         theme: ref.watch(themeDataProvider()),
         darkTheme: ref.watch(themeDataProvider(isDarkMode: true)),
         themeMode: ref.watch(themeModePreferenceProvider),
