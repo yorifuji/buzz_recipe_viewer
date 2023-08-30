@@ -50,7 +50,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   settings_ui: ^2.0.2
   package_info_plus: ^4.0.2
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.2.1
   custom_text: ^1.0.0
   like_button: ^2.0.5
   collection: ^1.17.1
