@@ -8,32 +8,63 @@
 
 # Architecture
 
-- Flutter
-  - MVVM + Repository
-  - DI
-    - [Riverpod](https://riverpod.dev/)
-  - Data store
-    - [Isar Database](https://isar.dev/ja/)
-    - [shared_preferences](https://pub.dev/packages/shared_preferences)
-  - UI
-    - [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
-    - [custom_text](https://pub.dev/packages/custom_text)
-    - [settings_ui](https://pub.dev/packages/settings_ui)
-    - [like_button](https://pub.dev/packages/like_button)
-  - i18n
-    - [slang](https://pub.dev/packages/slang)
-  - Other
-    - [freezed](https://pub.dev/packages/freezed)
-    - [package_info_plus](https://pub.dev/packages/package_info_plus)
-    - [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
-    - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
-    - [url_launcher](https://pub.dev/packages/url_launcher)
+```mermaid
+graph LR;
+    View-->|watch|Store
+    View-->|call|Service
+    Service-->|call|Repository
+    Service-->|update|Store
+```
+
+- View
+  - Widget など
+- Store
+  - 最新の状態保持、Single Source of Truth を担保する
+- Service
+  - View の操作に基づいて処理を行う
+    - Repository を呼び出してデータを取得する
+    - Store を更新する
+- Repository
+  - 外部サービス、API、データベースなどのデータソースからデータを取得
+
+# Dependencies
+
+- DI
+  - [Riverpod](https://riverpod.dev/)
+- Data store
+  - [Isar Database](https://isar.dev/ja/)
+  - [shared_preferences](https://pub.dev/packages/shared_preferences)
+- UI
+  - [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
+  - [custom_text](https://pub.dev/packages/custom_text)
+  - [settings_ui](https://pub.dev/packages/settings_ui)
+  - [like_button](https://pub.dev/packages/like_button)
+- i18n
+  - [slang](https://pub.dev/packages/slang)
+- Other
+  - [freezed](https://pub.dev/packages/freezed)
+  - [package_info_plus](https://pub.dev/packages/package_info_plus)
+  - [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
+  - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+  - [url_launcher](https://pub.dev/packages/url_launcher)
 - Backend
   - [Algolia](https://www.algolia.com/)
 - Data Source
   - [YouTube Data API](https://developers.google.com/youtube/v3)
-- CI/CD
-  - [GitHub Actions](https://github.co.jp/features/actions)
+- CI/CD([GitHub Actions](https://github.co.jp/features/actions))
+  - Check
+    - diff
+    - format
+    - analyze
+    - test
+  - Bump
+    - version
+  - Deploy
+    - Production(Play Console, App Store Connect)
+    - Staging(Firebase App Distribution)
+  - Nightly build
+- Dependencies Management
+  - [Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot)
 
 # Related repository
 
