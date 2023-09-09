@@ -88,8 +88,8 @@ class RecipeNoteEditViewModelProvider extends AutoDisposeNotifierProviderImpl<
     RecipeNoteEditViewModel, RecipeNoteEditState> {
   /// See also [RecipeNoteEditViewModel].
   RecipeNoteEditViewModelProvider({
-    this.recipeNote,
-  }) : super.internal(
+    RecipeNote? recipeNote,
+  }) : this._internal(
           () => RecipeNoteEditViewModel()..recipeNote = recipeNote,
           from: recipeNoteEditViewModelProvider,
           name: r'recipeNoteEditViewModelProvider',
@@ -100,9 +100,51 @@ class RecipeNoteEditViewModelProvider extends AutoDisposeNotifierProviderImpl<
           dependencies: RecipeNoteEditViewModelFamily._dependencies,
           allTransitiveDependencies:
               RecipeNoteEditViewModelFamily._allTransitiveDependencies,
+          recipeNote: recipeNote,
         );
 
+  RecipeNoteEditViewModelProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.recipeNote,
+  }) : super.internal();
+
   final RecipeNote? recipeNote;
+
+  @override
+  RecipeNoteEditState runNotifierBuild(
+    covariant RecipeNoteEditViewModel notifier,
+  ) {
+    return notifier.build(
+      recipeNote: recipeNote,
+    );
+  }
+
+  @override
+  Override overrideWith(RecipeNoteEditViewModel Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: RecipeNoteEditViewModelProvider._internal(
+        () => create()..recipeNote = recipeNote,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        recipeNote: recipeNote,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<RecipeNoteEditViewModel,
+      RecipeNoteEditState> createElement() {
+    return _RecipeNoteEditViewModelProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -117,15 +159,22 @@ class RecipeNoteEditViewModelProvider extends AutoDisposeNotifierProviderImpl<
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin RecipeNoteEditViewModelRef
+    on AutoDisposeNotifierProviderRef<RecipeNoteEditState> {
+  /// The parameter `recipeNote` of this provider.
+  RecipeNote? get recipeNote;
+}
+
+class _RecipeNoteEditViewModelProviderElement
+    extends AutoDisposeNotifierProviderElement<RecipeNoteEditViewModel,
+        RecipeNoteEditState> with RecipeNoteEditViewModelRef {
+  _RecipeNoteEditViewModelProviderElement(super.provider);
 
   @override
-  RecipeNoteEditState runNotifierBuild(
-    covariant RecipeNoteEditViewModel notifier,
-  ) {
-    return notifier.build(
-      recipeNote: recipeNote,
-    );
-  }
+  RecipeNote? get recipeNote =>
+      (origin as RecipeNoteEditViewModelProvider).recipeNote;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -31,8 +31,6 @@ class _SystemHash {
   }
 }
 
-typedef ThemeDataRef = AutoDisposeProviderRef<ThemeData>;
-
 /// See also [themeData].
 @ProviderFor(themeData)
 const themeDataProvider = ThemeDataFamily();
@@ -79,10 +77,10 @@ class ThemeDataFamily extends Family<ThemeData> {
 class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
   /// See also [themeData].
   ThemeDataProvider({
-    this.isDarkMode = false,
-  }) : super.internal(
+    bool isDarkMode = false,
+  }) : this._internal(
           (ref) => themeData(
-            ref,
+            ref as ThemeDataRef,
             isDarkMode: isDarkMode,
           ),
           from: themeDataProvider,
@@ -93,9 +91,43 @@ class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
                   : _$themeDataHash,
           dependencies: ThemeDataFamily._dependencies,
           allTransitiveDependencies: ThemeDataFamily._allTransitiveDependencies,
+          isDarkMode: isDarkMode,
         );
 
+  ThemeDataProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.isDarkMode,
+  }) : super.internal();
+
   final bool isDarkMode;
+
+  @override
+  Override overrideWith(
+    ThemeData Function(ThemeDataRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ThemeDataProvider._internal(
+        (ref) => create(ref as ThemeDataRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        isDarkMode: isDarkMode,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<ThemeData> createElement() {
+    return _ThemeDataProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -110,5 +142,18 @@ class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin ThemeDataRef on AutoDisposeProviderRef<ThemeData> {
+  /// The parameter `isDarkMode` of this provider.
+  bool get isDarkMode;
+}
+
+class _ThemeDataProviderElement extends AutoDisposeProviderElement<ThemeData>
+    with ThemeDataRef {
+  _ThemeDataProviderElement(super.provider);
+
+  @override
+  bool get isDarkMode => (origin as ThemeDataProvider).isDarkMode;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
