@@ -46,6 +46,7 @@ class SearchPage extends ConsumerWidget {
     };
 
     return Scaffold(
+      appBar: AppBar(title: Text(t.video.title)),
       body: SafeArea(
         child: Column(
           children: [

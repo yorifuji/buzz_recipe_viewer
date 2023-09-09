@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 108 (54 per locale)
 ///
-/// Built on 2023-09-09 at 03:22 UTC
+/// Built on 2023-09-09 at 03:26 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -231,7 +231,7 @@ class _StringsVideoEn {
   final _StringsEn _root; // ignore: unused_field
 
   // Translations
-  String get title => '';
+  String get title => 'Video';
 }
 
 // Path: favorite
@@ -630,7 +630,7 @@ class _StringsVideoJa implements _StringsVideoEn {
 
   // Translations
   @override
-  String get title => '';
+  String get title => 'ビデオ';
 }
 
 // Path: favorite
@@ -1076,7 +1076,7 @@ extension on _StringsEn {
       case 'recipe.viewRecipe.delete':
         return 'Delete';
       case 'video.title':
-        return '';
+        return 'Video';
       case 'favorite.title':
         return 'Favorite';
       case 'favorite.empty':
@@ -1193,7 +1193,7 @@ extension on _StringsJa {
       case 'recipe.viewRecipe.delete':
         return '削除';
       case 'video.title':
-        return '';
+        return 'ビデオ';
       case 'favorite.title':
         return 'お気に入り';
       case 'favorite.empty':
