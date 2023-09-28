@@ -57,7 +57,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   slang: ^3.22.0
-  slang_flutter: ^3.22.0
+  slang_flutter: ^3.24.0
 
 dev_dependencies:
   flutter_test:
