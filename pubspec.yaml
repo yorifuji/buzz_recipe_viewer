@@ -79,7 +79,7 @@ dev_dependencies:
   custom_lint: ^0.5.3
   isar_generator: ^3.1.0+1
   flutter_launcher_icons: ^0.13.1
-  slang_build_runner: ^3.22.0
+  slang_build_runner: ^3.24.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
