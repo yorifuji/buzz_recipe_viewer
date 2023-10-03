@@ -19,11 +19,11 @@ graph LR;
 - View
   - Widget など
 - Store
-  - 最新の状態保持、Single Source of Truth を担保する
+  - 状態の保持
 - Service
   - View の操作に基づいて処理を行う
-    - Repository を呼び出してデータを取得する
-    - Store を更新する
+    - 主にRepositoryに対する操作を行いデータを取得する
+    - 取得したデータに基づいてStoreを更新する
 - Repository
   - 外部サービス、API、データベースなどのデータソースからデータを取得
 
@@ -47,24 +47,50 @@ graph LR;
   - [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
   - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
   - [url_launcher](https://pub.dev/packages/url_launcher)
-- Backend
-  - [Algolia](https://www.algolia.com/)
-- Data Source
-  - [YouTube Data API](https://developers.google.com/youtube/v3)
-- CI/CD([GitHub Actions](https://github.co.jp/features/actions))
-  - Check
-    - diff
-    - format
-    - analyze
-    - test
-  - Bump
-    - version
-  - Deploy
-    - Production(Play Console, App Store Connect)
-    - Staging(Firebase App Distribution)
-  - Nightly build
-- Dependencies Management
-  - [Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot)
+
+# Dependency Management
+
+- [Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot)
+
+# Backend
+
+- [Algolia](https://www.algolia.com/)
+
+# Data Source
+
+- [YouTube Data API](https://developers.google.com/youtube/v3)
+
+# Flavor
+
+`--dart-define=FLAVOR=...` を採用
+
+- dev
+  - 開発用（ローカルビルド）
+  - dev.yorifuji.buzz_recipe_viewer.dev
+- stg
+  - STG配布（Firebase App Distribution）
+  - dev.yorifuji.buzz_recipe_viewer.stg
+- prod
+  - 本番配布
+  - dev.yorifuji.buzz_recipe_viewer
+
+# CI/CD
+
+[GitHub Actions](https://github.co.jp/features/actions)を採用
+
+- Check
+  - flutter format
+  - flutter analyze
+  - flutter test
+  - diffのチェック
+- Bump
+  - `version:`` のインクリメント
+- Deliver(build & deploy)
+  - stg
+    - Firebase App Distribution
+  - prod
+    - Google Play, App Store Connect(Test Flight)
+- Nightly build
 
 # Related repository
 
