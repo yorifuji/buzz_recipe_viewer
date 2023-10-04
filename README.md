@@ -2,6 +2,10 @@
 
 [![check](https://github.com/yorifuji/buzz_recipe_viewer/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/yorifuji/buzz_recipe_viewer/actions/workflows/check.yml)
 
+レシピ記録と動画を検索・閲覧するアプリです。
+
+本アプリを通してFlutterアプリ開発におけるアーキテクチャの検討やライブラリ利用のスキルを習得することを目的にしています（技術showcase）。
+
 # Screenshot
 
 |                               |                               |
@@ -15,6 +19,7 @@
 | ------- | ------- |
 | Flutter | 3.13.6  |
 | Xcode   | 14.3.1  |
+| Android Studio   |  |
 
 # Architecture
 
