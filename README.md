@@ -70,7 +70,7 @@ graph LR;
 # Data Source
 
 - [YouTube Data API](https://developers.google.com/youtube/v3)
-- 指定の YouTube のチャンネルの動画の情報を定期的に取得して Algolia にインポートしている
+- 後述の別のリポジトリを使って YouTube の情報を定期的に取得して Algolia にインポートしている
 
 # Flavor
 
