@@ -22,8 +22,8 @@ graph LR;
   - 状態の保持
 - Service
   - View の操作に基づいて処理を行う
-    - 主にRepositoryに対する操作を行いデータを取得する
-    - 取得したデータに基づいてStoreを更新する
+    - 主に Repository に対する操作を行いデータを取得する
+    - 取得したデータに基づいて Store を更新する
 - Repository
   - 外部サービス、API、データベースなどのデータソースからデータを取得
 
@@ -66,9 +66,10 @@ graph LR;
 
 - dev
   - 開発用（ローカルビルド）
-  - dev.yorifuji.buzz_recipe_viewer.dev
+  - リポジトリの一部をモックに差し替えている
+  - BundleID:dev.yorifuji.buzz_recipe_viewer.dev
 - stg
-  - STG配布（Firebase App Distribution）
+  - STG 配布（Firebase App Distribution）
   - dev.yorifuji.buzz_recipe_viewer.stg
 - prod
   - 本番配布
@@ -82,9 +83,9 @@ graph LR;
   - flutter format
   - flutter analyze
   - flutter test
-  - diffのチェック
+  - 差分（diff）のチェック
 - Bump
-  - `version:`` のインクリメント
+  - pubspec.yaml の`version:`のインクリメント
 - Deliver(build & deploy)
   - stg
     - Firebase App Distribution
