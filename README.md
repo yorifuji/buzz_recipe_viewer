@@ -2,9 +2,19 @@
 
 [![check](https://github.com/yorifuji/buzz_recipe_viewer/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/yorifuji/buzz_recipe_viewer/actions/workflows/check.yml)
 
-| light                         | dark                          |
+# Screenshot
+
+|                               |                               |
 | ----------------------------- | ----------------------------- |
 | ![](./images/screenshot1.png) | ![](./images/screenshot2.png) |
+| ![](./images/screenshot3.png) | ![](./images/screenshot4.png) |
+
+# Environment
+
+| Tool    | Version |
+| ------- | ------- |
+| Flutter | 3.13.6  |
+| Xcode   | 14.3.1  |
 
 # Architecture
 
@@ -30,7 +40,7 @@ graph LR;
 # Dependencies
 
 - DI
-  - [Riverpod](https://riverpod.dev/)
+  - [Riverpod(v2, generator)](https://riverpod.dev/)
 - Data store
   - [Isar Database](https://isar.dev/ja/)
   - [shared_preferences](https://pub.dev/packages/shared_preferences)
@@ -48,17 +58,19 @@ graph LR;
   - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
   - [url_launcher](https://pub.dev/packages/url_launcher)
 
-# Dependency Management
+## Dependency Management
 
 - [Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot)
 
 # Backend
 
 - [Algolia](https://www.algolia.com/)
+- 後述の YouTube Data API で取得したデータを Algolia にインポートしている
 
 # Data Source
 
 - [YouTube Data API](https://developers.google.com/youtube/v3)
+- 指定の YouTube のチャンネルの動画の情報を定期的に取得して Algolia にインポートしている
 
 # Flavor
 
@@ -96,3 +108,5 @@ graph LR;
 # Related repository
 
 - [yorifuji/buzz_recipe_importer](https://github.com/yorifuji/buzz_recipe_importer)
+- YouTube のチャンネルの動画の情報を定期的に取得して Algolia にインポートする Python プログラム
+- GitHub Actions で定期実行している
