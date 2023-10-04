@@ -65,7 +65,6 @@ graph LR;
 # Backend
 
 - [Algolia](https://www.algolia.com/)
-- 後述の YouTube Data API で取得したデータを Algolia にインポートしている
 
 # Data Source
 
