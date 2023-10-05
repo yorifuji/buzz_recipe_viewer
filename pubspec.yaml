@@ -75,7 +75,7 @@ dev_dependencies:
   json_serializable: any
   pedantic_mono: any
   riverpod_generator: 2.3.3
-  riverpod_lint: any
+  riverpod_lint: 2.1.1
   custom_lint: any
   isar_generator: any
   flutter_launcher_icons: any
