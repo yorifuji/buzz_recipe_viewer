@@ -1,0 +1,26 @@
+// ignore_for_file: scoped_providers_should_specify_dependencies
+import 'package:buzz_recipe_viewer/store/favorite_store.dart';
+import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'fake_favorite_store.dart';
+
+void main() {
+  testWidgets('FavoritePage', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          favoriteStoreProvider.overrideWith(FakeFavoriteStore.new),
+        ],
+        child: const MaterialApp(home: FavoritePage()),
+      ),
+    );
+
+    expect(
+      find.text('Love a video?\nTap the heart to make it your fave!'),
+      findsOneWidget,
+    );
+  });
+}
