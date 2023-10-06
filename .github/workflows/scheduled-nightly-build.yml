@@ -13,6 +13,9 @@ permissions:
 jobs:
   check:
     uses: ./.github/workflows/check.yml
+    permissions:
+      issues: write
+      pull-requests: write    
     secrets: inherit
 
   build:
