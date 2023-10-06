@@ -11,7 +11,12 @@ permissions:
   contents: read
 
 jobs:
+  check:
+    uses: ./.github/workflows/check.yml
+    secrets: inherit
+
   build:
+    needs: check
     uses: ./.github/workflows/deliver-prod.yml
     secrets: inherit
     with:
