@@ -15,6 +15,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  final test1 = 1;
+  final test2 = 2;
   WidgetsFlutterBinding.ensureInitialized();
 
   final (_, isar, packageInfo, sharedPreferences) = await (
