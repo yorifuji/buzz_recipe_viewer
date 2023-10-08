@@ -91,6 +91,14 @@ graph LR;
   - 本番配布
   - dev.yorifuji.buzz_recipe_viewer
 
+# Test
+
+簡易なWidget Testのみ
+
+TBD
+
+- VRT(Visual Regression Testing)
+
 # CI/CD
 
 [GitHub Actions](https://github.co.jp/features/actions)を採用
