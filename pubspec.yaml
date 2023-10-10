@@ -49,7 +49,7 @@ dependencies:
   path_provider: any
   youtube_player_flutter: any
   settings_ui: any
-  package_info_plus: any
+  package_info_plus: 5.0.0
   shared_preferences: any
   custom_text: any
   like_button: any
