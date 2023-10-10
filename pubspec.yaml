@@ -41,7 +41,7 @@ dependencies:
   flutter_dotenv: any
   intl: any
   url_launcher: any
-  flutter_hooks: any
+  flutter_hooks: 0.20.3
   hooks_riverpod: 2.4.3
   riverpod_annotation: 2.2.0
   isar: any
