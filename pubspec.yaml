@@ -43,7 +43,7 @@ dependencies:
   url_launcher: any
   flutter_hooks: any
   hooks_riverpod: 2.4.3
-  riverpod_annotation: any
+  riverpod_annotation: 2.2.0
   isar: any
   isar_flutter_libs: any
   path_provider: any
