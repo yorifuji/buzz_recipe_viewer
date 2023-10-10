@@ -70,7 +70,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: any
   cider: any
-  freezed: any
+  freezed: 2.4.5
   build_runner: any
   json_serializable: any
   pedantic_mono: any
