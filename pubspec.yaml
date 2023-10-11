@@ -69,7 +69,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: any
-  cider: any
+  cider: 0.2.4
   freezed: any
   build_runner: any
   json_serializable: any
