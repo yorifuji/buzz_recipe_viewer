@@ -1,8 +1,5 @@
 
-.PHONY: analyze build 
-
-analyze:
-	flutter analyze
+.PHONY: build-runner build-launcher-icons 
 
 build-runner:
 	test -e .env || cp .env_example .env
