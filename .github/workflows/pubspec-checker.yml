@@ -1,0 +1,49 @@
+name: pubspec update checker
+
+run-name: Check pubspec.lock updates ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * *"
+
+env:
+  GIT_USER_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
+  GIT_USER_NAME: "github-actions[bot]"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - name: Check for changes
+        run: |
+          rm pubspec.lock
+          flutter pub get
+          git diff
+
+      - name: Create PR if changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ `git status -s` ]; then
+            git config --local user.name $GIT_USER_NAME
+            git config --local user.email $GIT_USER_EMAIL
+            git add pubspec.lock
+            git commit -m "Update pubspec.lock"
+            git checkout -b ci/pubspec-update-checker
+            git push -f origin ci/pubspec-update-checker
+            gh pr create --base ${{ github.ref_name }} --head ci/pubspec-update-checker --title "Update pubspec.lock" --body "Update pubspec.lock"
+          fi
