@@ -38,12 +38,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ `git status -s` ]; then
+          if [[ -n $(git status --porcelain) ]]; then
             git config --local user.name $GIT_USER_NAME
             git config --local user.email $GIT_USER_EMAIL
             git add pubspec.lock
             git commit -m "Update pubspec.lock"
             git checkout -b ci/pubspec-update-checker
             git push -f origin ci/pubspec-update-checker
-            gh pr create --base ${{ github.ref_name }} --head ci/pubspec-update-checker --title "Update pubspec.lock" --body "Update pubspec.lock"
+            gh pr create --base ${{ github.ref_name }} --head ci/pubspec-update-checker --title "CI: Update pubspec.lock" --body "Update pubspec.lock" || exit 0
           fi
