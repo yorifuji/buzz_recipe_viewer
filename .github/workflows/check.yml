@@ -38,8 +38,7 @@ jobs:
 
       - name: Check for changes
         run: |
-          GIT_STATUS=`git status --porcelain`
-          if [ $GIT_STATUS ]; then
+          if [[ -n $(git status --porcelain) ]]; then
             echo "There are changes in the working tree, please commit them before running this action."
             echo "$GIT_STATUS"
             exit 1
