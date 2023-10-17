@@ -145,3 +145,9 @@ jobs:
       - run: flutter pub get
 
       - run: flutter test
+
+  action-timeline:
+    needs: [format, analyze, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v1

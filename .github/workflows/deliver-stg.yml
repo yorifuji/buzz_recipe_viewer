@@ -161,3 +161,9 @@ jobs:
         run: |
           which firebase || curl -sL https://firebase.tools | bash
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute $APP_PATH --app $FIREBASE_APP_ID_IOS --testers "yorifuji@gmail.com"
+
+  action-timeline:
+    needs: [android, ios]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v1

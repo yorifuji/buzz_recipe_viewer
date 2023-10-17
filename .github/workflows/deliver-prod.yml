@@ -171,3 +171,9 @@ jobs:
         if: ${{ always() }}
         run: |
           rm -rf ./private_keys
+
+  action-timeline:
+    needs: [android, ios]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v1
