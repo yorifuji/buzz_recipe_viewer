@@ -16,6 +16,10 @@ env:
   GIT_USER_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
   GIT_USER_NAME: "github-actions[bot]"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tagged:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')

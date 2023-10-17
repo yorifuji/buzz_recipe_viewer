@@ -10,13 +10,17 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     uses: ./.github/workflows/check.yml
     permissions:
       contents: read
       issues: write
-      pull-requests: write    
+      pull-requests: write
     secrets: inherit
 
   build:
