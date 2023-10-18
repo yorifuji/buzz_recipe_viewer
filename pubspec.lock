@@ -221,10 +221,10 @@ packages:
     dependency: transitive
     description:
       name: csv
-      sha256: "016b31a51a913744a0a1655c74ff13c9379e1200e246a03d96c81c5d9ed297b5"
+      sha256: "142bdf2b24f4a49e35a0fc4398f21d861c4c0f9015e8054dcacd0bb8e23ee27d"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "5.1.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -367,10 +367,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_riverpod
-      sha256: e667e406a74d67715f1fa0bd941d9ded49aff72f3a9f4440a36aece4e8d457a7
+      sha256: bdba94be666ecb1beeb0f5a748d96cdd6a37215f27e6b48c7673b95cecb800c8
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.3"
+    version: "2.4.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -425,10 +425,10 @@ packages:
     dependency: "direct main"
     description:
       name: hooks_riverpod
-      sha256: "69dcb88acbc68c81fc27ec15a89a4e24b7812c83c13a6307a1a9366ada758541"
+      sha256: "0e02037e6fd3511a06ab4770b1a766d2d9bb576f85780d5bb452ca53e3311044"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.3"
+    version: "2.4.4"
   hotreloader:
     dependency: transitive
     description:
@@ -769,10 +769,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "494bf2cfb4df30000273d3052bdb1cc1de738574c6b678f0beb146ea56f5e208"
+      sha256: "2af3d127a6e4e34b89b8f1f018086f5ded04b8e538174f0510bba3e4c0d878b1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.3"
+    version: "2.4.4"
   riverpod_analyzer_utils:
     dependency: transitive
     description:
@@ -785,10 +785,10 @@ packages:
     dependency: "direct main"
     description:
       name: riverpod_annotation
-      sha256: b724b2085405c4f62a1824a3fa3fb1e4858e09a4e2e8db92b7547c08d07a1377
+      sha256: "388b03ed91b8f5126318fa43221fe078ebc20c81523dec9fcb5237cb5431d4dd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   riverpod_generator:
     dependency: "direct dev"
     description:
@@ -902,26 +902,26 @@ packages:
     dependency: "direct main"
     description:
       name: slang
-      sha256: ce1270c6dada4163b42811682d49ecc12efa076efbdde066c05e7fd010c4eb23
+      sha256: "829ae38374a328ac8d97d5835e8b4e9bbed1993f66ca85771c5ccec9c87ac397"
       url: "https://pub.dev"
     source: hosted
-    version: "3.24.0"
+    version: "3.25.0"
   slang_build_runner:
     dependency: "direct dev"
     description:
       name: slang_build_runner
-      sha256: "3257b62a66faa85b38a0590e0d59e874fc120d19b83a14643e51e14a57d0e184"
+      sha256: f5003a3aa8a6a72de59c8ad29c072da9ab5d1b81c599798c0f651c4e5c7e25e5
       url: "https://pub.dev"
     source: hosted
-    version: "3.24.0"
+    version: "3.25.0"
   slang_flutter:
     dependency: "direct main"
     description:
       name: slang_flutter
-      sha256: cbd4dedb7543c5e791100ef565c30e42b609c918260bfb2f5114f420ccee1d56
+      sha256: cb5e1611744cca620cc03f93a54eca6918e25ae7d600cd940ef2d556e2be4c64
       url: "https://pub.dev"
     source: hosted
-    version: "3.24.0"
+    version: "3.25.0"
   source_gen:
     dependency: transitive
     description:
