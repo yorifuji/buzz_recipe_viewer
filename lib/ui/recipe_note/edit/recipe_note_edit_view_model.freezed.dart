@@ -62,21 +62,22 @@ class _$TextItemCopyWithImpl<$Res, $Val extends TextItem>
 }
 
 /// @nodoc
-abstract class _$$_TextItemCopyWith<$Res> implements $TextItemCopyWith<$Res> {
-  factory _$$_TextItemCopyWith(
-          _$_TextItem value, $Res Function(_$_TextItem) then) =
-      __$$_TextItemCopyWithImpl<$Res>;
+abstract class _$$TextItemImplCopyWith<$Res>
+    implements $TextItemCopyWith<$Res> {
+  factory _$$TextItemImplCopyWith(
+          _$TextItemImpl value, $Res Function(_$TextItemImpl) then) =
+      __$$TextItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String text, DateTime dateTime});
 }
 
 /// @nodoc
-class __$$_TextItemCopyWithImpl<$Res>
-    extends _$TextItemCopyWithImpl<$Res, _$_TextItem>
-    implements _$$_TextItemCopyWith<$Res> {
-  __$$_TextItemCopyWithImpl(
-      _$_TextItem _value, $Res Function(_$_TextItem) _then)
+class __$$TextItemImplCopyWithImpl<$Res>
+    extends _$TextItemCopyWithImpl<$Res, _$TextItemImpl>
+    implements _$$TextItemImplCopyWith<$Res> {
+  __$$TextItemImplCopyWithImpl(
+      _$TextItemImpl _value, $Res Function(_$TextItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_TextItemCopyWithImpl<$Res>
     Object? text = null,
     Object? dateTime = null,
   }) {
-    return _then(_$_TextItem(
+    return _then(_$TextItemImpl(
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,9 @@ class __$$_TextItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TextItem extends _TextItem {
-  const _$_TextItem({required this.text, required this.dateTime}) : super._();
+class _$TextItemImpl extends _TextItem {
+  const _$TextItemImpl({required this.text, required this.dateTime})
+      : super._();
 
   @override
   final String text;
@@ -117,7 +119,7 @@ class _$_TextItem extends _TextItem {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TextItem &&
+            other is _$TextItemImpl &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime));
@@ -129,14 +131,14 @@ class _$_TextItem extends _TextItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TextItemCopyWith<_$_TextItem> get copyWith =>
-      __$$_TextItemCopyWithImpl<_$_TextItem>(this, _$identity);
+  _$$TextItemImplCopyWith<_$TextItemImpl> get copyWith =>
+      __$$TextItemImplCopyWithImpl<_$TextItemImpl>(this, _$identity);
 }
 
 abstract class _TextItem extends TextItem {
   const factory _TextItem(
       {required final String text,
-      required final DateTime dateTime}) = _$_TextItem;
+      required final DateTime dateTime}) = _$TextItemImpl;
   const _TextItem._() : super._();
 
   @override
@@ -145,7 +147,7 @@ abstract class _TextItem extends TextItem {
   DateTime get dateTime;
   @override
   @JsonKey(ignore: true)
-  _$$_TextItemCopyWith<_$_TextItem> get copyWith =>
+  _$$TextItemImplCopyWith<_$TextItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -214,11 +216,11 @@ class _$RecipeNoteEditStateCopyWithImpl<$Res, $Val extends RecipeNoteEditState>
 }
 
 /// @nodoc
-abstract class _$$_RecipeNoteEditStateCopyWith<$Res>
+abstract class _$$RecipeNoteEditStateImplCopyWith<$Res>
     implements $RecipeNoteEditStateCopyWith<$Res> {
-  factory _$$_RecipeNoteEditStateCopyWith(_$_RecipeNoteEditState value,
-          $Res Function(_$_RecipeNoteEditState) then) =
-      __$$_RecipeNoteEditStateCopyWithImpl<$Res>;
+  factory _$$RecipeNoteEditStateImplCopyWith(_$RecipeNoteEditStateImpl value,
+          $Res Function(_$RecipeNoteEditStateImpl) then) =
+      __$$RecipeNoteEditStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -229,11 +231,11 @@ abstract class _$$_RecipeNoteEditStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RecipeNoteEditStateCopyWithImpl<$Res>
-    extends _$RecipeNoteEditStateCopyWithImpl<$Res, _$_RecipeNoteEditState>
-    implements _$$_RecipeNoteEditStateCopyWith<$Res> {
-  __$$_RecipeNoteEditStateCopyWithImpl(_$_RecipeNoteEditState _value,
-      $Res Function(_$_RecipeNoteEditState) _then)
+class __$$RecipeNoteEditStateImplCopyWithImpl<$Res>
+    extends _$RecipeNoteEditStateCopyWithImpl<$Res, _$RecipeNoteEditStateImpl>
+    implements _$$RecipeNoteEditStateImplCopyWith<$Res> {
+  __$$RecipeNoteEditStateImplCopyWithImpl(_$RecipeNoteEditStateImpl _value,
+      $Res Function(_$RecipeNoteEditStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -244,7 +246,7 @@ class __$$_RecipeNoteEditStateCopyWithImpl<$Res>
     Object? foodList = null,
     Object? stepList = null,
   }) {
-    return _then(_$_RecipeNoteEditState(
+    return _then(_$RecipeNoteEditStateImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -267,8 +269,8 @@ class __$$_RecipeNoteEditStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RecipeNoteEditState extends _RecipeNoteEditState {
-  const _$_RecipeNoteEditState(
+class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
+  const _$RecipeNoteEditStateImpl(
       {this.title = '',
       this.description = '',
       final List<TextItem> foodList = const [],
@@ -310,7 +312,7 @@ class _$_RecipeNoteEditState extends _RecipeNoteEditState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RecipeNoteEditState &&
+            other is _$RecipeNoteEditStateImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -329,8 +331,8 @@ class _$_RecipeNoteEditState extends _RecipeNoteEditState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RecipeNoteEditStateCopyWith<_$_RecipeNoteEditState> get copyWith =>
-      __$$_RecipeNoteEditStateCopyWithImpl<_$_RecipeNoteEditState>(
+  _$$RecipeNoteEditStateImplCopyWith<_$RecipeNoteEditStateImpl> get copyWith =>
+      __$$RecipeNoteEditStateImplCopyWithImpl<_$RecipeNoteEditStateImpl>(
           this, _$identity);
 }
 
@@ -339,7 +341,7 @@ abstract class _RecipeNoteEditState extends RecipeNoteEditState {
       {final String title,
       final String description,
       final List<TextItem> foodList,
-      final List<TextItem> stepList}) = _$_RecipeNoteEditState;
+      final List<TextItem> stepList}) = _$RecipeNoteEditStateImpl;
   const _RecipeNoteEditState._() : super._();
 
   @override
@@ -352,6 +354,6 @@ abstract class _RecipeNoteEditState extends RecipeNoteEditState {
   List<TextItem> get stepList;
   @override
   @JsonKey(ignore: true)
-  _$$_RecipeNoteEditStateCopyWith<_$_RecipeNoteEditState> get copyWith =>
+  _$$RecipeNoteEditStateImplCopyWith<_$RecipeNoteEditStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

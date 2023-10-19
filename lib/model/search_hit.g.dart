@@ -8,7 +8,8 @@ part of 'search_hit.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SearchHit _$$_SearchHitFromJson(Map<String, dynamic> json) => _$_SearchHit(
+_$SearchHitImpl _$$SearchHitImplFromJson(Map<String, dynamic> json) =>
+    _$SearchHitImpl(
       id: json['id'] as String,
       videoId: json['videoId'] as String,
       title: json['title'] as String,
@@ -21,7 +22,7 @@ _$_SearchHit _$$_SearchHitFromJson(Map<String, dynamic> json) => _$_SearchHit(
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$_SearchHitToJson(_$_SearchHit instance) =>
+Map<String, dynamic> _$$SearchHitImplToJson(_$SearchHitImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'videoId': instance.videoId,

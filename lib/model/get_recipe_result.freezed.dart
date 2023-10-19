@@ -63,22 +63,22 @@ class _$GetRecipeResultCopyWithImpl<$Res, $Val extends GetRecipeResult>
 }
 
 /// @nodoc
-abstract class _$$_GetRecipeResultCopyWith<$Res>
+abstract class _$$GetRecipeResultImplCopyWith<$Res>
     implements $GetRecipeResultCopyWith<$Res> {
-  factory _$$_GetRecipeResultCopyWith(
-          _$_GetRecipeResult value, $Res Function(_$_GetRecipeResult) then) =
-      __$$_GetRecipeResultCopyWithImpl<$Res>;
+  factory _$$GetRecipeResultImplCopyWith(_$GetRecipeResultImpl value,
+          $Res Function(_$GetRecipeResultImpl) then) =
+      __$$GetRecipeResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<SearchHit> searchHits, int nextPage});
 }
 
 /// @nodoc
-class __$$_GetRecipeResultCopyWithImpl<$Res>
-    extends _$GetRecipeResultCopyWithImpl<$Res, _$_GetRecipeResult>
-    implements _$$_GetRecipeResultCopyWith<$Res> {
-  __$$_GetRecipeResultCopyWithImpl(
-      _$_GetRecipeResult _value, $Res Function(_$_GetRecipeResult) _then)
+class __$$GetRecipeResultImplCopyWithImpl<$Res>
+    extends _$GetRecipeResultCopyWithImpl<$Res, _$GetRecipeResultImpl>
+    implements _$$GetRecipeResultImplCopyWith<$Res> {
+  __$$GetRecipeResultImplCopyWithImpl(
+      _$GetRecipeResultImpl _value, $Res Function(_$GetRecipeResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_GetRecipeResultCopyWithImpl<$Res>
     Object? searchHits = null,
     Object? nextPage = null,
   }) {
-    return _then(_$_GetRecipeResult(
+    return _then(_$GetRecipeResultImpl(
       searchHits: null == searchHits
           ? _value._searchHits
           : searchHits // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_GetRecipeResultCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetRecipeResult implements _GetRecipeResult {
-  const _$_GetRecipeResult(
+class _$GetRecipeResultImpl implements _GetRecipeResult {
+  const _$GetRecipeResultImpl(
       {final List<SearchHit> searchHits = const <SearchHit>[],
       this.nextPage = 0})
       : _searchHits = searchHits;
@@ -130,7 +130,7 @@ class _$_GetRecipeResult implements _GetRecipeResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetRecipeResult &&
+            other is _$GetRecipeResultImpl &&
             const DeepCollectionEquality()
                 .equals(other._searchHits, _searchHits) &&
             (identical(other.nextPage, nextPage) ||
@@ -144,14 +144,15 @@ class _$_GetRecipeResult implements _GetRecipeResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetRecipeResultCopyWith<_$_GetRecipeResult> get copyWith =>
-      __$$_GetRecipeResultCopyWithImpl<_$_GetRecipeResult>(this, _$identity);
+  _$$GetRecipeResultImplCopyWith<_$GetRecipeResultImpl> get copyWith =>
+      __$$GetRecipeResultImplCopyWithImpl<_$GetRecipeResultImpl>(
+          this, _$identity);
 }
 
 abstract class _GetRecipeResult implements GetRecipeResult {
   const factory _GetRecipeResult(
       {final List<SearchHit> searchHits,
-      final int nextPage}) = _$_GetRecipeResult;
+      final int nextPage}) = _$GetRecipeResultImpl;
 
   @override
   List<SearchHit> get searchHits;
@@ -159,6 +160,6 @@ abstract class _GetRecipeResult implements GetRecipeResult {
   int get nextPage;
   @override
   @JsonKey(ignore: true)
-  _$$_GetRecipeResultCopyWith<_$_GetRecipeResult> get copyWith =>
+  _$$GetRecipeResultImplCopyWith<_$GetRecipeResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

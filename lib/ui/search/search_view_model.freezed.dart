@@ -79,11 +79,11 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
 }
 
 /// @nodoc
-abstract class _$$_SearchStateCopyWith<$Res>
+abstract class _$$SearchStateImplCopyWith<$Res>
     implements $SearchStateCopyWith<$Res> {
-  factory _$$_SearchStateCopyWith(
-          _$_SearchState value, $Res Function(_$_SearchState) then) =
-      __$$_SearchStateCopyWithImpl<$Res>;
+  factory _$$SearchStateImplCopyWith(
+          _$SearchStateImpl value, $Res Function(_$SearchStateImpl) then) =
+      __$$SearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_SearchStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchStateCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$_SearchState>
-    implements _$$_SearchStateCopyWith<$Res> {
-  __$$_SearchStateCopyWithImpl(
-      _$_SearchState _value, $Res Function(_$_SearchState) _then)
+class __$$SearchStateImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$SearchStateImpl>
+    implements _$$SearchStateImplCopyWith<$Res> {
+  __$$SearchStateImplCopyWithImpl(
+      _$SearchStateImpl _value, $Res Function(_$SearchStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? loadingState = null,
     Object? moreLoadingState = null,
   }) {
-    return _then(_$_SearchState(
+    return _then(_$SearchStateImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_SearchStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
-  const _$_SearchState(
+class _$SearchStateImpl with DiagnosticableTreeMixin implements _SearchState {
+  const _$SearchStateImpl(
       {this.query = '',
       this.sortType = SortIndex.timestamp,
       this.loadingState = LoadingState.loadable,
@@ -172,7 +172,7 @@ class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchState &&
+            other is _$SearchStateImpl &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.sortType, sortType) ||
                 other.sortType == sortType) &&
@@ -189,8 +189,8 @@ class _$_SearchState with DiagnosticableTreeMixin implements _SearchState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>
-      __$$_SearchStateCopyWithImpl<_$_SearchState>(this, _$identity);
+  _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>
+      __$$SearchStateImplCopyWithImpl<_$SearchStateImpl>(this, _$identity);
 }
 
 abstract class _SearchState implements SearchState {
@@ -198,7 +198,7 @@ abstract class _SearchState implements SearchState {
       {final String query,
       final SortIndex sortType,
       final LoadingState loadingState,
-      final LoadingState moreLoadingState}) = _$_SearchState;
+      final LoadingState moreLoadingState}) = _$SearchStateImpl;
 
   @override
   String get query;
@@ -210,6 +210,6 @@ abstract class _SearchState implements SearchState {
   LoadingState get moreLoadingState;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>
+  _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

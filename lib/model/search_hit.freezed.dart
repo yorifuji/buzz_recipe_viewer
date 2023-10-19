@@ -125,10 +125,11 @@ class _$SearchHitCopyWithImpl<$Res, $Val extends SearchHit>
 }
 
 /// @nodoc
-abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
-  factory _$$_SearchHitCopyWith(
-          _$_SearchHit value, $Res Function(_$_SearchHit) then) =
-      __$$_SearchHitCopyWithImpl<$Res>;
+abstract class _$$SearchHitImplCopyWith<$Res>
+    implements $SearchHitCopyWith<$Res> {
+  factory _$$SearchHitImplCopyWith(
+          _$SearchHitImpl value, $Res Function(_$SearchHitImpl) then) =
+      __$$SearchHitImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -145,11 +146,11 @@ abstract class _$$_SearchHitCopyWith<$Res> implements $SearchHitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SearchHitCopyWithImpl<$Res>
-    extends _$SearchHitCopyWithImpl<$Res, _$_SearchHit>
-    implements _$$_SearchHitCopyWith<$Res> {
-  __$$_SearchHitCopyWithImpl(
-      _$_SearchHit _value, $Res Function(_$_SearchHit) _then)
+class __$$SearchHitImplCopyWithImpl<$Res>
+    extends _$SearchHitCopyWithImpl<$Res, _$SearchHitImpl>
+    implements _$$SearchHitImplCopyWith<$Res> {
+  __$$SearchHitImplCopyWithImpl(
+      _$SearchHitImpl _value, $Res Function(_$SearchHitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -166,7 +167,7 @@ class __$$_SearchHitCopyWithImpl<$Res>
     Object? image = null,
     Object? url = null,
   }) {
-    return _then(_$_SearchHit(
+    return _then(_$SearchHitImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -213,8 +214,8 @@ class __$$_SearchHitCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
-  const _$_SearchHit(
+class _$SearchHitImpl with DiagnosticableTreeMixin implements _SearchHit {
+  const _$SearchHitImpl(
       {required this.id,
       required this.videoId,
       required this.title,
@@ -226,8 +227,8 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
       required this.image,
       required this.url});
 
-  factory _$_SearchHit.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchHitFromJson(json);
+  factory _$SearchHitImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchHitImplFromJson(json);
 
   @override
   final String id;
@@ -276,7 +277,7 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchHit &&
+            other is _$SearchHitImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
             (identical(other.title, title) || other.title == title) &&
@@ -300,12 +301,12 @@ class _$_SearchHit with DiagnosticableTreeMixin implements _SearchHit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchHitCopyWith<_$_SearchHit> get copyWith =>
-      __$$_SearchHitCopyWithImpl<_$_SearchHit>(this, _$identity);
+  _$$SearchHitImplCopyWith<_$SearchHitImpl> get copyWith =>
+      __$$SearchHitImplCopyWithImpl<_$SearchHitImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchHitToJson(
+    return _$$SearchHitImplToJson(
       this,
     );
   }
@@ -322,10 +323,10 @@ abstract class _SearchHit implements SearchHit {
       required final int views,
       required final int likes,
       required final String image,
-      required final String url}) = _$_SearchHit;
+      required final String url}) = _$SearchHitImpl;
 
   factory _SearchHit.fromJson(Map<String, dynamic> json) =
-      _$_SearchHit.fromJson;
+      _$SearchHitImpl.fromJson;
 
   @override
   String get id;
@@ -349,7 +350,7 @@ abstract class _SearchHit implements SearchHit {
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchHitCopyWith<_$_SearchHit> get copyWith =>
+  _$$SearchHitImplCopyWith<_$SearchHitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -406,11 +407,11 @@ class _$SearchHitItemCopyWithImpl<$Res, $Val extends SearchHitItem>
 }
 
 /// @nodoc
-abstract class _$$_SearchHitItemCopyWith<$Res>
+abstract class _$$SearchHitItemImplCopyWith<$Res>
     implements $SearchHitItemCopyWith<$Res> {
-  factory _$$_SearchHitItemCopyWith(
-          _$_SearchHitItem value, $Res Function(_$_SearchHitItem) then) =
-      __$$_SearchHitItemCopyWithImpl<$Res>;
+  factory _$$SearchHitItemImplCopyWith(
+          _$SearchHitItemImpl value, $Res Function(_$SearchHitItemImpl) then) =
+      __$$SearchHitItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SearchHit searchHit});
@@ -420,11 +421,11 @@ abstract class _$$_SearchHitItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchHitItemCopyWithImpl<$Res>
-    extends _$SearchHitItemCopyWithImpl<$Res, _$_SearchHitItem>
-    implements _$$_SearchHitItemCopyWith<$Res> {
-  __$$_SearchHitItemCopyWithImpl(
-      _$_SearchHitItem _value, $Res Function(_$_SearchHitItem) _then)
+class __$$SearchHitItemImplCopyWithImpl<$Res>
+    extends _$SearchHitItemCopyWithImpl<$Res, _$SearchHitItemImpl>
+    implements _$$SearchHitItemImplCopyWith<$Res> {
+  __$$SearchHitItemImplCopyWithImpl(
+      _$SearchHitItemImpl _value, $Res Function(_$SearchHitItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -432,7 +433,7 @@ class __$$_SearchHitItemCopyWithImpl<$Res>
   $Res call({
     Object? searchHit = null,
   }) {
-    return _then(_$_SearchHitItem(
+    return _then(_$SearchHitItemImpl(
       searchHit: null == searchHit
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
@@ -443,8 +444,10 @@ class __$$_SearchHitItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
-  const _$_SearchHitItem({required this.searchHit});
+class _$SearchHitItemImpl
+    with DiagnosticableTreeMixin
+    implements _SearchHitItem {
+  const _$SearchHitItemImpl({required this.searchHit});
 
   @override
   final SearchHit searchHit;
@@ -466,7 +469,7 @@ class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchHitItem &&
+            other is _$SearchHitItemImpl &&
             (identical(other.searchHit, searchHit) ||
                 other.searchHit == searchHit));
   }
@@ -477,18 +480,18 @@ class _$_SearchHitItem with DiagnosticableTreeMixin implements _SearchHitItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchHitItemCopyWith<_$_SearchHitItem> get copyWith =>
-      __$$_SearchHitItemCopyWithImpl<_$_SearchHitItem>(this, _$identity);
+  _$$SearchHitItemImplCopyWith<_$SearchHitItemImpl> get copyWith =>
+      __$$SearchHitItemImplCopyWithImpl<_$SearchHitItemImpl>(this, _$identity);
 }
 
 abstract class _SearchHitItem implements SearchHitItem {
   const factory _SearchHitItem({required final SearchHit searchHit}) =
-      _$_SearchHitItem;
+      _$SearchHitItemImpl;
 
   @override
   SearchHit get searchHit;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchHitItemCopyWith<_$_SearchHitItem> get copyWith =>
+  _$$SearchHitItemImplCopyWith<_$SearchHitItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

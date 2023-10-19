@@ -71,9 +71,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
 }
 
 /// @nodoc
-abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
-  factory _$$_RecipeCopyWith(_$_Recipe value, $Res Function(_$_Recipe) then) =
-      __$$_RecipeCopyWithImpl<$Res>;
+abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
+  factory _$$RecipeImplCopyWith(
+          _$RecipeImpl value, $Res Function(_$RecipeImpl) then) =
+      __$$RecipeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SearchHit searchHit, Favorite? favorite});
@@ -83,10 +84,11 @@ abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RecipeCopyWithImpl<$Res>
-    extends _$RecipeCopyWithImpl<$Res, _$_Recipe>
-    implements _$$_RecipeCopyWith<$Res> {
-  __$$_RecipeCopyWithImpl(_$_Recipe _value, $Res Function(_$_Recipe) _then)
+class __$$RecipeImplCopyWithImpl<$Res>
+    extends _$RecipeCopyWithImpl<$Res, _$RecipeImpl>
+    implements _$$RecipeImplCopyWith<$Res> {
+  __$$RecipeImplCopyWithImpl(
+      _$RecipeImpl _value, $Res Function(_$RecipeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +97,7 @@ class __$$_RecipeCopyWithImpl<$Res>
     Object? searchHit = null,
     Object? favorite = freezed,
   }) {
-    return _then(_$_Recipe(
+    return _then(_$RecipeImpl(
       searchHit: null == searchHit
           ? _value.searchHit
           : searchHit // ignore: cast_nullable_to_non_nullable
@@ -110,8 +112,8 @@ class __$$_RecipeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Recipe implements _Recipe {
-  const _$_Recipe({required this.searchHit, this.favorite = null});
+class _$RecipeImpl implements _Recipe {
+  const _$RecipeImpl({required this.searchHit, this.favorite = null});
 
   @override
   final SearchHit searchHit;
@@ -128,7 +130,7 @@ class _$_Recipe implements _Recipe {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Recipe &&
+            other is _$RecipeImpl &&
             (identical(other.searchHit, searchHit) ||
                 other.searchHit == searchHit) &&
             (identical(other.favorite, favorite) ||
@@ -141,14 +143,14 @@ class _$_Recipe implements _Recipe {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RecipeCopyWith<_$_Recipe> get copyWith =>
-      __$$_RecipeCopyWithImpl<_$_Recipe>(this, _$identity);
+  _$$RecipeImplCopyWith<_$RecipeImpl> get copyWith =>
+      __$$RecipeImplCopyWithImpl<_$RecipeImpl>(this, _$identity);
 }
 
 abstract class _Recipe implements Recipe {
   const factory _Recipe(
       {required final SearchHit searchHit,
-      final Favorite? favorite}) = _$_Recipe;
+      final Favorite? favorite}) = _$RecipeImpl;
 
   @override
   SearchHit get searchHit;
@@ -156,6 +158,6 @@ abstract class _Recipe implements Recipe {
   Favorite? get favorite;
   @override
   @JsonKey(ignore: true)
-  _$$_RecipeCopyWith<_$_Recipe> get copyWith =>
+  _$$RecipeImplCopyWith<_$RecipeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
