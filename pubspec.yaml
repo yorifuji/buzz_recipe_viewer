@@ -80,6 +80,7 @@ dev_dependencies:
   isar_generator: any
   flutter_launcher_icons: any
   slang_build_runner: any
+  golden_toolkit: ^0.15.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
