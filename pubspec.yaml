@@ -80,7 +80,7 @@ dev_dependencies:
   isar_generator: any
   flutter_launcher_icons: any
   slang_build_runner: any
-  golden_toolkit: ^0.15.0
+  golden_toolkit: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -124,6 +124,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: NotoSansJP
+      fonts:
+        - asset: fonts/NotoSansJP-Regular.ttf
 
 flutter_launcher_icons:
   android: true

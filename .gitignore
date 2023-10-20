@@ -48,3 +48,5 @@ app.*.map.json
 
 # secrets for GitHub Actions
 .secrets*
+test/golden_test/goldens
+test/golden_test/failures/

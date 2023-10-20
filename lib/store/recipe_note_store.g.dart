@@ -8,7 +8,7 @@ part of 'recipe_note_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipeNoteStoreHash() => r'82453f631f1adfd1ba93d97dd3bbff64ac80e031';
+String _$recipeNoteStoreHash() => r'28c1ed76144260f235ca3a580b9f0a54c5047e98';
 
 /// See also [RecipeNoteStore].
 @ProviderFor(RecipeNoteStore)
@@ -19,8 +19,8 @@ final recipeNoteStoreProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$recipeNoteStoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef _$RecipeNoteStore = AutoDisposeNotifier<List<RecipeNote>>;
