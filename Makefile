@@ -9,4 +9,4 @@ build-launcher-icons:
 	flutter pub run flutter_launcher_icons:main
 
 update-goldens:
-	flutter test --update-goldens
+	flutter test --update-goldens --tags=golden
