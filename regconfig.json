@@ -1,0 +1,12 @@
+{
+  "core": {
+    "workingDir": ".reg",
+    "actualDir": "test/golden_test/goldens",
+    "thresholdRate": 0,
+    "addIgnore": true,
+    "ximgdiff": {
+      "invocationType": "none"
+    }
+  },
+  "plugins": {}
+}

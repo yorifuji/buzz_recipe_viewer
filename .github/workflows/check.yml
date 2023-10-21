@@ -144,7 +144,7 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter test
+      - run: flutter test -x golden
 
   action-timeline:
     needs: [format, analyze, test]
