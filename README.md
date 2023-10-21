@@ -93,10 +93,7 @@ graph LR;
 
 # Test
 
-簡易なWidget Testのみ
-
-TBD
-
+- Widget Test
 - VRT(Visual Regression Testing)
 
 # CI/CD
@@ -107,7 +104,8 @@ TBD
   - flutter format
   - flutter analyze
   - flutter test
-  - 差分（diff）のチェック
+  - VRT(Visual Regression Testing)
+  - ファイル差分有無のチェック
 - Bump
   - pubspec.yaml の`version:`のインクリメント
 - Deliver(build & deploy)
