@@ -178,13 +178,13 @@ jobs:
 
             const generateMarkdown = (stats, owner, repository, runId) => {
                 return `
-              ## reg-suit check visual changes
+              ### reg-suit has checked for visual changes
 
               | 🔴 Changed | ⚪ New | 🔵 Passing |
               |----------|------|----------|
               | ${stats.changed}      | ${stats.newItems}   | ${stats.passing}      |
 
-              You can check artifacts for details [here](https://github.com/${owner}/${repository}/actions/runs/${runId})
+              You can check details from Artifact [here](https://github.com/${owner}/${repository}/actions/runs/${runId})
               `;
             };
 
