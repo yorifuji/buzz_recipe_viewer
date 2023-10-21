@@ -107,7 +107,13 @@ jobs:
 
       - name: sha of base branch
         id: base
-        run: echo "sha=$(git rev-parse $GITHUB_BASE_REF)" >> $GITHUB_OUTPUT
+        run: |
+          git rev-parse $GITHUB_BASE_REF
+          sha1=$(git rev-parse $GITHUB_BASE_REF)
+          echo $sha1
+          sha2=$(git rev-parse "$GITHUB_BASE_REF")
+          echo $sha2
+          echo "sha=$(git rev-parse $GITHUB_BASE_REF)" >> $GITHUB_OUTPUT
 
       - name: restore reg-suit cache
         uses: actions/cache/restore@v3
