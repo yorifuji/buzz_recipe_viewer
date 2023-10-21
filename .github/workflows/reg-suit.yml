@@ -85,9 +85,8 @@ jobs:
           mkdir -p .reg/
           mv test/golden_test/goldens .reg/expected
 
-      - name: upload .reg/
-        if: steps.check_files.outputs.files_exists == 'false'
+      - name: upload .reg/ to check
         uses: actions/upload-artifact@v3
         with:
-          name: reg-expected
+          name: reg-suit-cache-test
           path: .reg/
