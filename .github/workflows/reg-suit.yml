@@ -139,7 +139,7 @@ jobs:
         run: flutter test --update-goldens --tags=golden
 
       - name: Compare by reg-suit
-        run: npx reg-suit compare 2>&1 | tee reg-suit-compare.log
+        run: npx reg-suit compare 2>&1 | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | tee reg-suit-compare.log
 
       - name: Upload .reg/ to articaft
         uses: actions/upload-artifact@v3
@@ -147,57 +147,64 @@ jobs:
           name: reg-suit-compare-result
           path: .reg/
 
-      - name: Generate Markdown
+      - name: Generate Comment
         uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs');
 
             const parseLogFile = (logFilePath) => {
-                const logData = fs.readFileSync(logFilePath, 'utf-8');
-                const lines = logData.split('\n');
-
-                const stats = {
-                    changed: 0,
-                    newItems: 0,
-                    passing: 0
-                };
-
-                for (const line of lines) {
-                    if (line.includes('Changed items')) {
-                        stats.changed = parseInt(line.split(': ')[1], 10);
-                    } else if (line.includes('New items')) {
-                        stats.newItems = parseInt(line.split(': ')[1], 10);
-                    } else if (line.includes('Passed items')) {
-                        stats.passing = parseInt(line.split(': ')[1], 10);
-                    }
+              const logData = fs.readFileSync(logFilePath, 'utf-8');
+              const lines = logData.split('\n');
+              const stats = {
+                changed: 0,
+                newItems: 0,
+                passing: 0
+              };
+              for (const line of lines) {
+                if (line.includes('Changed items')) {
+                    stats.changed = parseInt(line.split(': ')[1], 10);
+                } else if (line.includes('New items')) {
+                    stats.newItems = parseInt(line.split(': ')[1], 10);
+                } else if (line.includes('Passed items')) {
+                    stats.passing = parseInt(line.split(': ')[1], 10);
                 }
-
-                return stats;
+              }
+              return stats;
             };
 
-            const generateMarkdown = (stats, owner, repository, runId) => {
-                return `
-              ### reg-suit has checked for visual changes
+            const parseLogFileToSnipet = (logFilePath) => {
+              const logData = fs.readFileSync(logFilePath, 'utf-8');
+              return "log\n\n```\n" + logData + "\n```\n\n";
+            };
 
-              | 🔴 Changed | ⚪ New | 🔵 Passing |
+            const generateMarkdown = (stats, icon, owner, repository, runId) => {
+              return `
+              ### ${icon} reg-suit has checked for visual changes
+
+              | 🔴 Changed | 🟡  New | 🔵 Passing |
               |----------|------|----------|
               | ${stats.changed}      | ${stats.newItems}   | ${stats.passing}      |
 
               You can check details from Artifact [here](https://github.com/${owner}/${repository}/actions/runs/${runId})
+
               `;
             };
 
             const stats = parseLogFile('./reg-suit-compare.log');
-            const markdown = generateMarkdown(stats, context.repo.owner, context.repo.repo, context.runId);
-            fs.writeFileSync('./reg-suit-compare.md', markdown);
+            const log = parseLogFileToSnipet('./reg-suit-compare.log');
+            const icon = stats.changed != 0 ? '🔄' : stats.newItems != 0 ? '🆕' : '✅';
+            const markdown = generateMarkdown(stats, icon, context.repo.owner, context.repo.repo, context.runId);
+            fs.writeFileSync('./reg-suit-compare.md', markdown + log);
 
             await core.summary
-              .addRaw("### reg-suit has checked for visual changes\n")
+              .addRaw(`### ${icon} reg-suit has checked for visual changes\n`)
               .addTable([
-                ["🔴 Changed", "⚪ New", "🔵 Passing"],
+                ["🔴 Changed", "🟡 New", "🔵 Passing"],
                 [String(stats.changed), String(stats.newItems), String(stats.passing)]
               ])
+              .addRaw("\n")
+              .addRaw(log)
               .write()
 
       - env:
