@@ -19,8 +19,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  reg-suit-cache:
-    name: Create reg-suit cache
+  create-image-cache:
+    name: Create image cache
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
@@ -87,9 +87,9 @@ jobs:
       #     name: reg-suit-cache-result
       #     path: .reg/
 
-  reg-suit-compare:
-    name: Run reg-suit compare
-    needs: reg-suit-cache
+  compare-image:
+    name: Compare image
+    needs: create-image-cache
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
@@ -148,7 +148,7 @@ jobs:
           path: .reg/
 
       - name: Generate Markdown
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs');
@@ -190,9 +190,15 @@ jobs:
 
             const stats = parseLogFile('./reg-suit-compare.log');
             const markdown = generateMarkdown(stats, context.repo.owner, context.repo.repo, context.runId);
-            console.log(markdown);
-
             fs.writeFileSync('./reg-suit-compare.md', markdown);
+
+            await core.summary
+              .addRaw("### reg-suit has checked for visual changes\n")
+              .addTable([
+                ["🔴 Changed", "⚪ New", "🔵 Passing"],
+                [String(stats.changed), String(stats.newItems), String(stats.passing)]
+              ])
+              .write()
 
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
