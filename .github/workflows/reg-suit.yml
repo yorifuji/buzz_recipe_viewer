@@ -52,20 +52,17 @@ jobs:
           key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
           path: .yarn/cache/
 
-      - name: yanr install main branch
-        if: steps.cache.outputs.cache-hit != 'true'
+      - if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
-      - name: install flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - name: install flutter dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+      - if: steps.cache.outputs.cache-hit != 'true'
         run: flutter pub get
 
       - name: Run pre-process script
@@ -77,10 +74,10 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - name: run flutter test --update-goldens
+      - name: Create golden images
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          flutter test --update-goldens
+          flutter test --update-goldens --tags=golden
           mkdir -p .reg/
           mv test/golden_test/goldens .reg/expected
 
@@ -120,18 +117,15 @@ jobs:
           key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
           path: .yarn/cache/
 
-      - name: yanr install
-        run: yarn install --immutable
+      - run: yarn install --immutable
 
-      - name: install flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - name: install flutter dependencies
-        run: flutter pub get
+      - run: flutter pub get
 
       - name: Run pre-process script
         env:
@@ -141,10 +135,10 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - name: run flutter test --update-goldens --tags=golden
-        run: flutter test --update-goldens
+      - name: Create golden images
+        run: flutter test --update-goldens --tags=golden
 
-      - name: Run reg-suit compare
+      - name: Compare by reg-suit
         run: npx reg-suit compare
 
       - name: Upload .reg/ to articaft
