@@ -6,8 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class VideoInformationContainer extends StatefulWidget {
   const VideoInformationContainer({
-    super.key,
-    required this.searchHit,
+    required this.searchHit, super.key,
     this.forceExpanded = false,
   });
 

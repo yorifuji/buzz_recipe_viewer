@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerPage extends HookConsumerWidget {
-  const VideoPlayerPage({super.key, required this.searchHit});
+  const VideoPlayerPage({required this.searchHit, super.key});
 
   final SearchHit searchHit;
 
