@@ -190,9 +190,27 @@ jobs:
 
             const stats = parseLogFile('./reg-suit-compare.log');
             const markdown = generateMarkdown(stats, context.repo.owner, context.repo.repo, context.runId);
+            fs.writeFileSync('./reg-suit-compare.md', markdown);
             console.log(markdown);
 
-            fs.writeFileSync('./reg-suit-compare.md', markdown);
+            parametersTable = [
+              [{ data: 'key', header: true}, { data: 'value', header: true }],
+              ['branch', '${{ github.ref_name }}']
+            ]
+            retryCommand = `gh workflow run --ref ${{ github.ref_name }} '${{ github.workflow }}'`
+
+            for ([key, value] of Object.entries(context.payload.inputs)) {
+              parametersTable.push([key, value])
+              retryCommand += ` -f ${key}='${value}'`
+            }
+
+            await core.summary
+              .addRaw("### reg-suit has checked for visual changes\n")
+              .addTable([
+                ["🔴 Changed", "⚪ New", "🔵 Passing"],
+                [stats.changed, stats.newItems, stats.passing]
+              ])
+              .write()
 
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
