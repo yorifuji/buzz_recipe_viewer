@@ -5,7 +5,7 @@
     "thresholdRate": 0,
     "addIgnore": true,
     "ximgdiff": {
-      "invocationType": "client"
+      "invocationType": "none"
     }
   },
   "plugins": {}
