@@ -34,47 +34,42 @@ jobs:
           echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: restore reg-suit cache
+        id: cache
         uses: actions/cache@v3
         with:
           key: reg-suit-cache-${{ steps.base.outputs.sha }}
           path: .reg/
 
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: ".reg/"
-
       - uses: actions/setup-node@v3
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: 18
 
       - name: restore yarn cache
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         with:
           key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
           path: .yarn/cache/
 
       - name: yanr install main branch
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
       - name: install flutter
         uses: subosito/flutter-action@v2
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
       - name: install flutter dependencies
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: flutter pub get
 
       - name: Run pre-process script
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         env:
           PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
         run: |
@@ -83,7 +78,7 @@ jobs:
           fi
 
       - name: run flutter test --update-goldens
-        if: steps.check_files.outputs.files_exists == 'false'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           flutter test --update-goldens
           mkdir -p .reg/
