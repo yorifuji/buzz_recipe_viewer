@@ -1,0 +1,93 @@
+name: reg-suit
+
+run-name: reg-suit ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reg-suit-cache:
+    name: Create reg-suit image cache
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: check commit hash for main
+        id: commithash
+        run: echo "::set-output name=hash::$(git rev-parse HEAD)"
+
+      - name: restore reg-suit image cache
+        uses: actions/cache@v3
+        with:
+          path: .reg/
+          key: reg-suit-cache-${{ steps.commithash.outputs.hash }}-v7
+
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: ".reg/"
+
+      - uses: actions/setup-node@v3
+        if: steps.check_files.outputs.files_exists == 'false'
+        with:
+          node-version: 18
+
+      - name: restore yarn cache
+        if: steps.check_files.outputs.files_exists == 'false'
+        uses: actions/cache@v3
+        with:
+          path: .yarn/cache/
+          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}-v1
+
+      - name: yanr install main branch
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: yarn install --immutable
+
+      - name: install flutter
+        uses: subosito/flutter-action@v2
+        if: steps.check_files.outputs.files_exists == 'false'
+        with:
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - name: install flutter dependencies
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: flutter pub get
+
+      - name: run flutter test --update-goldens
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: |
+          flutter test --update-goldens
+          mkdir -p .reg/
+          mv test/golden_test/goldens .reg/expected
+
+      - name: upload .reg/
+        if: steps.check_files.outputs.files_exists == 'false'
+        uses: actions/upload-artifact@v3
+        with:
+          name: reg-expected
+          path: .reg/
