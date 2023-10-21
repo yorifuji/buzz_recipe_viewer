@@ -3,11 +3,6 @@ name: reg-suit
 run-name: reg-suit ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "**.md"
   pull_request:
     paths-ignore:
       - "**.md"
@@ -31,18 +26,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
-          fetch-depth: 0
+          ref: ${{ github.base_ref }}
+          # fetch-depth: 0
 
-      - name: check commit hash for main
-        id: commithash
-        run: echo "::set-output name=hash::$(git rev-parse HEAD)"
+      - name: target sha of base branch
+        id: target
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: restore reg-suit cache
         uses: actions/cache@v3
         with:
+          key: reg-suit-cache-${{ steps.target.outputs.sha }}
           path: .reg/
-          key: reg-suit-cache-${{ steps.commithash.outputs.hash }}-v7
 
       - name: Check file existence
         id: check_files
@@ -59,8 +55,8 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'false'
         uses: actions/cache@v3
         with:
+          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
           path: .yarn/cache/
-          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}-v1
 
       - name: yanr install main branch
         if: steps.check_files.outputs.files_exists == 'false'
@@ -108,15 +104,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: check commit hash for main
-        id: commithash
-        run: echo "::set-output name=hash::$(git rev-parse HEAD)"
+      - name: target sha of base branch
+        id: target
+        run: |
+          echo "sha=$(git rev-parse $GITHUB_BASE_REF)" >> $GITHUB_OUTPUT
+          echo git rev-parse $GITHUB_BASE_REF
+          echo "sha=$(git rev-parse $GITHUB_BASE_REF)"
 
       - name: restore reg-suit cache
         uses: actions/cache/restore@v3
         with:
+          key: reg-suit-cache-${{ steps.target.outputs.sha }}
           path: .reg/
-          key: reg-suit-cache-${{ steps.commithash.outputs.hash }}-v7
 
       - uses: actions/setup-node@v3
         with:
@@ -125,8 +124,8 @@ jobs:
       - name: restore yarn cache
         uses: actions/cache@v3
         with:
+          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
           path: .yarn/cache/
-          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}-v1
 
       - name: yanr install
         run: yarn install --immutable
