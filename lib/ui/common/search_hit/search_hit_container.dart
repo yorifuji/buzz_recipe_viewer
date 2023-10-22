@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class SearchHitWidget extends StatelessWidget {
   const SearchHitWidget({
-    required this.searchHit, super.key,
+    required this.searchHit,
+    super.key,
     this.onTapFavorite,
     this.isFavorite = false,
   });

@@ -4,7 +4,8 @@ import 'package:like_button/like_button.dart';
 
 class VideoImageContainer extends StatelessWidget {
   const VideoImageContainer({
-    required this.searchHit, super.key,
+    required this.searchHit,
+    super.key,
     this.isLiked = false,
     this.onTap,
     this.onLongPress,
