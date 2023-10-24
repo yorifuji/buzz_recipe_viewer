@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - "**.md"
   workflow_dispatch:
-  workflow_call:
 
 permissions:
   contents: read
@@ -159,6 +158,7 @@ jobs:
               const stats = {
                 changed: 0,
                 newItems: 0,
+                deleted: 0,
                 passing: 0
               };
               for (const line of lines) {
@@ -166,6 +166,8 @@ jobs:
                     stats.changed = parseInt(line.split(': ')[1], 10);
                 } else if (line.includes('New items')) {
                     stats.newItems = parseInt(line.split(': ')[1], 10);
+                } else if (line.includes('Deleted items')) {
+                    stats.deleted = parseInt(line.split(': ')[1], 10);
                 } else if (line.includes('Passed items')) {
                     stats.passing = parseInt(line.split(': ')[1], 10);
                 }
@@ -182,9 +184,9 @@ jobs:
               return `
               ### ${icon} reg-suit has checked for visual changes
 
-              | 🔴 Changed | 🟡  New | 🔵 Passing |
-              |----------|------|----------|
-              | ${stats.changed}      | ${stats.newItems}   | ${stats.passing}      |
+              | 🔴 Changed | 🟡  New | ⚫️ Deleted | 🔵 Passing |
+              |----------|------|------|----------|
+              | ${stats.changed}      | ${stats.newItems}   | ${stats.deleted} | ${stats.passing}      |
 
               You can check details from Artifact [here](https://github.com/${owner}/${repository}/actions/runs/${runId})
 
@@ -200,8 +202,8 @@ jobs:
             await core.summary
               .addRaw(`### ${icon} reg-suit has checked for visual changes\n`)
               .addTable([
-                ["🔴 Changed", "🟡 New", "🔵 Passing"],
-                [String(stats.changed), String(stats.newItems), String(stats.passing)]
+                ["🔴 Changed", "🟡 New", "⚫ Deleted", "🔵 Passing"],
+                [String(stats.changed), String(stats.newItems), String(stats.deleted), String(stats.passing)]
               ])
               .addRaw("\n")
               .addRaw(log)
