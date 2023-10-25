@@ -4,7 +4,7 @@
 
 レシピ記録と動画を検索・閲覧するアプリです。
 
-本アプリを通してFlutterアプリ開発におけるアーキテクチャの検討やライブラリ利用のスキルを習得することを目的にしています（技術showcase）。
+本アプリを通して Flutter アプリ開発におけるアーキテクチャの検討やライブラリ利用のスキルを習得することを目的にしています（技術 showcase）。
 
 # Screenshot
 
@@ -15,11 +15,11 @@
 
 # Environment
 
-| Tool    | Version |
-| ------- | ------- |
-| Flutter | 3.13.6  |
-| Xcode   | 14.3.1  |
-| Android Studio   |  |
+| Tool           | Version |
+| -------------- | ------- |
+| Flutter        | 3.13.6  |
+| Xcode          | 14.3.1  |
+| Android Studio |         |
 
 # Architecture
 
@@ -103,9 +103,10 @@ graph LR;
 - Check
   - flutter format
   - flutter analyze
+  - コード生成のファイル差分のチェック（コミット漏れの検出）
+- Test
   - flutter test
   - VRT(Visual Regression Testing)
-  - ファイル差分有無のチェック
 - Bump
   - pubspec.yaml の`version:`のインクリメント
 - Deliver(build & deploy)
