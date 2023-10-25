@@ -18,8 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  create-image-cache:
-    name: Create image cache
+  cache:
+    name: cache
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
@@ -86,9 +86,9 @@ jobs:
       #     name: reg-suit-cache-result
       #     path: .reg/
 
-  compare-image:
-    name: Compare image
-    needs: create-image-cache
+  compare:
+    name: compare
+    needs: cache
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
