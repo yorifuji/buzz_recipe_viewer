@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 108 (54 per locale)
 ///
-/// Built on 2023-10-25 at 03:02 UTC
+/// Built on 2023-10-25 at 03:15 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -216,7 +216,8 @@ class _StringsRecipeEn {
 
   // Translations
   String get title => 'Recipe';
-  String get empty => 'Tap the + button to add a new recipe!';
+  String get empty =>
+      'No recipes found.\nTap the + button to add a new recipe.';
   String get addRecipe => 'Add Recipe';
   late final _StringsRecipeNewRecipeEn newRecipe =
       _StringsRecipeNewRecipeEn._(_root);
@@ -1046,7 +1047,7 @@ extension on _StringsEn {
       case 'recipe.title':
         return 'Recipe';
       case 'recipe.empty':
-        return 'Tap the + button to add a new recipe!';
+        return 'No recipes found.\nTap the + button to add a new recipe.';
       case 'recipe.addRecipe':
         return 'Add Recipe';
       case 'recipe.newRecipe.title':

@@ -8,7 +8,7 @@
     },
     "recipe" : {
         "title" : "Recipe",
-        "empty" : "Tap the + button to add a new recipe!",
+        "empty" : "No recipes found.\nTap the + button to add a new recipe.",
         "addRecipe" : "Add Recipe",
         "newRecipe" : {
             "title" : "New Recipe",
