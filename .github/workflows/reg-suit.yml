@@ -138,7 +138,7 @@ jobs:
         run: flutter test --update-goldens --tags=golden
 
       - name: Compare by reg-suit
-        run: npx reg-suit compare 2>&1 | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | tee reg-suit-compare.log
+        run: npx reg-suit compare 2>&1 | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | tee reg-suit.log
 
       - name: Upload .reg/ to articaft
         uses: actions/upload-artifact@v3
@@ -151,10 +151,10 @@ jobs:
         with:
           script: |
             const fs = require('fs');
+            const log = fs.readFileSync('./reg-suit.log', 'utf-8');
 
-            const parseLogFile = (logFilePath) => {
-              const logData = fs.readFileSync(logFilePath, 'utf-8');
-              const lines = logData.split('\n');
+            const parseStats = () => {
+              const lines = log.split('\n');
               const stats = {
                 changed: 0,
                 newItems: 0,
@@ -163,53 +163,60 @@ jobs:
               };
               for (const line of lines) {
                 if (line.includes('Changed items')) {
-                    stats.changed = parseInt(line.split(': ')[1], 10);
+                    stats.changed = String(parseInt(line.split(': ')[1], 10));
                 } else if (line.includes('New items')) {
-                    stats.newItems = parseInt(line.split(': ')[1], 10);
+                    stats.newItems = String(parseInt(line.split(': ')[1], 10));
                 } else if (line.includes('Deleted items')) {
-                    stats.deleted = parseInt(line.split(': ')[1], 10);
+                    stats.deleted = String(parseInt(line.split(': ')[1], 10));
                 } else if (line.includes('Passed items')) {
-                    stats.passing = parseInt(line.split(': ')[1], 10);
+                    stats.passing = String(parseInt(line.split(': ')[1], 10));
                 }
               }
               return stats;
             };
-
-            const parseLogFileToSnipet = (logFilePath) => {
-              const logData = fs.readFileSync(logFilePath, 'utf-8');
-              return "log\n\n```\n" + logData + "\n```\n\n";
+            const stats = parseStats();
+            const parseIcon = () => {
+              if (stats.changed != 0 || stats.deleted != 0) {
+                return '❗';
+              } else if (stats.newItems != 0) {
+                return '💡';
+              } else {
+                return '✅';
+              }
             };
+            const icon = parseIcon();
 
-            const generateMarkdown = (stats, icon, owner, repository, runId) => {
-              return `
-              ### ${icon} reg-suit has checked for visual changes
+            const runsUrl = `You can check report from Artifact [here](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`;
+            const makePRComment = () => {
+              return `### ${icon} reg-suit has checked for visual changes
 
               | 🔴 Changed | 🟡  New | ⚫️ Deleted | 🔵 Passing |
-              |----------|------|------|----------|
-              | ${stats.changed}      | ${stats.newItems}   | ${stats.deleted} | ${stats.passing}      |
+              |------|------|------|------|
+              | ${stats.changed} | ${stats.newItems} | ${stats.deleted} | ${stats.passing} |
+              
+              ${runsUrl}
+              
+              ### 📝 Log
 
-              You can check details from Artifact [here](https://github.com/${owner}/${repository}/actions/runs/${runId})
+              \`\`\`
+              ${log}
+              \`\`\`
 
               `;
             };
-
-            const stats = parseLogFile('./reg-suit-compare.log');
-            const log = parseLogFileToSnipet('./reg-suit-compare.log');
-            const icon = stats.changed != 0 ? '🔄' : stats.newItems != 0 ? '🆕' : '✅';
-            const markdown = generateMarkdown(stats, icon, context.repo.owner, context.repo.repo, context.runId);
-            fs.writeFileSync('./reg-suit-compare.md', markdown + log);
+            fs.writeFileSync('./reg-suit-result.md', makePRComment());
 
             await core.summary
-              .addRaw(`### ${icon} reg-suit has checked for visual changes\n`)
+              .addHeading(`${icon} reg-suit has checked for visual changes`, 3)
               .addTable([
-                ["🔴 Changed", "🟡 New", "⚫ Deleted", "🔵 Passing"],
-                [String(stats.changed), String(stats.newItems), String(stats.deleted), String(stats.passing)]
+                ["🔴 Changed",  "🟡 New",        "⚫ Deleted",  "🔵 Passing"],
+                [stats.changed, stats.newItems, stats.deleted, stats.passing]
               ])
-              .addRaw("\n")
-              .addRaw(log)
+              .addHeading("📝 Log", 3)
+              .addCodeBlock(log, "log")
               .write()
 
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment ${{ github.event.number }} --edit-last -F ./reg-suit-compare.md || gh pr comment ${{ github.event.number }} -F ./reg-suit-compare.md
+          gh pr comment ${{ github.event.number }} --edit-last -F ./reg-suit-result.md || gh pr comment ${{ github.event.number }} -F ./reg-suit-result.md
