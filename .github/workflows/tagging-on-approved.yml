@@ -28,9 +28,9 @@ jobs:
       - name: add deliver label to pull request
         uses: pullreminders/label-when-approved-action@9d8dd03e30f605a3bf687cde6614c1862862d466
         env:
-          APPROVALS: "1"
+          APPROVALS: '1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ADD_LABEL: "deliver"
+          ADD_LABEL: 'deliver'
 
       - uses: actions/checkout@v4
 

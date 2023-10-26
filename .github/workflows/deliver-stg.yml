@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       upload:
-        description: "Upload"
+        description: 'Upload'
         type: boolean
         default: true
   workflow_call:
     inputs:
       upload:
-        description: "Upload"
+        description: 'Upload'
         type: boolean
         default: true
 

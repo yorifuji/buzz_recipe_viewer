@@ -5,7 +5,7 @@ run-name: Nightly Build ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hos
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 15 * * *"
+    - cron: '0 15 * * *'
 
 permissions:
   contents: read

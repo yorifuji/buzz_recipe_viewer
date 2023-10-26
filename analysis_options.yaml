@@ -6,6 +6,6 @@ linter:
     public_member_api_docs: false
 analyzer:
   exclude:
-    - "**/*.g.dart"
+    - '**/*.g.dart'
   plugins:
     - custom_lint

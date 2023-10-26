@@ -13,8 +13,8 @@ permissions:
   contents: write
 
 env:
-  GIT_USER_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
-  GIT_USER_NAME: "github-actions[bot]"
+  GIT_USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  GIT_USER_NAME: 'github-actions[bot]'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

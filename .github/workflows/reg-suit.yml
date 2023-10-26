@@ -5,7 +5,7 @@ run-name: reg-suit ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)'
 on:
   pull_request:
     paths-ignore:
-      - "**.md"
+      - '**.md'
   workflow_dispatch:
 
 permissions:
