@@ -145,6 +145,7 @@ jobs:
         with:
           name: reg-suit-compare-result
           path: .reg/
+          retention-days: 3
 
       - name: Generate Comment
         uses: actions/github-script@v6
@@ -186,35 +187,20 @@ jobs:
             };
             const icon = parseIcon();
 
-            const runsUrl = `You can check report from Artifact [here](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`;
-            const makePRComment = () => {
-              return `### ${icon} reg-suit has checked for visual changes
-
-              | 🔴 Changed | 🟡  New | ⚫️ Deleted | 🔵 Passing |
-              |------|------|------|------|
-              | ${stats.changed} | ${stats.newItems} | ${stats.deleted} | ${stats.passing} |
-              
-              ${runsUrl}
-              
-              ### 📝 Log
-
-              \`\`\`
-              ${log}
-              \`\`\`
-
-              `;
-            };
-            fs.writeFileSync('./reg-suit-result.md', makePRComment());
-
-            await core.summary
+            const markdown = await core.summary
               .addHeading(`${icon} reg-suit has checked for visual changes`, 3)
               .addTable([
                 ["🔴 Changed",  "🟡 New",        "⚫ Deleted",  "🔵 Passing"],
                 [stats.changed, stats.newItems, stats.deleted, stats.passing]
               ])
+              .addHeading("📊 Download Report", 3)
+              .addLink('You can download the report from the artifact here', `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`)
               .addHeading("📝 Log", 3)
               .addCodeBlock(log, "log")
-              .write()
+              .stringify()
+            await core.summary.write()
+
+            fs.writeFileSync('./reg-suit-result.md', markdown);
 
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
