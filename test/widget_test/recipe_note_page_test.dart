@@ -17,6 +17,6 @@ void main() {
       ),
     );
 
-    expect(find.text('Add Recipe'), findsOneWidget);
+    expect(find.text('Add Recipe!!!!!'), findsOneWidget);
   });
 }
