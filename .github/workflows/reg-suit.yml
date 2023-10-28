@@ -22,19 +22,23 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     outputs:
-      sha: ${{ steps.base-ref.outputs.sha }}
+      sha: ${{ steps.merge-base.outputs.sha }}
       cache-hit: ${{ steps.lookup.outputs.cache-hit }}
     steps:
-      - name: sha of base branch
-        id: base-ref
-        run: |
-          echo "sha=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: sha of merge base(common parent)
+        id: merge-base
+        shell: bash # set pipefail option
+        run: echo "sha=$(git merge-base origin/$GITHUB_BASE_REF origin/$GITHUB_HEAD_REF)" >> $GITHUB_OUTPUT
 
       - name: lookup reg-suit cache
         id: lookup
         uses: actions/cache@v3
         with:
-          key: reg-suit-cache-${{ steps.base-ref.outputs.sha }}
+          key: reg-suit-cache-${{ steps.merge-base.outputs.sha }}
           path: .reg/
           lookup-only: true
 
