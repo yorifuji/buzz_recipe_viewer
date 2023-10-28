@@ -17,6 +17,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  checks: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -143,7 +144,14 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter test -x golden
+      - run: flutter test -x golden --reporter json > test_report.json
+
+      - uses: dorny/test-reporter@afe6793191b75b608954023a46831a3fe10048d4
+        if: success() || failure() # ignore cancelled
+        with:
+          name: flutter test
+          path: test_report.json
+          reporter: flutter-json
 
   action-timeline:
     needs: [format, analyze, test]
