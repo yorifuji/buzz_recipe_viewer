@@ -18,8 +18,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  cache:
-    name: cache
+  cache-check:
+    name: cache check
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    outputs:
+      cache-hit: ${{ steps.lookup.outputs.cache-hit }}
+    steps:
+      - name: sha of base branch
+        id: base
+        run: |
+          echo "sha=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
+
+      - name: lookup reg-suit cache
+        id: lookup
+        uses: actions/cache@v3
+        with:
+          key: reg-suit-cache-${{ steps.base.outputs.sha }}
+          path: .reg/
+          lookup-only: true
+
+  create-cache:
+    name: create cache
+    needs: cache-check
+    if: needs.cache-check.outputs.cache-hit != 'true'
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
@@ -30,42 +52,35 @@ jobs:
       - name: sha of base branch
         id: base
         run: |
-          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "sha=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
 
       - name: restore reg-suit cache
-        id: cache
         uses: actions/cache@v3
         with:
           key: reg-suit-cache-${{ steps.base.outputs.sha }}
           path: .reg/
 
       - uses: actions/setup-node@v4
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: 18
 
       - name: restore yarn cache
-        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         with:
           key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
           path: .yarn/cache/
 
-      - if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable
+      - run: yarn install --immutable
 
       - uses: subosito/flutter-action@v2
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - if: steps.cache.outputs.cache-hit != 'true'
-        run: flutter pub get
+      - run: flutter pub get
 
       - name: Run pre-process script
-        if: steps.cache.outputs.cache-hit != 'true'
         env:
           PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
         run: |
@@ -74,7 +89,6 @@ jobs:
           fi
 
       - name: Create golden images
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           flutter test --update-goldens --tags=golden
           mkdir -p .reg/
@@ -88,7 +102,8 @@ jobs:
 
   compare:
     name: compare
-    needs: cache
+    needs: create-cache
+    if: ${{ !cancelled() && !failure() }}
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
