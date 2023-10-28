@@ -16,7 +16,9 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pull-requests: write
+  checks: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -143,7 +145,28 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter test -x golden
+      - run: flutter test -x golden --reporter json > test_report.json
+
+      - uses: dorny/test-reporter@afe6793191b75b608954023a46831a3fe10048d4
+        id: test-reporter
+        if: success() || failure() # ignore cancelled
+        with:
+          name: test report
+          path: test_report.json
+          reporter: flutter-json
+          fail-on-error: false
+
+      # - if: success() || failure() # ignore cancelled
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     cat << EOF > ./test-reporter.md
+      #     ### Test Report
+
+      #     [Test report is here](${{ steps.test-reporter.outputs.url_html }})
+
+      #     EOF
+      #     gh pr comment ${{ github.event.number }} --edit-last -F ./test-reporter.md || gh pr comment ${{ github.event.number }} -F ./test-reporter.md
 
   action-timeline:
     needs: [format, analyze, test]
