@@ -18,15 +18,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  cache-check:
-    name: cache check
+  lookup:
+    name: lookup
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     outputs:
+      sha: ${{ steps.base-ref.outputs.sha }}
       cache-hit: ${{ steps.lookup.outputs.cache-hit }}
     steps:
       - name: sha of base branch
-        id: base
+        id: base-ref
         run: |
           echo "sha=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
 
@@ -34,43 +35,20 @@ jobs:
         id: lookup
         uses: actions/cache@v3
         with:
-          key: reg-suit-cache-${{ steps.base.outputs.sha }}
+          key: reg-suit-cache-${{ steps.base-ref.outputs.sha }}
           path: .reg/
           lookup-only: true
 
   create-cache:
     name: create cache
-    needs: cache-check
-    if: needs.cache-check.outputs.cache-hit != 'true'
+    needs: lookup
+    if: needs.lookup.outputs.cache-hit != 'true'
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.base_ref }}
-
-      - name: sha of base branch
-        id: base
-        run: |
-          echo "sha=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
-
-      - name: restore reg-suit cache
-        uses: actions/cache@v3
-        with:
-          key: reg-suit-cache-${{ steps.base.outputs.sha }}
-          path: .reg/
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: restore yarn cache
-        uses: actions/cache@v3
-        with:
-          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
-          path: .yarn/cache/
-
-      - run: yarn install --immutable
+          ref: ${{ needs.lookup.outputs.sha }}
 
       - uses: subosito/flutter-action@v2
         with:
@@ -94,44 +72,27 @@ jobs:
           mkdir -p .reg/
           mv test/golden_test/goldens .reg/expected
 
+      - uses: actions/cache/save@v3
+        with:
+          path: .reg/
+          key: reg-suit-cache-${{ needs.lookup.outputs.sha }}
+
       # - name: Upload .reg/ to articaft(for test)
       #   uses: actions/upload-artifact@v3
       #   with:
-      #     name: reg-suit-cache-result
+      #     name: reg-suit-cache-artifact
       #     path: .reg/
 
   compare:
     name: compare
-    needs: create-cache
+    needs:
+      - lookup
+      - create-cache
     if: ${{ !cancelled() && !failure() }}
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: sha of base branch
-        id: base
-        run: echo "sha=$(git rev-parse origin/$GITHUB_BASE_REF)" >> $GITHUB_OUTPUT
-
-      - name: restore reg-suit cache
-        uses: actions/cache/restore@v3
-        with:
-          key: reg-suit-cache-${{ steps.base.outputs.sha }}
-          path: .reg/
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: restore yarn cache
-        uses: actions/cache@v3
-        with:
-          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
-          path: .yarn/cache/
-
-      - run: yarn install --immutable
 
       - uses: subosito/flutter-action@v2
         with:
@@ -151,6 +112,24 @@ jobs:
 
       - name: Create golden images
         run: flutter test --update-goldens --tags=golden
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: restore yarn cache
+        uses: actions/cache@v3
+        with:
+          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: .yarn/cache/
+
+      - run: yarn install --immutable
+
+      - name: restore reg-suit cache
+        uses: actions/cache/restore@v3
+        with:
+          key: reg-suit-cache-${{ needs.lookup.outputs.sha }}
+          path: .reg/
 
       - name: Compare by reg-suit
         run: npx reg-suit compare 2>&1 | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | tee reg-suit.log
