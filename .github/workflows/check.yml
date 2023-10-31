@@ -165,6 +165,8 @@ jobs:
           [Test report is here](${{ steps.test-reporter.outputs.url_html }})
 
           EOF
+          git config --local user.name 'test-reporter[bot]'
+          git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
           gh pr comment ${{ github.event.number }} --edit-last -F ./test-reporter.md || gh pr comment ${{ github.event.number }} -F ./test-reporter.md
 
   action-timeline:
