@@ -1,6 +1,6 @@
-name: reg-suit
+name: vrt
 
-run-name: reg-suit ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+run-name: VRT ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   pull_request:
