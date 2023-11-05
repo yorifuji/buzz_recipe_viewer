@@ -203,3 +203,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr comment ${{ github.event.number }} --edit-last -F ./reg-suit-result.md || gh pr comment ${{ github.event.number }} -F ./reg-suit-result.md
+
+  action-timeline:
+    needs: [lookup, create-cache, compare]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v1
