@@ -208,4 +208,4 @@ jobs:
     needs: [lookup, create-cache, compare]
     runs-on: ubuntu-latest
     steps:
-      - uses: Kesin11/actions-timeline@v1
+      - uses: Kesin11/actions-timeline@v2
