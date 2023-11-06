@@ -147,13 +147,11 @@ jobs:
       - run: flutter test -x golden --reporter json > test_report.json
 
       - uses: dorny/test-reporter@afe6793191b75b608954023a46831a3fe10048d4
-        id: test-reporter
         if: success() || failure() # ignore cancelled
         with:
           name: test report
           path: test_report.json
           reporter: flutter-json
-          fail-on-error: false
 
   action-timeline:
     needs: [format, analyze, test]
