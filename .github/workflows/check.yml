@@ -155,18 +155,6 @@ jobs:
           reporter: flutter-json
           fail-on-error: false
 
-      # - if: success() || failure() # ignore cancelled
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     cat << EOF > ./test-reporter.md
-      #     ### Test Report
-
-      #     [Test report is here](${{ steps.test-reporter.outputs.url_html }})
-
-      #     EOF
-      #     gh pr comment ${{ github.event.number }} --edit-last -F ./test-reporter.md || gh pr comment ${{ github.event.number }} -F ./test-reporter.md
-
   action-timeline:
     needs: [format, analyze, test]
     runs-on: ubuntu-latest
