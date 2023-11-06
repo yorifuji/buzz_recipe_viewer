@@ -13,6 +13,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final x = 0;
     return TranslationProvider(
       child: MaterialApp(
         // debugShowCheckedModeBanner: false,
