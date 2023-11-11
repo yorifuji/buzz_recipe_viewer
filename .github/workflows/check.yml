@@ -127,7 +127,7 @@ jobs:
       - uses: dorny/test-reporter@afe6793191b75b608954023a46831a3fe10048d4
         if: success() || failure() # ignore cancelled
         with:
-          name: test report
+          name: flutter test report
           path: test_report.json
           reporter: flutter-json
 

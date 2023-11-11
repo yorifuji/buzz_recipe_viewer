@@ -4,8 +4,14 @@ run-name: VRT ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || 
 
 on:
   pull_request:
-    paths-ignore:
-      - '**.md'
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'android/**'
+      - 'ios/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.github/workflows/vrt.yml' # this file
   workflow_dispatch:
 
 permissions:
