@@ -2,14 +2,15 @@ name: PR Labeler
 
 on:
   pull_request:
-    types: [opened]
+    types: opened
 
 jobs:
   pr-labeler:
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     permissions:
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: TimonVS/pr-labeler-action@v4
         with:
