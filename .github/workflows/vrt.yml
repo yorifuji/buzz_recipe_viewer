@@ -195,7 +195,7 @@ jobs:
             const markdown = await core.summary
               .addHeading(`${icon} reg-suit has checked for visual changes`, 3)
               .addTable([
-                ["🔴 Changed",  "🟡 New",        "⚫ Deleted",  "🔵 Passing"],
+                ["🔴 Changed",  "🟡 New",        "🟤  Deleted",  "🔵 Passing"],
                 [stats.changed, stats.newItems, stats.deleted, stats.passing]
               ])
               .addHeading("📊 Download Report", 3)
