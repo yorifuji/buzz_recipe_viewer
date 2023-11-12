@@ -190,6 +190,8 @@ jobs:
             };
             const icon = parseIcon();
 
+            const summaryCommentAnnotation = '<!-- Flutter VRT Test Summary Comment -->';
+
             const markdown = await core.summary
               .addHeading(`${icon} reg-suit has checked for visual changes`, 3)
               .addTable([
@@ -204,12 +206,34 @@ jobs:
               .stringify()
             await core.summary.write()
 
-            fs.writeFileSync('./reg-suit-result.md', markdown);
-
-      - env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr comment ${{ github.event.number }} --edit-last -F ./reg-suit-result.md || gh pr comment ${{ github.event.number }} -F ./reg-suit-result.md
+            const requestPerPage = 100;
+            try {
+              const listComments = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                per_page: requestPerPage
+              });
+              const summaryComment = listComments.data.find(comment => comment.body.includes(summaryCommentAnnotation));
+              if (summaryComment) {
+                // delete summary comment if exists
+                await github.rest.issues.deleteComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: summaryComment.id
+                });
+              }
+              // create a summary comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: markdown
+              });
+            } catch (error) {
+              logError(`Failed to modify comment: ${error.message}`);
+              return;
+            }
 
   action-timeline:
     needs: [lookup, create-cache, compare]
