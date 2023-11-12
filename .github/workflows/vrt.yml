@@ -1,6 +1,6 @@
 name: vrt
 
-run-name: VRT ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+run-name: Visual Regression Test ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   pull_request:
@@ -200,6 +200,7 @@ jobs:
               .addLink('You can download the report from the artifact here', `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`)
               .addHeading("📝 Log", 3)
               .addCodeBlock(log, "log")
+              .addRaw('<!-- Flutter VRT Test Summary Comment -->')
               .stringify()
             await core.summary.write()
 
