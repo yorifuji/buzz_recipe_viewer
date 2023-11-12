@@ -1,7 +1,7 @@
 feature: ['feature/*', 'feat/*']
-fix: 'fix/*'
+fix: ['fix/*', 'bug/*', 'hotfix/*', 'bugfix/*']
 chore: 'chore/*'
-docs: doc/*
+docs: [doc/*, docs/*]
 style: style/*
 refactor: refactor/*
 perf: perf/*
