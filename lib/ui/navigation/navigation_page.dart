@@ -52,11 +52,9 @@ class NavigationPage extends ConsumerWidget {
     final fullscreenVideoPlayingState =
         ref.watch(fullscreenVideoPlayingStateProvider);
 
-    return WillPopScope(
+    return PopScope(
       // スタックが存在しない場合はアプリを終了する（バックグラウンドに移動する）
-      onWillPop: () async =>
-          !(await navigatorKeys[currentTab.index].currentState?.maybePop() ??
-              true),
+      canPop: navigatorKeys[currentTab.index].currentState?.canPop() ?? false,
       child: Scaffold(
         body: IndexedStack(
           index: currentTab.index,
