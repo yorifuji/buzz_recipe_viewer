@@ -133,6 +133,7 @@ jobs:
 
   action-timeline:
     needs: [format, analyze, test]
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2
