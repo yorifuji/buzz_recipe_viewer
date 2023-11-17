@@ -1,5 +1,7 @@
 name: Assign PR to author
 
+run-name: Assign PR Author ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
 on:
   pull_request:
     types: opened
