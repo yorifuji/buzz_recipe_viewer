@@ -31,9 +31,6 @@ void main() async {
     SharedPreferences.getInstance()
   ).wait;
 
-  // 初回起動かどうか（未使用）
-  final isFirstRun = await isar.getSize() == 0;
-
   runApp(
     ProviderScope(
       overrides: [
