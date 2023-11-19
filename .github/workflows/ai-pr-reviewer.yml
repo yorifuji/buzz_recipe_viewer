@@ -33,4 +33,8 @@ jobs:
           review_simple_changes: true
           review_comment_lgtm: false
           language: ja-JP
+<<<<<<< Updated upstream
           bot_icon: '<img src="https://avatars.githubusercontent.com/in/513642"/>'
+=======
+          openai_heavy_model: gpt-4-1106-preview
+>>>>>>> Stashed changes
