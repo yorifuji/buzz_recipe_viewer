@@ -25,3 +25,4 @@ jobs:
           debug: false
           review_simple_changes: true
           review_comment_lgtm: true
+          language: ja-JP
