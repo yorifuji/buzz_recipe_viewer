@@ -22,10 +22,6 @@ permissions:
 env:
   DEVELOPER_DIR: /Applications/Xcode_${{ (vars.XCODE_VERSION == null && '14.3.1') || vars.XCODE_VERSION }}.app
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   android:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
