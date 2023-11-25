@@ -64,10 +64,14 @@ jobs:
 
       - name: push branch
         run: |
-          git push -u origin $RELEASE_BRANCH
+          git push -f -u origin $RELEASE_BRANCH
 
       - name: create pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create --base ${{ github.ref_name }} --head $RELEASE_BRANCH --title "Release $BUMP_VERSION" --body "Release $BUMP_VERSION"
+        run: >
+          gh pr create
+          --base ${{ github.ref_name }}
+          --head $RELEASE_BRANCH
+          --title "Release $BUMP_VERSION"
+          --body "Release $BUMP_VERSION"
