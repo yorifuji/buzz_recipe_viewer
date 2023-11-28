@@ -261,10 +261,10 @@ packages:
     dependency: "direct main"
     description:
       name: custom_text
-      sha256: "14f4dafc595940335cd5684e5e3e64de97f639570b7911227c6a2c498ad04da8"
+      sha256: af9eed4e07be87430ee20eb5f7146238b085224f544f72fd0790db89ffe15902
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   dart_style:
     dependency: transitive
     description:
