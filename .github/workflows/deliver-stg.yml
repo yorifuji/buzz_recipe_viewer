@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 env:
-  DEVELOPER_DIR: ${{ (vars.DEVELOPER_DIR == null && '/Applications/Xcode_14.3.1.app') || vars.DEVELOPER_DIR }}.app
+  DEVELOPER_DIR: ${{ (vars.DEVELOPER_DIR == null && '/Applications/Xcode_14.3.1.app') || vars.DEVELOPER_DIR }}
 
 jobs:
   android:
