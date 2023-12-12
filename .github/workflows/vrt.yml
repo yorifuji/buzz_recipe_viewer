@@ -28,36 +28,48 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     outputs:
-      sha: ${{ steps.merge-base.outputs.sha }}
-      cache-hit: ${{ steps.lookup.outputs.cache-hit }}
+      actual-ref: ${{ steps.sha.outputs.actual-ref }}
+      actual-cache-hit: ${{ steps.actual-cache.outputs.cache-hit }}
+      expected-ref: ${{ steps.sha.outputs.expected-ref }}
+      expected-cache-hit: ${{ steps.expected-cache.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: sha of merge base(common parent)
-        id: merge-base
+      - name: ref for actual and expected
+        id: sha
         shell: bash # set pipefail option
-        run: echo "sha=$(git merge-base origin/$GITHUB_BASE_REF origin/$GITHUB_HEAD_REF)" >> $GITHUB_OUTPUT
+        run: |
+          echo "actual-ref=${{ github.event.pull_request.merge_commit_sha }}" >> $GITHUB_OUTPUT
+          echo "expected-ref=$(git merge-base origin/$GITHUB_BASE_REF origin/$GITHUB_HEAD_REF)" >> $GITHUB_OUTPUT
 
-      - name: lookup reg-suit cache
-        id: lookup
+      - name: lookup actual cache
+        id: actual-cache
         uses: actions/cache@v3
         with:
-          key: reg-suit-cache-${{ steps.merge-base.outputs.sha }}
-          path: .reg/
+          key: reg-suit-cache-${{ steps.sha.outputs.actual-ref }}
+          path: .reg-actual
           lookup-only: true
 
-  create-cache:
-    name: create cache
+      - name: lookup expected cache
+        id: expected-cache
+        uses: actions/cache@v3
+        with:
+          key: reg-suit-cache-${{ steps.sha.outputs.expected-ref }}
+          path: .reg/expected
+          lookup-only: true
+
+  crate-expected-images:
+    name: crate expected images
     needs: lookup
-    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.cache-hit != 'true' }}
+    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.expected-cache-hit != 'true' }}
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.lookup.outputs.sha }}
+          ref: ${{ needs.lookup.outputs.expected-ref }}
 
       - uses: subosito/flutter-action@v2
         with:
@@ -83,25 +95,25 @@ jobs:
 
       - uses: actions/cache/save@v3
         with:
-          path: .reg/
-          key: reg-suit-cache-${{ needs.lookup.outputs.sha }}
+          path: .reg/expected
+          key: reg-suit-cache-${{ needs.lookup.outputs.expected-ref }}
 
-      # - name: Upload .reg/ to articaft(for test)
+      # - name: Upload articaft
       #   uses: actions/upload-artifact@v3
       #   with:
-      #     name: reg-suit-cache-artifact
-      #     path: .reg/
+      #     name: reg-expected-artifact
+      #     path: .reg/expected
 
-  compare:
-    name: compare
-    needs:
-      - lookup
-      - create-cache
-    if: ${{ !cancelled() && !failure() }}
+  crate-actual-images:
+    name: crate actual images
+    needs: lookup
+    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.actual-cache-hit != 'true' }}
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.lookup.outputs.actual-ref }}
 
       - uses: subosito/flutter-action@v2
         with:
@@ -120,27 +132,54 @@ jobs:
           fi
 
       - name: Create golden images
-        run: flutter test --update-goldens --tags=golden
+        run: |
+          flutter test --update-goldens --tags=golden
+          mv test/golden_test/goldens .reg-actual
+
+      - uses: actions/cache/save@v3
+        with:
+          path: .reg-actual
+          key: reg-suit-cache-${{ needs.lookup.outputs.actual-ref }}
+
+      # - name: Upload articaft
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: reg-actual-artifact
+      #     path: .reg-actual
+
+  compare:
+    name: compare
+    needs:
+      - lookup
+      - crate-actual-images
+      - crate-expected-images
+    if: ${{ !cancelled() && !failure() }}
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-
-      - name: restore yarn cache
-        uses: actions/cache@v3
-        with:
-          key: reg-suit-cache-yarn-${{ hashFiles('**/yarn.lock') }}
-          path: .yarn/cache/
+          node-version: 20
+          cache: 'yarn'
 
       - run: yarn install --immutable
 
-      - name: restore reg-suit cache
+      - name: restore actual cache
         uses: actions/cache/restore@v3
         with:
-          key: reg-suit-cache-${{ needs.lookup.outputs.sha }}
-          path: .reg/
+          key: reg-suit-cache-${{ needs.lookup.outputs.actual-ref }}
+          path: .reg-actual
+
+      - name: restore expected cache
+        uses: actions/cache/restore@v3
+        with:
+          key: reg-suit-cache-${{ needs.lookup.outputs.expected-ref }}
+          path: .reg/expected
 
       - name: Compare by reg-suit
+        shell: bash # set pipefail option
         run: npx reg-suit compare 2>&1 | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | tee reg-suit.log
 
       - name: Upload .reg/ to articaft
@@ -236,7 +275,7 @@ jobs:
             }
 
   action-timeline:
-    needs: [lookup, create-cache, compare]
+    needs: [lookup, crate-expected-images, crate-actual-images, compare]
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2

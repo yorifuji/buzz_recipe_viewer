@@ -1,7 +1,7 @@
 {
   "core": {
     "workingDir": ".reg",
-    "actualDir": "test/golden_test/goldens",
+    "actualDir": ".reg-actual",
     "thresholdRate": 0,
     "addIgnore": true,
     "ximgdiff": {
