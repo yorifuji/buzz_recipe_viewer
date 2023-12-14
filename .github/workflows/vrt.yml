@@ -24,96 +24,28 @@ concurrency:
 
 jobs:
   lookup:
-    name: lookup
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     outputs:
-      actual-ref: ${{ steps.sha.outputs.actual-ref }}
-      actual-cache-hit: ${{ steps.actual-cache.outputs.cache-hit }}
-      expected-ref: ${{ steps.sha.outputs.expected-ref }}
-      expected-cache-hit: ${{ steps.expected-cache.outputs.cache-hit }}
+      actual-sha: ${{ steps.lookup.outputs.actual-sha }}
+      actual-cache-hit: ${{ steps.lookup.outputs.actual-cache-hit }}
+      expected-sha: ${{ steps.lookup.outputs.expected-sha }}
+      expected-cache-hit: ${{ steps.lookup.outputs.expected-cache-hit }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: yorifuji/easy-vrt@main
+        id: lookup
         with:
-          fetch-depth: 0
+          mode: lookup
 
-      - name: ref for actual and expected
-        id: sha
-        shell: bash # set pipefail option
-        run: |
-          echo "actual-ref=${{ github.event.pull_request.merge_commit_sha }}" >> $GITHUB_OUTPUT
-          echo "expected-ref=$(git merge-base origin/$GITHUB_BASE_REF origin/$GITHUB_HEAD_REF)" >> $GITHUB_OUTPUT
-
-      - name: lookup actual cache
-        id: actual-cache
-        uses: actions/cache@v3
-        with:
-          key: reg-suit-cache-${{ steps.sha.outputs.actual-ref }}
-          path: .reg-actual
-          lookup-only: true
-
-      - name: lookup expected cache
-        id: expected-cache
-        uses: actions/cache@v3
-        with:
-          key: reg-suit-cache-${{ steps.sha.outputs.expected-ref }}
-          path: .reg/expected
-          lookup-only: true
-
-  crate-expected-images:
-    name: crate expected images
-    needs: lookup
+  expected:
     if: ${{ !cancelled() && !failure() && needs.lookup.outputs.expected-cache-hit != 'true' }}
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.lookup.outputs.expected-ref }}
-
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
-          channel: stable
-          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
-
-      - run: flutter pub get
-
-      - name: Run pre-process script
-        env:
-          PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
-        run: |
-          if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
-          fi
-
-      - name: Create golden images
-        run: |
-          flutter test --update-goldens --tags=golden
-          mkdir -p .reg/
-          mv test/golden_test/goldens .reg/expected
-
-      - uses: actions/cache/save@v3
-        with:
-          path: .reg/expected
-          key: reg-suit-cache-${{ needs.lookup.outputs.expected-ref }}
-
-      # - name: Upload articaft
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: reg-expected-artifact
-      #     path: .reg/expected
-
-  crate-actual-images:
-    name: crate actual images
     needs: lookup
-    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.actual-cache-hit != 'true' }}
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.lookup.outputs.actual-ref }}
+          ref: ${{ needs.lookup.outputs.expected-sha }}
 
       - uses: subosito/flutter-action@v2
         with:
@@ -134,148 +66,62 @@ jobs:
       - name: Create golden images
         run: |
           flutter test --update-goldens --tags=golden
-          mv test/golden_test/goldens .reg-actual
 
-      - uses: actions/cache/save@v3
+      - uses: yorifuji/easy-vrt@main
         with:
-          path: .reg-actual
-          key: reg-suit-cache-${{ needs.lookup.outputs.actual-ref }}
+          mode: expected
+          expected-dir: test/golden_test/golden
+          expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
 
-      # - name: Upload articaft
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: reg-actual-artifact
-      #     path: .reg-actual
+  actual:
+    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.actual-cache-hit != 'true' }}
+    needs: lookup
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.lookup.outputs.actual-sha }}
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
+
+      - name: Run pre-process script
+        env:
+          PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
+        run: |
+          if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
+            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
+          fi
+
+      - name: Create golden images
+        run: |
+          flutter test --update-goldens --tags=golden
+
+      - uses: yorifuji/easy-vrt@main
+        with:
+          mode: actual
+          actual-dir: test/golden_test/golden
+          actual-cache-key: ${{ needs.lookup.outputs.actual-sha }}
 
   compare:
-    name: compare
-    needs:
-      - lookup
-      - crate-actual-images
-      - crate-expected-images
     if: ${{ !cancelled() && !failure() }}
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
-    timeout-minutes: 30
+    needs: [lookup, expected, actual]
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: yorifuji/easy-vrt@main
         with:
-          node-version: 20
-          cache: 'yarn'
-
-      - run: yarn install --immutable
-
-      - name: restore actual cache
-        uses: actions/cache/restore@v3
-        with:
-          key: reg-suit-cache-${{ needs.lookup.outputs.actual-ref }}
-          path: .reg-actual
-
-      - name: restore expected cache
-        uses: actions/cache/restore@v3
-        with:
-          key: reg-suit-cache-${{ needs.lookup.outputs.expected-ref }}
-          path: .reg/expected
-
-      - name: Compare by reg-suit
-        shell: bash # set pipefail option
-        run: npx reg-suit compare 2>&1 | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | tee reg-suit.log
-
-      - name: Upload .reg/ to articaft
-        uses: actions/upload-artifact@v3
-        with:
-          name: reg-suit-compare-result
-          path: .reg/
-          retention-days: 3
-
-      - name: Generate Comment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const log = fs.readFileSync('./reg-suit.log', 'utf-8');
-
-            const parseStats = () => {
-              const lines = log.split('\n');
-              const stats = {
-                changed: 0,
-                newItems: 0,
-                deleted: 0,
-                passing: 0
-              };
-              for (const line of lines) {
-                if (line.includes('Changed items')) {
-                    stats.changed = String(parseInt(line.split(': ')[1], 10));
-                } else if (line.includes('New items')) {
-                    stats.newItems = String(parseInt(line.split(': ')[1], 10));
-                } else if (line.includes('Deleted items')) {
-                    stats.deleted = String(parseInt(line.split(': ')[1], 10));
-                } else if (line.includes('Passed items')) {
-                    stats.passing = String(parseInt(line.split(': ')[1], 10));
-                }
-              }
-              return stats;
-            };
-            const stats = parseStats();
-            const parseIcon = () => {
-              if (stats.changed != 0 || stats.deleted != 0) {
-                return '❗';
-              } else if (stats.newItems != 0) {
-                return '💡';
-              } else {
-                return '✅';
-              }
-            };
-            const icon = parseIcon();
-
-            const summaryCommentAnnotation = '<!-- Flutter VRT Test Summary Comment -->';
-
-            const markdown = await core.summary
-              .addHeading(`${icon} reg-suit has checked for visual changes`, 3)
-              .addTable([
-                ["🔴 Changed",  "🟡 New",        "🟤  Deleted",  "🔵 Passing"],
-                [stats.changed, stats.newItems, stats.deleted, stats.passing]
-              ])
-              .addHeading("📊 Download Report", 3)
-              .addLink('You can download the report from the artifact here', `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`)
-              .addHeading("📝 Log", 3)
-              .addCodeBlock(log, "log")
-              .addRaw('<!-- Flutter VRT Test Summary Comment -->')
-              .stringify()
-            await core.summary.write()
-
-            const requestPerPage = 100;
-            try {
-              const listComments = await github.rest.issues.listComments({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                per_page: requestPerPage
-              });
-              const summaryComment = listComments.data.find(comment => comment.body.includes(summaryCommentAnnotation));
-              if (summaryComment) {
-                // delete summary comment if exists
-                await github.rest.issues.deleteComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: summaryComment.id
-                });
-              }
-              // create a summary comment
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: markdown
-              });
-            } catch (error) {
-              logError(`Failed to modify comment: ${error.message}`);
-              return;
-            }
+          mode: compare
+          expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
+          actual-cache-key: ${{ needs.lookup.outputs.actual-sha }}
 
   action-timeline:
-    needs: [lookup, crate-expected-images, crate-actual-images, compare]
+    needs: [lookup, actual, expected, compare]
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2
