@@ -70,7 +70,7 @@ jobs:
       - uses: yorifuji/easy-vrt@main
         with:
           mode: expected
-          expected-dir: test/golden_test/golden
+          expected-dir: test/golden_test/goldens
           expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
 
   actual:
@@ -106,7 +106,7 @@ jobs:
       - uses: yorifuji/easy-vrt@main
         with:
           mode: actual
-          actual-dir: test/golden_test/golden
+          actual-dir: test/golden_test/goldens
           actual-cache-key: ${{ needs.lookup.outputs.actual-sha }}
 
   compare:
