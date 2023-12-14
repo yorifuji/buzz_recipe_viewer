@@ -8,7 +8,7 @@
     },
     "recipe" : {
         "title" : "Recipe",
-        "empty" : "We've got no recipes.\nAdd your best ones!",
+        "empty" : "We've got no recipes.\nAdd your best ones!!",
         "addRecipe" : "Add Recipe",
         "newRecipe" : {
             "title" : "New Recipe",
