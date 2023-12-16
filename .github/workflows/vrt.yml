@@ -119,8 +119,11 @@ jobs:
           mode: compare
           expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
           actual-cache-key: ${{ needs.lookup.outputs.actual-sha }}
+          summary-comment: true
+          review-comment: true
 
   action-timeline:
+    if: ${{ !cancelled() }}
     needs: [lookup, actual, expected, compare]
     runs-on: ubuntu-latest
     steps:
