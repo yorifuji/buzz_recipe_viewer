@@ -30,6 +30,8 @@ void main() async {
     SharedPreferences.getInstance()
   ).wait;
 
+  // foo bar
+
   runApp(
     ProviderScope(
       overrides: [
