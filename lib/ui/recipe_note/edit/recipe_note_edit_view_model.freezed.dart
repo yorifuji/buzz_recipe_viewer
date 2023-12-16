@@ -116,7 +116,7 @@ class _$TextItemImpl extends _TextItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TextItemImpl &&
@@ -309,7 +309,7 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecipeNoteEditStateImpl &&

@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 108 (54 per locale)
 ///
-/// Built on 2023-10-19 at 16:30 UTC
+/// Built on 2023-12-16 at 12:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -24,8 +24,8 @@ const AppLocale _baseLocale = AppLocale.en;
 /// - LocaleSettings.setLocale(AppLocale.en) // set locale
 /// - Locale locale = AppLocale.en.flutterLocale // get flutter locale from enum
 /// - if (LocaleSettings.currentLocale == AppLocale.en) // locale check
-enum AppLocale with BaseAppLocale<AppLocale, _StringsEn> {
-  en(languageCode: 'en', build: _StringsEn.build),
+enum AppLocale with BaseAppLocale<AppLocale, Translations> {
+  en(languageCode: 'en', build: Translations.build),
   ja(languageCode: 'ja', build: _StringsJa.build);
 
   const AppLocale(
@@ -41,10 +41,11 @@ enum AppLocale with BaseAppLocale<AppLocale, _StringsEn> {
   @override
   final String? countryCode;
   @override
-  final TranslationBuilder<AppLocale, _StringsEn> build;
+  final TranslationBuilder<AppLocale, Translations> build;
 
   /// Gets current instance managed by [LocaleSettings].
-  _StringsEn get translations => LocaleSettings.instance.translationMap[this]!;
+  Translations get translations =>
+      LocaleSettings.instance.translationMap[this]!;
 }
 
 /// Method A: Simple
@@ -56,7 +57,7 @@ enum AppLocale with BaseAppLocale<AppLocale, _StringsEn> {
 /// Usage:
 /// String a = t.someKey.anotherKey;
 /// String b = t['someKey.anotherKey']; // Only for edge cases!
-_StringsEn get t => LocaleSettings.instance.currentTranslations;
+Translations get t => LocaleSettings.instance.currentTranslations;
 
 /// Method B: Advanced
 ///
@@ -73,21 +74,14 @@ _StringsEn get t => LocaleSettings.instance.currentTranslations;
 /// final t = Translations.of(context); // Get t variable.
 /// String a = t.someKey.anotherKey; // Use t variable.
 /// String b = t['someKey.anotherKey']; // Only for edge cases!
-class Translations {
-  Translations._(); // no constructor
-
-  static _StringsEn of(BuildContext context) =>
-      InheritedLocaleData.of<AppLocale, _StringsEn>(context).translations;
-}
-
-/// The provider for method B
 class TranslationProvider
-    extends BaseTranslationProvider<AppLocale, _StringsEn> {
+    extends BaseTranslationProvider<AppLocale, Translations> {
   TranslationProvider({required super.child})
       : super(settings: LocaleSettings.instance);
 
-  static InheritedLocaleData<AppLocale, _StringsEn> of(BuildContext context) =>
-      InheritedLocaleData.of<AppLocale, _StringsEn>(context);
+  static InheritedLocaleData<AppLocale, Translations> of(
+          BuildContext context) =>
+      InheritedLocaleData.of<AppLocale, Translations>(context);
 }
 
 /// Method B shorthand via [BuildContext] extension method.
@@ -96,11 +90,12 @@ class TranslationProvider
 /// Usage (e.g. in a widget's build method):
 /// context.t.someKey.anotherKey
 extension BuildContextTranslationsExtension on BuildContext {
-  _StringsEn get t => TranslationProvider.of(this).translations;
+  Translations get t => TranslationProvider.of(this).translations;
 }
 
 /// Manages all translation instances and the current locale
-class LocaleSettings extends BaseFlutterLocaleSettings<AppLocale, _StringsEn> {
+class LocaleSettings
+    extends BaseFlutterLocaleSettings<AppLocale, Translations> {
   LocaleSettings._() : super(utils: AppLocaleUtils.instance);
 
   static final instance = LocaleSettings._();
@@ -134,7 +129,7 @@ class LocaleSettings extends BaseFlutterLocaleSettings<AppLocale, _StringsEn> {
 }
 
 /// Provides utility functions without any side effects.
-class AppLocaleUtils extends BaseAppLocaleUtils<AppLocale, _StringsEn> {
+class AppLocaleUtils extends BaseAppLocaleUtils<AppLocale, Translations> {
   AppLocaleUtils._()
       : super(baseLocale: _baseLocale, locales: AppLocale.values);
 
@@ -158,10 +153,17 @@ class AppLocaleUtils extends BaseAppLocaleUtils<AppLocale, _StringsEn> {
 // translations
 
 // Path: <root>
-class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
+class Translations implements BaseTranslations<AppLocale, Translations> {
+  /// Returns the current translations of the given [context].
+  ///
+  /// Usage:
+  /// final t = Translations.of(context);
+  static Translations of(BuildContext context) =>
+      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
-  _StringsEn.build(
+  Translations.build(
       {Map<String, Node>? overrides,
       PluralResolver? cardinalResolver,
       PluralResolver? ordinalResolver})
@@ -178,12 +180,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 
   /// Metadata for the translations of <en>.
   @override
-  final TranslationMetadata<AppLocale, _StringsEn> $meta;
+  final TranslationMetadata<AppLocale, Translations> $meta;
 
   /// Access flat map
   dynamic operator [](String key) => $meta.getTranslation(key);
 
-  late final _StringsEn _root = this; // ignore: unused_field
+  late final Translations _root = this; // ignore: unused_field
 
   // Translations
   String get appTitle => 'Awesome Japanese Recipe';
@@ -199,7 +201,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 class _StringsTabEn {
   _StringsTabEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get recipe => 'Recipe';
@@ -212,7 +214,7 @@ class _StringsTabEn {
 class _StringsRecipeEn {
   _StringsRecipeEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Recipe';
@@ -228,7 +230,7 @@ class _StringsRecipeEn {
 class _StringsVideoEn {
   _StringsVideoEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Video';
@@ -238,7 +240,7 @@ class _StringsVideoEn {
 class _StringsFavoriteEn {
   _StringsFavoriteEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Favorite';
@@ -249,7 +251,7 @@ class _StringsFavoriteEn {
 class _StringsSettingsEn {
   _StringsSettingsEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Settings';
@@ -264,7 +266,7 @@ class _StringsSettingsEn {
 class _StringsCommonEn {
   _StringsCommonEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get addFavorite => 'Add Favorite';
@@ -282,7 +284,7 @@ class _StringsCommonEn {
 class _StringsRecipeNewRecipeEn {
   _StringsRecipeNewRecipeEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'New Recipe';
@@ -294,7 +296,7 @@ class _StringsRecipeNewRecipeEn {
 class _StringsRecipeViewRecipeEn {
   _StringsRecipeViewRecipeEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Recipe';
@@ -306,7 +308,7 @@ class _StringsRecipeViewRecipeEn {
 class _StringsSettingsGeneralEn {
   _StringsSettingsGeneralEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'General';
@@ -318,7 +320,7 @@ class _StringsSettingsGeneralEn {
 class _StringsSettingsVideoEn {
   _StringsSettingsVideoEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'Video';
@@ -330,7 +332,7 @@ class _StringsSettingsVideoEn {
 class _StringsSettingsAboutEn {
   _StringsSettingsAboutEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'About';
@@ -342,7 +344,7 @@ class _StringsSettingsAboutEn {
 class _StringsSettingsDebugEn {
   _StringsSettingsDebugEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'Debug';
@@ -354,7 +356,7 @@ class _StringsSettingsDebugEn {
 class _StringsRecipeNewRecipeInputEn {
   _StringsRecipeNewRecipeInputEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Title';
@@ -372,7 +374,7 @@ class _StringsRecipeNewRecipeInputEn {
 class _StringsSettingsGeneralRowEn {
   _StringsSettingsGeneralRowEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   late final _StringsSettingsGeneralRowThemeEn theme =
@@ -387,7 +389,7 @@ class _StringsSettingsGeneralRowEn {
 class _StringsSettingsVideoRowEn {
   _StringsSettingsVideoRowEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   late final _StringsSettingsVideoRowPlayWithinAppEn playWithinApp =
@@ -398,7 +400,7 @@ class _StringsSettingsVideoRowEn {
 class _StringsSettingsAboutRowEn {
   _StringsSettingsAboutRowEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   late final _StringsSettingsAboutRowVersionEn version =
@@ -411,7 +413,7 @@ class _StringsSettingsAboutRowEn {
 class _StringsSettingsDebugRowEn {
   _StringsSettingsDebugRowEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   late final _StringsSettingsDebugRowDummyRecipeEn dummyRecipe =
@@ -422,7 +424,7 @@ class _StringsSettingsDebugRowEn {
 class _StringsSettingsGeneralRowThemeEn {
   _StringsSettingsGeneralRowThemeEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Theme';
@@ -434,7 +436,7 @@ class _StringsSettingsGeneralRowThemeEn {
 class _StringsSettingsGeneralRowColorEn {
   _StringsSettingsGeneralRowColorEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Color';
@@ -446,7 +448,7 @@ class _StringsSettingsGeneralRowColorEn {
 class _StringsSettingsGeneralRowLanguageEn {
   _StringsSettingsGeneralRowLanguageEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Language';
@@ -458,7 +460,7 @@ class _StringsSettingsGeneralRowLanguageEn {
 class _StringsSettingsVideoRowPlayWithinAppEn {
   _StringsSettingsVideoRowPlayWithinAppEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Play within app';
@@ -468,7 +470,7 @@ class _StringsSettingsVideoRowPlayWithinAppEn {
 class _StringsSettingsAboutRowVersionEn {
   _StringsSettingsAboutRowVersionEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Version';
@@ -478,7 +480,7 @@ class _StringsSettingsAboutRowVersionEn {
 class _StringsSettingsAboutRowLicenseEn {
   _StringsSettingsAboutRowLicenseEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'License';
@@ -488,7 +490,7 @@ class _StringsSettingsAboutRowLicenseEn {
 class _StringsSettingsDebugRowDummyRecipeEn {
   _StringsSettingsDebugRowDummyRecipeEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Insert Dummy Recipe';
@@ -498,7 +500,7 @@ class _StringsSettingsDebugRowDummyRecipeEn {
 class _StringsSettingsGeneralRowThemeThemeEn {
   _StringsSettingsGeneralRowThemeThemeEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'Theme';
@@ -513,7 +515,7 @@ class _StringsSettingsGeneralRowThemeThemeEn {
 class _StringsSettingsGeneralRowColorColorEn {
   _StringsSettingsGeneralRowColorColorEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'Color';
@@ -523,7 +525,7 @@ class _StringsSettingsGeneralRowColorColorEn {
 class _StringsSettingsGeneralRowLanguageLanguageEn {
   _StringsSettingsGeneralRowLanguageLanguageEn._(this._root);
 
-  final _StringsEn _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
   // Translations
   String get header => 'Language';
@@ -535,7 +537,7 @@ class _StringsSettingsGeneralRowLanguageLanguageEn {
 }
 
 // Path: <root>
-class _StringsJa implements _StringsEn {
+class _StringsJa implements Translations {
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
   _StringsJa.build(
@@ -555,7 +557,7 @@ class _StringsJa implements _StringsEn {
 
   /// Metadata for the translations of <ja>.
   @override
-  final TranslationMetadata<AppLocale, _StringsEn> $meta;
+  final TranslationMetadata<AppLocale, Translations> $meta;
 
   /// Access flat map
   @override
@@ -1030,7 +1032,7 @@ class _StringsSettingsGeneralRowLanguageLanguageJa
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
-extension on _StringsEn {
+extension on Translations {
   dynamic _flatMapFunction(String path) {
     switch (path) {
       case 'appTitle':
