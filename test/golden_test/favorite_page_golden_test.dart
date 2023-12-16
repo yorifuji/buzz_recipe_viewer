@@ -9,7 +9,7 @@ import '../fake_favorite_store.dart';
 import 'flutter_test_config.dart';
 
 void main() {
-  const description = 'FavoritePage';
+  const description = 'favorite';
   final deviceBuilder = DeviceBuilder()
     ..addScenario(
       widget: ProviderScope(
@@ -25,14 +25,20 @@ void main() {
       const locale = AppLocale.ja;
       LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(deviceBuilder, wrapper: wrapper);
-      await screenMatchesGolden(tester, '${locale.languageCode}/$description');
+      await screenMatchesGolden(
+        tester,
+        '${locale.languageCode}/$description/page',
+      );
     });
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
       LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(deviceBuilder, wrapper: wrapper);
-      await screenMatchesGolden(tester, '${locale.languageCode}/$description');
+      await screenMatchesGolden(
+        tester,
+        '${locale.languageCode}/$description/page',
+      );
     });
   });
 }

@@ -9,8 +9,17 @@ import '../fake_recipe_note_store.dart';
 import 'flutter_test_config.dart';
 
 void main() {
-  const description = 'RecipeNotePage';
-  final deviceBuilder = DeviceBuilder()
+  final emptyDeviceBuilder = DeviceBuilder()
+    ..addScenario(
+      widget: ProviderScope(
+        overrides: [
+          recipeNoteStoreProvider.overrideWith(FakeEmptyRecipeNoteStore.new),
+        ],
+        child: const RecipeNotePage(),
+      ),
+    );
+
+  final listDeviceBuilder = DeviceBuilder()
     ..addScenario(
       widget: ProviderScope(
         overrides: [
@@ -20,19 +29,47 @@ void main() {
       ),
     );
 
-  group(description, () {
+  group('recipe_note', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
       LocaleSettings.setLocale(locale);
-      await tester.pumpDeviceBuilder(deviceBuilder, wrapper: wrapper);
-      await screenMatchesGolden(tester, '${locale.languageCode}/$description');
+      await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
+      await screenMatchesGolden(
+        tester,
+        '${locale.languageCode}/recipe_note/empty',
+      );
     });
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
       LocaleSettings.setLocale(locale);
-      await tester.pumpDeviceBuilder(deviceBuilder, wrapper: wrapper);
-      await screenMatchesGolden(tester, '${locale.languageCode}/$description');
+      await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
+      await screenMatchesGolden(
+        tester,
+        '${locale.languageCode}/recipe_note/empty',
+      );
+    });
+  });
+
+  group('list', () {
+    testGoldens('ja', (tester) async {
+      const locale = AppLocale.ja;
+      LocaleSettings.setLocale(locale);
+      await tester.pumpDeviceBuilder(listDeviceBuilder, wrapper: wrapper);
+      await screenMatchesGolden(
+        tester,
+        '${locale.languageCode}/recipe_note/list',
+      );
+    });
+
+    testGoldens('en', (tester) async {
+      const locale = AppLocale.en;
+      LocaleSettings.setLocale(locale);
+      await tester.pumpDeviceBuilder(listDeviceBuilder, wrapper: wrapper);
+      await screenMatchesGolden(
+        tester,
+        '${locale.languageCode}/recipe_note/list',
+      );
     });
   });
 }

@@ -8,8 +8,25 @@ part of 'fake_recipe_note_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$fakeEmptyRecipeNoteStoreHash() =>
+    r'513218f82b853870c07dafa16ca82ebe22e5a3cb';
+
+/// See also [FakeEmptyRecipeNoteStore].
+@ProviderFor(FakeEmptyRecipeNoteStore)
+final fakeEmptyRecipeNoteStoreProvider = AutoDisposeNotifierProvider<
+    FakeEmptyRecipeNoteStore, List<RecipeNote>>.internal(
+  FakeEmptyRecipeNoteStore.new,
+  name: r'fakeEmptyRecipeNoteStoreProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fakeEmptyRecipeNoteStoreHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$FakeEmptyRecipeNoteStore = AutoDisposeNotifier<List<RecipeNote>>;
 String _$fakeRecipeNoteStoreHash() =>
-    r'418e8e676876c692243cfd03121d3c3075d6f217';
+    r'e8d225db72235a9586b9ea2eda1a696fab90325c';
 
 /// See also [FakeRecipeNoteStore].
 @ProviderFor(FakeRecipeNoteStore)

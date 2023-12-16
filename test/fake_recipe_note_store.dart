@@ -5,10 +5,22 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'fake_recipe_note_store.g.dart';
 
 @riverpod
-class FakeRecipeNoteStore extends _$FakeRecipeNoteStore
+class FakeEmptyRecipeNoteStore extends _$FakeEmptyRecipeNoteStore
     implements RecipeNoteStore {
   @override
   List<RecipeNote> build() {
     return [];
+  }
+}
+
+@riverpod
+class FakeRecipeNoteStore extends _$FakeRecipeNoteStore
+    implements RecipeNoteStore {
+  @override
+  List<RecipeNote> build() {
+    return [
+      RecipeNote('title1', 'description1', [], []),
+      RecipeNote('title2', 'description2', [], []),
+    ];
   }
 }
