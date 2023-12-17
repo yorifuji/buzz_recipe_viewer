@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/store/favorite_store.dart';
 import 'package:buzz_recipe_viewer/store/search_hit_store.dart';
 import 'package:collection/collection.dart';
+import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_store.g.dart';
@@ -27,4 +28,9 @@ class RecipeStore extends _$RecipeStore {
       }).toList();
     }
   }
+}
+
+class FakeRecipeStore extends _$RecipeStore with Mock implements RecipeStore {
+  @override
+  List<Recipe> build() => [];
 }

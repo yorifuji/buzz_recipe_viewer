@@ -3,6 +3,7 @@ import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/service/recipe_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_view_model.freezed.dart';
@@ -58,4 +59,13 @@ class SearchViewModel extends _$SearchViewModel {
   void updateSortType(SortIndex sortType) {
     state = state.copyWith(sortType: sortType);
   }
+}
+
+class FakeSearchViewModel extends _$SearchViewModel
+    with Mock
+    implements SearchViewModel {
+  @override
+  SearchState build() => const SearchState();
+  @override
+  Future<void> search() async {}
 }
