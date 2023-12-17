@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../fake_recipe_note_store.dart';
 import 'flutter_test_config.dart';
 
 void main() {

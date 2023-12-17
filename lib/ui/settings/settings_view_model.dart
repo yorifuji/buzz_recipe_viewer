@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'settings_view_model.freezed.dart';
@@ -28,4 +29,11 @@ class SettingsViewModel extends _$SettingsViewModel {
         );
     state = state.copyWith(useInternalPlayer: useInternalPlayer);
   }
+}
+
+class FakeSettingsViewModel extends _$SettingsViewModel
+    with Mock
+    implements SettingsViewModel {
+  @override
+  SettingsState build() => const SettingsState();
 }
