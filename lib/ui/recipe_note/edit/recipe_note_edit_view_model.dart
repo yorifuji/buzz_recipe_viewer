@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_note_edit_view_model.freezed.dart';
@@ -54,7 +55,7 @@ class RecipeNoteEditState with _$RecipeNoteEditState {
   bool get isValid => title.isNotEmpty && description.isNotEmpty;
 }
 
-@riverpod
+@Riverpod(dependencies: [])
 class RecipeNoteEditViewModel extends _$RecipeNoteEditViewModel {
   late RecipeNoteService _recipeNoteService;
   @override
@@ -141,4 +142,12 @@ extension RecipeNoteEditStateExtension on RecipeNoteEditState {
         foodList.map((item) => item.text).toList(),
         stepList.map((item) => item.text).toList(),
       );
+}
+
+class FakeRecipeNoteEditViewModel extends _$RecipeNoteEditViewModel
+    with Mock
+    implements RecipeNoteEditViewModel {
+  @override
+  RecipeNoteEditState build({RecipeNote? recipeNote}) =>
+      const RecipeNoteEditState();
 }
