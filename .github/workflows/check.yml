@@ -69,10 +69,14 @@ jobs:
 
       - run: flutter analyze --write=flutter_analyze.log
 
-      - uses: yorifuji/flutter-analyze-commenter@v1
+      - if: ${{ !cancelled() }}
+        run: dart run custom_lint --format=json > custom_lint.json
+
+      - uses: yorifuji/flutter-analyze-commenter@develop
         if: ${{ !cancelled() }}
         with:
-          analyze_log: flutter_analyze.log
+          analyze-log: flutter_analyze.log
+          custom-lint-log: custom_lint.json
           verbose: true
 
   # diff:
