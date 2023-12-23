@@ -30,7 +30,7 @@ class RecipeStore2 extends _$RecipeStore2 {
   }
 }
 
-class FakeRecipeStore extends _$RecipeStore with Mock implements RecipeStore2 {
+class FakeRecipeStore extends _$RecipeStore2 with Mock implements RecipeStore2 {
   @override
   List<Recipe> build() => [];
 }
