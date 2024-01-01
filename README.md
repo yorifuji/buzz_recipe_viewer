@@ -17,8 +17,8 @@
 
 | Tool           | Version |
 | -------------- | ------- |
-| Flutter        | 3.13.6  |
-| Xcode          | 14.3.1  |
+| Flutter        | 3.16.5  |
+| Xcode          | 15.1    |
 | Android Studio |         |
 
 # Architecture
