@@ -70,7 +70,7 @@ jobs:
       - run: flutter analyze --write=flutter_analyze.log
 
       - if: ${{ !cancelled() }}
-        run: dart run custom_lint --format=json > custom_lint.json
+        run: dart run custom_lint --format=json > custom_lint.log
 
       - uses: yorifuji/flutter-analyze-commenter@v1
         if: ${{ !cancelled() }}               # required to run this step even if flutter analyze fails
