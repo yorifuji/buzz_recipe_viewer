@@ -114,7 +114,7 @@ jobs:
     needs: [lookup, expected, actual]
     runs-on: ubuntu-latest
     steps:
-      - uses: yorifuji/easy-vrt@main
+      - uses: yorifuji/easy-vrt@v1
         with:
           mode: compare
           expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
