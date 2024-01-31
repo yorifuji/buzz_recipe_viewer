@@ -38,6 +38,7 @@ jobs:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+          architecture: arm64
 
       - run: flutter pub get
 
