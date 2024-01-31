@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 env:
-  DEVELOPER_DIR: ${{ (vars.DEVELOPER_DIR == null && '/Applications/Xcode_14.3.1.app') || vars.DEVELOPER_DIR }}
+  DEVELOPER_DIR: ${{ (vars.DEVELOPER_DIR == null && '/Applications/Xcode_15.0.1.app') || vars.DEVELOPER_DIR }}
 
 jobs:
   android:
@@ -80,7 +80,7 @@ jobs:
           rm -f ./android/key.properties
 
   ios:
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-13') || 'self-hosted' }}
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
