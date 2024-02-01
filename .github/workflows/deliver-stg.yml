@@ -38,7 +38,7 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: subosito/flutter-action@v2
+      - uses: yorifuji/flutter-action@46cfa204fb3d8c478fe4ac019c39720499db9a61
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -94,7 +94,7 @@ jobs:
             echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: subosito/flutter-action@v2
+      - uses: yorifuji/flutter-action@46cfa204fb3d8c478fe4ac019c39720499db9a61
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
