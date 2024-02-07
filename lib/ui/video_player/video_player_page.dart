@@ -17,13 +17,12 @@ class VideoPlayerPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final didInitStateDone = useState(false);
-    final isMounted = useIsMounted();
     final fullscreenVideoPlayingState =
         ref.watch(fullscreenVideoPlayingStateProvider);
 
     useEffect(
       () {
-        if (isMounted()) {
+        if (context.mounted) {
           Future.delayed(
               const Duration(
                 milliseconds: 500,

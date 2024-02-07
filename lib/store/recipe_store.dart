@@ -7,7 +7,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_store.g.dart';
 
-@riverpod
+@Riverpod(
+  dependencies: [
+    FavoriteStore,
+    SearchHitStore,
+  ],
+)
 class RecipeStore extends _$RecipeStore {
   @override
   List<Recipe> build() {

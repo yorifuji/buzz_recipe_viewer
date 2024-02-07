@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'favorite_store.g.dart';
 
-@Riverpod(dependencies: [])
+@Riverpod(dependencies: [DatabaseRepository])
 class FavoriteStore extends _$FavoriteStore {
   @override
   List<Favorite> build() {
