@@ -92,8 +92,8 @@ class _FavoriteContainer extends ConsumerWidget {
                     History.from(favorite.searchHit),
                   );
               if (useInternalPlayer) {
-                // ignore: use_build_context_synchronously
                 await Navigator.push(
+                  // ignore: use_build_context_synchronously
                   context,
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) {

@@ -117,8 +117,8 @@ class _VideoListContainer extends HookConsumerWidget {
                         .read(historyServiceProvider)
                         .add(History.from(hitList[index].searchHit));
                     if (useInternalPlayer) {
-                      // ignore: use_build_context_synchronously
                       await Navigator.push(
+                        // ignore: use_build_context_synchronously
                         context,
                         MaterialPageRoute<void>(
                           builder: (BuildContext context) {

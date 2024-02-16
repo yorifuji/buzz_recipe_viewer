@@ -47,8 +47,8 @@ class RecipeNoteEditPage extends ConsumerWidget {
                             Navigator.pop(context);
                           } else {
                             await viewModel.onUpdate();
-                            // ignore: use_build_context_synchronously
                             Navigator.popUntil(
+                              // ignore: use_build_context_synchronously
                               context,
                               (route) => route.isFirst,
                             );
