@@ -18,27 +18,28 @@
 | Tool           | Version |
 | -------------- | ------- |
 | Flutter        | 3.19.4  |
-| Xcode          | 15.1    |
+| Xcode          | 15.2    |
 | Android Studio |         |
 
 # Architecture
 
 ```mermaid
 graph LR;
-    View-->|watch|Store
-    View-->|call|Service
+    Presentation-->|watch|Store
+    Presentation-->|call|Service
     Service-->|call|Repository
     Service-->|update|Store
 ```
 
-- View
+- Presentation
   - Widget など
 - Store
-  - 状態の保持
+  - 状態の保持、主にNotifierProvierで実装
 - Service
   - View の操作に基づいて処理を行う
     - 主に Repository に対する操作を行いデータを取得する
-    - 取得したデータに基づいて Store を更新する
+  - 取得したデータに基づいて Store を更新する
+  - 状態は持たない
 - Repository
   - 外部サービス、API、データベースなどのデータソースからデータを取得
 
