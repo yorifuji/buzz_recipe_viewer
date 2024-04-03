@@ -23,6 +23,8 @@
 
 # Architecture
 
+- Single Source of Truth(SSOT)とコマンドクエリ責務分離(CQRS)を意識した単方向データフロー
+
 ```mermaid
 graph LR;
     Presentation-->|watch|Store
@@ -34,9 +36,11 @@ graph LR;
 - Presentation
   - Widget など
 - Store
-  - 状態の保持、主にNotifierProvierで実装
+  - 状態の保持、主に NotifierProvier で実装
+  - State の更新は Service 経由で行う
+  - Presentation から watch することで状態をリアクティブにUIに反映させる
 - Service
-  - View の操作に基づいて処理を行う
+  - UI の操作に基づいて処理を行う
     - 主に Repository に対する操作を行いデータを取得する
   - 取得したデータに基づいて Store を更新する
   - 状態は持たない
