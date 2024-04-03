@@ -23,7 +23,7 @@
 
 # Architecture
 
-- Single Source of Truth(SSOT)とコマンドクエリ責務分離(CQRS)を意識した単方向データフロー
+Single Source of Truth(SSOT)とコマンドクエリ責務分離(CQRS)を意識した単方向データフロー
 
 ```mermaid
 graph LR;
