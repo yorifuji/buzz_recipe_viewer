@@ -44,10 +44,8 @@ dependencies:
   flutter_hooks: any
   hooks_riverpod: any
   riverpod_annotation: any
-  isar: any
-  isar_flutter_libs: any
-  path_provider: any
-  youtube_player_flutter: any
+  path_provider: ^2.1.2
+  youtube_player_flutter: ^9.0.0
   settings_ui: any
   package_info_plus: any
   shared_preferences: any
@@ -59,6 +57,10 @@ dependencies:
   slang: any
   slang_flutter: any
   mockito: ^5.4.4
+  drift: ^2.16.0
+  sqlite3_flutter_libs: ^0.5.20
+  path: ^1.9.0
+  sqlite3: ^2.4.2
 
 dev_dependencies:
   flutter_test:
@@ -66,16 +68,16 @@ dev_dependencies:
 
   cider: any
   freezed: any
-  build_runner: any
+  build_runner: ^2.4.9
   json_serializable: any
   very_good_analysis: any
   riverpod_generator: any
   riverpod_lint: any
   custom_lint: any
-  isar_generator: any
   flutter_launcher_icons: any
   slang_build_runner: any
   golden_toolkit: any
+  drift_dev: ^2.16.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

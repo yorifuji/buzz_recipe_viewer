@@ -19,6 +19,7 @@ mixin _$SearchState {
   String get query => throw _privateConstructorUsedError;
   SortIndex get sortType => throw _privateConstructorUsedError;
   int get nextPage => throw _privateConstructorUsedError;
+  List<SearchHit> get searchHits => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchStateCopyWith<SearchState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $SearchStateCopyWith<$Res> {
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
-  $Res call({String query, SortIndex sortType, int nextPage});
+  $Res call(
+      {String query,
+      SortIndex sortType,
+      int nextPage,
+      List<SearchHit> searchHits});
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? query = null,
     Object? sortType = null,
     Object? nextPage = null,
+    Object? searchHits = null,
   }) {
     return _then(_value.copyWith(
       query: null == query
@@ -64,6 +70,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
+      searchHits: null == searchHits
+          ? _value.searchHits
+          : searchHits // ignore: cast_nullable_to_non_nullable
+              as List<SearchHit>,
     ) as $Val);
   }
 }
@@ -76,7 +86,11 @@ abstract class _$$SearchStateImplCopyWith<$Res>
       __$$SearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String query, SortIndex sortType, int nextPage});
+  $Res call(
+      {String query,
+      SortIndex sortType,
+      int nextPage,
+      List<SearchHit> searchHits});
 }
 
 /// @nodoc
@@ -93,6 +107,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
     Object? query = null,
     Object? sortType = null,
     Object? nextPage = null,
+    Object? searchHits = null,
   }) {
     return _then(_$SearchStateImpl(
       query: null == query
@@ -107,6 +122,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
+      searchHits: null == searchHits
+          ? _value._searchHits
+          : searchHits // ignore: cast_nullable_to_non_nullable
+              as List<SearchHit>,
     ));
   }
 }
@@ -117,7 +136,9 @@ class _$SearchStateImpl implements _SearchState {
   const _$SearchStateImpl(
       {this.query = '',
       this.sortType = SortIndex.timestamp,
-      this.nextPage = 0});
+      this.nextPage = 0,
+      final List<SearchHit> searchHits = const <SearchHit>[]})
+      : _searchHits = searchHits;
 
   @override
   @JsonKey()
@@ -128,10 +149,18 @@ class _$SearchStateImpl implements _SearchState {
   @override
   @JsonKey()
   final int nextPage;
+  final List<SearchHit> _searchHits;
+  @override
+  @JsonKey()
+  List<SearchHit> get searchHits {
+    if (_searchHits is EqualUnmodifiableListView) return _searchHits;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchHits);
+  }
 
   @override
   String toString() {
-    return 'SearchState(query: $query, sortType: $sortType, nextPage: $nextPage)';
+    return 'SearchState(query: $query, sortType: $sortType, nextPage: $nextPage, searchHits: $searchHits)';
   }
 
   @override
@@ -143,11 +172,14 @@ class _$SearchStateImpl implements _SearchState {
             (identical(other.sortType, sortType) ||
                 other.sortType == sortType) &&
             (identical(other.nextPage, nextPage) ||
-                other.nextPage == nextPage));
+                other.nextPage == nextPage) &&
+            const DeepCollectionEquality()
+                .equals(other._searchHits, _searchHits));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query, sortType, nextPage);
+  int get hashCode => Object.hash(runtimeType, query, sortType, nextPage,
+      const DeepCollectionEquality().hash(_searchHits));
 
   @JsonKey(ignore: true)
   @override
@@ -160,7 +192,8 @@ abstract class _SearchState implements SearchState {
   const factory _SearchState(
       {final String query,
       final SortIndex sortType,
-      final int nextPage}) = _$SearchStateImpl;
+      final int nextPage,
+      final List<SearchHit> searchHits}) = _$SearchStateImpl;
 
   @override
   String get query;
@@ -168,6 +201,8 @@ abstract class _SearchState implements SearchState {
   SortIndex get sortType;
   @override
   int get nextPage;
+  @override
+  List<SearchHit> get searchHits;
   @override
   @JsonKey(ignore: true)
   _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>

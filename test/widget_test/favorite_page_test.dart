@@ -1,5 +1,6 @@
-// ignore_for_file: scoped_providers_should_specify_dependencies
-import 'package:buzz_recipe_viewer/store/favorite_store.dart';
+import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/repository/favorite_repository_mock.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,14 +11,17 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          favoriteStoreProvider.overrideWith(FakeFavoriteStore.new),
+          favoriteStreamProvider.overrideWith(emptyFavoriteStream),
         ],
         child: const MaterialApp(home: FavoritePage()),
       ),
     );
 
+    // Verify that RecipeNotePage is displayed
+    await tester.pumpAndSettle();
+
     expect(
-      find.text('Love a video?\nTap the heart to make it your fave!'),
+      find.text(t.favorite.empty),
       findsOneWidget,
     );
   });

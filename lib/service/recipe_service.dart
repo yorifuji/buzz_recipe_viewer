@@ -2,7 +2,6 @@ import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_repository_mock.dart';
-import 'package:buzz_recipe_viewer/store/search_hit_store.dart';
 import 'package:buzz_recipe_viewer/store/search_state_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,19 +12,16 @@ RecipeService recipeService(RecipeServiceRef ref) => RecipeService(
       ref.watch(flavorProvider) == Flavor.dev
           ? ref.watch(recipeRepositoryMockProvider)
           : ref.watch(recipeRepositoryProvider),
-      ref.watch(searchHitStoreProvider.notifier),
       ref.watch(searchStateStoreProvider.notifier),
     );
 
 class RecipeService {
   RecipeService(
     this._recipeRepository,
-    this._searchHitStore,
     this._searchStateStore,
   );
 
   final RecipeRepository _recipeRepository;
-  final SearchHitStore _searchHitStore;
   final SearchStateStore _searchStateStore;
 
   Future<bool> getRecipe(String query, SortIndex sortIndex) async {
@@ -37,8 +33,8 @@ class RecipeService {
         _searchStateStore
           ..setQuery(query)
           ..setSortType(sortIndex)
-          ..setNextPage(data.nextPage);
-        _searchHitStore.set(data.searchHits);
+          ..setNextPage(data.nextPage)
+          ..setSearchHits(data.searchHits);
       },
       failure: (error) {},
     );
@@ -55,8 +51,9 @@ class RecipeService {
 
     getRecipeResult.when(
       success: (data) {
-        _searchStateStore.setNextPage(data.nextPage);
-        _searchHitStore.add(data.searchHits);
+        _searchStateStore
+          ..setNextPage(data.nextPage)
+          ..addSearchHits(data.searchHits);
       },
       failure: (error) {},
     );

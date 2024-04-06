@@ -1,11 +1,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
-import 'package:buzz_recipe_viewer/model/isar/history.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
-import 'package:buzz_recipe_viewer/service/favorite_service.dart';
-import 'package:buzz_recipe_viewer/service/history_service.dart';
-import 'package:buzz_recipe_viewer/store/recipe_store.dart';
 import 'package:buzz_recipe_viewer/store/search_state_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
@@ -17,7 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SearchPage extends ConsumerWidget {
+class SearchPage extends HookConsumerWidget {
   const SearchPage({super.key});
 
   static Widget show() => const SearchPage();
@@ -28,6 +23,14 @@ class SearchPage extends ConsumerWidget {
       searchViewModelProvider.select((value) => value.loadingState),
     );
     final viewModel = ref.watch(searchViewModelProvider.notifier);
+
+    useEffect(
+      () {
+        Future.microtask(viewModel.search);
+        return null;
+      },
+      const [],
+    );
 
     final body = switch (loadingState) {
       LoadingState.loadable => const SizedBox.shrink(),
@@ -74,7 +77,8 @@ class _VideoListContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(searchViewModelProvider.notifier);
-    final hitList = ref.watch(recipeStoreProvider);
+    final hitList =
+        ref.watch(searchStateStoreProvider.select((value) => value.searchHits));
     final moreLoadingState = ref.watch(
       searchViewModelProvider.select((value) => value.moreLoadingState),
     );
@@ -110,12 +114,8 @@ class _VideoListContainer extends HookConsumerWidget {
             return Column(
               children: [
                 VideoImageContainer(
-                  searchHit: hitList[index].searchHit,
-                  isLiked: hitList[index].favorite != null,
+                  searchHit: hitList[index],
                   onTap: () async {
-                    await ref
-                        .read(historyServiceProvider)
-                        .add(History.from(hitList[index].searchHit));
                     if (useInternalPlayer) {
                       await Navigator.push(
                         // ignore: use_build_context_synchronously
@@ -123,13 +123,13 @@ class _VideoListContainer extends HookConsumerWidget {
                         MaterialPageRoute<void>(
                           builder: (BuildContext context) {
                             return VideoPlayerPage(
-                              searchHit: hitList[index].searchHit,
+                              searchHit: hitList[index],
                             );
                           },
                         ),
                       );
                     } else {
-                      final url = Uri.parse(hitList[index].searchHit.url);
+                      final url = Uri.parse(hitList[index].url);
                       if (await launchUrl(
                         url,
                         mode: LaunchMode.externalApplication,
@@ -141,28 +141,8 @@ class _VideoListContainer extends HookConsumerWidget {
                       }
                     }
                   },
-                  onTapLike: (isLiked) {
-                    if (isLiked) {
-                      ref
-                          .read(favoriteServiceProvider)
-                          .add(Favorite.from(hitList[index].searchHit));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            t.common.addFavorite,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          duration: const Duration(seconds: 1),
-                        ),
-                      );
-                    } else {
-                      ref
-                          .read(favoriteServiceProvider)
-                          .delete(hitList[index].favorite!);
-                    }
-                  },
                 ),
-                VideoInformationContainer(searchHit: hitList[index].searchHit),
+                VideoInformationContainer(searchHit: hitList[index]),
               ],
             );
           }
@@ -172,7 +152,7 @@ class _VideoListContainer extends HookConsumerWidget {
   }
 }
 
-class _SortLabelButton extends HookConsumerWidget {
+class _SortLabelButton extends ConsumerWidget {
   const _SortLabelButton();
 
   @override
@@ -180,14 +160,6 @@ class _SortLabelButton extends HookConsumerWidget {
     final sortType =
         ref.watch(searchViewModelProvider.select((value) => value.sortType));
     final viewModel = ref.watch(searchViewModelProvider.notifier);
-
-    useEffect(
-      () {
-        Future.microtask(viewModel.search);
-        return null;
-      },
-      const [],
-    );
 
     return Row(
       children: [

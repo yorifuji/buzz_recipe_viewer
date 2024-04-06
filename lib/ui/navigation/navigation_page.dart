@@ -13,7 +13,6 @@ enum AppTab {
   recipe(Icon(Icons.note)),
   video(Icon(Icons.ondemand_video)),
   favorite(Icon(Icons.favorite)),
-  // history(Icon(Icons.history)),
   setting(Icon(Icons.settings));
 
   const AppTab(this.icon);
@@ -27,7 +26,6 @@ enum AppTab {
         AppTab.recipe => RecipeNotePage.show,
         AppTab.video => SearchPage.show,
         AppTab.favorite => FavoritePage.show,
-        // AppTab.history => HistoryPage.show,
         AppTab.setting => SettingsPage.show,
       };
 

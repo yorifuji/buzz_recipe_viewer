@@ -9,7 +9,7 @@ part of 'recipe_note_edit_view_model.dart';
 // **************************************************************************
 
 String _$recipeNoteEditViewModelHash() =>
-    r'30255878cc7a4be08475cd0b426c5547e3d6b39f';
+    r'869350cceb3ad340d5ec9f844e7cab3b821b6bb8';
 
 /// Copied from Dart SDK
 class _SystemHash {

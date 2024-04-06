@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,6 +22,8 @@ class TextItem with _$TextItem {
 @freezed
 class RecipeNoteEditState with _$RecipeNoteEditState {
   const factory RecipeNoteEditState({
+    RecipeNote? recipeNote,
+    int? id,
     @Default('') String title,
     @Default('') String description,
     @Default([]) List<TextItem> foodList,
@@ -31,6 +33,8 @@ class RecipeNoteEditState with _$RecipeNoteEditState {
 
   factory RecipeNoteEditState.fromRecipeNote(RecipeNote recipeNote) {
     return RecipeNoteEditState(
+      recipeNote: recipeNote,
+      id: recipeNote.id,
       title: recipeNote.title,
       description: recipeNote.description,
       foodList: recipeNote.foodList
@@ -125,23 +129,29 @@ class RecipeNoteEditViewModel extends _$RecipeNoteEditViewModel {
 
   Future<void> onSave() async {
     final recipeNote = state.toRecipeNote();
-    await _recipeNoteService.add(recipeNote);
+    await _recipeNoteService.create(recipeNote);
   }
 
   Future<void> onUpdate() async {
-    final recipeNoteNew = state.toRecipeNote()..id = recipeNote!.id;
-    await _recipeNoteService.add(recipeNoteNew);
+    final recipeNote = state.toRecipeNote(isUpdate: true);
+    await _recipeNoteService.update(recipeNote);
   }
 }
 
 // RecipeNoteEditState から RecipeNote を生成するextension
 extension RecipeNoteEditStateExtension on RecipeNoteEditState {
-  RecipeNote toRecipeNote() => RecipeNote(
-        title,
-        description,
-        foodList.map((item) => item.text).toList(),
-        stepList.map((item) => item.text).toList(),
-      );
+  RecipeNote toRecipeNote({bool isUpdate = false}) {
+    final now = DateTime.now();
+    return RecipeNote(
+      id: id,
+      title: title,
+      description: description,
+      foodList: foodList.map((item) => item.text).toList(),
+      stepList: stepList.map((item) => item.text).toList(),
+      createdAt: isUpdate ? recipeNote!.createdAt : now,
+      updatedAt: now,
+    );
+  }
 }
 
 class FakeRecipeNoteEditViewModel extends _$RecipeNoteEditViewModel

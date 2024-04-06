@@ -1,7 +1,7 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/isar/recipe_note.dart';
+import 'package:buzz_recipe_viewer/model/recipe_note.dart';
+import 'package:buzz_recipe_viewer/repository/recipe_note_repository.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
-import 'package:buzz_recipe_viewer/store/recipe_note_store.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/view/recipe_note_view_page.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +14,15 @@ class RecipeNotePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final recipeNoteList = ref.watch(recipeNoteStoreProvider);
-    return Scaffold(
-      appBar: AppBar(title: Text(t.recipe.title)),
-      body: recipeNoteList.isEmpty
+    final recipeNoteStream = ref.watch(recipeNoteStreamProvider);
+    final body = recipeNoteStream.when(
+      data: (data) => data.isEmpty
           ? const _EmptyRecipeNoteListContainer()
-          : _RecipeNoteListContainer(recipeNoteList),
+          : _RecipeNoteListContainer(data),
+      error: (error, stackTrace) => const CircularProgressIndicator(),
+      loading: () => const CircularProgressIndicator(),
     );
+    return Scaffold(appBar: AppBar(title: Text(t.recipe.title)), body: body);
   }
 }
 
@@ -110,7 +112,7 @@ class _RecipeNoteListContainer extends ConsumerWidget {
                   onDismissed: (_) async {
                     await ref
                         .read(recipeNoteServiceProvider)
-                        .delete(recipeNote);
+                        .delete(recipeNoteList[index]);
                   },
                 ),
               );

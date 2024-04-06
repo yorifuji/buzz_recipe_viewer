@@ -153,6 +153,8 @@ abstract class _TextItem extends TextItem {
 
 /// @nodoc
 mixin _$RecipeNoteEditState {
+  RecipeNote? get recipeNote => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<TextItem> get foodList => throw _privateConstructorUsedError;
@@ -170,10 +172,14 @@ abstract class $RecipeNoteEditStateCopyWith<$Res> {
       _$RecipeNoteEditStateCopyWithImpl<$Res, RecipeNoteEditState>;
   @useResult
   $Res call(
-      {String title,
+      {RecipeNote? recipeNote,
+      int? id,
+      String title,
       String description,
       List<TextItem> foodList,
       List<TextItem> stepList});
+
+  $RecipeNoteCopyWith<$Res>? get recipeNote;
 }
 
 /// @nodoc
@@ -189,12 +195,22 @@ class _$RecipeNoteEditStateCopyWithImpl<$Res, $Val extends RecipeNoteEditState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? recipeNote = freezed,
+    Object? id = freezed,
     Object? title = null,
     Object? description = null,
     Object? foodList = null,
     Object? stepList = null,
   }) {
     return _then(_value.copyWith(
+      recipeNote: freezed == recipeNote
+          ? _value.recipeNote
+          : recipeNote // ignore: cast_nullable_to_non_nullable
+              as RecipeNote?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -213,6 +229,18 @@ class _$RecipeNoteEditStateCopyWithImpl<$Res, $Val extends RecipeNoteEditState>
               as List<TextItem>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RecipeNoteCopyWith<$Res>? get recipeNote {
+    if (_value.recipeNote == null) {
+      return null;
+    }
+
+    return $RecipeNoteCopyWith<$Res>(_value.recipeNote!, (value) {
+      return _then(_value.copyWith(recipeNote: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -224,10 +252,15 @@ abstract class _$$RecipeNoteEditStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title,
+      {RecipeNote? recipeNote,
+      int? id,
+      String title,
       String description,
       List<TextItem> foodList,
       List<TextItem> stepList});
+
+  @override
+  $RecipeNoteCopyWith<$Res>? get recipeNote;
 }
 
 /// @nodoc
@@ -241,12 +274,22 @@ class __$$RecipeNoteEditStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? recipeNote = freezed,
+    Object? id = freezed,
     Object? title = null,
     Object? description = null,
     Object? foodList = null,
     Object? stepList = null,
   }) {
     return _then(_$RecipeNoteEditStateImpl(
+      recipeNote: freezed == recipeNote
+          ? _value.recipeNote
+          : recipeNote // ignore: cast_nullable_to_non_nullable
+              as RecipeNote?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -271,7 +314,9 @@ class __$$RecipeNoteEditStateImplCopyWithImpl<$Res>
 
 class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
   const _$RecipeNoteEditStateImpl(
-      {this.title = '',
+      {this.recipeNote,
+      this.id,
+      this.title = '',
       this.description = '',
       final List<TextItem> foodList = const [],
       final List<TextItem> stepList = const []})
@@ -279,6 +324,10 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
         _stepList = stepList,
         super._();
 
+  @override
+  final RecipeNote? recipeNote;
+  @override
+  final int? id;
   @override
   @JsonKey()
   final String title;
@@ -305,7 +354,7 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
 
   @override
   String toString() {
-    return 'RecipeNoteEditState(title: $title, description: $description, foodList: $foodList, stepList: $stepList)';
+    return 'RecipeNoteEditState(recipeNote: $recipeNote, id: $id, title: $title, description: $description, foodList: $foodList, stepList: $stepList)';
   }
 
   @override
@@ -313,6 +362,9 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecipeNoteEditStateImpl &&
+            (identical(other.recipeNote, recipeNote) ||
+                other.recipeNote == recipeNote) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -323,6 +375,8 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      recipeNote,
+      id,
       title,
       description,
       const DeepCollectionEquality().hash(_foodList),
@@ -338,12 +392,18 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
 
 abstract class _RecipeNoteEditState extends RecipeNoteEditState {
   const factory _RecipeNoteEditState(
-      {final String title,
+      {final RecipeNote? recipeNote,
+      final int? id,
+      final String title,
       final String description,
       final List<TextItem> foodList,
       final List<TextItem> stepList}) = _$RecipeNoteEditStateImpl;
   const _RecipeNoteEditState._() : super._();
 
+  @override
+  RecipeNote? get recipeNote;
+  @override
+  int? get id;
   @override
   String get title;
   @override

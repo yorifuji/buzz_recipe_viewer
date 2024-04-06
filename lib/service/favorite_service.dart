@@ -1,20 +1,22 @@
-import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
-import 'package:buzz_recipe_viewer/repository/database_repository.dart';
+import 'package:buzz_recipe_viewer/model/favorite.dart';
+import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'favorite_service.g.dart';
 
 @riverpod
 FavoriteService favoriteService(FavoriteServiceRef ref) =>
-    FavoriteService(ref.watch(databaseRepositoryProvider));
+    FavoriteService(ref.watch(favoriteRepositoryProvider));
 
 class FavoriteService {
-  FavoriteService(this._databaseRepository);
-  final DatabaseRepository _databaseRepository;
+  FavoriteService(this.repository);
+  FavoriteRepository repository;
 
-  Future<void> add(Favorite favorite) =>
-      _databaseRepository.insertFavorite(favorite);
+  Future<void> create(SearchHit searchHit) =>
+      repository.create(Favorite.from(searchHit));
 
-  Future<void> delete(Favorite favorite) =>
-      _databaseRepository.deleteFavorite(favorite);
+  Future<List<Favorite>> readAll() => repository.readAll();
+
+  Future<void> delete(Favorite favorite) => repository.delete(favorite);
 }
