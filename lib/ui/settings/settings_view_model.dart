@@ -13,7 +13,7 @@ class SettingsState with _$SettingsState {
   }) = _SettingsState;
 }
 
-@Riverpod(dependencies: [])
+@riverpod
 class SettingsViewModel extends _$SettingsViewModel {
   @override
   SettingsState build() {

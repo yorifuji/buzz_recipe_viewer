@@ -1,3 +1,4 @@
+// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
 import 'package:buzz_recipe_viewer/ui/search/search_view_model.dart';

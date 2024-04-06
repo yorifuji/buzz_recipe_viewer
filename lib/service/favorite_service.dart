@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'favorite_service.g.dart';
 
-@Riverpod(dependencies: [FavoriteRepository])
+@riverpod
 FavoriteService favoriteService(FavoriteServiceRef ref) =>
     FavoriteService(ref.watch(favoriteRepositoryProvider));
 

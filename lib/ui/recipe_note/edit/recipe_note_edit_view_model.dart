@@ -59,7 +59,7 @@ class RecipeNoteEditState with _$RecipeNoteEditState {
   bool get isValid => title.isNotEmpty && description.isNotEmpty;
 }
 
-@Riverpod(dependencies: [RecipeNoteService])
+@riverpod
 class RecipeNoteEditViewModel extends _$RecipeNoteEditViewModel {
   late RecipeNoteService _recipeNoteService;
   @override

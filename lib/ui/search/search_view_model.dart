@@ -19,7 +19,7 @@ class SearchState with _$SearchState {
   }) = _SearchState;
 }
 
-@Riverpod(dependencies: [])
+@riverpod
 class SearchViewModel extends _$SearchViewModel {
   late RecipeService _recipeService;
   @override
