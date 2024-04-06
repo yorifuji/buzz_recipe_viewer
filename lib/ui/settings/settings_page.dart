@@ -108,6 +108,16 @@ class SettingsPage extends ConsumerWidget {
                     await ref
                         .read(recipeNoteServiceProvider)
                         .createDummyRecipeNote();
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Add dummy recipe',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
                   },
                 ),
               ],

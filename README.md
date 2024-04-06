@@ -18,7 +18,7 @@
 | Tool           | Version |
 | -------------- | ------- |
 | Flutter        | 3.19.4  |
-| Xcode          | 15.2    |
+| Xcode          | 15.3    |
 | Android Studio |         |
 
 # Architecture
@@ -38,7 +38,7 @@ graph LR;
 - Store
   - 状態の保持、主に NotifierProvier で実装
   - State の更新は Service 経由で行う
-  - Presentation から watch することで状態をリアクティブにUIに反映させる
+  - Presentation から watch することで状態をリアクティブに UI に反映させる
 - Service
   - UI の操作に基づいて処理を行う
     - 主に Repository に対する操作を行いデータを取得する
@@ -52,7 +52,7 @@ graph LR;
 - DI
   - [Riverpod(v2, generator)](https://riverpod.dev/)
 - Data store
-  - [Isar Database](https://isar.dev/ja/)
+  - [Drift](https://drift.simonbinder.eu/)
   - [shared_preferences](https://pub.dev/packages/shared_preferences)
 - UI
   - [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
@@ -88,13 +88,13 @@ graph LR;
 - dev
   - 開発用（ローカルビルド）
   - リポジトリの一部をモックに差し替えている
-  - BundleID:dev.yorifuji.buzz_recipe_viewer.dev
+  - BundleID: dev.yorifuji.buzz_recipe_viewer.dev
 - stg
   - STG 配布（Firebase App Distribution）
-  - dev.yorifuji.buzz_recipe_viewer.stg
+  - BundleID: dev.yorifuji.buzz_recipe_viewer.stg
 - prod
-  - 本番配布
-  - dev.yorifuji.buzz_recipe_viewer
+  - 本番配布（PlayConsole, TestFlight）
+  - BundleID: dev.yorifuji.buzz_recipe_viewer
 
 # Test
 

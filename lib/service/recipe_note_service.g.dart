@@ -8,7 +8,7 @@ part of 'recipe_note_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipeNoteServiceHash() => r'7dab522d94ffb3bc781aceff8b983bd1c59972fd';
+String _$recipeNoteServiceHash() => r'5683fd13165d027f6831de77d11305bea81c9ede';
 
 /// See also [recipeNoteService].
 @ProviderFor(recipeNoteService)

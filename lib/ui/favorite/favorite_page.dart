@@ -1,9 +1,7 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
-import 'package:buzz_recipe_viewer/model/isar/history.dart';
+import 'package:buzz_recipe_viewer/model/favorite.dart';
+import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
-import 'package:buzz_recipe_viewer/service/history_service.dart';
-import 'package:buzz_recipe_viewer/store/favorite_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
@@ -19,14 +17,15 @@ class FavoritePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favorites = ref.watch(favoriteStoreProvider);
-
-    return Scaffold(
-      appBar: AppBar(title: Text(t.favorite.title)),
-      body: favorites.isEmpty
+    final favoriteStream = ref.watch(favoriteStreamProvider);
+    final body = favoriteStream.when(
+      data: (data) => data.isEmpty
           ? const _EmptyFavoriteContainer()
-          : _FavoriteListContainer(favorites),
+          : _FavoriteListContainer(data),
+      error: (error, stackTrace) => const CircularProgressIndicator(),
+      loading: () => const CircularProgressIndicator(),
     );
+    return Scaffold(appBar: AppBar(title: Text(t.favorite.title)), body: body);
   }
 }
 
@@ -88,9 +87,6 @@ class _FavoriteContainer extends ConsumerWidget {
           VideoImageContainer(
             searchHit: favorite.searchHit,
             onTap: () async {
-              await ref.read(historyServiceProvider).add(
-                    History.from(favorite.searchHit),
-                  );
               if (useInternalPlayer) {
                 await Navigator.push(
                   // ignore: use_build_context_synchronously

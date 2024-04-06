@@ -1,5 +1,4 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/isar/favorite.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
@@ -65,9 +64,7 @@ class VideoPlayerPage extends HookConsumerWidget {
                   ),
                 ),
                 onLongPress: () async {
-                  await ref
-                      .read(favoriteServiceProvider)
-                      .add(Favorite.from(searchHit));
+                  await ref.read(favoriteServiceProvider).create(searchHit);
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

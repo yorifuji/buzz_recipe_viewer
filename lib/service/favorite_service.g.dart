@@ -8,7 +8,7 @@ part of 'favorite_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favoriteServiceHash() => r'ddccf952ffa4f10d030cb9e22dd6b42b54d82060';
+String _$favoriteServiceHash() => r'9dbb8487c5774cb011d953181a2e2b10de9eddd8';
 
 /// See also [favoriteService].
 @ProviderFor(favoriteService)

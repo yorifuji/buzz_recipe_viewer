@@ -1,6 +1,7 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/store/favorite_store.dart';
+import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/repository/favorite_repository_mock.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -14,7 +15,7 @@ void main() {
     ..addScenario(
       widget: ProviderScope(
         overrides: [
-          favoriteStoreProvider.overrideWith(FakeFavoriteStore.new),
+          favoriteStreamProvider.overrideWith(emptyFavoriteStream),
         ],
         child: const FavoritePage(),
       ),

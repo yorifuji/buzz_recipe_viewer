@@ -1,9 +1,9 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
-import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
-import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/recipe_note_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
+import 'package:buzz_recipe_viewer/ui/video/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,7 +13,6 @@ enum AppTab {
   recipe(Icon(Icons.note)),
   video(Icon(Icons.ondemand_video)),
   favorite(Icon(Icons.favorite)),
-  // history(Icon(Icons.history)),
   setting(Icon(Icons.settings));
 
   const AppTab(this.icon);
@@ -27,7 +26,6 @@ enum AppTab {
         AppTab.recipe => RecipeNotePage.show,
         AppTab.video => SearchPage.show,
         AppTab.favorite => FavoritePage.show,
-        // AppTab.history => HistoryPage.show,
         AppTab.setting => SettingsPage.show,
       };
 
