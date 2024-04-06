@@ -52,3 +52,4 @@ test/golden_test/goldens
 test/golden_test/failures/
 node_modules/
 .reg
+.fvm/
