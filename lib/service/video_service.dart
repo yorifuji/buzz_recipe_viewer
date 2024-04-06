@@ -1,34 +1,34 @@
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
-import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
-import 'package:buzz_recipe_viewer/repository/recipe_repository_mock.dart';
+import 'package:buzz_recipe_viewer/repository/video_repository.dart';
+import 'package:buzz_recipe_viewer/repository/video_repository_mock.dart';
 import 'package:buzz_recipe_viewer/store/search_state_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'recipe_service.g.dart';
+part 'video_service.g.dart';
 
 @riverpod
-RecipeService recipeService(RecipeServiceRef ref) => RecipeService(
+VideoService videoService(VideoServiceRef ref) => VideoService(
       ref.watch(flavorProvider) == Flavor.dev
-          ? ref.watch(recipeRepositoryMockProvider)
-          : ref.watch(recipeRepositoryProvider),
+          ? ref.watch(videoRepositoryMockProvider)
+          : ref.watch(videoRepositoryProvider),
       ref.watch(searchStateStoreProvider.notifier),
     );
 
-class RecipeService {
-  RecipeService(
-    this._recipeRepository,
+class VideoService {
+  VideoService(
+    this._videoRepository,
     this._searchStateStore,
   );
 
-  final RecipeRepository _recipeRepository;
+  final VideoRepository _videoRepository;
   final SearchStateStore _searchStateStore;
 
-  Future<bool> getRecipe(String query, SortIndex sortIndex) async {
-    final getRecipeResult =
-        await _recipeRepository.getRecipe(query, sortIndex.indexName, 0);
+  Future<bool> getVideoList(String query, SortIndex sortIndex) async {
+    final result =
+        await _videoRepository.getVideoList(query, sortIndex.indexName, 0);
 
-    getRecipeResult.when(
+    result.when(
       success: (data) {
         _searchStateStore
           ..setQuery(query)
@@ -39,17 +39,17 @@ class RecipeService {
       failure: (error) {},
     );
 
-    return getRecipeResult.isSuccess;
+    return result.isSuccess;
   }
 
-  Future<bool> getRecipeMore() async {
-    final getRecipeResult = await _recipeRepository.getRecipe(
+  Future<bool> getVideoListMore() async {
+    final result = await _videoRepository.getVideoList(
       _searchStateStore.query(),
       _searchStateStore.sortType().indexName,
       _searchStateStore.nextPage(),
     );
 
-    getRecipeResult.when(
+    result.when(
       success: (data) {
         _searchStateStore
           ..setNextPage(data.nextPage)
@@ -58,6 +58,6 @@ class RecipeService {
       failure: (error) {},
     );
 
-    return getRecipeResult.isSuccess;
+    return result.isSuccess;
   }
 }

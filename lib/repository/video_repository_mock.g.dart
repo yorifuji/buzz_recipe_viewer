@@ -2,28 +2,28 @@
 
 // ignore_for_file: implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'recipe_repository_mock.dart';
+part of 'video_repository_mock.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipeRepositoryMockHash() =>
-    r'98cc9095b7c0ffcc5a9dc4bdf072574071a8fd18';
+String _$videoRepositoryMockHash() =>
+    r'dffb62e84480aa3dcb81dcd5c0c9d2314633650e';
 
-/// See also [recipeRepositoryMock].
-@ProviderFor(recipeRepositoryMock)
-final recipeRepositoryMockProvider =
-    AutoDisposeProvider<RecipeRepositoryMock>.internal(
-  recipeRepositoryMock,
-  name: r'recipeRepositoryMockProvider',
+/// See also [videoRepositoryMock].
+@ProviderFor(videoRepositoryMock)
+final videoRepositoryMockProvider =
+    AutoDisposeProvider<VideoRepositoryMock>.internal(
+  videoRepositoryMock,
+  name: r'videoRepositoryMockProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$recipeRepositoryMockHash,
+      : _$videoRepositoryMockHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef RecipeRepositoryMockRef = AutoDisposeProviderRef<RecipeRepositoryMock>;
+typedef VideoRepositoryMockRef = AutoDisposeProviderRef<VideoRepositoryMock>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

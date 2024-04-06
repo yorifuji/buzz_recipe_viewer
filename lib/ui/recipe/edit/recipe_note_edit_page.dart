@@ -1,6 +1,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe_note.dart';
-import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_note_edit_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,25 +1,25 @@
-import 'package:buzz_recipe_viewer/model/get_recipe_result.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/repository/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/model/video_list_result.dart';
+import 'package:buzz_recipe_viewer/repository/video_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'recipe_repository_mock.g.dart';
+part 'video_repository_mock.g.dart';
 
 @riverpod
-RecipeRepositoryMock recipeRepositoryMock(RecipeRepositoryMockRef ref) =>
-    RecipeRepositoryMock();
+VideoRepositoryMock videoRepositoryMock(VideoRepositoryMockRef ref) =>
+    VideoRepositoryMock();
 
-class RecipeRepositoryMock implements RecipeRepository {
+class VideoRepositoryMock implements VideoRepository {
   @override
-  Future<Result<GetRecipeResult>> getRecipe(
+  Future<Result<VideoListResult>> getVideoList(
     String query,
     String indexName,
     int page,
   ) async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return Result.success(
-      data: GetRecipeResult(
+      data: VideoListResult(
         searchHits: List.generate(
           10,
           (index) => SearchHit(

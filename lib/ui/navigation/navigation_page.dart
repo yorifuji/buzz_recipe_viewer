@@ -1,9 +1,9 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
-import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
-import 'package:buzz_recipe_viewer/ui/search/search_page.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/recipe_note_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
+import 'package:buzz_recipe_viewer/ui/video/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

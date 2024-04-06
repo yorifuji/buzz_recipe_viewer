@@ -1,6 +1,6 @@
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
-import 'package:buzz_recipe_viewer/service/recipe_service.dart';
+import 'package:buzz_recipe_viewer/service/video_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/mockito.dart';
@@ -21,10 +21,10 @@ class SearchState with _$SearchState {
 
 @riverpod
 class SearchViewModel extends _$SearchViewModel {
-  late RecipeService _recipeService;
+  late VideoService _videoService;
   @override
   SearchState build() {
-    _recipeService = ref.watch(recipeServiceProvider);
+    _videoService = ref.watch(videoServiceProvider);
     return const SearchState();
   }
 
@@ -33,7 +33,8 @@ class SearchViewModel extends _$SearchViewModel {
       loadingState: LoadingState.loading,
     );
 
-    final result = await _recipeService.getRecipe(state.query, state.sortType);
+    final result =
+        await _videoService.getVideoList(state.query, state.sortType);
 
     state = state.copyWith(
       loadingState: result ? LoadingState.success : LoadingState.failure,
@@ -45,7 +46,7 @@ class SearchViewModel extends _$SearchViewModel {
       moreLoadingState: LoadingState.loading,
     );
 
-    final result = await _recipeService.getRecipeMore();
+    final result = await _videoService.getVideoListMore();
 
     state = state.copyWith(
       moreLoadingState: result ? LoadingState.success : LoadingState.failure,

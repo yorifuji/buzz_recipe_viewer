@@ -2,8 +2,8 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_note_repository.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
-import 'package:buzz_recipe_viewer/ui/recipe_note/edit/recipe_note_edit_page.dart';
-import 'package:buzz_recipe_viewer/ui/recipe_note/view/recipe_note_view_page.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_note_edit_page.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/view/recipe_note_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
