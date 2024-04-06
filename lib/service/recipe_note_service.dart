@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_note_service.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [RecipeNoteRepository])
 RecipeNoteService recipeNoteService(RecipeNoteServiceRef ref) =>
     RecipeNoteService(ref.watch(recipeNoteRepositoryProvider));
 

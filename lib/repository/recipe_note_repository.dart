@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_note_repository.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [])
 RecipeNoteRepository recipeNoteRepository(RecipeNoteRepositoryRef ref) =>
     RecipeNoteRepository(ref.watch(databaseProvider));
 
@@ -43,7 +43,7 @@ class RecipeNoteRepository {
   }
 }
 
-@riverpod
+@Riverpod(dependencies: [])
 Stream<List<RecipeNote>> recipeNoteStream(RecipeNoteStreamRef ref) {
   final database = ref.watch(databaseProvider);
   final query = database.select(database.recipeNoteDB)

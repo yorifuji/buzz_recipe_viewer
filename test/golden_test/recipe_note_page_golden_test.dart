@@ -1,4 +1,3 @@
-// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_note_repository.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_note_repository_mock.dart';

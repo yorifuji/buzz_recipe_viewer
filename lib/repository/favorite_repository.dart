@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'favorite_repository.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [])
 FavoriteRepository favoriteRepository(FavoriteRepositoryRef ref) =>
     FavoriteRepository(ref.watch(databaseProvider));
 
@@ -51,7 +51,7 @@ class FavoriteRepository {
   }
 }
 
-@riverpod
+@Riverpod(dependencies: [])
 Stream<List<Favorite>> favoriteStream(FavoriteStreamRef ref) {
   final database = ref.watch(databaseProvider);
   final query = database.select(database.favoriteDB)
