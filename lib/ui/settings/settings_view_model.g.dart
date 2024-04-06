@@ -8,7 +8,7 @@ part of 'settings_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsViewModelHash() => r'd6ab11c4923d64c9e2c5a6eeb530e72e013e78cf';
+String _$settingsViewModelHash() => r'de6e9dc934c5ac577d1481ab9cdaa04852f95ec9';
 
 /// See also [SettingsViewModel].
 @ProviderFor(SettingsViewModel)
@@ -19,8 +19,8 @@ final settingsViewModelProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$settingsViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef _$SettingsViewModel = AutoDisposeNotifier<SettingsState>;

@@ -1,4 +1,3 @@
-// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/store/favorite_store.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:flutter/material.dart';

@@ -8,7 +8,7 @@ part of 'package_info_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$packageInfoHash() => r'833063b37c5ce4dcc58ecb8be0162a58356d14ce';
+String _$packageInfoHash() => r'd7ca2dc22465b0b4f07468e6227931e49960ad66';
 
 /// See also [packageInfo].
 @ProviderFor(packageInfo)
@@ -17,8 +17,8 @@ final packageInfoProvider = AutoDisposeProvider<PackageInfo>.internal(
   name: r'packageInfoProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$packageInfoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef PackageInfoRef = AutoDisposeProviderRef<PackageInfo>;

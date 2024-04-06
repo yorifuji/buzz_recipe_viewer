@@ -9,7 +9,7 @@ part of 'recipe_note_edit_view_model.dart';
 // **************************************************************************
 
 String _$recipeNoteEditViewModelHash() =>
-    r'30255878cc7a4be08475cd0b426c5547e3d6b39f';
+    r'87569f8bea34eccfed69154cb9158038fe1e6c2f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -68,12 +68,14 @@ class RecipeNoteEditViewModelFamily extends Family<RecipeNoteEditState> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies =
+      const <ProviderOrFamily>[];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      const <ProviderOrFamily>{};
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

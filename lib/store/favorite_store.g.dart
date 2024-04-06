@@ -8,7 +8,7 @@ part of 'favorite_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favoriteStoreHash() => r'80bafcc977570e66786489e1c616866a5dc69e97';
+String _$favoriteStoreHash() => r'895998a9b52efc4bc218b70de90c9cc521167a49';
 
 /// See also [FavoriteStore].
 @ProviderFor(FavoriteStore)
@@ -19,8 +19,8 @@ final favoriteStoreProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$favoriteStoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef _$FavoriteStore = AutoDisposeNotifier<List<Favorite>>;

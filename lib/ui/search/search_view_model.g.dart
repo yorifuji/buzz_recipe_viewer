@@ -8,7 +8,7 @@ part of 'search_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchViewModelHash() => r'23bb9639da8dc38d01c5fe094c8965db9c4c89e6';
+String _$searchViewModelHash() => r'2791140e5213571d8323b04b9ce006bafdc3d263';
 
 /// See also [SearchViewModel].
 @ProviderFor(SearchViewModel)
@@ -19,8 +19,8 @@ final searchViewModelProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$searchViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef _$SearchViewModel = AutoDisposeNotifier<SearchState>;

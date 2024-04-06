@@ -8,7 +8,7 @@ part of 'recipe_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipeStoreHash() => r'a09d1aa1c5b5d79d62575dd566dc47c2ee44fd61';
+String _$recipeStoreHash() => r'ee09730da2d3f3ff4e034894d2b522890738a737';
 
 /// See also [RecipeStore].
 @ProviderFor(RecipeStore)
@@ -18,8 +18,11 @@ final recipeStoreProvider =
   name: r'recipeStoreProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$recipeStoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[favoriteStoreProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    favoriteStoreProvider,
+    ...?favoriteStoreProvider.allTransitiveDependencies
+  },
 );
 
 typedef _$RecipeStore = AutoDisposeNotifier<List<Recipe>>;
