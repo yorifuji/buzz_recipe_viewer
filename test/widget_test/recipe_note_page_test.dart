@@ -1,3 +1,4 @@
+// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/store/recipe_note_store.dart';
 import 'package:buzz_recipe_viewer/ui/recipe_note/recipe_note_page.dart';
 import 'package:flutter/material.dart';
