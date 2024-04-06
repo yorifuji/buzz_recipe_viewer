@@ -18,7 +18,7 @@
 | Tool           | Version |
 | -------------- | ------- |
 | Flutter        | 3.19.4  |
-| Xcode          | 15.2    |
+| Xcode          | 15.3    |
 | Android Studio |         |
 
 # Architecture
@@ -88,13 +88,13 @@ graph LR;
 - dev
   - 開発用（ローカルビルド）
   - リポジトリの一部をモックに差し替えている
-  - BundleID:dev.yorifuji.buzz_recipe_viewer.dev
+  - BundleID: dev.yorifuji.buzz_recipe_viewer.dev
 - stg
   - STG 配布（Firebase App Distribution）
-  - dev.yorifuji.buzz_recipe_viewer.stg
+  - BundleID: dev.yorifuji.buzz_recipe_viewer.stg
 - prod
-  - 本番配布
-  - dev.yorifuji.buzz_recipe_viewer
+  - 本番配布（PlayConsole, TestFlight）
+  - BundleID: dev.yorifuji.buzz_recipe_viewer
 
 # Test
 
