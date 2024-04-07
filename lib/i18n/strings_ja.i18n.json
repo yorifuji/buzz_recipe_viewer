@@ -76,7 +76,8 @@
             "header" : "ビデオ",
             "row" : {
                 "playWithinApp" : {
-                    "title" : "アプリ内で再生する"
+                    "title" : "アプリ内で再生する",
+                    "description" : "Web版はアプリ内再生をサポートしていません"
                 }
             }
         },

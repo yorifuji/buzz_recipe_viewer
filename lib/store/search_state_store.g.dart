@@ -8,7 +8,7 @@ part of 'search_state_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchStateStoreHash() => r'2f28d0aec0a9e139cfffd27755ed7bc7b9c7e2c2';
+String _$searchStateStoreHash() => r'a353cc74c6ce29cb09c42cb62aaf32698d0eaf9d';
 
 /// See also [SearchStateStore].
 @ProviderFor(SearchStateStore)

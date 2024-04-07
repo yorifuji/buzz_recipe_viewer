@@ -76,7 +76,8 @@
             "header" : "Video",
             "row" : {
                 "playWithinApp" : {
-                    "title" : "Play within app"
+                    "title" : "Play within app",
+                    "description" : "Web app does not support play within app"
                 }
             }
         },

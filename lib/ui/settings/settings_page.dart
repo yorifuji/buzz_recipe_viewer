@@ -79,6 +79,9 @@ class SettingsPage extends ConsumerWidget {
               SettingsTile.switchTile(
                 title: Text(t.settings.video.row.playWithinApp.title),
                 initialValue: useInternalPlayer,
+                description: kIsWeb
+                    ? Text(t.settings.video.row.playWithinApp.description)
+                    : null,
                 enabled: !kIsWeb,
                 onToggle: (value) =>
                     viewModel.setUseInternalPlayer(useInternalPlayer: value),

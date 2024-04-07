@@ -91,7 +91,9 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SettingsStateImpl implements _SettingsState {
+class _$SettingsStateImpl
+    with DiagnosticableTreeMixin
+    implements _SettingsState {
   const _$SettingsStateImpl({this.useInternalPlayer = false});
 
   @override
@@ -99,8 +101,16 @@ class _$SettingsStateImpl implements _SettingsState {
   final bool useInternalPlayer;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SettingsState(useInternalPlayer: $useInternalPlayer)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SettingsState'))
+      ..add(DiagnosticsProperty('useInternalPlayer', useInternalPlayer));
   }
 
   @override
