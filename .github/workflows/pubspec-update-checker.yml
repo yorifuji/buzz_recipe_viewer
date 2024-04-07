@@ -1,4 +1,4 @@
-name: pubspec update checker
+name: pubspec.yaml update checker
 
 run-name: Check pubspec.lock updates ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 

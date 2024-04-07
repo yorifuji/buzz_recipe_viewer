@@ -1,4 +1,4 @@
-name: 02 bump pull request
+name: 02 Bumpup via pull request
 
 run-name: Bump with Pull Request ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 

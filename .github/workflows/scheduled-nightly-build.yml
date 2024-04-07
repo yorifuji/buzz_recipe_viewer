@@ -1,4 +1,4 @@
-name: scheduled nightly build
+name: Scheduled nightly build
 
 run-name: Nightly Build ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 

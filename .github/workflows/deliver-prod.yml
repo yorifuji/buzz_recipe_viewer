@@ -1,4 +1,4 @@
-name: 04 deliver for production
+name: 04 Deliver for production
 
 run-name: Deliver for production ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 

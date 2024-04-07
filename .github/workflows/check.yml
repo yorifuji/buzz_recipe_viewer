@@ -1,4 +1,4 @@
-name: check
+name: Check
 
 run-name: Check ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 

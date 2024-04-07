@@ -1,4 +1,4 @@
-name: tagging on approved
+name: Tagging on approved
 
 run-name: Tagging on Approved ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 

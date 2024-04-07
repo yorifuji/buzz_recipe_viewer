@@ -1,4 +1,4 @@
-name: deliver on tagged
+name: Deliver on tagged
 
 run-name: Deliver on Tagged ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
