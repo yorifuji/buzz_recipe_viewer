@@ -4,6 +4,17 @@ run-name: Deliver for GitHub Pages via ${{ (vars.RUNS_ON_SELF_HOSTED == null && 
 
 on:
   workflow_dispatch:
+    inputs:
+      upload:
+        description: 'Upload'
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      upload:
+        description: 'Upload'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -39,10 +50,12 @@ jobs:
           flutter build web --base-href /buzz_recipe_viewer/ --dart-define=FLAVOR=dev
 
       - name: Upload artifact
+        if: ${{ inputs.upload }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
 
       - name: Deploy to GitHub Pages
+        if: ${{ inputs.upload }}
         id: deployment
         uses: actions/deploy-pages@v4

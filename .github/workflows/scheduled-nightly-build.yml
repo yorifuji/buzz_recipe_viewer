@@ -19,9 +19,23 @@ jobs:
       checks: write
     secrets: inherit
 
-  build:
+  build-prod:
     needs: check
     uses: ./.github/workflows/deliver-prod.yml
+    secrets: inherit
+    with:
+      upload: false
+
+  build-stg:
+    needs: check
+    uses: ./.github/workflows/deliver-stg.yml
+    secrets: inherit
+    with:
+      upload: false
+
+  build-pages:
+    needs: check
+    uses: ./.github/workflows/deliver-pages.yml
     secrets: inherit
     with:
       upload: false
