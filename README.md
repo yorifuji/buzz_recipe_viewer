@@ -52,8 +52,8 @@ graph LR;
 ```
 lib
 ├── i18n              # 国際化関連（slang）
-├── model             # model の定義
-├── provider          # インスタンを提供する Provider の定義
+├── model             # モデルの定義
+├── provider          # クラスのインスタンスを提供する Provider の定義
 ├── repository        # データソース (API, DB)
 │   └── drift           # Drift
 ├── service           # ビジネスロジックの実装
