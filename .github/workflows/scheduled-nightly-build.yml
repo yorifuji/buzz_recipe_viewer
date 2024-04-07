@@ -43,3 +43,10 @@ jobs:
       id-token: write
     with:
       upload: false
+
+  action-timeline:
+    needs: [check, build-prod, build-stg, build-pages]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v2

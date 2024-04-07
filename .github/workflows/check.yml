@@ -137,7 +137,7 @@ jobs:
 
   action-timeline:
     needs: [format, analyze, test]
-    if: ${{ !cancelled() }}
+    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/check.yml' }}
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2

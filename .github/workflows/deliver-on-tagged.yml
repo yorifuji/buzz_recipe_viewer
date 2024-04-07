@@ -27,3 +27,10 @@ jobs:
       contents: read
       pages: write
       id-token: write
+
+  action-timeline:
+    needs: [prod, stg, pages]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v2

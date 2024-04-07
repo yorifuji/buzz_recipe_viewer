@@ -176,6 +176,7 @@ jobs:
 
   action-timeline:
     needs: [android, ios]
+    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-prod.yml' }}
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2

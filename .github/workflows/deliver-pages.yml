@@ -59,3 +59,10 @@ jobs:
         if: ${{ inputs.upload }}
         id: deployment
         uses: actions/deploy-pages@v4
+
+  action-timeline:
+    needs: [deploy-pages]
+    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-pages.yml' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v2

@@ -123,8 +123,8 @@ jobs:
           review-comment: true
 
   action-timeline:
-    if: ${{ !cancelled() }}
     needs: [lookup, actual, expected, compare]
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2
