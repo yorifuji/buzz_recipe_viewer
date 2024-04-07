@@ -37,5 +37,9 @@ jobs:
     needs: check
     uses: ./.github/workflows/deliver-pages.yml
     secrets: inherit
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     with:
       upload: false
