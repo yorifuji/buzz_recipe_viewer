@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
+import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/store/search_state_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
@@ -140,6 +141,21 @@ class _VideoListContainer extends HookConsumerWidget {
                         throw 'Could not launch $url';
                       }
                     }
+                  },
+                  onLongPress: () async {
+                    await ref
+                        .read(favoriteServiceProvider)
+                        .create(hitList[index]);
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          t.common.addFavorite,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
                   },
                 ),
                 VideoInformationContainer(searchHit: hitList[index]),
