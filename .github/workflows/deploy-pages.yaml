@@ -36,7 +36,7 @@ jobs:
       - run: |
           make build-runner 
           flutter pub get
-          flutter build web --base-href /buzz_recipe_viewer/
+          flutter build web --base-href /buzz_recipe_viewer/ --dart-define=FLAVOR=dev
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
