@@ -24,6 +24,17 @@
             "args": [
                 "--dart-define=FLAVOR=prod"
             ]
-        }
+        },
+        {
+            "name": "Run dev chrome",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port=8888",
+                "--dart-define=FLAVOR=dev"
+            ]
+        },
     ]
 }

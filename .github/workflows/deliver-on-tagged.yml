@@ -19,3 +19,7 @@ jobs:
   stg:
     uses: ./.github/workflows/deliver-stg.yml
     secrets: inherit
+
+  pages:
+    uses: ./.github/workflows/deliver-pages.yml
+    secrets: inherit
