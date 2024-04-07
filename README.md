@@ -47,6 +47,29 @@ graph LR;
 - Repository
   - 外部サービス、API、データベースなどのデータソースからデータを取得
 
+# Directory
+
+```
+lib
+├── i18n              # 国際化関連（slang）
+├── model             # model の定義
+├── provider          # インスタンを提供する Provider の定義
+├── repository        # データソース (API, DB)
+│   └── drift           # Drift
+├── service           # ビジネスロジックの実装
+├── store             # 状態管理
+└── ui                # UI
+    ├── common        # 共通コンポーネント
+    ├── error         # エラー画面
+    ├── favorite      # お気に入り
+    ├── navigation    # ナビゲーション
+    ├── recipe        # レシピ
+    ├── settings      # 設定
+    ├── video         # 動画
+    └── video_player  # 動画プレイヤー
+
+```
+
 # Dependencies
 
 - DI
