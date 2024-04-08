@@ -47,7 +47,7 @@ jobs:
       - run: |
           make build-runner 
           flutter pub get
-          flutter build web --base-href /buzz_recipe_viewer/ --dart-define=FLAVOR=dev
+          flutter build web --dart-define=FLAVOR=dev
 
       - name: Upload artifact
         if: ${{ inputs.upload }}
