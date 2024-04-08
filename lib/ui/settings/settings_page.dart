@@ -1,6 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
-import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
