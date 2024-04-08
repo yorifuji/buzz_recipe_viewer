@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
@@ -80,7 +82,8 @@ class SettingsPage extends ConsumerWidget {
               SettingsTile.switchTile(
                 title: Text(t.settings.video.row.playWithinApp.title),
                 initialValue: useInternalPlayer,
-                description: kIsWeb
+                // web or macos
+                description: kIsWeb || Platform.isMacOS
                     ? Text(t.settings.video.row.playWithinApp.description)
                     : null,
                 enabled: !kIsWeb,

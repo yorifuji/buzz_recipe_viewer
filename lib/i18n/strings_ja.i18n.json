@@ -77,7 +77,7 @@
             "row" : {
                 "playWithinApp" : {
                     "title" : "アプリ内で再生する",
-                    "description" : "Web版はアプリ内再生をサポートしていません"
+                    "description" : "このプラットフォームはアプリ内再生をサポートしていません"
                 }
             }
         },
