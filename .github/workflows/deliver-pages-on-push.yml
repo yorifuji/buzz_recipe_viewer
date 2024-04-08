@@ -1,0 +1,24 @@
+name: Deliver for GitHub Pages on push
+
+run-name: Deliver for GitHub Pages on push ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pages:
+    uses: ./.github/workflows/deliver-pages.yml
+    secrets: inherit
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+  action-timeline:
+    needs: pages
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v2
