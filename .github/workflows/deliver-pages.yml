@@ -1,6 +1,6 @@
 name: 05 Deliver for GitHub Pages
 
-run-name: Deliver for GitHub Pages via ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+run-name: Deliver for GitHub Pages ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   workflow_dispatch:
