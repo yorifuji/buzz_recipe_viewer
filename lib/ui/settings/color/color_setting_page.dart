@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/app_color.dart';
 import 'package:buzz_recipe_viewer/provider/app_color_preference_provider.dart';
 import 'package:buzz_recipe_viewer/service/app_color_service.dart';
+import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -18,7 +19,7 @@ class ColorSettingPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(t.settings.general.row.color.title),
       ),
-      body: SettingsList(
+      body: CustomSettingsList(
         sections: [
           SettingsSection(
             title: Text(t.settings.general.row.color.color.header),

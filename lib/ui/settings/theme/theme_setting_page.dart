@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/theme_mode_preference_provider.dart';
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
 import 'package:buzz_recipe_viewer/service/theme_service.dart';
+import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,7 +20,7 @@ class ThemeSettingPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(t.settings.general.row.theme.title),
       ),
-      body: SettingsList(
+      body: CustomSettingsList(
         sections: [
           SettingsSection(
             title: Text(t.settings.general.row.theme.theme.header),

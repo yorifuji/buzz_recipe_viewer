@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/locale_preference_provider.dart';
 import 'package:buzz_recipe_viewer/service/locale_service.dart';
+import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,7 +21,7 @@ class LocaleSettingPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(t.settings.general.row.language.title),
       ),
-      body: SettingsList(
+      body: CustomSettingsList(
         sections: [
           SettingsSection(
             title: Text(

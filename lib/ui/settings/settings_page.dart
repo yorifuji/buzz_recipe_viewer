@@ -1,7 +1,9 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
+import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
+import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
@@ -27,7 +29,7 @@ class SettingsPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(t.settings.title),
       ),
-      body: SettingsList(
+      body: CustomSettingsList(
         sections: [
           SettingsSection(
             title: Text(t.settings.general.header),
