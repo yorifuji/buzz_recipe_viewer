@@ -38,11 +38,9 @@ class CustomSettingsList extends ConsumerWidget {
       physics: physics,
       platform: platform,
       lightTheme: SettingsThemeData(
-        settingsSectionBackground: light.cardColor,
         settingsListBackground: light.scaffoldBackgroundColor,
       ).merge(theme: lightTheme),
       darkTheme: SettingsThemeData(
-        settingsSectionBackground: dark.cardColor,
         settingsListBackground: dark.scaffoldBackgroundColor,
       ).merge(theme: darkTheme),
       brightness: brightness,
