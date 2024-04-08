@@ -32,7 +32,7 @@ class SettingsPage extends ConsumerWidget {
         sections: [
           SettingsSection(
             title: Text(t.settings.general.header),
-            tiles: <SettingsTile>[
+            tiles: [
               SettingsTile.navigation(
                 title: Text(t.settings.general.row.theme.title),
                 onPressed: (context) {
@@ -76,7 +76,7 @@ class SettingsPage extends ConsumerWidget {
           ),
           SettingsSection(
             title: Text(t.settings.video.header),
-            tiles: <SettingsTile>[
+            tiles: [
               SettingsTile.switchTile(
                 title: Text(t.settings.video.row.playWithinApp.title),
                 initialValue: useInternalPlayer,
@@ -91,7 +91,7 @@ class SettingsPage extends ConsumerWidget {
           ),
           SettingsSection(
             title: Text(t.settings.about.header),
-            tiles: <SettingsTile>[
+            tiles: [
               SettingsTile(
                 title: Text(t.settings.about.row.version.title),
                 value:
@@ -106,7 +106,7 @@ class SettingsPage extends ConsumerWidget {
           if (kDebugMode)
             SettingsSection(
               title: Text(t.settings.debug.header),
-              tiles: <SettingsTile>[
+              tiles: [
                 SettingsTile(
                   title: Text(t.settings.debug.row.dummyRecipe.title),
                   onPressed: (_) async {
