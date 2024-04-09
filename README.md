@@ -101,23 +101,18 @@ lib
 
 # Data Source
 
-- [YouTube Data API](https://developers.google.com/youtube/v3)
 - 後述の別のリポジトリを使って YouTube の情報を定期的に取得して Algolia にインポートしている
+- [YouTube Data API](https://developers.google.com/youtube/v3)
 
 # Flavor
 
 `--dart-define=FLAVOR=...` を採用
 
-- dev
-  - 開発用（ローカルビルド）
-  - リポジトリの一部をモックに差し替えている
-  - BundleID: dev.yorifuji.buzz_recipe_viewer.dev
-- stg
-  - STG 配布（Firebase App Distribution）
-  - BundleID: dev.yorifuji.buzz_recipe_viewer.stg
-- prod
-  - 本番配布（PlayConsole, TestFlight）
-  - BundleID: dev.yorifuji.buzz_recipe_viewer
+| Flavor | 用途         | 配布方法                  | BundleID                              |
+| ------ | ------------ | ------------------------- | ------------------------------------- |
+| prod   | 本番用       | PlayConsole, TestFlight   | `dev.yorifuji.buzz_recipe_viewer`     |
+| stg    | ステージング | Firebase App Distribution | `dev.yorifuji.buzz_recipe_viewer.stg` |
+| dev    | 開発用       | ローカルビルド            | `dev.yorifuji.buzz_recipe_viewer.dev` |
 
 # Test
 
@@ -131,17 +126,18 @@ lib
 - Check
   - flutter format
   - flutter analyze
-  - コード生成のファイル差分のチェック（コミット漏れの検出）
 - Test
   - flutter test
   - VRT(Visual Regression Testing)
-- Bump
+- Bumpup
   - pubspec.yaml の`version:`のインクリメント
 - Deliver(build & deploy)
   - stg
     - Firebase App Distribution
   - prod
     - Google Play, App Store Connect(Test Flight)
+  - pages
+    - GitHub Pages
 - Nightly build
 
 # Related repository
