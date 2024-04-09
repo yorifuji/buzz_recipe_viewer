@@ -14,7 +14,7 @@ dependencies:
 
   cupertino_icons: any
   freezed_annotation: any
-  json_annotation: any
+  json_annotation: ^4.8.1
   algolia: any
   flutter_dotenv: any
   intl: any

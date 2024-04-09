@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,7 +21,7 @@ class SettingsViewModel extends _$SettingsViewModel {
   @override
   SettingsState build() {
     return SettingsState(
-      useInternalPlayer: !kIsWeb &&
+      useInternalPlayer: !(kIsWeb || Platform.isMacOS) &&
           ref.read(sharedPreferencesRepositoryProvider).getUseInternalPlayer(),
     );
   }

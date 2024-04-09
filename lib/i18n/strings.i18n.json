@@ -77,7 +77,7 @@
             "row" : {
                 "playWithinApp" : {
                     "title" : "Play within app",
-                    "description" : "Web app does not support play within app"
+                    "description" : "This platform does not support play within app"
                 }
             }
         },

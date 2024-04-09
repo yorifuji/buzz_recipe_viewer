@@ -13,7 +13,17 @@
 | ![](./images/screenshot1.png) | ![](./images/screenshot2.png) |
 | ![](./images/screenshot3.png) | ![](./images/screenshot4.png) |
 
-# Environment
+# Supported Platform
+
+| Platform | Status |
+| -------- | ------ |
+| iOS      | OK     |
+| Android  | OK     |
+| Web      | OK     |
+| macOS    | OK     |
+| Windows  | N/A    |
+
+# Development Environment
 
 | Tool           | Version |
 | -------------- | ------- |

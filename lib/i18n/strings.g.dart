@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 110 (55 per locale)
 ///
-/// Built on 2024-04-07 at 08:56 UTC
+/// Built on 2024-04-08 at 15:29 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -464,7 +464,7 @@ class _StringsSettingsVideoRowPlayWithinAppEn {
 
   // Translations
   String get title => 'Play within app';
-  String get description => 'Web app does not support play within app';
+  String get description => 'This platform does not support play within app';
 }
 
 // Path: settings.about.row.version
@@ -939,7 +939,7 @@ class _StringsSettingsVideoRowPlayWithinAppJa
   @override
   String get title => 'アプリ内で再生する';
   @override
-  String get description => 'Web版はアプリ内再生をサポートしていません';
+  String get description => 'このプラットフォームはアプリ内再生をサポートしていません';
 }
 
 // Path: settings.about.row.version
@@ -1119,7 +1119,7 @@ extension on Translations {
       case 'settings.video.row.playWithinApp.title':
         return 'Play within app';
       case 'settings.video.row.playWithinApp.description':
-        return 'Web app does not support play within app';
+        return 'This platform does not support play within app';
       case 'settings.about.header':
         return 'About';
       case 'settings.about.row.version.title':
@@ -1238,7 +1238,7 @@ extension on _StringsJa {
       case 'settings.video.row.playWithinApp.title':
         return 'アプリ内で再生する';
       case 'settings.video.row.playWithinApp.description':
-        return 'Web版はアプリ内再生をサポートしていません';
+        return 'このプラットフォームはアプリ内再生をサポートしていません';
       case 'settings.about.header':
         return 'このアプリについて';
       case 'settings.about.row.version.title':
