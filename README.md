@@ -15,13 +15,9 @@
 
 # Supported Platform
 
-| Platform | Status |
-| -------- | ------ |
-| iOS      | OK     |
-| Android  | OK     |
-| Web      | OK     |
-| macOS    | OK     |
-| Windows  | N/A    |
+| Platform | Android | iOS | Web | macOS | Windows |
+| -------- | ------- | --- | --- | ----- | ------- |
+| Status   | ✅      | ✅  | ✅  | ✅    | N/A     |
 
 # Development Environment
 
