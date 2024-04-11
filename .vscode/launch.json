@@ -3,6 +3,7 @@
     "configurations": [
         {
             "name": "Run dev",
+            "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -11,6 +12,7 @@
         },
         {
             "name": "Run stg",
+            "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -19,14 +21,16 @@
         },
         {
             "name": "Run prod",
+            "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
             "args": [
                 "--dart-define=FLAVOR=prod"
-            ]
+            ],
         },
         {
             "name": "Run dev chrome",
+            "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -36,5 +40,5 @@
                 "--dart-define=FLAVOR=dev"
             ]
         },
-    ]
+    ],
 }

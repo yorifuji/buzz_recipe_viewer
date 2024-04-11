@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "prepareEnvTask",
+            "type": "shell",
+            "command": "make prepare-env"
+        }
+    ],
+}
