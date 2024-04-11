@@ -104,4 +104,9 @@ class SharedPreferencesRepository {
       shouldShowWalkthrough,
     );
   }
+
+  // clear
+  Future<void> clear() async {
+    await _sharedPreferences.clear();
+  }
 }
