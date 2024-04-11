@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
-import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
