@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 110 (55 per locale)
+/// Strings: 122 (61 per locale)
 ///
-/// Built on 2024-04-08 at 15:29 UTC
+/// Built on 2024-04-11 at 09:47 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -190,6 +190,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   // Translations
   String get appTitle => 'Awesome Japanese Recipe';
   late final _StringsTabEn tab = _StringsTabEn._(_root);
+  late final _StringsWalkthroughEn walkthrough = _StringsWalkthroughEn._(_root);
   late final _StringsRecipeEn recipe = _StringsRecipeEn._(_root);
   late final _StringsVideoEn video = _StringsVideoEn._(_root);
   late final _StringsFavoriteEn favorite = _StringsFavoriteEn._(_root);
@@ -208,6 +209,21 @@ class _StringsTabEn {
   String get video => 'Video';
   String get favorite => 'Favorite';
   String get settings => 'Settings';
+}
+
+// Path: walkthrough
+class _StringsWalkthroughEn {
+  _StringsWalkthroughEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final _StringsWalkthroughIntro1En intro1 =
+      _StringsWalkthroughIntro1En._(_root);
+  late final _StringsWalkthroughIntro2En intro2 =
+      _StringsWalkthroughIntro2En._(_root);
+  String get skip => 'Skip';
+  String get done => 'Done';
 }
 
 // Path: recipe
@@ -278,6 +294,28 @@ class _StringsCommonEn {
   String get sortByDate => 'Sort by Date (Newest First)';
   String get sortByLikes => 'Popular (Likes)';
   String get sortByViews => 'Popular (Views)';
+}
+
+// Path: walkthrough.intro1
+class _StringsWalkthroughIntro1En {
+  _StringsWalkthroughIntro1En._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Make every day delicious';
+  String get body => 'Let\'s create your own recipe book';
+}
+
+// Path: walkthrough.intro2
+class _StringsWalkthroughIntro2En {
+  _StringsWalkthroughIntro2En._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Learn the steps';
+  String get body => 'Elevate your everyday meals with professional tips';
 }
 
 // Path: recipe.newRecipe
@@ -573,6 +611,8 @@ class _StringsJa implements Translations {
   @override
   late final _StringsTabJa tab = _StringsTabJa._(_root);
   @override
+  late final _StringsWalkthroughJa walkthrough = _StringsWalkthroughJa._(_root);
+  @override
   late final _StringsRecipeJa recipe = _StringsRecipeJa._(_root);
   @override
   late final _StringsVideoJa video = _StringsVideoJa._(_root);
@@ -600,6 +640,26 @@ class _StringsTabJa implements _StringsTabEn {
   String get favorite => 'お気に入り';
   @override
   String get settings => '設定';
+}
+
+// Path: walkthrough
+class _StringsWalkthroughJa implements _StringsWalkthroughEn {
+  _StringsWalkthroughJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  late final _StringsWalkthroughIntro1Ja intro1 =
+      _StringsWalkthroughIntro1Ja._(_root);
+  @override
+  late final _StringsWalkthroughIntro2Ja intro2 =
+      _StringsWalkthroughIntro2Ja._(_root);
+  @override
+  String get skip => 'スキップ';
+  @override
+  String get done => '完了';
 }
 
 // Path: recipe
@@ -697,6 +757,34 @@ class _StringsCommonJa implements _StringsCommonEn {
   String get sortByLikes => '人気順（いいね）';
   @override
   String get sortByViews => '人気順（閲覧数）';
+}
+
+// Path: walkthrough.intro1
+class _StringsWalkthroughIntro1Ja implements _StringsWalkthroughIntro1En {
+  _StringsWalkthroughIntro1Ja._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '美味しい毎日を';
+  @override
+  String get body => 'あなただけのレシピブックを作ろう';
+}
+
+// Path: walkthrough.intro2
+class _StringsWalkthroughIntro2Ja implements _StringsWalkthroughIntro2En {
+  _StringsWalkthroughIntro2Ja._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '手順を学ぼう';
+  @override
+  String get body => 'プロのコツで、いつもの料理をワンランクアップ';
 }
 
 // Path: recipe.newRecipe
@@ -1048,6 +1136,18 @@ extension on Translations {
         return 'Favorite';
       case 'tab.settings':
         return 'Settings';
+      case 'walkthrough.intro1.title':
+        return 'Make every day delicious';
+      case 'walkthrough.intro1.body':
+        return 'Let\'s create your own recipe book';
+      case 'walkthrough.intro2.title':
+        return 'Learn the steps';
+      case 'walkthrough.intro2.body':
+        return 'Elevate your everyday meals with professional tips';
+      case 'walkthrough.skip':
+        return 'Skip';
+      case 'walkthrough.done':
+        return 'Done';
       case 'recipe.title':
         return 'Recipe';
       case 'recipe.empty':
@@ -1167,6 +1267,18 @@ extension on _StringsJa {
         return 'お気に入り';
       case 'tab.settings':
         return '設定';
+      case 'walkthrough.intro1.title':
+        return '美味しい毎日を';
+      case 'walkthrough.intro1.body':
+        return 'あなただけのレシピブックを作ろう';
+      case 'walkthrough.intro2.title':
+        return '手順を学ぼう';
+      case 'walkthrough.intro2.body':
+        return 'プロのコツで、いつもの料理をワンランクアップ';
+      case 'walkthrough.skip':
+        return 'スキップ';
+      case 'walkthrough.done':
+        return '完了';
       case 'recipe.title':
         return 'レシピ';
       case 'recipe.empty':

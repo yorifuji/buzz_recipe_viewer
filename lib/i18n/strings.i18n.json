@@ -6,6 +6,18 @@
         "favorite" : "Favorite",
         "settings" : "Settings"
     },
+    "walkthrough" : {
+        "intro1" : {
+            "title" : "Make every day delicious",
+            "body" : "Let's create your own recipe book"
+        },
+        "intro2" : {
+            "title" : "Learn the steps",
+            "body" : "Elevate your everyday meals with professional tips"
+        },
+        "skip" : "Skip",
+        "done" : "Done"
+    },
     "recipe" : {
         "title" : "Recipe",
         "empty" : "We've got no recipes.\nAdd your best ones!",

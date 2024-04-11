@@ -89,4 +89,19 @@ class SharedPreferencesRepository {
     final appColor = _sharedPreferences.getString('app_color');
     return AppColor.fromName(appColor);
   }
+
+  // get shouldShowWalkthrough
+  bool getShouldShowWalkthrough() {
+    return _sharedPreferences.getBool('should_show_walkthrough') ?? true;
+  }
+
+  // set shouldShowWalkthrough
+  Future<void> setShouldShowWalkthrough({
+    required bool shouldShowWalkthrough,
+  }) async {
+    await _sharedPreferences.setBool(
+      'should_show_walkthrough',
+      shouldShowWalkthrough,
+    );
+  }
 }
