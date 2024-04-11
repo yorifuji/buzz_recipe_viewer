@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
+import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
@@ -121,6 +122,23 @@ class SettingsPage extends ConsumerWidget {
                       const SnackBar(
                         content: Text(
                           'Add dummy recipe',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                ),
+                SettingsTile(
+                  title: const Text('Clear Shared Preference'),
+                  onPressed: (_) async {
+                    await ref.read(sharedPreferencesRepositoryProvider).clear();
+                    ref.invalidate(sharedPreferencesRepositoryProvider);
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Clear Shared Preference',
                           style: TextStyle(fontSize: 12),
                         ),
                         duration: Duration(seconds: 1),

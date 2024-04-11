@@ -8,10 +8,11 @@
 
 # Screenshot
 
-| iOS                           |                               |
-| ----------------------------- | ----------------------------- |
-| ![](./images/screenshot1.png) | ![](./images/screenshot2.png) |
-| ![](./images/screenshot3.png) | ![](./images/screenshot4.png) |
+| iOS                            |                                |
+| ------------------------------ | ------------------------------ |
+| ![](./images/walkthrough1.png) | ![](./images/walkthrough2.png) |
+| ![](./images/screenshot1.png)  | ![](./images/screenshot2.png)  |
+| ![](./images/screenshot3.png)  | ![](./images/screenshot4.png)  |
 
 | Web                           | macOS                         |
 | ----------------------------- | ----------------------------- |
@@ -96,10 +97,12 @@ lib
   - [slang](https://pub.dev/packages/slang)
 - Other
   - [freezed](https://pub.dev/packages/freezed)
+  - [flutter_gen](https://pub.dev/packages/flutter_gen)
   - [package_info_plus](https://pub.dev/packages/package_info_plus)
   - [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
   - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
   - [url_launcher](https://pub.dev/packages/url_launcher)
+  - [introduction_screen](https://pub.dev/packages/introduction_screen)
 
 ## Dependency Management
 
