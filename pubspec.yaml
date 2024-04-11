@@ -22,7 +22,7 @@ dependencies:
   flutter_hooks: any
   hooks_riverpod: any
   riverpod_annotation: any
-  path_provider: ^2.1.2
+  path_provider: any
   youtube_player_flutter: ^9.0.0
   settings_ui: any
   package_info_plus: any
@@ -34,11 +34,11 @@ dependencies:
     sdk: flutter
   slang: any
   slang_flutter: any
-  mockito: ^5.4.4
-  drift: ^2.16.0
-  sqlite3_flutter_libs: ^0.5.20
-  path: ^1.9.0
-  sqlite3: ^2.4.2
+  mockito: any
+  drift: any
+  sqlite3_flutter_libs: any
+  path: any
+  sqlite3: any
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +46,7 @@ dev_dependencies:
 
   cider: any
   freezed: any
-  build_runner: ^2.4.9
+  build_runner: any
   json_serializable: any
   very_good_analysis: any
   riverpod_generator: any
@@ -55,7 +55,7 @@ dev_dependencies:
   flutter_launcher_icons: any
   slang_build_runner: any
   golden_toolkit: any
-  drift_dev: ^2.16.0
+  drift_dev: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
