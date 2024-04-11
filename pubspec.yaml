@@ -39,6 +39,7 @@ dependencies:
   sqlite3_flutter_libs: any
   path: any
   sqlite3: any
+  introduction_screen: any
 
 dev_dependencies:
   flutter_test:
