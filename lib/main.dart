@@ -1,8 +1,6 @@
 import 'package:buzz_recipe_viewer/app.dart';
-import 'package:buzz_recipe_viewer/provider/database_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
-import 'package:buzz_recipe_viewer/repository/drift/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,7 +19,6 @@ void main() async {
   runApp(
     ProviderScope(
       overrides: [
-        databaseProvider.overrideWithValue(AppDatabase()),
         packageInfoProvider.overrideWithValue(packageInfo),
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],

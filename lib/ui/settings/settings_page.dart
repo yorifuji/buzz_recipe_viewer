@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/provider/database_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
@@ -169,29 +170,28 @@ class SettingsPage extends ConsumerWidget {
                         .createDummyRecipeNote();
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content: Text(
-                          'Add dummy recipe',
-                          style: TextStyle(fontSize: 12),
+                          t.settings.debug.row.dummyRecipe.title,
                         ),
-                        duration: Duration(seconds: 1),
+                        duration: const Duration(seconds: 1),
                       ),
                     );
                   },
                 ),
                 SettingsTile(
-                  title: const Text('Clear Shared Preference'),
+                  title: Text(t.settings.debug.row.deleteLocalData.title),
                   onPressed: (_) async {
+                    ref.read(databaseProvider).clearAll();
                     await ref.read(sharedPreferencesRepositoryProvider).clear();
                     ref.invalidate(sharedPreferencesRepositoryProvider);
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content: Text(
-                          'Clear Shared Preference',
-                          style: TextStyle(fontSize: 12),
+                          t.settings.debug.row.deleteLocalData.title,
                         ),
-                        duration: Duration(seconds: 1),
+                        duration: const Duration(seconds: 1),
                       ),
                     );
                   },

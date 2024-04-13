@@ -12,4 +12,9 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  void clearAll() {
+    delete(recipeNoteDB).go();
+    delete(favoriteDB).go();
+  }
 }

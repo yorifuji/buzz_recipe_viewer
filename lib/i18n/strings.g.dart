@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 138 (69 per locale)
+/// Strings: 140 (70 per locale)
 ///
-/// Built on 2024-04-13 at 14:55 UTC
+/// Built on 2024-04-13 at 15:05 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -493,6 +493,8 @@ class _StringsSettingsDebugRowEn {
   // Translations
   late final _StringsSettingsDebugRowDummyRecipeEn dummyRecipe =
       _StringsSettingsDebugRowDummyRecipeEn._(_root);
+  late final _StringsSettingsDebugRowDeleteLocalDataEn deleteLocalData =
+      _StringsSettingsDebugRowDeleteLocalDataEn._(_root);
 }
 
 // Path: settings.general.row.theme
@@ -640,6 +642,16 @@ class _StringsSettingsDebugRowDummyRecipeEn {
 
   // Translations
   String get title => 'Insert Dummy Recipe';
+}
+
+// Path: settings.debug.row.deleteLocalData
+class _StringsSettingsDebugRowDeleteLocalDataEn {
+  _StringsSettingsDebugRowDeleteLocalDataEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Delete Local Data';
 }
 
 // Path: settings.general.row.theme.theme
@@ -1121,6 +1133,9 @@ class _StringsSettingsDebugRowJa implements _StringsSettingsDebugRowEn {
   @override
   late final _StringsSettingsDebugRowDummyRecipeJa dummyRecipe =
       _StringsSettingsDebugRowDummyRecipeJa._(_root);
+  @override
+  late final _StringsSettingsDebugRowDeleteLocalDataJa deleteLocalData =
+      _StringsSettingsDebugRowDeleteLocalDataJa._(_root);
 }
 
 // Path: settings.general.row.theme
@@ -1316,6 +1331,19 @@ class _StringsSettingsDebugRowDummyRecipeJa
   String get title => 'ダミーレシピを登録';
 }
 
+// Path: settings.debug.row.deleteLocalData
+class _StringsSettingsDebugRowDeleteLocalDataJa
+    implements _StringsSettingsDebugRowDeleteLocalDataEn {
+  _StringsSettingsDebugRowDeleteLocalDataJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'ローカルデータを削除';
+}
+
 // Path: settings.general.row.theme.theme
 class _StringsSettingsGeneralRowThemeThemeJa
     implements _StringsSettingsGeneralRowThemeThemeEn {
@@ -1493,6 +1521,8 @@ extension on Translations {
         return 'Debug';
       case 'settings.debug.row.dummyRecipe.title':
         return 'Insert Dummy Recipe';
+      case 'settings.debug.row.deleteLocalData.title':
+        return 'Delete Local Data';
       case 'common.addFavorite':
         return 'Add Favorite';
       case 'common.fetchFailed':
@@ -1640,6 +1670,8 @@ extension on _StringsJa {
         return 'デバッグ';
       case 'settings.debug.row.dummyRecipe.title':
         return 'ダミーレシピを登録';
+      case 'settings.debug.row.deleteLocalData.title':
+        return 'ローカルデータを削除';
       case 'common.addFavorite':
         return 'お気に入りに追加しました';
       case 'common.fetchFailed':

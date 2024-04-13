@@ -4,4 +4,4 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'database_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-AppDatabase database(DatabaseRef ref) => throw UnimplementedError();
+AppDatabase database(DatabaseRef ref) => AppDatabase();

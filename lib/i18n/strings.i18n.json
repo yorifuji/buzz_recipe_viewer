@@ -135,6 +135,9 @@
             "row" : {
                 "dummyRecipe" : {
                     "title" : "Insert Dummy Recipe"
+                },
+                "deleteLocalData" : {
+                    "title" : "Delete Local Data"
                 }
             }
         }
