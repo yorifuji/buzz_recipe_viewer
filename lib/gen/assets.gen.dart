@@ -12,14 +12,24 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/error.png
+  AssetGenImage get error => const AssetGenImage('assets/images/error.png');
+
+  /// File path: assets/images/favorite.png
+  AssetGenImage get favorite =>
+      const AssetGenImage('assets/images/favorite.png');
+
   /// File path: assets/images/intro1.png
   AssetGenImage get intro1 => const AssetGenImage('assets/images/intro1.png');
 
   /// File path: assets/images/intro2.png
   AssetGenImage get intro2 => const AssetGenImage('assets/images/intro2.png');
 
+  /// File path: assets/images/recipe.png
+  AssetGenImage get recipe => const AssetGenImage('assets/images/recipe.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [intro1, intro2];
+  List<AssetGenImage> get values => [error, favorite, intro1, intro2, recipe];
 }
 
 class Assets {

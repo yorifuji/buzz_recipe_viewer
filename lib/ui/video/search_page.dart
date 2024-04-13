@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
@@ -40,11 +41,8 @@ class SearchPage extends HookConsumerWidget {
       LoadingState.failure => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Assets.images.error.image(),
             Text(t.common.fetchFailed),
-            ElevatedButton(
-              onPressed: viewModel.search,
-              child: Text(t.common.reload),
-            ),
           ],
         )
     };

@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
@@ -34,18 +35,16 @@ class _EmptyFavoriteContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.videogame_asset,
-            size: 32,
-          ),
+          Assets.images.favorite.image(),
           Text(
             t.favorite.empty,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
+            style: theme.textTheme.bodyMedium,
           ),
         ],
       ),
