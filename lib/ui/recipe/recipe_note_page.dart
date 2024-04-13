@@ -37,7 +37,7 @@ class _EmptyRecipeNoteListContainer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Assets.images.recipe.image(),
+          Assets.images.recipe.image(width: 256, height: 256),
           const SizedBox(height: 16),
           Text(
             t.recipe.empty,

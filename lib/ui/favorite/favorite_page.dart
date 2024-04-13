@@ -40,7 +40,7 @@ class _EmptyFavoriteContainer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Assets.images.favorite.image(),
+          Assets.images.favorite.image(width: 256, height: 256),
           Text(
             t.favorite.empty,
             textAlign: TextAlign.center,

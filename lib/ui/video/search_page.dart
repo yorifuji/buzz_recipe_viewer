@@ -41,7 +41,7 @@ class SearchPage extends HookConsumerWidget {
       LoadingState.failure => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Assets.images.error.image(),
+            Assets.images.error.image(width: 256, height: 256),
             Text(t.common.fetchFailed),
           ],
         )
