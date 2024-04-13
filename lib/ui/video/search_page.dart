@@ -131,15 +131,10 @@ class _VideoListContainer extends HookConsumerWidget {
                       );
                     } else {
                       final url = Uri.parse(hitList[index].url);
-                      if (await launchUrl(
+                      await launchUrl(
                         url,
                         mode: LaunchMode.externalApplication,
-                      )) {
-                      } else {
-                        // FIXME:
-                        // ignore: only_throw_errors
-                        throw 'Could not launch $url';
-                      }
+                      );
                     }
                   },
                   onLongPress: () async {

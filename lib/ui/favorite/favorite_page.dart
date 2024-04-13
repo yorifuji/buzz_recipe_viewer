@@ -101,15 +101,10 @@ class _FavoriteContainer extends ConsumerWidget {
                 );
               } else {
                 final url = Uri.parse(favorite.searchHit.url);
-                if (await launchUrl(
+                await launchUrl(
                   url,
                   mode: LaunchMode.externalApplication,
-                )) {
-                } else {
-                  // FIXME:
-                  // ignore: only_throw_errors
-                  throw 'Could not launch $url';
-                }
+                );
               }
             },
           ),
