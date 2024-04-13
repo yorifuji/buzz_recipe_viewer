@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
@@ -34,18 +35,16 @@ class _EmptyFavoriteContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.videogame_asset,
-            size: 32,
-          ),
+          Assets.images.favorite.image(width: 256, height: 256),
           Text(
             t.favorite.empty,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
+            style: theme.textTheme.bodyMedium,
           ),
         ],
       ),
@@ -101,15 +100,10 @@ class _FavoriteContainer extends ConsumerWidget {
                 );
               } else {
                 final url = Uri.parse(favorite.searchHit.url);
-                if (await launchUrl(
+                await launchUrl(
                   url,
                   mode: LaunchMode.externalApplication,
-                )) {
-                } else {
-                  // FIXME:
-                  // ignore: only_throw_errors
-                  throw 'Could not launch $url';
-                }
+                );
               }
             },
           ),

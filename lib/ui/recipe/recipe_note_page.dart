@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe_note.dart';
 import 'package:buzz_recipe_viewer/repository/recipe_note_repository.dart';
@@ -31,19 +32,17 @@ class _EmptyRecipeNoteListContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.note_alt_outlined,
-            size: 32,
-          ),
+          Assets.images.recipe.image(width: 256, height: 256),
           const SizedBox(height: 16),
           Text(
             t.recipe.empty,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
+            style: theme.textTheme.bodyMedium,
           ),
           const SizedBox(height: 16),
           FilledButton(
@@ -90,12 +89,15 @@ class _RecipeNoteListContainer extends ConsumerWidget {
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
                         child: Text(
                           recipeNote.title,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                       subtitle: Text(
                         recipeNote.description,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       onTap: () {
                         Navigator.push(

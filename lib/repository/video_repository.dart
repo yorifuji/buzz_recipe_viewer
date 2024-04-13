@@ -20,23 +20,23 @@ class VideoRepository {
     String indexName,
     int page,
   ) async {
-    return Result.guardFuture(() async {
-      try {
-        final algoliaQuery = _algoliaClient
-            .index(indexName)
-            .setHitsPerPage(30)
-            .setPage(page)
-            .query(query);
-        final snapshot = await algoliaQuery.getObjects();
-        final searchHits =
-            snapshot.hits.map((e) => SearchHit.fromJson(e.toMap())).toList();
-        final nextPage =
-            snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
-        return VideoListResult(searchHits: searchHits, nextPage: nextPage);
-        // ignore: avoid_catches_without_on_clauses
-      } catch (_) {
-        throw Exception(); // FIXME: use error
-      }
-    });
+    try {
+      final algoliaQuery = _algoliaClient
+          .index(indexName)
+          .setHitsPerPage(30)
+          .setPage(page)
+          .query(query);
+      final snapshot = await algoliaQuery.getObjects();
+      final searchHits =
+          snapshot.hits.map((e) => SearchHit.fromJson(e.toMap())).toList();
+      final nextPage =
+          snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
+      return Result.success(
+        data: VideoListResult(searchHits: searchHits, nextPage: nextPage),
+      );
+      // ignore: avoid_catches_without_on_clauses
+    } catch (_) {
+      return Result.failure(error: Exception('Failed to fetch video list'));
+    }
   }
 }
