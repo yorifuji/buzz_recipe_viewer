@@ -93,9 +93,32 @@
                 }
             }
         },
+        "support" : {
+            "header" : "Support",
+            "row" : {
+                "review" : {
+                    "title" : "Review"
+                },
+                "share" : {
+                    "title" : "Share"
+                },
+                "feedback" : {
+                    "title" : "Feedback"
+                },
+                "contact" : {
+                    "title" : "Contact"
+                }
+            }
+        },
         "about" : {
             "header" : "About",
             "row" : {
+                "terms" : {
+                    "title" : "Terms"
+                },
+                "privacy" : {
+                    "title" : "Privacy"
+                },
                 "version" : {
                     "title" : "Version"
                 },

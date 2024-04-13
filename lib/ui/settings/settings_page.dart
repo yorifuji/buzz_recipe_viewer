@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'dart:io' show Platform;
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
@@ -11,8 +10,11 @@ import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -94,16 +96,59 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           SettingsSection(
+            title: Text(t.settings.support.header),
+            tiles: [
+              if (!kIsWeb)
+                SettingsTile(
+                  title: Text(t.settings.support.row.review.title),
+                  onPressed: (context) async {
+                    final inAppReview = InAppReview.instance;
+                    if (await inAppReview.isAvailable()) {
+                      await inAppReview.requestReview();
+                    }
+                  },
+                ),
+              SettingsTile(
+                title: Text(t.settings.support.row.share.title),
+                onPressed: (context) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Not implemented')),
+                  );
+                },
+              ),
+              SettingsTile.navigation(
+                title: Text(t.settings.support.row.feedback.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
+              SettingsTile.navigation(
+                title: Text(t.settings.support.row.contact.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
+            ],
+          ),
+          SettingsSection(
             title: Text(t.settings.about.header),
             tiles: [
+              SettingsTile.navigation(
+                title: Text(t.settings.about.row.terms.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
+              SettingsTile.navigation(
+                title: Text(t.settings.about.row.privacy.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
+              SettingsTile.navigation(
+                title: Text(t.settings.about.row.license.title),
+                onPressed: (context) => showLicensePage(context: context),
+              ),
               SettingsTile(
                 title: Text(t.settings.about.row.version.title),
                 value:
                     Text('${packageInfo.version}(${packageInfo.buildNumber})'),
-              ),
-              SettingsTile(
-                title: Text(t.settings.about.row.license.title),
-                onPressed: (context) => showLicensePage(context: context),
               ),
             ],
           ),
@@ -151,5 +196,24 @@ class SettingsPage extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _openBrowser({required String url}) async {
+    if (kIsWeb) {
+      await launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      );
+    } else if (Platform.isMacOS) {
+      await InAppBrowser().openUrlRequest(
+        urlRequest: URLRequest(
+          url: WebUri(url),
+        ),
+      );
+    } else {
+      await ChromeSafariBrowser().open(
+        url: WebUri(url),
+      );
+    }
   }
 }

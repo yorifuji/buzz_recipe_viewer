@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 122 (61 per locale)
+/// Strings: 136 (68 per locale)
 ///
-/// Built on 2024-04-11 at 09:47 UTC
+/// Built on 2024-04-13 at 04:32 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -274,6 +274,8 @@ class _StringsSettingsEn {
   late final _StringsSettingsGeneralEn general =
       _StringsSettingsGeneralEn._(_root);
   late final _StringsSettingsVideoEn video = _StringsSettingsVideoEn._(_root);
+  late final _StringsSettingsSupportEn support =
+      _StringsSettingsSupportEn._(_root);
   late final _StringsSettingsAboutEn about = _StringsSettingsAboutEn._(_root);
   late final _StringsSettingsDebugEn debug = _StringsSettingsDebugEn._(_root);
 }
@@ -366,6 +368,18 @@ class _StringsSettingsVideoEn {
       _StringsSettingsVideoRowEn._(_root);
 }
 
+// Path: settings.support
+class _StringsSettingsSupportEn {
+  _StringsSettingsSupportEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get header => 'Support';
+  late final _StringsSettingsSupportRowEn row =
+      _StringsSettingsSupportRowEn._(_root);
+}
+
 // Path: settings.about
 class _StringsSettingsAboutEn {
   _StringsSettingsAboutEn._(this._root);
@@ -434,6 +448,23 @@ class _StringsSettingsVideoRowEn {
       _StringsSettingsVideoRowPlayWithinAppEn._(_root);
 }
 
+// Path: settings.support.row
+class _StringsSettingsSupportRowEn {
+  _StringsSettingsSupportRowEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final _StringsSettingsSupportRowReviewEn review =
+      _StringsSettingsSupportRowReviewEn._(_root);
+  late final _StringsSettingsSupportRowShareEn share =
+      _StringsSettingsSupportRowShareEn._(_root);
+  late final _StringsSettingsSupportRowFeedbackEn feedback =
+      _StringsSettingsSupportRowFeedbackEn._(_root);
+  late final _StringsSettingsSupportRowContactEn contact =
+      _StringsSettingsSupportRowContactEn._(_root);
+}
+
 // Path: settings.about.row
 class _StringsSettingsAboutRowEn {
   _StringsSettingsAboutRowEn._(this._root);
@@ -441,6 +472,10 @@ class _StringsSettingsAboutRowEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
+  late final _StringsSettingsAboutRowTermsEn terms =
+      _StringsSettingsAboutRowTermsEn._(_root);
+  late final _StringsSettingsAboutRowPrivacyEn privacy =
+      _StringsSettingsAboutRowPrivacyEn._(_root);
   late final _StringsSettingsAboutRowVersionEn version =
       _StringsSettingsAboutRowVersionEn._(_root);
   late final _StringsSettingsAboutRowLicenseEn license =
@@ -503,6 +538,66 @@ class _StringsSettingsVideoRowPlayWithinAppEn {
   // Translations
   String get title => 'Play within app';
   String get description => 'This platform does not support play within app';
+}
+
+// Path: settings.support.row.review
+class _StringsSettingsSupportRowReviewEn {
+  _StringsSettingsSupportRowReviewEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Review';
+}
+
+// Path: settings.support.row.share
+class _StringsSettingsSupportRowShareEn {
+  _StringsSettingsSupportRowShareEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Share';
+}
+
+// Path: settings.support.row.feedback
+class _StringsSettingsSupportRowFeedbackEn {
+  _StringsSettingsSupportRowFeedbackEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Feedback';
+}
+
+// Path: settings.support.row.contact
+class _StringsSettingsSupportRowContactEn {
+  _StringsSettingsSupportRowContactEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Contact';
+}
+
+// Path: settings.about.row.terms
+class _StringsSettingsAboutRowTermsEn {
+  _StringsSettingsAboutRowTermsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Terms';
+}
+
+// Path: settings.about.row.privacy
+class _StringsSettingsAboutRowPrivacyEn {
+  _StringsSettingsAboutRowPrivacyEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Privacy';
 }
 
 // Path: settings.about.row.version
@@ -726,6 +821,9 @@ class _StringsSettingsJa implements _StringsSettingsEn {
   @override
   late final _StringsSettingsVideoJa video = _StringsSettingsVideoJa._(_root);
   @override
+  late final _StringsSettingsSupportJa support =
+      _StringsSettingsSupportJa._(_root);
+  @override
   late final _StringsSettingsAboutJa about = _StringsSettingsAboutJa._(_root);
   @override
   late final _StringsSettingsDebugJa debug = _StringsSettingsDebugJa._(_root);
@@ -848,6 +946,21 @@ class _StringsSettingsVideoJa implements _StringsSettingsVideoEn {
       _StringsSettingsVideoRowJa._(_root);
 }
 
+// Path: settings.support
+class _StringsSettingsSupportJa implements _StringsSettingsSupportEn {
+  _StringsSettingsSupportJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get header => 'サポート';
+  @override
+  late final _StringsSettingsSupportRowJa row =
+      _StringsSettingsSupportRowJa._(_root);
+}
+
 // Path: settings.about
 class _StringsSettingsAboutJa implements _StringsSettingsAboutEn {
   _StringsSettingsAboutJa._(this._root);
@@ -938,6 +1051,28 @@ class _StringsSettingsVideoRowJa implements _StringsSettingsVideoRowEn {
       _StringsSettingsVideoRowPlayWithinAppJa._(_root);
 }
 
+// Path: settings.support.row
+class _StringsSettingsSupportRowJa implements _StringsSettingsSupportRowEn {
+  _StringsSettingsSupportRowJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  late final _StringsSettingsSupportRowReviewJa review =
+      _StringsSettingsSupportRowReviewJa._(_root);
+  @override
+  late final _StringsSettingsSupportRowShareJa share =
+      _StringsSettingsSupportRowShareJa._(_root);
+  @override
+  late final _StringsSettingsSupportRowFeedbackJa feedback =
+      _StringsSettingsSupportRowFeedbackJa._(_root);
+  @override
+  late final _StringsSettingsSupportRowContactJa contact =
+      _StringsSettingsSupportRowContactJa._(_root);
+}
+
 // Path: settings.about.row
 class _StringsSettingsAboutRowJa implements _StringsSettingsAboutRowEn {
   _StringsSettingsAboutRowJa._(this._root);
@@ -946,6 +1081,12 @@ class _StringsSettingsAboutRowJa implements _StringsSettingsAboutRowEn {
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
+  @override
+  late final _StringsSettingsAboutRowTermsJa terms =
+      _StringsSettingsAboutRowTermsJa._(_root);
+  @override
+  late final _StringsSettingsAboutRowPrivacyJa privacy =
+      _StringsSettingsAboutRowPrivacyJa._(_root);
   @override
   late final _StringsSettingsAboutRowVersionJa version =
       _StringsSettingsAboutRowVersionJa._(_root);
@@ -1028,6 +1169,84 @@ class _StringsSettingsVideoRowPlayWithinAppJa
   String get title => 'アプリ内で再生する';
   @override
   String get description => 'このプラットフォームはアプリ内再生をサポートしていません';
+}
+
+// Path: settings.support.row.review
+class _StringsSettingsSupportRowReviewJa
+    implements _StringsSettingsSupportRowReviewEn {
+  _StringsSettingsSupportRowReviewJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'レビュー';
+}
+
+// Path: settings.support.row.share
+class _StringsSettingsSupportRowShareJa
+    implements _StringsSettingsSupportRowShareEn {
+  _StringsSettingsSupportRowShareJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'シェア';
+}
+
+// Path: settings.support.row.feedback
+class _StringsSettingsSupportRowFeedbackJa
+    implements _StringsSettingsSupportRowFeedbackEn {
+  _StringsSettingsSupportRowFeedbackJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'フィードバック';
+}
+
+// Path: settings.support.row.contact
+class _StringsSettingsSupportRowContactJa
+    implements _StringsSettingsSupportRowContactEn {
+  _StringsSettingsSupportRowContactJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'お問い合わせ';
+}
+
+// Path: settings.about.row.terms
+class _StringsSettingsAboutRowTermsJa
+    implements _StringsSettingsAboutRowTermsEn {
+  _StringsSettingsAboutRowTermsJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '利用規約';
+}
+
+// Path: settings.about.row.privacy
+class _StringsSettingsAboutRowPrivacyJa
+    implements _StringsSettingsAboutRowPrivacyEn {
+  _StringsSettingsAboutRowPrivacyJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'プライバシーポリシー';
 }
 
 // Path: settings.about.row.version
@@ -1220,8 +1439,22 @@ extension on Translations {
         return 'Play within app';
       case 'settings.video.row.playWithinApp.description':
         return 'This platform does not support play within app';
+      case 'settings.support.header':
+        return 'Support';
+      case 'settings.support.row.review.title':
+        return 'Review';
+      case 'settings.support.row.share.title':
+        return 'Share';
+      case 'settings.support.row.feedback.title':
+        return 'Feedback';
+      case 'settings.support.row.contact.title':
+        return 'Contact';
       case 'settings.about.header':
         return 'About';
+      case 'settings.about.row.terms.title':
+        return 'Terms';
+      case 'settings.about.row.privacy.title':
+        return 'Privacy';
       case 'settings.about.row.version.title':
         return 'Version';
       case 'settings.about.row.license.title':
@@ -1351,8 +1584,22 @@ extension on _StringsJa {
         return 'アプリ内で再生する';
       case 'settings.video.row.playWithinApp.description':
         return 'このプラットフォームはアプリ内再生をサポートしていません';
+      case 'settings.support.header':
+        return 'サポート';
+      case 'settings.support.row.review.title':
+        return 'レビュー';
+      case 'settings.support.row.share.title':
+        return 'シェア';
+      case 'settings.support.row.feedback.title':
+        return 'フィードバック';
+      case 'settings.support.row.contact.title':
+        return 'お問い合わせ';
       case 'settings.about.header':
         return 'このアプリについて';
+      case 'settings.about.row.terms.title':
+        return '利用規約';
+      case 'settings.about.row.privacy.title':
+        return 'プライバシーポリシー';
       case 'settings.about.row.version.title':
         return 'バージョン';
       case 'settings.about.row.license.title':
