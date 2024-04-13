@@ -121,13 +121,13 @@ lib
 
 # Flavor
 
-`--dart-define=FLAVOR=...` を採用
+Android および iOS のみ対応、`--dart-define=FLAVOR=...` で切り替え
 
-| Flavor | 用途         | 配布方法                  | BundleID                              |
-| ------ | ------------ | ------------------------- | ------------------------------------- |
-| prod   | 本番用       | PlayConsole, TestFlight   | `dev.yorifuji.buzz_recipe_viewer`     |
-| stg    | ステージング | Firebase App Distribution | `dev.yorifuji.buzz_recipe_viewer.stg` |
-| dev    | 開発用       | ローカルビルド            | `dev.yorifuji.buzz_recipe_viewer.dev` |
+| Flavor | 用途         | 配布方法                  | BundleID prefix |
+| ------ | ------------ | ------------------------- | --------------- |
+| prod   | 本番用       | PlayConsole, TestFlight   |                 |
+| stg    | ステージング | Firebase App Distribution | `.stg`          |
+| dev    | 開発用       | ローカルビルド            | `.dev`          |
 
 # Test
 
