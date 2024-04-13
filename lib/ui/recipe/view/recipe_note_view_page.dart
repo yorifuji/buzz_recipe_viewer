@@ -30,12 +30,14 @@ class RecipeNoteViewPage extends ConsumerWidget {
                     children: [
                       Text(
                         recipeNote.title,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 16),
                       Text(
                         recipeNote.description,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const Padding(
                         padding: EdgeInsets.only(top: 16, bottom: 16),
@@ -46,7 +48,7 @@ class RecipeNoteViewPage extends ConsumerWidget {
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Text(
                             '${index + 1}. $e',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                       ),
@@ -59,7 +61,7 @@ class RecipeNoteViewPage extends ConsumerWidget {
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Text(
                             '${index + 1}. $e',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                       ),

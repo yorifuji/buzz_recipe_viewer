@@ -89,12 +89,15 @@ class _RecipeNoteListContainer extends ConsumerWidget {
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
                         child: Text(
                           recipeNote.title,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                       subtitle: Text(
                         recipeNote.description,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       onTap: () {
                         Navigator.push(
