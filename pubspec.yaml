@@ -40,6 +40,8 @@ dependencies:
   path: any
   sqlite3: any
   introduction_screen: any
+  flutter_inappwebview: any
+  in_app_review: any
 
 dev_dependencies:
   flutter_test:

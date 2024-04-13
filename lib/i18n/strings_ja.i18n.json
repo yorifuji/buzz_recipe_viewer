@@ -93,9 +93,32 @@
                 }
             }
         },
+        "support" : {
+            "header" : "サポート",
+            "row" : {
+                "review" : {
+                    "title" : "レビュー"
+                },
+                "share" : {
+                    "title" : "シェア"
+                },
+                "feedback" : {
+                    "title" : "フィードバック"
+                },
+                "contact" : {
+                    "title" : "お問い合わせ"
+                }
+            }
+        },
         "about" : {
             "header" : "このアプリについて",
             "row" : {
+                "terms" : {
+                    "title" : "利用規約"
+                },
+                "privacy" : {
+                    "title" : "プライバシーポリシー"
+                },
                 "version" : {
                     "title" : "バージョン"
                 },
