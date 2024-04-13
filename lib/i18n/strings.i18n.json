@@ -107,6 +107,9 @@
                 },
                 "contact" : {
                     "title" : "Contact"
+                },
+                "help" : {
+                    "title" : "Help"
                 }
             }
         },

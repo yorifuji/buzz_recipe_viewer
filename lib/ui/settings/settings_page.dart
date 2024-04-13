@@ -98,6 +98,21 @@ class SettingsPage extends ConsumerWidget {
           SettingsSection(
             title: Text(t.settings.support.header),
             tiles: [
+              SettingsTile.navigation(
+                title: Text(t.settings.support.row.help.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
+              SettingsTile.navigation(
+                title: Text(t.settings.support.row.contact.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
+              SettingsTile.navigation(
+                title: Text(t.settings.support.row.feedback.title),
+                onPressed: (context) =>
+                    _openBrowser(url: 'https://flutter.dev/'),
+              ),
               if (!kIsWeb)
                 SettingsTile(
                   title: Text(t.settings.support.row.review.title),
@@ -115,16 +130,6 @@ class SettingsPage extends ConsumerWidget {
                     const SnackBar(content: Text('Not implemented')),
                   );
                 },
-              ),
-              SettingsTile.navigation(
-                title: Text(t.settings.support.row.feedback.title),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
-              ),
-              SettingsTile.navigation(
-                title: Text(t.settings.support.row.contact.title),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
               ),
             ],
           ),

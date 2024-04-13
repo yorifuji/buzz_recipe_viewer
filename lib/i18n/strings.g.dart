@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 136 (68 per locale)
+/// Strings: 138 (69 per locale)
 ///
-/// Built on 2024-04-13 at 04:32 UTC
+/// Built on 2024-04-13 at 14:55 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -463,6 +463,8 @@ class _StringsSettingsSupportRowEn {
       _StringsSettingsSupportRowFeedbackEn._(_root);
   late final _StringsSettingsSupportRowContactEn contact =
       _StringsSettingsSupportRowContactEn._(_root);
+  late final _StringsSettingsSupportRowHelpEn help =
+      _StringsSettingsSupportRowHelpEn._(_root);
 }
 
 // Path: settings.about.row
@@ -578,6 +580,16 @@ class _StringsSettingsSupportRowContactEn {
 
   // Translations
   String get title => 'Contact';
+}
+
+// Path: settings.support.row.help
+class _StringsSettingsSupportRowHelpEn {
+  _StringsSettingsSupportRowHelpEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Help';
 }
 
 // Path: settings.about.row.terms
@@ -1071,6 +1083,9 @@ class _StringsSettingsSupportRowJa implements _StringsSettingsSupportRowEn {
   @override
   late final _StringsSettingsSupportRowContactJa contact =
       _StringsSettingsSupportRowContactJa._(_root);
+  @override
+  late final _StringsSettingsSupportRowHelpJa help =
+      _StringsSettingsSupportRowHelpJa._(_root);
 }
 
 // Path: settings.about.row
@@ -1221,6 +1236,19 @@ class _StringsSettingsSupportRowContactJa
   // Translations
   @override
   String get title => 'お問い合わせ';
+}
+
+// Path: settings.support.row.help
+class _StringsSettingsSupportRowHelpJa
+    implements _StringsSettingsSupportRowHelpEn {
+  _StringsSettingsSupportRowHelpJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'ヘルプ';
 }
 
 // Path: settings.about.row.terms
@@ -1449,6 +1477,8 @@ extension on Translations {
         return 'Feedback';
       case 'settings.support.row.contact.title':
         return 'Contact';
+      case 'settings.support.row.help.title':
+        return 'Help';
       case 'settings.about.header':
         return 'About';
       case 'settings.about.row.terms.title':
@@ -1594,6 +1624,8 @@ extension on _StringsJa {
         return 'フィードバック';
       case 'settings.support.row.contact.title':
         return 'お問い合わせ';
+      case 'settings.support.row.help.title':
+        return 'ヘルプ';
       case 'settings.about.header':
         return 'このアプリについて';
       case 'settings.about.row.terms.title':
