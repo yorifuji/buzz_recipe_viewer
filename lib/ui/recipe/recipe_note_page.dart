@@ -20,8 +20,9 @@ class RecipeNotePage extends ConsumerWidget {
       data: (data) => data.isEmpty
           ? const _EmptyRecipeNoteListContainer()
           : _RecipeNoteListContainer(data),
-      error: (error, stackTrace) => const CircularProgressIndicator(),
-      loading: () => const CircularProgressIndicator(),
+      error: (error, stackTrace) =>
+          const Center(child: CircularProgressIndicator()),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
     return Scaffold(appBar: AppBar(title: Text(t.recipe.title)), body: body);
   }
