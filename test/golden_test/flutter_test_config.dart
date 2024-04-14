@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -20,7 +21,7 @@ final wrapper = materialAppWrapper(
     useMaterial3: true,
     brightness: Brightness.light,
     colorSchemeSeed: Colors.deepPurple,
-    fontFamily: 'NotoSansJP',
+    fontFamily: FontFamily.notoSansJP,
   ),
   localeOverrides: [const Locale('ja'), const Locale('en')],
   localizations: [
