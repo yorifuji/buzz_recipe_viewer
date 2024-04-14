@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/theme_mode_preference_provider.dart';
 import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
@@ -23,12 +24,16 @@ class ThemeSettingPage extends ConsumerWidget {
       body: CustomSettingsList(
         sections: [
           SettingsSection(
-            title: Text(t.settings.general.row.theme.theme.header),
+            title: Text(
+              t.settings.general.row.theme.theme.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
             tiles: ThemeModePreference.values
                 .mapIndexed(
                   (index, e) => SettingsTile(
                     title: Text(
                       t.settings.general.row.theme.theme.row[index],
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                     ),
                     trailing:
                         theme == e.themeMode ? const Icon(Icons.check) : null,

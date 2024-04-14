@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/app_color.dart';
 import 'package:buzz_recipe_viewer/provider/app_color_preference_provider.dart';
@@ -22,10 +23,16 @@ class ColorSettingPage extends ConsumerWidget {
       body: CustomSettingsList(
         sections: [
           SettingsSection(
-            title: Text(t.settings.general.row.color.color.header),
+            title: Text(
+              t.settings.general.row.color.color.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
             tiles: AppColor.values.map((e) {
               return SettingsTile(
-                title: Text(e.title),
+                title: Text(
+                  e.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 leading: Icon(
                   Icons.circle,
                   color: e.color,

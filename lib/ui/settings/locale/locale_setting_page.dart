@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/locale_preference_provider.dart';
@@ -26,12 +27,14 @@ class LocaleSettingPage extends ConsumerWidget {
           SettingsSection(
             title: Text(
               t.settings.general.row.language.language.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
             ),
             tiles: LocalePreference.values
                 .mapIndexed(
                   (index, e) => SettingsTile(
                     title: Text(
                       t.settings.general.row.language.language.row[index],
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                     ),
                     trailing:
                         locale == e.toLocale ? const Icon(Icons.check) : null,

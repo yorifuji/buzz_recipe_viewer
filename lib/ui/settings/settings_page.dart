@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/database_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
@@ -37,10 +38,16 @@ class SettingsPage extends ConsumerWidget {
       body: CustomSettingsList(
         sections: [
           SettingsSection(
-            title: Text(t.settings.general.header),
+            title: Text(
+              t.settings.general.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
             tiles: [
               SettingsTile.navigation(
-                title: Text(t.settings.general.row.theme.title),
+                title: Text(
+                  t.settings.general.row.theme.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) {
                   Navigator.push(
                     context,
@@ -53,7 +60,10 @@ class SettingsPage extends ConsumerWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: Text(t.settings.general.row.color.title),
+                title: Text(
+                  t.settings.general.row.color.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) {
                   Navigator.push(
                     context,
@@ -66,7 +76,10 @@ class SettingsPage extends ConsumerWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: Text(t.settings.general.row.language.title),
+                title: Text(
+                  t.settings.general.row.language.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) {
                   Navigator.push(
                     context,
@@ -81,14 +94,24 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: Text(t.settings.video.header),
+            title: Text(
+              t.settings.video.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
             tiles: [
               SettingsTile.switchTile(
-                title: Text(t.settings.video.row.playWithinApp.title),
+                title: Text(
+                  t.settings.video.row.playWithinApp.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 initialValue: useInternalPlayer,
                 // web or macos
                 description: kIsWeb || Platform.isMacOS
-                    ? Text(t.settings.video.row.playWithinApp.description)
+                    ? Text(
+                        t.settings.video.row.playWithinApp.description,
+                        style:
+                            const TextStyle(fontFamily: FontFamily.notoSansJP),
+                      )
                     : null,
                 enabled: !kIsWeb,
                 onToggle: (value) =>
@@ -97,26 +120,41 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: Text(t.settings.support.header),
+            title: Text(
+              t.settings.support.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
             tiles: [
               SettingsTile.navigation(
-                title: Text(t.settings.support.row.help.title),
+                title: Text(
+                  t.settings.support.row.help.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) =>
                     _openBrowser(url: 'https://flutter.dev/'),
               ),
               SettingsTile.navigation(
-                title: Text(t.settings.support.row.contact.title),
+                title: Text(
+                  t.settings.support.row.contact.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) =>
                     _openBrowser(url: 'https://flutter.dev/'),
               ),
               SettingsTile.navigation(
-                title: Text(t.settings.support.row.feedback.title),
+                title: Text(
+                  t.settings.support.row.feedback.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) =>
                     _openBrowser(url: 'https://flutter.dev/'),
               ),
               if (!kIsWeb)
                 SettingsTile(
-                  title: Text(t.settings.support.row.review.title),
+                  title: Text(
+                    t.settings.support.row.review.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
                   onPressed: (context) async {
                     final inAppReview = InAppReview.instance;
                     if (await inAppReview.isAvailable()) {
@@ -125,7 +163,10 @@ class SettingsPage extends ConsumerWidget {
                   },
                 ),
               SettingsTile(
-                title: Text(t.settings.support.row.share.title),
+                title: Text(
+                  t.settings.support.row.share.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Not implemented')),
@@ -135,24 +176,39 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           SettingsSection(
-            title: Text(t.settings.about.header),
+            title: Text(
+              t.settings.about.header,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
             tiles: [
               SettingsTile.navigation(
-                title: Text(t.settings.about.row.terms.title),
+                title: Text(
+                  t.settings.about.row.terms.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) =>
                     _openBrowser(url: 'https://flutter.dev/'),
               ),
               SettingsTile.navigation(
-                title: Text(t.settings.about.row.privacy.title),
+                title: Text(
+                  t.settings.about.row.privacy.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) =>
                     _openBrowser(url: 'https://flutter.dev/'),
               ),
               SettingsTile.navigation(
-                title: Text(t.settings.about.row.license.title),
+                title: Text(
+                  t.settings.about.row.license.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 onPressed: (context) => showLicensePage(context: context),
               ),
               SettingsTile(
-                title: Text(t.settings.about.row.version.title),
+                title: Text(
+                  t.settings.about.row.version.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
                 value:
                     Text('${packageInfo.version}(${packageInfo.buildNumber})'),
               ),
@@ -160,10 +216,16 @@ class SettingsPage extends ConsumerWidget {
           ),
           if (kDebugMode)
             SettingsSection(
-              title: Text(t.settings.debug.header),
+              title: Text(
+                t.settings.debug.header,
+                style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+              ),
               tiles: [
                 SettingsTile(
-                  title: Text(t.settings.debug.row.dummyRecipe.title),
+                  title: Text(
+                    t.settings.debug.row.dummyRecipe.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
                   onPressed: (_) async {
                     await ref
                         .read(recipeNoteServiceProvider)
@@ -180,7 +242,10 @@ class SettingsPage extends ConsumerWidget {
                   },
                 ),
                 SettingsTile(
-                  title: Text(t.settings.debug.row.deleteLocalData.title),
+                  title: Text(
+                    t.settings.debug.row.deleteLocalData.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
                   onPressed: (_) async {
                     ref.read(databaseProvider).clearAll();
                     await ref.read(sharedPreferencesRepositoryProvider).clear();
