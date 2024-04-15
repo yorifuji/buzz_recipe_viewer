@@ -75,7 +75,3 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Regular.ttf
-
-flutter_launcher_icons:
-  android: true
-  ios: true
