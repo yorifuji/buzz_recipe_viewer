@@ -23,8 +23,9 @@ class FavoritePage extends ConsumerWidget {
       data: (data) => data.isEmpty
           ? const _EmptyFavoriteContainer()
           : _FavoriteListContainer(data),
-      error: (error, stackTrace) => const CircularProgressIndicator(),
-      loading: () => const CircularProgressIndicator(),
+      error: (error, stackTrace) =>
+          const Center(child: CircularProgressIndicator()),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
     return Scaffold(appBar: AppBar(title: Text(t.favorite.title)), body: body);
   }
