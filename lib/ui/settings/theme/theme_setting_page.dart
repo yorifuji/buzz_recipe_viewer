@@ -1,10 +1,10 @@
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/provider/theme_mode_preference_provider.dart';
-import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
-import 'package:buzz_recipe_viewer/service/theme_service.dart';
+import 'package:buzz_recipe_viewer/model/theme_mode_preference.dart';
+import 'package:buzz_recipe_viewer/store/theme_mode_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -16,7 +16,7 @@ class ThemeSettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeModePreferenceProvider);
+    final theme = ref.watch(themeModeNotiferProvider).themeMode;
     return Scaffold(
       appBar: AppBar(
         title: Text(t.settings.general.row.theme.title),
@@ -37,10 +37,20 @@ class ThemeSettingPage extends ConsumerWidget {
                     ),
                     trailing:
                         theme == e.themeMode ? const Icon(Icons.check) : null,
+                    value: kIsWeb
+                        ? theme == e.themeMode
+                            ? Text(
+                                t.settings.selected,
+                                style: const TextStyle(
+                                  fontFamily: FontFamily.notoSansJP,
+                                ),
+                              )
+                            : null
+                        : null,
                     onPressed: (context) async {
                       await ref
-                          .read(themeServiceProvider)
-                          .setThemeModePreference(e);
+                          .read(themeModeNotiferProvider.notifier)
+                          .update(e);
                     },
                   ),
                 )

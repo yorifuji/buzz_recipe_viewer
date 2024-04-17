@@ -1,14 +1,17 @@
+import 'dart:io';
+
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
+import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/store/search_state_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
-import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -83,9 +86,9 @@ class _VideoListContainer extends HookConsumerWidget {
     );
     final nextPage =
         ref.watch(searchStateStoreProvider.select((value) => value.nextPage));
-    final useInternalPlayer = ref.watch(
-      settingsViewModelProvider.select((value) => value.useInternalPlayer),
-    );
+    final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
+    final useInternalPlayer = isInternalPlayerAvailable &&
+        ref.watch(boolPreferenceProvider(BoolKey.useInternalPlayer));
 
     if (hitList.isEmpty) {
       return Center(child: Text(t.common.searchEmpty));

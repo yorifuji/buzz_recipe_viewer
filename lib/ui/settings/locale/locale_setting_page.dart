@@ -1,10 +1,10 @@
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
-import 'package:buzz_recipe_viewer/provider/locale_preference_provider.dart';
-import 'package:buzz_recipe_viewer/service/locale_service.dart';
+import 'package:buzz_recipe_viewer/store/locale_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -16,7 +16,7 @@ class LocaleSettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locale = ref.watch(localePreferenceProvider);
+    final locale = ref.watch(localeNotiferProvider).toLocale;
 
     return Scaffold(
       appBar: AppBar(
@@ -36,10 +36,20 @@ class LocaleSettingPage extends ConsumerWidget {
                       t.settings.general.row.language.language.row[index],
                       style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                     ),
+                    value: kIsWeb
+                        ? locale == e.toLocale
+                            ? Text(
+                                t.settings.selected,
+                                style: const TextStyle(
+                                  fontFamily: FontFamily.notoSansJP,
+                                ),
+                              )
+                            : null
+                        : null,
                     trailing:
                         locale == e.toLocale ? const Icon(Icons.check) : null,
                     onPressed: (context) async {
-                      await ref.read(localeServiceProvider).setLocale(e);
+                      await ref.read(localeNotiferProvider.notifier).update(e);
                     },
                   ),
                 )
