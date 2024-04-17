@@ -1,9 +1,9 @@
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/app_color.dart';
-import 'package:buzz_recipe_viewer/provider/app_color_preference_provider.dart';
-import 'package:buzz_recipe_viewer/service/app_color_service.dart';
+import 'package:buzz_recipe_viewer/store/app_color_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -15,7 +15,7 @@ class ColorSettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appColor = ref.watch(appColorPreferenceProvider);
+    final appColor = ref.watch(appColorNotiferProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(t.settings.general.row.color.title),
@@ -38,8 +38,18 @@ class ColorSettingPage extends ConsumerWidget {
                   color: e.color,
                 ),
                 trailing: e == appColor ? const Icon(Icons.check) : null,
+                value: kIsWeb
+                    ? e == appColor
+                        ? Text(
+                            t.settings.selected,
+                            style: const TextStyle(
+                              fontFamily: FontFamily.notoSansJP,
+                            ),
+                          )
+                        : null
+                    : null,
                 onPressed: (context) {
-                  ref.read(appColorServiceProvider).setAppColor(e);
+                  ref.read(appColorNotiferProvider.notifier).update(e);
                 },
               );
             }).toList(),

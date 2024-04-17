@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 140 (70 per locale)
+/// Strings: 142 (71 per locale)
 ///
-/// Built on 2024-04-13 at 15:05 UTC
+/// Built on 2024-04-17 at 10:16 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -278,6 +278,7 @@ class _StringsSettingsEn {
       _StringsSettingsSupportEn._(_root);
   late final _StringsSettingsAboutEn about = _StringsSettingsAboutEn._(_root);
   late final _StringsSettingsDebugEn debug = _StringsSettingsDebugEn._(_root);
+  String get selected => 'Selected';
 }
 
 // Path: common
@@ -851,6 +852,8 @@ class _StringsSettingsJa implements _StringsSettingsEn {
   late final _StringsSettingsAboutJa about = _StringsSettingsAboutJa._(_root);
   @override
   late final _StringsSettingsDebugJa debug = _StringsSettingsDebugJa._(_root);
+  @override
+  String get selected => '選択中';
 }
 
 // Path: common
@@ -1523,6 +1526,8 @@ extension on Translations {
         return 'Insert Dummy Recipe';
       case 'settings.debug.row.deleteLocalData.title':
         return 'Delete Local Data';
+      case 'settings.selected':
+        return 'Selected';
       case 'common.addFavorite':
         return 'Add Favorite';
       case 'common.fetchFailed':
@@ -1672,6 +1677,8 @@ extension on _StringsJa {
         return 'ダミーレシピを登録';
       case 'settings.debug.row.deleteLocalData.title':
         return 'ローカルデータを削除';
+      case 'settings.selected':
+        return '選択中';
       case 'common.addFavorite':
         return 'お気に入りに追加しました';
       case 'common.fetchFailed':

@@ -1,13 +1,11 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/provider/fullscreen_video_playing_state_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_note_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final currentAppTab = StateProvider((ref) => AppTab.recipe);
 
 enum AppTab {
   recipe(Icon(Icons.note)),
@@ -37,7 +35,7 @@ enum AppTab {
       };
 }
 
-class NavigationPage extends ConsumerWidget {
+class NavigationPage extends HookConsumerWidget {
   const NavigationPage({super.key});
 
   static final List<GlobalKey<NavigatorState>> navigatorKeys =
@@ -46,16 +44,15 @@ class NavigationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final currentTab = ref.watch(currentAppTab);
-    final fullscreenVideoPlayingState =
-        ref.watch(fullscreenVideoPlayingStateProvider);
+    final currentTab = useState<AppTab>(AppTab.recipe);
 
     return PopScope(
       // スタックが存在しない場合はアプリを終了する（バックグラウンドに移動する）
-      canPop: navigatorKeys[currentTab.index].currentState?.canPop() ?? false,
+      canPop:
+          navigatorKeys[currentTab.value.index].currentState?.canPop() ?? false,
       child: Scaffold(
         body: IndexedStack(
-          index: currentTab.index,
+          index: currentTab.value.index,
           children: AppTab.values
               .map(
                 (tab) => Navigator(
@@ -67,28 +64,25 @@ class NavigationPage extends ConsumerWidget {
               )
               .toList(),
         ),
-        bottomNavigationBar: fullscreenVideoPlayingState
-            ? null
-            : NavigationBar(
-                destinations: AppTab.values
-                    .map(
-                      (tab) => NavigationDestination(
-                        icon: tab.icon,
-                        label: tab.title,
-                      ),
-                    )
-                    .toList(),
-                onDestinationSelected: (value) {
-                  if (navigatorKeys[currentTab.index].currentState?.canPop() ??
-                      false) {
-                    navigatorKeys[currentTab.index].currentState?.pop();
-                  }
-                  ref.read(currentAppTab.notifier).state =
-                      AppTab.fromIndex(value);
-                },
-                selectedIndex: currentTab.index,
-                indicatorColor: theme.colorScheme.primaryContainer,
-              ),
+        bottomNavigationBar: NavigationBar(
+          destinations: AppTab.values
+              .map(
+                (tab) => NavigationDestination(
+                  icon: tab.icon,
+                  label: tab.title,
+                ),
+              )
+              .toList(),
+          onDestinationSelected: (value) {
+            if (navigatorKeys[currentTab.value.index].currentState?.canPop() ??
+                false) {
+              navigatorKeys[currentTab.value.index].currentState?.pop();
+            }
+            currentTab.value = AppTab.fromIndex(value);
+          },
+          selectedIndex: currentTab.value.index,
+          indicatorColor: theme.colorScheme.primaryContainer,
+        ),
       ),
     );
   }

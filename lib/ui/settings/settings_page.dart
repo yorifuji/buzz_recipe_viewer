@@ -3,12 +3,12 @@ import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/database_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
-import 'package:buzz_recipe_viewer/repository/shared_preferences_repository.dart';
+import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
-import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +26,9 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final packageInfo = ref.watch(packageInfoProvider);
-    final useInternalPlayer = ref.watch(
-      settingsViewModelProvider.select((value) => value.useInternalPlayer),
-    );
-    final viewModel = ref.watch(settingsViewModelProvider.notifier);
+    final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
+    final useInternalPlayer = isInternalPlayerAvailable &&
+        ref.watch(boolPreferenceProvider(BoolKey.useInternalPlayer));
 
     return Scaffold(
       appBar: AppBar(
@@ -80,8 +79,8 @@ class SettingsPage extends ConsumerWidget {
                   t.settings.general.row.language.title,
                   style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                 ),
-                onPressed: (context) {
-                  Navigator.push(
+                onPressed: (context) async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) {
@@ -89,6 +88,8 @@ class SettingsPage extends ConsumerWidget {
                       },
                     ),
                   );
+                  await WidgetsFlutterBinding.ensureInitialized()
+                      .performReassemble();
                 },
               ),
             ],
@@ -106,16 +107,20 @@ class SettingsPage extends ConsumerWidget {
                 ),
                 initialValue: useInternalPlayer,
                 // web or macos
-                description: kIsWeb || Platform.isMacOS
-                    ? Text(
+                description: isInternalPlayerAvailable
+                    ? null
+                    : Text(
                         t.settings.video.row.playWithinApp.description,
                         style:
                             const TextStyle(fontFamily: FontFamily.notoSansJP),
-                      )
-                    : null,
-                enabled: !kIsWeb,
-                onToggle: (value) =>
-                    viewModel.setUseInternalPlayer(useInternalPlayer: value),
+                      ),
+                enabled: isInternalPlayerAvailable,
+                onToggle: (value) => ref
+                    .read(
+                      boolPreferenceProvider(BoolKey.useInternalPlayer)
+                          .notifier,
+                    )
+                    .update(value),
               ),
             ],
           ),
@@ -248,8 +253,7 @@ class SettingsPage extends ConsumerWidget {
                   ),
                   onPressed: (_) async {
                     ref.read(databaseProvider).clearAll();
-                    await ref.read(sharedPreferencesRepositoryProvider).clear();
-                    ref.invalidate(sharedPreferencesRepositoryProvider);
+                    await ref.read(preferenceServiceProvider).clearAll();
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

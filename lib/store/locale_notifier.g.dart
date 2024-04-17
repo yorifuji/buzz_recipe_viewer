@@ -2,26 +2,27 @@
 
 // ignore_for_file: implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'locale_preference_provider.dart';
+part of 'locale_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localePreferenceHash() => r'7bb419756554112d3ddfa995d08614b994148c91';
+String _$localeNotiferHash() => r'793bda9df29531a1158b9364ae761dae0ccd5082';
 
-/// See also [localePreference].
-@ProviderFor(localePreference)
-final localePreferenceProvider = AutoDisposeProvider<Locale?>.internal(
-  localePreference,
-  name: r'localePreferenceProvider',
+/// See also [LocaleNotifer].
+@ProviderFor(LocaleNotifer)
+final localeNotiferProvider =
+    AutoDisposeNotifierProvider<LocaleNotifer, LocalePreference>.internal(
+  LocaleNotifer.new,
+  name: r'localeNotiferProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$localePreferenceHash,
+      : _$localeNotiferHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef LocalePreferenceRef = AutoDisposeProviderRef<Locale?>;
+typedef _$LocaleNotifer = AutoDisposeNotifier<LocalePreference>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

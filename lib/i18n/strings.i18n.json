@@ -140,7 +140,8 @@
                     "title" : "Delete Local Data"
                 }
             }
-        }
+        },
+        "selected" : "Selected"
     },
     "common" : {
         "addFavorite" : "Add Favorite",

@@ -1,12 +1,15 @@
+import 'dart:io';
+
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
-import 'package:buzz_recipe_viewer/ui/settings/settings_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -76,9 +79,9 @@ class _FavoriteContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final useInternalPlayer = ref.watch(
-      settingsViewModelProvider.select((value) => value.useInternalPlayer),
-    );
+    final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
+    final useInternalPlayer = isInternalPlayerAvailable &&
+        ref.watch(boolPreferenceProvider(BoolKey.useInternalPlayer));
 
     return Dismissible(
       key: UniqueKey(),

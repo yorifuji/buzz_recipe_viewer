@@ -1,6 +1,6 @@
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/ui/walkthrough/walkthrough_view_model.dart';
+import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -35,8 +35,10 @@ class WalkthroughPage extends ConsumerWidget {
       done: Text(t.walkthrough.done),
       onDone: () {
         ref
-            .read(walkthroughViewModelProvider.notifier)
-            .setshouldShowWalkthrough(shouldShowWalkthrough: false);
+            .read(
+              boolPreferenceProvider(BoolKey.shouldShowWalkthrough).notifier,
+            )
+            .update(false);
       },
     );
   }
