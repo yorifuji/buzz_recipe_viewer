@@ -1,7 +1,7 @@
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/theme_mode_preference.dart';
-import 'package:buzz_recipe_viewer/store/theme_mode_notifier.dart';
+import 'package:buzz_recipe_viewer/model/theme_preference.dart';
+import 'package:buzz_recipe_viewer/store/theme_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -16,7 +16,7 @@ class ThemeSettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeModeNotiferProvider).themeMode;
+    final theme = ref.watch(themeNotiferProvider).themeMode;
     return Scaffold(
       appBar: AppBar(
         title: Text(t.settings.general.row.theme.title),
@@ -28,7 +28,7 @@ class ThemeSettingPage extends ConsumerWidget {
               t.settings.general.row.theme.theme.header,
               style: const TextStyle(fontFamily: FontFamily.notoSansJP),
             ),
-            tiles: ThemeModePreference.values
+            tiles: ThemePreference.values
                 .mapIndexed(
                   (index, e) => SettingsTile(
                     title: Text(
@@ -48,9 +48,7 @@ class ThemeSettingPage extends ConsumerWidget {
                             : null
                         : null,
                     onPressed: (context) async {
-                      await ref
-                          .read(themeModeNotiferProvider.notifier)
-                          .update(e);
+                      await ref.read(themeNotiferProvider.notifier).update(e);
                     },
                   ),
                 )

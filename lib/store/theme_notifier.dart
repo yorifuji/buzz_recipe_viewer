@@ -1,18 +1,18 @@
-import 'package:buzz_recipe_viewer/model/theme_mode_preference.dart';
+import 'package:buzz_recipe_viewer/model/theme_preference.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'theme_mode_notifier.g.dart';
+part 'theme_notifier.g.dart';
 
 @riverpod
-class ThemeModeNotifer extends _$ThemeModeNotifer {
+class ThemeNotifer extends _$ThemeNotifer {
   @override
-  ThemeModePreference build() {
+  ThemePreference build() {
     final index = ref.watch(intPreferenceProvider(IntKey.themeMode));
-    return ThemeModePreference.fromIndex(index);
+    return ThemePreference.fromIndex(index);
   }
 
-  Future<void> update(ThemeModePreference themeModePreference) async {
+  Future<void> update(ThemePreference themeModePreference) async {
     await ref
         .read(intPreferenceProvider(IntKey.themeMode).notifier)
         .update(themeModePreference.index);
