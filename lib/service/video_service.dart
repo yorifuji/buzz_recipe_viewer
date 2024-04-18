@@ -9,7 +9,7 @@ part 'video_service.g.dart';
 
 @riverpod
 VideoService videoService(VideoServiceRef ref) => VideoService(
-      ref.watch(flavorProvider) == Flavor.dev
+      ref.watch(flavorProvider).isDev
           ? ref.watch(videoRepositoryMockProvider)
           : ref.watch(videoRepositoryProvider),
       ref.watch(searchStateStoreProvider.notifier),

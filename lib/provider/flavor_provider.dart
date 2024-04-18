@@ -12,6 +12,10 @@ enum Flavor {
         (e) => e.name == value,
         orElse: () => throw ArgumentError('Invalid flavor: $value'),
       );
+
+  bool get isDev => this == Flavor.dev;
+  bool get isStg => this == Flavor.stg;
+  bool get isProd => this == Flavor.prod;
 }
 
 @riverpod

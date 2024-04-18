@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/database_provider.dart';
+import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
@@ -219,7 +220,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode)
+          if (kDebugMode || ref.watch(flavorProvider).isDev)
             SettingsSection(
               title: Text(
                 t.settings.debug.header,
