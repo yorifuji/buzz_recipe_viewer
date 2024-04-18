@@ -8,7 +8,7 @@ part of 'app_color_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appColorNotiferHash() => r'84c6f3f45fd99904b9fa962bb5758a579d2ff2f5';
+String _$appColorNotiferHash() => r'393c64f7c908c96fe17fdae30a52520bca3e88f4';
 
 /// See also [AppColorNotifer].
 @ProviderFor(AppColorNotifer)

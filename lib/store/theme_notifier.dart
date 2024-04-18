@@ -8,13 +8,14 @@ part 'theme_notifier.g.dart';
 class ThemeNotifer extends _$ThemeNotifer {
   @override
   ThemePreference build() {
-    final index = ref.watch(intPreferenceProvider(IntKey.themeMode));
+    final index =
+        ref.watch(preferenceNotifierProvider(PreferenceKeys.themeMode));
     return ThemePreference.fromIndex(index);
   }
 
   Future<void> update(ThemePreference themeModePreference) async {
     await ref
-        .read(intPreferenceProvider(IntKey.themeMode).notifier)
+        .read(preferenceNotifierProvider(PreferenceKeys.themeMode).notifier)
         .update(themeModePreference.index);
     ref.invalidateSelf();
   }

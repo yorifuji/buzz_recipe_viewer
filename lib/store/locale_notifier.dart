@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'locale_notifier.g.dart';
@@ -9,7 +10,7 @@ part 'locale_notifier.g.dart';
 class LocaleNotifer extends _$LocaleNotifer {
   @override
   LocalePreference build() {
-    final index = ref.watch(intPreferenceProvider(IntKey.locale));
+    final index = ref.watch(preferenceNotifierProvider(PreferenceKeys.locale));
     final localePreference = LocalePreference.fromIndex(index);
     _applyLocaleSettings(localePreference);
     return localePreference;
@@ -17,7 +18,7 @@ class LocaleNotifer extends _$LocaleNotifer {
 
   Future<void> update(LocalePreference localePreference) async {
     await ref
-        .read(intPreferenceProvider(IntKey.locale).notifier)
+        .read(preferenceNotifierProvider(PreferenceKeys.locale).notifier)
         .update(localePreference.index);
     ref.invalidateSelf();
   }

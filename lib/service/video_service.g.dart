@@ -8,7 +8,7 @@ part of 'video_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$videoServiceHash() => r'355707605438c282fd9ee9cfc674ad493683afc3';
+String _$videoServiceHash() => r'4591e5af695bb412921eb7602d4e9b53b87bf0b2';
 
 /// See also [videoService].
 @ProviderFor(videoService)
