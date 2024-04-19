@@ -1,6 +1,5 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_page.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,8 +14,6 @@ void main() {
       widget: ProviderScope(
         overrides: [
           searchViewModelProvider.overrideWith(FakeSearchViewModel.new),
-          boolPreferenceProvider(BoolKey.useInternalPlayer)
-              .overrideWith(FakeTruePreference.new),
         ],
         child: const SearchPage(),
       ),

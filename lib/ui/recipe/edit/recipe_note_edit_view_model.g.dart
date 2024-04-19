@@ -46,9 +46,23 @@ abstract class _$RecipeNoteEditViewModel
 const recipeNoteEditViewModelProvider = RecipeNoteEditViewModelFamily();
 
 /// See also [RecipeNoteEditViewModel].
-class RecipeNoteEditViewModelFamily extends Family<RecipeNoteEditState> {
+class RecipeNoteEditViewModelFamily extends Family {
   /// See also [RecipeNoteEditViewModel].
   const RecipeNoteEditViewModelFamily();
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'recipeNoteEditViewModelProvider';
 
   /// See also [RecipeNoteEditViewModel].
   RecipeNoteEditViewModelProvider call({
@@ -59,6 +73,7 @@ class RecipeNoteEditViewModelFamily extends Family<RecipeNoteEditState> {
     );
   }
 
+  @visibleForOverriding
   @override
   RecipeNoteEditViewModelProvider getProviderOverride(
     covariant RecipeNoteEditViewModelProvider provider,
@@ -68,19 +83,26 @@ class RecipeNoteEditViewModelFamily extends Family<RecipeNoteEditState> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  /// Enables overriding the behavior of this provider, no matter the parameters.
+  Override overrideWith(RecipeNoteEditViewModel Function() create) {
+    return _$RecipeNoteEditViewModelFamilyOverride(this, create);
+  }
+}
+
+class _$RecipeNoteEditViewModelFamilyOverride implements FamilyOverride {
+  _$RecipeNoteEditViewModelFamilyOverride(this.overriddenFamily, this.create);
+
+  final RecipeNoteEditViewModel Function() create;
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  final RecipeNoteEditViewModelFamily overriddenFamily;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'recipeNoteEditViewModelProvider';
+  RecipeNoteEditViewModelProvider getProviderOverride(
+    covariant RecipeNoteEditViewModelProvider provider,
+  ) {
+    return provider._copyWith(create);
+  }
 }
 
 /// See also [RecipeNoteEditViewModel].
@@ -104,7 +126,7 @@ class RecipeNoteEditViewModelProvider extends AutoDisposeNotifierProviderImpl<
         );
 
   RecipeNoteEditViewModelProvider._internal(
-    super._createNotifier, {
+    super.create, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
@@ -141,9 +163,30 @@ class RecipeNoteEditViewModelProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
+  ({
+    RecipeNote? recipeNote,
+  }) get argument {
+    return (recipeNote: recipeNote,);
+  }
+
+  @override
   AutoDisposeNotifierProviderElement<RecipeNoteEditViewModel,
       RecipeNoteEditState> createElement() {
     return _RecipeNoteEditViewModelProviderElement(this);
+  }
+
+  RecipeNoteEditViewModelProvider _copyWith(
+    RecipeNoteEditViewModel Function() create,
+  ) {
+    return RecipeNoteEditViewModelProvider._internal(
+      () => create()..recipeNote = recipeNote,
+      name: name,
+      dependencies: dependencies,
+      allTransitiveDependencies: allTransitiveDependencies,
+      debugGetCreateSourceHash: debugGetCreateSourceHash,
+      from: from,
+      recipeNote: recipeNote,
+    );
   }
 
   @override
@@ -177,4 +220,4 @@ class _RecipeNoteEditViewModelProviderElement
       (origin as RecipeNoteEditViewModelProvider).recipeNote;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

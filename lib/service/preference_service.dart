@@ -14,9 +14,6 @@ class PreferenceService {
 
   Future<void> clearAll() async {
     await _ref.read(sharedPreferencesProvider).clear();
-    _ref
-      ..invalidate(boolPreferenceProvider)
-      ..invalidate(intPreferenceProvider)
-      ..invalidate(stringPreferenceProvider);
+    _ref.invalidate(preferenceNotifierProvider);
   }
 }

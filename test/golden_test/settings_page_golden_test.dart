@@ -2,7 +2,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,8 +24,6 @@ void main() {
               buildNumber: '1',
             ),
           ),
-          boolPreferenceProvider(BoolKey.useInternalPlayer)
-              .overrideWith(FakeTruePreference.new),
           themeDataProvider().overrideWith((ref) => ThemeData.light()),
           themeDataProvider(isDarkMode: true)
               .overrideWith((ref) => ThemeData.dark()),

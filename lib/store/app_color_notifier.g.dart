@@ -8,7 +8,7 @@ part of 'app_color_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appColorNotiferHash() => r'84c6f3f45fd99904b9fa962bb5758a579d2ff2f5';
+String _$appColorNotiferHash() => r'd7264476b224f44fe150d9b6d1e8e4ee120f0af3';
 
 /// See also [AppColorNotifer].
 @ProviderFor(AppColorNotifer)
@@ -25,4 +25,4 @@ final appColorNotiferProvider =
 
 typedef _$AppColorNotifer = AutoDisposeNotifier<AppColor>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

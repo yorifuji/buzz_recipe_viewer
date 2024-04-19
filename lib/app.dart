@@ -29,7 +29,9 @@ class App extends ConsumerWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: LocalePreference.supportedLocaleList(),
-        home: ref.watch(boolPreferenceProvider(BoolKey.shouldShowWalkthrough))
+        home: ref.watch(
+          preferenceNotifierProvider(PreferenceKeys.shouldShowWalkthrough),
+        )
             ? const WalkthroughPage()
             : const NavigationPage(),
       ),

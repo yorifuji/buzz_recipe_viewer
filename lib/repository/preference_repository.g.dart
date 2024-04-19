@@ -8,7 +8,8 @@ part of 'preference_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$boolPreferenceHash() => r'afe11a237008cbbdd4b355ed8abc9c4d653f0db9';
+String _$preferenceNotifierHash() =>
+    r'15163380ca54a899178b74da906224b3b87daa2d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,78 +32,100 @@ class _SystemHash {
   }
 }
 
-abstract class _$BoolPreference extends BuildlessAutoDisposeNotifier<bool> {
-  late final BoolKey keyValue;
+abstract class _$PreferenceNotifier<T> extends BuildlessAutoDisposeNotifier<T> {
+  late final PreferenceKeys<T> keyValue;
 
-  bool build(
-    BoolKey keyValue,
+  T build(
+    PreferenceKeys<T> keyValue,
   );
 }
 
-/// See also [BoolPreference].
-@ProviderFor(BoolPreference)
-const boolPreferenceProvider = BoolPreferenceFamily();
+/// See also [PreferenceNotifier].
+@ProviderFor(PreferenceNotifier)
+const preferenceNotifierProvider = PreferenceNotifierFamily();
 
-/// See also [BoolPreference].
-class BoolPreferenceFamily extends Family<bool> {
-  /// See also [BoolPreference].
-  const BoolPreferenceFamily();
-
-  /// See also [BoolPreference].
-  BoolPreferenceProvider call(
-    BoolKey keyValue,
-  ) {
-    return BoolPreferenceProvider(
-      keyValue,
-    );
-  }
-
-  @override
-  BoolPreferenceProvider getProviderOverride(
-    covariant BoolPreferenceProvider provider,
-  ) {
-    return call(
-      provider.keyValue,
-    );
-  }
+/// See also [PreferenceNotifier].
+class PreferenceNotifierFamily extends Family {
+  /// See also [PreferenceNotifier].
+  const PreferenceNotifierFamily();
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
 
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'boolPreferenceProvider';
+  String? get name => r'preferenceNotifierProvider';
+
+  /// See also [PreferenceNotifier].
+  PreferenceNotifierProvider<T> call<T>(
+    PreferenceKeys<T> keyValue,
+  ) {
+    return PreferenceNotifierProvider<T>(
+      keyValue,
+    );
+  }
+
+  @visibleForOverriding
+  @override
+  PreferenceNotifierProvider<Object?> getProviderOverride(
+    covariant PreferenceNotifierProvider<Object?> provider,
+  ) {
+    return call(
+      provider.keyValue,
+    );
+  }
+
+  /// Enables overriding the behavior of this provider, no matter the parameters.
+  Override overrideWith(PreferenceNotifier Function() create) {
+    return _$PreferenceNotifierFamilyOverride(this, create);
+  }
 }
 
-/// See also [BoolPreference].
-class BoolPreferenceProvider
-    extends AutoDisposeNotifierProviderImpl<BoolPreference, bool> {
-  /// See also [BoolPreference].
-  BoolPreferenceProvider(
-    BoolKey keyValue,
+class _$PreferenceNotifierFamilyOverride implements FamilyOverride {
+  _$PreferenceNotifierFamilyOverride(this.overriddenFamily, this.create);
+
+  final PreferenceNotifier Function() create;
+
+  @override
+  final PreferenceNotifierFamily overriddenFamily;
+
+  @override
+  PreferenceNotifierProvider getProviderOverride(
+    covariant PreferenceNotifierProvider provider,
+  ) {
+    return provider._copyWith(create);
+  }
+}
+
+/// See also [PreferenceNotifier].
+class PreferenceNotifierProvider<T>
+    extends AutoDisposeNotifierProviderImpl<PreferenceNotifier<T>, T> {
+  /// See also [PreferenceNotifier].
+  PreferenceNotifierProvider(
+    PreferenceKeys<T> keyValue,
   ) : this._internal(
-          () => BoolPreference()..keyValue = keyValue,
-          from: boolPreferenceProvider,
-          name: r'boolPreferenceProvider',
+          () => PreferenceNotifier<T>()..keyValue = keyValue,
+          from: preferenceNotifierProvider,
+          name: r'preferenceNotifierProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$boolPreferenceHash,
-          dependencies: BoolPreferenceFamily._dependencies,
+                  : _$preferenceNotifierHash,
+          dependencies: PreferenceNotifierFamily._dependencies,
           allTransitiveDependencies:
-              BoolPreferenceFamily._allTransitiveDependencies,
+              PreferenceNotifierFamily._allTransitiveDependencies,
           keyValue: keyValue,
         );
 
-  BoolPreferenceProvider._internal(
-    super._createNotifier, {
+  PreferenceNotifierProvider._internal(
+    super.create, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
@@ -111,11 +134,11 @@ class BoolPreferenceProvider
     required this.keyValue,
   }) : super.internal();
 
-  final BoolKey keyValue;
+  final PreferenceKeys<T> keyValue;
 
   @override
-  bool runNotifierBuild(
-    covariant BoolPreference notifier,
+  T runNotifierBuild(
+    covariant PreferenceNotifier<T> notifier,
   ) {
     return notifier.build(
       keyValue,
@@ -123,10 +146,10 @@ class BoolPreferenceProvider
   }
 
   @override
-  Override overrideWith(BoolPreference Function() create) {
+  Override overrideWith(PreferenceNotifier<T> Function() create) {
     return ProviderOverride(
       origin: this,
-      override: BoolPreferenceProvider._internal(
+      override: PreferenceNotifierProvider<T>._internal(
         () => create()..keyValue = keyValue,
         from: from,
         name: null,
@@ -139,320 +162,59 @@ class BoolPreferenceProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<BoolPreference, bool> createElement() {
-    return _BoolPreferenceProviderElement(this);
+  (PreferenceKeys<T>,) get argument {
+    return (keyValue,);
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<PreferenceNotifier<T>, T> createElement() {
+    return _PreferenceNotifierProviderElement(this);
+  }
+
+  PreferenceNotifierProvider _copyWith(
+    PreferenceNotifier Function() create,
+  ) {
+    return PreferenceNotifierProvider._internal(
+      () => create()..keyValue = keyValue,
+      name: name,
+      dependencies: dependencies,
+      allTransitiveDependencies: allTransitiveDependencies,
+      debugGetCreateSourceHash: debugGetCreateSourceHash,
+      from: from,
+      keyValue: keyValue,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is BoolPreferenceProvider && other.keyValue == keyValue;
+    return other is PreferenceNotifierProvider &&
+        other.runtimeType == runtimeType &&
+        other.keyValue == keyValue;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, keyValue.hashCode);
+    hash = _SystemHash.combine(hash, T.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin BoolPreferenceRef on AutoDisposeNotifierProviderRef<bool> {
+mixin PreferenceNotifierRef<T> on AutoDisposeNotifierProviderRef<T> {
   /// The parameter `keyValue` of this provider.
-  BoolKey get keyValue;
+  PreferenceKeys<T> get keyValue;
 }
 
-class _BoolPreferenceProviderElement
-    extends AutoDisposeNotifierProviderElement<BoolPreference, bool>
-    with BoolPreferenceRef {
-  _BoolPreferenceProviderElement(super.provider);
+class _PreferenceNotifierProviderElement<T>
+    extends AutoDisposeNotifierProviderElement<PreferenceNotifier<T>, T>
+    with PreferenceNotifierRef<T> {
+  _PreferenceNotifierProviderElement(super.provider);
 
   @override
-  BoolKey get keyValue => (origin as BoolPreferenceProvider).keyValue;
-}
-
-String _$intPreferenceHash() => r'8c68ac08a0eef123dcf477c1dfc4311f8f07f2d0';
-
-abstract class _$IntPreference extends BuildlessAutoDisposeNotifier<int> {
-  late final IntKey keyValue;
-
-  int build(
-    IntKey keyValue,
-  );
-}
-
-/// See also [IntPreference].
-@ProviderFor(IntPreference)
-const intPreferenceProvider = IntPreferenceFamily();
-
-/// See also [IntPreference].
-class IntPreferenceFamily extends Family<int> {
-  /// See also [IntPreference].
-  const IntPreferenceFamily();
-
-  /// See also [IntPreference].
-  IntPreferenceProvider call(
-    IntKey keyValue,
-  ) {
-    return IntPreferenceProvider(
-      keyValue,
-    );
-  }
-
-  @override
-  IntPreferenceProvider getProviderOverride(
-    covariant IntPreferenceProvider provider,
-  ) {
-    return call(
-      provider.keyValue,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'intPreferenceProvider';
-}
-
-/// See also [IntPreference].
-class IntPreferenceProvider
-    extends AutoDisposeNotifierProviderImpl<IntPreference, int> {
-  /// See also [IntPreference].
-  IntPreferenceProvider(
-    IntKey keyValue,
-  ) : this._internal(
-          () => IntPreference()..keyValue = keyValue,
-          from: intPreferenceProvider,
-          name: r'intPreferenceProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$intPreferenceHash,
-          dependencies: IntPreferenceFamily._dependencies,
-          allTransitiveDependencies:
-              IntPreferenceFamily._allTransitiveDependencies,
-          keyValue: keyValue,
-        );
-
-  IntPreferenceProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.keyValue,
-  }) : super.internal();
-
-  final IntKey keyValue;
-
-  @override
-  int runNotifierBuild(
-    covariant IntPreference notifier,
-  ) {
-    return notifier.build(
-      keyValue,
-    );
-  }
-
-  @override
-  Override overrideWith(IntPreference Function() create) {
-    return ProviderOverride(
-      origin: this,
-      override: IntPreferenceProvider._internal(
-        () => create()..keyValue = keyValue,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        keyValue: keyValue,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeNotifierProviderElement<IntPreference, int> createElement() {
-    return _IntPreferenceProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is IntPreferenceProvider && other.keyValue == keyValue;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, keyValue.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin IntPreferenceRef on AutoDisposeNotifierProviderRef<int> {
-  /// The parameter `keyValue` of this provider.
-  IntKey get keyValue;
-}
-
-class _IntPreferenceProviderElement
-    extends AutoDisposeNotifierProviderElement<IntPreference, int>
-    with IntPreferenceRef {
-  _IntPreferenceProviderElement(super.provider);
-
-  @override
-  IntKey get keyValue => (origin as IntPreferenceProvider).keyValue;
-}
-
-String _$stringPreferenceHash() => r'6581e46aac1cad29ceba82b458b04bbc16226209';
-
-abstract class _$StringPreference extends BuildlessAutoDisposeNotifier<String> {
-  late final StringKey keyValue;
-
-  String build(
-    StringKey keyValue,
-  );
-}
-
-/// See also [StringPreference].
-@ProviderFor(StringPreference)
-const stringPreferenceProvider = StringPreferenceFamily();
-
-/// See also [StringPreference].
-class StringPreferenceFamily extends Family<String> {
-  /// See also [StringPreference].
-  const StringPreferenceFamily();
-
-  /// See also [StringPreference].
-  StringPreferenceProvider call(
-    StringKey keyValue,
-  ) {
-    return StringPreferenceProvider(
-      keyValue,
-    );
-  }
-
-  @override
-  StringPreferenceProvider getProviderOverride(
-    covariant StringPreferenceProvider provider,
-  ) {
-    return call(
-      provider.keyValue,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'stringPreferenceProvider';
-}
-
-/// See also [StringPreference].
-class StringPreferenceProvider
-    extends AutoDisposeNotifierProviderImpl<StringPreference, String> {
-  /// See also [StringPreference].
-  StringPreferenceProvider(
-    StringKey keyValue,
-  ) : this._internal(
-          () => StringPreference()..keyValue = keyValue,
-          from: stringPreferenceProvider,
-          name: r'stringPreferenceProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$stringPreferenceHash,
-          dependencies: StringPreferenceFamily._dependencies,
-          allTransitiveDependencies:
-              StringPreferenceFamily._allTransitiveDependencies,
-          keyValue: keyValue,
-        );
-
-  StringPreferenceProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.keyValue,
-  }) : super.internal();
-
-  final StringKey keyValue;
-
-  @override
-  String runNotifierBuild(
-    covariant StringPreference notifier,
-  ) {
-    return notifier.build(
-      keyValue,
-    );
-  }
-
-  @override
-  Override overrideWith(StringPreference Function() create) {
-    return ProviderOverride(
-      origin: this,
-      override: StringPreferenceProvider._internal(
-        () => create()..keyValue = keyValue,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        keyValue: keyValue,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeNotifierProviderElement<StringPreference, String> createElement() {
-    return _StringPreferenceProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is StringPreferenceProvider && other.keyValue == keyValue;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, keyValue.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin StringPreferenceRef on AutoDisposeNotifierProviderRef<String> {
-  /// The parameter `keyValue` of this provider.
-  StringKey get keyValue;
-}
-
-class _StringPreferenceProviderElement
-    extends AutoDisposeNotifierProviderElement<StringPreference, String>
-    with StringPreferenceRef {
-  _StringPreferenceProviderElement(super.provider);
-
-  @override
-  StringKey get keyValue => (origin as StringPreferenceProvider).keyValue;
+  PreferenceKeys<T> get keyValue =>
+      (origin as PreferenceNotifierProvider<T>).keyValue;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

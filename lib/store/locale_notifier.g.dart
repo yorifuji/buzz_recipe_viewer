@@ -8,7 +8,7 @@ part of 'locale_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localeNotiferHash() => r'793bda9df29531a1158b9364ae761dae0ccd5082';
+String _$localeNotiferHash() => r'903f6b43c3efa299aa6cba2b0b8b6adbb121ddee';
 
 /// See also [LocaleNotifer].
 @ProviderFor(LocaleNotifer)
@@ -25,4 +25,4 @@ final localeNotiferProvider =
 
 typedef _$LocaleNotifer = AutoDisposeNotifier<LocalePreference>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

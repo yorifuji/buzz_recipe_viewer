@@ -8,7 +8,7 @@ part of 'video_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$videoServiceHash() => r'355707605438c282fd9ee9cfc674ad493683afc3';
+String _$videoServiceHash() => r'4591e5af695bb412921eb7602d4e9b53b87bf0b2';
 
 /// See also [videoService].
 @ProviderFor(videoService)
@@ -23,4 +23,4 @@ final videoServiceProvider = AutoDisposeProvider<VideoService>.internal(
 
 typedef VideoServiceRef = AutoDisposeProviderRef<VideoService>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

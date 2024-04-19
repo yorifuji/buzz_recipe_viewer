@@ -36,9 +36,23 @@ class _SystemHash {
 const themeDataProvider = ThemeDataFamily();
 
 /// See also [themeData].
-class ThemeDataFamily extends Family<ThemeData> {
+class ThemeDataFamily extends Family {
   /// See also [themeData].
   const ThemeDataFamily();
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'themeDataProvider';
 
   /// See also [themeData].
   ThemeDataProvider call({
@@ -49,6 +63,7 @@ class ThemeDataFamily extends Family<ThemeData> {
     );
   }
 
+  @visibleForOverriding
   @override
   ThemeDataProvider getProviderOverride(
     covariant ThemeDataProvider provider,
@@ -58,19 +73,26 @@ class ThemeDataFamily extends Family<ThemeData> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  /// Enables overriding the behavior of this provider, no matter the parameters.
+  Override overrideWith(ThemeData Function(ThemeDataRef ref) create) {
+    return _$ThemeDataFamilyOverride(this, create);
+  }
+}
+
+class _$ThemeDataFamilyOverride implements FamilyOverride {
+  _$ThemeDataFamilyOverride(this.overriddenFamily, this.create);
+
+  final ThemeData Function(ThemeDataRef ref) create;
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  final ThemeDataFamily overriddenFamily;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'themeDataProvider';
+  ThemeDataProvider getProviderOverride(
+    covariant ThemeDataProvider provider,
+  ) {
+    return provider._copyWith(create);
+  }
 }
 
 /// See also [themeData].
@@ -95,7 +117,7 @@ class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
         );
 
   ThemeDataProvider._internal(
-    super._createNotifier, {
+    super.create, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
@@ -108,7 +130,7 @@ class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
 
   @override
   Override overrideWith(
-    ThemeData Function(ThemeDataRef provider) create,
+    ThemeData Function(ThemeDataRef ref) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -125,8 +147,29 @@ class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
   }
 
   @override
+  ({
+    bool isDarkMode,
+  }) get argument {
+    return (isDarkMode: isDarkMode,);
+  }
+
+  @override
   AutoDisposeProviderElement<ThemeData> createElement() {
     return _ThemeDataProviderElement(this);
+  }
+
+  ThemeDataProvider _copyWith(
+    ThemeData Function(ThemeDataRef ref) create,
+  ) {
+    return ThemeDataProvider._internal(
+      (ref) => create(ref as ThemeDataRef),
+      name: name,
+      dependencies: dependencies,
+      allTransitiveDependencies: allTransitiveDependencies,
+      debugGetCreateSourceHash: debugGetCreateSourceHash,
+      from: from,
+      isDarkMode: isDarkMode,
+    );
   }
 
   @override
@@ -156,4 +199,4 @@ class _ThemeDataProviderElement extends AutoDisposeProviderElement<ThemeData>
   bool get isDarkMode => (origin as ThemeDataProvider).isDarkMode;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
