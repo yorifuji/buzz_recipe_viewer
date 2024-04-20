@@ -30,6 +30,8 @@ enum PreferenceKeys<T> {
   locale('locale', 0),
   // String
   appColor('app_color', ''),
+  // bool?
+  nullableBool('nullable_bool', null),
   ;
 
   const PreferenceKeys(this.key, this.defaultValue);
@@ -42,6 +44,9 @@ class PreferenceNotifier<T> extends _$PreferenceNotifier<T> {
   @override
   T build(PreferenceKeys<T> keyValue) {
     if (keyValue.defaultValue is bool) {
+      final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
+      return value == null ? keyValue.defaultValue : value as T;
+    } else if (keyValue.defaultValue is bool?) {
       final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
       return value == null ? keyValue.defaultValue : value as T;
     } else if (keyValue.defaultValue is String) {
