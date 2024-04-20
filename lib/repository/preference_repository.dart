@@ -31,7 +31,7 @@ enum PreferenceKeys<T> {
   // String
   appColor('app_color', ''),
   // bool?
-  nullableBool('nullable_bool', null),
+  // nullableBool('nullable_bool', null),
   ;
 
   const PreferenceKeys(this.key, this.defaultValue);
@@ -46,9 +46,9 @@ class PreferenceNotifier<T> extends _$PreferenceNotifier<T> {
     if (keyValue.defaultValue is bool) {
       final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
       return value == null ? keyValue.defaultValue : value as T;
-    } else if (keyValue.defaultValue is bool?) {
-      final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
-      return value == null ? keyValue.defaultValue : value as T;
+      // } else if (keyValue.defaultValue is bool?) {
+      //   final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
+      //   return value == null ? keyValue.defaultValue : value as T;
     } else if (keyValue.defaultValue is String) {
       final value =
           ref.watch(sharedPreferencesProvider).getString(keyValue.key);

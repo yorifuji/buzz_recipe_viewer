@@ -10,8 +10,8 @@ class AppColorNotifer extends _$AppColorNotifer {
   AppColor build() {
     final appColor =
         ref.watch(preferenceNotifierProvider(PreferenceKeys.appColor));
-    final nullableValue = ref
-        .watch(preferenceNotifierProvider<bool?>(PreferenceKeys.nullableBool));
+    // final nullableValue = ref
+    //     .watch(preferenceNotifierProvider<bool?>(PreferenceKeys.nullableBool));
     return AppColor.fromName(appColor);
   }
 
@@ -19,10 +19,12 @@ class AppColorNotifer extends _$AppColorNotifer {
     await ref
         .read(preferenceNotifierProvider(PreferenceKeys.appColor).notifier)
         .update(appColor.name);
-    await ref
-        .read(preferenceNotifierProvider<bool?>(PreferenceKeys.nullableBool)
-            .notifier)
-        .update(null);
+    // await ref
+    //     .read(
+    //       preferenceNotifierProvider<bool?>(PreferenceKeys.nullableBool)
+    //           .notifier,
+    //     )
+    //     .update(null);
     ref.invalidateSelf();
   }
 }
