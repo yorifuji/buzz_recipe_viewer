@@ -119,8 +119,8 @@ class SettingsPage extends ConsumerWidget {
                 onToggle: (value) => ref
                     .read(
                       boolPreferenceProvider(
-                              BoolPreferenceKey.useInternalPlayer)
-                          .notifier,
+                        BoolPreferenceKey.useInternalPlayer,
+                      ).notifier,
                     )
                     .update(value),
               ),
