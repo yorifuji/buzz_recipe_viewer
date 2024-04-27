@@ -15,9 +15,9 @@ _$SearchHitImpl _$$SearchHitImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String,
       published: json['published'] as String,
-      timestamp: json['timestamp'] as int,
-      views: json['views'] as int,
-      likes: json['likes'] as int,
+      timestamp: (json['timestamp'] as num).toInt(),
+      views: (json['views'] as num).toInt(),
+      likes: (json['likes'] as num).toInt(),
       image: json['image'] as String,
       url: json['url'] as String,
     );

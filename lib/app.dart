@@ -30,7 +30,7 @@ class App extends ConsumerWidget {
         ],
         supportedLocales: LocalePreference.supportedLocaleList(),
         home: ref.watch(
-          boolPreferenceProvider(BoolPreferenceKey.shouldShowWalkthrough),
+          boolPreferenceProvider(PreferenceKey.shouldShowWalkthrough),
         )
             ? const WalkthroughPage()
             : const NavigationPage(),

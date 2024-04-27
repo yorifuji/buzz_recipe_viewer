@@ -15,7 +15,7 @@ void main() {
       widget: ProviderScope(
         overrides: [
           searchViewModelProvider.overrideWith(FakeSearchViewModel.new),
-          boolPreferenceProvider(BoolPreferenceKey.useInternalPlayer)
+          boolPreferenceProvider(PreferenceKey.useInternalPlayer)
               .overrideWith(FakeTruePreference.new),
         ],
         child: const SearchPage(),

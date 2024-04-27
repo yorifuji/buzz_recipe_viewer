@@ -29,9 +29,9 @@ FavoriteVideoData _$FavoriteVideoDataFromJson(Map<String, dynamic> json) =>
       json['title'] as String,
       json['description'] as String,
       json['published'] as String,
-      json['timestamp'] as int,
-      json['views'] as int,
-      json['likes'] as int,
+      (json['timestamp'] as num).toInt(),
+      (json['views'] as num).toInt(),
+      (json['likes'] as num).toInt(),
       json['image'] as String,
       json['url'] as String,
     );

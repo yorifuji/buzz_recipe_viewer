@@ -9,13 +9,13 @@ class AppColorNotifer extends _$AppColorNotifer {
   @override
   AppColor build() {
     final appColor =
-        ref.watch(stringPreferenceProvider(StringPreferenceKey.appColor));
+        ref.watch(stringPreferenceProvider(PreferenceKey.appColor));
     return AppColor.fromName(appColor);
   }
 
   Future<void> update(AppColor appColor) async {
     await ref
-        .read(stringPreferenceProvider(StringPreferenceKey.appColor).notifier)
+        .read(stringPreferenceProvider(PreferenceKey.appColor).notifier)
         .update(appColor.name);
     ref.invalidateSelf();
   }
