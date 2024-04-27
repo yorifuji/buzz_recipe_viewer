@@ -9,7 +9,7 @@ part 'locale_notifier.g.dart';
 class LocaleNotifer extends _$LocaleNotifer {
   @override
   LocalePreference build() {
-    final index = ref.watch(intPreferenceProvider(IntKey.locale));
+    final index = ref.watch(intPreferenceProvider(IntPreferenceKey.locale));
     final localePreference = LocalePreference.fromIndex(index);
     _applyLocaleSettings(localePreference);
     return localePreference;
@@ -17,7 +17,7 @@ class LocaleNotifer extends _$LocaleNotifer {
 
   Future<void> update(LocalePreference localePreference) async {
     await ref
-        .read(intPreferenceProvider(IntKey.locale).notifier)
+        .read(intPreferenceProvider(IntPreferenceKey.locale).notifier)
         .update(localePreference.index);
     ref.invalidateSelf();
   }

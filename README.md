@@ -155,6 +155,10 @@ Android および iOS のみ対応、`--dart-define=FLAVOR=...` で切り替え
     - GitHub Pages
 - Nightly build
 
+# 素材
+
+- https://loosedrawing.com/
+
 # Related repository
 
 - [yorifuji/buzz_recipe_importer](https://github.com/yorifuji/buzz_recipe_importer)

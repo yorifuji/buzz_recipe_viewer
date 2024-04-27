@@ -4,32 +4,32 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'preference_repository.g.dart';
 
-enum BoolKey {
+enum BoolPreferenceKey {
   useInternalPlayer('use_internal_player', true),
   shouldShowWalkthrough('should_show_walkthrough', true),
   ;
 
   // ignore: avoid_positional_boolean_parameters
-  const BoolKey(this.key, this.defaultValue);
+  const BoolPreferenceKey(this.key, this.defaultValue);
   final String key;
   final bool defaultValue;
 }
 
-enum IntKey {
+enum IntPreferenceKey {
   themeMode('theme_mode', 0),
   locale('locale', 0),
   ;
 
-  const IntKey(this.key, this.defaultValue);
+  const IntPreferenceKey(this.key, this.defaultValue);
   final String key;
   final int defaultValue;
 }
 
-enum StringKey {
+enum StringPreferenceKey {
   appColor('app_color', ''),
   ;
 
-  const StringKey(this.key, this.defaultValue);
+  const StringPreferenceKey(this.key, this.defaultValue);
   final String key;
   final String defaultValue;
 }
@@ -37,7 +37,7 @@ enum StringKey {
 @riverpod
 class BoolPreference extends _$BoolPreference {
   @override
-  bool build(BoolKey keyValue) =>
+  bool build(BoolPreferenceKey keyValue) =>
       ref.watch(sharedPreferencesProvider).getBool(keyValue.key) ??
       keyValue.defaultValue;
 
@@ -51,7 +51,7 @@ class BoolPreference extends _$BoolPreference {
 @riverpod
 class IntPreference extends _$IntPreference {
   @override
-  int build(IntKey keyValue) =>
+  int build(IntPreferenceKey keyValue) =>
       ref.watch(sharedPreferencesProvider).getInt(keyValue.key) ??
       keyValue.defaultValue;
 
@@ -64,7 +64,7 @@ class IntPreference extends _$IntPreference {
 @riverpod
 class StringPreference extends _$StringPreference {
   @override
-  String build(StringKey keyValue) =>
+  String build(StringPreferenceKey keyValue) =>
       ref.watch(sharedPreferencesProvider).getString(keyValue.key) ??
       keyValue.defaultValue;
 
@@ -78,14 +78,14 @@ class FakeTruePreference extends _$BoolPreference
     with Mock
     implements BoolPreference {
   @override
-  bool build(BoolKey keyValue) => true;
+  bool build(BoolPreferenceKey keyValue) => true;
 }
 
 class FakeFalsePreference extends _$BoolPreference
     with Mock
     implements BoolPreference {
   @override
-  bool build(BoolKey keyValue) => false;
+  bool build(BoolPreferenceKey keyValue) => false;
 }
 
 class FakeIntPreference extends _$IntPreference
@@ -96,5 +96,5 @@ class FakeIntPreference extends _$IntPreference
   // ignore: avoid_public_notifier_properties
   final int value;
   @override
-  int build(IntKey keyValue) => value;
+  int build(IntPreferenceKey keyValue) => value;
 }

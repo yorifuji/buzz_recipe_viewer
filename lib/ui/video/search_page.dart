@@ -6,7 +6,7 @@ import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/service/favorite_service.dart';
-import 'package:buzz_recipe_viewer/store/search_state_store.dart';
+import 'package:buzz_recipe_viewer/store/video/search_state_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
@@ -88,7 +88,7 @@ class _VideoListContainer extends HookConsumerWidget {
         ref.watch(searchStateStoreProvider.select((value) => value.nextPage));
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
-        ref.watch(boolPreferenceProvider(BoolKey.useInternalPlayer));
+        ref.watch(boolPreferenceProvider(BoolPreferenceKey.useInternalPlayer));
 
     if (hitList.isEmpty) {
       return Center(child: Text(t.common.searchEmpty));
