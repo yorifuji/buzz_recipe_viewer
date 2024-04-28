@@ -8,7 +8,16 @@ on:
       - main
 
 jobs:
+  check:
+    uses: ./.github/workflows/check.yml
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    secrets: inherit
+
   pages:
+    needs: check
     uses: ./.github/workflows/deliver-dev.yml
     secrets: inherit
     permissions:
