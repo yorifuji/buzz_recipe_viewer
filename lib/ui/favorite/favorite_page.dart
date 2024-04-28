@@ -81,7 +81,7 @@ class _FavoriteContainer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
-        ref.watch(preferenceNotifierProvider(PreferenceKeys.useInternalPlayer));
+        ref.watch(preferenceNotifierProvider(PreferenceKey.useInternalPlayer));
 
     return Dismissible(
       key: UniqueKey(),

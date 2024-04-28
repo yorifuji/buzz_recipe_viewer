@@ -36,7 +36,7 @@ class WalkthroughPage extends ConsumerWidget {
       onDone: () {
         ref
             .read(
-              preferenceNotifierProvider(PreferenceKeys.shouldShowWalkthrough)
+              preferenceNotifierProvider(PreferenceKey.shouldShowWalkthrough)
                   .notifier,
             )
             .update(false);

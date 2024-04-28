@@ -3,25 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'preference_repository.g.dart';
 
-// class PreferenceKey<T> {
-//   const PreferenceKey(this.key, this.defaultValue);
-//   final String key;
-//   final T defaultValue;
-// }
-
-// class PreferenceKeys {
-//   static const useInternalPlayer =
-//       PreferenceKey<bool>('use_internal_player', true);
-//   static const shouldShowWalkthrough =
-//       PreferenceKey<bool>('should_show_walkthrough', true);
-//   static const themeMode = PreferenceKey<int>('theme_mode', 0);
-//   static const locale = PreferenceKey<int>('locale', 0);
-//   static const appColor = PreferenceKey<String>('app_color', '');
-//   // dummy
-//   static const nullableBool = PreferenceKey<bool?>('nullable_bool', null);
-// }
-
-enum PreferenceKeys<T> {
+enum PreferenceKey<T> {
   // bool
   useInternalPlayer('use_internal_player', true),
   shouldShowWalkthrough('should_show_walkthrough', true),
@@ -34,7 +16,7 @@ enum PreferenceKeys<T> {
   // nullableBool('nullable_bool', null),
   ;
 
-  const PreferenceKeys(this.key, this.defaultValue);
+  const PreferenceKey(this.key, this.defaultValue);
   final String key;
   final T defaultValue;
 }
@@ -42,13 +24,21 @@ enum PreferenceKeys<T> {
 @riverpod
 class PreferenceNotifier<T> extends _$PreferenceNotifier<T> {
   @override
-  T build(PreferenceKeys<T> keyValue) {
+  T build(PreferenceKey<T> keyValue) {
+    // return switch (keyValue.defaultValue.runtimeType) {
+    //   bool => ref.watch(sharedPreferencesProvider).getBool(keyValue.key) as T ??
+    //       keyValue.defaultValue,
+    //   String =>
+    //     ref.watch(sharedPreferencesProvider).getString(keyValue.key) as T ??
+    //         keyValue.defaultValue,
+    //   int => ref.watch(sharedPreferencesProvider).getInt(keyValue.key) as T ??
+    //       keyValue.defaultValue,
+    //   _ => throw UnimplementedError(),
+    // };
+
     if (keyValue.defaultValue is bool) {
       final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
       return value == null ? keyValue.defaultValue : value as T;
-      // } else if (keyValue.defaultValue is bool?) {
-      //   final value = ref.watch(sharedPreferencesProvider).getBool(keyValue.key);
-      //   return value == null ? keyValue.defaultValue : value as T;
     } else if (keyValue.defaultValue is String) {
       final value =
           ref.watch(sharedPreferencesProvider).getString(keyValue.key);

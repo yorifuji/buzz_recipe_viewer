@@ -33,10 +33,10 @@ class _SystemHash {
 }
 
 abstract class _$PreferenceNotifier<T> extends BuildlessAutoDisposeNotifier<T> {
-  late final PreferenceKeys<T> keyValue;
+  late final PreferenceKey<T> keyValue;
 
   T build(
-    PreferenceKeys<T> keyValue,
+    PreferenceKey<T> keyValue,
   );
 }
 
@@ -65,7 +65,7 @@ class PreferenceNotifierFamily extends Family {
 
   /// See also [PreferenceNotifier].
   PreferenceNotifierProvider<T> call<T>(
-    PreferenceKeys<T> keyValue,
+    PreferenceKey<T> keyValue,
   ) {
     return PreferenceNotifierProvider<T>(
       keyValue,
@@ -109,7 +109,7 @@ class PreferenceNotifierProvider<T>
     extends AutoDisposeNotifierProviderImpl<PreferenceNotifier<T>, T> {
   /// See also [PreferenceNotifier].
   PreferenceNotifierProvider(
-    PreferenceKeys<T> keyValue,
+    PreferenceKey<T> keyValue,
   ) : this._internal(
           () => PreferenceNotifier<T>()..keyValue = keyValue,
           from: preferenceNotifierProvider,
@@ -134,7 +134,7 @@ class PreferenceNotifierProvider<T>
     required this.keyValue,
   }) : super.internal();
 
-  final PreferenceKeys<T> keyValue;
+  final PreferenceKey<T> keyValue;
 
   @override
   T runNotifierBuild(
@@ -162,7 +162,7 @@ class PreferenceNotifierProvider<T>
   }
 
   @override
-  (PreferenceKeys<T>,) get argument {
+  (PreferenceKey<T>,) get argument {
     return (keyValue,);
   }
 
@@ -204,7 +204,7 @@ class PreferenceNotifierProvider<T>
 
 mixin PreferenceNotifierRef<T> on AutoDisposeNotifierProviderRef<T> {
   /// The parameter `keyValue` of this provider.
-  PreferenceKeys<T> get keyValue;
+  PreferenceKey<T> get keyValue;
 }
 
 class _PreferenceNotifierProviderElement<T>
@@ -213,7 +213,7 @@ class _PreferenceNotifierProviderElement<T>
   _PreferenceNotifierProviderElement(super.provider);
 
   @override
-  PreferenceKeys<T> get keyValue =>
+  PreferenceKey<T> get keyValue =>
       (origin as PreferenceNotifierProvider<T>).keyValue;
 }
 // ignore_for_file: type=lint

@@ -9,19 +9,19 @@ class AppColorNotifer extends _$AppColorNotifer {
   @override
   AppColor build() {
     final appColor =
-        ref.watch(preferenceNotifierProvider(PreferenceKeys.appColor));
+        ref.watch(preferenceNotifierProvider(PreferenceKey.appColor));
     // final nullableValue = ref
-    //     .watch(preferenceNotifierProvider<bool?>(PreferenceKeys.nullableBool));
+    //     .watch(preferenceNotifierProvider<bool?>(PreferenceKey.nullableBool));
     return AppColor.fromName(appColor);
   }
 
   Future<void> update(AppColor appColor) async {
     await ref
-        .read(preferenceNotifierProvider(PreferenceKeys.appColor).notifier)
+        .read(preferenceNotifierProvider(PreferenceKey.appColor).notifier)
         .update(appColor.name);
     // await ref
     //     .read(
-    //       preferenceNotifierProvider<bool?>(PreferenceKeys.nullableBool)
+    //       preferenceNotifierProvider<bool?>(PreferenceKey.nullableBool)
     //           .notifier,
     //     )
     //     .update(null);

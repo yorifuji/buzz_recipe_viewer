@@ -9,13 +9,13 @@ class ThemeNotifer extends _$ThemeNotifer {
   @override
   ThemePreference build() {
     final index =
-        ref.watch(preferenceNotifierProvider(PreferenceKeys.themeMode));
+        ref.watch(preferenceNotifierProvider(PreferenceKey.themeMode));
     return ThemePreference.fromIndex(index);
   }
 
   Future<void> update(ThemePreference themeModePreference) async {
     await ref
-        .read(preferenceNotifierProvider(PreferenceKeys.themeMode).notifier)
+        .read(preferenceNotifierProvider(PreferenceKey.themeMode).notifier)
         .update(themeModePreference.index);
     ref.invalidateSelf();
   }
