@@ -188,13 +188,12 @@ jobs:
 
       - run: flutter pub get
 
-      - name: Build
-        run: |
-          flutter build macos --dart-define=FLAVOR=stg
+      - run: flutter build macos --dart-define=FLAVOR=stg
 
   action-timeline:
     needs: [android, ios, macos]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-stg.yml' }}
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2

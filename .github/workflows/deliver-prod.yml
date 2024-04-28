@@ -198,9 +198,7 @@ jobs:
 
       - run: flutter pub get
 
-      - name: Build
-        run: |
-          flutter build macos --dart-define=FLAVOR=prod
+      - run: flutter build macos --dart-define=FLAVOR=prod
 
   action-timeline:
     needs: [android, ios, macos]
