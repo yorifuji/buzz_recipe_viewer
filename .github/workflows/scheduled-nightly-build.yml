@@ -7,9 +7,6 @@ on:
   schedule:
     - cron: '0 15 * * *'
 
-permissions:
-  contents: read
-
 jobs:
   check:
     uses: ./.github/workflows/check.yml
@@ -22,6 +19,8 @@ jobs:
   build-prod:
     needs: check
     uses: ./.github/workflows/deliver-prod.yml
+    permissions:
+      contents: read
     secrets: inherit
     with:
       upload: false
@@ -29,6 +28,8 @@ jobs:
   build-stg:
     needs: check
     uses: ./.github/workflows/deliver-stg.yml
+    permissions:
+      contents: read
     secrets: inherit
     with:
       upload: false
