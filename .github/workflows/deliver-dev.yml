@@ -18,11 +18,16 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   web:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -38,9 +43,23 @@ jobs:
 
       - run: flutter build web --dart-define=FLAVOR=dev
 
+      - uses: actions/configure-pages@v5
+        if: ${{ inputs.upload }}
+
+      - name: Upload artifact
+        if: ${{ inputs.upload }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+      - name: Deploy to GitHub Pages
+        if: ${{ inputs.upload }}
+        id: deployment
+        uses: actions/deploy-pages@v4
+
   action-timeline:
     needs: [web]
-    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-stg.yml' }}
+    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-dev.yml' }}
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:

@@ -9,7 +9,7 @@ on:
 
 jobs:
   pages:
-    uses: ./.github/workflows/deliver-pages.yml
+    uses: ./.github/workflows/deliver-dev.yml
     secrets: inherit
     permissions:
       contents: read
