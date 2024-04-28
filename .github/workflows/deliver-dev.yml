@@ -1,0 +1,45 @@
+name: 05 Deliver for development
+
+run-name: Deliver for dev ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      upload:
+        description: 'Upload'
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      upload:
+        description: 'Upload'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
+          channel: stable
+          cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+
+      - run: flutter pub get
+
+      - run: flutter build web --dart-define=FLAVOR=dev
+
+  action-timeline:
+    needs: [web]
+    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-stg.yml' }}
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v2
