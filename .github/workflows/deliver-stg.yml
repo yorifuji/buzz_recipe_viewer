@@ -190,7 +190,7 @@ jobs:
 
       - name: Build
         run: |
-          flutter build macos
+          flutter build macos --dart-define=FLAVOR=stg
 
   action-timeline:
     needs: [android, ios, macos]
