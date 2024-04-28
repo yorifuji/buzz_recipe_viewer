@@ -97,7 +97,7 @@ jobs:
 
   ios:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
-    timeout-minutes: 60
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -176,7 +176,7 @@ jobs:
 
   macos:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
-    timeout-minutes: 60
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -204,5 +204,6 @@ jobs:
     needs: [android, ios, macos]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-prod.yml' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: Kesin11/actions-timeline@v2

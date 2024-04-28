@@ -33,20 +33,17 @@ jobs:
     with:
       upload: false
 
-  build-pages:
+  build-dev:
     needs: check
-    uses: ./.github/workflows/deliver-pages.yml
+    uses: ./.github/workflows/deliver-dev.yml
     secrets: inherit
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     with:
       upload: false
 
   action-timeline:
-    needs: [check, build-prod, build-stg, build-pages]
+    needs: [check, build-prod, build-stg, build-dev]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: Kesin11/actions-timeline@v2

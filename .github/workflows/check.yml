@@ -139,5 +139,6 @@ jobs:
     needs: [format, analyze, test]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/check.yml' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: Kesin11/actions-timeline@v2

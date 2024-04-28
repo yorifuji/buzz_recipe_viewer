@@ -1,4 +1,4 @@
-name: 05 Deliver for GitHub Pages
+name: 06 Deliver for GitHub Pages
 
 run-name: Deliver for GitHub Pages ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
@@ -33,6 +33,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -63,6 +64,7 @@ jobs:
   action-timeline:
     needs: [deploy-pages]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-pages.yml' }}
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
       - uses: Kesin11/actions-timeline@v2
