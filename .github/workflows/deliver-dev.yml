@@ -32,6 +32,8 @@ jobs:
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
+      - run: make build-runner
+
       - run: flutter pub get
 
       - run: flutter build web --dart-define=FLAVOR=dev
