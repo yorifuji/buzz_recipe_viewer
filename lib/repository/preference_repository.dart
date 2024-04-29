@@ -51,8 +51,8 @@ extension on SharedPreferences {
       final value = getStringList(prefKey.key);
       return value == null ? prefKey.defaultValue : value as T;
     } else {
-      throw UnimplementedError(
-        '''SharedPreferencesExt.getValue: unsupported types ${prefKey.defaultValue.runtimeType}''',
+      throw UnsupportedError(
+        '''SharedPreferencesExt:getValue() unsupported types ${prefKey.defaultValue.runtimeType}''',
       );
     }
   }
@@ -69,8 +69,8 @@ extension on SharedPreferences {
     } else if (value is List<String>) {
       return setStringList(prefKey.key, value);
     } else {
-      throw UnimplementedError(
-        '''SharedPreferencesExt.setValue: unsupported types ${prefKey.defaultValue.runtimeType}''',
+      throw UnsupportedError(
+        '''SharedPreferencesExt:setValue() unsupported types ${prefKey.defaultValue.runtimeType}''',
       );
     }
   }
