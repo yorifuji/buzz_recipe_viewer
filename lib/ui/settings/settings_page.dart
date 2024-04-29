@@ -29,7 +29,7 @@ class SettingsPage extends ConsumerWidget {
     final packageInfo = ref.watch(packageInfoProvider);
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
-        ref.watch(boolPreferenceProvider(PreferenceKey.useInternalPlayer));
+        ref.watch(boolPreferenceProvider(Preference.useInternalPlayer));
 
     return Scaffold(
       appBar: AppBar(
@@ -119,7 +119,7 @@ class SettingsPage extends ConsumerWidget {
                 onToggle: (value) => ref
                     .read(
                       boolPreferenceProvider(
-                        PreferenceKey.useInternalPlayer,
+                        Preference.useInternalPlayer,
                       ).notifier,
                     )
                     .update(value),

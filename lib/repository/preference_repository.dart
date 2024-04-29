@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'preference_repository.g.dart';
 
-enum PreferenceKey<T> {
+enum Preference<T> {
   // bool
   useInternalPlayer('use_internal_player', true),
   shouldShowWalkthrough('should_show_walkthrough', true),
@@ -15,7 +15,7 @@ enum PreferenceKey<T> {
   appColor('app_color', ''),
   ;
 
-  const PreferenceKey(this.key, this.defaultValue);
+  const Preference(this.key, this.defaultValue);
   final String key;
   final T defaultValue;
 }
@@ -23,13 +23,13 @@ enum PreferenceKey<T> {
 @riverpod
 class BoolPreference extends _$BoolPreference {
   @override
-  bool build(PreferenceKey<bool> keyValue) =>
-      ref.read(sharedPreferencesProvider).getBool(keyValue.key) ??
-      keyValue.defaultValue;
+  bool build(Preference<bool> pref) =>
+      ref.read(sharedPreferencesProvider).getBool(pref.key) ??
+      pref.defaultValue;
 
   // ignore: avoid_positional_boolean_parameters
   Future<void> update(bool value) async {
-    await ref.read(sharedPreferencesProvider).setBool(keyValue.key, value);
+    await ref.read(sharedPreferencesProvider).setBool(pref.key, value);
     ref.invalidateSelf();
   }
 }
@@ -37,12 +37,11 @@ class BoolPreference extends _$BoolPreference {
 @riverpod
 class IntPreference extends _$IntPreference {
   @override
-  int build(PreferenceKey<int> keyValue) =>
-      ref.read(sharedPreferencesProvider).getInt(keyValue.key) ??
-      keyValue.defaultValue;
+  int build(Preference<int> pref) =>
+      ref.read(sharedPreferencesProvider).getInt(pref.key) ?? pref.defaultValue;
 
   Future<void> update(int value) async {
-    await ref.read(sharedPreferencesProvider).setInt(keyValue.key, value);
+    await ref.read(sharedPreferencesProvider).setInt(pref.key, value);
     ref.invalidateSelf();
   }
 }
@@ -50,12 +49,12 @@ class IntPreference extends _$IntPreference {
 @riverpod
 class StringPreference extends _$StringPreference {
   @override
-  String build(PreferenceKey<String> keyValue) =>
-      ref.read(sharedPreferencesProvider).getString(keyValue.key) ??
-      keyValue.defaultValue;
+  String build(Preference<String> pref) =>
+      ref.read(sharedPreferencesProvider).getString(pref.key) ??
+      pref.defaultValue;
 
   Future<void> update(String value) async {
-    await ref.read(sharedPreferencesProvider).setString(keyValue.key, value);
+    await ref.read(sharedPreferencesProvider).setString(pref.key, value);
     ref.invalidateSelf();
   }
 }
@@ -64,14 +63,14 @@ class FakeTruePreference extends _$BoolPreference
     with Mock
     implements BoolPreference {
   @override
-  bool build(PreferenceKey<bool> keyValue) => true;
+  bool build(Preference<bool> pref) => true;
 }
 
 class FakeFalsePreference extends _$BoolPreference
     with Mock
     implements BoolPreference {
   @override
-  bool build(PreferenceKey<bool> keyValue) => false;
+  bool build(Preference<bool> pref) => false;
 }
 
 class FakeIntPreference extends _$IntPreference
@@ -82,5 +81,5 @@ class FakeIntPreference extends _$IntPreference
   // ignore: avoid_public_notifier_properties
   final int value;
   @override
-  int build(PreferenceKey<int> keyValue) => value;
+  int build(Preference<int> pref) => value;
 }

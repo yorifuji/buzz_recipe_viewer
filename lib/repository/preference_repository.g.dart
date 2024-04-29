@@ -8,7 +8,7 @@ part of 'preference_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$boolPreferenceHash() => r'e824c16586401513df134ecf0467c37d23d5ccca';
+String _$boolPreferenceHash() => r'b0b32b677185b1fcf258c4911cae1d88efa3b5a1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,10 +32,10 @@ class _SystemHash {
 }
 
 abstract class _$BoolPreference extends BuildlessAutoDisposeNotifier<bool> {
-  late final PreferenceKey<bool> keyValue;
+  late final Preference<bool> pref;
 
   bool build(
-    PreferenceKey<bool> keyValue,
+    Preference<bool> pref,
   );
 }
 
@@ -50,10 +50,10 @@ class BoolPreferenceFamily extends Family<bool> {
 
   /// See also [BoolPreference].
   BoolPreferenceProvider call(
-    PreferenceKey<bool> keyValue,
+    Preference<bool> pref,
   ) {
     return BoolPreferenceProvider(
-      keyValue,
+      pref,
     );
   }
 
@@ -62,7 +62,7 @@ class BoolPreferenceFamily extends Family<bool> {
     covariant BoolPreferenceProvider provider,
   ) {
     return call(
-      provider.keyValue,
+      provider.pref,
     );
   }
 
@@ -86,9 +86,9 @@ class BoolPreferenceProvider
     extends AutoDisposeNotifierProviderImpl<BoolPreference, bool> {
   /// See also [BoolPreference].
   BoolPreferenceProvider(
-    PreferenceKey<bool> keyValue,
+    Preference<bool> pref,
   ) : this._internal(
-          () => BoolPreference()..keyValue = keyValue,
+          () => BoolPreference()..pref = pref,
           from: boolPreferenceProvider,
           name: r'boolPreferenceProvider',
           debugGetCreateSourceHash:
@@ -98,7 +98,7 @@ class BoolPreferenceProvider
           dependencies: BoolPreferenceFamily._dependencies,
           allTransitiveDependencies:
               BoolPreferenceFamily._allTransitiveDependencies,
-          keyValue: keyValue,
+          pref: pref,
         );
 
   BoolPreferenceProvider._internal(
@@ -108,17 +108,17 @@ class BoolPreferenceProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.keyValue,
+    required this.pref,
   }) : super.internal();
 
-  final PreferenceKey<bool> keyValue;
+  final Preference<bool> pref;
 
   @override
   bool runNotifierBuild(
     covariant BoolPreference notifier,
   ) {
     return notifier.build(
-      keyValue,
+      pref,
     );
   }
 
@@ -127,13 +127,13 @@ class BoolPreferenceProvider
     return ProviderOverride(
       origin: this,
       override: BoolPreferenceProvider._internal(
-        () => create()..keyValue = keyValue,
+        () => create()..pref = pref,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        keyValue: keyValue,
+        pref: pref,
       ),
     );
   }
@@ -145,21 +145,21 @@ class BoolPreferenceProvider
 
   @override
   bool operator ==(Object other) {
-    return other is BoolPreferenceProvider && other.keyValue == keyValue;
+    return other is BoolPreferenceProvider && other.pref == pref;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, keyValue.hashCode);
+    hash = _SystemHash.combine(hash, pref.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin BoolPreferenceRef on AutoDisposeNotifierProviderRef<bool> {
-  /// The parameter `keyValue` of this provider.
-  PreferenceKey<bool> get keyValue;
+  /// The parameter `pref` of this provider.
+  Preference<bool> get pref;
 }
 
 class _BoolPreferenceProviderElement
@@ -168,17 +168,16 @@ class _BoolPreferenceProviderElement
   _BoolPreferenceProviderElement(super.provider);
 
   @override
-  PreferenceKey<bool> get keyValue =>
-      (origin as BoolPreferenceProvider).keyValue;
+  Preference<bool> get pref => (origin as BoolPreferenceProvider).pref;
 }
 
-String _$intPreferenceHash() => r'1e3fa67172a45fa5c3a92e25fafe36e541762d6b';
+String _$intPreferenceHash() => r'f39b62f4b44dd341c85e0373ae72ba7fd215d492';
 
 abstract class _$IntPreference extends BuildlessAutoDisposeNotifier<int> {
-  late final PreferenceKey<int> keyValue;
+  late final Preference<int> pref;
 
   int build(
-    PreferenceKey<int> keyValue,
+    Preference<int> pref,
   );
 }
 
@@ -193,10 +192,10 @@ class IntPreferenceFamily extends Family<int> {
 
   /// See also [IntPreference].
   IntPreferenceProvider call(
-    PreferenceKey<int> keyValue,
+    Preference<int> pref,
   ) {
     return IntPreferenceProvider(
-      keyValue,
+      pref,
     );
   }
 
@@ -205,7 +204,7 @@ class IntPreferenceFamily extends Family<int> {
     covariant IntPreferenceProvider provider,
   ) {
     return call(
-      provider.keyValue,
+      provider.pref,
     );
   }
 
@@ -229,9 +228,9 @@ class IntPreferenceProvider
     extends AutoDisposeNotifierProviderImpl<IntPreference, int> {
   /// See also [IntPreference].
   IntPreferenceProvider(
-    PreferenceKey<int> keyValue,
+    Preference<int> pref,
   ) : this._internal(
-          () => IntPreference()..keyValue = keyValue,
+          () => IntPreference()..pref = pref,
           from: intPreferenceProvider,
           name: r'intPreferenceProvider',
           debugGetCreateSourceHash:
@@ -241,7 +240,7 @@ class IntPreferenceProvider
           dependencies: IntPreferenceFamily._dependencies,
           allTransitiveDependencies:
               IntPreferenceFamily._allTransitiveDependencies,
-          keyValue: keyValue,
+          pref: pref,
         );
 
   IntPreferenceProvider._internal(
@@ -251,17 +250,17 @@ class IntPreferenceProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.keyValue,
+    required this.pref,
   }) : super.internal();
 
-  final PreferenceKey<int> keyValue;
+  final Preference<int> pref;
 
   @override
   int runNotifierBuild(
     covariant IntPreference notifier,
   ) {
     return notifier.build(
-      keyValue,
+      pref,
     );
   }
 
@@ -270,13 +269,13 @@ class IntPreferenceProvider
     return ProviderOverride(
       origin: this,
       override: IntPreferenceProvider._internal(
-        () => create()..keyValue = keyValue,
+        () => create()..pref = pref,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        keyValue: keyValue,
+        pref: pref,
       ),
     );
   }
@@ -288,21 +287,21 @@ class IntPreferenceProvider
 
   @override
   bool operator ==(Object other) {
-    return other is IntPreferenceProvider && other.keyValue == keyValue;
+    return other is IntPreferenceProvider && other.pref == pref;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, keyValue.hashCode);
+    hash = _SystemHash.combine(hash, pref.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin IntPreferenceRef on AutoDisposeNotifierProviderRef<int> {
-  /// The parameter `keyValue` of this provider.
-  PreferenceKey<int> get keyValue;
+  /// The parameter `pref` of this provider.
+  Preference<int> get pref;
 }
 
 class _IntPreferenceProviderElement
@@ -311,16 +310,16 @@ class _IntPreferenceProviderElement
   _IntPreferenceProviderElement(super.provider);
 
   @override
-  PreferenceKey<int> get keyValue => (origin as IntPreferenceProvider).keyValue;
+  Preference<int> get pref => (origin as IntPreferenceProvider).pref;
 }
 
-String _$stringPreferenceHash() => r'733393a1e8abeb765d827ab0d0876bb012272b09';
+String _$stringPreferenceHash() => r'9eb1d103f3fa4dbb80d75b439f56cc1d69e776ab';
 
 abstract class _$StringPreference extends BuildlessAutoDisposeNotifier<String> {
-  late final PreferenceKey<String> keyValue;
+  late final Preference<String> pref;
 
   String build(
-    PreferenceKey<String> keyValue,
+    Preference<String> pref,
   );
 }
 
@@ -335,10 +334,10 @@ class StringPreferenceFamily extends Family<String> {
 
   /// See also [StringPreference].
   StringPreferenceProvider call(
-    PreferenceKey<String> keyValue,
+    Preference<String> pref,
   ) {
     return StringPreferenceProvider(
-      keyValue,
+      pref,
     );
   }
 
@@ -347,7 +346,7 @@ class StringPreferenceFamily extends Family<String> {
     covariant StringPreferenceProvider provider,
   ) {
     return call(
-      provider.keyValue,
+      provider.pref,
     );
   }
 
@@ -371,9 +370,9 @@ class StringPreferenceProvider
     extends AutoDisposeNotifierProviderImpl<StringPreference, String> {
   /// See also [StringPreference].
   StringPreferenceProvider(
-    PreferenceKey<String> keyValue,
+    Preference<String> pref,
   ) : this._internal(
-          () => StringPreference()..keyValue = keyValue,
+          () => StringPreference()..pref = pref,
           from: stringPreferenceProvider,
           name: r'stringPreferenceProvider',
           debugGetCreateSourceHash:
@@ -383,7 +382,7 @@ class StringPreferenceProvider
           dependencies: StringPreferenceFamily._dependencies,
           allTransitiveDependencies:
               StringPreferenceFamily._allTransitiveDependencies,
-          keyValue: keyValue,
+          pref: pref,
         );
 
   StringPreferenceProvider._internal(
@@ -393,17 +392,17 @@ class StringPreferenceProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.keyValue,
+    required this.pref,
   }) : super.internal();
 
-  final PreferenceKey<String> keyValue;
+  final Preference<String> pref;
 
   @override
   String runNotifierBuild(
     covariant StringPreference notifier,
   ) {
     return notifier.build(
-      keyValue,
+      pref,
     );
   }
 
@@ -412,13 +411,13 @@ class StringPreferenceProvider
     return ProviderOverride(
       origin: this,
       override: StringPreferenceProvider._internal(
-        () => create()..keyValue = keyValue,
+        () => create()..pref = pref,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        keyValue: keyValue,
+        pref: pref,
       ),
     );
   }
@@ -430,21 +429,21 @@ class StringPreferenceProvider
 
   @override
   bool operator ==(Object other) {
-    return other is StringPreferenceProvider && other.keyValue == keyValue;
+    return other is StringPreferenceProvider && other.pref == pref;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, keyValue.hashCode);
+    hash = _SystemHash.combine(hash, pref.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin StringPreferenceRef on AutoDisposeNotifierProviderRef<String> {
-  /// The parameter `keyValue` of this provider.
-  PreferenceKey<String> get keyValue;
+  /// The parameter `pref` of this provider.
+  Preference<String> get pref;
 }
 
 class _StringPreferenceProviderElement
@@ -453,8 +452,7 @@ class _StringPreferenceProviderElement
   _StringPreferenceProviderElement(super.provider);
 
   @override
-  PreferenceKey<String> get keyValue =>
-      (origin as StringPreferenceProvider).keyValue;
+  Preference<String> get pref => (origin as StringPreferenceProvider).pref;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

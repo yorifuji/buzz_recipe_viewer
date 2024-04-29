@@ -25,7 +25,7 @@ void main() {
               buildNumber: '1',
             ),
           ),
-          boolPreferenceProvider(PreferenceKey.useInternalPlayer)
+          boolPreferenceProvider(Preference.useInternalPlayer)
               .overrideWith(FakeTruePreference.new),
           themeDataProvider().overrideWith((ref) => ThemeData.light()),
           themeDataProvider(isDarkMode: true)

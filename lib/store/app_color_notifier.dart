@@ -8,14 +8,13 @@ part 'app_color_notifier.g.dart';
 class AppColorNotifer extends _$AppColorNotifer {
   @override
   AppColor build() {
-    final appColor =
-        ref.watch(stringPreferenceProvider(PreferenceKey.appColor));
+    final appColor = ref.watch(stringPreferenceProvider(Preference.appColor));
     return AppColor.fromName(appColor);
   }
 
   Future<void> update(AppColor appColor) async {
     await ref
-        .read(stringPreferenceProvider(PreferenceKey.appColor).notifier)
+        .read(stringPreferenceProvider(Preference.appColor).notifier)
         .update(appColor.name);
     ref.invalidateSelf();
   }
