@@ -9,7 +9,7 @@ part of 'preference_repository.dart';
 // **************************************************************************
 
 String _$preferenceNotifierHash() =>
-    r'15163380ca54a899178b74da906224b3b87daa2d';
+    r'86def3174cb2d8af28eb34596fa1ae272f2f99da';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -33,10 +33,10 @@ class _SystemHash {
 }
 
 abstract class _$PreferenceNotifier<T> extends BuildlessAutoDisposeNotifier<T> {
-  late final PreferenceKey<T> keyValue;
+  late final Preference<T> pref;
 
   T build(
-    PreferenceKey<T> keyValue,
+    Preference<T> pref,
   );
 }
 
@@ -65,10 +65,10 @@ class PreferenceNotifierFamily extends Family {
 
   /// See also [PreferenceNotifier].
   PreferenceNotifierProvider<T> call<T>(
-    PreferenceKey<T> keyValue,
+    Preference<T> pref,
   ) {
     return PreferenceNotifierProvider<T>(
-      keyValue,
+      pref,
     );
   }
 
@@ -78,7 +78,7 @@ class PreferenceNotifierFamily extends Family {
     covariant PreferenceNotifierProvider<Object?> provider,
   ) {
     return call(
-      provider.keyValue,
+      provider.pref,
     );
   }
 
@@ -109,9 +109,9 @@ class PreferenceNotifierProvider<T>
     extends AutoDisposeNotifierProviderImpl<PreferenceNotifier<T>, T> {
   /// See also [PreferenceNotifier].
   PreferenceNotifierProvider(
-    PreferenceKey<T> keyValue,
+    Preference<T> pref,
   ) : this._internal(
-          () => PreferenceNotifier<T>()..keyValue = keyValue,
+          () => PreferenceNotifier<T>()..pref = pref,
           from: preferenceNotifierProvider,
           name: r'preferenceNotifierProvider',
           debugGetCreateSourceHash:
@@ -121,7 +121,7 @@ class PreferenceNotifierProvider<T>
           dependencies: PreferenceNotifierFamily._dependencies,
           allTransitiveDependencies:
               PreferenceNotifierFamily._allTransitiveDependencies,
-          keyValue: keyValue,
+          pref: pref,
         );
 
   PreferenceNotifierProvider._internal(
@@ -131,17 +131,17 @@ class PreferenceNotifierProvider<T>
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.keyValue,
+    required this.pref,
   }) : super.internal();
 
-  final PreferenceKey<T> keyValue;
+  final Preference<T> pref;
 
   @override
   T runNotifierBuild(
     covariant PreferenceNotifier<T> notifier,
   ) {
     return notifier.build(
-      keyValue,
+      pref,
     );
   }
 
@@ -150,20 +150,20 @@ class PreferenceNotifierProvider<T>
     return ProviderOverride(
       origin: this,
       override: PreferenceNotifierProvider<T>._internal(
-        () => create()..keyValue = keyValue,
+        () => create()..pref = pref,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        keyValue: keyValue,
+        pref: pref,
       ),
     );
   }
 
   @override
-  (PreferenceKey<T>,) get argument {
-    return (keyValue,);
+  (Preference<T>,) get argument {
+    return (pref,);
   }
 
   @override
@@ -175,13 +175,13 @@ class PreferenceNotifierProvider<T>
     PreferenceNotifier Function() create,
   ) {
     return PreferenceNotifierProvider._internal(
-      () => create()..keyValue = keyValue,
+      () => create()..pref = pref,
       name: name,
       dependencies: dependencies,
       allTransitiveDependencies: allTransitiveDependencies,
       debugGetCreateSourceHash: debugGetCreateSourceHash,
       from: from,
-      keyValue: keyValue,
+      pref: pref,
     );
   }
 
@@ -189,13 +189,13 @@ class PreferenceNotifierProvider<T>
   bool operator ==(Object other) {
     return other is PreferenceNotifierProvider &&
         other.runtimeType == runtimeType &&
-        other.keyValue == keyValue;
+        other.pref == pref;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, keyValue.hashCode);
+    hash = _SystemHash.combine(hash, pref.hashCode);
     hash = _SystemHash.combine(hash, T.hashCode);
 
     return _SystemHash.finish(hash);
@@ -203,8 +203,8 @@ class PreferenceNotifierProvider<T>
 }
 
 mixin PreferenceNotifierRef<T> on AutoDisposeNotifierProviderRef<T> {
-  /// The parameter `keyValue` of this provider.
-  PreferenceKey<T> get keyValue;
+  /// The parameter `pref` of this provider.
+  Preference<T> get pref;
 }
 
 class _PreferenceNotifierProviderElement<T>
@@ -213,8 +213,7 @@ class _PreferenceNotifierProviderElement<T>
   _PreferenceNotifierProviderElement(super.provider);
 
   @override
-  PreferenceKey<T> get keyValue =>
-      (origin as PreferenceNotifierProvider<T>).keyValue;
+  Preference<T> get pref => (origin as PreferenceNotifierProvider<T>).pref;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

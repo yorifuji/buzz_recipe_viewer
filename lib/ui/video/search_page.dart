@@ -88,7 +88,7 @@ class _VideoListContainer extends HookConsumerWidget {
         ref.watch(searchStateStoreProvider.select((value) => value.nextPage));
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
-        ref.watch(preferenceNotifierProvider(PreferenceKey.useInternalPlayer));
+        ref.watch(preferenceNotifierProvider(Preference.useInternalPlayer));
 
     if (hitList.isEmpty) {
       return Center(child: Text(t.common.searchEmpty));
