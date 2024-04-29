@@ -24,7 +24,7 @@ enum Preference<T> {
 class PreferenceNotifier<T> extends _$PreferenceNotifier<T> {
   @override
   T build(Preference<T> pref) {
-    return ref.read(sharedPreferencesProvider).getValue(pref);
+    return ref.watch(sharedPreferencesProvider).getValue(pref);
   }
 
   Future<void> update(T value) async {
