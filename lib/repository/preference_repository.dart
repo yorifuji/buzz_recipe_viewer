@@ -24,7 +24,7 @@ enum Preference<T> {
 class BoolPreference extends _$BoolPreference {
   @override
   bool build(Preference<bool> pref) =>
-      ref.read(sharedPreferencesProvider).getBool(pref.key) ??
+      ref.watch(sharedPreferencesProvider).getBool(pref.key) ??
       pref.defaultValue;
 
   // ignore: avoid_positional_boolean_parameters
@@ -38,7 +38,8 @@ class BoolPreference extends _$BoolPreference {
 class IntPreference extends _$IntPreference {
   @override
   int build(Preference<int> pref) =>
-      ref.read(sharedPreferencesProvider).getInt(pref.key) ?? pref.defaultValue;
+      ref.watch(sharedPreferencesProvider).getInt(pref.key) ??
+      pref.defaultValue;
 
   Future<void> update(int value) async {
     await ref.read(sharedPreferencesProvider).setInt(pref.key, value);
@@ -50,7 +51,7 @@ class IntPreference extends _$IntPreference {
 class StringPreference extends _$StringPreference {
   @override
   String build(Preference<String> pref) =>
-      ref.read(sharedPreferencesProvider).getString(pref.key) ??
+      ref.watch(sharedPreferencesProvider).getString(pref.key) ??
       pref.defaultValue;
 
   Future<void> update(String value) async {
