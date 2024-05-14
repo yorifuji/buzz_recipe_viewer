@@ -126,84 +126,87 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          SettingsSection(
-            title: Text(
-              t.settings.support.header,
-              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-            ),
-            tiles: [
-              SettingsTile.navigation(
-                title: Text(
-                  t.settings.support.row.help.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                ),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
+          if (kDebugMode || !ref.watch(flavorProvider).isProd)
+            SettingsSection(
+              title: Text(
+                t.settings.support.header,
+                style: const TextStyle(fontFamily: FontFamily.notoSansJP),
               ),
-              SettingsTile.navigation(
-                title: Text(
-                  t.settings.support.row.contact.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                ),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
-              ),
-              SettingsTile.navigation(
-                title: Text(
-                  t.settings.support.row.feedback.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                ),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
-              ),
-              if (!kIsWeb)
-                SettingsTile(
+              tiles: [
+                SettingsTile.navigation(
                   title: Text(
-                    t.settings.support.row.review.title,
+                    t.settings.support.row.help.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
-                  onPressed: (context) async {
-                    final inAppReview = InAppReview.instance;
-                    if (await inAppReview.isAvailable()) {
-                      await inAppReview.requestReview();
-                    }
+                  onPressed: (context) =>
+                      _openBrowser(url: 'https://flutter.dev/'),
+                ),
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.support.row.contact.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) =>
+                      _openBrowser(url: 'https://flutter.dev/'),
+                ),
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.support.row.feedback.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) =>
+                      _openBrowser(url: 'https://flutter.dev/'),
+                ),
+                if (!kIsWeb)
+                  SettingsTile(
+                    title: Text(
+                      t.settings.support.row.review.title,
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onPressed: (context) async {
+                      final inAppReview = InAppReview.instance;
+                      if (await inAppReview.isAvailable()) {
+                        await inAppReview.requestReview();
+                      }
+                    },
+                  ),
+                SettingsTile(
+                  title: Text(
+                    t.settings.support.row.share.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Not implemented')),
+                    );
                   },
                 ),
-              SettingsTile(
-                title: Text(
-                  t.settings.support.row.share.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                ),
-                onPressed: (context) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Not implemented')),
-                  );
-                },
-              ),
-            ],
-          ),
+              ],
+            ),
           SettingsSection(
             title: Text(
               t.settings.about.header,
               style: const TextStyle(fontFamily: FontFamily.notoSansJP),
             ),
             tiles: [
-              SettingsTile.navigation(
-                title: Text(
-                  t.settings.about.row.terms.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+              if (kDebugMode || !ref.watch(flavorProvider).isProd) ...[
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.about.row.terms.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) =>
+                      _openBrowser(url: 'https://flutter.dev/'),
                 ),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
-              ),
-              SettingsTile.navigation(
-                title: Text(
-                  t.settings.about.row.privacy.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.about.row.privacy.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) =>
+                      _openBrowser(url: 'https://flutter.dev/'),
                 ),
-                onPressed: (context) =>
-                    _openBrowser(url: 'https://flutter.dev/'),
-              ),
+              ],
               SettingsTile.navigation(
                 title: Text(
                   t.settings.about.row.license.title,
