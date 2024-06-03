@@ -52,7 +52,15 @@ jobs:
           flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
           echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
+      - id: create-github-app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APPS_APP_ID }}
+          private-key: ${{ secrets.APPS_PRIVATE_KEY }}
+
       - name: commit and push pubspec.yaml
+        env:
+          GITHUB_TOKEN: ${{ steps.create-github-app-token.outputs.token }}
         run: |
           git add -u pubspec.yaml
           echo "Bumped version: $BUMP_VERSION" | git commit --file=-
@@ -60,6 +68,6 @@ jobs:
 
       - name: create tag and release note
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ steps.create-github-app-token.outputs.token }}
         run: |
           gh release create v$BUMP_VERSION --target ${{ github.ref_name }} --generate-notes
