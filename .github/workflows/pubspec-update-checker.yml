@@ -1,6 +1,6 @@
-name: pubspec.yaml update checker
+name: Dependency Update Checker
 
-run-name: Check pubspec.lock updates ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+run-name: Dependency Update Checker ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  pubspec-update-checker:
+  dependency-update-checker:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
@@ -28,11 +28,13 @@ jobs:
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - name: Check for changes
-        run: |
+      - run: |
           rm pubspec.lock
-          flutter pub get
-          git diff
+          rm ios/Podfile.lock macos/Podfile.lock
+      - run: flutter pub get
+      - run: cd ios && pod repo update && pod install --repo-update
+      - run: cd macos && pod repo update && pod install --repo-update
+      - run: git diff
 
       - name: Create PR if changes
         env:
@@ -41,11 +43,11 @@ jobs:
           if [[ -n $(git status --porcelain) ]]; then
             git config --local user.name $GIT_USER_NAME
             git config --local user.email $GIT_USER_EMAIL
-            git add pubspec.lock
-            git commit -m "Update pubspec.lock"
-            git checkout -b ci/pubspec-update-checker
-            git push -f origin ci/pubspec-update-checker
-            gh pr create --base ${{ github.ref_name }} --head ci/pubspec-update-checker --title "CI: Update pubspec.lock" --body "Update pubspec.lock" || exit 0
+            git add .
+            git commit -m "Update dependencies"
+            git checkout -b ci/dependency-update-checker
+            git push -f origin ci/dependency-update-checker
+            gh pr create --base ${{ github.ref_name }} --head ci/dependency-update-checker --title "CI: Update dependencies" --body "Update dependencies" || exit 0
           else
-            git push -d origin ci/pubspec-update-checker || exit 0
+            git push -d origin ci/dependency-update-checker || exit 0
           fi
