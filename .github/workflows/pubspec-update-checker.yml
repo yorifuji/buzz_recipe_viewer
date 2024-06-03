@@ -28,13 +28,18 @@ jobs:
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - run: |
-          rm pubspec.lock
-          rm ios/Podfile.lock macos/Podfile.lock
+      - run: flutter precache --ios --macos
+
+      - run: rm pubspec.lock ios/Podfile.lock macos/Podfile.lock
+
       - run: flutter pub get
+
       - run: sudo gem install cocoapods
+
       - run: cd ios && pod repo update && pod install --repo-update
+
       - run: cd macos && pod repo update && pod install --repo-update
+
       - run: git diff
 
       - name: Create PR if changes
