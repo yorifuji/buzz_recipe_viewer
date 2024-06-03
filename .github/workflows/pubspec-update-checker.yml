@@ -32,6 +32,7 @@ jobs:
           rm pubspec.lock
           rm ios/Podfile.lock macos/Podfile.lock
       - run: flutter pub get
+      - run: sudo gem install cocoapods
       - run: cd ios && pod repo update && pod install --repo-update
       - run: cd macos && pod repo update && pod install --repo-update
       - run: git diff
