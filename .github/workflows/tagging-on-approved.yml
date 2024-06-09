@@ -52,9 +52,15 @@ jobs:
         run: |
           echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' pubspec.yaml)" >> $GITHUB_ENV
 
+      - id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APPS_APP_ID }}
+          private-key: ${{ secrets.APPS_PRIVATE_KEY }}
+
       - name: create tag and release note
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           BUMP_VERSION: ${{ env.BUMP_VERSION }}
         run: |
           gh release create v$BUMP_VERSION --generate-notes
