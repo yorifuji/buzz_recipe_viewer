@@ -29,9 +29,15 @@ jobs:
 
       - uses: actions/checkout@v4
 
+      - id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APPS_APP_ID }}
+          private-key: ${{ secrets.APPS_PRIVATE_KEY }}
+
       - name: add comment to pull requset
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PULL_REQUERST_NUMBER: ${{ github.event.pull_request.number }}
         run: gh pr comment $PULL_REQUERST_NUMBER --body "🏃‍♂️ Going to delivery..."
 
