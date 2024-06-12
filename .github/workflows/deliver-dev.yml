@@ -57,6 +57,13 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      # Upload asset files to a GitHub Release if event is triggered by a push tag
+      - name: Upload asset files to a GitHub Release
+        if: ${{ github.event_name == 'push' && github.ref_type == 'tag' && inputs.upload}}
+        run: |
+          tar cvzf web.tar.gz build/web
+          gh release upload ${{ github.ref }} web.tar.gz --clobber
+
   action-timeline:
     needs: [web]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-dev.yml' }}
