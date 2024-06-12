@@ -57,9 +57,17 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      - id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APPS_APP_ID }}
+          private-key: ${{ secrets.APPS_PRIVATE_KEY }}
+
       # Upload asset files to a GitHub Release if event is triggered by a push tag
       - name: Upload asset files to a GitHub Release
         if: ${{ github.event_name == 'push' && github.ref_type == 'tag' && inputs.upload}}
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           tar cvzf web.tar.gz build/web
           gh release upload ${{ github.ref }} web.tar.gz --clobber
