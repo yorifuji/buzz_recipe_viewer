@@ -70,7 +70,7 @@ jobs:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           tar cvzf web.tar.gz build/web
-          gh release upload ${{ github.ref }} web.tar.gz --clobber
+          gh release upload ${{ github.ref_name }} web.tar.gz --clobber
 
   action-timeline:
     needs: [web]
