@@ -1,6 +1,6 @@
-name: 01 Bumpup pubspec.yaml
+name: 01 Bump up
 
-run-name: Bumpup ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+run-name: Bump up ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   workflow_dispatch:
