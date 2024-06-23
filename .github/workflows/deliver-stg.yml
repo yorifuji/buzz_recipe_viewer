@@ -40,7 +40,7 @@ jobs:
           PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
         run: |
           if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
+            echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
       - uses: subosito/flutter-action@v2
@@ -56,8 +56,8 @@ jobs:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           ANDROID_KEY_PROPERTIES_BASE64: ${{ secrets.ANDROID_KEY_PROPERTIES_BASE64 }}
         run: |
-          echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > ${{ runner.temp }}/release.jks
-          echo $ANDROID_KEY_PROPERTIES_BASE64 | base64 --decode > android/key.properties
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > ${{ runner.temp }}/release.jks
+          echo "$ANDROID_KEY_PROPERTIES_BASE64" | base64 --decode > android/key.properties
           echo storeFile=${{ runner.temp }}/release.jks >> android/key.properties
 
       - name: Build app bundle
@@ -96,7 +96,7 @@ jobs:
           PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
         run: |
           if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
+            echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
       - uses: subosito/flutter-action@v2
@@ -176,7 +176,7 @@ jobs:
           PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
         run: |
           if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
+            echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
       - uses: subosito/flutter-action@v2
