@@ -21,8 +21,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: get version from pubspec.yaml
-        run: |
-          echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' pubspec.yaml)" >> $GITHUB_ENV
+        run: echo "BUMP_VERSION=$(yq '.version' pubspec.yaml)" >> $GITHUB_ENV
 
       - id: app-token
         uses: actions/create-github-app-token@v1
