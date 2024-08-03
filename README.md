@@ -14,7 +14,7 @@
 | ![](./images/screenshot1.png)  | ![](./images/screenshot2.png)  |
 | ![](./images/screenshot3.png)  | ![](./images/screenshot4.png)  |
 
-| Web                           | macOS                         |
+| Web（[デモサイト](https://buzz.yorifuji.dev/)）                           | macOS                         |
 | ----------------------------- | ----------------------------- |
 | ![](./images/screenshot5.png) | ![](./images/screenshot6.png) |
 
