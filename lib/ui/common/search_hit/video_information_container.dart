@@ -39,6 +39,7 @@ class __TextInformationWidgetState extends State<VideoInformationContainer>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       widget.searchHit.title,
