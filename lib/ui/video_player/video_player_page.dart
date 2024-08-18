@@ -94,13 +94,13 @@ class _VideoPlayer extends ConsumerWidget {
     return YoutubePlayer(
       controller: controller,
       showVideoProgressIndicator: true,
-      bottomActions: [
+      bottomActions: const [
         CurrentPosition(),
         ProgressBar(
           isExpanded: true,
         ),
         RemainingDuration(),
-        const PlaybackSpeedButton(),
+        PlaybackSpeedButton(),
       ],
     );
   }
