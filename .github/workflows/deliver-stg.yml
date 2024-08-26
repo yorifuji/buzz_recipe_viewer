@@ -190,10 +190,12 @@ jobs:
 
       - run: flutter build macos --dart-define=FLAVOR=stg
 
+      - run: zip -r buzz_recipe_viewer_stg.zip build/macos/Build/Products/Release/buzz_recipe_viewer.app
+
       - uses: actions/upload-artifact@v4
         if: ${{ inputs.upload }}
         with:
-          path: build/macos/Build/Products/Release/buzz_recipe_viewer.app
+          path: buzz_recipe_viewer_stg.zip
           name: buzz_recipe_viewer_stg
           overwrite: true
 
