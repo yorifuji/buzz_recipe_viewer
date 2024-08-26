@@ -191,6 +191,7 @@ jobs:
       - run: flutter build macos --dart-define=FLAVOR=stg
 
       - uses: actions/upload-artifact@v4
+        if: ${{ inputs.upload }}
         with:
           path: build/macos/Build/Products/Release/buzz_recipe_viewer.app
           name: buzz_recipe_viewer_stg
