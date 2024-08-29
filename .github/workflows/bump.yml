@@ -31,9 +31,9 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -53,7 +53,7 @@ jobs:
           echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
       - id: app-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@31c86eb3b33c9b601a1f60f98dcbfd1d70f379b4 # v1.10.3
         with:
           app-id: ${{ secrets.APPS_APP_ID }}
           private-key: ${{ secrets.APPS_PRIVATE_KEY }}

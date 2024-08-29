@@ -32,7 +32,7 @@ jobs:
       expected-sha: ${{ steps.lookup.outputs.expected-sha }}
       expected-cache-hit: ${{ steps.lookup.outputs.expected-cache-hit }}
     steps:
-      - uses: yorifuji/easy-vrt@main
+      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
         id: lookup
         with:
           mode: lookup
@@ -43,11 +43,11 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ref: ${{ needs.lookup.outputs.expected-sha }}
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -67,7 +67,7 @@ jobs:
         run: |
           flutter test --update-goldens --tags=golden
 
-      - uses: yorifuji/easy-vrt@main
+      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
         with:
           mode: expected
           expected-dir: test/golden_test/goldens
@@ -79,11 +79,11 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ref: ${{ needs.lookup.outputs.actual-sha }}
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -103,7 +103,7 @@ jobs:
         run: |
           flutter test --update-goldens --tags=golden
 
-      - uses: yorifuji/easy-vrt@main
+      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
         with:
           mode: actual
           actual-dir: test/golden_test/goldens
@@ -114,7 +114,7 @@ jobs:
     needs: [lookup, expected, actual]
     runs-on: ubuntu-latest
     steps:
-      - uses: yorifuji/easy-vrt@v1
+      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
         with:
           mode: compare
           expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
@@ -127,4 +127,4 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: Kesin11/actions-timeline@v2
+      - uses: Kesin11/actions-timeline@da70beff098ff89b15d279e8bf2f60519a8dadd7 # v2.2.0

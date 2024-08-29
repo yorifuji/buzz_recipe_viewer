@@ -27,9 +27,9 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@6a0805fcefea3d4657a47ac4c165951e33482018 # v4.2.2
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -43,7 +43,7 @@ jobs:
             echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -88,7 +88,7 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Run pre-process script
         shell: bash
@@ -99,7 +99,7 @@ jobs:
             echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -168,7 +168,7 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Run pre-process script
         shell: bash
@@ -179,7 +179,7 @@ jobs:
             echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -197,7 +197,7 @@ jobs:
           popd
           mv build/macos/Build/Products/Release/buzz_recipe_viewer_stg.zip ./
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
         if: ${{ inputs.upload }}
         with:
           path: buzz_recipe_viewer_stg.zip
@@ -210,4 +210,4 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - uses: Kesin11/actions-timeline@v2
+      - uses: Kesin11/actions-timeline@da70beff098ff89b15d279e8bf2f60519a8dadd7 # v2.2.0

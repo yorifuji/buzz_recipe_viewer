@@ -20,7 +20,7 @@ jobs:
       github.event.review.state == 'approved' &&
       contains(github.event.pull_request.labels.*.name, 'deliver') == false
     steps:
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@31c86eb3b33c9b601a1f60f98dcbfd1d70f379b4 # v1.10.3
         id: app-token
         with:
           app-id: ${{ secrets.APPS_APP_ID }}
@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           ADD_LABEL: 'deliver'
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: add comment to pull requset
         env:
@@ -46,14 +46,14 @@ jobs:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: get version from pubspec.yaml
         run: |
           echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' pubspec.yaml)" >> $GITHUB_ENV
 
       - id: app-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@31c86eb3b33c9b601a1f60f98dcbfd1d70f379b4 # v1.10.3
         with:
           app-id: ${{ secrets.APPS_APP_ID }}
           private-key: ${{ secrets.APPS_PRIVATE_KEY }}
