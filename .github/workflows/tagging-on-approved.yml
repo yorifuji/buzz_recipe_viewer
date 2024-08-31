@@ -63,4 +63,4 @@ jobs:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           BUMP_VERSION: ${{ env.BUMP_VERSION }}
         run: |
-          gh release create v$BUMP_VERSION --generate-notes
+          gh release create v$BUMP_VERSION --generate-notes --draft
