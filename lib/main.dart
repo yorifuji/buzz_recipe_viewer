@@ -23,11 +23,11 @@ void main() async {
     )
   ).wait;
 
-  // Request permission
-  await FirebaseMessaging.instance.requestPermission();
-
   // Get the token each time the application loads
   final token = await FirebaseMessaging.instance.getToken();
+
+  // Request permission
+  await FirebaseMessaging.instance.requestPermission();
 
   runApp(
     ProviderScope(
