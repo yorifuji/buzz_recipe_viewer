@@ -190,7 +190,7 @@ jobs:
             -allowProvisioningUpdates \
             -authenticationKeyIssuerID $APPLE_API_ISSUER_ID \
             -authenticationKeyID $APPLE_API_KEY_ID \
-            -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8 | xcbeautify
+            -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
           xcodebuild -exportArchive \
             -archivePath ./build/ios/Runner.xcarchive \
             -exportPath ./build/ios/ipa \
