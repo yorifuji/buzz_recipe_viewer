@@ -20,15 +20,19 @@ update-goldens:
 .PHONY: firebase-configure
 firebase-configure-stg:
 	flutterfire configure \
+		--yes \
 		--project=buzzrecipeviewer-stg \
-		--platforms=android,ios \
+		--platforms=android,ios,macos \
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer.stg \
+		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer \
 		--android-package-name=dev.yorifuji.buzz_recipe_viewer.stg
 
 .PHONY: firebase-configure-prod
 firebase-configure-prod:
 	flutterfire configure \
+		--yes \
 		--project=buzzrecipeviewer \
-		--platforms=android,ios \
+		--platforms=android,ios,macos \
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer \
+		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer \
 		--android-package-name=dev.yorifuji.buzz_recipe_viewer
