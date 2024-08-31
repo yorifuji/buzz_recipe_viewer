@@ -12,6 +12,7 @@ import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +33,7 @@ class SettingsPage extends ConsumerWidget {
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
         ref.watch(boolPreferenceProvider(Preference.useInternalPlayer));
-    final fcmToken = ref.watch(firebaseMessagingTokenProvider);
+    // final fcmToken = ref.watch(firebaseMessagingTokenProvider) ?? 'N/A';
 
     return Scaffold(
       appBar: AppBar(
@@ -273,25 +274,49 @@ class SettingsPage extends ConsumerWidget {
                     );
                   },
                 ),
-                if (fcmToken != null)
-                  SettingsTile(
-                    title: InkWell(
-                      child: Text(
-                        t.settings.debug.row.fcmToken.title,
-                        style:
-                            const TextStyle(fontFamily: FontFamily.notoSansJP),
-                      ),
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: fcmToken));
+                SettingsTile(
+                  title: InkWell(
+                    child: const Text(
+                      'Request notification permission',
+                      style: TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onTap: () async {
+                      // Request permission
+                      final result =
+                          await FirebaseMessaging.instance.requestPermission();
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content:
+                              Text('Permission: ${result.authorizationStatus}'),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SettingsTile(
+                  title: InkWell(
+                    child: Text(
+                      t.settings.debug.row.fcmToken.title,
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onTap: () async {
+                      // Get the token each time the application loads
+                      final token = await FirebaseMessaging.instance.getToken();
+                      if (token != null) {
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Copied to clipboard'),
-                            duration: Duration(seconds: 1),
+                          SnackBar(
+                            content: Text('FCM Token: $token'),
+                            duration: const Duration(seconds: 1),
                           ),
                         );
-                      },
-                    ),
+                        await Clipboard.setData(ClipboardData(text: token));
+                      }
+                    },
                   ),
+                ),
               ],
             ),
         ],
