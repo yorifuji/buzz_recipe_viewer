@@ -22,15 +22,17 @@ firebase-configure-stg:
 	flutterfire configure \
 		--yes \
 		--project=buzzrecipeviewer-stg \
-		--platforms=android,ios \
+		--platforms=android,ios,macos \
+		--android-package-name=dev.yorifuji.buzz_recipe_viewer.stg \
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer.stg \
-		--android-package-name=dev.yorifuji.buzz_recipe_viewer.stg
+		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer
 
 .PHONY: firebase-configure-prod
 firebase-configure-prod:
 	flutterfire configure \
 		--yes \
 		--project=buzzrecipeviewer \
-		--platforms=android,ios \
+		--platforms=android,ios,macos \
+		--android-package-name=dev.yorifuji.buzz_recipe_viewer \
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer \
-		--android-package-name=dev.yorifuji.buzz_recipe_viewer
+		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer
