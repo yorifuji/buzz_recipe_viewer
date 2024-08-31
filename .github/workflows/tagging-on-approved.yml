@@ -27,7 +27,7 @@ jobs:
           private-key: ${{ secrets.APPS_PRIVATE_KEY }}
 
       - name: add deliver label to pull request
-        uses: abinoda/label-when-approved-action@9d8dd03e30f605a3bf687cde6614c1862862d466
+        uses: abinoda/label-when-approved-action@09b41ee798957cb258b29e12f7619bf18d229109 # v1.0.7
         env:
           APPROVALS: '1'
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
