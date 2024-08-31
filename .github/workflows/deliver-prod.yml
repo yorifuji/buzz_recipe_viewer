@@ -182,8 +182,32 @@ jobs:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
         run: |
           flutter build ios --release --no-codesign --dart-define=FLAVOR=prod
-          xcodebuild archive CODE_SIGNING_ALLOWED=NO -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive | xcbeautify
-          xcodebuild -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8 | xcbeautify
+          xcodebuild archive \
+            CODE_SIGNING_ALLOWED=NO \
+            -workspace ./ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -archivePath ./build/ios/Runner.xcarchive | xcbeautify
+          xcodebuild -exportArchive \
+            -archivePath ./build/ios/Runner.xcarchive \
+            -exportPath ./build/ios/ipa \
+            -exportOptionsPlist ./ios/ExportOptions.plist \
+            -allowProvisioningUpdates \
+            -authenticationKeyIssuerID $APPLE_API_ISSUER_ID \
+            -authenticationKeyID $APPLE_API_KEY_ID \
+            -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8 | xcbeautify
+
+      - run: |
+          pushd build/ios/ipa/
+          zip -r buzz_recipe_viewer.zip buzz_recipe_viewer.ipa
+          popd
+          mv build/ios/ipa/buzz_recipe_viewer.zip ./
+
+      - uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
+        with:
+          path: buzz_recipe_viewer.zip
+          name: buzz_recipe_viewer
+          overwrite: true
 
       - name: Find ipa file path
         id: info
