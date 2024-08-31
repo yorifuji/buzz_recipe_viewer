@@ -59,11 +59,9 @@ jobs:
         run: |
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
 
-      - name: Login Firebase and run flutterfire configure
+      - name: flutterfire configure
         run: |
-          which firebase || curl -sL https://firebase.tools | bash
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json firebase login
-          make firebase-configure-prod
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make firebase-configure-prod
 
       - name: Extract key.properties file
         env:
@@ -137,11 +135,9 @@ jobs:
         run: |
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
 
-      - name: Login Firebase and run flutterfire configure
+      - name: flutterfire configure
         run: |
-          which firebase || curl -sL https://firebase.tools | bash
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json firebase login
-          make firebase-configure-prod
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make firebase-configure-prod
 
       - name: Extract App Store Connect API Private Key
         env:
