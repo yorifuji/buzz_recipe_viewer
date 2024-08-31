@@ -23,18 +23,18 @@ void main() async {
     )
   ).wait;
 
-  // Get the token each time the application loads
-  final token = await FirebaseMessaging.instance.getToken();
+  // // Get the token each time the application loads
+  // final token = await FirebaseMessaging.instance.getToken();
 
-  // Request permission
-  await FirebaseMessaging.instance.requestPermission();
+  // // Request permission
+  // await FirebaseMessaging.instance.requestPermission();
 
   runApp(
     ProviderScope(
       overrides: [
         packageInfoProvider.overrideWithValue(packageInfo),
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-        firebaseMessagingTokenProvider.overrideWithValue(token),
+        firebaseMessagingTokenProvider.overrideWithValue(null),
       ],
       child: const App(),
     ),
