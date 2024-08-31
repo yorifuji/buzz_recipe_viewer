@@ -11,57 +11,57 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: any
-  freezed_annotation: any
-  json_annotation: any
-  algolia: any
-  flutter_dotenv: any
-  intl: any
-  url_launcher: any
-  flutter_hooks: any
-  hooks_riverpod: any
-  riverpod_annotation: any
-  path_provider: any
-  youtube_player_flutter: ^9.0.0
-  settings_ui: any
-  package_info_plus: any
-  shared_preferences: any
-  custom_text: any
-  like_button: any
-  collection: any
   flutter_localizations:
     sdk: flutter
-  slang: any
-  slang_flutter: any
-  mockito: any
-  drift: any
-  sqlite3_flutter_libs: any
-  path: any
-  sqlite3: any
-  introduction_screen: any
-  flutter_inappwebview: any
-  in_app_review: any
-  firebase_core: ^2.24.2
-  firebase_messaging: ^14.9.4
+
+  cupertino_icons: ^1.0.8
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  algolia: ^1.1.2
+  flutter_dotenv: ^5.1.0
+  intl: ^0.19.0
+  url_launcher: ^6.3.0
+  flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.5.2
+  riverpod_annotation: ^2.3.5
+  path_provider: ^2.1.4
+  youtube_player_flutter: ^9.0.3
+  settings_ui: ^2.0.2
+  package_info_plus: ^8.0.2
+  shared_preferences: ^2.3.2
+  custom_text: ^2.0.2
+  like_button: ^2.0.5
+  collection: ^1.18.0
+  slang: ^3.31.2
+  slang_flutter: ^3.31.0
+  mockito: ^5.4.4
+  drift: ^2.19.1+1
+  sqlite3_flutter_libs: ^0.5.24
+  path: ^1.9.0
+  sqlite3: ^2.4.5
+  introduction_screen: ^3.1.14
+  flutter_inappwebview: ^6.0.0
+  in_app_review: ^2.0.9
+  firebase_core: ^3.4.0
+  firebase_messaging: ^15.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  cider: any
-  freezed: any
-  build_runner: any
-  json_serializable: any
-  very_good_analysis: any
-  riverpod_generator: any
-  riverpod_lint: any
-  custom_lint: any
-  flutter_launcher_icons: any
-  slang_build_runner: any
-  golden_toolkit: any
-  drift_dev: any
-  flutter_gen_runner: any
+  cider: ^0.2.8
+  freezed: ^2.5.7
+  build_runner: ^2.4.12
+  json_serializable: ^6.8.0
+  very_good_analysis: ^6.0.0
+  riverpod_generator: ^2.4.3
+  riverpod_lint: ^2.3.13
+  custom_lint: ^0.6.5
+  flutter_launcher_icons: ^0.13.1
+  slang_build_runner: ^3.31.0
+  golden_toolkit: ^0.15.0
+  drift_dev: ^2.19.1
+  flutter_gen_runner: ^5.7.0
 
 flutter:
   uses-material-design: true
