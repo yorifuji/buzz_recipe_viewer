@@ -14,3 +14,21 @@ build-launcher-icons:
 .PHONY: update-goldens
 update-goldens:
 	flutter test --update-goldens --tags=golden
+
+# Firebase
+
+.PHONY: firebase-configure
+firebase-configure-stg:
+	flutterfire configure \
+		--project=buzzrecipeviewer-stg \
+		--platforms=android,ios \
+		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer.stg \
+		--android-package-name=dev.yorifuji.buzz_recipe_viewer.stg
+
+.PHONY: firebase-configure-prod
+firebase-configure-prod:
+	flutterfire configure \
+		--project=buzzrecipeviewer \
+		--platforms=android,ios \
+		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer \
+		--android-package-name=dev.yorifuji.buzz_recipe_viewer

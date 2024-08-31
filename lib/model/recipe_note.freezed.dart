@@ -24,7 +24,9 @@ mixin _$RecipeNote {
   DateTime get updatedAt => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RecipeNote
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RecipeNoteCopyWith<RecipeNote> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$RecipeNoteCopyWithImpl<$Res, $Val extends RecipeNote>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RecipeNote
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +129,8 @@ class __$$RecipeNoteImplCopyWithImpl<$Res>
       _$RecipeNoteImpl _value, $Res Function(_$RecipeNoteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RecipeNote
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -243,7 +249,9 @@ class _$RecipeNoteImpl implements _RecipeNote {
       updatedAt,
       id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RecipeNote
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RecipeNoteImplCopyWith<_$RecipeNoteImpl> get copyWith =>
@@ -274,8 +282,11 @@ abstract class _RecipeNote implements RecipeNote {
   DateTime get updatedAt;
   @override
   int? get id;
+
+  /// Create a copy of RecipeNote
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RecipeNoteImplCopyWith<_$RecipeNoteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -8,7 +8,7 @@ part of 'preference_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$boolPreferenceHash() => r'b0b32b677185b1fcf258c4911cae1d88efa3b5a1';
+String _$boolPreferenceHash() => r'3ecd0ef7061eb006fd9f42d8fb7ccd28e4352a82';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -171,7 +171,7 @@ class _BoolPreferenceProviderElement
   Preference<bool> get pref => (origin as BoolPreferenceProvider).pref;
 }
 
-String _$intPreferenceHash() => r'f39b62f4b44dd341c85e0373ae72ba7fd215d492';
+String _$intPreferenceHash() => r'56e20d6aca92c639e1f4143dde2c8950ea2a621d';
 
 abstract class _$IntPreference extends BuildlessAutoDisposeNotifier<int> {
   late final Preference<int> pref;
@@ -313,7 +313,7 @@ class _IntPreferenceProviderElement
   Preference<int> get pref => (origin as IntPreferenceProvider).pref;
 }
 
-String _$stringPreferenceHash() => r'9eb1d103f3fa4dbb80d75b439f56cc1d69e776ab';
+String _$stringPreferenceHash() => r'b5f8bbb1d04af8798605c2d00c86e058bb0ba8a4';
 
 abstract class _$StringPreference extends BuildlessAutoDisposeNotifier<String> {
   late final Preference<String> pref;

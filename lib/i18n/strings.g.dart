@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 142 (71 per locale)
+/// Strings: 144 (72 per locale)
 ///
-/// Built on 2024-04-29 at 02:09 UTC
+/// Built on 2024-08-31 at 07:46 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -496,6 +496,8 @@ class _StringsSettingsDebugRowEn {
       _StringsSettingsDebugRowDummyRecipeEn._(_root);
   late final _StringsSettingsDebugRowDeleteLocalDataEn deleteLocalData =
       _StringsSettingsDebugRowDeleteLocalDataEn._(_root);
+  late final _StringsSettingsDebugRowFcmTokenEn fcmToken =
+      _StringsSettingsDebugRowFcmTokenEn._(_root);
 }
 
 // Path: settings.general.row.theme
@@ -653,6 +655,16 @@ class _StringsSettingsDebugRowDeleteLocalDataEn {
 
   // Translations
   String get title => 'Delete Local Data';
+}
+
+// Path: settings.debug.row.fcmToken
+class _StringsSettingsDebugRowFcmTokenEn {
+  _StringsSettingsDebugRowFcmTokenEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'FCM Token(Tap to copy)';
 }
 
 // Path: settings.general.row.theme.theme
@@ -1139,6 +1151,9 @@ class _StringsSettingsDebugRowJa implements _StringsSettingsDebugRowEn {
   @override
   late final _StringsSettingsDebugRowDeleteLocalDataJa deleteLocalData =
       _StringsSettingsDebugRowDeleteLocalDataJa._(_root);
+  @override
+  late final _StringsSettingsDebugRowFcmTokenJa fcmToken =
+      _StringsSettingsDebugRowFcmTokenJa._(_root);
 }
 
 // Path: settings.general.row.theme
@@ -1347,6 +1362,19 @@ class _StringsSettingsDebugRowDeleteLocalDataJa
   String get title => 'ローカルデータを削除';
 }
 
+// Path: settings.debug.row.fcmToken
+class _StringsSettingsDebugRowFcmTokenJa
+    implements _StringsSettingsDebugRowFcmTokenEn {
+  _StringsSettingsDebugRowFcmTokenJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'FCM Token(Tap to copy)';
+}
+
 // Path: settings.general.row.theme.theme
 class _StringsSettingsGeneralRowThemeThemeJa
     implements _StringsSettingsGeneralRowThemeThemeEn {
@@ -1526,6 +1554,8 @@ extension on Translations {
         return 'Insert Dummy Recipe';
       case 'settings.debug.row.deleteLocalData.title':
         return 'Delete Local Data';
+      case 'settings.debug.row.fcmToken.title':
+        return 'FCM Token(Tap to copy)';
       case 'settings.selected':
         return 'Selected';
       case 'common.addFavorite':
@@ -1677,6 +1707,8 @@ extension on _StringsJa {
         return 'ダミーレシピを登録';
       case 'settings.debug.row.deleteLocalData.title':
         return 'ローカルデータを削除';
+      case 'settings.debug.row.fcmToken.title':
+        return 'FCM Token(Tap to copy)';
       case 'settings.selected':
         return '選択中';
       case 'common.addFavorite':

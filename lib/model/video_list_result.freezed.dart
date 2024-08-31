@@ -19,7 +19,9 @@ mixin _$VideoListResult {
   List<SearchHit> get searchHits => throw _privateConstructorUsedError;
   int get nextPage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoListResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VideoListResultCopyWith<VideoListResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$VideoListResultCopyWithImpl<$Res, $Val extends VideoListResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VideoListResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$VideoListResultImplCopyWithImpl<$Res>
       _$VideoListResultImpl _value, $Res Function(_$VideoListResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VideoListResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,7 +147,9 @@ class _$VideoListResultImpl implements _VideoListResult {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_searchHits), nextPage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoListResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VideoListResultImplCopyWith<_$VideoListResultImpl> get copyWith =>
@@ -158,8 +166,11 @@ abstract class _VideoListResult implements VideoListResult {
   List<SearchHit> get searchHits;
   @override
   int get nextPage;
+
+  /// Create a copy of VideoListResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VideoListResultImplCopyWith<_$VideoListResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

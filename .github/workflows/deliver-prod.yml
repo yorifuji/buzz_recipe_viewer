@@ -53,6 +53,18 @@ jobs:
 
       - run: flutter pub get
 
+      - name: Firebase Admin Service Account
+        env:
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_PROD }}
+        run: |
+          echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
+
+      - name: Login Firebase and run flutterfire configure
+        run: |
+          which firebase || curl -sL https://firebase.tools | bash
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json firebase login
+          make firebase-configure-prod
+
       - name: Extract key.properties file
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
@@ -119,6 +131,18 @@ jobs:
 
       - run: flutter pub get
 
+      - name: Firebase Admin Service Account
+        env:
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_PROD }}
+        run: |
+          echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
+
+      - name: Login Firebase and run flutterfire configure
+        run: |
+          which firebase || curl -sL https://firebase.tools | bash
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json firebase login
+          make firebase-configure-prod
+
       - name: Extract App Store Connect API Private Key
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
@@ -127,7 +151,7 @@ jobs:
           mkdir -p ./private_keys
           echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode > ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
 
-      - name: Create ExportOptions.plist
+      - name: Create ExportOptions.plist and Runner.entitlements
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
@@ -145,6 +169,16 @@ jobs:
               <key>teamID</key>
               <string>${APPLE_TEAM_ID}</string>
             </dict>
+          </plist>
+          EOS
+          cat << EOS > ./ios/Runner/Runner.entitlements
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>aps-environment</key>
+            <string>production</string>
+          </dict>
           </plist>
           EOS
 

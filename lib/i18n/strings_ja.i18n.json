@@ -138,6 +138,9 @@
                 },
                 "deleteLocalData" : {
                     "title" : "ローカルデータを削除"
+                },
+                "fcmToken" : {
+                    "title" : "FCM Token(Tap to copy)"
                 }
             }
         },
