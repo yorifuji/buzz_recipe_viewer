@@ -199,6 +199,7 @@ jobs:
             -scheme Runner \
             -configuration Release \
             -allowProvisioningUpdates \
+            -allowProvisioningDeviceRegistration \
             -authenticationKeyIssuerID $APPLE_API_ISSUER_ID \
             -authenticationKeyID $APPLE_API_KEY_ID \
             -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8
