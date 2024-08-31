@@ -126,6 +126,27 @@ jobs:
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make firebase-configure-stg
 
+      - name: Import Apple Development Certificate(Required xcodebuild archive with entitlements)
+        env:
+          APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64: ${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64 }}
+          APPLE_DEVELOPMENT_CERTIFICATE_P12_PASSWORD: ${{ secrets.APPLE_DEVELOPMENT_CERTIFICATE_P12_PASSWORD }}
+          APPLE_DEVELOPMENT_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_DEVELOPMENT_KEYCHAIN_PASSWORD }}
+        run: |
+          CERTIFICATE_P12_PATH=${{ runner.temp }}/build_certificate.p12
+          KEYCHAIN_PATH=${{ runner.temp }}/app-signing.keychain-db
+
+          # extract certificate from secrets
+          echo -n "$APPLE_DEVELOPMENT_CERTIFICATE_P12_BASE64" | base64 --decode --output $CERTIFICATE_P12_PATH
+
+          # create temporary keychain
+          security create-keychain -p "$APPLE_DEVELOPMENT_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$APPLE_DEVELOPMENT_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_P12_PATH -P "$APPLE_DEVELOPMENT_CERTIFICATE_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
       - name: Extract App Store Connect API Private Key
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
@@ -151,16 +172,6 @@ jobs:
             </dict>
           </plist>
           EOS
-          cat << EOS > ./ios/Runner/Runner.entitlements
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>aps-environment</key>
-            <string>production</string>
-          </dict>
-          </plist>
-          EOS
 
       - name: Build
         env:
@@ -168,8 +179,24 @@ jobs:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
         run: |
           flutter build ios --release --no-codesign --dart-define=FLAVOR=stg
-          xcodebuild archive CODE_SIGNING_ALLOWED=NO -workspace ./ios/Runner.xcworkspace -scheme Runner -configuration Release -archivePath ./build/ios/Runner.xcarchive | xcbeautify
-          xcodebuild -exportArchive -archivePath ./build/ios/Runner.xcarchive -exportPath ./build/ios/ipa -exportOptionsPlist ./ios/ExportOptions.plist -allowProvisioningUpdates -authenticationKeyIssuerID $APPLE_API_ISSUER_ID -authenticationKeyID $APPLE_API_KEY_ID -authenticationKeyPath ${{ runner.temp }}/AuthKey_$APPLE_API_KEY_ID.p8 | xcbeautify
+          xcodebuild archive \
+            -archivePath ./build/ios/Runner.xcarchive \
+            -workspace ./ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -allowProvisioningUpdates \
+            -allowProvisioningDeviceRegistration \
+            -authenticationKeyIssuerID $APPLE_API_ISSUER_ID \
+            -authenticationKeyID $APPLE_API_KEY_ID \
+            -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8 | xcbeautify
+          xcodebuild -exportArchive \
+            -archivePath ./build/ios/Runner.xcarchive \
+            -exportPath ./build/ios/ipa \
+            -exportOptionsPlist ./ios/ExportOptions.plist \
+            -allowProvisioningUpdates \
+            -authenticationKeyIssuerID $APPLE_API_ISSUER_ID \
+            -authenticationKeyID $APPLE_API_KEY_ID \
+            -authenticationKeyPath `pwd`/private_keys/AuthKey_$APPLE_API_KEY_ID.p8 | xcbeautify
 
       - name: Find ipa file path
         id: info
@@ -191,6 +218,13 @@ jobs:
         run: |
           which firebase || curl -sL https://firebase.tools | bash
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute $APP_PATH --app $FIREBASE_APP_ID_IOS --testers "yorifuji@gmail.com"
+
+      - name: Clean up
+        if: ${{ always() }}
+        run: |
+          security delete-keychain ${{ runner.temp }}/app-signing.keychain-db
+          rm -rf ~/Library/MobileDevice/Provisioning\ Profiles
+          rm -rf ./private_keys
 
   macos:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
