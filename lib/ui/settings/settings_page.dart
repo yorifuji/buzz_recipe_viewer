@@ -94,22 +94,23 @@ class SettingsPage extends ConsumerWidget {
                       .performReassemble();
                 },
               ),
-              SettingsTile.navigation(
-                title: Text(
-                  t.settings.general.row.notification.title,
-                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+              if (Platform.isIOS || Platform.isAndroid)
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.general.row.notification.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                          return const NotificationSettingPage();
+                        },
+                      ),
+                    );
+                  },
                 ),
-                onPressed: (context) async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) {
-                        return const NotificationSettingPage();
-                      },
-                    ),
-                  );
-                },
-              ),
             ],
           ),
           SettingsSection(
