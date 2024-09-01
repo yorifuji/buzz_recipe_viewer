@@ -2,7 +2,6 @@ import 'dart:io' show Platform;
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/database_provider.dart';
-import 'package:buzz_recipe_viewer/provider/firebase_messaging_token_provider.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
@@ -33,7 +32,6 @@ class SettingsPage extends ConsumerWidget {
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
         ref.watch(boolPreferenceProvider(Preference.useInternalPlayer));
-    // final fcmToken = ref.watch(firebaseMessagingTokenProvider) ?? 'N/A';
 
     return Scaffold(
       appBar: AppBar(
