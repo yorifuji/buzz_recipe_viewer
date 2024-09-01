@@ -187,6 +187,7 @@ jobs:
             -workspace ./ios/Runner.xcworkspace \
             -scheme Runner \
             -configuration Release \
+            -destination "generic/platform=iOS" \
             -allowProvisioningUpdates \
             -allowProvisioningDeviceRegistration \
             -authenticationKeyIssuerID $APPLE_API_ISSUER_ID \
