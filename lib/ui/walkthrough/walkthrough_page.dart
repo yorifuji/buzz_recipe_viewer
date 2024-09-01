@@ -44,7 +44,7 @@ class WalkthroughPage extends ConsumerWidget {
             ],
           ),
           decoration: const PageDecoration(bodyAlignment: Alignment.center),
-        )
+        ),
       ],
       showSkipButton: true,
       showNextButton: false,
