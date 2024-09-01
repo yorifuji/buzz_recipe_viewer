@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -27,6 +28,22 @@ class WalkthroughPage extends ConsumerWidget {
             padding: const EdgeInsets.only(top: 32),
             child: Assets.images.intro2.image(),
           ),
+        ),
+        PageViewModel(
+          title: t.walkthrough.intro3.title,
+          bodyWidget: Column(
+            children: [
+              Text(t.walkthrough.intro3.body),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () async {
+                  await FirebaseMessaging.instance.requestPermission();
+                },
+                child: Text(t.walkthrough.intro3.button),
+              ),
+            ],
+          ),
+          decoration: const PageDecoration(bodyAlignment: Alignment.center),
         ),
       ],
       showSkipButton: true,

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 142 (71 per locale)
+/// Strings: 158 (79 per locale)
 ///
-/// Built on 2024-04-29 at 02:09 UTC
+/// Built on 2024-09-01 at 07:26 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -222,6 +222,8 @@ class _StringsWalkthroughEn {
       _StringsWalkthroughIntro1En._(_root);
   late final _StringsWalkthroughIntro2En intro2 =
       _StringsWalkthroughIntro2En._(_root);
+  late final _StringsWalkthroughIntro3En intro3 =
+      _StringsWalkthroughIntro3En._(_root);
   String get skip => 'Skip';
   String get done => 'Done';
 }
@@ -319,6 +321,18 @@ class _StringsWalkthroughIntro2En {
   // Translations
   String get title => 'Learn the steps';
   String get body => 'Elevate your everyday meals with professional tips';
+}
+
+// Path: walkthrough.intro3
+class _StringsWalkthroughIntro3En {
+  _StringsWalkthroughIntro3En._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Get the latest info';
+  String get body => 'We\'ll send you new recipes with push notifications';
+  String get button => 'Allow Notifications';
 }
 
 // Path: recipe.newRecipe
@@ -436,6 +450,8 @@ class _StringsSettingsGeneralRowEn {
       _StringsSettingsGeneralRowColorEn._(_root);
   late final _StringsSettingsGeneralRowLanguageEn language =
       _StringsSettingsGeneralRowLanguageEn._(_root);
+  late final _StringsSettingsGeneralRowNotificationEn notification =
+      _StringsSettingsGeneralRowNotificationEn._(_root);
 }
 
 // Path: settings.video.row
@@ -496,6 +512,8 @@ class _StringsSettingsDebugRowEn {
       _StringsSettingsDebugRowDummyRecipeEn._(_root);
   late final _StringsSettingsDebugRowDeleteLocalDataEn deleteLocalData =
       _StringsSettingsDebugRowDeleteLocalDataEn._(_root);
+  late final _StringsSettingsDebugRowFcmTokenEn fcmToken =
+      _StringsSettingsDebugRowFcmTokenEn._(_root);
 }
 
 // Path: settings.general.row.theme
@@ -532,6 +550,18 @@ class _StringsSettingsGeneralRowLanguageEn {
   String get title => 'Language';
   late final _StringsSettingsGeneralRowLanguageLanguageEn language =
       _StringsSettingsGeneralRowLanguageLanguageEn._(_root);
+}
+
+// Path: settings.general.row.notification
+class _StringsSettingsGeneralRowNotificationEn {
+  _StringsSettingsGeneralRowNotificationEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Notification';
+  late final _StringsSettingsGeneralRowNotificationChildEn child =
+      _StringsSettingsGeneralRowNotificationChildEn._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -655,6 +685,16 @@ class _StringsSettingsDebugRowDeleteLocalDataEn {
   String get title => 'Delete Local Data';
 }
 
+// Path: settings.debug.row.fcmToken
+class _StringsSettingsDebugRowFcmTokenEn {
+  _StringsSettingsDebugRowFcmTokenEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'FCM Token(Tap to copy)';
+}
+
 // Path: settings.general.row.theme.theme
 class _StringsSettingsGeneralRowThemeThemeEn {
   _StringsSettingsGeneralRowThemeThemeEn._(this._root);
@@ -693,6 +733,42 @@ class _StringsSettingsGeneralRowLanguageLanguageEn {
         'English',
         'Japanese',
       ];
+}
+
+// Path: settings.general.row.notification.child
+class _StringsSettingsGeneralRowNotificationChildEn {
+  _StringsSettingsGeneralRowNotificationChildEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Notification';
+  late final _StringsSettingsGeneralRowNotificationChildRequestPermissionEn
+      requestPermission =
+      _StringsSettingsGeneralRowNotificationChildRequestPermissionEn._(_root);
+  late final _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn
+      copyFcmToken =
+      _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn._(_root);
+}
+
+// Path: settings.general.row.notification.child.requestPermission
+class _StringsSettingsGeneralRowNotificationChildRequestPermissionEn {
+  _StringsSettingsGeneralRowNotificationChildRequestPermissionEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Request Permission';
+}
+
+// Path: settings.general.row.notification.child.copyFcmToken
+class _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn {
+  _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Copy Token';
 }
 
 // Path: <root>
@@ -776,6 +852,9 @@ class _StringsWalkthroughJa implements _StringsWalkthroughEn {
   @override
   late final _StringsWalkthroughIntro2Ja intro2 =
       _StringsWalkthroughIntro2Ja._(_root);
+  @override
+  late final _StringsWalkthroughIntro3Ja intro3 =
+      _StringsWalkthroughIntro3Ja._(_root);
   @override
   String get skip => 'スキップ';
   @override
@@ -910,6 +989,22 @@ class _StringsWalkthroughIntro2Ja implements _StringsWalkthroughIntro2En {
   String get title => '手順を学ぼう';
   @override
   String get body => 'プロのコツで、いつもの料理をワンランクアップ';
+}
+
+// Path: walkthrough.intro3
+class _StringsWalkthroughIntro3Ja implements _StringsWalkthroughIntro3En {
+  _StringsWalkthroughIntro3Ja._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '最新情報を受け取ろう';
+  @override
+  String get body => 'プッシュ通知で新着レシピをお届けします';
+  @override
+  String get button => '通知を許可';
 }
 
 // Path: recipe.newRecipe
@@ -1063,6 +1158,9 @@ class _StringsSettingsGeneralRowJa implements _StringsSettingsGeneralRowEn {
   @override
   late final _StringsSettingsGeneralRowLanguageJa language =
       _StringsSettingsGeneralRowLanguageJa._(_root);
+  @override
+  late final _StringsSettingsGeneralRowNotificationJa notification =
+      _StringsSettingsGeneralRowNotificationJa._(_root);
 }
 
 // Path: settings.video.row
@@ -1139,6 +1237,9 @@ class _StringsSettingsDebugRowJa implements _StringsSettingsDebugRowEn {
   @override
   late final _StringsSettingsDebugRowDeleteLocalDataJa deleteLocalData =
       _StringsSettingsDebugRowDeleteLocalDataJa._(_root);
+  @override
+  late final _StringsSettingsDebugRowFcmTokenJa fcmToken =
+      _StringsSettingsDebugRowFcmTokenJa._(_root);
 }
 
 // Path: settings.general.row.theme
@@ -1187,6 +1288,22 @@ class _StringsSettingsGeneralRowLanguageJa
   @override
   late final _StringsSettingsGeneralRowLanguageLanguageJa language =
       _StringsSettingsGeneralRowLanguageLanguageJa._(_root);
+}
+
+// Path: settings.general.row.notification
+class _StringsSettingsGeneralRowNotificationJa
+    implements _StringsSettingsGeneralRowNotificationEn {
+  _StringsSettingsGeneralRowNotificationJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知';
+  @override
+  late final _StringsSettingsGeneralRowNotificationChildJa child =
+      _StringsSettingsGeneralRowNotificationChildJa._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -1347,6 +1464,19 @@ class _StringsSettingsDebugRowDeleteLocalDataJa
   String get title => 'ローカルデータを削除';
 }
 
+// Path: settings.debug.row.fcmToken
+class _StringsSettingsDebugRowFcmTokenJa
+    implements _StringsSettingsDebugRowFcmTokenEn {
+  _StringsSettingsDebugRowFcmTokenJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'FCM Token(Tap to copy)';
+}
+
 // Path: settings.general.row.theme.theme
 class _StringsSettingsGeneralRowThemeThemeJa
     implements _StringsSettingsGeneralRowThemeThemeEn {
@@ -1398,6 +1528,53 @@ class _StringsSettingsGeneralRowLanguageLanguageJa
       ];
 }
 
+// Path: settings.general.row.notification.child
+class _StringsSettingsGeneralRowNotificationChildJa
+    implements _StringsSettingsGeneralRowNotificationChildEn {
+  _StringsSettingsGeneralRowNotificationChildJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知';
+  @override
+  late final _StringsSettingsGeneralRowNotificationChildRequestPermissionJa
+      requestPermission =
+      _StringsSettingsGeneralRowNotificationChildRequestPermissionJa._(_root);
+  @override
+  late final _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa
+      copyFcmToken =
+      _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa._(_root);
+}
+
+// Path: settings.general.row.notification.child.requestPermission
+class _StringsSettingsGeneralRowNotificationChildRequestPermissionJa
+    implements _StringsSettingsGeneralRowNotificationChildRequestPermissionEn {
+  _StringsSettingsGeneralRowNotificationChildRequestPermissionJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知権限を要求する';
+}
+
+// Path: settings.general.row.notification.child.copyFcmToken
+class _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa
+    implements _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn {
+  _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'トークンをコピー';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -1422,6 +1599,12 @@ extension on Translations {
         return 'Learn the steps';
       case 'walkthrough.intro2.body':
         return 'Elevate your everyday meals with professional tips';
+      case 'walkthrough.intro3.title':
+        return 'Get the latest info';
+      case 'walkthrough.intro3.body':
+        return 'We\'ll send you new recipes with push notifications';
+      case 'walkthrough.intro3.button':
+        return 'Allow Notifications';
       case 'walkthrough.skip':
         return 'Skip';
       case 'walkthrough.done':
@@ -1492,6 +1675,14 @@ extension on Translations {
         return 'English';
       case 'settings.general.row.language.language.row.2':
         return 'Japanese';
+      case 'settings.general.row.notification.title':
+        return 'Notification';
+      case 'settings.general.row.notification.child.title':
+        return 'Notification';
+      case 'settings.general.row.notification.child.requestPermission.title':
+        return 'Request Permission';
+      case 'settings.general.row.notification.child.copyFcmToken.title':
+        return 'Copy Token';
       case 'settings.video.header':
         return 'Video';
       case 'settings.video.row.playWithinApp.title':
@@ -1526,6 +1717,8 @@ extension on Translations {
         return 'Insert Dummy Recipe';
       case 'settings.debug.row.deleteLocalData.title':
         return 'Delete Local Data';
+      case 'settings.debug.row.fcmToken.title':
+        return 'FCM Token(Tap to copy)';
       case 'settings.selected':
         return 'Selected';
       case 'common.addFavorite':
@@ -1573,6 +1766,12 @@ extension on _StringsJa {
         return '手順を学ぼう';
       case 'walkthrough.intro2.body':
         return 'プロのコツで、いつもの料理をワンランクアップ';
+      case 'walkthrough.intro3.title':
+        return '最新情報を受け取ろう';
+      case 'walkthrough.intro3.body':
+        return 'プッシュ通知で新着レシピをお届けします';
+      case 'walkthrough.intro3.button':
+        return '通知を許可';
       case 'walkthrough.skip':
         return 'スキップ';
       case 'walkthrough.done':
@@ -1643,6 +1842,14 @@ extension on _StringsJa {
         return 'English';
       case 'settings.general.row.language.language.row.2':
         return '日本語';
+      case 'settings.general.row.notification.title':
+        return '通知';
+      case 'settings.general.row.notification.child.title':
+        return '通知';
+      case 'settings.general.row.notification.child.requestPermission.title':
+        return '通知権限を要求する';
+      case 'settings.general.row.notification.child.copyFcmToken.title':
+        return 'トークンをコピー';
       case 'settings.video.header':
         return 'ビデオ';
       case 'settings.video.row.playWithinApp.title':
@@ -1677,6 +1884,8 @@ extension on _StringsJa {
         return 'ダミーレシピを登録';
       case 'settings.debug.row.deleteLocalData.title':
         return 'ローカルデータを削除';
+      case 'settings.debug.row.fcmToken.title':
+        return 'FCM Token(Tap to copy)';
       case 'settings.selected':
         return '選択中';
       case 'common.addFavorite':

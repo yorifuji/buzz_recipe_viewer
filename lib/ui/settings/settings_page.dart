@@ -10,6 +10,7 @@ import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
+import 'package:buzz_recipe_viewer/ui/settings/notification/notification_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +94,23 @@ class SettingsPage extends ConsumerWidget {
                       .performReassemble();
                 },
               ),
+              if (Platform.isIOS || Platform.isAndroid)
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.general.row.notification.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                          return const NotificationSettingPage();
+                        },
+                      ),
+                    );
+                  },
+                ),
             ],
           ),
           SettingsSection(

@@ -31,8 +31,12 @@ mixin _$SearchHit {
   String get image => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
+  /// Serializes this SearchHit to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SearchHit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchHitCopyWith<SearchHit> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +69,8 @@ class _$SearchHitCopyWithImpl<$Res, $Val extends SearchHit>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchHit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,6 +159,8 @@ class __$$SearchHitImplCopyWithImpl<$Res>
       _$SearchHitImpl _value, $Res Function(_$SearchHitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchHit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -293,12 +301,14 @@ class _$SearchHitImpl with DiagnosticableTreeMixin implements _SearchHit {
             (identical(other.url, url) || other.url == url));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, videoId, title, description,
       published, timestamp, views, likes, image, url);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchHit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchHitImplCopyWith<_$SearchHitImpl> get copyWith =>
@@ -348,8 +358,11 @@ abstract class _SearchHit implements SearchHit {
   String get image;
   @override
   String get url;
+
+  /// Create a copy of SearchHit
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchHitImplCopyWith<_$SearchHitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -358,7 +371,9 @@ abstract class _SearchHit implements SearchHit {
 mixin _$SearchHitItem {
   SearchHit get searchHit => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchHitItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchHitItemCopyWith<SearchHitItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -384,6 +399,8 @@ class _$SearchHitItemCopyWithImpl<$Res, $Val extends SearchHitItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchHitItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -397,6 +414,8 @@ class _$SearchHitItemCopyWithImpl<$Res, $Val extends SearchHitItem>
     ) as $Val);
   }
 
+  /// Create a copy of SearchHitItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SearchHitCopyWith<$Res> get searchHit {
@@ -428,6 +447,8 @@ class __$$SearchHitItemImplCopyWithImpl<$Res>
       _$SearchHitItemImpl _value, $Res Function(_$SearchHitItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchHitItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -477,7 +498,9 @@ class _$SearchHitItemImpl
   @override
   int get hashCode => Object.hash(runtimeType, searchHit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchHitItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchHitItemImplCopyWith<_$SearchHitItemImpl> get copyWith =>
@@ -490,8 +513,11 @@ abstract class _SearchHitItem implements SearchHitItem {
 
   @override
   SearchHit get searchHit;
+
+  /// Create a copy of SearchHitItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchHitItemImplCopyWith<_$SearchHitItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

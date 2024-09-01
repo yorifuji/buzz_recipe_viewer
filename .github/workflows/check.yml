@@ -67,6 +67,15 @@ jobs:
 
       - run: flutter pub get
 
+      - name: flutterfire configure
+        env:
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_STG }}
+        run: |
+          which firebase || curl -sL https://firebase.tools | bash
+          dart pub global activate flutterfire_cli 1.0.1-dev.4
+          echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make firebase-configure-stg
+
       - run: flutter analyze --write=flutter_analyze.log
 
       - if: ${{ !cancelled() }}

@@ -161,6 +161,15 @@ class RecipeNoteDBData extends DataClass
         updatedAt: updatedAt ?? this.updatedAt,
         data: data ?? this.data,
       );
+  RecipeNoteDBData copyWithCompanion(RecipeNoteDBCompanion data) {
+    return RecipeNoteDBData(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      data: data.data.present ? data.data.value : this.data,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('RecipeNoteDBData(')
@@ -413,6 +422,15 @@ class FavoriteDBData extends DataClass implements Insertable<FavoriteDBData> {
         updatedAt: updatedAt ?? this.updatedAt,
         data: data ?? this.data,
       );
+  FavoriteDBData copyWithCompanion(FavoriteDBCompanion data) {
+    return FavoriteDBData(
+      id: data.id.present ? data.id.value : this.id,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      data: data.data.present ? data.data.value : this.data,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('FavoriteDBData(')
@@ -513,6 +531,7 @@ class FavoriteDBCompanion extends UpdateCompanion<FavoriteDBData> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $RecipeNoteDBTable recipeNoteDB = $RecipeNoteDBTable(this);
   late final $FavoriteDBTable favoriteDB = $FavoriteDBTable(this);
   @override
@@ -521,4 +540,227 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [recipeNoteDB, favoriteDB];
+}
+
+typedef $$RecipeNoteDBTableCreateCompanionBuilder = RecipeNoteDBCompanion
+    Function({
+  Value<int> id,
+  Value<DateTime> createdAt,
+  Value<DateTime> updatedAt,
+  required RecipeNoteData data,
+});
+typedef $$RecipeNoteDBTableUpdateCompanionBuilder = RecipeNoteDBCompanion
+    Function({
+  Value<int> id,
+  Value<DateTime> createdAt,
+  Value<DateTime> updatedAt,
+  Value<RecipeNoteData> data,
+});
+
+class $$RecipeNoteDBTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $RecipeNoteDBTable,
+    RecipeNoteDBData,
+    $$RecipeNoteDBTableFilterComposer,
+    $$RecipeNoteDBTableOrderingComposer,
+    $$RecipeNoteDBTableCreateCompanionBuilder,
+    $$RecipeNoteDBTableUpdateCompanionBuilder> {
+  $$RecipeNoteDBTableTableManager(_$AppDatabase db, $RecipeNoteDBTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$RecipeNoteDBTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$RecipeNoteDBTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<RecipeNoteData> data = const Value.absent(),
+          }) =>
+              RecipeNoteDBCompanion(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            data: data,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            required RecipeNoteData data,
+          }) =>
+              RecipeNoteDBCompanion.insert(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            data: data,
+          ),
+        ));
+}
+
+class $$RecipeNoteDBTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $RecipeNoteDBTable> {
+  $$RecipeNoteDBTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<RecipeNoteData, RecipeNoteData, String>
+      get data => $state.composableBuilder(
+          column: $state.table.data,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+}
+
+class $$RecipeNoteDBTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $RecipeNoteDBTable> {
+  $$RecipeNoteDBTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get data => $state.composableBuilder(
+      column: $state.table.data,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$FavoriteDBTableCreateCompanionBuilder = FavoriteDBCompanion Function({
+  Value<int> id,
+  Value<DateTime> createdAt,
+  Value<DateTime> updatedAt,
+  required FavoriteData data,
+});
+typedef $$FavoriteDBTableUpdateCompanionBuilder = FavoriteDBCompanion Function({
+  Value<int> id,
+  Value<DateTime> createdAt,
+  Value<DateTime> updatedAt,
+  Value<FavoriteData> data,
+});
+
+class $$FavoriteDBTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $FavoriteDBTable,
+    FavoriteDBData,
+    $$FavoriteDBTableFilterComposer,
+    $$FavoriteDBTableOrderingComposer,
+    $$FavoriteDBTableCreateCompanionBuilder,
+    $$FavoriteDBTableUpdateCompanionBuilder> {
+  $$FavoriteDBTableTableManager(_$AppDatabase db, $FavoriteDBTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$FavoriteDBTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$FavoriteDBTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<FavoriteData> data = const Value.absent(),
+          }) =>
+              FavoriteDBCompanion(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            data: data,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            required FavoriteData data,
+          }) =>
+              FavoriteDBCompanion.insert(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            data: data,
+          ),
+        ));
+}
+
+class $$FavoriteDBTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $FavoriteDBTable> {
+  $$FavoriteDBTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<FavoriteData, FavoriteData, String> get data =>
+      $state.composableBuilder(
+          column: $state.table.data,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+}
+
+class $$FavoriteDBTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $FavoriteDBTable> {
+  $$FavoriteDBTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get data => $state.composableBuilder(
+      column: $state.table.data,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $AppDatabaseManager {
+  final _$AppDatabase _db;
+  $AppDatabaseManager(this._db);
+  $$RecipeNoteDBTableTableManager get recipeNoteDB =>
+      $$RecipeNoteDBTableTableManager(_db, _db.recipeNoteDB);
+  $$FavoriteDBTableTableManager get favoriteDB =>
+      $$FavoriteDBTableTableManager(_db, _db.favoriteDB);
 }

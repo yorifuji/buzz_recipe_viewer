@@ -19,7 +19,9 @@ mixin _$TextItem {
   String get text => throw _privateConstructorUsedError;
   DateTime get dateTime => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TextItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TextItemCopyWith<TextItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$TextItemCopyWithImpl<$Res, $Val extends TextItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TextItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +84,8 @@ class __$$TextItemImplCopyWithImpl<$Res>
       _$TextItemImpl _value, $Res Function(_$TextItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TextItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,7 +134,9 @@ class _$TextItemImpl extends _TextItem {
   @override
   int get hashCode => Object.hash(runtimeType, text, dateTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TextItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TextItemImplCopyWith<_$TextItemImpl> get copyWith =>
@@ -145,8 +153,11 @@ abstract class _TextItem extends TextItem {
   String get text;
   @override
   DateTime get dateTime;
+
+  /// Create a copy of TextItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TextItemImplCopyWith<_$TextItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -160,7 +171,9 @@ mixin _$RecipeNoteEditState {
   List<TextItem> get foodList => throw _privateConstructorUsedError;
   List<TextItem> get stepList => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RecipeNoteEditState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RecipeNoteEditStateCopyWith<RecipeNoteEditState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -192,6 +205,8 @@ class _$RecipeNoteEditStateCopyWithImpl<$Res, $Val extends RecipeNoteEditState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RecipeNoteEditState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -230,6 +245,8 @@ class _$RecipeNoteEditStateCopyWithImpl<$Res, $Val extends RecipeNoteEditState>
     ) as $Val);
   }
 
+  /// Create a copy of RecipeNoteEditState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $RecipeNoteCopyWith<$Res>? get recipeNote {
@@ -271,6 +288,8 @@ class __$$RecipeNoteEditStateImplCopyWithImpl<$Res>
       $Res Function(_$RecipeNoteEditStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RecipeNoteEditState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -382,7 +401,9 @@ class _$RecipeNoteEditStateImpl extends _RecipeNoteEditState {
       const DeepCollectionEquality().hash(_foodList),
       const DeepCollectionEquality().hash(_stepList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RecipeNoteEditState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RecipeNoteEditStateImplCopyWith<_$RecipeNoteEditStateImpl> get copyWith =>
@@ -412,8 +433,11 @@ abstract class _RecipeNoteEditState extends RecipeNoteEditState {
   List<TextItem> get foodList;
   @override
   List<TextItem> get stepList;
+
+  /// Create a copy of RecipeNoteEditState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RecipeNoteEditStateImplCopyWith<_$RecipeNoteEditStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

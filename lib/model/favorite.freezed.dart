@@ -21,7 +21,9 @@ mixin _$Favorite {
   DateTime get updatedAt => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FavoriteCopyWith<Favorite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +49,8 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
     ) as $Val);
   }
 
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SearchHitCopyWith<$Res> get searchHit {
@@ -107,6 +113,8 @@ class __$$FavoriteImplCopyWithImpl<$Res>
       _$FavoriteImpl _value, $Res Function(_$FavoriteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,7 +185,9 @@ class _$FavoriteImpl implements _Favorite {
   int get hashCode =>
       Object.hash(runtimeType, searchHit, createdAt, updatedAt, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FavoriteImplCopyWith<_$FavoriteImpl> get copyWith =>
@@ -199,8 +209,11 @@ abstract class _Favorite implements Favorite {
   DateTime get updatedAt;
   @override
   int? get id;
+
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FavoriteImplCopyWith<_$FavoriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

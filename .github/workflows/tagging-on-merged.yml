@@ -32,4 +32,4 @@ jobs:
       - name: create tag and release note
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-        run: gh release create v$BUMP_VERSION --generate-notes
+        run: gh release create v$BUMP_VERSION --generate-notes --draft

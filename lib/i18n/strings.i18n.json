@@ -1,158 +1,169 @@
 {
-    "appTitle" : "Awesome Japanese Recipe",
-    "tab" : {
-        "recipe" : "Recipe",
-        "video" : "Video",
-        "favorite" : "Favorite",
-        "settings" : "Settings"
+  "appTitle": "Awesome Japanese Recipe",
+  "tab": {
+    "recipe": "Recipe",
+    "video": "Video",
+    "favorite": "Favorite",
+    "settings": "Settings"
+  },
+  "walkthrough": {
+    "intro1": {
+      "title": "Make every day delicious",
+      "body": "Let's create your own recipe book"
     },
-    "walkthrough" : {
-        "intro1" : {
-            "title" : "Make every day delicious",
-            "body" : "Let's create your own recipe book"
-        },
-        "intro2" : {
-            "title" : "Learn the steps",
-            "body" : "Elevate your everyday meals with professional tips"
-        },
-        "skip" : "Skip",
-        "done" : "Done"
+    "intro2": {
+      "title": "Learn the steps",
+      "body": "Elevate your everyday meals with professional tips"
     },
-    "recipe" : {
-        "title" : "Recipe",
-        "empty" : "We've got no recipes.\nAdd your best ones!",
-        "addRecipe" : "Add Recipe",
-        "newRecipe" : {
-            "title" : "New Recipe",
-            "input" : {
-                "title" : "Title",
-                "description" : "Description",
-                "ingredients" : "Ingredients",
-                "ingredients_example" : "e.g. 1 cup of rice",
-                "steps" : "Steps",
-                "steps_example" : "e.g. 1. Cook rice",
-                "add" : "Add",
-                "caution" : "Title and description are required.",
-                "save" : "Save"
-            }
-        },
-        "viewRecipe" : {
-            "title" : "Recipe",
-            "edit" : "Edit",
-            "delete" : "Delete"
-        }
+    "intro3": {
+      "title": "Get the latest info",
+      "body": "We'll send you new recipes with push notifications",
+      "button": "Allow Notifications"
     },
-    "video" : {
-        "title" : "Video"
+    "skip": "Skip",
+    "done": "Done"
+  },
+  "recipe": {
+    "title": "Recipe",
+    "empty": "We've got no recipes.\nAdd your best ones!",
+    "addRecipe": "Add Recipe",
+    "newRecipe": {
+      "title": "New Recipe",
+      "input": {
+        "title": "Title",
+        "description": "Description",
+        "ingredients": "Ingredients",
+        "ingredients_example": "e.g. 1 cup of rice",
+        "steps": "Steps",
+        "steps_example": "e.g. 1. Cook rice",
+        "add": "Add",
+        "caution": "Title and description are required.",
+        "save": "Save"
+      }
     },
-    "favorite" : {
-        "title" : "Favorite",
-        "empty" : "Love a video?\nTap the heart to make it your fave!"
-    },
-    "settings" : {
-        "title" : "Settings",
-        "general" : {
-            "header" : "General",
-            "row" : {
-                "theme" : {
-                    "title" : "Theme",
-                    "theme" : {
-                        "header" : "Theme",
-                        "row" : [
-                            "Automatically",
-                            "Light",
-                            "Dark"
-                        ]
-                    }
-                },
-                "color" : {
-                    "title" : "Color",
-                    "color" : {
-                        "header" : "Color"
-                    }
-                },
-                "language" : {
-                    "title" : "Language",
-                    "language" : {
-                        "header" : "Language",
-                        "row" : [
-                            "Automatically",
-                            "English",
-                            "Japanese"
-                        ]
-                    }
-                }
-            }
-        },
-        "video" : {
-            "header" : "Video",
-            "row" : {
-                "playWithinApp" : {
-                    "title" : "Play within app",
-                    "description" : "This platform does not support play within app"
-                }
-            }
-        },
-        "support" : {
-            "header" : "Support",
-            "row" : {
-                "review" : {
-                    "title" : "Review"
-                },
-                "share" : {
-                    "title" : "Share"
-                },
-                "feedback" : {
-                    "title" : "Feedback"
-                },
-                "contact" : {
-                    "title" : "Contact"
-                },
-                "help" : {
-                    "title" : "Help"
-                }
-            }
-        },
-        "about" : {
-            "header" : "About",
-            "row" : {
-                "terms" : {
-                    "title" : "Terms"
-                },
-                "privacy" : {
-                    "title" : "Privacy"
-                },
-                "version" : {
-                    "title" : "Version"
-                },
-                "license" : {
-                    "title" : "License"
-                }
-            }
-        },
-        "debug" : {
-            "header" : "Debug",
-            "row" : {
-                "dummyRecipe" : {
-                    "title" : "Insert Dummy Recipe"
-                },
-                "deleteLocalData" : {
-                    "title" : "Delete Local Data"
-                }
-            }
-        },
-        "selected" : "Selected"
-    },
-    "common" : {
-        "addFavorite" : "Add Favorite",
-        "fetchFailed" : "Failed to fetch data.",
-        "reload" : "Reload",
-        "searchEmpty" : "The search returned 0 results.",
-        "more" : "More",
-        "searchQuery" : "Search query",
-        "sortByDate" : "Sort by Date (Newest First)",
-        "sortByLikes" : "Popular (Likes)",
-        "sortByViews" : "Popular (Views)"
+    "viewRecipe": {
+      "title": "Recipe",
+      "edit": "Edit",
+      "delete": "Delete"
     }
-
+  },
+  "video": {
+    "title": "Video"
+  },
+  "favorite": {
+    "title": "Favorite",
+    "empty": "Love a video?\nTap the heart to make it your fave!"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": {
+      "header": "General",
+      "row": {
+        "theme": {
+          "title": "Theme",
+          "theme": {
+            "header": "Theme",
+            "row": ["Automatically", "Light", "Dark"]
+          }
+        },
+        "color": {
+          "title": "Color",
+          "color": {
+            "header": "Color"
+          }
+        },
+        "language": {
+          "title": "Language",
+          "language": {
+            "header": "Language",
+            "row": ["Automatically", "English", "Japanese"]
+          }
+        },
+        "notification": {
+          "title": "Notification",
+          "child": {
+            "title": "Notification",
+            "requestPermission": {
+              "title": "Request Permission"
+            },
+            "copyFcmToken": {
+              "title": "Copy Token"
+            }
+          }
+        }
+      }
+    },
+    "video": {
+      "header": "Video",
+      "row": {
+        "playWithinApp": {
+          "title": "Play within app",
+          "description": "This platform does not support play within app"
+        }
+      }
+    },
+    "support": {
+      "header": "Support",
+      "row": {
+        "review": {
+          "title": "Review"
+        },
+        "share": {
+          "title": "Share"
+        },
+        "feedback": {
+          "title": "Feedback"
+        },
+        "contact": {
+          "title": "Contact"
+        },
+        "help": {
+          "title": "Help"
+        }
+      }
+    },
+    "about": {
+      "header": "About",
+      "row": {
+        "terms": {
+          "title": "Terms"
+        },
+        "privacy": {
+          "title": "Privacy"
+        },
+        "version": {
+          "title": "Version"
+        },
+        "license": {
+          "title": "License"
+        }
+      }
+    },
+    "debug": {
+      "header": "Debug",
+      "row": {
+        "dummyRecipe": {
+          "title": "Insert Dummy Recipe"
+        },
+        "deleteLocalData": {
+          "title": "Delete Local Data"
+        },
+        "fcmToken": {
+          "title": "FCM Token(Tap to copy)"
+        }
+      }
+    },
+    "selected": "Selected"
+  },
+  "common": {
+    "addFavorite": "Add Favorite",
+    "fetchFailed": "Failed to fetch data.",
+    "reload": "Reload",
+    "searchEmpty": "The search returned 0 results.",
+    "more": "More",
+    "searchQuery": "Search query",
+    "sortByDate": "Sort by Date (Newest First)",
+    "sortByLikes": "Popular (Likes)",
+    "sortByViews": "Popular (Views)"
+  }
 }
