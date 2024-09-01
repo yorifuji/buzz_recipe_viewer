@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 152 (76 per locale)
+/// Strings: 158 (79 per locale)
 ///
-/// Built on 2024-09-01 at 01:34 UTC
+/// Built on 2024-09-01 at 07:26 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -222,6 +222,8 @@ class _StringsWalkthroughEn {
       _StringsWalkthroughIntro1En._(_root);
   late final _StringsWalkthroughIntro2En intro2 =
       _StringsWalkthroughIntro2En._(_root);
+  late final _StringsWalkthroughIntro3En intro3 =
+      _StringsWalkthroughIntro3En._(_root);
   String get skip => 'Skip';
   String get done => 'Done';
 }
@@ -319,6 +321,18 @@ class _StringsWalkthroughIntro2En {
   // Translations
   String get title => 'Learn the steps';
   String get body => 'Elevate your everyday meals with professional tips';
+}
+
+// Path: walkthrough.intro3
+class _StringsWalkthroughIntro3En {
+  _StringsWalkthroughIntro3En._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Get the latest info';
+  String get body => 'We\'ll send you new recipes with push notifications';
+  String get button => 'Allow Notifications';
 }
 
 // Path: recipe.newRecipe
@@ -839,6 +853,9 @@ class _StringsWalkthroughJa implements _StringsWalkthroughEn {
   late final _StringsWalkthroughIntro2Ja intro2 =
       _StringsWalkthroughIntro2Ja._(_root);
   @override
+  late final _StringsWalkthroughIntro3Ja intro3 =
+      _StringsWalkthroughIntro3Ja._(_root);
+  @override
   String get skip => 'スキップ';
   @override
   String get done => '完了';
@@ -972,6 +989,22 @@ class _StringsWalkthroughIntro2Ja implements _StringsWalkthroughIntro2En {
   String get title => '手順を学ぼう';
   @override
   String get body => 'プロのコツで、いつもの料理をワンランクアップ';
+}
+
+// Path: walkthrough.intro3
+class _StringsWalkthroughIntro3Ja implements _StringsWalkthroughIntro3En {
+  _StringsWalkthroughIntro3Ja._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '最新情報を受け取ろう';
+  @override
+  String get body => 'プッシュ通知で新着レシピをお届けします';
+  @override
+  String get button => '通知を許可';
 }
 
 // Path: recipe.newRecipe
@@ -1566,6 +1599,12 @@ extension on Translations {
         return 'Learn the steps';
       case 'walkthrough.intro2.body':
         return 'Elevate your everyday meals with professional tips';
+      case 'walkthrough.intro3.title':
+        return 'Get the latest info';
+      case 'walkthrough.intro3.body':
+        return 'We\'ll send you new recipes with push notifications';
+      case 'walkthrough.intro3.button':
+        return 'Allow Notifications';
       case 'walkthrough.skip':
         return 'Skip';
       case 'walkthrough.done':
@@ -1727,6 +1766,12 @@ extension on _StringsJa {
         return '手順を学ぼう';
       case 'walkthrough.intro2.body':
         return 'プロのコツで、いつもの料理をワンランクアップ';
+      case 'walkthrough.intro3.title':
+        return '最新情報を受け取ろう';
+      case 'walkthrough.intro3.body':
+        return 'プッシュ通知で新着レシピをお届けします';
+      case 'walkthrough.intro3.button':
+        return '通知を許可';
       case 'walkthrough.skip':
         return 'スキップ';
       case 'walkthrough.done':

@@ -15,6 +15,11 @@
       "title": "Learn the steps",
       "body": "Elevate your everyday meals with professional tips"
     },
+    "intro3": {
+      "title": "Get the latest info",
+      "body": "We'll send you new recipes with push notifications",
+      "button": "Allow Notifications"
+    },
     "skip": "Skip",
     "done": "Done"
   },
