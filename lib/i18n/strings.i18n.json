@@ -81,6 +81,18 @@
                             "Japanese"
                         ]
                     }
+                },
+                "notification" : {
+                    "title" : "Notification",
+                    "child" : {
+                        "title" : "Notification",
+                        "requestPermission" : {
+                            "title" : "Request Permission"
+                        },
+                        "copyFcmToken" : {
+                            "title" : "Copy Token"
+                        }
+                    }
                 }
             }
         },

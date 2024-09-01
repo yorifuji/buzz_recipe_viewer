@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 144 (72 per locale)
+/// Strings: 152 (76 per locale)
 ///
-/// Built on 2024-08-31 at 07:46 UTC
+/// Built on 2024-09-01 at 01:34 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -436,6 +436,8 @@ class _StringsSettingsGeneralRowEn {
       _StringsSettingsGeneralRowColorEn._(_root);
   late final _StringsSettingsGeneralRowLanguageEn language =
       _StringsSettingsGeneralRowLanguageEn._(_root);
+  late final _StringsSettingsGeneralRowNotificationEn notification =
+      _StringsSettingsGeneralRowNotificationEn._(_root);
 }
 
 // Path: settings.video.row
@@ -534,6 +536,18 @@ class _StringsSettingsGeneralRowLanguageEn {
   String get title => 'Language';
   late final _StringsSettingsGeneralRowLanguageLanguageEn language =
       _StringsSettingsGeneralRowLanguageLanguageEn._(_root);
+}
+
+// Path: settings.general.row.notification
+class _StringsSettingsGeneralRowNotificationEn {
+  _StringsSettingsGeneralRowNotificationEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Notification';
+  late final _StringsSettingsGeneralRowNotificationChildEn child =
+      _StringsSettingsGeneralRowNotificationChildEn._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -705,6 +719,42 @@ class _StringsSettingsGeneralRowLanguageLanguageEn {
         'English',
         'Japanese',
       ];
+}
+
+// Path: settings.general.row.notification.child
+class _StringsSettingsGeneralRowNotificationChildEn {
+  _StringsSettingsGeneralRowNotificationChildEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Notification';
+  late final _StringsSettingsGeneralRowNotificationChildRequestPermissionEn
+      requestPermission =
+      _StringsSettingsGeneralRowNotificationChildRequestPermissionEn._(_root);
+  late final _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn
+      copyFcmToken =
+      _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn._(_root);
+}
+
+// Path: settings.general.row.notification.child.requestPermission
+class _StringsSettingsGeneralRowNotificationChildRequestPermissionEn {
+  _StringsSettingsGeneralRowNotificationChildRequestPermissionEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Request Permission';
+}
+
+// Path: settings.general.row.notification.child.copyFcmToken
+class _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn {
+  _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Copy Token';
 }
 
 // Path: <root>
@@ -1075,6 +1125,9 @@ class _StringsSettingsGeneralRowJa implements _StringsSettingsGeneralRowEn {
   @override
   late final _StringsSettingsGeneralRowLanguageJa language =
       _StringsSettingsGeneralRowLanguageJa._(_root);
+  @override
+  late final _StringsSettingsGeneralRowNotificationJa notification =
+      _StringsSettingsGeneralRowNotificationJa._(_root);
 }
 
 // Path: settings.video.row
@@ -1202,6 +1255,22 @@ class _StringsSettingsGeneralRowLanguageJa
   @override
   late final _StringsSettingsGeneralRowLanguageLanguageJa language =
       _StringsSettingsGeneralRowLanguageLanguageJa._(_root);
+}
+
+// Path: settings.general.row.notification
+class _StringsSettingsGeneralRowNotificationJa
+    implements _StringsSettingsGeneralRowNotificationEn {
+  _StringsSettingsGeneralRowNotificationJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知';
+  @override
+  late final _StringsSettingsGeneralRowNotificationChildJa child =
+      _StringsSettingsGeneralRowNotificationChildJa._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -1426,6 +1495,53 @@ class _StringsSettingsGeneralRowLanguageLanguageJa
       ];
 }
 
+// Path: settings.general.row.notification.child
+class _StringsSettingsGeneralRowNotificationChildJa
+    implements _StringsSettingsGeneralRowNotificationChildEn {
+  _StringsSettingsGeneralRowNotificationChildJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知';
+  @override
+  late final _StringsSettingsGeneralRowNotificationChildRequestPermissionJa
+      requestPermission =
+      _StringsSettingsGeneralRowNotificationChildRequestPermissionJa._(_root);
+  @override
+  late final _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa
+      copyFcmToken =
+      _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa._(_root);
+}
+
+// Path: settings.general.row.notification.child.requestPermission
+class _StringsSettingsGeneralRowNotificationChildRequestPermissionJa
+    implements _StringsSettingsGeneralRowNotificationChildRequestPermissionEn {
+  _StringsSettingsGeneralRowNotificationChildRequestPermissionJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知権限を要求する';
+}
+
+// Path: settings.general.row.notification.child.copyFcmToken
+class _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa
+    implements _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn {
+  _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'トークンをコピー';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -1520,6 +1636,14 @@ extension on Translations {
         return 'English';
       case 'settings.general.row.language.language.row.2':
         return 'Japanese';
+      case 'settings.general.row.notification.title':
+        return 'Notification';
+      case 'settings.general.row.notification.child.title':
+        return 'Notification';
+      case 'settings.general.row.notification.child.requestPermission.title':
+        return 'Request Permission';
+      case 'settings.general.row.notification.child.copyFcmToken.title':
+        return 'Copy Token';
       case 'settings.video.header':
         return 'Video';
       case 'settings.video.row.playWithinApp.title':
@@ -1673,6 +1797,14 @@ extension on _StringsJa {
         return 'English';
       case 'settings.general.row.language.language.row.2':
         return '日本語';
+      case 'settings.general.row.notification.title':
+        return '通知';
+      case 'settings.general.row.notification.child.title':
+        return '通知';
+      case 'settings.general.row.notification.child.requestPermission.title':
+        return '通知権限を要求する';
+      case 'settings.general.row.notification.child.copyFcmToken.title':
+        return 'トークンをコピー';
       case 'settings.video.header':
         return 'ビデオ';
       case 'settings.video.row.playWithinApp.title':

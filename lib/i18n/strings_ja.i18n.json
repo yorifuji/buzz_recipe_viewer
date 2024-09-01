@@ -81,7 +81,19 @@
                             "日本語"
                         ]
                     }
-                }
+                },
+                "notification" : {
+                    "title" : "通知",
+                    "child" : {
+                        "title" : "通知",
+                        "requestPermission" : {
+                            "title" : "通知権限を要求する"
+                        },
+                        "copyFcmToken" : {
+                            "title" : "トークンをコピー"
+                        }
+                    }
+                }                
             }
         },
         "video" : {

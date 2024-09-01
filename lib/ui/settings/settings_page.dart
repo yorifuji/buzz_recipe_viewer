@@ -10,11 +10,10 @@ import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
+import 'package:buzz_recipe_viewer/ui/settings/notification/notification_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -93,6 +92,22 @@ class SettingsPage extends ConsumerWidget {
                   );
                   await WidgetsFlutterBinding.ensureInitialized()
                       .performReassemble();
+                },
+              ),
+              SettingsTile.navigation(
+                title: Text(
+                  t.settings.general.row.notification.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
+                onPressed: (context) async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) {
+                        return const NotificationSettingPage();
+                      },
+                    ),
+                  );
                 },
               ),
             ],
@@ -226,7 +241,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (true || kDebugMode || ref.watch(flavorProvider).isDev)
+          if (kDebugMode || ref.watch(flavorProvider).isDev)
             SettingsSection(
               title: Text(
                 t.settings.debug.header,
@@ -271,49 +286,6 @@ class SettingsPage extends ConsumerWidget {
                       ),
                     );
                   },
-                ),
-                SettingsTile(
-                  title: InkWell(
-                    child: const Text(
-                      'Request notification permission',
-                      style: TextStyle(fontFamily: FontFamily.notoSansJP),
-                    ),
-                    onTap: () async {
-                      // Request permission
-                      final result =
-                          await FirebaseMessaging.instance.requestPermission();
-                      // ignore: use_build_context_synchronously
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                              Text('Permission: ${result.authorizationStatus}'),
-                          duration: const Duration(seconds: 1),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SettingsTile(
-                  title: InkWell(
-                    child: Text(
-                      t.settings.debug.row.fcmToken.title,
-                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                    ),
-                    onTap: () async {
-                      // Get the token each time the application loads
-                      final token = await FirebaseMessaging.instance.getToken();
-                      if (token != null) {
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('FCM Token: $token'),
-                            duration: const Duration(seconds: 1),
-                          ),
-                        );
-                        await Clipboard.setData(ClipboardData(text: token));
-                      }
-                    },
-                  ),
                 ),
               ],
             ),
