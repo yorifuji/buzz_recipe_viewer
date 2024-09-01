@@ -18,7 +18,8 @@
     "intro3": {
       "title": "Get the latest info",
       "body": "We'll send you new recipes with push notifications",
-      "button": "Allow Notifications"
+      "requestPermission": "Allow Notifications",
+      "openNotificationSettings": "Open Notification Settings"
     },
     "skip": "Skip",
     "done": "Done"
@@ -78,17 +79,18 @@
             "header": "Language",
             "row": ["Automatically", "English", "Japanese"]
           }
-        },
-        "notification": {
-          "title": "Notification",
-          "child": {
-            "title": "Notification",
-            "requestPermission": {
-              "title": "Request Permission"
-            },
-            "copyFcmToken": {
-              "title": "Copy Token"
-            }
+        }
+      },
+      "notifications": {
+        "title": "Notifications",
+        "notifications": {
+          "title": "Notifications",
+          "item": ["Settings"],
+          "allowNotifications": {
+            "title": "Allow Notifications"
+          },
+          "copyFcmToken": {
+            "title": "Copy Token"
           }
         }
       }

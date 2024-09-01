@@ -97,7 +97,7 @@ class SettingsPage extends ConsumerWidget {
               if (Platform.isIOS || Platform.isAndroid)
                 SettingsTile.navigation(
                   title: Text(
-                    t.settings.general.row.notification.title,
+                    t.settings.general.notifications.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (context) async {

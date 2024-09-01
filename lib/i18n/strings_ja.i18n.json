@@ -18,7 +18,8 @@
     "intro3": {
       "title": "最新情報を受け取ろう",
       "body": "プッシュ通知で新着レシピをお届けします",
-      "button": "通知を許可"
+      "requestPermission": "通知を許可",
+      "openNotificationSettings": "通知設定を開く"
     },
     "skip": "スキップ",
     "done": "完了"
@@ -78,17 +79,18 @@
             "header": "言語",
             "row": ["自動（デバイスの設定に従う）", "English", "日本語"]
           }
-        },
-        "notification": {
+        }
+      },
+      "notifications": {
+        "title": "通知",
+        "notifications": {
           "title": "通知",
-          "child": {
-            "title": "通知",
-            "requestPermission": {
-              "title": "通知権限を要求する"
-            },
-            "copyFcmToken": {
-              "title": "トークンをコピー"
-            }
+          "item": ["設定"],
+          "allowNotifications": {
+            "title": "通知を許可"
+          },
+          "copyFcmToken": {
+            "title": "トークンをコピー"
           }
         }
       }

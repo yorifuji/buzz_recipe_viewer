@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 158 (79 per locale)
+/// Strings: 162 (81 per locale)
 ///
-/// Built on 2024-09-01 at 07:26 UTC
+/// Built on 2024-09-01 at 21:38 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -332,7 +332,8 @@ class _StringsWalkthroughIntro3En {
   // Translations
   String get title => 'Get the latest info';
   String get body => 'We\'ll send you new recipes with push notifications';
-  String get button => 'Allow Notifications';
+  String get requestPermission => 'Allow Notifications';
+  String get openNotificationSettings => 'Open Notification Settings';
 }
 
 // Path: recipe.newRecipe
@@ -369,6 +370,8 @@ class _StringsSettingsGeneralEn {
   String get header => 'General';
   late final _StringsSettingsGeneralRowEn row =
       _StringsSettingsGeneralRowEn._(_root);
+  late final _StringsSettingsGeneralNotificationsEn notifications =
+      _StringsSettingsGeneralNotificationsEn._(_root);
 }
 
 // Path: settings.video
@@ -450,8 +453,18 @@ class _StringsSettingsGeneralRowEn {
       _StringsSettingsGeneralRowColorEn._(_root);
   late final _StringsSettingsGeneralRowLanguageEn language =
       _StringsSettingsGeneralRowLanguageEn._(_root);
-  late final _StringsSettingsGeneralRowNotificationEn notification =
-      _StringsSettingsGeneralRowNotificationEn._(_root);
+}
+
+// Path: settings.general.notifications
+class _StringsSettingsGeneralNotificationsEn {
+  _StringsSettingsGeneralNotificationsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Notifications';
+  late final _StringsSettingsGeneralNotificationsNotificationsEn notifications =
+      _StringsSettingsGeneralNotificationsNotificationsEn._(_root);
 }
 
 // Path: settings.video.row
@@ -552,16 +565,24 @@ class _StringsSettingsGeneralRowLanguageEn {
       _StringsSettingsGeneralRowLanguageLanguageEn._(_root);
 }
 
-// Path: settings.general.row.notification
-class _StringsSettingsGeneralRowNotificationEn {
-  _StringsSettingsGeneralRowNotificationEn._(this._root);
+// Path: settings.general.notifications.notifications
+class _StringsSettingsGeneralNotificationsNotificationsEn {
+  _StringsSettingsGeneralNotificationsNotificationsEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Notification';
-  late final _StringsSettingsGeneralRowNotificationChildEn child =
-      _StringsSettingsGeneralRowNotificationChildEn._(_root);
+  String get title => 'Notifications';
+  List<String> get item => [
+        'Settings',
+      ];
+  late final _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn
+      allowNotifications =
+      _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn._(
+          _root);
+  late final _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn
+      copyFcmToken =
+      _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -735,35 +756,20 @@ class _StringsSettingsGeneralRowLanguageLanguageEn {
       ];
 }
 
-// Path: settings.general.row.notification.child
-class _StringsSettingsGeneralRowNotificationChildEn {
-  _StringsSettingsGeneralRowNotificationChildEn._(this._root);
+// Path: settings.general.notifications.notifications.allowNotifications
+class _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn {
+  _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn._(
+      this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Notification';
-  late final _StringsSettingsGeneralRowNotificationChildRequestPermissionEn
-      requestPermission =
-      _StringsSettingsGeneralRowNotificationChildRequestPermissionEn._(_root);
-  late final _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn
-      copyFcmToken =
-      _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn._(_root);
+  String get title => 'Allow Notifications';
 }
 
-// Path: settings.general.row.notification.child.requestPermission
-class _StringsSettingsGeneralRowNotificationChildRequestPermissionEn {
-  _StringsSettingsGeneralRowNotificationChildRequestPermissionEn._(this._root);
-
-  final Translations _root; // ignore: unused_field
-
-  // Translations
-  String get title => 'Request Permission';
-}
-
-// Path: settings.general.row.notification.child.copyFcmToken
-class _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn {
-  _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn._(this._root);
+// Path: settings.general.notifications.notifications.copyFcmToken
+class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn {
+  _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -1004,7 +1010,9 @@ class _StringsWalkthroughIntro3Ja implements _StringsWalkthroughIntro3En {
   @override
   String get body => 'プッシュ通知で新着レシピをお届けします';
   @override
-  String get button => '通知を許可';
+  String get requestPermission => '通知を許可';
+  @override
+  String get openNotificationSettings => '通知設定を開く';
 }
 
 // Path: recipe.newRecipe
@@ -1051,6 +1059,9 @@ class _StringsSettingsGeneralJa implements _StringsSettingsGeneralEn {
   @override
   late final _StringsSettingsGeneralRowJa row =
       _StringsSettingsGeneralRowJa._(_root);
+  @override
+  late final _StringsSettingsGeneralNotificationsJa notifications =
+      _StringsSettingsGeneralNotificationsJa._(_root);
 }
 
 // Path: settings.video
@@ -1158,9 +1169,22 @@ class _StringsSettingsGeneralRowJa implements _StringsSettingsGeneralRowEn {
   @override
   late final _StringsSettingsGeneralRowLanguageJa language =
       _StringsSettingsGeneralRowLanguageJa._(_root);
+}
+
+// Path: settings.general.notifications
+class _StringsSettingsGeneralNotificationsJa
+    implements _StringsSettingsGeneralNotificationsEn {
+  _StringsSettingsGeneralNotificationsJa._(this._root);
+
   @override
-  late final _StringsSettingsGeneralRowNotificationJa notification =
-      _StringsSettingsGeneralRowNotificationJa._(_root);
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '通知';
+  @override
+  late final _StringsSettingsGeneralNotificationsNotificationsJa notifications =
+      _StringsSettingsGeneralNotificationsNotificationsJa._(_root);
 }
 
 // Path: settings.video.row
@@ -1290,10 +1314,10 @@ class _StringsSettingsGeneralRowLanguageJa
       _StringsSettingsGeneralRowLanguageLanguageJa._(_root);
 }
 
-// Path: settings.general.row.notification
-class _StringsSettingsGeneralRowNotificationJa
-    implements _StringsSettingsGeneralRowNotificationEn {
-  _StringsSettingsGeneralRowNotificationJa._(this._root);
+// Path: settings.general.notifications.notifications
+class _StringsSettingsGeneralNotificationsNotificationsJa
+    implements _StringsSettingsGeneralNotificationsNotificationsEn {
+  _StringsSettingsGeneralNotificationsNotificationsJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
@@ -1302,8 +1326,18 @@ class _StringsSettingsGeneralRowNotificationJa
   @override
   String get title => '通知';
   @override
-  late final _StringsSettingsGeneralRowNotificationChildJa child =
-      _StringsSettingsGeneralRowNotificationChildJa._(_root);
+  List<String> get item => [
+        '設定',
+      ];
+  @override
+  late final _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa
+      allowNotifications =
+      _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa._(
+          _root);
+  @override
+  late final _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
+      copyFcmToken =
+      _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -1528,44 +1562,25 @@ class _StringsSettingsGeneralRowLanguageLanguageJa
       ];
 }
 
-// Path: settings.general.row.notification.child
-class _StringsSettingsGeneralRowNotificationChildJa
-    implements _StringsSettingsGeneralRowNotificationChildEn {
-  _StringsSettingsGeneralRowNotificationChildJa._(this._root);
+// Path: settings.general.notifications.notifications.allowNotifications
+class _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa
+    implements
+        _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn {
+  _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa._(
+      this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => '通知';
-  @override
-  late final _StringsSettingsGeneralRowNotificationChildRequestPermissionJa
-      requestPermission =
-      _StringsSettingsGeneralRowNotificationChildRequestPermissionJa._(_root);
-  @override
-  late final _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa
-      copyFcmToken =
-      _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa._(_root);
+  String get title => '通知を許可';
 }
 
-// Path: settings.general.row.notification.child.requestPermission
-class _StringsSettingsGeneralRowNotificationChildRequestPermissionJa
-    implements _StringsSettingsGeneralRowNotificationChildRequestPermissionEn {
-  _StringsSettingsGeneralRowNotificationChildRequestPermissionJa._(this._root);
-
-  @override
-  final _StringsJa _root; // ignore: unused_field
-
-  // Translations
-  @override
-  String get title => '通知権限を要求する';
-}
-
-// Path: settings.general.row.notification.child.copyFcmToken
-class _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa
-    implements _StringsSettingsGeneralRowNotificationChildCopyFcmTokenEn {
-  _StringsSettingsGeneralRowNotificationChildCopyFcmTokenJa._(this._root);
+// Path: settings.general.notifications.notifications.copyFcmToken
+class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
+    implements _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn {
+  _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
@@ -1603,8 +1618,10 @@ extension on Translations {
         return 'Get the latest info';
       case 'walkthrough.intro3.body':
         return 'We\'ll send you new recipes with push notifications';
-      case 'walkthrough.intro3.button':
+      case 'walkthrough.intro3.requestPermission':
         return 'Allow Notifications';
+      case 'walkthrough.intro3.openNotificationSettings':
+        return 'Open Notification Settings';
       case 'walkthrough.skip':
         return 'Skip';
       case 'walkthrough.done':
@@ -1675,13 +1692,15 @@ extension on Translations {
         return 'English';
       case 'settings.general.row.language.language.row.2':
         return 'Japanese';
-      case 'settings.general.row.notification.title':
-        return 'Notification';
-      case 'settings.general.row.notification.child.title':
-        return 'Notification';
-      case 'settings.general.row.notification.child.requestPermission.title':
-        return 'Request Permission';
-      case 'settings.general.row.notification.child.copyFcmToken.title':
+      case 'settings.general.notifications.title':
+        return 'Notifications';
+      case 'settings.general.notifications.notifications.title':
+        return 'Notifications';
+      case 'settings.general.notifications.notifications.item.0':
+        return 'Settings';
+      case 'settings.general.notifications.notifications.allowNotifications.title':
+        return 'Allow Notifications';
+      case 'settings.general.notifications.notifications.copyFcmToken.title':
         return 'Copy Token';
       case 'settings.video.header':
         return 'Video';
@@ -1770,8 +1789,10 @@ extension on _StringsJa {
         return '最新情報を受け取ろう';
       case 'walkthrough.intro3.body':
         return 'プッシュ通知で新着レシピをお届けします';
-      case 'walkthrough.intro3.button':
+      case 'walkthrough.intro3.requestPermission':
         return '通知を許可';
+      case 'walkthrough.intro3.openNotificationSettings':
+        return '通知設定を開く';
       case 'walkthrough.skip':
         return 'スキップ';
       case 'walkthrough.done':
@@ -1842,13 +1863,15 @@ extension on _StringsJa {
         return 'English';
       case 'settings.general.row.language.language.row.2':
         return '日本語';
-      case 'settings.general.row.notification.title':
+      case 'settings.general.notifications.title':
         return '通知';
-      case 'settings.general.row.notification.child.title':
+      case 'settings.general.notifications.notifications.title':
         return '通知';
-      case 'settings.general.row.notification.child.requestPermission.title':
-        return '通知権限を要求する';
-      case 'settings.general.row.notification.child.copyFcmToken.title':
+      case 'settings.general.notifications.notifications.item.0':
+        return '設定';
+      case 'settings.general.notifications.notifications.allowNotifications.title':
+        return '通知を許可';
+      case 'settings.general.notifications.notifications.copyFcmToken.title':
         return 'トークンをコピー';
       case 'settings.video.header':
         return 'ビデオ';
