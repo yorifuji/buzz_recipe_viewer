@@ -267,15 +267,15 @@ jobs:
       - if: ${{ inputs.upload }}
         run: |
           pushd build/macos/Build/Products/Release
-          zip -r buzz_recipe_viewer_stg.zip buzz_recipe_viewer.app
+          zip -r buzz_recipe_viewer_macos_stg.zip buzz_recipe_viewer.app
           popd
-          mv build/macos/Build/Products/Release/buzz_recipe_viewer_stg.zip ./
+          mv build/macos/Build/Products/Release/buzz_recipe_viewer_macos_stg.zip ./
 
       - uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
         if: ${{ inputs.upload }}
         with:
-          path: buzz_recipe_viewer_stg.zip
-          name: buzz_recipe_viewer_stg
+          path: buzz_recipe_viewer_macos_stg.zip
+          name: buzz_recipe_viewer_macos_stg
           overwrite: true
 
   action-timeline:

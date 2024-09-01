@@ -266,6 +266,20 @@ jobs:
 
       - run: flutter build macos --dart-define=FLAVOR=prod
 
+      - if: ${{ inputs.upload }}
+        run: |
+          pushd build/macos/Build/Products/Release
+          zip -r buzz_recipe_viewer_macos_prod.zip buzz_recipe_viewer.app
+          popd
+          mv build/macos/Build/Products/Release/buzz_recipe_viewer_macos_prod.zip ./
+
+      - uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
+        if: ${{ inputs.upload }}
+        with:
+          path: buzz_recipe_viewer_macos_prod.zip
+          name: buzz_recipe_viewer_macos_prod
+          overwrite: true
+
   action-timeline:
     needs: [android, ios, macos]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-prod.yml' }}
