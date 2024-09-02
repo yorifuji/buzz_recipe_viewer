@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/database_provider.dart';
