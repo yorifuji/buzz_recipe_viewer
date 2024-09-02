@@ -54,6 +54,7 @@ class WalkthroughPage extends ConsumerWidget {
                     AuthorizationStatus.notDetermined => ElevatedButton(
                         onPressed: () async {
                           await NotificationService.requestPermission();
+                          ref.invalidate(notificationAuthorizeStatusProvider);
                         },
                         child: Text(t.walkthrough.intro3.requestPermission),
                       ),
