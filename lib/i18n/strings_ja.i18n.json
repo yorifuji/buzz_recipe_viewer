@@ -82,15 +82,16 @@
         }
       },
       "notifications": {
-        "title": "通知",
-        "notifications": {
-          "title": "通知",
-          "item": ["設定"],
-          "allowNotifications": {
-            "title": "通知を許可"
+        "title": "通知設定",
+        "page": {
+          "title": "通知設定",
+          "settings": {
+            "title": "通知",
+            "items": ["通知を許可", "トークンをコピー"]
           },
-          "copyFcmToken": {
-            "title": "トークンをコピー"
+          "topic": {
+            "title": "トピック",
+            "items": ["一般", "新しいビデオの追加"]
           }
         }
       }

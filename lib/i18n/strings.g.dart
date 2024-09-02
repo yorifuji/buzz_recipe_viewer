@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 162 (81 per locale)
+/// Strings: 168 (84 per locale)
 ///
-/// Built on 2024-09-01 at 21:38 UTC
+/// Built on 2024-09-02 at 12:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -463,8 +463,8 @@ class _StringsSettingsGeneralNotificationsEn {
 
   // Translations
   String get title => 'Notifications';
-  late final _StringsSettingsGeneralNotificationsNotificationsEn notifications =
-      _StringsSettingsGeneralNotificationsNotificationsEn._(_root);
+  late final _StringsSettingsGeneralNotificationsPageEn page =
+      _StringsSettingsGeneralNotificationsPageEn._(_root);
 }
 
 // Path: settings.video.row
@@ -565,24 +565,18 @@ class _StringsSettingsGeneralRowLanguageEn {
       _StringsSettingsGeneralRowLanguageLanguageEn._(_root);
 }
 
-// Path: settings.general.notifications.notifications
-class _StringsSettingsGeneralNotificationsNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsEn._(this._root);
+// Path: settings.general.notifications.page
+class _StringsSettingsGeneralNotificationsPageEn {
+  _StringsSettingsGeneralNotificationsPageEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Notifications';
-  List<String> get item => [
-        'Settings',
-      ];
-  late final _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn
-      allowNotifications =
-      _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn._(
-          _root);
-  late final _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn
-      copyFcmToken =
-      _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn._(_root);
+  late final _StringsSettingsGeneralNotificationsPageSettingsEn settings =
+      _StringsSettingsGeneralNotificationsPageSettingsEn._(_root);
+  late final _StringsSettingsGeneralNotificationsPageTopicEn topic =
+      _StringsSettingsGeneralNotificationsPageTopicEn._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -756,25 +750,32 @@ class _StringsSettingsGeneralRowLanguageLanguageEn {
       ];
 }
 
-// Path: settings.general.notifications.notifications.allowNotifications
-class _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn._(
-      this._root);
+// Path: settings.general.notifications.page.settings
+class _StringsSettingsGeneralNotificationsPageSettingsEn {
+  _StringsSettingsGeneralNotificationsPageSettingsEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Allow Notifications';
+  String get title => 'Notifications';
+  List<String> get items => [
+        'Allow Notifications',
+        'Copy Token',
+      ];
 }
 
-// Path: settings.general.notifications.notifications.copyFcmToken
-class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn {
-  _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn._(this._root);
+// Path: settings.general.notifications.page.topic
+class _StringsSettingsGeneralNotificationsPageTopicEn {
+  _StringsSettingsGeneralNotificationsPageTopicEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Copy Token';
+  String get title => 'Topic';
+  List<String> get items => [
+        'General',
+        'Video',
+      ];
 }
 
 // Path: <root>
@@ -1181,10 +1182,10 @@ class _StringsSettingsGeneralNotificationsJa
 
   // Translations
   @override
-  String get title => '通知';
+  String get title => '通知設定';
   @override
-  late final _StringsSettingsGeneralNotificationsNotificationsJa notifications =
-      _StringsSettingsGeneralNotificationsNotificationsJa._(_root);
+  late final _StringsSettingsGeneralNotificationsPageJa page =
+      _StringsSettingsGeneralNotificationsPageJa._(_root);
 }
 
 // Path: settings.video.row
@@ -1314,30 +1315,23 @@ class _StringsSettingsGeneralRowLanguageJa
       _StringsSettingsGeneralRowLanguageLanguageJa._(_root);
 }
 
-// Path: settings.general.notifications.notifications
-class _StringsSettingsGeneralNotificationsNotificationsJa
-    implements _StringsSettingsGeneralNotificationsNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsJa._(this._root);
+// Path: settings.general.notifications.page
+class _StringsSettingsGeneralNotificationsPageJa
+    implements _StringsSettingsGeneralNotificationsPageEn {
+  _StringsSettingsGeneralNotificationsPageJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => '通知';
+  String get title => '通知設定';
   @override
-  List<String> get item => [
-        '設定',
-      ];
+  late final _StringsSettingsGeneralNotificationsPageSettingsJa settings =
+      _StringsSettingsGeneralNotificationsPageSettingsJa._(_root);
   @override
-  late final _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa
-      allowNotifications =
-      _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa._(
-          _root);
-  @override
-  late final _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
-      copyFcmToken =
-      _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa._(_root);
+  late final _StringsSettingsGeneralNotificationsPageTopicJa topic =
+      _StringsSettingsGeneralNotificationsPageTopicJa._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -1562,32 +1556,40 @@ class _StringsSettingsGeneralRowLanguageLanguageJa
       ];
 }
 
-// Path: settings.general.notifications.notifications.allowNotifications
-class _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa
-    implements
-        _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa._(
-      this._root);
+// Path: settings.general.notifications.page.settings
+class _StringsSettingsGeneralNotificationsPageSettingsJa
+    implements _StringsSettingsGeneralNotificationsPageSettingsEn {
+  _StringsSettingsGeneralNotificationsPageSettingsJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => '通知を許可';
+  String get title => '通知';
+  @override
+  List<String> get items => [
+        '通知を許可',
+        'トークンをコピー',
+      ];
 }
 
-// Path: settings.general.notifications.notifications.copyFcmToken
-class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
-    implements _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn {
-  _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa._(this._root);
+// Path: settings.general.notifications.page.topic
+class _StringsSettingsGeneralNotificationsPageTopicJa
+    implements _StringsSettingsGeneralNotificationsPageTopicEn {
+  _StringsSettingsGeneralNotificationsPageTopicJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => 'トークンをコピー';
+  String get title => 'トピック';
+  @override
+  List<String> get items => [
+        '一般',
+        '新しいビデオの追加',
+      ];
 }
 
 /// Flat map(s) containing all translations.
@@ -1694,14 +1696,20 @@ extension on Translations {
         return 'Japanese';
       case 'settings.general.notifications.title':
         return 'Notifications';
-      case 'settings.general.notifications.notifications.title':
+      case 'settings.general.notifications.page.title':
         return 'Notifications';
-      case 'settings.general.notifications.notifications.item.0':
-        return 'Settings';
-      case 'settings.general.notifications.notifications.allowNotifications.title':
+      case 'settings.general.notifications.page.settings.title':
+        return 'Notifications';
+      case 'settings.general.notifications.page.settings.items.0':
         return 'Allow Notifications';
-      case 'settings.general.notifications.notifications.copyFcmToken.title':
+      case 'settings.general.notifications.page.settings.items.1':
         return 'Copy Token';
+      case 'settings.general.notifications.page.topic.title':
+        return 'Topic';
+      case 'settings.general.notifications.page.topic.items.0':
+        return 'General';
+      case 'settings.general.notifications.page.topic.items.1':
+        return 'Video';
       case 'settings.video.header':
         return 'Video';
       case 'settings.video.row.playWithinApp.title':
@@ -1864,15 +1872,21 @@ extension on _StringsJa {
       case 'settings.general.row.language.language.row.2':
         return '日本語';
       case 'settings.general.notifications.title':
+        return '通知設定';
+      case 'settings.general.notifications.page.title':
+        return '通知設定';
+      case 'settings.general.notifications.page.settings.title':
         return '通知';
-      case 'settings.general.notifications.notifications.title':
-        return '通知';
-      case 'settings.general.notifications.notifications.item.0':
-        return '設定';
-      case 'settings.general.notifications.notifications.allowNotifications.title':
+      case 'settings.general.notifications.page.settings.items.0':
         return '通知を許可';
-      case 'settings.general.notifications.notifications.copyFcmToken.title':
+      case 'settings.general.notifications.page.settings.items.1':
         return 'トークンをコピー';
+      case 'settings.general.notifications.page.topic.title':
+        return 'トピック';
+      case 'settings.general.notifications.page.topic.items.0':
+        return '一般';
+      case 'settings.general.notifications.page.topic.items.1':
+        return '新しいビデオの追加';
       case 'settings.video.header':
         return 'ビデオ';
       case 'settings.video.row.playWithinApp.title':

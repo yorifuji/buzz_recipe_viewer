@@ -32,4 +32,17 @@ class NotificationService {
     return (await FirebaseMessaging.instance.getNotificationSettings())
         .authorizationStatus;
   }
+
+  static Future<void> subscribeToTopic(String topic) {
+    return FirebaseMessaging.instance.subscribeToTopic(topic);
+  }
+
+  static Future<void> unsubscribeFromTopic(String topic) {
+    return FirebaseMessaging.instance.unsubscribeFromTopic(topic);
+  }
+
+  // delete token
+  static Future<void> deleteToken() {
+    return FirebaseMessaging.instance.deleteToken();
+  }
 }

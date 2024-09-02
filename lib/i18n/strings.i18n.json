@@ -83,14 +83,15 @@
       },
       "notifications": {
         "title": "Notifications",
-        "notifications": {
+        "page": {
           "title": "Notifications",
-          "item": ["Settings"],
-          "allowNotifications": {
-            "title": "Allow Notifications"
+          "settings": {
+            "title": "Notifications",
+            "items": ["Allow Notifications", "Copy Token"]
           },
-          "copyFcmToken": {
-            "title": "Copy Token"
+          "topic": {
+            "title": "Topic",
+            "items": ["General", "Video"]
           }
         }
       }
