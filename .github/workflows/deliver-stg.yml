@@ -15,9 +15,6 @@ on:
         description: 'Upload'
         type: boolean
         default: true
-  push:
-    branches:
-      - develop
 
 permissions:
   contents: read
