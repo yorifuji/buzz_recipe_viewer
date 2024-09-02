@@ -10,23 +10,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-enum NotificationTopic {
-  general('general'),
-  video('video'),
-  ;
-
-  const NotificationTopic(this.value);
-
-  final String value;
-}
-
 class NotificationSettingPage extends HookConsumerWidget {
   const NotificationSettingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final subscribeGeneral = useState<bool>(false);
-    final subscribeVideo = useState<bool>(false);
+    final subscribeGeneral = useState<bool>(true);
+    final subscribeVideo = useState<bool>(true);
     final authorizationStatus = ref.watch(notificationAuthorizeStatusProvider);
 
     final allowNotificationTile = switch (authorizationStatus) {

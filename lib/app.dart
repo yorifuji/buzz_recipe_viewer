@@ -1,7 +1,9 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
+import 'package:buzz_recipe_viewer/provider/app_lifecycle_state_provider.dart';
 import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/service/notification_service.dart';
 import 'package:buzz_recipe_viewer/store/locale_notifier.dart';
 import 'package:buzz_recipe_viewer/store/theme_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_page.dart';
@@ -15,6 +17,15 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<bool>(
+      appLifecycleStateProvider.select((state) => state.isResumed),
+      (_, resumed) {
+        if (resumed) {
+          ref.invalidate(notificationAuthorizeStatusProvider);
+        }
+      },
+    );
+
     return TranslationProvider(
       child: MaterialApp(
         // debugShowCheckedModeBanner: false,

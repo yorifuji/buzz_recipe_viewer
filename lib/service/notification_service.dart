@@ -3,6 +3,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notification_service.g.dart';
 
+enum NotificationTopic {
+  general('general'),
+  video('video'),
+  ;
+
+  const NotificationTopic(this.value);
+
+  final String value;
+}
+
 @riverpod
 Future<AuthorizationStatus> notificationAuthorizeStatus(
   NotificationAuthorizeStatusRef ref,
@@ -19,6 +29,7 @@ class NotificationService {
         badge: true,
         sound: true,
       );
+      await subscribeToAllTopic();
     }
     return result.authorizationStatus;
   }
@@ -39,6 +50,14 @@ class NotificationService {
 
   static Future<void> unsubscribeFromTopic(String topic) {
     return FirebaseMessaging.instance.unsubscribeFromTopic(topic);
+  }
+
+  static Future<void> subscribeToAllTopic() async {
+    await (
+      FirebaseMessaging.instance
+          .subscribeToTopic(NotificationTopic.general.value),
+      FirebaseMessaging.instance.subscribeToTopic(NotificationTopic.video.value)
+    ).wait;
   }
 
   // delete token
