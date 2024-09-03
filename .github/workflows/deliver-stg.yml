@@ -181,7 +181,10 @@ jobs:
           APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
         run: |
-          flutter build ios --config-only --no-codesign --dart-define=FLAVOR=stg
+          flutter build ios \
+            --config-only \
+            --no-codesign \
+            --dart-define=FLAVOR=stg
           xcodebuild archive \
             -archivePath ./build/ios/Runner.xcarchive \
             -workspace ./ios/Runner.xcworkspace \
