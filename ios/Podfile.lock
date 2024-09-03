@@ -1,11 +1,18 @@
 PODS:
   - app_settings (5.1.1):
     - Flutter
+  - Firebase/Auth (11.0.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 11.0.0)
   - Firebase/CoreOnly (11.0.0):
     - FirebaseCore (= 11.0.0)
   - Firebase/Messaging (11.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.0.0)
+  - firebase_auth (5.2.0):
+    - Firebase/Auth (= 11.0.0)
+    - firebase_core
+    - Flutter
   - firebase_core (3.4.0):
     - Firebase/CoreOnly (= 11.0.0)
     - Flutter
@@ -13,10 +20,23 @@ PODS:
     - Firebase/Messaging (= 11.0.0)
     - firebase_core
     - Flutter
+  - FirebaseAppCheckInterop (11.1.0)
+  - FirebaseAuth (11.0.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.0)
+    - FirebaseCoreExtension (~> 11.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (~> 3.4)
+    - RecaptchaInterop (~> 100.0)
+  - FirebaseAuthInterop (11.1.0)
   - FirebaseCore (11.0.0):
     - FirebaseCoreInternal (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
+  - FirebaseCoreExtension (11.1.0):
+    - FirebaseCore (~> 11.0)
   - FirebaseCoreInternal (11.1.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - FirebaseInstallations (11.1.0):
@@ -70,6 +90,7 @@ PODS:
   - GoogleUtilities/UserDefaults (8.0.2):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
+  - GTMSessionFetcher/Core (3.5.0)
   - in_app_review (0.2.0):
     - Flutter
   - nanopb (3.30910.0):
@@ -84,6 +105,7 @@ PODS:
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.4.0)
+  - RecaptchaInterop (100.0.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -110,6 +132,7 @@ PODS:
 
 DEPENDENCIES:
   - app_settings (from `.symlinks/plugins/app_settings/ios`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
@@ -125,20 +148,28 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
+    - GTMSessionFetcher
     - nanopb
     - OrderedSet
     - PromisesObjC
+    - RecaptchaInterop
     - sqlite3
 
 EXTERNAL SOURCES:
   app_settings:
     :path: ".symlinks/plugins/app_settings/ios"
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -165,9 +196,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
   Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
+  firebase_auth: 16ac5db3d064db837ecd845080d7e18e4be7c66d
   firebase_core: ceec591a66629daaee82d3321551692c4a871493
   firebase_messaging: 15d8b557010f3bb7b98d0302e1c7c8fbcd244425
+  FirebaseAppCheckInterop: e59b52f2c0e188e6ba77b9e3f6acead2117f2abf
+  FirebaseAuth: d5cf28be74d7e82257f6a3f717509eff70d3cf4a
+  FirebaseAuthInterop: 49e8faefaf254ce578e278a84a8fe0aebe23b546
   FirebaseCore: 3cf438f431f18c12cdf2aaf64434648b63f7e383
+  FirebaseCoreExtension: aa5c9779c2d0d39d83f1ceb3fdbafe80c4feecfa
   FirebaseCoreInternal: adefedc9a88dbe393c4884640a73ec9e8e790f8c
   FirebaseInstallations: d0a8fea5a6fa91abc661591cf57c0f0d70863e57
   FirebaseMessaging: d2d1d9c62c46dd2db49a952f7deb5b16ad2c9742
@@ -176,12 +212,14 @@ SPEC CHECKSUMS:
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
+  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sqlite3: 0bb0e6389d824e40296f531b858a2a0b71c0d2fb
   sqlite3_flutter_libs: c00457ebd31e59fa6bb830380ddba24d44fbcd3b

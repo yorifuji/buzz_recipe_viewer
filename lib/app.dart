@@ -17,6 +17,13 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final shouldShowWalkthrough = ref.watch(
+      boolPreferenceProvider(Preference.shouldShowWalkthrough),
+    );
+    final isProvisioned = ref.watch(
+      boolPreferenceProvider(Preference.isProvisioned),
+    );
+
     ref.listen<bool>(
       appLifecycleStateProvider.select((state) => state.isResumed),
       (_, resumed) {
@@ -40,11 +47,11 @@ class App extends ConsumerWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: LocalePreference.supportedLocaleList(),
-        home: ref.watch(
-          boolPreferenceProvider(Preference.shouldShowWalkthrough),
-        )
+        home: shouldShowWalkthrough
             ? const WalkthroughPage()
-            : const NavigationPage(),
+            : isProvisioned
+                ? const NavigationPage()
+                : const NavigationPage(),
       ),
     );
   }
