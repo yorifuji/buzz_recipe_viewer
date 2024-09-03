@@ -243,7 +243,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || ref.watch(flavorProvider).isDev)
+          if (kDebugMode || !ref.watch(flavorProvider).isProd)
             SettingsSection(
               title: Text(
                 t.settings.debug.header,
