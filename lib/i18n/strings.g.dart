@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 202 (101 per locale)
+/// Strings: 203 (101 per locale)
 ///
-/// Built on 2024-09-04 at 03:44 UTC
+/// Built on 2024-09-04 at 03:51 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -188,7 +188,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   late final Translations _root = this; // ignore: unused_field
 
   // Translations
-  String get appTitle => 'Awesome Japanese Recipe';
+  late final _StringsAppEn app = _StringsAppEn._(_root);
   late final _StringsTabEn tab = _StringsTabEn._(_root);
   late final _StringsWalkthroughEn walkthrough = _StringsWalkthroughEn._(_root);
   late final _StringsProvisioningEn provisioning =
@@ -199,6 +199,16 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   late final _StringsSettingsEn settings = _StringsSettingsEn._(_root);
   late final _StringsCommonEn common = _StringsCommonEn._(_root);
   late final _StringsErrorEn error = _StringsErrorEn._(_root);
+}
+
+// Path: app
+class _StringsAppEn {
+  _StringsAppEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Awesome Japanese Recipe';
 }
 
 // Path: tab
@@ -294,6 +304,8 @@ class _StringsSettingsEn {
       _StringsSettingsSupportEn._(_root);
   late final _StringsSettingsAboutEn about = _StringsSettingsAboutEn._(_root);
   late final _StringsSettingsDebugEn debug = _StringsSettingsDebugEn._(_root);
+  late final _StringsSettingsCommonEn common =
+      _StringsSettingsCommonEn._(_root);
 }
 
 // Path: common
@@ -312,7 +324,6 @@ class _StringsCommonEn {
   String get sortByDate => 'Sort by Date (Newest First)';
   String get sortByLikes => 'Popular (Likes)';
   String get sortByViews => 'Popular (Views)';
-  String get selected => 'Selected';
 }
 
 // Path: error
@@ -444,6 +455,16 @@ class _StringsSettingsDebugEn {
   String get header => 'Debug';
   late final _StringsSettingsDebugRowEn row =
       _StringsSettingsDebugRowEn._(_root);
+}
+
+// Path: settings.common
+class _StringsSettingsCommonEn {
+  _StringsSettingsCommonEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get selected => 'Selected';
 }
 
 // Path: error.auth
@@ -858,7 +879,7 @@ class _StringsJa implements Translations {
 
   // Translations
   @override
-  String get appTitle => 'シンプルレシピ検索';
+  late final _StringsAppJa app = _StringsAppJa._(_root);
   @override
   late final _StringsTabJa tab = _StringsTabJa._(_root);
   @override
@@ -878,6 +899,18 @@ class _StringsJa implements Translations {
   late final _StringsCommonJa common = _StringsCommonJa._(_root);
   @override
   late final _StringsErrorJa error = _StringsErrorJa._(_root);
+}
+
+// Path: app
+class _StringsAppJa implements _StringsAppEn {
+  _StringsAppJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'シンプルレシピ検索';
 }
 
 // Path: tab
@@ -1005,6 +1038,9 @@ class _StringsSettingsJa implements _StringsSettingsEn {
   late final _StringsSettingsAboutJa about = _StringsSettingsAboutJa._(_root);
   @override
   late final _StringsSettingsDebugJa debug = _StringsSettingsDebugJa._(_root);
+  @override
+  late final _StringsSettingsCommonJa common =
+      _StringsSettingsCommonJa._(_root);
 }
 
 // Path: common
@@ -1202,6 +1238,18 @@ class _StringsSettingsDebugJa implements _StringsSettingsDebugEn {
   @override
   late final _StringsSettingsDebugRowJa row =
       _StringsSettingsDebugRowJa._(_root);
+}
+
+// Path: settings.common
+class _StringsSettingsCommonJa implements _StringsSettingsCommonEn {
+  _StringsSettingsCommonJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get selected => '選択中';
 }
 
 // Path: error.auth
@@ -1717,7 +1765,7 @@ class _StringsSettingsGeneralNotificationsPageTopicJa
 extension on Translations {
   dynamic _flatMapFunction(String path) {
     switch (path) {
-      case 'appTitle':
+      case 'app.title':
         return 'Awesome Japanese Recipe';
       case 'tab.recipe':
         return 'Recipe';
@@ -1869,6 +1917,8 @@ extension on Translations {
         return 'Delete Local Data';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
+      case 'settings.common.selected':
+        return 'Selected';
       case 'common.addFavorite':
         return 'Add Favorite';
       case 'common.fetchFailed':
@@ -1887,8 +1937,6 @@ extension on Translations {
         return 'Popular (Likes)';
       case 'common.sortByViews':
         return 'Popular (Views)';
-      case 'common.selected':
-        return 'Selected';
       case 'error.auth.emailAlreadyInUse':
         return 'Email already in use.';
       case 'error.auth.invalidEmail':
@@ -1928,7 +1976,7 @@ extension on Translations {
 extension on _StringsJa {
   dynamic _flatMapFunction(String path) {
     switch (path) {
-      case 'appTitle':
+      case 'app.title':
         return 'シンプルレシピ検索';
       case 'tab.recipe':
         return 'レシピ';
@@ -2080,6 +2128,8 @@ extension on _StringsJa {
         return 'ローカルデータを削除';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
+      case 'settings.common.selected':
+        return '選択中';
       case 'common.addFavorite':
         return 'お気に入りに追加しました';
       case 'common.fetchFailed':

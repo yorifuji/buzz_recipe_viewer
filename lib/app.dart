@@ -29,7 +29,7 @@ class App extends ConsumerWidget {
     return TranslationProvider(
       child: MaterialApp.router(
         // debugShowCheckedModeBanner: false,
-        title: t.appTitle,
+        title: t.app.title,
         theme: ref.watch(themeDataProvider()),
         darkTheme: ref.watch(themeDataProvider(isDarkMode: true)),
         themeMode: ref.watch(themeNotiferProvider).themeMode,

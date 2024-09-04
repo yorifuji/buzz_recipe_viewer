@@ -1,4 +1,5 @@
-appTitle: Awesome Japanese Recipe
+app:
+  title: Awesome Japanese Recipe
 tab:
   recipe: Recipe
   video: Video
@@ -128,6 +129,8 @@ settings:
         title: Delete Local Data
       fcmToken:
         title: FCM Token(Tap to copy)
+  common:
+    selected: Selected
 common:
   addFavorite: Add Favorite
   fetchFailed: Failed to fetch data.
@@ -138,7 +141,6 @@ common:
   sortByDate: Sort by Date (Newest First)
   sortByLikes: Popular (Likes)
   sortByViews: Popular (Views)
-  selected: Selected
 error:
   auth:
     emailAlreadyInUse: Email already in use.

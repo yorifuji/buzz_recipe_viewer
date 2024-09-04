@@ -1,4 +1,5 @@
-appTitle: シンプルレシピ検索
+app:
+  title: シンプルレシピ検索
 tab:
   recipe: レシピ
   video: ビデオ
@@ -126,6 +127,8 @@ settings:
         title: ローカルデータを削除
       fcmToken:
         title: FCM Token(Tap to copy)
+  common:
+    selected: 選択中
 common:
   addFavorite: お気に入りに追加しました
   fetchFailed: データを取得できませんでした

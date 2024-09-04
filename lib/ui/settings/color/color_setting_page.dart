@@ -41,7 +41,7 @@ class ColorSettingPage extends ConsumerWidget {
                 value: kIsWeb
                     ? e == appColor
                         ? Text(
-                            t.common.selected,
+                            t.settings.common.selected,
                             style: const TextStyle(
                               fontFamily: FontFamily.notoSansJP,
                             ),

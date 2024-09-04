@@ -39,7 +39,7 @@ class LocaleSettingPage extends ConsumerWidget {
                     value: kIsWeb
                         ? locale == e.toLocale
                             ? Text(
-                                t.common.selected,
+                                t.settings.common.selected,
                                 style: const TextStyle(
                                   fontFamily: FontFamily.notoSansJP,
                                 ),
