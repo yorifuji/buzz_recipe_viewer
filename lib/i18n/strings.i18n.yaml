@@ -156,5 +156,6 @@ error:
     invalidVerificationCode: Invalid verification code.
     invalidVerificationId: Invalid verification ID.
     adminRestrictedOperation: Admin restricted operation.
+    internalError: Internal error.
     networkRequestFailed: Network request failed.
     unknown: Unknown error.

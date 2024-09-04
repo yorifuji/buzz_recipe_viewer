@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 203 (101 per locale)
+/// Strings: 205 (102 per locale)
 ///
-/// Built on 2024-09-04 at 03:51 UTC
+/// Built on 2024-09-04 at 09:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -487,6 +487,7 @@ class _StringsErrorAuthEn {
   String get invalidVerificationCode => 'Invalid verification code.';
   String get invalidVerificationId => 'Invalid verification ID.';
   String get adminRestrictedOperation => 'Admin restricted operation.';
+  String get internalError => 'Internal error.';
   String get networkRequestFailed => 'Network request failed.';
   String get unknown => 'Unknown error.';
 }
@@ -1287,6 +1288,8 @@ class _StringsErrorAuthJa implements _StringsErrorAuthEn {
   @override
   String get adminRestrictedOperation => '管理者によって制限された操作です';
   @override
+  String get internalError => '内部エラーが発生しました';
+  @override
   String get networkRequestFailed => 'ネットワークエラーが発生しました';
   @override
   String get unknown => '不明なエラーが発生しました';
@@ -1963,6 +1966,8 @@ extension on Translations {
         return 'Invalid verification ID.';
       case 'error.auth.adminRestrictedOperation':
         return 'Admin restricted operation.';
+      case 'error.auth.internalError':
+        return 'Internal error.';
       case 'error.auth.networkRequestFailed':
         return 'Network request failed.';
       case 'error.auth.unknown':
@@ -2176,6 +2181,8 @@ extension on _StringsJa {
         return '認証IDが無効です';
       case 'error.auth.adminRestrictedOperation':
         return '管理者によって制限された操作です';
+      case 'error.auth.internalError':
+        return '内部エラーが発生しました';
       case 'error.auth.networkRequestFailed':
         return 'ネットワークエラーが発生しました';
       case 'error.auth.unknown':

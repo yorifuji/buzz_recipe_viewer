@@ -19,6 +19,7 @@ enum AuthException implements Exception {
   invalidVerificationId('invalid-verification-id'),
   adminRestrictedOperation('admin-restricted-operation'),
   // other
+  internalError('internal-error'),
   networkRequestFailed('network-request-failed'),
   unknown(''),
   ;
@@ -53,6 +54,7 @@ extension AuthExceptionReason on AuthException {
           t.error.auth.invalidVerificationId,
         AuthException.adminRestrictedOperation =>
           t.error.auth.adminRestrictedOperation,
+        AuthException.internalError => t.error.auth.internalError,
         AuthException.networkRequestFailed => t.error.auth.networkRequestFailed,
         AuthException.unknown => t.error.auth.unknown,
       };

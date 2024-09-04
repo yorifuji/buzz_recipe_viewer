@@ -155,5 +155,6 @@ error:
     invalidVerificationCode: 認証コードが無効です
     invalidVerificationId: 認証IDが無効です
     adminRestrictedOperation: 管理者によって制限された操作です
+    internalError: 内部エラーが発生しました
     networkRequestFailed: ネットワークエラーが発生しました
     unknown: 不明なエラーが発生しました
