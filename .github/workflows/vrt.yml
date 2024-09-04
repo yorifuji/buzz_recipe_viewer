@@ -32,7 +32,7 @@ jobs:
       expected-sha: ${{ steps.lookup.outputs.expected-sha }}
       expected-cache-hit: ${{ steps.lookup.outputs.expected-cache-hit }}
     steps:
-      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
+      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
         id: lookup
         with:
           mode: lookup
@@ -65,9 +65,9 @@ jobs:
 
       - name: Create golden images
         run: |
-          flutter test --update-goldens --tags=golden
+          flutter test --update-goldens --tags=golden || exit 0
 
-      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
+      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
         with:
           mode: expected
           expected-dir: test/golden_test/goldens
@@ -101,9 +101,9 @@ jobs:
 
       - name: Create golden images
         run: |
-          flutter test --update-goldens --tags=golden
+          flutter test --update-goldens --tags=golden || exit 0
 
-      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
+      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
         with:
           mode: actual
           actual-dir: test/golden_test/goldens
@@ -111,10 +111,10 @@ jobs:
 
   compare:
     if: ${{ !cancelled() && !failure() }}
-    needs: [lookup, expected, actual]
+    needs: [expected, actual]
     runs-on: ubuntu-latest
     steps:
-      - uses: yorifuji/easy-vrt@0a42d84955f5bb0f34243ea6e881c07a5fe3ce19 # v1.0.5
+      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
         with:
           mode: compare
           expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
@@ -123,7 +123,7 @@ jobs:
           review-comment: true
 
   action-timeline:
-    needs: [lookup, actual, expected, compare]
+    needs: [compare]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:

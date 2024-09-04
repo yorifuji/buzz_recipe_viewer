@@ -15,7 +15,7 @@ class VideoRepository {
   VideoRepository(this._algoliaClient);
   final Algolia _algoliaClient;
 
-  Future<Result<VideoListResult>> getVideoList(
+  Future<Result<VideoListResult, Exception>> getVideoList(
     String query,
     String indexName,
     int page,

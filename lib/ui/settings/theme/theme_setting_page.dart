@@ -40,7 +40,7 @@ class ThemeSettingPage extends ConsumerWidget {
                     value: kIsWeb
                         ? theme == e.themeMode
                             ? Text(
-                                t.settings.selected,
+                                t.settings.common.selected,
                                 style: const TextStyle(
                                   fontFamily: FontFamily.notoSansJP,
                                 ),

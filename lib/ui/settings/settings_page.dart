@@ -1,9 +1,11 @@
 import 'dart:io' show Platform;
+
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/database_provider.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
+import 'package:buzz_recipe_viewer/provider/user_provider.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
@@ -14,6 +16,7 @@ import 'package:buzz_recipe_viewer/ui/settings/notification/notification_setting
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -31,6 +34,7 @@ class SettingsPage extends ConsumerWidget {
     final isInternalPlayerAvailable = !kIsWeb && !Platform.isMacOS;
     final useInternalPlayer = isInternalPlayerAvailable &&
         ref.watch(boolPreferenceProvider(Preference.useInternalPlayer));
+    final user = ref.watch(userProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -242,7 +246,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || ref.watch(flavorProvider).isDev)
+          if (kDebugMode || !ref.watch(flavorProvider).isProd)
             SettingsSection(
               title: Text(
                 t.settings.debug.header,
@@ -288,6 +292,24 @@ class SettingsPage extends ConsumerWidget {
                     );
                   },
                 ),
+                if (user.value != null)
+                  SettingsTile(
+                    title: const Text(
+                      'Copy Firebase UID',
+                      style: TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onPressed: (context) async {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Firebase UID: ${user.value!.uid}'),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                      await Clipboard.setData(
+                        ClipboardData(text: user.value!.uid),
+                      );
+                    },
+                  ),
               ],
             ),
         ],

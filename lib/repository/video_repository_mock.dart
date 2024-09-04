@@ -12,7 +12,7 @@ VideoRepositoryMock videoRepositoryMock(VideoRepositoryMockRef ref) =>
 
 class VideoRepositoryMock implements VideoRepository {
   @override
-  Future<Result<VideoListResult>> getVideoList(
+  Future<Result<VideoListResult, Exception>> getVideoList(
     String query,
     String indexName,
     int page,

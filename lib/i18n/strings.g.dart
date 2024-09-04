@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 162 (81 per locale)
+/// Strings: 205 (102 per locale)
 ///
-/// Built on 2024-09-01 at 21:38 UTC
+/// Built on 2024-09-04 at 09:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -188,14 +188,27 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   late final Translations _root = this; // ignore: unused_field
 
   // Translations
-  String get appTitle => 'Awesome Japanese Recipe';
+  late final _StringsAppEn app = _StringsAppEn._(_root);
   late final _StringsTabEn tab = _StringsTabEn._(_root);
   late final _StringsWalkthroughEn walkthrough = _StringsWalkthroughEn._(_root);
+  late final _StringsProvisioningEn provisioning =
+      _StringsProvisioningEn._(_root);
   late final _StringsRecipeEn recipe = _StringsRecipeEn._(_root);
   late final _StringsVideoEn video = _StringsVideoEn._(_root);
   late final _StringsFavoriteEn favorite = _StringsFavoriteEn._(_root);
   late final _StringsSettingsEn settings = _StringsSettingsEn._(_root);
   late final _StringsCommonEn common = _StringsCommonEn._(_root);
+  late final _StringsErrorEn error = _StringsErrorEn._(_root);
+}
+
+// Path: app
+class _StringsAppEn {
+  _StringsAppEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Awesome Japanese Recipe';
 }
 
 // Path: tab
@@ -226,6 +239,17 @@ class _StringsWalkthroughEn {
       _StringsWalkthroughIntro3En._(_root);
   String get skip => 'Skip';
   String get done => 'Done';
+}
+
+// Path: provisioning
+class _StringsProvisioningEn {
+  _StringsProvisioningEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get provisioning => 'Provisioning Your Account...';
+  String get retry => 'Retry';
 }
 
 // Path: recipe
@@ -280,7 +304,8 @@ class _StringsSettingsEn {
       _StringsSettingsSupportEn._(_root);
   late final _StringsSettingsAboutEn about = _StringsSettingsAboutEn._(_root);
   late final _StringsSettingsDebugEn debug = _StringsSettingsDebugEn._(_root);
-  String get selected => 'Selected';
+  late final _StringsSettingsCommonEn common =
+      _StringsSettingsCommonEn._(_root);
 }
 
 // Path: common
@@ -299,6 +324,16 @@ class _StringsCommonEn {
   String get sortByDate => 'Sort by Date (Newest First)';
   String get sortByLikes => 'Popular (Likes)';
   String get sortByViews => 'Popular (Views)';
+}
+
+// Path: error
+class _StringsErrorEn {
+  _StringsErrorEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final _StringsErrorAuthEn auth = _StringsErrorAuthEn._(_root);
 }
 
 // Path: walkthrough.intro1
@@ -422,6 +457,41 @@ class _StringsSettingsDebugEn {
       _StringsSettingsDebugRowEn._(_root);
 }
 
+// Path: settings.common
+class _StringsSettingsCommonEn {
+  _StringsSettingsCommonEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get selected => 'Selected';
+}
+
+// Path: error.auth
+class _StringsErrorAuthEn {
+  _StringsErrorAuthEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get emailAlreadyInUse => 'Email already in use.';
+  String get invalidEmail => 'Invalid email address.';
+  String get operationNotAllowed => 'Operation not allowed.';
+  String get weakPassword => 'Weak password.';
+  String get userDisabled => 'User disabled.';
+  String get userNotFound => 'User not found.';
+  String get wrongPassword => 'Wrong password.';
+  String get providerAlreadyLinked => 'Provider already linked.';
+  String get invalidCredential => 'Invalid credential.';
+  String get credentialAlreadyInUse => 'Credential already in use.';
+  String get invalidVerificationCode => 'Invalid verification code.';
+  String get invalidVerificationId => 'Invalid verification ID.';
+  String get adminRestrictedOperation => 'Admin restricted operation.';
+  String get internalError => 'Internal error.';
+  String get networkRequestFailed => 'Network request failed.';
+  String get unknown => 'Unknown error.';
+}
+
 // Path: recipe.newRecipe.input
 class _StringsRecipeNewRecipeInputEn {
   _StringsRecipeNewRecipeInputEn._(this._root);
@@ -463,8 +533,8 @@ class _StringsSettingsGeneralNotificationsEn {
 
   // Translations
   String get title => 'Notifications';
-  late final _StringsSettingsGeneralNotificationsNotificationsEn notifications =
-      _StringsSettingsGeneralNotificationsNotificationsEn._(_root);
+  late final _StringsSettingsGeneralNotificationsPageEn page =
+      _StringsSettingsGeneralNotificationsPageEn._(_root);
 }
 
 // Path: settings.video.row
@@ -565,24 +635,18 @@ class _StringsSettingsGeneralRowLanguageEn {
       _StringsSettingsGeneralRowLanguageLanguageEn._(_root);
 }
 
-// Path: settings.general.notifications.notifications
-class _StringsSettingsGeneralNotificationsNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsEn._(this._root);
+// Path: settings.general.notifications.page
+class _StringsSettingsGeneralNotificationsPageEn {
+  _StringsSettingsGeneralNotificationsPageEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
   String get title => 'Notifications';
-  List<String> get item => [
-        'Settings',
-      ];
-  late final _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn
-      allowNotifications =
-      _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn._(
-          _root);
-  late final _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn
-      copyFcmToken =
-      _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn._(_root);
+  late final _StringsSettingsGeneralNotificationsPageSettingsEn settings =
+      _StringsSettingsGeneralNotificationsPageSettingsEn._(_root);
+  late final _StringsSettingsGeneralNotificationsPageTopicEn topic =
+      _StringsSettingsGeneralNotificationsPageTopicEn._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -756,25 +820,32 @@ class _StringsSettingsGeneralRowLanguageLanguageEn {
       ];
 }
 
-// Path: settings.general.notifications.notifications.allowNotifications
-class _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn._(
-      this._root);
+// Path: settings.general.notifications.page.settings
+class _StringsSettingsGeneralNotificationsPageSettingsEn {
+  _StringsSettingsGeneralNotificationsPageSettingsEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Allow Notifications';
+  String get title => 'Notifications';
+  List<String> get items => [
+        'Allow Notifications',
+        'Copy Token',
+      ];
 }
 
-// Path: settings.general.notifications.notifications.copyFcmToken
-class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn {
-  _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn._(this._root);
+// Path: settings.general.notifications.page.topic
+class _StringsSettingsGeneralNotificationsPageTopicEn {
+  _StringsSettingsGeneralNotificationsPageTopicEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Copy Token';
+  String get title => 'Topic';
+  List<String> get items => [
+        'General',
+        'Video',
+      ];
 }
 
 // Path: <root>
@@ -809,11 +880,14 @@ class _StringsJa implements Translations {
 
   // Translations
   @override
-  String get appTitle => 'シンプルレシピ検索';
+  late final _StringsAppJa app = _StringsAppJa._(_root);
   @override
   late final _StringsTabJa tab = _StringsTabJa._(_root);
   @override
   late final _StringsWalkthroughJa walkthrough = _StringsWalkthroughJa._(_root);
+  @override
+  late final _StringsProvisioningJa provisioning =
+      _StringsProvisioningJa._(_root);
   @override
   late final _StringsRecipeJa recipe = _StringsRecipeJa._(_root);
   @override
@@ -824,6 +898,20 @@ class _StringsJa implements Translations {
   late final _StringsSettingsJa settings = _StringsSettingsJa._(_root);
   @override
   late final _StringsCommonJa common = _StringsCommonJa._(_root);
+  @override
+  late final _StringsErrorJa error = _StringsErrorJa._(_root);
+}
+
+// Path: app
+class _StringsAppJa implements _StringsAppEn {
+  _StringsAppJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'シンプルレシピ検索';
 }
 
 // Path: tab
@@ -865,6 +953,20 @@ class _StringsWalkthroughJa implements _StringsWalkthroughEn {
   String get skip => 'スキップ';
   @override
   String get done => '完了';
+}
+
+// Path: provisioning
+class _StringsProvisioningJa implements _StringsProvisioningEn {
+  _StringsProvisioningJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get provisioning => 'アカウントを準備しています...';
+  @override
+  String get retry => '再試行';
 }
 
 // Path: recipe
@@ -938,7 +1040,8 @@ class _StringsSettingsJa implements _StringsSettingsEn {
   @override
   late final _StringsSettingsDebugJa debug = _StringsSettingsDebugJa._(_root);
   @override
-  String get selected => '選択中';
+  late final _StringsSettingsCommonJa common =
+      _StringsSettingsCommonJa._(_root);
 }
 
 // Path: common
@@ -967,6 +1070,20 @@ class _StringsCommonJa implements _StringsCommonEn {
   String get sortByLikes => '人気順（いいね）';
   @override
   String get sortByViews => '人気順（閲覧数）';
+  @override
+  String get selected => '選択中';
+}
+
+// Path: error
+class _StringsErrorJa implements _StringsErrorEn {
+  _StringsErrorJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  late final _StringsErrorAuthJa auth = _StringsErrorAuthJa._(_root);
 }
 
 // Path: walkthrough.intro1
@@ -1124,6 +1241,60 @@ class _StringsSettingsDebugJa implements _StringsSettingsDebugEn {
       _StringsSettingsDebugRowJa._(_root);
 }
 
+// Path: settings.common
+class _StringsSettingsCommonJa implements _StringsSettingsCommonEn {
+  _StringsSettingsCommonJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get selected => '選択中';
+}
+
+// Path: error.auth
+class _StringsErrorAuthJa implements _StringsErrorAuthEn {
+  _StringsErrorAuthJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get emailAlreadyInUse => 'このメールアドレスは既に使用されています';
+  @override
+  String get invalidEmail => 'メールアドレスが無効です';
+  @override
+  String get operationNotAllowed => 'メール/パスワード認証が無効です';
+  @override
+  String get weakPassword => 'パスワードが弱すぎます';
+  @override
+  String get userDisabled => 'このユーザーは無効です';
+  @override
+  String get userNotFound => 'ユーザーが見つかりませんでした';
+  @override
+  String get wrongPassword => 'パスワードが間違っています';
+  @override
+  String get providerAlreadyLinked => 'このアカウントは既にリンクされています';
+  @override
+  String get invalidCredential => '認証情報が無効です';
+  @override
+  String get credentialAlreadyInUse => 'この認証情報は既に使用されています';
+  @override
+  String get invalidVerificationCode => '認証コードが無効です';
+  @override
+  String get invalidVerificationId => '認証IDが無効です';
+  @override
+  String get adminRestrictedOperation => '管理者によって制限された操作です';
+  @override
+  String get internalError => '内部エラーが発生しました';
+  @override
+  String get networkRequestFailed => 'ネットワークエラーが発生しました';
+  @override
+  String get unknown => '不明なエラーが発生しました';
+}
+
 // Path: recipe.newRecipe.input
 class _StringsRecipeNewRecipeInputJa implements _StringsRecipeNewRecipeInputEn {
   _StringsRecipeNewRecipeInputJa._(this._root);
@@ -1181,10 +1352,10 @@ class _StringsSettingsGeneralNotificationsJa
 
   // Translations
   @override
-  String get title => '通知';
+  String get title => '通知設定';
   @override
-  late final _StringsSettingsGeneralNotificationsNotificationsJa notifications =
-      _StringsSettingsGeneralNotificationsNotificationsJa._(_root);
+  late final _StringsSettingsGeneralNotificationsPageJa page =
+      _StringsSettingsGeneralNotificationsPageJa._(_root);
 }
 
 // Path: settings.video.row
@@ -1314,30 +1485,23 @@ class _StringsSettingsGeneralRowLanguageJa
       _StringsSettingsGeneralRowLanguageLanguageJa._(_root);
 }
 
-// Path: settings.general.notifications.notifications
-class _StringsSettingsGeneralNotificationsNotificationsJa
-    implements _StringsSettingsGeneralNotificationsNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsJa._(this._root);
+// Path: settings.general.notifications.page
+class _StringsSettingsGeneralNotificationsPageJa
+    implements _StringsSettingsGeneralNotificationsPageEn {
+  _StringsSettingsGeneralNotificationsPageJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => '通知';
+  String get title => '通知設定';
   @override
-  List<String> get item => [
-        '設定',
-      ];
+  late final _StringsSettingsGeneralNotificationsPageSettingsJa settings =
+      _StringsSettingsGeneralNotificationsPageSettingsJa._(_root);
   @override
-  late final _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa
-      allowNotifications =
-      _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa._(
-          _root);
-  @override
-  late final _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
-      copyFcmToken =
-      _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa._(_root);
+  late final _StringsSettingsGeneralNotificationsPageTopicJa topic =
+      _StringsSettingsGeneralNotificationsPageTopicJa._(_root);
 }
 
 // Path: settings.video.row.playWithinApp
@@ -1562,32 +1726,40 @@ class _StringsSettingsGeneralRowLanguageLanguageJa
       ];
 }
 
-// Path: settings.general.notifications.notifications.allowNotifications
-class _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa
-    implements
-        _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsEn {
-  _StringsSettingsGeneralNotificationsNotificationsAllowNotificationsJa._(
-      this._root);
+// Path: settings.general.notifications.page.settings
+class _StringsSettingsGeneralNotificationsPageSettingsJa
+    implements _StringsSettingsGeneralNotificationsPageSettingsEn {
+  _StringsSettingsGeneralNotificationsPageSettingsJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => '通知を許可';
+  String get title => '通知';
+  @override
+  List<String> get items => [
+        '通知を許可',
+        'トークンをコピー',
+      ];
 }
 
-// Path: settings.general.notifications.notifications.copyFcmToken
-class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
-    implements _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenEn {
-  _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa._(this._root);
+// Path: settings.general.notifications.page.topic
+class _StringsSettingsGeneralNotificationsPageTopicJa
+    implements _StringsSettingsGeneralNotificationsPageTopicEn {
+  _StringsSettingsGeneralNotificationsPageTopicJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => 'トークンをコピー';
+  String get title => 'トピック';
+  @override
+  List<String> get items => [
+        '一般',
+        '新しいビデオの追加',
+      ];
 }
 
 /// Flat map(s) containing all translations.
@@ -1596,7 +1768,7 @@ class _StringsSettingsGeneralNotificationsNotificationsCopyFcmTokenJa
 extension on Translations {
   dynamic _flatMapFunction(String path) {
     switch (path) {
-      case 'appTitle':
+      case 'app.title':
         return 'Awesome Japanese Recipe';
       case 'tab.recipe':
         return 'Recipe';
@@ -1626,6 +1798,10 @@ extension on Translations {
         return 'Skip';
       case 'walkthrough.done':
         return 'Done';
+      case 'provisioning.provisioning':
+        return 'Provisioning Your Account...';
+      case 'provisioning.retry':
+        return 'Retry';
       case 'recipe.title':
         return 'Recipe';
       case 'recipe.empty':
@@ -1694,14 +1870,20 @@ extension on Translations {
         return 'Japanese';
       case 'settings.general.notifications.title':
         return 'Notifications';
-      case 'settings.general.notifications.notifications.title':
+      case 'settings.general.notifications.page.title':
         return 'Notifications';
-      case 'settings.general.notifications.notifications.item.0':
-        return 'Settings';
-      case 'settings.general.notifications.notifications.allowNotifications.title':
+      case 'settings.general.notifications.page.settings.title':
+        return 'Notifications';
+      case 'settings.general.notifications.page.settings.items.0':
         return 'Allow Notifications';
-      case 'settings.general.notifications.notifications.copyFcmToken.title':
+      case 'settings.general.notifications.page.settings.items.1':
         return 'Copy Token';
+      case 'settings.general.notifications.page.topic.title':
+        return 'Topic';
+      case 'settings.general.notifications.page.topic.items.0':
+        return 'General';
+      case 'settings.general.notifications.page.topic.items.1':
+        return 'Video';
       case 'settings.video.header':
         return 'Video';
       case 'settings.video.row.playWithinApp.title':
@@ -1738,7 +1920,7 @@ extension on Translations {
         return 'Delete Local Data';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
-      case 'settings.selected':
+      case 'settings.common.selected':
         return 'Selected';
       case 'common.addFavorite':
         return 'Add Favorite';
@@ -1758,6 +1940,38 @@ extension on Translations {
         return 'Popular (Likes)';
       case 'common.sortByViews':
         return 'Popular (Views)';
+      case 'error.auth.emailAlreadyInUse':
+        return 'Email already in use.';
+      case 'error.auth.invalidEmail':
+        return 'Invalid email address.';
+      case 'error.auth.operationNotAllowed':
+        return 'Operation not allowed.';
+      case 'error.auth.weakPassword':
+        return 'Weak password.';
+      case 'error.auth.userDisabled':
+        return 'User disabled.';
+      case 'error.auth.userNotFound':
+        return 'User not found.';
+      case 'error.auth.wrongPassword':
+        return 'Wrong password.';
+      case 'error.auth.providerAlreadyLinked':
+        return 'Provider already linked.';
+      case 'error.auth.invalidCredential':
+        return 'Invalid credential.';
+      case 'error.auth.credentialAlreadyInUse':
+        return 'Credential already in use.';
+      case 'error.auth.invalidVerificationCode':
+        return 'Invalid verification code.';
+      case 'error.auth.invalidVerificationId':
+        return 'Invalid verification ID.';
+      case 'error.auth.adminRestrictedOperation':
+        return 'Admin restricted operation.';
+      case 'error.auth.internalError':
+        return 'Internal error.';
+      case 'error.auth.networkRequestFailed':
+        return 'Network request failed.';
+      case 'error.auth.unknown':
+        return 'Unknown error.';
       default:
         return null;
     }
@@ -1767,7 +1981,7 @@ extension on Translations {
 extension on _StringsJa {
   dynamic _flatMapFunction(String path) {
     switch (path) {
-      case 'appTitle':
+      case 'app.title':
         return 'シンプルレシピ検索';
       case 'tab.recipe':
         return 'レシピ';
@@ -1797,6 +2011,10 @@ extension on _StringsJa {
         return 'スキップ';
       case 'walkthrough.done':
         return '完了';
+      case 'provisioning.provisioning':
+        return 'アカウントを準備しています...';
+      case 'provisioning.retry':
+        return '再試行';
       case 'recipe.title':
         return 'レシピ';
       case 'recipe.empty':
@@ -1864,15 +2082,21 @@ extension on _StringsJa {
       case 'settings.general.row.language.language.row.2':
         return '日本語';
       case 'settings.general.notifications.title':
+        return '通知設定';
+      case 'settings.general.notifications.page.title':
+        return '通知設定';
+      case 'settings.general.notifications.page.settings.title':
         return '通知';
-      case 'settings.general.notifications.notifications.title':
-        return '通知';
-      case 'settings.general.notifications.notifications.item.0':
-        return '設定';
-      case 'settings.general.notifications.notifications.allowNotifications.title':
+      case 'settings.general.notifications.page.settings.items.0':
         return '通知を許可';
-      case 'settings.general.notifications.notifications.copyFcmToken.title':
+      case 'settings.general.notifications.page.settings.items.1':
         return 'トークンをコピー';
+      case 'settings.general.notifications.page.topic.title':
+        return 'トピック';
+      case 'settings.general.notifications.page.topic.items.0':
+        return '一般';
+      case 'settings.general.notifications.page.topic.items.1':
+        return '新しいビデオの追加';
       case 'settings.video.header':
         return 'ビデオ';
       case 'settings.video.row.playWithinApp.title':
@@ -1909,7 +2133,7 @@ extension on _StringsJa {
         return 'ローカルデータを削除';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
-      case 'settings.selected':
+      case 'settings.common.selected':
         return '選択中';
       case 'common.addFavorite':
         return 'お気に入りに追加しました';
@@ -1929,6 +2153,40 @@ extension on _StringsJa {
         return '人気順（いいね）';
       case 'common.sortByViews':
         return '人気順（閲覧数）';
+      case 'common.selected':
+        return '選択中';
+      case 'error.auth.emailAlreadyInUse':
+        return 'このメールアドレスは既に使用されています';
+      case 'error.auth.invalidEmail':
+        return 'メールアドレスが無効です';
+      case 'error.auth.operationNotAllowed':
+        return 'メール/パスワード認証が無効です';
+      case 'error.auth.weakPassword':
+        return 'パスワードが弱すぎます';
+      case 'error.auth.userDisabled':
+        return 'このユーザーは無効です';
+      case 'error.auth.userNotFound':
+        return 'ユーザーが見つかりませんでした';
+      case 'error.auth.wrongPassword':
+        return 'パスワードが間違っています';
+      case 'error.auth.providerAlreadyLinked':
+        return 'このアカウントは既にリンクされています';
+      case 'error.auth.invalidCredential':
+        return '認証情報が無効です';
+      case 'error.auth.credentialAlreadyInUse':
+        return 'この認証情報は既に使用されています';
+      case 'error.auth.invalidVerificationCode':
+        return '認証コードが無効です';
+      case 'error.auth.invalidVerificationId':
+        return '認証IDが無効です';
+      case 'error.auth.adminRestrictedOperation':
+        return '管理者によって制限された操作です';
+      case 'error.auth.internalError':
+        return '内部エラーが発生しました';
+      case 'error.auth.networkRequestFailed':
+        return 'ネットワークエラーが発生しました';
+      case 'error.auth.unknown':
+        return '不明なエラーが発生しました';
       default:
         return null;
     }
