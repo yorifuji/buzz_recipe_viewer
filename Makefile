@@ -20,7 +20,6 @@ update-goldens:
 .PHONY: firebase-configure-dev
 firebase-configure-dev:
 	flutterfire configure \
-		--yes \
 		--project=buzzrecipeviewer-dev \
 		--platforms=android,ios,macos,web \
 		--android-package-name=dev.yorifuji.buzz_recipe_viewer.dev \
@@ -30,7 +29,6 @@ firebase-configure-dev:
 .PHONY: firebase-configure-stg
 firebase-configure-stg:
 	flutterfire configure \
-		--yes \
 		--project=buzzrecipeviewer-stg \
 		--platforms=android,ios,macos,web \
 		--android-package-name=dev.yorifuji.buzz_recipe_viewer.stg \
@@ -40,7 +38,6 @@ firebase-configure-stg:
 .PHONY: firebase-configure-prod
 firebase-configure-prod:
 	flutterfire configure \
-		--yes \
 		--project=buzzrecipeviewer \
 		--platforms=android,ios,macos,web \
 		--android-package-name=dev.yorifuji.buzz_recipe_viewer \
