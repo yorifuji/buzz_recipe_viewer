@@ -11,12 +11,4 @@ targets:
       slang_build_runner:
         options:
           input_directory: lib/i18n
-      # drift_dev:
-      #   options:
-      #     sql:
-      #       dialect: sqlite
-      #       options:
-      #         modules:
-      #           - json1
-      #           - fts5
-      #           - math
+          input_file_pattern: .i18n.yaml

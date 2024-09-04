@@ -31,7 +31,6 @@ class NotificationSettingPage extends HookConsumerWidget {
                 await AppSettings.openAppSettings(
                   type: AppSettingsType.notification,
                 );
-                // TODO: invalidate notificationAuthorizeStatusProvider when the user returns from the settings
               },
             ),
           _ => SettingsTile.switchTile(

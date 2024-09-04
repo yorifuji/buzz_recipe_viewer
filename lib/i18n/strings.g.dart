@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 202 (101 per locale)
 ///
-/// Built on 2024-09-04 at 03:10 UTC
+/// Built on 2024-09-04 at 03:44 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -294,7 +294,6 @@ class _StringsSettingsEn {
       _StringsSettingsSupportEn._(_root);
   late final _StringsSettingsAboutEn about = _StringsSettingsAboutEn._(_root);
   late final _StringsSettingsDebugEn debug = _StringsSettingsDebugEn._(_root);
-  String get selected => 'Selected';
 }
 
 // Path: common
@@ -313,6 +312,7 @@ class _StringsCommonEn {
   String get sortByDate => 'Sort by Date (Newest First)';
   String get sortByLikes => 'Popular (Likes)';
   String get sortByViews => 'Popular (Views)';
+  String get selected => 'Selected';
 }
 
 // Path: error
@@ -1005,8 +1005,6 @@ class _StringsSettingsJa implements _StringsSettingsEn {
   late final _StringsSettingsAboutJa about = _StringsSettingsAboutJa._(_root);
   @override
   late final _StringsSettingsDebugJa debug = _StringsSettingsDebugJa._(_root);
-  @override
-  String get selected => '選択中';
 }
 
 // Path: common
@@ -1035,6 +1033,8 @@ class _StringsCommonJa implements _StringsCommonEn {
   String get sortByLikes => '人気順（いいね）';
   @override
   String get sortByViews => '人気順（閲覧数）';
+  @override
+  String get selected => '選択中';
 }
 
 // Path: error
@@ -1869,8 +1869,6 @@ extension on Translations {
         return 'Delete Local Data';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
-      case 'settings.selected':
-        return 'Selected';
       case 'common.addFavorite':
         return 'Add Favorite';
       case 'common.fetchFailed':
@@ -1889,6 +1887,8 @@ extension on Translations {
         return 'Popular (Likes)';
       case 'common.sortByViews':
         return 'Popular (Views)';
+      case 'common.selected':
+        return 'Selected';
       case 'error.auth.emailAlreadyInUse':
         return 'Email already in use.';
       case 'error.auth.invalidEmail':
@@ -2080,8 +2080,6 @@ extension on _StringsJa {
         return 'ローカルデータを削除';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
-      case 'settings.selected':
-        return '選択中';
       case 'common.addFavorite':
         return 'お気に入りに追加しました';
       case 'common.fetchFailed':
@@ -2100,6 +2098,8 @@ extension on _StringsJa {
         return '人気順（いいね）';
       case 'common.sortByViews':
         return '人気順（閲覧数）';
+      case 'common.selected':
+        return '選択中';
       case 'error.auth.emailAlreadyInUse':
         return 'このメールアドレスは既に使用されています';
       case 'error.auth.invalidEmail':
