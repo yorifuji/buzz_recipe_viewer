@@ -24,6 +24,10 @@
     "skip": "Skip",
     "done": "Done"
   },
+  "provisioning": {
+    "provisioning": "Provisioning Your Account...",
+    "retry": "Retry"
+  },
   "recipe": {
     "title": "Recipe",
     "empty": "We've got no recipes.\nAdd your best ones!",
@@ -168,5 +172,24 @@
     "sortByDate": "Sort by Date (Newest First)",
     "sortByLikes": "Popular (Likes)",
     "sortByViews": "Popular (Views)"
+  },
+  "error": {
+    "auth": {
+      "emailAlreadyInUse": "Email already in use.",
+      "invalidEmail": "Invalid email address.",
+      "operationNotAllowed": "Operation not allowed.",
+      "weakPassword": "Weak password.",
+      "userDisabled": "User disabled.",
+      "userNotFound": "User not found.",
+      "wrongPassword": "Wrong password.",
+      "providerAlreadyLinked": "Provider already linked.",
+      "invalidCredential": "Invalid credential.",
+      "credentialAlreadyInUse": "Credential already in use.",
+      "invalidVerificationCode": "Invalid verification code.",
+      "invalidVerificationId": "Invalid verification ID.",
+      "adminRestrictedOperation": "Admin restricted operation.",
+      "networkRequestFailed": "Network request failed.",
+      "unknown": "Unknown error."
+    }
   }
 }

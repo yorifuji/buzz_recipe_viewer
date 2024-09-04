@@ -24,6 +24,10 @@
     "skip": "スキップ",
     "done": "完了"
   },
+  "provisioning": {
+    "provisioning": "アカウントを準備しています...",
+    "retry": "再試行"
+  },
   "recipe": {
     "title": "レシピ",
     "empty": "レシピが登録されていません\n新しいレシピを登録しましょう！",
@@ -168,5 +172,24 @@
     "sortByDate": "登録日（新しい順）",
     "sortByLikes": "人気順（いいね）",
     "sortByViews": "人気順（閲覧数）"
+  },
+  "error": {
+    "auth": {
+      "emailAlreadyInUse": "このメールアドレスは既に使用されています",
+      "invalidEmail": "メールアドレスが無効です",
+      "operationNotAllowed": "メール/パスワード認証が無効です",
+      "weakPassword": "パスワードが弱すぎます",
+      "userDisabled": "このユーザーは無効です",
+      "userNotFound": "ユーザーが見つかりませんでした",
+      "wrongPassword": "パスワードが間違っています",
+      "providerAlreadyLinked": "このアカウントは既にリンクされています",
+      "invalidCredential": "認証情報が無効です",
+      "credentialAlreadyInUse": "この認証情報は既に使用されています",
+      "invalidVerificationCode": "認証コードが無効です",
+      "invalidVerificationId": "認証IDが無効です",
+      "adminRestrictedOperation": "管理者によって制限された操作です",
+      "networkRequestFailed": "ネットワークエラーが発生しました",
+      "unknown": "不明なエラーが発生しました"
+    }
   }
 }

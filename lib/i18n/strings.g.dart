@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 168 (84 per locale)
+/// Strings: 202 (101 per locale)
 ///
-/// Built on 2024-09-03 at 11:37 UTC
+/// Built on 2024-09-04 at 03:10 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -191,11 +191,14 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   String get appTitle => 'Awesome Japanese Recipe';
   late final _StringsTabEn tab = _StringsTabEn._(_root);
   late final _StringsWalkthroughEn walkthrough = _StringsWalkthroughEn._(_root);
+  late final _StringsProvisioningEn provisioning =
+      _StringsProvisioningEn._(_root);
   late final _StringsRecipeEn recipe = _StringsRecipeEn._(_root);
   late final _StringsVideoEn video = _StringsVideoEn._(_root);
   late final _StringsFavoriteEn favorite = _StringsFavoriteEn._(_root);
   late final _StringsSettingsEn settings = _StringsSettingsEn._(_root);
   late final _StringsCommonEn common = _StringsCommonEn._(_root);
+  late final _StringsErrorEn error = _StringsErrorEn._(_root);
 }
 
 // Path: tab
@@ -226,6 +229,17 @@ class _StringsWalkthroughEn {
       _StringsWalkthroughIntro3En._(_root);
   String get skip => 'Skip';
   String get done => 'Done';
+}
+
+// Path: provisioning
+class _StringsProvisioningEn {
+  _StringsProvisioningEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get provisioning => 'Provisioning Your Account...';
+  String get retry => 'Retry';
 }
 
 // Path: recipe
@@ -299,6 +313,16 @@ class _StringsCommonEn {
   String get sortByDate => 'Sort by Date (Newest First)';
   String get sortByLikes => 'Popular (Likes)';
   String get sortByViews => 'Popular (Views)';
+}
+
+// Path: error
+class _StringsErrorEn {
+  _StringsErrorEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final _StringsErrorAuthEn auth = _StringsErrorAuthEn._(_root);
 }
 
 // Path: walkthrough.intro1
@@ -420,6 +444,30 @@ class _StringsSettingsDebugEn {
   String get header => 'Debug';
   late final _StringsSettingsDebugRowEn row =
       _StringsSettingsDebugRowEn._(_root);
+}
+
+// Path: error.auth
+class _StringsErrorAuthEn {
+  _StringsErrorAuthEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get emailAlreadyInUse => 'Email already in use.';
+  String get invalidEmail => 'Invalid email address.';
+  String get operationNotAllowed => 'Operation not allowed.';
+  String get weakPassword => 'Weak password.';
+  String get userDisabled => 'User disabled.';
+  String get userNotFound => 'User not found.';
+  String get wrongPassword => 'Wrong password.';
+  String get providerAlreadyLinked => 'Provider already linked.';
+  String get invalidCredential => 'Invalid credential.';
+  String get credentialAlreadyInUse => 'Credential already in use.';
+  String get invalidVerificationCode => 'Invalid verification code.';
+  String get invalidVerificationId => 'Invalid verification ID.';
+  String get adminRestrictedOperation => 'Admin restricted operation.';
+  String get networkRequestFailed => 'Network request failed.';
+  String get unknown => 'Unknown error.';
 }
 
 // Path: recipe.newRecipe.input
@@ -816,6 +864,9 @@ class _StringsJa implements Translations {
   @override
   late final _StringsWalkthroughJa walkthrough = _StringsWalkthroughJa._(_root);
   @override
+  late final _StringsProvisioningJa provisioning =
+      _StringsProvisioningJa._(_root);
+  @override
   late final _StringsRecipeJa recipe = _StringsRecipeJa._(_root);
   @override
   late final _StringsVideoJa video = _StringsVideoJa._(_root);
@@ -825,6 +876,8 @@ class _StringsJa implements Translations {
   late final _StringsSettingsJa settings = _StringsSettingsJa._(_root);
   @override
   late final _StringsCommonJa common = _StringsCommonJa._(_root);
+  @override
+  late final _StringsErrorJa error = _StringsErrorJa._(_root);
 }
 
 // Path: tab
@@ -866,6 +919,20 @@ class _StringsWalkthroughJa implements _StringsWalkthroughEn {
   String get skip => 'スキップ';
   @override
   String get done => '完了';
+}
+
+// Path: provisioning
+class _StringsProvisioningJa implements _StringsProvisioningEn {
+  _StringsProvisioningJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get provisioning => 'アカウントを準備しています...';
+  @override
+  String get retry => '再試行';
 }
 
 // Path: recipe
@@ -968,6 +1035,18 @@ class _StringsCommonJa implements _StringsCommonEn {
   String get sortByLikes => '人気順（いいね）';
   @override
   String get sortByViews => '人気順（閲覧数）';
+}
+
+// Path: error
+class _StringsErrorJa implements _StringsErrorEn {
+  _StringsErrorJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  late final _StringsErrorAuthJa auth = _StringsErrorAuthJa._(_root);
 }
 
 // Path: walkthrough.intro1
@@ -1123,6 +1202,46 @@ class _StringsSettingsDebugJa implements _StringsSettingsDebugEn {
   @override
   late final _StringsSettingsDebugRowJa row =
       _StringsSettingsDebugRowJa._(_root);
+}
+
+// Path: error.auth
+class _StringsErrorAuthJa implements _StringsErrorAuthEn {
+  _StringsErrorAuthJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get emailAlreadyInUse => 'このメールアドレスは既に使用されています';
+  @override
+  String get invalidEmail => 'メールアドレスが無効です';
+  @override
+  String get operationNotAllowed => 'メール/パスワード認証が無効です';
+  @override
+  String get weakPassword => 'パスワードが弱すぎます';
+  @override
+  String get userDisabled => 'このユーザーは無効です';
+  @override
+  String get userNotFound => 'ユーザーが見つかりませんでした';
+  @override
+  String get wrongPassword => 'パスワードが間違っています';
+  @override
+  String get providerAlreadyLinked => 'このアカウントは既にリンクされています';
+  @override
+  String get invalidCredential => '認証情報が無効です';
+  @override
+  String get credentialAlreadyInUse => 'この認証情報は既に使用されています';
+  @override
+  String get invalidVerificationCode => '認証コードが無効です';
+  @override
+  String get invalidVerificationId => '認証IDが無効です';
+  @override
+  String get adminRestrictedOperation => '管理者によって制限された操作です';
+  @override
+  String get networkRequestFailed => 'ネットワークエラーが発生しました';
+  @override
+  String get unknown => '不明なエラーが発生しました';
 }
 
 // Path: recipe.newRecipe.input
@@ -1628,6 +1747,10 @@ extension on Translations {
         return 'Skip';
       case 'walkthrough.done':
         return 'Done';
+      case 'provisioning.provisioning':
+        return 'Provisioning Your Account...';
+      case 'provisioning.retry':
+        return 'Retry';
       case 'recipe.title':
         return 'Recipe';
       case 'recipe.empty':
@@ -1766,6 +1889,36 @@ extension on Translations {
         return 'Popular (Likes)';
       case 'common.sortByViews':
         return 'Popular (Views)';
+      case 'error.auth.emailAlreadyInUse':
+        return 'Email already in use.';
+      case 'error.auth.invalidEmail':
+        return 'Invalid email address.';
+      case 'error.auth.operationNotAllowed':
+        return 'Operation not allowed.';
+      case 'error.auth.weakPassword':
+        return 'Weak password.';
+      case 'error.auth.userDisabled':
+        return 'User disabled.';
+      case 'error.auth.userNotFound':
+        return 'User not found.';
+      case 'error.auth.wrongPassword':
+        return 'Wrong password.';
+      case 'error.auth.providerAlreadyLinked':
+        return 'Provider already linked.';
+      case 'error.auth.invalidCredential':
+        return 'Invalid credential.';
+      case 'error.auth.credentialAlreadyInUse':
+        return 'Credential already in use.';
+      case 'error.auth.invalidVerificationCode':
+        return 'Invalid verification code.';
+      case 'error.auth.invalidVerificationId':
+        return 'Invalid verification ID.';
+      case 'error.auth.adminRestrictedOperation':
+        return 'Admin restricted operation.';
+      case 'error.auth.networkRequestFailed':
+        return 'Network request failed.';
+      case 'error.auth.unknown':
+        return 'Unknown error.';
       default:
         return null;
     }
@@ -1805,6 +1958,10 @@ extension on _StringsJa {
         return 'スキップ';
       case 'walkthrough.done':
         return '完了';
+      case 'provisioning.provisioning':
+        return 'アカウントを準備しています...';
+      case 'provisioning.retry':
+        return '再試行';
       case 'recipe.title':
         return 'レシピ';
       case 'recipe.empty':
@@ -1943,6 +2100,36 @@ extension on _StringsJa {
         return '人気順（いいね）';
       case 'common.sortByViews':
         return '人気順（閲覧数）';
+      case 'error.auth.emailAlreadyInUse':
+        return 'このメールアドレスは既に使用されています';
+      case 'error.auth.invalidEmail':
+        return 'メールアドレスが無効です';
+      case 'error.auth.operationNotAllowed':
+        return 'メール/パスワード認証が無効です';
+      case 'error.auth.weakPassword':
+        return 'パスワードが弱すぎます';
+      case 'error.auth.userDisabled':
+        return 'このユーザーは無効です';
+      case 'error.auth.userNotFound':
+        return 'ユーザーが見つかりませんでした';
+      case 'error.auth.wrongPassword':
+        return 'パスワードが間違っています';
+      case 'error.auth.providerAlreadyLinked':
+        return 'このアカウントは既にリンクされています';
+      case 'error.auth.invalidCredential':
+        return '認証情報が無効です';
+      case 'error.auth.credentialAlreadyInUse':
+        return 'この認証情報は既に使用されています';
+      case 'error.auth.invalidVerificationCode':
+        return '認証コードが無効です';
+      case 'error.auth.invalidVerificationId':
+        return '認証IDが無効です';
+      case 'error.auth.adminRestrictedOperation':
+        return '管理者によって制限された操作です';
+      case 'error.auth.networkRequestFailed':
+        return 'ネットワークエラーが発生しました';
+      case 'error.auth.unknown':
+        return '不明なエラーが発生しました';
       default:
         return null;
     }

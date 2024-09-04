@@ -76,8 +76,8 @@ class WalkthroughPage extends ConsumerWidget {
           showNextButton: false,
           skip: Text(t.walkthrough.skip),
           done: Text(t.walkthrough.done),
-          onDone: () {
-            ref
+          onDone: () async {
+            await ref
                 .read(
                   boolPreferenceProvider(Preference.shouldShowWalkthrough)
                       .notifier,

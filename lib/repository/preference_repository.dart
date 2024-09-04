@@ -8,7 +8,7 @@ enum Preference<T> {
   // bool
   useInternalPlayer('use_internal_player', true),
   shouldShowWalkthrough('should_show_walkthrough', true),
-  isProvisioned('is_provisioned', false),
+  shouldProvisioning('should_provisioning', true),
   // int
   themeMode('theme_mode', 0),
   locale('locale', 0),
