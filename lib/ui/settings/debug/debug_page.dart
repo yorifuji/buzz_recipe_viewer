@@ -36,7 +36,7 @@ class DebugPage extends ConsumerWidget {
                   style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                 ),
                 onPressed: (_) async {
-                  await HapticFeedback.selectionClick();
+                  await HapticFeedback.mediumImpact();
                   await ref.read(preferenceServiceProvider).clearAll();
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -57,7 +57,7 @@ class DebugPage extends ConsumerWidget {
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
-                    await HapticFeedback.selectionClick();
+                    await HapticFeedback.mediumImpact();
                     await ref.read(recipeRepositoryProvider).createDummyData();
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -77,7 +77,7 @@ class DebugPage extends ConsumerWidget {
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
-                    await HapticFeedback.selectionClick();
+                    await HapticFeedback.mediumImpact();
                     await ref.read(recipeRepositoryProvider).deleteAll();
                     await ref.read(favoriteRepositoryProvider).deleteAll();
                     if (context.mounted) {
@@ -98,7 +98,7 @@ class DebugPage extends ConsumerWidget {
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
-                    await HapticFeedback.selectionClick();
+                    await HapticFeedback.mediumImpact();
                     await ref.read(recipeRepositoryProvider).addSampleData();
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -118,7 +118,7 @@ class DebugPage extends ConsumerWidget {
                     style: TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (context) async {
-                    await HapticFeedback.selectionClick();
+                    await HapticFeedback.mediumImpact();
                     await Clipboard.setData(
                       ClipboardData(text: user.value!.uid),
                     );
