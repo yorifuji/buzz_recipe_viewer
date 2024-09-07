@@ -6,7 +6,7 @@ part 'favorite_notifier.g.dart';
 
 @riverpod
 class FavoriteWindowNotifier extends _$FavoriteWindowNotifier {
-  static const int _pageSize = kDebugMode ? 5 : 100;
+  static const int _pageSize = kDebugMode ? 5 : 10;
   @override
   int build() => _pageSize;
   void growWindow() => state += _pageSize;
