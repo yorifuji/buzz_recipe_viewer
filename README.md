@@ -28,7 +28,7 @@
 
 | Tool           | Version |
 | -------------- | ------- |
-| Flutter        | 3.19.4  |
+| Flutter        | 3.24.1  |
 | Xcode          | 15.3    |
 | Android Studio |         |
 
@@ -51,12 +51,11 @@ graph LR;
   - State の更新は Service 経由で行う
   - Presentation から watch することで状態をリアクティブに UI に反映させる
 - Service
-  - UI の操作に基づいて処理を行う
-    - 主に Repository に対する操作を行いデータを取得する
+  - UI の操作に基づいて帛紗を伴う処理を行う、主に Repository に対する操作を行う
   - 取得したデータに基づいて Store を更新する
   - 状態は持たない
 - Repository
-  - 外部サービス、API、データベースなどのデータソースからデータを取得
+  - ストレージ・API・バックエンドとのインタフェース
 
 # Directory
 
@@ -66,7 +65,6 @@ lib
 ├── model             # モデルの定義
 ├── provider          # クラスのインスタンスを提供する Provider の定義
 ├── repository        # データソース (API, DB)
-│   └── drift           # Drift
 ├── service           # ビジネスロジックの実装
 ├── store             # 状態管理
 └── ui                # UI
@@ -86,7 +84,7 @@ lib
 - DI
   - [Riverpod(v2, generator)](https://riverpod.dev/)
 - Data store
-  - [Drift](https://drift.simonbinder.eu/)
+  - [Firestore](https://firebase.google.com/docs/firestore)
   - [shared_preferences](https://pub.dev/packages/shared_preferences)
 - UI
   - [custom_text](https://pub.dev/packages/custom_text)
@@ -112,6 +110,10 @@ lib
 
 # Backend
 
+- [Firebase](https://firebase.google.com/)
+  - [Authentication](https://firebase.google.com/products/auth)
+  - [Firestore](https://firebase.google.com/docs/firestore)
+  - [Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)
 - [Algolia](https://www.algolia.com/)
 
 # Data Source
@@ -147,9 +149,10 @@ Android および iOS のみ対応、`--dart-define=FLAVOR=...` で切り替え
 - Bumpup
   - pubspec.yaml の`version:`のインクリメント
 - Deliver(build & deploy)
-  - stg
+  - development
+  - staging
     - Firebase App Distribution
-  - prod
+  - production
     - Google Play, App Store Connect(Test Flight)
   - pages
     - GitHub Pages
