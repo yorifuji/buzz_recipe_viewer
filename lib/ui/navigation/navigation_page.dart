@@ -81,7 +81,6 @@ class NavigationPage extends HookConsumerWidget {
             currentTab.value = AppTab.fromIndex(value);
           },
           selectedIndex: currentTab.value.index,
-          indicatorColor: theme.colorScheme.primaryContainer,
         ),
       ),
     );
