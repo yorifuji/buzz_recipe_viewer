@@ -8,6 +8,7 @@ import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/view/recipe_view_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,12 +23,17 @@ class RecipePage extends StatelessWidget {
       appBar: buildAppBar(context, title: t.recipe.title),
       body: const _RecipeDataWidget1(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (_) => const RecipeEditPage(null),
-          ),
-        ),
+        onPressed: () async {
+          await HapticFeedback.mediumImpact();
+          if (context.mounted) {
+            await Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const RecipeEditPage(null),
+              ),
+            );
+          }
+        },
         tooltip: t.recipe.addRecipe,
         child: const Icon(Icons.add),
       ),
