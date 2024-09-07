@@ -81,10 +81,12 @@ lib
 
 # Dependencies
 
+- Routing
+  - [go_router](https://pub.dev/packages/go_router)
 - DI
   - [Riverpod(v2, generator)](https://riverpod.dev/)
 - Data store
-  - [Firestore](https://firebase.google.com/docs/firestore)
+  - [Firebase Firestore](https://firebase.google.com/docs/firestore)
   - [shared_preferences](https://pub.dev/packages/shared_preferences)
 - UI
   - [custom_text](https://pub.dev/packages/custom_text)
