@@ -4,7 +4,6 @@ import 'package:buzz_recipe_viewer/provider/user_provider.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
-import 'package:buzz_recipe_viewer/store/app_color_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
