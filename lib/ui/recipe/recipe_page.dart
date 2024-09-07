@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/model/complementary_color.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
@@ -23,8 +24,9 @@ class RecipePage extends StatelessWidget {
       appBar: buildAppBar(context, title: t.recipe.title),
       body: const _RecipeDataWidget1(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        foregroundColor: Theme.of(context).colorScheme.onSecondary,
+        foregroundColor:
+            Theme.of(context).colorScheme.onSecondary.complementary,
+        backgroundColor: Theme.of(context).colorScheme.secondary.complementary,
         onPressed: () async {
           await HapticFeedback.mediumImpact();
           if (context.mounted) {
