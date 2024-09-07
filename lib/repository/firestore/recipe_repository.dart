@@ -3,7 +3,6 @@ import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/firestore_error.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_repository.g.dart';
