@@ -3,77 +3,157 @@ import 'dart:io';
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/repository/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/repository/firestore/favorite_provider.dart';
+import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
-import 'package:buzz_recipe_viewer/service/favorite_service.dart';
+import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
+import 'package:buzz_recipe_viewer/ui/favorite/favorite_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FavoritePage extends ConsumerWidget {
+class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
 
   static Widget show() => const FavoritePage();
 
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildAppBar(context, title: t.favorite.title),
+      body: const _FavoriteDataWidget(),
+    );
+  }
+}
+
+class _FavoriteDataWidget extends HookConsumerWidget {
+  const _FavoriteDataWidget();
+
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoriteStream = ref.watch(favoriteStreamProvider);
-    final body = favoriteStream.when(
-      data: (data) => data.isEmpty
-          ? const _EmptyFavoriteContainer()
-          : _FavoriteListContainer(data),
-      error: (error, stackTrace) =>
-          const Center(child: CircularProgressIndicator()),
-      loading: () => const Center(child: CircularProgressIndicator()),
-    );
-    return Scaffold(appBar: AppBar(title: Text(t.favorite.title)), body: body);
-  }
-}
+    final windowSize = ref.watch(favoriteWindowNotifierProvider);
+    final stream = ref.watch(favoriteStreamProvider(windowSize));
 
-class _EmptyFavoriteContainer extends StatelessWidget {
-  const _EmptyFavoriteContainer();
+    final cache = useState<List<Favorite>?>(null);
+    ref.listen(favoriteStreamProvider(windowSize), (prev, next) {
+      if (next.hasValue) {
+        cache.value = next.requireValue;
+      }
+    });
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Assets.images.favorite.image(width: 256, height: 256),
-          Text(
-            t.favorite.empty,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium,
-          ),
-        ],
-      ),
-    );
-  }
-}
+    Widget listViewWidget(List<Favorite> data) {
+      final hasReachedEnd = data.length <= windowSize;
+      final value = data.take(windowSize).toList();
+      if (value.isEmpty) {
+        return const _NoFavoritesWidget();
+      } else {
+        return _FavoriteListWidget(
+          favorites: value,
+          hasReachedEnd: hasReachedEnd,
+        );
+      }
+    }
 
-class _FavoriteListContainer extends StatelessWidget {
-  const _FavoriteListContainer(this.favoriteList);
+    Widget errroWidget(
+      Object? error,
+      StackTrace stackTrace,
+      VoidCallback onPressed,
+    ) =>
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Assets.images.error.image(width: 256, height: 256),
+            TextButton(
+              onPressed: onPressed,
+              child: Text(t.common.fetchFailed),
+            ),
+          ],
+        );
 
-  final List<Favorite> favoriteList;
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: favoriteList.map(_FavoriteContainer.new).toList(),
+    Widget loadingWidget() => const Center(
+          child: CircularProgressIndicator(strokeWidth: 2),
+        );
+
+    return RefreshIndicator(
+      displacement: 0,
+      strokeWidth: 2,
+      child: stream.when(
+        data: listViewWidget,
+        loading: () {
+          if (cache.value != null) {
+            return listViewWidget(cache.value!);
+          } else {}
+          return loadingWidget();
+        },
+        error: (error, stack) => errroWidget(
+          error,
+          stack,
+          () => ref.invalidate(favoriteStreamProvider(windowSize)),
         ),
       ),
+      onRefresh: () async {
+        ref.read(favoriteWindowNotifierProvider.notifier).resetWindow();
+        ref.invalidate(favoriteStreamProvider(windowSize));
+      },
     );
   }
 }
 
-class _FavoriteContainer extends ConsumerWidget {
-  const _FavoriteContainer(this.favorite);
+class _FavoriteListWidget extends ConsumerWidget {
+  const _FavoriteListWidget({
+    required this.favorites,
+    required this.hasReachedEnd,
+  });
+
+  final List<Favorite> favorites;
+  final bool hasReachedEnd;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ListView.builder(
+      itemCount: hasReachedEnd ? favorites.length : favorites.length + 1,
+      itemBuilder: (_, index) {
+        final valuleKey = ValueKey(index);
+        if (hasReachedEnd) {
+          return _FavoriteCardWidget(
+            key: valuleKey,
+            favorite: favorites[index],
+          );
+        } else {
+          if (index == favorites.length) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 16),
+              child: TextButton(
+                onPressed: () {
+                  ref
+                      .read(favoriteWindowNotifierProvider.notifier)
+                      .growWindow();
+                },
+                child: const Text('More'),
+              ),
+            );
+          } else {
+            return _FavoriteCardWidget(
+              key: valuleKey,
+              favorite: favorites[index],
+            );
+          }
+        }
+      },
+    );
+  }
+}
+
+class _FavoriteCardWidget extends ConsumerWidget {
+  const _FavoriteCardWidget({
+    required this.favorite,
+    super.key,
+  });
 
   final Favorite favorite;
 
@@ -84,7 +164,7 @@ class _FavoriteContainer extends ConsumerWidget {
         ref.watch(boolPreferenceProvider(Preference.useInternalPlayer));
 
     return Dismissible(
-      key: UniqueKey(),
+      key: ValueKey(favorite),
       child: Column(
         children: [
           VideoImageContainer(
@@ -92,7 +172,6 @@ class _FavoriteContainer extends ConsumerWidget {
             onTap: () async {
               if (useInternalPlayer) {
                 await Navigator.push(
-                  // ignore: use_build_context_synchronously
                   context,
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) {
@@ -115,8 +194,30 @@ class _FavoriteContainer extends ConsumerWidget {
         ],
       ),
       onDismissed: (_) async {
-        await ref.read(favoriteServiceProvider).delete(favorite);
+        await ref.read(favoriteRepositoryProvider).delete(favorite);
       },
+    );
+  }
+}
+
+class _NoFavoritesWidget extends StatelessWidget {
+  const _NoFavoritesWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Assets.images.favorite.image(width: 256, height: 256),
+          Text(
+            t.favorite.empty,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyMedium,
+          ),
+        ],
+      ),
     );
   }
 }

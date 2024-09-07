@@ -2,13 +2,14 @@ import 'dart:io' show Platform;
 
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/provider/database_provider.dart';
 import 'package:buzz_recipe_viewer/provider/flavor_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/provider/user_provider.dart';
+import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
-import 'package:buzz_recipe_viewer/service/recipe_note_service.dart';
+import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
@@ -37,9 +38,7 @@ class SettingsPage extends ConsumerWidget {
     final user = ref.watch(userProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.settings.title),
-      ),
+      appBar: buildAppBar(context, title: t.settings.title),
       body: CustomSettingsList(
         sections: [
           SettingsSection(
@@ -255,61 +254,109 @@ class SettingsPage extends ConsumerWidget {
               tiles: [
                 SettingsTile(
                   title: Text(
-                    t.settings.debug.row.dummyRecipe.title,
-                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                  ),
-                  onPressed: (_) async {
-                    await ref
-                        .read(recipeNoteServiceProvider)
-                        .createDummyRecipeNote();
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          t.settings.debug.row.dummyRecipe.title,
-                        ),
-                        duration: const Duration(seconds: 1),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile(
-                  title: Text(
                     t.settings.debug.row.deleteLocalData.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
-                    ref.read(databaseProvider).clearAll();
+                    await HapticFeedback.selectionClick();
                     await ref.read(preferenceServiceProvider).clearAll();
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          t.settings.debug.row.deleteLocalData.title,
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            t.settings.debug.row.deleteLocalData.title,
+                          ),
+                          duration: const Duration(seconds: 1),
                         ),
-                        duration: const Duration(seconds: 1),
-                      ),
-                    );
+                      );
+                    }
                   },
                 ),
-                if (user.value != null)
+                if (user.value != null) ...[
+                  SettingsTile(
+                    title: Text(
+                      t.settings.debug.row.firestoreCreateData.title,
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onPressed: (_) async {
+                      await HapticFeedback.selectionClick();
+                      await ref
+                          .read(recipeRepositoryProvider)
+                          .createDummyData();
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              t.settings.debug.row.firestoreCreateData.title,
+                            ),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  SettingsTile(
+                    title: Text(
+                      t.settings.debug.row.firestoreDeleteData.title,
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onPressed: (_) async {
+                      await HapticFeedback.selectionClick();
+                      await ref.read(recipeRepositoryProvider).deleteAll();
+                      await ref.read(favoriteRepositoryProvider).deleteAll();
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              t.settings.debug.row.firestoreDeleteData.title,
+                            ),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  SettingsTile(
+                    title: Text(
+                      t.settings.debug.row.addSampleRecipe.title,
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onPressed: (_) async {
+                      await HapticFeedback.selectionClick();
+                      await ref.read(recipeRepositoryProvider).addSampleData();
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              t.settings.debug.row.addSampleRecipe.title,
+                            ),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                   SettingsTile(
                     title: const Text(
                       'Copy Firebase UID',
                       style: TextStyle(fontFamily: FontFamily.notoSansJP),
                     ),
                     onPressed: (context) async {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Firebase UID: ${user.value!.uid}'),
-                          duration: const Duration(seconds: 1),
-                        ),
-                      );
+                      await HapticFeedback.selectionClick();
                       await Clipboard.setData(
                         ClipboardData(text: user.value!.uid),
                       );
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Firebase UID: ${user.value!.uid}'),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                      }
                     },
                   ),
+                ],
               ],
             ),
         ],

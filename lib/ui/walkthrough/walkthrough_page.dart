@@ -65,7 +65,9 @@ class WalkthroughPage extends ConsumerWidget {
                           ),
                         _ => const SizedBox.shrink(),
                       },
-                    _ => const Center(child: CircularProgressIndicator()),
+                    _ => const Center(
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
                   },
                 ],
               ),

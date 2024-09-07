@@ -123,10 +123,14 @@ settings:
   debug:
     header: Debug
     row:
-      dummyRecipe:
-        title: Insert Dummy Recipe
+      firestoreCreateData:
+        title: Create Data in Firestore
+      firestoreDeleteData:
+        title: Delete Data in Firestore
       deleteLocalData:
         title: Delete Local Data
+      addSampleRecipe:
+        title: Add Sample Recipe
       fcmToken:
         title: FCM Token(Tap to copy)
   common:

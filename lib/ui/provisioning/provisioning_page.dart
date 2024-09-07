@@ -54,7 +54,7 @@ class ProvisioningPage extends HookConsumerWidget {
                     },
                     child: Text(t.provisioning.retry),
                   ),
-                _ => const CircularProgressIndicator(),
+                _ => const CircularProgressIndicator(strokeWidth: 2),
               },
             ],
           ),

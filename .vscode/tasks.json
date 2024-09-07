@@ -4,7 +4,12 @@
         {
             "label": "prepareEnvTask",
             "type": "shell",
-            "command": "make prepare-env"
+            "command": "make prepare-env",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated",
+                "close": true
+            },
         }
     ],
 }

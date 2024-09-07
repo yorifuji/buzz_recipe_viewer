@@ -1,6 +1,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
-import 'package:buzz_recipe_viewer/ui/recipe/recipe_note_page.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/recipe_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_page.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ enum AppTab {
   }
 
   Widget Function() get show => switch (this) {
-        AppTab.recipe => RecipeNotePage.show,
+        AppTab.recipe => RecipePage.show,
         AppTab.video => SearchPage.show,
         AppTab.favorite => FavoritePage.show,
         AppTab.setting => SettingsPage.show,
