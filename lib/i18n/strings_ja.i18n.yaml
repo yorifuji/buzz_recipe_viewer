@@ -82,7 +82,6 @@ settings:
           title: 通知
           items:
             - 通知を許可
-            - トークンをコピー
         topic:
           title: トピック
           items:
@@ -120,17 +119,23 @@ settings:
         title: ライセンス
   debug:
     header: デバッグ
-    row:
-      firestoreCreateData:
-        title: データを作成（Firestore）
-      firestoreDeleteData:
-        title: データを削除（Firestore）
-      deleteLocalData:
-        title: ローカルデータを削除
-      addSampleRecipe:
-        title: サンプルレシピを追加
-      fcmToken:
-        title: FCM Token(Tap to copy)
+    sections:
+      general:
+        title: 一般
+        deleteLocalData:
+          title: ローカルデータを削除
+      firebase:
+        title: Firebase
+        addSampleRecipe:
+          title: サンプルレシピを追加
+        firestoreCreateData:
+          title: Firestoreにテストデータを追加
+        firestoreDeleteData:
+          title: Firestoreのデータを削除
+        authUid:
+          title: Firebase Auth UIDをコピー
+        fcmToken:
+          title: FCMトークンをコピー
   common:
     selected: 選択中
 common:

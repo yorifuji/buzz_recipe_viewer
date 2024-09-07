@@ -84,7 +84,6 @@ settings:
           title: Notifications
           items:
             - Allow Notifications
-            - Copy Token
         topic:
           title: Topic
           items:
@@ -122,17 +121,23 @@ settings:
         title: License
   debug:
     header: Debug
-    row:
-      firestoreCreateData:
-        title: Create Data in Firestore
-      firestoreDeleteData:
-        title: Delete Data in Firestore
-      deleteLocalData:
-        title: Delete Local Data
-      addSampleRecipe:
-        title: Add Sample Recipe
-      fcmToken:
-        title: FCM Token(Tap to copy)
+    sections:
+      general:
+        title: General
+        deleteLocalData:
+          title: Delete Local Data
+      firebase:
+        title: General
+        addSampleRecipe:
+          title: Add Sample Recipe
+        firestoreCreateData:
+          title: Create Data in Firestore
+        firestoreDeleteData:
+          title: Delete Data in Firestore
+        authUid:
+          title: Copy Firebase Auth UID
+        fcmToken:
+          title: Copy FCM Token
   common:
     selected: Selected
 common:

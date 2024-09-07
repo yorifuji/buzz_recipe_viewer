@@ -3,6 +3,7 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/provider/user_provider.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/service/notification_service.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +27,13 @@ class DebugPage extends ConsumerWidget {
         sections: [
           SettingsSection(
             title: Text(
-              t.settings.debug.header,
+              t.settings.debug.sections.general.title,
               style: const TextStyle(fontFamily: FontFamily.notoSansJP),
             ),
             tiles: [
               SettingsTile(
                 title: Text(
-                  t.settings.debug.row.deleteLocalData.title,
+                  t.settings.debug.sections.general.deleteLocalData.title,
                   style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                 ),
                 onPressed: (_) async {
@@ -42,7 +43,8 @@ class DebugPage extends ConsumerWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          t.settings.debug.row.deleteLocalData.title,
+                          t.settings.debug.sections.general.deleteLocalData
+                              .title,
                         ),
                         duration: const Duration(seconds: 1),
                       ),
@@ -50,10 +52,19 @@ class DebugPage extends ConsumerWidget {
                   }
                 },
               ),
-              if (user.value != null) ...[
+            ],
+          ),
+          if (user.value != null)
+            SettingsSection(
+              title: Text(
+                t.settings.debug.sections.firebase.title,
+                style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+              ),
+              tiles: [
                 SettingsTile(
                   title: Text(
-                    t.settings.debug.row.firestoreCreateData.title,
+                    t.settings.debug.sections.firebase.firestoreCreateData
+                        .title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
@@ -63,7 +74,8 @@ class DebugPage extends ConsumerWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            t.settings.debug.row.firestoreCreateData.title,
+                            t.settings.debug.sections.firebase
+                                .firestoreCreateData.title,
                           ),
                           duration: const Duration(seconds: 1),
                         ),
@@ -73,7 +85,8 @@ class DebugPage extends ConsumerWidget {
                 ),
                 SettingsTile(
                   title: Text(
-                    t.settings.debug.row.firestoreDeleteData.title,
+                    t.settings.debug.sections.firebase.firestoreDeleteData
+                        .title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
@@ -84,7 +97,8 @@ class DebugPage extends ConsumerWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            t.settings.debug.row.firestoreDeleteData.title,
+                            t.settings.debug.sections.firebase
+                                .firestoreDeleteData.title,
                           ),
                           duration: const Duration(seconds: 1),
                         ),
@@ -94,7 +108,7 @@ class DebugPage extends ConsumerWidget {
                 ),
                 SettingsTile(
                   title: Text(
-                    t.settings.debug.row.addSampleRecipe.title,
+                    t.settings.debug.sections.firebase.addSampleRecipe.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
@@ -104,7 +118,8 @@ class DebugPage extends ConsumerWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            t.settings.debug.row.addSampleRecipe.title,
+                            t.settings.debug.sections.firebase.addSampleRecipe
+                                .title,
                           ),
                           duration: const Duration(seconds: 1),
                         ),
@@ -113,9 +128,9 @@ class DebugPage extends ConsumerWidget {
                   },
                 ),
                 SettingsTile(
-                  title: const Text(
-                    'Copy Firebase UID',
-                    style: TextStyle(fontFamily: FontFamily.notoSansJP),
+                  title: Text(
+                    t.settings.debug.sections.firebase.authUid.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (context) async {
                     await HapticFeedback.mediumImpact();
@@ -125,16 +140,40 @@ class DebugPage extends ConsumerWidget {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Firebase UID: ${user.value!.uid}'),
+                          content: Text(
+                            '${t.settings.debug.sections.firebase.authUid.title}: ${user.value!.uid}',
+                          ),
                           duration: const Duration(seconds: 1),
                         ),
                       );
                     }
                   },
                 ),
+                SettingsTile(
+                  title: InkWell(
+                    child: Text(
+                      t.settings.debug.sections.firebase.fcmToken.title,
+                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                    ),
+                    onTap: () async {
+                      await HapticFeedback.mediumImpact();
+                      final token = await NotificationService.getFcmToken();
+                      if (token != null && context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '${t.settings.debug.sections.firebase.authUid.title}: $token',
+                            ),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                        await Clipboard.setData(ClipboardData(text: token));
+                      }
+                    },
+                  ),
+                ),
               ],
-            ],
-          ),
+            ),
         ],
       ),
     );
