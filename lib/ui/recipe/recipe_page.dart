@@ -23,6 +23,8 @@ class RecipePage extends StatelessWidget {
       appBar: buildAppBar(context, title: t.recipe.title),
       body: const _RecipeDataWidget1(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Theme.of(context).colorScheme.onSecondary,
         onPressed: () async {
           await HapticFeedback.mediumImpact();
           if (context.mounted) {
