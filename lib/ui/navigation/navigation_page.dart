@@ -43,7 +43,6 @@ class NavigationPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final currentTab = useState<AppTab>(AppTab.recipe);
 
     return PopScope(
