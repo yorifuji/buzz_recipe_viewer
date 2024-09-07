@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
+import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
-import 'package:buzz_recipe_viewer/service/favorite_service.dart';
 import 'package:buzz_recipe_viewer/store/video/search_state_store.dart';
+import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
@@ -39,7 +41,8 @@ class SearchPage extends HookConsumerWidget {
 
     final body = switch (loadingState) {
       LoadingState.loadable => const SizedBox.shrink(),
-      LoadingState.loading => const Center(child: CircularProgressIndicator()),
+      LoadingState.loading =>
+        const Center(child: CircularProgressIndicator(strokeWidth: 2)),
       LoadingState.success => _VideoListContainer(),
       LoadingState.failure => Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +54,7 @@ class SearchPage extends HookConsumerWidget {
     };
 
     return Scaffold(
-      appBar: AppBar(title: Text(t.video.title)),
+      appBar: buildAppBar(context, title: t.video.title),
       body: SafeArea(
         child: Column(
           children: [
@@ -103,7 +106,9 @@ class _VideoListContainer extends HookConsumerWidget {
             return moreLoadingState == LoadingState.loading
                 ? const SizedBox(
                     height: 48,
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
                   )
                 : SizedBox(
                     height: 48,
@@ -140,8 +145,8 @@ class _VideoListContainer extends HookConsumerWidget {
                   },
                   onLongPress: () async {
                     await ref
-                        .read(favoriteServiceProvider)
-                        .create(hitList[index]);
+                        .read(favoriteRepositoryProvider)
+                        .create(Favorite.from(hitList[index]));
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

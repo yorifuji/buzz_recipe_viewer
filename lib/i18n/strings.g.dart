@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 205 (102 per locale)
+/// Strings: 209 (104 per locale)
 ///
-/// Built on 2024-09-04 at 09:23 UTC
+/// Built on 2024-09-07 at 03:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -591,10 +591,14 @@ class _StringsSettingsDebugRowEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final _StringsSettingsDebugRowDummyRecipeEn dummyRecipe =
-      _StringsSettingsDebugRowDummyRecipeEn._(_root);
+  late final _StringsSettingsDebugRowFirestoreCreateDataEn firestoreCreateData =
+      _StringsSettingsDebugRowFirestoreCreateDataEn._(_root);
+  late final _StringsSettingsDebugRowFirestoreDeleteDataEn firestoreDeleteData =
+      _StringsSettingsDebugRowFirestoreDeleteDataEn._(_root);
   late final _StringsSettingsDebugRowDeleteLocalDataEn deleteLocalData =
       _StringsSettingsDebugRowDeleteLocalDataEn._(_root);
+  late final _StringsSettingsDebugRowAddSampleRecipeEn addSampleRecipe =
+      _StringsSettingsDebugRowAddSampleRecipeEn._(_root);
   late final _StringsSettingsDebugRowFcmTokenEn fcmToken =
       _StringsSettingsDebugRowFcmTokenEn._(_root);
 }
@@ -750,14 +754,24 @@ class _StringsSettingsAboutRowLicenseEn {
   String get title => 'License';
 }
 
-// Path: settings.debug.row.dummyRecipe
-class _StringsSettingsDebugRowDummyRecipeEn {
-  _StringsSettingsDebugRowDummyRecipeEn._(this._root);
+// Path: settings.debug.row.firestoreCreateData
+class _StringsSettingsDebugRowFirestoreCreateDataEn {
+  _StringsSettingsDebugRowFirestoreCreateDataEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Insert Dummy Recipe';
+  String get title => 'Create Data in Firestore';
+}
+
+// Path: settings.debug.row.firestoreDeleteData
+class _StringsSettingsDebugRowFirestoreDeleteDataEn {
+  _StringsSettingsDebugRowFirestoreDeleteDataEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Delete Data in Firestore';
 }
 
 // Path: settings.debug.row.deleteLocalData
@@ -768,6 +782,16 @@ class _StringsSettingsDebugRowDeleteLocalDataEn {
 
   // Translations
   String get title => 'Delete Local Data';
+}
+
+// Path: settings.debug.row.addSampleRecipe
+class _StringsSettingsDebugRowAddSampleRecipeEn {
+  _StringsSettingsDebugRowAddSampleRecipeEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Add Sample Recipe';
 }
 
 // Path: settings.debug.row.fcmToken
@@ -1427,11 +1451,17 @@ class _StringsSettingsDebugRowJa implements _StringsSettingsDebugRowEn {
 
   // Translations
   @override
-  late final _StringsSettingsDebugRowDummyRecipeJa dummyRecipe =
-      _StringsSettingsDebugRowDummyRecipeJa._(_root);
+  late final _StringsSettingsDebugRowFirestoreCreateDataJa firestoreCreateData =
+      _StringsSettingsDebugRowFirestoreCreateDataJa._(_root);
+  @override
+  late final _StringsSettingsDebugRowFirestoreDeleteDataJa firestoreDeleteData =
+      _StringsSettingsDebugRowFirestoreDeleteDataJa._(_root);
   @override
   late final _StringsSettingsDebugRowDeleteLocalDataJa deleteLocalData =
       _StringsSettingsDebugRowDeleteLocalDataJa._(_root);
+  @override
+  late final _StringsSettingsDebugRowAddSampleRecipeJa addSampleRecipe =
+      _StringsSettingsDebugRowAddSampleRecipeJa._(_root);
   @override
   late final _StringsSettingsDebugRowFcmTokenJa fcmToken =
       _StringsSettingsDebugRowFcmTokenJa._(_root);
@@ -1636,17 +1666,30 @@ class _StringsSettingsAboutRowLicenseJa
   String get title => 'ライセンス';
 }
 
-// Path: settings.debug.row.dummyRecipe
-class _StringsSettingsDebugRowDummyRecipeJa
-    implements _StringsSettingsDebugRowDummyRecipeEn {
-  _StringsSettingsDebugRowDummyRecipeJa._(this._root);
+// Path: settings.debug.row.firestoreCreateData
+class _StringsSettingsDebugRowFirestoreCreateDataJa
+    implements _StringsSettingsDebugRowFirestoreCreateDataEn {
+  _StringsSettingsDebugRowFirestoreCreateDataJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => 'ダミーレシピを登録';
+  String get title => 'データを作成（Firestore）';
+}
+
+// Path: settings.debug.row.firestoreDeleteData
+class _StringsSettingsDebugRowFirestoreDeleteDataJa
+    implements _StringsSettingsDebugRowFirestoreDeleteDataEn {
+  _StringsSettingsDebugRowFirestoreDeleteDataJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'データを削除（Firestore）';
 }
 
 // Path: settings.debug.row.deleteLocalData
@@ -1660,6 +1703,19 @@ class _StringsSettingsDebugRowDeleteLocalDataJa
   // Translations
   @override
   String get title => 'ローカルデータを削除';
+}
+
+// Path: settings.debug.row.addSampleRecipe
+class _StringsSettingsDebugRowAddSampleRecipeJa
+    implements _StringsSettingsDebugRowAddSampleRecipeEn {
+  _StringsSettingsDebugRowAddSampleRecipeJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'サンプルレシピを追加';
 }
 
 // Path: settings.debug.row.fcmToken
@@ -1914,10 +1970,14 @@ extension on Translations {
         return 'License';
       case 'settings.debug.header':
         return 'Debug';
-      case 'settings.debug.row.dummyRecipe.title':
-        return 'Insert Dummy Recipe';
+      case 'settings.debug.row.firestoreCreateData.title':
+        return 'Create Data in Firestore';
+      case 'settings.debug.row.firestoreDeleteData.title':
+        return 'Delete Data in Firestore';
       case 'settings.debug.row.deleteLocalData.title':
         return 'Delete Local Data';
+      case 'settings.debug.row.addSampleRecipe.title':
+        return 'Add Sample Recipe';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
       case 'settings.common.selected':
@@ -2127,10 +2187,14 @@ extension on _StringsJa {
         return 'ライセンス';
       case 'settings.debug.header':
         return 'デバッグ';
-      case 'settings.debug.row.dummyRecipe.title':
-        return 'ダミーレシピを登録';
+      case 'settings.debug.row.firestoreCreateData.title':
+        return 'データを作成（Firestore）';
+      case 'settings.debug.row.firestoreDeleteData.title':
+        return 'データを削除（Firestore）';
       case 'settings.debug.row.deleteLocalData.title':
         return 'ローカルデータを削除';
+      case 'settings.debug.row.addSampleRecipe.title':
+        return 'サンプルレシピを追加';
       case 'settings.debug.row.fcmToken.title':
         return 'FCM Token(Tap to copy)';
       case 'settings.common.selected':

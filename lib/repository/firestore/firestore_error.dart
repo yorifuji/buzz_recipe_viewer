@@ -1,0 +1,5 @@
+// FirestoreError
+enum FirestoreError {
+  documentNotFound,
+  ;
+}

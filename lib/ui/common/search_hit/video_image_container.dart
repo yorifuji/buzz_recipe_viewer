@@ -28,7 +28,10 @@ class VideoImageContainer extends StatelessWidget {
           child: Align(
             child: Column(
               children: [
-                Image.network(searchHit.image),
+                Image.network(
+                  searchHit.image,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.error),
+                ),
                 const SizedBox(height: 8),
               ],
             ),

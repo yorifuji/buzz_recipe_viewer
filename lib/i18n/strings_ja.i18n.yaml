@@ -121,10 +121,14 @@ settings:
   debug:
     header: デバッグ
     row:
-      dummyRecipe:
-        title: ダミーレシピを登録
+      firestoreCreateData:
+        title: データを作成（Firestore）
+      firestoreDeleteData:
+        title: データを削除（Firestore）
       deleteLocalData:
         title: ローカルデータを削除
+      addSampleRecipe:
+        title: サンプルレシピを追加
       fcmToken:
         title: FCM Token(Tap to copy)
   common:
