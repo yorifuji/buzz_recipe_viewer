@@ -77,9 +77,8 @@ class FavoriteRepository {
 
   // delete all favorites
   Future<void> deleteAll() async {
-    final favorites = await read(limit: 100);
-    for (final favorite in favorites) {
-      await delete(favorite);
-    }
+    final snapshot = await _ref.read(favoriteQueryProvider).get();
+    final futures = snapshot.docs.map((doc) => doc.reference.delete());
+    await Future.wait(futures);
   }
 }
