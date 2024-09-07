@@ -49,12 +49,12 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final windowSize = ref.watch(recipeWindowNotifierProvider);
-    final recipeStream = ref.watch(recipeStreamProvider(windowSize));
+    final stream = ref.watch(recipeStreamProvider(windowSize));
 
-    final recipeCache = useState<List<Recipe>?>(null);
-    ref.listen(recipeStreamProvider(windowSize), (prev, next) {
+    final streamCache = useState<List<Recipe>?>(null);
+    ref.listen(recipeStreamProvider(windowSize), (_, next) {
       if (next.hasValue) {
-        recipeCache.value = next.requireValue;
+        streamCache.value = next.requireValue;
       }
     });
 
@@ -91,11 +91,11 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
     return RefreshIndicator(
       displacement: 0,
       strokeWidth: 2,
-      child: recipeStream.when(
+      child: stream.when(
         data: listViewWidget,
         loading: () {
-          if (recipeCache.value != null) {
-            return listViewWidget(recipeCache.value!);
+          if (streamCache.value != null) {
+            return listViewWidget(streamCache.value!);
           } else {}
           return loadingWidget();
         },
