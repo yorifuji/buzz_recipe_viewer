@@ -20,7 +20,7 @@ class DebugPage extends ConsumerWidget {
     final user = ref.watch(userProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(t.settings.general.row.color.title),
+        title: Text(t.settings.debug.header),
       ),
       body: CustomSettingsList(
         sections: [

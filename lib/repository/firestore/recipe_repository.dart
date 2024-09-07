@@ -84,26 +84,24 @@ class RecipeRepository {
 
 extension RecipeRepositoryDebug on RecipeRepository {
   Future<void> createDummyData() async {
-    if (kDebugMode) {
-      final start = DateTime.now();
-      final futures = List.generate(30, (index) => index).map((index) {
-        final now = start.add(Duration(seconds: index));
-        final recipe = Recipe(
-          title: '$index',
-          description: '$index',
-          foodList: [
-            '$index',
-          ],
-          stepList: [
-            '$index',
-          ],
-          createdAt: now,
-          updatedAt: now,
-        );
-        return create(recipe);
-      }).toList();
-      await Future.wait(futures);
-    }
+    final start = DateTime.now();
+    final futures = List.generate(30, (index) => index).map((index) {
+      final now = start.add(Duration(seconds: index));
+      final recipe = Recipe(
+        title: '$index',
+        description: '$index',
+        foodList: [
+          '$index',
+        ],
+        stepList: [
+          '$index',
+        ],
+        createdAt: now,
+        updatedAt: now,
+      );
+      return create(recipe);
+    }).toList();
+    await Future.wait(futures);
   }
 
   Future<void> addSampleData() async {
