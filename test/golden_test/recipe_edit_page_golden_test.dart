@@ -20,14 +20,14 @@ void main() {
       ),
     );
 
-  group('recipe_note_edit', () {
+  group('recipe_edit', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
       LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
-        '${locale.languageCode}/recipe_note_edit/empty',
+        '${locale.languageCode}/recipe_edit/empty',
       );
     });
 
@@ -37,7 +37,7 @@ void main() {
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
-        '${locale.languageCode}/recipe_note_edit/empty',
+        '${locale.languageCode}/recipe_edit/empty',
       );
     });
   });
