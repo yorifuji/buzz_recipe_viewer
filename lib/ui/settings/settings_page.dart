@@ -240,6 +240,65 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
+          SettingsSection(
+            title: Text(
+              t.settings.account.title,
+              style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+            ),
+            tiles: [
+              SettingsTile(
+                title: Text(
+                  t.settings.account.delete.title,
+                  style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                ),
+                onPressed: (context) {
+                  // confirm delete account
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          t.settings.account.delete.title,
+                          style: const TextStyle(
+                            fontFamily: FontFamily.notoSansJP,
+                          ),
+                        ),
+                        content: Text(
+                          t.settings.account.delete.description,
+                          style: const TextStyle(
+                            fontFamily: FontFamily.notoSansJP,
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              t.common.cancel,
+                              style: const TextStyle(
+                                fontFamily: FontFamily.notoSansJP,
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // delete account
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              t.common.ok,
+                              style: const TextStyle(
+                                fontFamily: FontFamily.notoSansJP,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
           if (kDebugMode || !ref.watch(flavorProvider).isProd)
             SettingsSection(
               title: Text(

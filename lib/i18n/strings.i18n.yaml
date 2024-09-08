@@ -120,6 +120,11 @@ settings:
         title: Version
       license:
         title: License
+  account:
+    title: Account
+    delete:
+      title: Delete Account
+      description: Delete your account and all data
   debug:
     header: Debug
     sections:
@@ -151,6 +156,8 @@ common:
   sortByDate: Sort by Date (Newest First)
   sortByLikes: Popular (Likes)
   sortByViews: Popular (Views)
+  cancel: Cancel
+  ok: OK
 error:
   auth:
     emailAlreadyInUse: Email already in use.

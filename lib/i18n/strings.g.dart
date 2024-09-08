@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 215 (107 per locale)
+/// Strings: 225 (112 per locale)
 ///
-/// Built on 2024-09-08 at 03:29 UTC
+/// Built on 2024-09-08 at 09:31 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -304,6 +304,8 @@ class _StringsSettingsEn {
   late final _StringsSettingsSupportEn support =
       _StringsSettingsSupportEn._(_root);
   late final _StringsSettingsAboutEn about = _StringsSettingsAboutEn._(_root);
+  late final _StringsSettingsAccountEn account =
+      _StringsSettingsAccountEn._(_root);
   late final _StringsSettingsDebugEn debug = _StringsSettingsDebugEn._(_root);
   late final _StringsSettingsCommonEn common =
       _StringsSettingsCommonEn._(_root);
@@ -325,6 +327,8 @@ class _StringsCommonEn {
   String get sortByDate => 'Sort by Date (Newest First)';
   String get sortByLikes => 'Popular (Likes)';
   String get sortByViews => 'Popular (Views)';
+  String get cancel => 'Cancel';
+  String get ok => 'OK';
 }
 
 // Path: error
@@ -444,6 +448,18 @@ class _StringsSettingsAboutEn {
   String get header => 'About';
   late final _StringsSettingsAboutRowEn row =
       _StringsSettingsAboutRowEn._(_root);
+}
+
+// Path: settings.account
+class _StringsSettingsAccountEn {
+  _StringsSettingsAccountEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Account';
+  late final _StringsSettingsAccountDeleteEn delete =
+      _StringsSettingsAccountDeleteEn._(_root);
 }
 
 // Path: settings.debug
@@ -583,6 +599,17 @@ class _StringsSettingsAboutRowEn {
       _StringsSettingsAboutRowVersionEn._(_root);
   late final _StringsSettingsAboutRowLicenseEn license =
       _StringsSettingsAboutRowLicenseEn._(_root);
+}
+
+// Path: settings.account.delete
+class _StringsSettingsAccountDeleteEn {
+  _StringsSettingsAccountDeleteEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Delete Account';
+  String get description => 'Delete your account and all data';
 }
 
 // Path: settings.debug.sections
@@ -1104,6 +1131,9 @@ class _StringsSettingsJa implements _StringsSettingsEn {
   @override
   late final _StringsSettingsAboutJa about = _StringsSettingsAboutJa._(_root);
   @override
+  late final _StringsSettingsAccountJa account =
+      _StringsSettingsAccountJa._(_root);
+  @override
   late final _StringsSettingsDebugJa debug = _StringsSettingsDebugJa._(_root);
   @override
   late final _StringsSettingsCommonJa common =
@@ -1138,6 +1168,10 @@ class _StringsCommonJa implements _StringsCommonEn {
   String get sortByViews => '人気順（閲覧数）';
   @override
   String get selected => '選択中';
+  @override
+  String get cancel => 'キャンセル';
+  @override
+  String get ok => 'OK';
 }
 
 // Path: error
@@ -1290,6 +1324,21 @@ class _StringsSettingsAboutJa implements _StringsSettingsAboutEn {
   @override
   late final _StringsSettingsAboutRowJa row =
       _StringsSettingsAboutRowJa._(_root);
+}
+
+// Path: settings.account
+class _StringsSettingsAccountJa implements _StringsSettingsAccountEn {
+  _StringsSettingsAccountJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'アカウント';
+  @override
+  late final _StringsSettingsAccountDeleteJa delete =
+      _StringsSettingsAccountDeleteJa._(_root);
 }
 
 // Path: settings.debug
@@ -1482,6 +1531,21 @@ class _StringsSettingsAboutRowJa implements _StringsSettingsAboutRowEn {
   @override
   late final _StringsSettingsAboutRowLicenseJa license =
       _StringsSettingsAboutRowLicenseJa._(_root);
+}
+
+// Path: settings.account.delete
+class _StringsSettingsAccountDeleteJa
+    implements _StringsSettingsAccountDeleteEn {
+  _StringsSettingsAccountDeleteJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'アカウントを削除';
+  @override
+  String get description => 'アカウントとデータを削除します';
 }
 
 // Path: settings.debug.sections
@@ -2062,6 +2126,12 @@ extension on Translations {
         return 'Version';
       case 'settings.about.row.license.title':
         return 'License';
+      case 'settings.account.title':
+        return 'Account';
+      case 'settings.account.delete.title':
+        return 'Delete Account';
+      case 'settings.account.delete.description':
+        return 'Delete your account and all data';
       case 'settings.debug.header':
         return 'Debug';
       case 'settings.debug.sections.general.title':
@@ -2100,6 +2170,10 @@ extension on Translations {
         return 'Popular (Likes)';
       case 'common.sortByViews':
         return 'Popular (Views)';
+      case 'common.cancel':
+        return 'Cancel';
+      case 'common.ok':
+        return 'OK';
       case 'error.auth.emailAlreadyInUse':
         return 'Email already in use.';
       case 'error.auth.invalidEmail':
@@ -2285,6 +2359,12 @@ extension on _StringsJa {
         return 'バージョン';
       case 'settings.about.row.license.title':
         return 'ライセンス';
+      case 'settings.account.title':
+        return 'アカウント';
+      case 'settings.account.delete.title':
+        return 'アカウントを削除';
+      case 'settings.account.delete.description':
+        return 'アカウントとデータを削除します';
       case 'settings.debug.header':
         return 'デバッグ';
       case 'settings.debug.sections.general.title':
@@ -2325,6 +2405,10 @@ extension on _StringsJa {
         return '人気順（閲覧数）';
       case 'common.selected':
         return '選択中';
+      case 'common.cancel':
+        return 'キャンセル';
+      case 'common.ok':
+        return 'OK';
       case 'error.auth.emailAlreadyInUse':
         return 'このメールアドレスは既に使用されています';
       case 'error.auth.invalidEmail':

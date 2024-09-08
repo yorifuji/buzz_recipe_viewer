@@ -118,6 +118,11 @@ settings:
         title: バージョン
       license:
         title: ライセンス
+  account:
+    title: アカウント
+    delete:
+      title: アカウントを削除
+      description: アカウントとデータを削除します
   debug:
     header: デバッグ
     sections:
@@ -150,6 +155,8 @@ common:
   sortByLikes: 人気順（いいね）
   sortByViews: 人気順（閲覧数）
   selected: 選択中
+  cancel: キャンセル
+  ok: OK
 error:
   auth:
     emailAlreadyInUse: このメールアドレスは既に使用されています
