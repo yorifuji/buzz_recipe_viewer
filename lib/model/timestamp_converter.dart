@@ -6,6 +6,9 @@ class CreatedAtField implements JsonConverter<DateTime, dynamic> {
 
   @override
   DateTime fromJson(dynamic timestamp) {
+    if (timestamp == null) {
+      return DateTime.now();
+    }
     timestamp as Timestamp;
     return timestamp.toDate();
   }
@@ -21,6 +24,9 @@ class UpdatedAtField implements JsonConverter<DateTime, dynamic> {
 
   @override
   DateTime fromJson(dynamic timestamp) {
+    if (timestamp == null) {
+      return DateTime.now();
+    }
     timestamp as Timestamp;
     return timestamp.toDate();
   }
