@@ -69,3 +69,12 @@ class FakeSearchViewModel extends _$SearchViewModel
   @override
   Future<void> search() async {}
 }
+
+class FakeErrorSearchViewModel extends _$SearchViewModel
+    with Mock
+    implements SearchViewModel {
+  @override
+  SearchState build() => const SearchState(loadingState: LoadingState.failure);
+  @override
+  Future<void> search() async {}
+}
