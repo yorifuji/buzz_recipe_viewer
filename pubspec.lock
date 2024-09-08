@@ -22,14 +22,54 @@ packages:
     description: dart
     source: sdk
     version: "0.3.2"
-  algolia:
-    dependency: "direct main"
+  algolia_client_core:
+    dependency: transitive
     description:
-      name: algolia
-      sha256: "0ba325344f85ac8f8351d158f0be0643e169ac0c91a43a496f8b1f3b54390066"
+      name: algolia_client_core
+      sha256: "31112fde184da4498fe0a885d23669b1c02186b9ebefea7ac0689c4075249d75"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2"
+    version: "1.24.0"
+  algolia_client_insights:
+    dependency: transitive
+    description:
+      name: algolia_client_insights
+      sha256: "96a79d245692e8d5a249349e955baff7ec254ffdb6d4359b63aa16800002a9ce"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.24.0"
+  algolia_client_search:
+    dependency: transitive
+    description:
+      name: algolia_client_search
+      sha256: b48bb4835f2bbac85160a6b85bd7135ca1028de7d8b27ab250839ab766584abd
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.24.0"
+  algolia_helper_flutter:
+    dependency: "direct main"
+    description:
+      name: algolia_helper_flutter
+      sha256: "863c474255ab888da01546b56272e6fa5c2f6b7b020c78749fa562bdfaea91ad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  algolia_insights:
+    dependency: transitive
+    description:
+      name: algolia_insights
+      sha256: cf7ee87ba68fb2627343be79871710c0e033573dd34e67f576f353a65173cb41
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  algoliasearch:
+    dependency: "direct main"
+    description:
+      name: algoliasearch
+      sha256: "2cd04c2ba50f2ec4a1d204df323359514bb4b3c91fa773f9f92e6de0d1d73474"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.24.0"
   analyzer:
     dependency: transitive
     description:
@@ -334,6 +374,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "5598aa796bbf4699afd5c67c0f5f6e2ed542afc956884b9cd58c306966efc260"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.7.0"
+  dio_web_adapter:
+    dependency: transitive
+    description:
+      name: dio_web_adapter
+      sha256: "33259a9276d6cea88774a0000cfae0d861003497755969c92faa223108620dc8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   dots_indicator:
     dependency: transitive
     description:
@@ -690,6 +746,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  hive:
+    dependency: transitive
+    description:
+      name: hive
+      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
   hooks_riverpod:
     dependency: "direct main"
     description:
@@ -710,10 +774,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
+      sha256: b9c29a161230ee03d3ccf545097fccd9b87a5264228c5d348202e0f0c28f9010
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.6"
+    version: "1.2.2"
   http_multi_server:
     dependency: transitive
     description:
@@ -1247,6 +1311,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -1335,14 +1407,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
-  universal_io:
-    dependency: transitive
-    description:
-      name: universal_io
-      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
   url_launcher:
     dependency: "direct main"
     description:
@@ -1411,10 +1475,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
+      sha256: f33d6bb662f0e4f79dcd7ada2e6170f3b3a2530c28fc41f49a411ddedd576a77
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.7"
+    version: "4.5.0"
   vector_graphics_codec:
     dependency: transitive
     description:

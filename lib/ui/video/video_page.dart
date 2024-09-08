@@ -11,7 +11,7 @@ import 'package:buzz_recipe_viewer/store/video/search_state_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
-import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/video/video_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,66 +19,41 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SearchPage extends HookConsumerWidget {
-  const SearchPage({super.key});
+class VideoPage extends HookConsumerWidget {
+  const VideoPage({super.key});
 
-  static Widget show() => const SearchPage();
+  static Widget show() => const VideoPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loadingState = ref.watch(
       searchViewModelProvider.select((value) => value.loadingState),
     );
-    final viewModel = ref.watch(searchViewModelProvider.notifier);
 
     useEffect(
       () {
-        Future.microtask(viewModel.search);
+        Future.microtask(ref.read(searchViewModelProvider.notifier).search);
         return null;
       },
       const [],
     );
 
-    final body = switch (loadingState) {
-      LoadingState.loadable => const SizedBox.shrink(),
-      LoadingState.loading =>
-        const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-      LoadingState.success => _VideoListContainer(),
-      LoadingState.failure => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Assets.images.error.image(width: 256, height: 256),
-            Text(t.common.fetchFailed),
-          ],
-        )
-    };
-
     return Scaffold(
       appBar: buildAppBar(context, title: t.video.title),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(child: body),
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: _SortLabelButton(),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Divider(height: 1),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: _SearchBox(),
-            ),
-          ],
-        ),
+        child: switch (loadingState) {
+          LoadingState.loadable => const SizedBox.shrink(),
+          LoadingState.loading =>
+            const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          LoadingState.success => _VideoListWidget(),
+          LoadingState.failure => const _ErrorWidget()
+        },
       ),
     );
   }
 }
 
-class _VideoListContainer extends HookConsumerWidget {
+class _VideoListWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(searchViewModelProvider.notifier);
@@ -93,78 +68,95 @@ class _VideoListContainer extends HookConsumerWidget {
     final useInternalPlayer = isInternalPlayerAvailable &&
         ref.watch(boolPreferenceProvider(Preference.useInternalPlayer));
 
-    if (hitList.isEmpty) {
-      return Center(child: Text(t.common.searchEmpty));
-    }
-
-    return RefreshIndicator(
-      onRefresh: viewModel.search,
-      child: ListView.builder(
-        itemCount: nextPage != 0 ? hitList.length + 1 : hitList.length,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == hitList.length) {
-            return moreLoadingState == LoadingState.loading
-                ? const SizedBox(
-                    height: 48,
-                    child: Center(
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                  )
-                : SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: viewModel.searchMore,
-                      child: Text(t.common.more),
-                    ),
-                  );
-          } else {
-            return Column(
-              children: [
-                VideoImageContainer(
-                  searchHit: hitList[index],
-                  onTap: () async {
-                    if (useInternalPlayer) {
-                      await Navigator.push(
-                        // ignore: use_build_context_synchronously
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) {
-                            return VideoPlayerPage(
-                              searchHit: hitList[index],
+    return Column(
+      children: [
+        if (hitList.isEmpty)
+          Expanded(child: Center(child: Text(t.common.searchEmpty)))
+        else
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: viewModel.search,
+              child: ListView.builder(
+                itemCount: nextPage != 0 ? hitList.length + 1 : hitList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == hitList.length) {
+                    return moreLoadingState == LoadingState.loading
+                        ? const SizedBox(
+                            height: 48,
+                            child: Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          )
+                        : SizedBox(
+                            height: 48,
+                            child: TextButton(
+                              onPressed: viewModel.searchMore,
+                              child: Text(t.common.more),
+                            ),
+                          );
+                  } else {
+                    return Column(
+                      children: [
+                        VideoImageContainer(
+                          searchHit: hitList[index],
+                          onTap: () async {
+                            if (useInternalPlayer) {
+                              await Navigator.push(
+                                // ignore: use_build_context_synchronously
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                    return VideoPlayerPage(
+                                      searchHit: hitList[index],
+                                    );
+                                  },
+                                ),
+                              );
+                            } else {
+                              final url = Uri.parse(hitList[index].url);
+                              await launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication,
+                              );
+                            }
+                          },
+                          onLongPress: () async {
+                            await ref
+                                .read(favoriteRepositoryProvider)
+                                .create(Favorite.from(hitList[index]));
+                            // ignore: use_build_context_synchronously
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  t.common.addFavorite,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                                duration: const Duration(seconds: 1),
+                              ),
                             );
                           },
                         ),
-                      );
-                    } else {
-                      final url = Uri.parse(hitList[index].url);
-                      await launchUrl(
-                        url,
-                        mode: LaunchMode.externalApplication,
-                      );
-                    }
-                  },
-                  onLongPress: () async {
-                    await ref
-                        .read(favoriteRepositoryProvider)
-                        .create(Favorite.from(hitList[index]));
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          t.common.addFavorite,
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        duration: const Duration(seconds: 1),
-                      ),
+                        VideoInformationContainer(searchHit: hitList[index]),
+                      ],
                     );
-                  },
-                ),
-                VideoInformationContainer(searchHit: hitList[index]),
-              ],
-            );
-          }
-        },
-      ),
+                  }
+                },
+              ),
+            ),
+          ),
+        const Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: _SortLabelButton(),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: Divider(height: 1),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: _SearchBox(),
+        ),
+      ],
     );
   }
 }
@@ -223,7 +215,7 @@ class _SearchBox extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final query =
         ref.watch(searchViewModelProvider.select((value) => value.query));
-    final queryEditController = useTextEditingController();
+    final queryEditController = useTextEditingController(text: query);
     final viewModel = ref.watch(searchViewModelProvider.notifier);
     return SizedBox(
       height: 44,
@@ -308,4 +300,28 @@ void _openBottomSheet(
       );
     },
   );
+}
+
+class _ErrorWidget extends ConsumerWidget {
+  const _ErrorWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Assets.images.error.image(width: 256, height: 256),
+          Text(t.common.fetchFailed),
+          TextButton(
+            onPressed: () {
+              ref.invalidate(searchViewModelProvider);
+              ref.read(searchViewModelProvider.notifier).search();
+            },
+            child: Text(t.video.refresh),
+          ),
+        ],
+      ),
+    );
+  }
 }

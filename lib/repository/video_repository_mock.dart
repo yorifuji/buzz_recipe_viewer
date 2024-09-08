@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/video_list_result.dart';
 import 'package:buzz_recipe_viewer/repository/video_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'video_repository_mock.g.dart';
@@ -66,4 +67,7 @@ class VideoRepositoryMock implements VideoRepository {
       ),
     );
   }
+
+  @override
+  Ref<Object?> get ref => throw UnimplementedError();
 }
