@@ -273,15 +273,17 @@ class _Errorwidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final windowSize = ref.watch(recipeWindowNotifierProvider);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Assets.images.error.image(width: 256, height: 256),
-        TextButton(
-          onPressed: () => ref.invalidate(recipeStreamProvider(windowSize)),
-          child: Text(t.common.fetchFailed),
-        ),
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Assets.images.error.image(width: 256, height: 256),
+          TextButton(
+            onPressed: () => ref.invalidate(recipeStreamProvider(windowSize)),
+            child: Text(t.common.fetchFailed),
+          ),
+        ],
+      ),
     );
   }
 }
