@@ -29,6 +29,7 @@ defaults:
 jobs:
   android:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    environment: staging
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -57,7 +58,7 @@ jobs:
 
       - name: flutterfire configure
         env:
-          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_STG }}
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
           which firebase || curl -sL https://firebase.tools | bash
           dart pub global activate flutterfire_cli 1.0.1-dev.4
@@ -99,6 +100,7 @@ jobs:
 
   ios:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
+    environment: staging
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -123,7 +125,7 @@ jobs:
 
       - name: flutterfire configure
         env:
-          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_STG }}
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
           which firebase || curl -sL https://firebase.tools | bash
           dart pub global activate flutterfire_cli 1.0.1-dev.4
@@ -235,6 +237,7 @@ jobs:
 
   macos:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
+    environment: staging
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -259,7 +262,7 @@ jobs:
 
       - name: flutterfire configure
         env:
-          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_STG }}
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
           which firebase || curl -sL https://firebase.tools | bash
           dart pub global activate flutterfire_cli 1.0.1-dev.4
