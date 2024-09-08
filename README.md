@@ -8,15 +8,18 @@
 
 # Screenshot
 
-| iOS                            |                                |
-| ------------------------------ | ------------------------------ |
-| ![](./images/walkthrough1.png) | ![](./images/walkthrough2.png) |
-| ![](./images/screenshot1.png)  | ![](./images/screenshot2.png)  |
-| ![](./images/screenshot3.png)  | ![](./images/screenshot4.png)  |
+| iOS                            |                                |                                |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| ![](./images/walkthrough1.png) | ![](./images/walkthrough2.png) | ![](./images/walkthrough3.png) |
 
-| Web（[デモサイト](https://buzz.yorifuji.dev/)）                           | macOS                         |
+| iOS                           |                               |
 | ----------------------------- | ----------------------------- |
-| ![](./images/screenshot5.png) | ![](./images/screenshot6.png) |
+| ![](./images/screenshot1.png) | ![](./images/screenshot2.png) |
+| ![](./images/screenshot3.png) | ![](./images/screenshot4.png) |
+
+| Web（[デモサイト](https://buzz.yorifuji.dev/)） | macOS                         |
+| ----------------------------------------------- | ----------------------------- |
+| ![](./images/screenshot5.png)                   | ![](./images/screenshot6.png) |
 
 # Supported Platform
 
