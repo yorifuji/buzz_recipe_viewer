@@ -277,48 +277,45 @@ class SettingsPage extends ConsumerWidget {
                   style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                 ),
                 onPressed: (context) {
-                  // confirm delete account
-                  showDialog(
+                  showDialog<void>(
                     context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text(
-                          t.settings.account.delete.title,
-                          style: const TextStyle(
-                            fontFamily: FontFamily.notoSansJP,
-                          ),
+                    builder: (context) => AlertDialog(
+                      title: Text(
+                        t.settings.account.delete.title,
+                        style: const TextStyle(
+                          fontFamily: FontFamily.notoSansJP,
                         ),
-                        content: Text(
-                          t.settings.account.delete.description,
-                          style: const TextStyle(
-                            fontFamily: FontFamily.notoSansJP,
-                          ),
+                      ),
+                      content: Text(
+                        t.settings.account.delete.description,
+                        style: const TextStyle(
+                          fontFamily: FontFamily.notoSansJP,
                         ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(
-                              t.common.cancel,
-                              style: const TextStyle(
-                                fontFamily: FontFamily.notoSansJP,
-                              ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(
+                            t.common.cancel,
+                            style: const TextStyle(
+                              fontFamily: FontFamily.notoSansJP,
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              // delete account
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              t.common.ok,
-                              style: const TextStyle(
-                                fontFamily: FontFamily.notoSansJP,
-                              ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // delete account
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            t.common.ok,
+                            style: const TextStyle(
+                              fontFamily: FontFamily.notoSansJP,
                             ),
                           ),
-                        ],
-                      );
-                    },
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
