@@ -240,6 +240,31 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
+          if (kDebugMode || !ref.watch(flavorProvider).isProd)
+            SettingsSection(
+              title: Text(
+                t.settings.debug.header,
+                style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+              ),
+              tiles: [
+                SettingsTile.navigation(
+                  title: Text(
+                    t.settings.debug.header,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                          return const DebugPage();
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           SettingsSection(
             title: Text(
               t.settings.account.title,
@@ -299,31 +324,6 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || !ref.watch(flavorProvider).isProd)
-            SettingsSection(
-              title: Text(
-                t.settings.debug.header,
-                style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-              ),
-              tiles: [
-                SettingsTile.navigation(
-                  title: Text(
-                    t.settings.debug.header,
-                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                  ),
-                  onPressed: (context) async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) {
-                          return const DebugPage();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
         ],
       ),
     );
