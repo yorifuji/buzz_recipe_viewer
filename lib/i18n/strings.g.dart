@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 213 (106 per locale)
+/// Strings: 215 (107 per locale)
 ///
-/// Built on 2024-09-07 at 15:42 UTC
+/// Built on 2024-09-08 at 03:29 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -276,6 +276,7 @@ class _StringsVideoEn {
 
   // Translations
   String get title => 'Video';
+  String get refresh => 'refresh';
 }
 
 // Path: favorite
@@ -1064,6 +1065,8 @@ class _StringsVideoJa implements _StringsVideoEn {
   // Translations
   @override
   String get title => '動画';
+  @override
+  String get refresh => '更新';
 }
 
 // Path: favorite
@@ -1983,6 +1986,8 @@ extension on Translations {
         return 'Delete';
       case 'video.title':
         return 'Video';
+      case 'video.refresh':
+        return 'refresh';
       case 'favorite.title':
         return 'Favorite';
       case 'favorite.empty':
@@ -2204,6 +2209,8 @@ extension on _StringsJa {
         return '削除';
       case 'video.title':
         return '動画';
+      case 'video.refresh':
+        return '更新';
       case 'favorite.title':
         return 'お気に入り';
       case 'favorite.empty':

@@ -46,6 +46,7 @@ recipe:
     delete: Delete
 video:
   title: Video
+  refresh: refresh
 favorite:
   title: Favorite
   empty: |-
