@@ -1,7 +1,5 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/favorite_provider.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/firestore_error.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,48 +17,6 @@ class FavoriteRepository {
   Future<String> create(Favorite favorite) async {
     final docRef = await _ref.read(favoriteCollectionProvider).add(favorite);
     return docRef.id;
-  }
-
-  // read
-  Future<List<Favorite>> read({required int limit}) async {
-    final snapshot = await _ref.read(favoriteQueryProvider).limit(limit).get();
-    return snapshot.docs.map((e) => e.data()).toList();
-  }
-
-  // read before document
-  Future<Result<List<Favorite>, FirestoreError>> readBefore({
-    required Favorite favorite,
-    required int limit,
-  }) async {
-    final favoriteRef =
-        await _ref.read(favoriteDocumentProvider(favorite.id!)).get();
-    if (!favoriteRef.exists) {
-      return const Result.failure(error: FirestoreError.documentNotFound);
-    }
-    final snapshot = await _ref
-        .read(favoriteQueryProvider)
-        .limit(limit)
-        .endBeforeDocument(favoriteRef)
-        .get();
-    return Result.success(data: snapshot.docs.map((e) => e.data()).toList());
-  }
-
-  // read after document
-  Future<Result<List<Favorite>, FirestoreError>> readAfter({
-    required Favorite favorite,
-    required int limit,
-  }) async {
-    final favoriteRef =
-        await _ref.read(favoriteDocumentProvider(favorite.id!)).get();
-    if (!favoriteRef.exists) {
-      return const Result.failure(error: FirestoreError.documentNotFound);
-    }
-    final snapshot = await _ref
-        .read(favoriteQueryProvider)
-        .limit(limit)
-        .startAfterDocument(favoriteRef)
-        .get();
-    return Result.success(data: snapshot.docs.map((e) => e.data()).toList());
   }
 
   // update

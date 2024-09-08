@@ -1,6 +1,4 @@
 import 'package:buzz_recipe_viewer/model/recipe.dart';
-import 'package:buzz_recipe_viewer/model/result.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/firestore_error.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,46 +17,6 @@ class RecipeRepository {
   Future<String> create(Recipe recipe) async {
     final docRef = await _ref.read(recipeCollectionProvider).add(recipe);
     return docRef.id;
-  }
-
-  // read
-  Future<List<Recipe>> read({required int limit}) async {
-    final snapshot = await _ref.read(recipeQueryProvider).limit(limit).get();
-    return snapshot.docs.map((e) => e.data()).toList();
-  }
-
-  // read before document
-  Future<Result<List<Recipe>, FirestoreError>> readBefore({
-    required Recipe recipe,
-    required int limit,
-  }) async {
-    final recipeRef = await _ref.read(recipeDocumentProvider(recipe.id!)).get();
-    if (!recipeRef.exists) {
-      return const Result.failure(error: FirestoreError.documentNotFound);
-    }
-    final snapshot = await _ref
-        .read(recipeQueryProvider)
-        .limit(limit)
-        .endBeforeDocument(recipeRef)
-        .get();
-    return Result.success(data: snapshot.docs.map((e) => e.data()).toList());
-  }
-
-  // read after document
-  Future<Result<List<Recipe>, FirestoreError>> readAfter({
-    required Recipe recipe,
-    required int limit,
-  }) async {
-    final recipeRef = await _ref.read(recipeDocumentProvider(recipe.id!)).get();
-    if (!recipeRef.exists) {
-      return const Result.failure(error: FirestoreError.documentNotFound);
-    }
-    final snapshot = await _ref
-        .read(recipeQueryProvider)
-        .limit(limit)
-        .startAfterDocument(recipeRef)
-        .get();
-    return Result.success(data: snapshot.docs.map((e) => e.data()).toList());
   }
 
   // update
