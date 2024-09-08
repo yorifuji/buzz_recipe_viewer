@@ -33,16 +33,19 @@ class RecipeRepository {
 
   // delete all
   Future<void> deleteAll() async {
+    final batch = FirebaseFirestore.instance.batch();
     final snapshot = await _ref.read(recipeQueryProvider).get();
-    final futures = snapshot.docs.map((doc) => doc.reference.delete());
-    await Future.wait(futures);
+    snapshot.docs.map((doc) => doc.reference).forEach(batch.delete);
+    await batch.commit();
   }
 }
 
 extension RecipeRepositoryDebug on RecipeRepository {
   Future<void> createDummyData() async {
     final start = DateTime.now();
-    final futures = List.generate(30, (index) => index).map((index) {
+    final batch = FirebaseFirestore.instance.batch();
+    final collection = _ref.read(recipeCollectionProvider);
+    List.generate(30, (index) => index).map((index) {
       final now = start.add(Duration(seconds: index));
       final recipe = Recipe(
         title: '$index',
@@ -56,9 +59,10 @@ extension RecipeRepositoryDebug on RecipeRepository {
         createdAt: now,
         updatedAt: now,
       );
-      return create(recipe);
+      final docRef = collection.doc();
+      batch.set(docRef, recipe);
     }).toList();
-    await Future.wait(futures);
+    await batch.commit();
   }
 
   Future<void> addSampleData() async {

@@ -31,10 +31,11 @@ class FavoriteRepository {
     await _ref.read(favoriteDocumentProvider(favorite.id!)).delete();
   }
 
-  // delete all favorites
+  // delete all
   Future<void> deleteAll() async {
+    final batch = FirebaseFirestore.instance.batch();
     final snapshot = await _ref.read(favoriteQueryProvider).get();
-    final futures = snapshot.docs.map((doc) => doc.reference.delete());
-    await Future.wait(futures);
+    snapshot.docs.map((doc) => doc.reference).forEach(batch.delete);
+    await batch.commit();
   }
 }
