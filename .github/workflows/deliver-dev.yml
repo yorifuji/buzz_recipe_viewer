@@ -41,6 +41,15 @@ jobs:
 
       - run: flutter pub get
 
+      - name: flutterfire configure
+        env:
+          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64_STG }}
+        run: |
+          which firebase || curl -sL https://firebase.tools | bash
+          dart pub global activate flutterfire_cli 1.0.1-dev.4
+          echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make firebase-configure-dev
+
       - run: flutter build web --release --dart-define=FLAVOR=dev --web-renderer canvaskit
 
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
