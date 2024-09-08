@@ -89,7 +89,7 @@ class _VideoListWidget extends HookConsumerWidget {
                           )
                         : SizedBox(
                             height: 48,
-                            child: ElevatedButton(
+                            child: TextButton(
                               onPressed: viewModel.searchMore,
                               child: Text(t.common.more),
                             ),
@@ -215,7 +215,7 @@ class _SearchBox extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final query =
         ref.watch(searchViewModelProvider.select((value) => value.query));
-    final queryEditController = useTextEditingController();
+    final queryEditController = useTextEditingController(text: query);
     final viewModel = ref.watch(searchViewModelProvider.notifier);
     return SizedBox(
       height: 44,
