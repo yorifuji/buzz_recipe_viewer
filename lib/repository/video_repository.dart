@@ -19,18 +19,22 @@ class VideoRepository {
     String indexName,
     int page,
   ) async {
-    final result = await ref.read(
-      searchResultProvider(
-        indexName: indexName,
-        searchRequest: SearchRequest(query: query, page: page),
-      ).future,
-    );
+    try {
+      final result = await ref.read(
+        searchResultProvider(
+          indexName: indexName,
+          searchRequest: SearchRequest(query: query, page: page),
+        ).future,
+      );
 
-    return Result.success(
-      data: VideoListResult(
-        searchHits: result.hitsPage.items,
-        nextPage: result.hitsPage.nextPageKey ?? 0,
-      ),
-    );
+      return Result.success(
+        data: VideoListResult(
+          searchHits: result.hitsPage.items,
+          nextPage: result.hitsPage.nextPageKey ?? 0,
+        ),
+      );
+    } catch (e) {
+      return Result.failure(error: e as Exception);
+    }
   }
 }
