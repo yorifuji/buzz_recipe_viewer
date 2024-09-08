@@ -92,7 +92,7 @@ class SettingsPage extends ConsumerWidget {
                       .performReassemble();
                 },
               ),
-              if (Platform.isIOS || Platform.isAndroid)
+              if (!kIsWeb && (Platform.isIOS || Platform.isAndroid))
                 SettingsTile.navigation(
                   title: Text(
                     t.settings.general.notifications.title,
