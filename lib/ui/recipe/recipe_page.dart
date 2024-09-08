@@ -60,31 +60,11 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
       final hasReachedEnd = data.length <= windowSize;
       final value = data.take(windowSize).toList();
       if (value.isEmpty) {
-        return const _RecipesNotFoundWidget();
+        return const _EmptyWidget();
       } else {
         return _RecipeListWidget(recipes: value, hasReachedEnd: hasReachedEnd);
       }
     }
-
-    Widget errroWidget(
-      Object? error,
-      StackTrace stackTrace,
-      VoidCallback onPressed,
-    ) =>
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Assets.images.error.image(width: 256, height: 256),
-            TextButton(
-              onPressed: onPressed,
-              child: Text(t.common.fetchFailed),
-            ),
-          ],
-        );
-
-    Widget loadingWidget() => const Center(
-          child: CircularProgressIndicator(strokeWidth: 2),
-        );
 
     return RefreshIndicator(
       displacement: 0,
@@ -94,14 +74,13 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
         loading: () {
           if (streamCache.value != null) {
             return listViewWidget(streamCache.value!);
-          } else {}
-          return loadingWidget();
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(strokeWidth: 2),
+            );
+          }
         },
-        error: (error, stack) => errroWidget(
-          error,
-          stack,
-          () => ref.invalidate(recipeStreamProvider(windowSize)),
-        ),
+        error: (_, __) => const _Errorwidget(),
       ),
       onRefresh: () async {
         ref.read(recipeWindowNotifierProvider.notifier).resetWindow();
@@ -129,7 +108,7 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
 //       final hasReachedEnd = data.length <= windowSize;
 //       final value = data.take(windowSize).toList();
 //       if (value.isEmpty) {
-//         return const _RecipesNotFoundWidget();
+//         return const _EmptyWidget();
 //       } else {
 //         return ListView.builder(
 //           itemCount: hasReachedEnd ? value.length : value.length + 1,
@@ -265,8 +244,8 @@ class _RecipeCardWidget extends ConsumerWidget {
   }
 }
 
-class _RecipesNotFoundWidget extends StatelessWidget {
-  const _RecipesNotFoundWidget();
+class _EmptyWidget extends StatelessWidget {
+  const _EmptyWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -284,6 +263,25 @@ class _RecipesNotFoundWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _Errorwidget extends ConsumerWidget {
+  const _Errorwidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final windowSize = ref.watch(recipeWindowNotifierProvider);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Assets.images.error.image(width: 256, height: 256),
+        TextButton(
+          onPressed: () => ref.invalidate(recipeStreamProvider(windowSize)),
+          child: Text(t.common.fetchFailed),
+        ),
+      ],
     );
   }
 }
