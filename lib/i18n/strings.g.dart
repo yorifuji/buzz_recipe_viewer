@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 213 (106 per locale)
 ///
-/// Built on 2024-09-07 at 10:48 UTC
+/// Built on 2024-09-07 at 15:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -988,7 +988,7 @@ class _StringsTabJa implements _StringsTabEn {
   @override
   String get recipe => 'レシピ';
   @override
-  String get video => 'ビデオ';
+  String get video => '動画';
   @override
   String get favorite => 'お気に入り';
   @override
@@ -1063,7 +1063,7 @@ class _StringsVideoJa implements _StringsVideoEn {
 
   // Translations
   @override
-  String get title => 'ビデオ';
+  String get title => '動画';
 }
 
 // Path: favorite
@@ -1253,7 +1253,7 @@ class _StringsSettingsVideoJa implements _StringsSettingsVideoEn {
 
   // Translations
   @override
-  String get header => 'ビデオ';
+  String get header => '動画';
   @override
   late final _StringsSettingsVideoRowJa row =
       _StringsSettingsVideoRowJa._(_root);
@@ -2141,7 +2141,7 @@ extension on _StringsJa {
       case 'tab.recipe':
         return 'レシピ';
       case 'tab.video':
-        return 'ビデオ';
+        return '動画';
       case 'tab.favorite':
         return 'お気に入り';
       case 'tab.settings':
@@ -2203,7 +2203,7 @@ extension on _StringsJa {
       case 'recipe.viewRecipe.delete':
         return '削除';
       case 'video.title':
-        return 'ビデオ';
+        return '動画';
       case 'favorite.title':
         return 'お気に入り';
       case 'favorite.empty':
@@ -2251,7 +2251,7 @@ extension on _StringsJa {
       case 'settings.general.notifications.page.topic.items.1':
         return '新しいビデオの追加';
       case 'settings.video.header':
-        return 'ビデオ';
+        return '動画';
       case 'settings.video.row.playWithinApp.title':
         return 'アプリ内で再生する';
       case 'settings.video.row.playWithinApp.description':

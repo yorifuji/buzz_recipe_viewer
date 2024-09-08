@@ -2,7 +2,7 @@ app:
   title: シンプルレシピ検索
 tab:
   recipe: レシピ
-  video: ビデオ
+  video: 動画
   favorite: お気に入り
   settings: 設定
 walkthrough:
@@ -45,7 +45,7 @@ recipe:
     edit: 編集
     delete: 削除
 video:
-  title: ビデオ
+  title: 動画
 favorite:
   title: お気に入り
   empty: 動画をお気に入りに追加しよう！
@@ -88,7 +88,7 @@ settings:
             - 一般
             - 新しいビデオの追加
   video:
-    header: ビデオ
+    header: 動画
     row:
       playWithinApp:
         title: アプリ内で再生する

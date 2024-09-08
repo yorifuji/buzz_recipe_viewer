@@ -1,13 +1,12 @@
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/service/video_service.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'search_view_model.freezed.dart';
-part 'search_view_model.g.dart';
+part 'video_view_model.freezed.dart';
+part 'video_view_model.g.dart';
 
 @freezed
 class SearchState with _$SearchState {

@@ -1,42 +1,36 @@
-import 'package:algolia/algolia.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
-import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/model/search_request.dart';
 import 'package:buzz_recipe_viewer/model/video_list_result.dart';
-import 'package:buzz_recipe_viewer/provider/algolia_provider.dart';
+import 'package:buzz_recipe_viewer/provider/search_result_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'video_repository.g.dart';
 
 @riverpod
-VideoRepository videoRepository(VideoRepositoryRef ref) =>
-    VideoRepository(ref.watch(algoliaProvider));
+VideoRepository videoRepository(VideoRepositoryRef ref) => VideoRepository(ref);
 
 class VideoRepository {
-  VideoRepository(this._algoliaClient);
-  final Algolia _algoliaClient;
+  VideoRepository(this.ref);
+  final Ref ref;
 
   Future<Result<VideoListResult, Exception>> getVideoList(
     String query,
     String indexName,
     int page,
   ) async {
-    try {
-      final algoliaQuery = _algoliaClient
-          .index(indexName)
-          .setHitsPerPage(30)
-          .setPage(page)
-          .query(query);
-      final snapshot = await algoliaQuery.getObjects();
-      final searchHits =
-          snapshot.hits.map((e) => SearchHit.fromJson(e.toMap())).toList();
-      final nextPage =
-          snapshot.page + 1 < snapshot.nbPages ? snapshot.page + 1 : 0;
-      return Result.success(
-        data: VideoListResult(searchHits: searchHits, nextPage: nextPage),
-      );
-      // ignore: avoid_catches_without_on_clauses
-    } catch (_) {
-      return Result.failure(error: Exception('Failed to fetch video list'));
-    }
+    final result = await ref.read(
+      searchResultProvider(
+        indexName: indexName,
+        searchRequest: SearchRequest(query: query, page: page),
+      ).future,
+    );
+
+    return Result.success(
+      data: VideoListResult(
+        searchHits: result.hitsPage.items,
+        nextPage: result.hitsPage.nextPageKey ?? 0,
+      ),
+    );
   }
 }

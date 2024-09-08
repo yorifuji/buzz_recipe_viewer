@@ -1,8 +1,8 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
-import 'package:buzz_recipe_viewer/ui/video/search_page.dart';
-import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/video/video_page.dart';
+import 'package:buzz_recipe_viewer/ui/video/video_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,23 +18,23 @@ void main() {
           boolPreferenceProvider(Preference.useInternalPlayer)
               .overrideWith(FakeTruePreference.new),
         ],
-        child: const SearchPage(),
+        child: const VideoPage(),
       ),
     );
 
-  group('search', () {
+  group('video', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
       LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
-      await screenMatchesGolden(tester, '${locale.languageCode}/search/page');
+      await screenMatchesGolden(tester, '${locale.languageCode}/video/page');
     });
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
       LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
-      await screenMatchesGolden(tester, '${locale.languageCode}/search/page');
+      await screenMatchesGolden(tester, '${locale.languageCode}/video/page');
     });
   });
 }

@@ -11,7 +11,7 @@ import 'package:buzz_recipe_viewer/store/video/search_state_store.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
-import 'package:buzz_recipe_viewer/ui/video/search_view_model.dart';
+import 'package:buzz_recipe_viewer/ui/video/video_view_model.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +19,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SearchPage extends HookConsumerWidget {
-  const SearchPage({super.key});
+class VideoPage extends HookConsumerWidget {
+  const VideoPage({super.key});
 
-  static Widget show() => const SearchPage();
+  static Widget show() => const VideoPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
