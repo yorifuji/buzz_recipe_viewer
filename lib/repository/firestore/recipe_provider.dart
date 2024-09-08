@@ -13,19 +13,13 @@ extension RecipeConverter on Recipe {
   ) =>
       Recipe.fromJson(snapshot.data()!..['id'] = snapshot.id);
 
-  static Map<String, Object?> toCreate(
-    Recipe recipe,
-    SetOptions? options,
-  ) =>
+  static Map<String, Object?> toCreate(Recipe recipe, SetOptions? options) =>
       recipe.toJson()
         ..remove('id')
         ..['createdAt'] = FieldValue.serverTimestamp()
         ..['updatedAt'] = FieldValue.serverTimestamp();
 
-  static Map<String, Object?> toUpdate(
-    Recipe recipe,
-    SetOptions? options,
-  ) =>
+  static Map<String, Object?> toUpdate(Recipe recipe, SetOptions? options) =>
       recipe.toJson()
         ..remove('id')
         ..remove('createdAt')
