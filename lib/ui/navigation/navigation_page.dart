@@ -14,11 +14,9 @@ enum AppTab {
   setting(Icon(Icons.settings));
 
   const AppTab(this.icon);
-  final Icon icon;
+  factory AppTab.fromIndex(int index) => AppTab.values[index];
 
-  static AppTab fromIndex(int index) {
-    return AppTab.values[index];
-  }
+  final Icon icon;
 
   Widget Function() get show => switch (this) {
         AppTab.recipe => RecipePage.show,
