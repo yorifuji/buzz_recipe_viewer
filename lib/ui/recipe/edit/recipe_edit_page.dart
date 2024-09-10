@@ -42,15 +42,17 @@ class RecipeEditPage extends ConsumerWidget {
                       ? () async {
                           if (recipe == null) {
                             await viewModel.onSave();
-                            // ignore: use_build_context_synchronously
-                            Navigator.pop(context);
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                            }
                           } else {
                             await viewModel.onUpdate();
-                            Navigator.popUntil(
-                              // ignore: use_build_context_synchronously
-                              context,
-                              (route) => route.isFirst,
-                            );
+                            if (context.mounted) {
+                              Navigator.popUntil(
+                                context,
+                                (route) => route.isFirst,
+                              );
+                            }
                           }
                         }
                       : null,

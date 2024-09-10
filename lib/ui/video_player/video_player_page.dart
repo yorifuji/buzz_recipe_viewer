@@ -63,16 +63,17 @@ class VideoPlayerPage extends HookConsumerWidget {
             await ref
                 .read(favoriteRepositoryProvider)
                 .create(Favorite.from(searchHit));
-            // ignore: use_build_context_synchronously
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  t.common.addFavorite,
-                  style: const TextStyle(fontSize: 12),
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    t.common.addFavorite,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  duration: const Duration(seconds: 1),
                 ),
-                duration: const Duration(seconds: 1),
-              ),
-            );
+              );
+            }
           },
         ),
       ),

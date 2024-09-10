@@ -101,17 +101,18 @@ class _VideoListWidget extends HookConsumerWidget {
                           searchHit: hitList[index],
                           onTap: () async {
                             if (useInternalPlayer) {
-                              await Navigator.push(
-                                // ignore: use_build_context_synchronously
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return VideoPlayerPage(
-                                      searchHit: hitList[index],
-                                    );
-                                  },
-                                ),
-                              );
+                              if (context.mounted) {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) {
+                                      return VideoPlayerPage(
+                                        searchHit: hitList[index],
+                                      );
+                                    },
+                                  ),
+                                );
+                              }
                             } else {
                               final url = Uri.parse(hitList[index].url);
                               await launchUrl(
@@ -124,16 +125,17 @@ class _VideoListWidget extends HookConsumerWidget {
                             await ref
                                 .read(favoriteRepositoryProvider)
                                 .create(Favorite.from(hitList[index]));
-                            // ignore: use_build_context_synchronously
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  t.common.addFavorite,
-                                  style: const TextStyle(fontSize: 12),
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    t.common.addFavorite,
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  duration: const Duration(seconds: 1),
                                 ),
-                                duration: const Duration(seconds: 1),
-                              ),
-                            );
+                              );
+                            }
                           },
                         ),
                         VideoInformationContainer(searchHit: hitList[index]),
