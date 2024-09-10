@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'flavor_provider.g.dart';
+part 'flavor.g.dart';
 
 enum Flavor {
   dev,

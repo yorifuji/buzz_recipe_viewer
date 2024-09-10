@@ -8,7 +8,7 @@ part of 'user_stream.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userStreamHash() => r'f525804bb59a7147eab46d78a5fb3b744e554d98';
+String _$userStreamHash() => r'436fbe2ed865869567f0a4687bc5b4155ded82c1';
 
 /// See also [userStream].
 @ProviderFor(userStream)
