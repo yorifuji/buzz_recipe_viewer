@@ -8,10 +8,8 @@ enum Flavor {
   prod,
   ;
 
-  static Flavor fromString(String value) => values.firstWhere(
-        (e) => e.name == value,
-        orElse: () => throw ArgumentError('Invalid flavor: $value'),
-      );
+  factory Flavor.fromString(String value) =>
+      values.firstWhere((e) => e.name == value);
 
   bool get isDev => this == Flavor.dev;
   bool get isStg => this == Flavor.stg;
