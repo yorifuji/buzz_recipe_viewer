@@ -46,3 +46,15 @@ flutterfire-prod:
 		--android-package-name=dev.yorifuji.buzz_recipe_viewer \
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer \
 		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer
+
+.PHONY: firebase-deploy-dev
+firebase-deploy-dev:
+	firebase deploy --config firebase/firebase.json --project buzzrecipeviewer-dev --only firestore:rules
+
+.PHONY: firebase-deploy-stg
+firebase-deploy-stg:
+	firebase deploy --config firebase/firebase.json --project buzzrecipeviewer-stg --only firestore:rules
+
+.PHONY: firebase-deploy-prod
+firebase-deploy-prod:
+	firebase deploy --config firebase/firebase.json --project buzzrecipeviewer --only firestore:rules

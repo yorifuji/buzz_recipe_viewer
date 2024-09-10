@@ -1,0 +1,127 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{user}/recipes/{recipe} {
+      allow get: if isAuthenticated() &&
+        isUserAuthenticated(user);
+
+      allow list: if isAuthenticated() &&
+        isUserAuthenticated(user);
+
+      allow create: if isAuthenticated() &&
+        isUserAuthenticated(user) &&
+        validateField(futureData());
+
+      allow update: if isAuthenticated() &&
+        isUserAuthenticated(user) &&
+        validateField(futureData()) &&
+        isNotChanged(['createdAt']);
+
+      allow delete: if isAuthenticated() &&
+        isUserAuthenticated(user);
+
+      function validateField(data) {
+        let fields = [
+          'title',
+          'description',
+          'foodList',
+          'stepList',
+          'createdAt',
+          'updatedAt',
+        ];
+        return matchAllFields(data, fields);
+      }
+    }
+
+    match /users/{user}/favorites/{favorite} {
+      allow get: if isAuthenticated() &&
+        isUserAuthenticated(user);
+
+      allow list: if isAuthenticated() &&
+        isUserAuthenticated(user);
+
+      allow create: if isAuthenticated() &&
+        isUserAuthenticated(user) &&
+        validateField(futureData());
+
+      allow update: if isAuthenticated() &&
+        isUserAuthenticated(user) &&
+        validateField(futureData()) &&
+        isNotChanged(['createdAt']);
+
+      allow delete: if isAuthenticated() &&
+        isUserAuthenticated(user);
+
+      function validateField(data) {
+        let fields = [
+          'searchHit',
+          'createdAt',
+          'updatedAt',
+        ];
+        return matchAllFields(data, fields);
+      }
+    }
+  }
+}
+
+function documentPath(paths) {
+  return path([
+    ['databases', database, 'documents'].join('/'),
+    paths.join('/')
+  ].join('/'));
+}
+
+function isAuthenticated() {
+  return request.auth != null;
+}
+
+function isUserAuthenticated(userID) {
+  return request.auth.uid == userID;
+}
+
+function futureData() {
+  return request.resource.data;
+}
+
+function existingData() {
+  return resource.data;
+}
+
+function getData(path) {
+  return get(path).data;
+}
+
+function getAfterData(path) {
+  return getAfter(path).data;
+}
+
+function isRequestedTime(time) {
+  return time == request.time;
+}
+
+function validateString(text, min, max) {
+  return text is string
+    && min <= text.size()
+    && text.size() <= max;
+}
+
+function validateNumber(num, min, max) {
+  return num is number
+    && min <= num
+    && num <= max;
+}
+
+function dataDiff() {
+  return futureData().diff(existingData());
+}
+
+function isNotChanged(keys) {
+  let affectedKeys = dataDiff().affectedKeys();
+  return !affectedKeys.hasAny(keys.toSet());
+}
+
+function matchAllFields(data, fields) {
+  return data.keys().toSet().difference(fields.toSet()).size() == 0;
+}
+

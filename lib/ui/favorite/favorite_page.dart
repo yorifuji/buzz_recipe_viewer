@@ -59,26 +59,6 @@ class _FavoriteDataWidget extends HookConsumerWidget {
       }
     }
 
-    Widget errroWidget(
-      Object? error,
-      StackTrace stackTrace,
-      VoidCallback onPressed,
-    ) =>
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Assets.images.error.image(width: 256, height: 256),
-            TextButton(
-              onPressed: onPressed,
-              child: Text(t.common.fetchFailed),
-            ),
-          ],
-        );
-
-    Widget loadingWidget() => const Center(
-          child: CircularProgressIndicator(strokeWidth: 2),
-        );
-
     return RefreshIndicator(
       displacement: 0,
       strokeWidth: 2,
@@ -88,13 +68,11 @@ class _FavoriteDataWidget extends HookConsumerWidget {
           if (cache.value != null) {
             return listViewWidget(cache.value!);
           } else {}
-          return loadingWidget();
+          return const Center(
+            child: CircularProgressIndicator(strokeWidth: 2),
+          );
         },
-        error: (error, stack) => errroWidget(
-          error,
-          stack,
-          () => ref.invalidate(favoriteStreamProvider(windowSize)),
-        ),
+        error: (_, __) => const _ErrorWidget(),
       ),
       onRefresh: () async {
         ref.read(favoriteWindowNotifierProvider.notifier).resetWindow();
@@ -215,6 +193,27 @@ class _NoFavoritesWidget extends StatelessWidget {
             t.favorite.empty,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ErrorWidget extends ConsumerWidget {
+  const _ErrorWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final windowSize = ref.watch(favoriteWindowNotifierProvider);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Assets.images.error.image(width: 256, height: 256),
+          TextButton(
+            onPressed: () => ref.invalidate(favoriteStreamProvider(windowSize)),
+            child: Text(t.common.fetchFailed),
           ),
         ],
       ),
