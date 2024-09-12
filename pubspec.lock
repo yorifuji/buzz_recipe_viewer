@@ -250,26 +250,26 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_firestore
-      sha256: "0af4f1e0b7f82a2082ad2c886b042595d85c7641616688609dd999d33aeef850"
+      sha256: faa61fd92d775d2277a112ba1a515bc24b5e4b82399562b781e20271fd288559
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.0"
+    version: "5.4.1"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
-      sha256: "6e82bcaf2b8e33f312dfc7c5e5855376fee538467dd6e58dc41bd13996ff5d64"
+      sha256: "13f516263a1b2b51491f4089173d3d78b577db5bb3c235832704218720ea6328"
       url: "https://pub.dev"
     source: hosted
-    version: "6.4.0"
+    version: "6.4.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
-      sha256: "38aec6ed732980dea6eec192a25fb55665137edc5c356603d8dc26ff5971f4d8"
+      sha256: "34665625a9bf2be3ca8a198a7a184030ca623163a7383171d941604223a9bf17"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.0"
+    version: "4.3.0"
   code_builder:
     dependency: transitive
     description:
@@ -330,18 +330,18 @@ packages:
     dependency: "direct dev"
     description:
       name: custom_lint
-      sha256: "4939d89e580c36215e48a7de8fd92f22c79dcc3eb11fda84f3402b3b45aec663"
+      sha256: "6e1ec47427ca968f22bce734d00028ae7084361999b41673291138945c5baca0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   custom_lint_builder:
     dependency: transitive
     description:
       name: custom_lint_builder
-      sha256: d9e5bb63ed52c1d006f5a1828992ba6de124c27a531e8fba0a31afffa81621b3
+      sha256: ba2f90fff4eff71d202d097eb14b14f87087eaaef742e956208c0eb9d3a40a21
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   custom_lint_core:
     dependency: transitive
     description:
@@ -362,10 +362,10 @@ packages:
     dependency: transitive
     description:
       name: dart_style
-      sha256: "99e066ce75c89d6b29903d788a7bb9369cf754f7b24bf70bf4b6d6d6b26853b9"
+      sha256: "7856d364b589d1f08986e140938578ed36ed948581fbc3bc9aef1805039ac5ab"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.6"
+    version: "2.3.7"
   dartx:
     dependency: transitive
     description:
@@ -450,10 +450,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
-      sha256: "6f5792bdc208416bfdfbfe3363b78ce01667b6ebc4c5cb47cfa891f2fca45ab7"
+      sha256: f03a6cdbee1006f65cc6e64dc8f93a0179b10a4b54e6287430057dd9b8556ee4
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.0"
+    version: "5.2.1"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
@@ -498,10 +498,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_messaging
-      sha256: "29941ba5a3204d80656c0e52103369aa9a53edfd9ceae05a2bb3376f24fda453"
+      sha256: cc02c4afd6510cd84586020670140c4a23fbe52af16cd260ccf8ede101bb8d1b
       url: "https://pub.dev"
     source: hosted
-    version: "15.1.0"
+    version: "15.1.1"
   firebase_messaging_platform_interface:
     dependency: transitive
     description:
