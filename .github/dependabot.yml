@@ -1,5 +1,4 @@
 version: 2
-enable-beta-ecosystems: true
 updates:
   - package-ecosystem: 'pub'
     directory: '/'
@@ -7,8 +6,7 @@ updates:
       interval: 'daily'
       time: '00:00'
       timezone: 'Asia/Tokyo'
-    # open-pull-requests-limit: 10
-    versioning-strategy: increase
+    open-pull-requests-limit: 10
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
@@ -16,7 +14,3 @@ updates:
       time: '00:00'
       timezone: 'Asia/Tokyo'
     open-pull-requests-limit: 10
-    groups:
-      dependencies:
-        patterns:
-          - '*'
