@@ -15,6 +15,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
     ref.listen<bool>(
       appLifecycleStateProvider.select((state) => state.isResumed),
       (_, resumed) {
@@ -23,8 +24,6 @@ class App extends ConsumerWidget {
         }
       },
     );
-
-    final router = ref.watch(routerProvider);
 
     return TranslationProvider(
       child: MaterialApp.router(

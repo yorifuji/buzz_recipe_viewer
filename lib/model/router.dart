@@ -3,6 +3,7 @@ import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_page.dart';
 import 'package:buzz_recipe_viewer/ui/provisioning/provisioning_page.dart';
 import 'package:buzz_recipe_viewer/ui/walkthrough/walkthrough_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,6 +34,9 @@ GoRouter router(RouterRef ref) {
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
     initialLocation: Route.walkthrough.path,
+    observers: [
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
     routes: [
       GoRoute(
         path: Route.walkthrough.path,
