@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_widget.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_page.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +71,14 @@ class RecipeViewPage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 32),
+              if (recipe.imageList.isNotEmpty)
+                AspectRatio(
+                  aspectRatio: 2,
+                  child: PhotoSlideWidget(
+                    urls: recipe.imageList.map((e) => e.url).toList(),
+                  ),
+                ),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

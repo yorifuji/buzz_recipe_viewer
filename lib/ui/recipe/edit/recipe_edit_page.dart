@@ -1,11 +1,18 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
+import 'package:buzz_recipe_viewer/ui/common/image_picker_bottom_sheet.dart';
+import 'package:buzz_recipe_viewer/ui/common/loading_barrier_dialog.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_controller.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_widget.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_notifier.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
-class RecipeEditPage extends ConsumerWidget {
+class RecipeEditPage extends HookConsumerWidget {
   const RecipeEditPage(this.recipe, {super.key});
 
   final Recipe? recipe;
@@ -18,6 +25,18 @@ class RecipeEditPage extends ConsumerWidget {
     final isValid = ref.watch(
       recipeEditNotifierProvider(recipe).select((value) => value.isValid),
     );
+
+    final photoSlideController = usePhotoSlideController(
+      initialUrls: recipe?.imageList.map((e) => e.url).toList() ?? [],
+    );
+
+    ref.listen(
+        recipeEditNotifierProvider(recipe)
+            .select((value) => value.loadingState), (_, loadingState) {
+      toggleLoadingBarrierDialog(context,
+          isShow: loadingState == LoadingState.loading);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(t.recipe.newRecipe.title),
@@ -34,6 +53,27 @@ class RecipeEditPage extends ConsumerWidget {
               const SizedBox(height: 16),
               _StepListContainer(recipe),
               const SizedBox(height: 16),
+              AspectRatio(
+                aspectRatio: 2,
+                child: PhotoSlideWidget(
+                  controller: photoSlideController,
+                  onTapPickImage: () async {
+                    final pickerMode =
+                        await showImagePickerBottomSheet(context);
+                    try {
+                      final pickupImage = await ImagePicker().pickImage(
+                        source: pickerMode == ImagePickerMenu.camera
+                            ? ImageSource.camera
+                            : ImageSource.gallery,
+                      );
+                      return pickupImage;
+                    } on PlatformException catch (_) {
+                      return null;
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
               Center(child: Text(t.recipe.newRecipe.input.caution)),
               const SizedBox(height: 16),
               Center(
@@ -41,12 +81,13 @@ class RecipeEditPage extends ConsumerWidget {
                   onPressed: isValid
                       ? () async {
                           if (recipe == null) {
-                            await viewModel.onSave();
+                            await viewModel.onSave(photoSlideController.value);
                             if (context.mounted) {
                               Navigator.pop(context);
                             }
                           } else {
-                            await viewModel.onUpdate();
+                            await viewModel
+                                .onUpdate(photoSlideController.value);
                             if (context.mounted) {
                               Navigator.popUntil(
                                 context,

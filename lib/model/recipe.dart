@@ -1,3 +1,4 @@
+import 'package:buzz_recipe_viewer/model/storage_image.dart';
 import 'package:buzz_recipe_viewer/model/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,6 +14,7 @@ class Recipe with _$Recipe {
     required List<String> stepList,
     @CreatedAtField() required DateTime createdAt,
     @UpdatedAtField() required DateTime updatedAt,
+    @StorageImageListField() required List<StorageImage> imageList,
     String? id,
   }) = _Recipe;
 

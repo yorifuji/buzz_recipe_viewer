@@ -28,6 +28,8 @@ mixin _$Recipe {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @UpdatedAtField()
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  @StorageImageListField()
+  List<StorageImage> get imageList => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
   /// Serializes this Recipe to a JSON map.
@@ -51,6 +53,7 @@ abstract class $RecipeCopyWith<$Res> {
       List<String> stepList,
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
+      @StorageImageListField() List<StorageImage> imageList,
       String? id});
 }
 
@@ -75,6 +78,7 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
     Object? stepList = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? imageList = null,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
@@ -102,6 +106,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      imageList: null == imageList
+          ? _value.imageList
+          : imageList // ignore: cast_nullable_to_non_nullable
+              as List<StorageImage>,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -124,6 +132,7 @@ abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       List<String> stepList,
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
+      @StorageImageListField() List<StorageImage> imageList,
       String? id});
 }
 
@@ -146,6 +155,7 @@ class __$$RecipeImplCopyWithImpl<$Res>
     Object? stepList = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? imageList = null,
     Object? id = freezed,
   }) {
     return _then(_$RecipeImpl(
@@ -173,6 +183,10 @@ class __$$RecipeImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      imageList: null == imageList
+          ? _value._imageList
+          : imageList // ignore: cast_nullable_to_non_nullable
+              as List<StorageImage>,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -191,9 +205,11 @@ class _$RecipeImpl implements _Recipe {
       required final List<String> stepList,
       @CreatedAtField() required this.createdAt,
       @UpdatedAtField() required this.updatedAt,
+      @StorageImageListField() required final List<StorageImage> imageList,
       this.id})
       : _foodList = foodList,
-        _stepList = stepList;
+        _stepList = stepList,
+        _imageList = imageList;
 
   factory _$RecipeImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecipeImplFromJson(json);
@@ -224,12 +240,21 @@ class _$RecipeImpl implements _Recipe {
   @override
   @UpdatedAtField()
   final DateTime updatedAt;
+  final List<StorageImage> _imageList;
+  @override
+  @StorageImageListField()
+  List<StorageImage> get imageList {
+    if (_imageList is EqualUnmodifiableListView) return _imageList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageList);
+  }
+
   @override
   final String? id;
 
   @override
   String toString() {
-    return 'Recipe(title: $title, description: $description, foodList: $foodList, stepList: $stepList, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+    return 'Recipe(title: $title, description: $description, foodList: $foodList, stepList: $stepList, createdAt: $createdAt, updatedAt: $updatedAt, imageList: $imageList, id: $id)';
   }
 
   @override
@@ -246,6 +271,8 @@ class _$RecipeImpl implements _Recipe {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality()
+                .equals(other._imageList, _imageList) &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -259,6 +286,7 @@ class _$RecipeImpl implements _Recipe {
       const DeepCollectionEquality().hash(_stepList),
       createdAt,
       updatedAt,
+      const DeepCollectionEquality().hash(_imageList),
       id);
 
   /// Create a copy of Recipe
@@ -285,6 +313,7 @@ abstract class _Recipe implements Recipe {
       required final List<String> stepList,
       @CreatedAtField() required final DateTime createdAt,
       @UpdatedAtField() required final DateTime updatedAt,
+      @StorageImageListField() required final List<StorageImage> imageList,
       final String? id}) = _$RecipeImpl;
 
   factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
@@ -303,6 +332,9 @@ abstract class _Recipe implements Recipe {
   @override
   @UpdatedAtField()
   DateTime get updatedAt;
+  @override
+  @StorageImageListField()
+  List<StorageImage> get imageList;
   @override
   String? get id;
 

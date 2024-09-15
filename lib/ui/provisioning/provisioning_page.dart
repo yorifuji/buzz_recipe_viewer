@@ -1,5 +1,6 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/auth_exception.dart';
+import 'package:buzz_recipe_viewer/model/auth_exception_reason.dart';
 import 'package:buzz_recipe_viewer/model/auth_result.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/provider/anonymous_signin_provider.dart';

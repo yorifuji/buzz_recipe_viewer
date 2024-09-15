@@ -27,6 +27,7 @@ service cloud.firestore {
           'description',
           'foodList',
           'stepList',
+          'imageList',
           'createdAt',
           'updatedAt',
         ];

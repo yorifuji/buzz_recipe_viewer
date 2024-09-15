@@ -1,1 +1,4 @@
 CFBundleDisplayName="JapanDish";
+NSCameraUsageDescription="Take photos of dishes";
+NSPhotoLibraryUsageDescription="Select photos of dishes";
+NSMicrophoneUsageDescription="Perform voice search";

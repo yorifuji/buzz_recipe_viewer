@@ -1,1 +1,4 @@
 CFBundleDisplayName="レシピ検索";
+NSCameraUsageDescription="料理の写真を撮影します";
+NSPhotoLibraryUsageDescription="料理の写真を選択します";
+NSMicrophoneUsageDescription="音声検索を行います";

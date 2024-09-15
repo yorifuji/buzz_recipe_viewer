@@ -56,6 +56,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
         stepList: [
           '$index',
         ],
+        imageList: [],
         createdAt: now,
         updatedAt: now,
       );
@@ -92,6 +93,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
         'ゼラチンが固まるまで冷蔵庫で冷やします。',
         '銀色の食用スプレーを軽く吹きかけて、星空のような輝きを出します。',
       ],
+      imageList: [],
       createdAt: now1,
       updatedAt: now1,
     );
@@ -115,6 +117,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
         'カクテルグラスに注ぎ、サイダーで満たします。',
         '最後にレモンスライスを添えて完成です。',
       ],
+      imageList: [],
       createdAt: now2,
       updatedAt: now2,
     );
@@ -143,6 +146,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
         'オリーブオイルを全体にかけ、塩と黒胡椒で味を調えます。',
         '予熱したオーブンで200℃で15分、またはチーズが溶けて軽く焦げ目がつくまで焼きます。',
       ],
+      imageList: [],
       createdAt: now3,
       updatedAt: now3,
     );

@@ -9,7 +9,7 @@ part of 'recipe_edit_notifier.dart';
 // **************************************************************************
 
 String _$recipeEditNotifierHash() =>
-    r'133f5cecf0c5e2d461a21f793fce9457dfb67911';
+    r'0570b0ea476c6b7e800eab7283d882233b7f7e0e';
 
 /// Copied from Dart SDK
 class _SystemHash {
