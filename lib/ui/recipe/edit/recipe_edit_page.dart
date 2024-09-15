@@ -33,8 +33,10 @@ class RecipeEditPage extends HookConsumerWidget {
     ref.listen(
         recipeEditNotifierProvider(recipe)
             .select((value) => value.loadingState), (_, loadingState) {
-      toggleLoadingBarrierDialog(context,
-          isShow: loadingState == LoadingState.loading);
+      toggleLoadingBarrierDialog(
+        context,
+        isShow: loadingState == LoadingState.loading,
+      );
     });
 
     return Scaffold(
