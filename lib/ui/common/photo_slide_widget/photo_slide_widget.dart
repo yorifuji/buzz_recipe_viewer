@@ -10,14 +10,24 @@ class PhotoSlideWidget extends HookWidget {
     super.key,
     this.urls,
     this.onTapPickImage,
+    this.onTapPickImages,
     this.controller,
-  }) : assert(
+  })  : assert(
           (controller != null) ^ (urls != null),
           'Either controller or urls must be provided, but not both',
+        ),
+        assert(
+          (controller == null &&
+                  onTapPickImage == null &&
+                  onTapPickImages == null) ||
+              controller != null &&
+                  ((onTapPickImage != null) ^ (onTapPickImages != null)),
+          'onTapPickImage and onTapPickImages must be provided only when controller is provided',
         );
 
   final List<String>? urls;
   final Future<XFile?> Function()? onTapPickImage;
+  final Future<List<XFile>?> Function()? onTapPickImages;
   final PhotoSlideController? controller;
 
   bool get _isEditable => controller != null;
@@ -54,9 +64,16 @@ class PhotoSlideWidget extends HookWidget {
         child: Center(child: Text(t.imagePicker.noImageSelected)),
       ),
       onTap: () async {
-        final pickedImage = await onTapPickImage?.call();
-        if (pickedImage != null) {
-          controller?.addNewFile(pickedImage);
+        if (onTapPickImages != null) {
+          final pickedImages = await onTapPickImages?.call();
+          if (pickedImages != null) {
+            controller?.addNewFiles(pickedImages);
+          }
+        } else {
+          final pickedImages = await onTapPickImages?.call();
+          if (pickedImages != null) {
+            controller?.addNewFiles(pickedImages);
+          }
         }
       },
     );

@@ -59,19 +59,22 @@ class RecipeEditPage extends HookConsumerWidget {
                 aspectRatio: 2,
                 child: PhotoSlideWidget(
                   controller: photoSlideController,
-                  onTapPickImage: () async {
+                  onTapPickImages: () async {
                     final pickerMode =
                         await showImagePickerBottomSheet(context);
                     if (pickerMode == null) {
                       return null;
                     }
                     try {
-                      final pickupImage = await ImagePicker().pickImage(
-                        source: pickerMode == ImagePickerMenu.camera
-                            ? ImageSource.camera
-                            : ImageSource.gallery,
-                      );
-                      return pickupImage;
+                      switch (pickerMode) {
+                        case ImagePickerMenu.camera:
+                          final image = await ImagePicker().pickImage(
+                            source: ImageSource.camera,
+                          );
+                          return image == null ? null : [image];
+                        case ImagePickerMenu.gallery:
+                          return await ImagePicker().pickMultiImage();
+                      }
                     } on PlatformException catch (_) {
                       return null;
                     }

@@ -11,6 +11,10 @@ class PhotoSlideController extends ValueNotifier<PhotoSlideState> {
     value = value.copyWith(files: [...value.files, file]);
   }
 
+  void addNewFiles(List<XFile> files) {
+    value = value.copyWith(files: [...value.files, ...files]);
+  }
+
   void removeItem(int index) {
     if (value.isUrlAtIndex(index)) {
       value = value.copyWith(urls: [...value.urls]..removeAt(index));
