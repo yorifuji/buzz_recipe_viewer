@@ -306,12 +306,10 @@ class SettingsPage extends ConsumerWidget {
                         ),
                         TextButton(
                           onPressed: () async {
-                            // await ref
-                            //     .read(preferenceServiceProvider)
-                            //     .clearAll();
-                            // delete account
+                            await ref
+                                .read(preferenceServiceProvider)
+                                .clearAll();
                             await FirebaseAuth.instance.currentUser?.delete();
-                            Navigator.pop(context);
                           },
                           child: Text(
                             t.common.ok,
