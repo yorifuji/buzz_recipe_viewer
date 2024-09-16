@@ -62,6 +62,9 @@ class RecipeEditPage extends HookConsumerWidget {
                   onTapPickImage: () async {
                     final pickerMode =
                         await showImagePickerBottomSheet(context);
+                    if (pickerMode == null) {
+                      return null;
+                    }
                     try {
                       final pickupImage = await ImagePicker().pickImage(
                         source: pickerMode == ImagePickerMenu.camera
