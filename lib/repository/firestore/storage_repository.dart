@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:buzz_recipe_viewer/model/content_type.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/storage_exception.dart';
 import 'package:buzz_recipe_viewer/model/storage_image.dart';
@@ -25,8 +26,17 @@ class StorageRepository {
     XFile uploadFile,
     String uploadPath,
   ) async {
+    SettableMetadata? metadata;
+    try {
+      final contentType = ContentType.fromPath(uploadFile.path);
+      metadata = SettableMetadata(contentType: contentType.value);
+    } catch (_) {
+      metadata = null;
+    }
+
     final fileRef = FirebaseStorage.instance.ref(uploadPath);
-    await fileRef.putFile(File(uploadFile.path));
+    await fileRef.putData(File(uploadFile.path).readAsBytesSync(), metadata);
+
     return fileRef.getDownloadURL();
   }
 
