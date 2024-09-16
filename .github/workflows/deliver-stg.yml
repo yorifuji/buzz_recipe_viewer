@@ -63,7 +63,7 @@ jobs:
           which firebase || curl -sL https://firebase.tools | bash
           dart pub global activate flutterfire_cli 1.0.1-dev.4
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-stg
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
 
       - name: Extract key.properties file
         env:
@@ -130,7 +130,7 @@ jobs:
           which firebase || curl -sL https://firebase.tools | bash
           dart pub global activate flutterfire_cli 1.0.1-dev.4
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-stg
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
 
       - name: Import Apple Development Certificate(Required xcodebuild archive with entitlements)
         env:
@@ -267,7 +267,7 @@ jobs:
           which firebase || curl -sL https://firebase.tools | bash
           dart pub global activate flutterfire_cli 1.0.1-dev.4
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-stg
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
 
       - run: flutter build macos --dart-define=FLAVOR=stg
 

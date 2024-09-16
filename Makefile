@@ -17,8 +17,8 @@ update-goldens:
 
 # Firebase
 
-.PHONY: flutterfire-dev
-flutterfire-dev:
+.PHONY: flutterfire-configure-dev
+flutterfire-configure-dev:
 	flutterfire configure \
 		--overwrite-firebase-options \
 		--project=buzzrecipeviewer-dev \
@@ -27,8 +27,8 @@ flutterfire-dev:
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer.dev \
 		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer
 
-.PHONY: flutterfire-stg
-flutterfire-stg:
+.PHONY: flutterfire-configure-stg
+flutterfire-configure-stg:
 	flutterfire configure \
 		--overwrite-firebase-options \
 		--project=buzzrecipeviewer-stg \
@@ -37,8 +37,8 @@ flutterfire-stg:
 		--ios-bundle-id=dev.yorifuji.buzzRecipeViewer.stg \
 		--macos-bundle-id=dev.yorifuji.buzzRecipeViewer
 
-.PHONY: flutterfire-prod
-flutterfire-prod:
+.PHONY: flutterfire-configure-prod
+flutterfire-configure-prod:
 	flutterfire configure \
 		--overwrite-firebase-options \
 		--project=buzzrecipeviewer \
