@@ -43,7 +43,7 @@ class StorageRepository {
 
       final result = await Future.wait(futures);
 
-      result.sort((a, b) => a.index.compareTo(b.index));
+      result.sort((a, b) => a.index - b.index);
       return Result.success(
         data: result
             .map((e) => StorageImage(imageId: e.imageId, url: e.url))
