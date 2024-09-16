@@ -1,4 +1,4 @@
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart';
 
 enum ContentType {
   jpeg('image/jpeg', ['jpg', 'jpeg']),
@@ -13,21 +13,18 @@ enum ContentType {
   raw('image/x-raw', ['raw']),
   ico('image/x-icon', ['ico']);
 
-  const ContentType(this.contentType, this.extensions);
+  const ContentType(this.value, this.extensions);
 
   factory ContentType.fromPath(String filePath) {
-    final fileExtension =
-        path.extension(filePath).toLowerCase().replaceAll('.', '');
+    final ext = extension(filePath).toLowerCase().replaceAll('.', '');
     return ContentType.values.firstWhere(
-      (type) => type.extensions.contains(fileExtension),
+      (type) => type.extensions.contains(ext),
       orElse: () => throw UnsupportedError(
-        'Unsupported file extension: $fileExtension',
+        'Unsupported file extension: $ext',
       ),
     );
   }
 
-  final String contentType;
+  final String value;
   final List<String> extensions;
-
-  String get value => contentType;
 }
