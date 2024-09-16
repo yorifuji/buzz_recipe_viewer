@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/ui/common/full_screen_image_page_view.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_widget.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_page.dart';
 import 'package:collection/collection.dart';
@@ -14,6 +15,7 @@ class RecipeViewPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final imageList = recipe.imageList.map((e) => e.url).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(t.recipe.viewRecipe.title),
@@ -75,7 +77,14 @@ class RecipeViewPage extends ConsumerWidget {
                 AspectRatio(
                   aspectRatio: 2,
                   child: PhotoSlideWidget(
-                    urls: recipe.imageList.map((e) => e.url).toList(),
+                    urls: imageList,
+                    onTapImage: (index) {
+                      showFullscreenImageDialog(
+                        context,
+                        imageList,
+                        initialIndex: index,
+                      );
+                    },
                   ),
                 ),
               const SizedBox(height: 16),

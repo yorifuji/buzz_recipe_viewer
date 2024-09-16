@@ -9,6 +9,7 @@ class PhotoSlideWidget extends HookWidget {
   const PhotoSlideWidget({
     super.key,
     this.urls,
+    this.onTapImage,
     this.onTapPickImage,
     this.onTapPickImages,
     this.controller,
@@ -23,9 +24,14 @@ class PhotoSlideWidget extends HookWidget {
               controller != null &&
                   ((onTapPickImage != null) ^ (onTapPickImages != null)),
           'onTapPickImage and onTapPickImages must be provided only when controller is provided',
+        ),
+        assert(
+          controller == null || onTapImage == null,
+          'onTapImage must be provided only when controller is not provided',
         );
 
   final List<String>? urls;
+  final void Function(int index)? onTapImage;
   final Future<XFile?> Function()? onTapPickImage;
   final Future<List<XFile>?> Function()? onTapPickImages;
   final PhotoSlideController? controller;
@@ -80,7 +86,7 @@ class PhotoSlideWidget extends HookWidget {
   }
 
   Widget _buildPhotoWidget(PhotoSlideState state, int index) {
-    return Stack(
+    final stack = Stack(
       children: [
         Positioned.fill(
           child: ClipRRect(
@@ -88,6 +94,21 @@ class PhotoSlideWidget extends HookWidget {
             child: Image(
               image: state.getImageProviderAtIndex(index),
               fit: BoxFit.cover,
+              loadingBuilder: (
+                BuildContext context,
+                Widget child,
+                ImageChunkEvent? loadingProgress,
+              ) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -102,5 +123,12 @@ class PhotoSlideWidget extends HookWidget {
           ),
       ],
     );
+
+    return onTapImage != null
+        ? InkWell(
+            child: stack,
+            onTap: () => onTapImage?.call(index),
+          )
+        : stack;
   }
 }
