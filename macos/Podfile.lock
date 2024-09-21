@@ -1,8 +1,10 @@
 PODS:
-  - cloud_firestore (5.4.1):
+  - cloud_firestore (5.4.2):
     - Firebase/CoreOnly (~> 11.0.0)
     - Firebase/Firestore (~> 11.0.0)
     - firebase_core
+    - FlutterMacOS
+  - file_selector_macos (0.0.1):
     - FlutterMacOS
   - Firebase/Analytics (11.0.0):
     - Firebase/Core
@@ -23,24 +25,24 @@ PODS:
   - Firebase/Storage (11.0.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 11.0.0)
-  - firebase_analytics (11.3.1):
+  - firebase_analytics (11.3.2):
     - Firebase/Analytics (= 11.0.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_auth (5.2.1):
+  - firebase_auth (5.3.0):
     - Firebase/Auth (~> 11.0.0)
     - Firebase/CoreOnly (~> 11.0.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_core (3.4.1):
+  - firebase_core (3.5.0):
     - Firebase/CoreOnly (~> 11.0.0)
     - FlutterMacOS
-  - firebase_messaging (15.1.1):
+  - firebase_messaging (15.1.2):
     - Firebase/CoreOnly (~> 11.0.0)
     - Firebase/Messaging (~> 11.0.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_storage (12.3.0):
+  - firebase_storage (12.3.1):
     - Firebase/CoreOnly (~> 11.0.0)
     - Firebase/Storage (~> 11.0.0)
     - firebase_core
@@ -203,6 +205,7 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos`)
+  - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - firebase_analytics (from `Flutter/ephemeral/.symlinks/plugins/firebase_analytics/macos`)
   - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
@@ -249,6 +252,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   cloud_firestore:
     :path: Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos
+  file_selector_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   firebase_analytics:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_analytics/macos
   firebase_auth:
@@ -283,13 +288,14 @@ CHECKOUT OPTIONS:
     :tag: 11.0.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 02e05c3cc3f336053ef23ba15a0438409b74a5a4
+  cloud_firestore: e54df88f6c2cc8a9d87798d62fa6c2a14b8a8234
+  file_selector_macos: 54fdab7caa3ac3fc43c9fac4d7d8d231277f8cf2
   Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
-  firebase_analytics: 2169e28bb3ee1f765efe0fd4f5b5f625d92fda13
-  firebase_auth: 64a63f92c1b46ad6c11d5384ca2c9f94d7106647
-  firebase_core: 3f80bec72646b26618f0497e74ce8bcd608f03ca
-  firebase_messaging: ce70e6615f0cd906d80b7a651b960d76dad6de56
-  firebase_storage: e71579078b2c0fc4cfe8cb31ad2c97735c0080a7
+  firebase_analytics: a2d0d907566e4a48e27745317f05b4b7db85edd9
+  firebase_auth: 339428ee566c9dfd50aa4496b200ee03d2d04e44
+  firebase_core: c55630cdb8a01cf49eae741dd4bc8c93bdd546b8
+  firebase_messaging: 12726b352752420d073ff075e328cc2f0ca14c47
+  firebase_storage: f80abfe62208751bbc5a5b115b3a79fa1eb5b982
   FirebaseAnalytics: 27eb78b97880ea4a004839b9bac0b58880f5a92a
   FirebaseAppCheckInterop: e59b52f2c0e188e6ba77b9e3f6acead2117f2abf
   FirebaseAuth: d5cf28be74d7e82257f6a3f717509eff70d3cf4a
