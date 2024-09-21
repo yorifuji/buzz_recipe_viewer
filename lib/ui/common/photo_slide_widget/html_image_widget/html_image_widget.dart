@@ -1,6 +1,5 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-import 'dart:ui_web';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image_widget/html_mock/html_import.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image_widget/platform_view_registry_mock/platform_view_registry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -19,9 +18,9 @@ class HtmlImageWidget extends HookWidget {
         final viewType = 'html-image-${imageUrl.hashCode}';
         // ViewTypeを登録済みかどうかを確認する方法が変更されたため、try-catchを使用
         try {
-          PlatformViewRegistry().registerViewFactory(
+          platformViewRegistry.registerViewFactory(
             viewType,
-            (int viewId) => html.ImageElement()
+            (int viewId) => ImageElement()
               ..src = imageUrl
               ..style.width = '100%'
               ..style.height = '100%'
