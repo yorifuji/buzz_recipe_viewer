@@ -19,6 +19,9 @@ class PhotoSlideState with _$PhotoSlideState {
 
   bool isUrlAtIndex(int index) => index < urls.length;
 
+  String getPathAtIndex(int index) =>
+      isUrlAtIndex(index) ? urls[index] : files[index - urls.length].path;
+
   ImageProvider getImageProviderAtIndex(int index) => isUrlAtIndex(index)
       ? NetworkImage(urls[index])
       : kIsWeb
