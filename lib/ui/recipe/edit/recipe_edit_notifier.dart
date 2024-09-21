@@ -1,5 +1,9 @@
+import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
+import 'package:buzz_recipe_viewer/model/storage_image.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/repository/firestore/storage_repository.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_state.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/mockito.dart';
@@ -32,6 +36,8 @@ class RecipeEditState with _$RecipeEditState {
     @Default('') String description,
     @Default([]) List<TextItem> foodList,
     @Default([]) List<TextItem> stepList,
+    @Default([]) List<StorageImage> imageList,
+    @Default(LoadingState.loadable) LoadingState loadingState,
   }) = _RecipeEditState;
   const RecipeEditState._();
 
@@ -48,6 +54,7 @@ class RecipeEditState with _$RecipeEditState {
       description: recipe.description,
       foodList: recipe.foodList.mapIndexed(TextItem.fromIndex).toList(),
       stepList: recipe.stepList.mapIndexed(TextItem.fromIndex).toList(),
+      imageList: recipe.imageList,
     );
   }
 
@@ -115,14 +122,37 @@ class RecipeEditNotifier extends _$RecipeEditNotifier {
     state = state.copyWith(stepList: stepList);
   }
 
-  Future<void> onSave() async {
+  Future<void> onSave(PhotoSlideState photoSlideState) async {
+    state = state.copyWith(loadingState: LoadingState.loading);
     final recipe = state.toRecipe();
-    await ref.read(recipeRepositoryProvider).create(recipe);
+    final imageList = await ref
+        .read(storageRepositoryProvider)
+        .uploadRecipeImageList(photoSlideState.files);
+    await ref.read(recipeRepositoryProvider).create(
+          recipe.copyWith(
+            imageList: imageList.isSuccess ? imageList.data : [],
+          ),
+        );
+    state = state.copyWith(loadingState: LoadingState.success);
   }
 
-  Future<void> onUpdate() async {
+  Future<void> onUpdate(PhotoSlideState photoSlideState) async {
+    state = state.copyWith(loadingState: LoadingState.loading);
     final recipe = state.toRecipe(isUpdate: true);
-    await ref.read(recipeRepositoryProvider).update(recipe);
+    final imageList = await ref
+        .read(storageRepositoryProvider)
+        .uploadRecipeImageList(photoSlideState.files);
+    final retainImageList = state.imageList
+        .where((element) => photoSlideState.urls.contains(element.url))
+        .toList();
+    await ref.read(recipeRepositoryProvider).update(
+          recipe.copyWith(
+            imageList: imageList.isSuccess
+                ? [...retainImageList, ...imageList.data]
+                : retainImageList,
+          ),
+        );
+    state = state.copyWith(loadingState: LoadingState.success);
   }
 }
 
@@ -136,6 +166,7 @@ extension RecipeEditStateExtension on RecipeEditState {
       description: description,
       foodList: foodList.map((item) => item.text).toList(),
       stepList: stepList.map((item) => item.text).toList(),
+      imageList: [],
       createdAt: isUpdate ? recipe!.createdAt : now,
       updatedAt: now,
     );

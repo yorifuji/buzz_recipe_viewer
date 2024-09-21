@@ -40,14 +40,17 @@ GoRouter router(RouterRef ref) {
     routes: [
       GoRoute(
         path: Route.walkthrough.path,
+        name: Route.walkthrough.path,
         builder: (context, state) => const WalkthroughPage(),
       ),
       GoRoute(
         path: Route.provisoning.path,
+        name: Route.provisoning.path,
         builder: (context, state) => const ProvisioningPage(),
       ),
       GoRoute(
         path: Route.navigation.path,
+        name: Route.navigation.path,
         builder: (context, state) => const NavigationPage(),
       ),
     ],

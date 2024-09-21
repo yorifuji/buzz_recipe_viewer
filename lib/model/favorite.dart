@@ -1,5 +1,4 @@
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/model/search_hit_converter.dart';
 import 'package:buzz_recipe_viewer/model/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

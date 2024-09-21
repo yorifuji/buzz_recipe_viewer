@@ -1,8 +1,10 @@
 PODS:
-  - cloud_firestore (5.4.0):
+  - cloud_firestore (5.4.2):
     - Firebase/CoreOnly (~> 11.0.0)
     - Firebase/Firestore (~> 11.0.0)
     - firebase_core
+    - FlutterMacOS
+  - file_selector_macos (0.0.1):
     - FlutterMacOS
   - Firebase/Analytics (11.0.0):
     - Firebase/Core
@@ -20,21 +22,29 @@ PODS:
   - Firebase/Messaging (11.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.0.0)
-  - firebase_analytics (11.3.1):
+  - Firebase/Storage (11.0.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 11.0.0)
+  - firebase_analytics (11.3.2):
     - Firebase/Analytics (= 11.0.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_auth (5.2.0):
+  - firebase_auth (5.3.0):
     - Firebase/Auth (~> 11.0.0)
     - Firebase/CoreOnly (~> 11.0.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_core (3.4.1):
+  - firebase_core (3.5.0):
     - Firebase/CoreOnly (~> 11.0.0)
     - FlutterMacOS
-  - firebase_messaging (15.1.0):
+  - firebase_messaging (15.1.2):
     - Firebase/CoreOnly (~> 11.0.0)
     - Firebase/Messaging (~> 11.0.0)
+    - firebase_core
+    - FlutterMacOS
+  - firebase_storage (12.3.1):
+    - Firebase/CoreOnly (~> 11.0.0)
+    - Firebase/Storage (~> 11.0.0)
     - firebase_core
     - FlutterMacOS
   - FirebaseAnalytics (11.0.0):
@@ -110,6 +120,13 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
   - FirebaseSharedSwift (11.0.0)
+  - FirebaseStorage (11.0.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.0)
+    - FirebaseCoreExtension (~> 11.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (~> 3.4)
   - flutter_inappwebview_macos (0.0.1):
     - FlutterMacOS
     - OrderedSet (~> 5.0)
@@ -188,10 +205,12 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos`)
+  - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - firebase_analytics (from `Flutter/ephemeral/.symlinks/plugins/firebase_analytics/macos`)
   - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - firebase_messaging (from `Flutter/ephemeral/.symlinks/plugins/firebase_messaging/macos`)
+  - firebase_storage (from `Flutter/ephemeral/.symlinks/plugins/firebase_storage/macos`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.0.0`)
   - flutter_inappwebview_macos (from `Flutter/ephemeral/.symlinks/plugins/flutter_inappwebview_macos/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
@@ -220,6 +239,7 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseSharedSwift
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -232,6 +252,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   cloud_firestore:
     :path: Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos
+  file_selector_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   firebase_analytics:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_analytics/macos
   firebase_auth:
@@ -240,6 +262,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
   firebase_messaging:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_messaging/macos
+  firebase_storage:
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_storage/macos
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
     :tag: 11.0.0
@@ -264,12 +288,14 @@ CHECKOUT OPTIONS:
     :tag: 11.0.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 1027275a809aca4e63a6365fcdb2b00302f1fc00
+  cloud_firestore: e54df88f6c2cc8a9d87798d62fa6c2a14b8a8234
+  file_selector_macos: 54fdab7caa3ac3fc43c9fac4d7d8d231277f8cf2
   Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
-  firebase_analytics: 2169e28bb3ee1f765efe0fd4f5b5f625d92fda13
-  firebase_auth: 1fecddb4d192c26ed714b29e3906891cd3c2683b
-  firebase_core: 3f80bec72646b26618f0497e74ce8bcd608f03ca
-  firebase_messaging: c834894f659ce965ba4f93fe5d0dc5d705a3cc88
+  firebase_analytics: a2d0d907566e4a48e27745317f05b4b7db85edd9
+  firebase_auth: 339428ee566c9dfd50aa4496b200ee03d2d04e44
+  firebase_core: c55630cdb8a01cf49eae741dd4bc8c93bdd546b8
+  firebase_messaging: 12726b352752420d073ff075e328cc2f0ca14c47
+  firebase_storage: f80abfe62208751bbc5a5b115b3a79fa1eb5b982
   FirebaseAnalytics: 27eb78b97880ea4a004839b9bac0b58880f5a92a
   FirebaseAppCheckInterop: e59b52f2c0e188e6ba77b9e3f6acead2117f2abf
   FirebaseAuth: d5cf28be74d7e82257f6a3f717509eff70d3cf4a
@@ -287,6 +313,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: d0a8fea5a6fa91abc661591cf57c0f0d70863e57
   FirebaseMessaging: d2d1d9c62c46dd2db49a952f7deb5b16ad2c9742
   FirebaseSharedSwift: 9d0e7130af2f0cf162ecd136971f9661f2a3f769
+  FirebaseStorage: f9e2bf027d549db18b6195a37b31c85f56e40200
   flutter_inappwebview_macos: 9600c9df9fdb346aaa8933812009f8d94304203d
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   GoogleAppMeasurement: 6e49ffac7d3f2c3ded9cc663f912a13b67bbd0de

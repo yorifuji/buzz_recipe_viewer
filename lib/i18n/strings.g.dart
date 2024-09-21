@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 225 (112 per locale)
+/// Strings: 267 (133 per locale)
 ///
-/// Built on 2024-09-10 at 09:58 UTC
+/// Built on 2024-09-14 at 11:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -197,6 +197,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   late final _StringsVideoEn video = _StringsVideoEn._(_root);
   late final _StringsFavoriteEn favorite = _StringsFavoriteEn._(_root);
   late final _StringsSettingsEn settings = _StringsSettingsEn._(_root);
+  late final _StringsImagePickerEn imagePicker = _StringsImagePickerEn._(_root);
   late final _StringsCommonEn common = _StringsCommonEn._(_root);
   late final _StringsErrorEn error = _StringsErrorEn._(_root);
 }
@@ -266,6 +267,7 @@ class _StringsRecipeEn {
       _StringsRecipeNewRecipeEn._(_root);
   late final _StringsRecipeViewRecipeEn viewRecipe =
       _StringsRecipeViewRecipeEn._(_root);
+  late final _StringsRecipeCommonEn common = _StringsRecipeCommonEn._(_root);
 }
 
 // Path: video
@@ -311,6 +313,19 @@ class _StringsSettingsEn {
       _StringsSettingsCommonEn._(_root);
 }
 
+// Path: imagePicker
+class _StringsImagePickerEn {
+  _StringsImagePickerEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Image Picker';
+  String get takePhoto => 'Take Photo';
+  String get chooseFromLibrary => 'Choose from Library';
+  String get noImageSelected => 'No image selected';
+}
+
 // Path: common
 class _StringsCommonEn {
   _StringsCommonEn._(this._root);
@@ -339,6 +354,7 @@ class _StringsErrorEn {
 
   // Translations
   late final _StringsErrorAuthEn auth = _StringsErrorAuthEn._(_root);
+  late final _StringsErrorStorageEn storage = _StringsErrorStorageEn._(_root);
 }
 
 // Path: walkthrough.intro1
@@ -398,6 +414,16 @@ class _StringsRecipeViewRecipeEn {
   String get title => 'Recipe';
   String get edit => 'Edit';
   String get delete => 'Delete';
+}
+
+// Path: recipe.common
+class _StringsRecipeCommonEn {
+  _StringsRecipeCommonEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get pickImage => 'Pick Image';
 }
 
 // Path: settings.general
@@ -507,6 +533,31 @@ class _StringsErrorAuthEn {
   String get internalError => 'Internal error.';
   String get networkRequestFailed => 'Network request failed.';
   String get unknown => 'Unknown error.';
+}
+
+// Path: error.storage
+class _StringsErrorStorageEn {
+  _StringsErrorStorageEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get unknown => 'Unknown error.';
+  String get objectNotFound => 'Object not found.';
+  String get bucketNotFound => 'Bucket not found.';
+  String get projectNotFound => 'Project not found.';
+  String get quotaExceeded => 'Quota exceeded.';
+  String get unauthenticated => 'Unauthenticated.';
+  String get unauthorized => 'Unauthorized.';
+  String get retryLimitExceeded => 'Retry limit exceeded.';
+  String get invalidChecksum => 'Invalid checksum.';
+  String get canceled => 'Canceled.';
+  String get invalidEventName => 'Invalid event name.';
+  String get invalidUrl => 'Invalid URL.';
+  String get invalidArgument => 'Invalid argument.';
+  String get noDefaultBucket => 'No default bucket.';
+  String get cannotSliceBlob => 'Cannot slice blob.';
+  String get serverFileWrongSize => 'Server file wrong size.';
 }
 
 // Path: recipe.newRecipe.input
@@ -988,6 +1039,8 @@ class _StringsJa implements Translations {
   @override
   late final _StringsSettingsJa settings = _StringsSettingsJa._(_root);
   @override
+  late final _StringsImagePickerJa imagePicker = _StringsImagePickerJa._(_root);
+  @override
   late final _StringsCommonJa common = _StringsCommonJa._(_root);
   @override
   late final _StringsErrorJa error = _StringsErrorJa._(_root);
@@ -1080,6 +1133,8 @@ class _StringsRecipeJa implements _StringsRecipeEn {
   @override
   late final _StringsRecipeViewRecipeJa viewRecipe =
       _StringsRecipeViewRecipeJa._(_root);
+  @override
+  late final _StringsRecipeCommonJa common = _StringsRecipeCommonJa._(_root);
 }
 
 // Path: video
@@ -1140,6 +1195,24 @@ class _StringsSettingsJa implements _StringsSettingsEn {
       _StringsSettingsCommonJa._(_root);
 }
 
+// Path: imagePicker
+class _StringsImagePickerJa implements _StringsImagePickerEn {
+  _StringsImagePickerJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '画像選択';
+  @override
+  String get takePhoto => '写真を撮る';
+  @override
+  String get chooseFromLibrary => 'ライブラリから選択';
+  @override
+  String get noImageSelected => '画像が選択されていません';
+}
+
 // Path: common
 class _StringsCommonJa implements _StringsCommonEn {
   _StringsCommonJa._(this._root);
@@ -1184,6 +1257,8 @@ class _StringsErrorJa implements _StringsErrorEn {
   // Translations
   @override
   late final _StringsErrorAuthJa auth = _StringsErrorAuthJa._(_root);
+  @override
+  late final _StringsErrorStorageJa storage = _StringsErrorStorageJa._(_root);
 }
 
 // Path: walkthrough.intro1
@@ -1261,6 +1336,18 @@ class _StringsRecipeViewRecipeJa implements _StringsRecipeViewRecipeEn {
   String get edit => '編集';
   @override
   String get delete => '削除';
+}
+
+// Path: recipe.common
+class _StringsRecipeCommonJa implements _StringsRecipeCommonEn {
+  _StringsRecipeCommonJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get pickImage => '画像を選択';
 }
 
 // Path: settings.general
@@ -1408,6 +1495,48 @@ class _StringsErrorAuthJa implements _StringsErrorAuthEn {
   String get networkRequestFailed => 'ネットワークエラーが発生しました';
   @override
   String get unknown => '不明なエラーが発生しました';
+}
+
+// Path: error.storage
+class _StringsErrorStorageJa implements _StringsErrorStorageEn {
+  _StringsErrorStorageJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get unknown => '不明なエラーが発生しました';
+  @override
+  String get objectNotFound => 'オブジェクトが見つかりません';
+  @override
+  String get bucketNotFound => 'バケットが見つかりません';
+  @override
+  String get projectNotFound => 'プロジェクトが見つかりません';
+  @override
+  String get quotaExceeded => 'クォータが超過しました';
+  @override
+  String get unauthenticated => '認証されていません';
+  @override
+  String get unauthorized => '権限がありません';
+  @override
+  String get retryLimitExceeded => 'リトライ回数が超過しました';
+  @override
+  String get invalidChecksum => 'チェックサムが無効です';
+  @override
+  String get canceled => 'キャンセルされました';
+  @override
+  String get invalidEventName => 'イベント名が無効です';
+  @override
+  String get invalidUrl => 'URLが無効です';
+  @override
+  String get invalidArgument => '引数が無効です';
+  @override
+  String get noDefaultBucket => 'デフォルトバケットがありません';
+  @override
+  String get cannotSliceBlob => 'ブロブをスライスできません';
+  @override
+  String get serverFileWrongSize => 'サーバーファイルのサイズが異なります';
 }
 
 // Path: recipe.newRecipe.input
@@ -2048,6 +2177,8 @@ extension on Translations {
         return 'Edit';
       case 'recipe.viewRecipe.delete':
         return 'Delete';
+      case 'recipe.common.pickImage':
+        return 'Pick Image';
       case 'video.title':
         return 'Video';
       case 'video.refresh':
@@ -2152,6 +2283,14 @@ extension on Translations {
         return 'Copy FCM Token';
       case 'settings.common.selected':
         return 'Selected';
+      case 'imagePicker.title':
+        return 'Image Picker';
+      case 'imagePicker.takePhoto':
+        return 'Take Photo';
+      case 'imagePicker.chooseFromLibrary':
+        return 'Choose from Library';
+      case 'imagePicker.noImageSelected':
+        return 'No image selected';
       case 'common.addFavorite':
         return 'Add Favorite';
       case 'common.fetchFailed':
@@ -2206,6 +2345,38 @@ extension on Translations {
         return 'Network request failed.';
       case 'error.auth.unknown':
         return 'Unknown error.';
+      case 'error.storage.unknown':
+        return 'Unknown error.';
+      case 'error.storage.objectNotFound':
+        return 'Object not found.';
+      case 'error.storage.bucketNotFound':
+        return 'Bucket not found.';
+      case 'error.storage.projectNotFound':
+        return 'Project not found.';
+      case 'error.storage.quotaExceeded':
+        return 'Quota exceeded.';
+      case 'error.storage.unauthenticated':
+        return 'Unauthenticated.';
+      case 'error.storage.unauthorized':
+        return 'Unauthorized.';
+      case 'error.storage.retryLimitExceeded':
+        return 'Retry limit exceeded.';
+      case 'error.storage.invalidChecksum':
+        return 'Invalid checksum.';
+      case 'error.storage.canceled':
+        return 'Canceled.';
+      case 'error.storage.invalidEventName':
+        return 'Invalid event name.';
+      case 'error.storage.invalidUrl':
+        return 'Invalid URL.';
+      case 'error.storage.invalidArgument':
+        return 'Invalid argument.';
+      case 'error.storage.noDefaultBucket':
+        return 'No default bucket.';
+      case 'error.storage.cannotSliceBlob':
+        return 'Cannot slice blob.';
+      case 'error.storage.serverFileWrongSize':
+        return 'Server file wrong size.';
       default:
         return null;
     }
@@ -2281,6 +2452,8 @@ extension on _StringsJa {
         return '編集';
       case 'recipe.viewRecipe.delete':
         return '削除';
+      case 'recipe.common.pickImage':
+        return '画像を選択';
       case 'video.title':
         return '動画';
       case 'video.refresh':
@@ -2385,6 +2558,14 @@ extension on _StringsJa {
         return 'FCMトークンをコピー';
       case 'settings.common.selected':
         return '選択中';
+      case 'imagePicker.title':
+        return '画像選択';
+      case 'imagePicker.takePhoto':
+        return '写真を撮る';
+      case 'imagePicker.chooseFromLibrary':
+        return 'ライブラリから選択';
+      case 'imagePicker.noImageSelected':
+        return '画像が選択されていません';
       case 'common.addFavorite':
         return 'お気に入りに追加しました';
       case 'common.fetchFailed':
@@ -2441,6 +2622,38 @@ extension on _StringsJa {
         return 'ネットワークエラーが発生しました';
       case 'error.auth.unknown':
         return '不明なエラーが発生しました';
+      case 'error.storage.unknown':
+        return '不明なエラーが発生しました';
+      case 'error.storage.objectNotFound':
+        return 'オブジェクトが見つかりません';
+      case 'error.storage.bucketNotFound':
+        return 'バケットが見つかりません';
+      case 'error.storage.projectNotFound':
+        return 'プロジェクトが見つかりません';
+      case 'error.storage.quotaExceeded':
+        return 'クォータが超過しました';
+      case 'error.storage.unauthenticated':
+        return '認証されていません';
+      case 'error.storage.unauthorized':
+        return '権限がありません';
+      case 'error.storage.retryLimitExceeded':
+        return 'リトライ回数が超過しました';
+      case 'error.storage.invalidChecksum':
+        return 'チェックサムが無効です';
+      case 'error.storage.canceled':
+        return 'キャンセルされました';
+      case 'error.storage.invalidEventName':
+        return 'イベント名が無効です';
+      case 'error.storage.invalidUrl':
+        return 'URLが無効です';
+      case 'error.storage.invalidArgument':
+        return '引数が無効です';
+      case 'error.storage.noDefaultBucket':
+        return 'デフォルトバケットがありません';
+      case 'error.storage.cannotSliceBlob':
+        return 'ブロブをスライスできません';
+      case 'error.storage.serverFileWrongSize':
+        return 'サーバーファイルのサイズが異なります';
       default:
         return null;
     }

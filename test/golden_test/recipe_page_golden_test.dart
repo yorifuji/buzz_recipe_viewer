@@ -128,6 +128,7 @@ class FakeRecipe {
         'ゼラチンが固まるまで冷蔵庫で冷やします。',
         '銀色の食用スプレーを軽く吹きかけて、星空のような輝きを出します。',
       ],
+      imageList: [],
       createdAt: now1,
       updatedAt: now1,
     );
@@ -150,6 +151,7 @@ class FakeRecipe {
         'カクテルグラスに注ぎ、サイダーで満たします。',
         '最後にレモンスライスを添えて完成です。',
       ],
+      imageList: [],
       createdAt: now2,
       updatedAt: now2,
     );
@@ -177,6 +179,7 @@ class FakeRecipe {
         'オリーブオイルを全体にかけ、塩と黒胡椒で味を調えます。',
         '予熱したオーブンで200℃で15分、またはチーズが溶けて軽く焦げ目がつくまで焼きます。',
       ],
+      imageList: [],
       createdAt: now3,
       updatedAt: now3,
     );
@@ -210,6 +213,7 @@ class FakeRecipe {
         'Chill in the refrigerator until the gelatin sets.',
         'Lightly spray the tart with edible silver spray to create a starry effect.',
       ],
+      imageList: [],
       createdAt: now1,
       updatedAt: now1,
     );
@@ -232,6 +236,7 @@ class FakeRecipe {
         'Pour into a cocktail glass and top with cider.',
         "Garnish with a lemon slice and it's ready to serve.",
       ],
+      imageList: [],
       createdAt: now2,
       updatedAt: now2,
     );
@@ -260,6 +265,7 @@ class FakeRecipe {
         'Drizzle olive oil over the pizza and season with salt and black pepper.',
         'Bake in a preheated oven at 200°C for 15 minutes or until the cheese melts and lightly browns.',
       ],
+      imageList: [],
       createdAt: now3,
       updatedAt: now3,
     );

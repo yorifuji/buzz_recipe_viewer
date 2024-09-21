@@ -5,6 +5,7 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/flavor.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
@@ -12,6 +13,7 @@ import 'package:buzz_recipe_viewer/ui/settings/debug/debug_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/locale/locale_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/notification/notification_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/theme/theme_setting_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -303,9 +305,11 @@ class SettingsPage extends ConsumerWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            // delete account
-                            Navigator.pop(context);
+                          onPressed: () async {
+                            await ref
+                                .read(preferenceServiceProvider)
+                                .clearAll();
+                            await FirebaseAuth.instance.currentUser?.delete();
                           },
                           child: Text(
                             t.common.ok,

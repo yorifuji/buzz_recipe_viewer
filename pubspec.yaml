@@ -49,6 +49,10 @@ dependencies:
   algoliasearch: ^1.24.0
   algolia_helper_flutter: ^1.1.0
   firebase_analytics: ^11.3.1
+  firebase_storage: ^12.3.0
+  image_picker: ^1.1.2
+  uuid: ^4.5.0
+  cross_file: ^0.3.4+2
 
 dev_dependencies:
   flutter_test:

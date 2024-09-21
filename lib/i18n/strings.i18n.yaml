@@ -44,6 +44,8 @@ recipe:
     title: Recipe
     edit: Edit
     delete: Delete
+  common:
+    pickImage: Pick Image
 video:
   title: Video
   refresh: refresh
@@ -146,6 +148,11 @@ settings:
           title: Copy FCM Token
   common:
     selected: Selected
+imagePicker:
+  title: Image Picker
+  takePhoto: Take Photo
+  chooseFromLibrary: Choose from Library
+  noImageSelected: No image selected
 common:
   addFavorite: Add Favorite
   fetchFailed: Failed to fetch data.
@@ -176,3 +183,20 @@ error:
     internalError: Internal error.
     networkRequestFailed: Network request failed.
     unknown: Unknown error.
+  storage:
+    unknown: Unknown error.
+    objectNotFound: Object not found.
+    bucketNotFound: Bucket not found.
+    projectNotFound: Project not found.
+    quotaExceeded: Quota exceeded.
+    unauthenticated: Unauthenticated.
+    unauthorized: Unauthorized.
+    retryLimitExceeded: Retry limit exceeded.
+    invalidChecksum: Invalid checksum.
+    canceled: Canceled.
+    invalidEventName: Invalid event name.
+    invalidUrl: Invalid URL.
+    invalidArgument: Invalid argument.
+    noDefaultBucket: No default bucket.
+    cannotSliceBlob: Cannot slice blob.
+    serverFileWrongSize: Server file wrong size.

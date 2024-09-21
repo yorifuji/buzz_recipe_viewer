@@ -170,6 +170,8 @@ mixin _$RecipeEditState {
   String get description => throw _privateConstructorUsedError;
   List<TextItem> get foodList => throw _privateConstructorUsedError;
   List<TextItem> get stepList => throw _privateConstructorUsedError;
+  List<StorageImage> get imageList => throw _privateConstructorUsedError;
+  LoadingState get loadingState => throw _privateConstructorUsedError;
 
   /// Create a copy of RecipeEditState
   /// with the given fields replaced by the non-null parameter values.
@@ -190,7 +192,9 @@ abstract class $RecipeEditStateCopyWith<$Res> {
       String title,
       String description,
       List<TextItem> foodList,
-      List<TextItem> stepList});
+      List<TextItem> stepList,
+      List<StorageImage> imageList,
+      LoadingState loadingState});
 
   $RecipeCopyWith<$Res>? get recipe;
 }
@@ -216,6 +220,8 @@ class _$RecipeEditStateCopyWithImpl<$Res, $Val extends RecipeEditState>
     Object? description = null,
     Object? foodList = null,
     Object? stepList = null,
+    Object? imageList = null,
+    Object? loadingState = null,
   }) {
     return _then(_value.copyWith(
       recipe: freezed == recipe
@@ -242,6 +248,14 @@ class _$RecipeEditStateCopyWithImpl<$Res, $Val extends RecipeEditState>
           ? _value.stepList
           : stepList // ignore: cast_nullable_to_non_nullable
               as List<TextItem>,
+      imageList: null == imageList
+          ? _value.imageList
+          : imageList // ignore: cast_nullable_to_non_nullable
+              as List<StorageImage>,
+      loadingState: null == loadingState
+          ? _value.loadingState
+          : loadingState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
     ) as $Val);
   }
 
@@ -274,7 +288,9 @@ abstract class _$$RecipeEditStateImplCopyWith<$Res>
       String title,
       String description,
       List<TextItem> foodList,
-      List<TextItem> stepList});
+      List<TextItem> stepList,
+      List<StorageImage> imageList,
+      LoadingState loadingState});
 
   @override
   $RecipeCopyWith<$Res>? get recipe;
@@ -299,6 +315,8 @@ class __$$RecipeEditStateImplCopyWithImpl<$Res>
     Object? description = null,
     Object? foodList = null,
     Object? stepList = null,
+    Object? imageList = null,
+    Object? loadingState = null,
   }) {
     return _then(_$RecipeEditStateImpl(
       recipe: freezed == recipe
@@ -325,6 +343,14 @@ class __$$RecipeEditStateImplCopyWithImpl<$Res>
           ? _value._stepList
           : stepList // ignore: cast_nullable_to_non_nullable
               as List<TextItem>,
+      imageList: null == imageList
+          ? _value._imageList
+          : imageList // ignore: cast_nullable_to_non_nullable
+              as List<StorageImage>,
+      loadingState: null == loadingState
+          ? _value.loadingState
+          : loadingState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
     ));
   }
 }
@@ -338,9 +364,12 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
       this.title = '',
       this.description = '',
       final List<TextItem> foodList = const [],
-      final List<TextItem> stepList = const []})
+      final List<TextItem> stepList = const [],
+      final List<StorageImage> imageList = const [],
+      this.loadingState = LoadingState.loadable})
       : _foodList = foodList,
         _stepList = stepList,
+        _imageList = imageList,
         super._();
 
   @override
@@ -371,9 +400,22 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
     return EqualUnmodifiableListView(_stepList);
   }
 
+  final List<StorageImage> _imageList;
+  @override
+  @JsonKey()
+  List<StorageImage> get imageList {
+    if (_imageList is EqualUnmodifiableListView) return _imageList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageList);
+  }
+
+  @override
+  @JsonKey()
+  final LoadingState loadingState;
+
   @override
   String toString() {
-    return 'RecipeEditState(recipe: $recipe, id: $id, title: $title, description: $description, foodList: $foodList, stepList: $stepList)';
+    return 'RecipeEditState(recipe: $recipe, id: $id, title: $title, description: $description, foodList: $foodList, stepList: $stepList, imageList: $imageList, loadingState: $loadingState)';
   }
 
   @override
@@ -387,7 +429,11 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._foodList, _foodList) &&
-            const DeepCollectionEquality().equals(other._stepList, _stepList));
+            const DeepCollectionEquality().equals(other._stepList, _stepList) &&
+            const DeepCollectionEquality()
+                .equals(other._imageList, _imageList) &&
+            (identical(other.loadingState, loadingState) ||
+                other.loadingState == loadingState));
   }
 
   @override
@@ -398,7 +444,9 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
       title,
       description,
       const DeepCollectionEquality().hash(_foodList),
-      const DeepCollectionEquality().hash(_stepList));
+      const DeepCollectionEquality().hash(_stepList),
+      const DeepCollectionEquality().hash(_imageList),
+      loadingState);
 
   /// Create a copy of RecipeEditState
   /// with the given fields replaced by the non-null parameter values.
@@ -417,7 +465,9 @@ abstract class _RecipeEditState extends RecipeEditState {
       final String title,
       final String description,
       final List<TextItem> foodList,
-      final List<TextItem> stepList}) = _$RecipeEditStateImpl;
+      final List<TextItem> stepList,
+      final List<StorageImage> imageList,
+      final LoadingState loadingState}) = _$RecipeEditStateImpl;
   const _RecipeEditState._() : super._();
 
   @override
@@ -432,6 +482,10 @@ abstract class _RecipeEditState extends RecipeEditState {
   List<TextItem> get foodList;
   @override
   List<TextItem> get stepList;
+  @override
+  List<StorageImage> get imageList;
+  @override
+  LoadingState get loadingState;
 
   /// Create a copy of RecipeEditState
   /// with the given fields replaced by the non-null parameter values.

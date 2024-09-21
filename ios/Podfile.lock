@@ -1,7 +1,7 @@
 PODS:
   - app_settings (5.1.1):
     - Flutter
-  - cloud_firestore (5.4.1):
+  - cloud_firestore (5.4.2):
     - Firebase/Firestore (= 11.0.0)
     - firebase_core
     - Flutter
@@ -21,19 +21,26 @@ PODS:
   - Firebase/Messaging (11.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.0.0)
-  - firebase_analytics (11.3.1):
+  - Firebase/Storage (11.0.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 11.0.0)
+  - firebase_analytics (11.3.2):
     - Firebase/Analytics (= 11.0.0)
     - firebase_core
     - Flutter
-  - firebase_auth (5.2.1):
+  - firebase_auth (5.3.0):
     - Firebase/Auth (= 11.0.0)
     - firebase_core
     - Flutter
-  - firebase_core (3.4.1):
+  - firebase_core (3.5.0):
     - Firebase/CoreOnly (= 11.0.0)
     - Flutter
-  - firebase_messaging (15.1.1):
+  - firebase_messaging (15.1.2):
     - Firebase/Messaging (= 11.0.0)
+    - firebase_core
+    - Flutter
+  - firebase_storage (12.3.1):
+    - Firebase/Storage (= 11.0.0)
     - firebase_core
     - Flutter
   - FirebaseAnalytics (11.0.0):
@@ -109,6 +116,13 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
   - FirebaseSharedSwift (11.0.0)
+  - FirebaseStorage (11.0.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.0)
+    - FirebaseCoreExtension (~> 11.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (~> 3.4)
   - Flutter (1.0.0)
   - flutter_inappwebview_ios (0.0.1):
     - Flutter
@@ -170,6 +184,8 @@ PODS:
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (3.5.0)
+  - image_picker_ios (0.0.1):
+    - Flutter
   - in_app_review (0.2.0):
     - Flutter
   - leveldb-library (1.22.5)
@@ -199,10 +215,12 @@ DEPENDENCIES:
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
+  - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.0.0`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - in_app_review (from `.symlinks/plugins/in_app_review/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -228,6 +246,7 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseSharedSwift
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -251,6 +270,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
     :path: ".symlinks/plugins/firebase_messaging/ios"
+  firebase_storage:
+    :path: ".symlinks/plugins/firebase_storage/ios"
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
     :tag: 11.0.0
@@ -260,6 +281,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   in_app_review:
     :path: ".symlinks/plugins/in_app_review/ios"
   package_info_plus:
@@ -278,12 +301,13 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
-  cloud_firestore: 6e3caf23a764c0ca66606ce8034d3f395f4d8c64
+  cloud_firestore: efded0403c9e674954e2788d93bc2772a5089557
   Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
-  firebase_analytics: b8ce6c2c4b245d3c3bb3a147965d09da0f455959
-  firebase_auth: 78dab5e2826921865b33799c66ce7868542beed0
-  firebase_core: ba84e940cf5cbbc601095f86556560937419195c
-  firebase_messaging: c40f84e7a98da956d5262fada373b5c458edcf13
+  firebase_analytics: 4fd10182fd08bb8358f26ac8aca8dad7b6d0f592
+  firebase_auth: f27287630c4d9e2c3c63e64d9240822ad6b07e5b
+  firebase_core: 2ec6b789859c7c24766344ec71fdf78639402d56
+  firebase_messaging: a18e1e02b2e8e69097c8173e0c851be223b21c50
+  firebase_storage: 9e484b4e90a239066e535a2ee2b6d662b140372b
   FirebaseAnalytics: 27eb78b97880ea4a004839b9bac0b58880f5a92a
   FirebaseAppCheckInterop: e59b52f2c0e188e6ba77b9e3f6acead2117f2abf
   FirebaseAuth: d5cf28be74d7e82257f6a3f717509eff70d3cf4a
@@ -301,6 +325,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: d0a8fea5a6fa91abc661591cf57c0f0d70863e57
   FirebaseMessaging: d2d1d9c62c46dd2db49a952f7deb5b16ad2c9742
   FirebaseSharedSwift: 9d0e7130af2f0cf162ecd136971f9661f2a3f769
+  FirebaseStorage: f9e2bf027d549db18b6195a37b31c85f56e40200
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
@@ -308,6 +333,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
