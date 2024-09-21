@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image_widget/html_image_widget.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_controller.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_state.dart';
 import 'package:cross_file/cross_file.dart';
