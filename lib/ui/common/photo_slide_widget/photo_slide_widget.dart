@@ -1,7 +1,9 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_controller.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_state.dart';
 import 'package:cross_file/cross_file.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -91,25 +93,27 @@ class PhotoSlideWidget extends HookWidget {
         Positioned.fill(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image(
-              image: state.getImageProviderAtIndex(index),
-              fit: BoxFit.cover,
-              loadingBuilder: (
-                BuildContext context,
-                Widget child,
-                ImageChunkEvent? loadingProgress,
-              ) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
+            child: kIsWeb
+                ? HtmlImageWidget(imageUrl: state.getPathAtIndex(index))
+                : Image(
+                    image: state.getImageProviderAtIndex(index),
+                    fit: BoxFit.cover,
+                    loadingBuilder: (
+                      BuildContext context,
+                      Widget child,
+                      ImageChunkEvent? loadingProgress,
+                    ) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ),
         if (_isEditable)
