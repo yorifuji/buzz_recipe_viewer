@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cross_file/cross_file.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,5 +21,7 @@ class PhotoSlideState with _$PhotoSlideState {
 
   ImageProvider getImageProviderAtIndex(int index) => isUrlAtIndex(index)
       ? NetworkImage(urls[index])
-      : FileImage(File(files[index - urls.length].path));
+      : kIsWeb
+          ? NetworkImage(files[index - urls.length].path)
+          : FileImage(File(files[index - urls.length].path));
 }

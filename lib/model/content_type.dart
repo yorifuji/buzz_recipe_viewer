@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:path/path.dart';
 
 enum ContentType {
@@ -15,14 +16,10 @@ enum ContentType {
 
   const ContentType(this.value, this.extensions);
 
-  factory ContentType.fromPath(String filePath) {
+  static ContentType? fromPath(String filePath) {
     final ext = extension(filePath).toLowerCase().replaceAll('.', '');
-    return ContentType.values.firstWhere(
-      (type) => type.extensions.contains(ext),
-      orElse: () => throw UnsupportedError(
-        'Unsupported file extension: $ext',
-      ),
-    );
+    return ContentType.values
+        .firstWhereOrNull((type) => type.extensions.contains(ext));
   }
 
   final String value;

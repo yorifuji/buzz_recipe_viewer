@@ -8,6 +8,7 @@ import 'package:buzz_recipe_viewer/repository/firestore/storage_path_provider.da
 import 'package:collection/collection.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -26,17 +27,17 @@ class StorageRepository {
     XFile uploadFile,
     String uploadPath,
   ) async {
-    SettableMetadata? metadata;
-    try {
-      final contentType = ContentType.fromPath(uploadFile.path);
-      metadata = SettableMetadata(contentType: contentType.value);
-    } catch (_) {
-      metadata = null;
-    }
+    final bytes = kIsWeb
+        ? await uploadFile.readAsBytes()
+        : await File(uploadFile.path).readAsBytes();
+    final metadata = kIsWeb
+        ? SettableMetadata(contentType: uploadFile.mimeType)
+        : SettableMetadata(
+            contentType: ContentType.fromPath(uploadFile.path)?.value,
+          );
 
     final fileRef = FirebaseStorage.instance.ref(uploadPath);
-    await fileRef.putData(File(uploadFile.path).readAsBytesSync(), metadata);
-
+    await fileRef.putData(bytes, metadata);
     return fileRef.getDownloadURL();
   }
 
