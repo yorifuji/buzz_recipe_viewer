@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image/image_source.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +9,50 @@ part 'photo_slide_state.freezed.dart';
 @freezed
 class PhotoSlideState with _$PhotoSlideState {
   const factory PhotoSlideState({
-    @Default([]) List<String> urls,
-    @Default([]) List<XFile> files,
+    @Default([]) List<ImageSource> imageSources,
   }) = _PhotoSlideState;
   const PhotoSlideState._();
 
-  int get totalCount => urls.length + files.length;
+  // urlのリストを受け取るfactory constructorを作成
+  factory PhotoSlideState.fromUrl(List<String> urls) => PhotoSlideState(
+        imageSources: urls.map(NetworkImageSource.new).toList(),
+      );
 
-  bool isUrlAtIndex(int index) => index < urls.length;
+  factory PhotoSlideState.fromFile(List<XFile> files) => PhotoSlideState(
+        imageSources: files.map(FileImageSource.new).toList(),
+      );
 
-  String getPathAtIndex(int index) =>
-      isUrlAtIndex(index) ? urls[index] : files[index - urls.length].path;
+  // add file
+  PhotoSlideState addFile(XFile file) => PhotoSlideState(
+        imageSources: [...imageSources, FileImageSource(file)],
+      );
 
-  ImageProvider getImageProviderAtIndex(int index) => isUrlAtIndex(index)
-      ? NetworkImage(urls[index])
-      : kIsWeb
-          ? NetworkImage(files[index - urls.length].path)
-          : FileImage(File(files[index - urls.length].path));
+  // add files
+  PhotoSlideState addFiles(List<XFile> files) => PhotoSlideState(
+        imageSources: [...imageSources, ...files.map(FileImageSource.new)],
+      );
+
+  // remove item
+  PhotoSlideState removeItem(int index) => PhotoSlideState(
+        imageSources: [
+          ...imageSources.sublist(0, index),
+          ...imageSources.sublist(index + 1),
+        ],
+      );
+
+  // get path at index
+  String getPathAtIndex(int index) => imageSources[index].url;
+
+  // get files
+  List<XFile> get files =>
+      imageSources.whereType<FileImageSource>().map((e) => e.file).toList();
+
+  // get urls
+  List<String> get urls =>
+      imageSources.whereType<NetworkImageSource>().map((e) => e.url).toList();
+
+  int get totalCount => imageSources.length;
+
+  ImageProvider getImageProviderAtIndex(int index) =>
+      imageSources[index].imageProvider;
 }

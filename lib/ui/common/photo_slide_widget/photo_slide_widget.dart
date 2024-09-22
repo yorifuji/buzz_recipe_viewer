@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image_widget/html_image_widget.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image/html_image.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_controller.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_state.dart';
 import 'package:cross_file/cross_file.dart';
@@ -44,7 +44,7 @@ class PhotoSlideWidget extends HookWidget {
   Widget build(BuildContext context) {
     final state = _isEditable
         ? useValueListenable(controller!)
-        : PhotoSlideState(urls: urls ?? []);
+        : PhotoSlideState.fromUrl(urls ?? []);
 
     return PageView.builder(
       controller: PageController(viewportFraction: 0.85),
@@ -94,25 +94,20 @@ class PhotoSlideWidget extends HookWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: kIsWeb
-                ? HtmlImageWidget(imageUrl: state.getPathAtIndex(index))
+                ? HtmlImage(imageUrl: state.getPathAtIndex(index))
                 : Image(
                     image: state.getImageProviderAtIndex(index),
                     fit: BoxFit.cover,
                     loadingBuilder: (
-                      BuildContext context,
+                      _,
                       Widget child,
                       ImageChunkEvent? loadingProgress,
-                    ) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    },
+                    ) =>
+                        loadingProgress == null
+                            ? child
+                            : const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                   ),
           ),
         ),

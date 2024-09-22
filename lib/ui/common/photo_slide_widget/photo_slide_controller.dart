@@ -5,25 +5,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class PhotoSlideController extends ValueNotifier<PhotoSlideState> {
   PhotoSlideController({List<String> initialUrls = const []})
-      : super(PhotoSlideState(urls: initialUrls));
+      : super(PhotoSlideState.fromUrl(initialUrls));
 
-  void addNewFile(XFile file) {
-    value = value.copyWith(files: [...value.files, file]);
-  }
+  void addNewFile(XFile file) => value = value.addFile(file);
 
-  void addNewFiles(List<XFile> files) {
-    value = value.copyWith(files: [...value.files, ...files]);
-  }
+  void addNewFiles(List<XFile> files) => value = value.addFiles(files);
 
-  void removeItem(int index) {
-    if (value.isUrlAtIndex(index)) {
-      value = value.copyWith(urls: [...value.urls]..removeAt(index));
-    } else {
-      value = value.copyWith(
-        files: [...value.files]..removeAt(index - value.urls.length),
-      );
-    }
-  }
+  void removeItem(int index) => value = value.removeItem(index);
 
   void clear() => value = const PhotoSlideState();
 }
