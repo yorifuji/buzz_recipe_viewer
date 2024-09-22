@@ -61,15 +61,18 @@ class StringPreference extends _$StringPreference {
   }
 }
 
-class FakeBoolPreference extends _$BoolPreference
+class FakeTruePreference extends _$BoolPreference
     with Mock
     implements BoolPreference {
-  FakeBoolPreference({required this.value});
-
-  // ignore: avoid_public_notifier_properties
-  final bool value;
   @override
-  bool build(Preference<bool> pref) => value;
+  bool build(Preference<bool> pref) => true;
+}
+
+class FakeFalsePreference extends _$BoolPreference
+    with Mock
+    implements BoolPreference {
+  @override
+  bool build(Preference<bool> pref) => false;
 }
 
 class FakeIntPreference extends _$IntPreference
