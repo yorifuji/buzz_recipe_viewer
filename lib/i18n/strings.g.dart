@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 267 (133 per locale)
+/// Strings: 271 (135 per locale)
 ///
-/// Built on 2024-09-22 at 00:47 UTC
+/// Built on 2024-09-22 at 12:06 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -190,6 +190,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   // Translations
   late final _StringsAppEn app = _StringsAppEn._(_root);
   late final _StringsTabEn tab = _StringsTabEn._(_root);
+  late final _StringsMaintenanceEn maintenance = _StringsMaintenanceEn._(_root);
   late final _StringsWalkthroughEn walkthrough = _StringsWalkthroughEn._(_root);
   late final _StringsProvisioningEn provisioning =
       _StringsProvisioningEn._(_root);
@@ -223,6 +224,17 @@ class _StringsTabEn {
   String get video => 'Video';
   String get favorite => 'Favorite';
   String get settings => 'Settings';
+}
+
+// Path: maintenance
+class _StringsMaintenanceEn {
+  _StringsMaintenanceEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Maintenance';
+  String get body => 'We\'re currently performing\nmaintenance.';
 }
 
 // Path: walkthrough
@@ -1026,6 +1038,8 @@ class _StringsJa implements Translations {
   @override
   late final _StringsTabJa tab = _StringsTabJa._(_root);
   @override
+  late final _StringsMaintenanceJa maintenance = _StringsMaintenanceJa._(_root);
+  @override
   late final _StringsWalkthroughJa walkthrough = _StringsWalkthroughJa._(_root);
   @override
   late final _StringsProvisioningJa provisioning =
@@ -1074,6 +1088,20 @@ class _StringsTabJa implements _StringsTabEn {
   String get favorite => 'お気に入り';
   @override
   String get settings => '設定';
+}
+
+// Path: maintenance
+class _StringsMaintenanceJa implements _StringsMaintenanceEn {
+  _StringsMaintenanceJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'メンテナンス';
+  @override
+  String get body => 'メンテナンス中です\nしばらくお待ちください';
 }
 
 // Path: walkthrough
@@ -2121,6 +2149,10 @@ extension on Translations {
         return 'Favorite';
       case 'tab.settings':
         return 'Settings';
+      case 'maintenance.title':
+        return 'Maintenance';
+      case 'maintenance.body':
+        return 'We\'re currently performing\nmaintenance.';
       case 'walkthrough.intro1.title':
         return 'Make every day delicious';
       case 'walkthrough.intro1.body':
@@ -2396,6 +2428,10 @@ extension on _StringsJa {
         return 'お気に入り';
       case 'tab.settings':
         return '設定';
+      case 'maintenance.title':
+        return 'メンテナンス';
+      case 'maintenance.body':
+        return 'メンテナンス中です\nしばらくお待ちください';
       case 'walkthrough.intro1.title':
         return '美味しい毎日を';
       case 'walkthrough.intro1.body':

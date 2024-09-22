@@ -1,5 +1,8 @@
+import 'package:buzz_recipe_viewer/model/remote_config_settings.dart';
+import 'package:buzz_recipe_viewer/provider/remoteconfig_provider.dart';
 import 'package:buzz_recipe_viewer/provider/user_stream_provider.dart';
 import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/ui/maintenance/maintenance_page.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_page.dart';
 import 'package:buzz_recipe_viewer/ui/provisioning/provisioning_page.dart';
 import 'package:buzz_recipe_viewer/ui/walkthrough/walkthrough_page.dart';
@@ -12,6 +15,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'router.g.dart';
 
 enum Route {
+  maintenance('/maintenance'),
   walkthrough('/walkthrough'),
   provisoning('/provisioning'),
   navigation('/'),
@@ -30,6 +34,8 @@ GoRouter router(RouterRef ref) {
     boolPreferenceProvider(Preference.shouldProvisioning),
   );
   final userStream = ref.watch(userStreamProvider);
+  final isMaintenance =
+      ref.watch(boolRemoteConfigProvider(RemoteConfigSetting.isMaintenance));
 
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
@@ -53,9 +59,16 @@ GoRouter router(RouterRef ref) {
         name: Route.navigation.path,
         builder: (context, state) => const NavigationPage(),
       ),
+      GoRoute(
+        path: Route.maintenance.path,
+        name: Route.maintenance.path,
+        builder: (context, state) => const MaintenancePage(),
+      ),
     ],
     redirect: (BuildContext context, GoRouterState state) {
-      if (shouldShowWalkthrough) {
+      if (isMaintenance) {
+        return Route.maintenance.path;
+      } else if (shouldShowWalkthrough) {
         return Route.walkthrough.path;
       } else if (shouldProvisioning || userStream.value == null) {
         return Route.provisoning.path;

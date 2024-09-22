@@ -22,6 +22,9 @@ PODS:
   - Firebase/Messaging (11.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.0.0)
+  - Firebase/RemoteConfig (11.0.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 11.0.0)
   - Firebase/Storage (11.0.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 11.0.0)
@@ -42,11 +45,18 @@ PODS:
     - Firebase/Messaging (~> 11.0.0)
     - firebase_core
     - FlutterMacOS
+  - firebase_remote_config (5.1.2):
+    - Firebase/CoreOnly (~> 11.0.0)
+    - Firebase/RemoteConfig (~> 11.0.0)
+    - firebase_core
+    - FlutterMacOS
   - firebase_storage (12.3.1):
     - Firebase/CoreOnly (~> 11.0.0)
     - Firebase/Storage (~> 11.0.0)
     - firebase_core
     - FlutterMacOS
+  - FirebaseABTesting (11.2.0):
+    - FirebaseCore (~> 11.0)
   - FirebaseAnalytics (11.0.0):
     - FirebaseAnalytics/AdIdSupport (= 11.0.0)
     - FirebaseCore (~> 11.0)
@@ -119,6 +129,15 @@ PODS:
     - GoogleUtilities/Reachability (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
+  - FirebaseRemoteConfig (11.0.0):
+    - FirebaseABTesting (~> 11.0)
+    - FirebaseCore (~> 11.0)
+    - FirebaseInstallations (~> 11.0)
+    - FirebaseRemoteConfigInterop (~> 11.0)
+    - FirebaseSharedSwift (~> 11.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - "GoogleUtilities/NSData+zlib (~> 8.0)"
+  - FirebaseRemoteConfigInterop (11.2.0)
   - FirebaseSharedSwift (11.0.0)
   - FirebaseStorage (11.0.0):
     - FirebaseAppCheckInterop (~> 11.0)
@@ -210,6 +229,7 @@ DEPENDENCIES:
   - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - firebase_messaging (from `Flutter/ephemeral/.symlinks/plugins/firebase_messaging/macos`)
+  - firebase_remote_config (from `Flutter/ephemeral/.symlinks/plugins/firebase_remote_config/macos`)
   - firebase_storage (from `Flutter/ephemeral/.symlinks/plugins/firebase_storage/macos`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.0.0`)
   - flutter_inappwebview_macos (from `Flutter/ephemeral/.symlinks/plugins/flutter_inappwebview_macos/macos`)
@@ -223,6 +243,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -238,6 +259,8 @@ SPEC REPOS:
     - FirebaseFirestoreInternalBinary
     - FirebaseInstallations
     - FirebaseMessaging
+    - FirebaseRemoteConfig
+    - FirebaseRemoteConfigInterop
     - FirebaseSharedSwift
     - FirebaseStorage
     - GoogleAppMeasurement
@@ -262,6 +285,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
   firebase_messaging:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_messaging/macos
+  firebase_remote_config:
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_remote_config/macos
   firebase_storage:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_storage/macos
   FirebaseFirestore:
@@ -295,7 +320,9 @@ SPEC CHECKSUMS:
   firebase_auth: 339428ee566c9dfd50aa4496b200ee03d2d04e44
   firebase_core: c55630cdb8a01cf49eae741dd4bc8c93bdd546b8
   firebase_messaging: 12726b352752420d073ff075e328cc2f0ca14c47
+  firebase_remote_config: 8459960ca4dab9f20f09e574290d401a8137eabd
   firebase_storage: f80abfe62208751bbc5a5b115b3a79fa1eb5b982
+  FirebaseABTesting: 2104d957ce33888a3d6f3bde298cdee376dde8f1
   FirebaseAnalytics: 27eb78b97880ea4a004839b9bac0b58880f5a92a
   FirebaseAppCheckInterop: e59b52f2c0e188e6ba77b9e3f6acead2117f2abf
   FirebaseAuth: d5cf28be74d7e82257f6a3f717509eff70d3cf4a
@@ -312,6 +339,8 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternalBinary: 9b233680572ca2bc2c3654c3c3b22b2699cb14eb
   FirebaseInstallations: d0a8fea5a6fa91abc661591cf57c0f0d70863e57
   FirebaseMessaging: d2d1d9c62c46dd2db49a952f7deb5b16ad2c9742
+  FirebaseRemoteConfig: fe8b7e6d6770fefbde27b0cac3f3deffba6e7326
+  FirebaseRemoteConfigInterop: 477b26fdeb8fb5fbaf22fa9db5343b42289dc7db
   FirebaseSharedSwift: 9d0e7130af2f0cf162ecd136971f9661f2a3f769
   FirebaseStorage: f9e2bf027d549db18b6195a37b31c85f56e40200
   flutter_inappwebview_macos: 9600c9df9fdb346aaa8933812009f8d94304203d

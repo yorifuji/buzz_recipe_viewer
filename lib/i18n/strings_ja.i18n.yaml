@@ -5,6 +5,11 @@ tab:
   video: 動画
   favorite: お気に入り
   settings: 設定
+maintenance:
+  title: メンテナンス
+  body: |-
+    メンテナンス中です
+    しばらくお待ちください
 walkthrough:
   intro1:
     title: 美味しい毎日を
