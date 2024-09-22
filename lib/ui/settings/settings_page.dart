@@ -144,7 +144,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || !ref.watch(flavorProvider).isProd)
+          if (kDebugMode || !Flavor.isProd())
             SettingsSection(
               title: Text(
                 t.settings.support.header,
@@ -207,7 +207,7 @@ class SettingsPage extends ConsumerWidget {
               style: const TextStyle(fontFamily: FontFamily.notoSansJP),
             ),
             tiles: [
-              if (kDebugMode || !ref.watch(flavorProvider).isProd) ...[
+              if (kDebugMode || !Flavor.isProd()) ...[
                 SettingsTile.navigation(
                   title: Text(
                     t.settings.about.row.terms.title,
@@ -242,7 +242,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || !ref.watch(flavorProvider).isProd)
+          if (kDebugMode || !Flavor.isProd())
             SettingsSection(
               title: Text(
                 t.settings.debug.header,

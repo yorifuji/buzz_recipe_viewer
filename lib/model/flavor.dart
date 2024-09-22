@@ -1,21 +1,15 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'flavor.g.dart';
-
 enum Flavor {
   dev,
   stg,
   prod,
   ;
 
-  factory Flavor.fromString(String value) =>
+  factory Flavor._fromEnvironment() =>
+      Flavor._fromString(const String.fromEnvironment('FLAVOR'));
+  factory Flavor._fromString(String value) =>
       values.firstWhere((e) => e.name == value);
 
-  bool get isDev => this == Flavor.dev;
-  bool get isStg => this == Flavor.stg;
-  bool get isProd => this == Flavor.prod;
+  static bool isDev() => Flavor._fromEnvironment() == Flavor.dev;
+  static bool isStg() => Flavor._fromEnvironment() == Flavor.stg;
+  static bool isProd() => Flavor._fromEnvironment() == Flavor.prod;
 }
-
-@riverpod
-Flavor flavor(FlavorRef ref) =>
-    Flavor.fromString(const String.fromEnvironment('FLAVOR'));
