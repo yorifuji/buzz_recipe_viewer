@@ -2,7 +2,7 @@
 
 // ignore_for_file: implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'remoteconfig_provider.dart';
+part of 'remote_config_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

@@ -2,7 +2,7 @@ import 'package:buzz_recipe_viewer/model/remote_config_settings.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'remoteconfig_provider.g.dart';
+part 'remote_config_provider.g.dart';
 
 @riverpod
 class BoolRemoteConfig extends _$BoolRemoteConfig {
