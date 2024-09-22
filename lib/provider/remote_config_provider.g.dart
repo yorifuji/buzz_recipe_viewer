@@ -8,7 +8,7 @@ part of 'remote_config_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$boolRemoteConfigHash() => r'e426b097d3b9e0f8e13e9250c45ac9a1c3839f73';
+String _$boolRemoteConfigHash() => r'2901009c97e69310fa4c1660af42fcfe3a0e5b95';
 
 /// Copied from Dart SDK
 class _SystemHash {
