@@ -15,21 +15,23 @@ sealed class ImageSource {
 }
 
 class NetworkImageSource extends ImageSource {
-  const NetworkImageSource(this.url);
-  @override
-  final String url;
+  const NetworkImageSource(this.imageUrl);
+  final String imageUrl;
 
   @override
-  ImageProvider<Object> get imageProvider => NetworkImage(url);
+  String get url => imageUrl;
+
+  @override
+  ImageProvider<Object> get imageProvider => NetworkImage(imageUrl);
 }
 
 class FileImageSource extends ImageSource {
-  FileImageSource(this.file);
-  final XFile file;
+  const FileImageSource(this.xFile);
+  final XFile xFile;
 
   @override
-  String get url => file.path;
+  String get url => xFile.path;
 
   @override
-  ImageProvider<Object> get imageProvider => FileImage(File(file.path));
+  ImageProvider<Object> get imageProvider => FileImage(File(xFile.path));
 }

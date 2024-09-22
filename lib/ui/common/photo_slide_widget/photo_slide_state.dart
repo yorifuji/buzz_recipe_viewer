@@ -45,11 +45,13 @@ class PhotoSlideState with _$PhotoSlideState {
 
   // get files
   List<XFile> get files =>
-      imageSources.whereType<FileImageSource>().map((e) => e.file).toList();
+      imageSources.whereType<FileImageSource>().map((e) => e.xFile).toList();
 
   // get urls
-  List<String> get urls =>
-      imageSources.whereType<NetworkImageSource>().map((e) => e.url).toList();
+  List<String> get urls => imageSources
+      .whereType<NetworkImageSource>()
+      .map((e) => e.imageUrl)
+      .toList();
 
   int get totalCount => imageSources.length;
 
