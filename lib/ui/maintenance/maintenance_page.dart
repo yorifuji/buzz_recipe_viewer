@@ -11,7 +11,7 @@ class MaintenancePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.build, size: 80),
+            const Icon(Icons.report_problem, size: 80),
             const SizedBox(height: 20),
             Text(t.maintenance.body, textAlign: TextAlign.center),
           ],

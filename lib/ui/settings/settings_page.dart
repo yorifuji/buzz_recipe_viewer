@@ -4,7 +4,7 @@ import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/flavor.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
@@ -144,7 +144,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || !ref.watch(flavorProvider).isProd)
+          if (kDebugMode || !Flavor.isProd())
             SettingsSection(
               title: Text(
                 t.settings.support.header,
@@ -207,7 +207,7 @@ class SettingsPage extends ConsumerWidget {
               style: const TextStyle(fontFamily: FontFamily.notoSansJP),
             ),
             tiles: [
-              if (kDebugMode || !ref.watch(flavorProvider).isProd) ...[
+              if (kDebugMode || !Flavor.isProd()) ...[
                 SettingsTile.navigation(
                   title: Text(
                     t.settings.about.row.terms.title,
@@ -242,7 +242,7 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (kDebugMode || !ref.watch(flavorProvider).isProd)
+          if (kDebugMode || !Flavor.isProd())
             SettingsSection(
               title: Text(
                 t.settings.debug.header,

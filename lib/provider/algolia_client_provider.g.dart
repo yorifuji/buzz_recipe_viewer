@@ -8,7 +8,7 @@ part of 'algolia_client_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$algoliaClientHash() => r'2d58ff0daac6a268cea34ad4c691ae96fc3f333c';
+String _$algoliaClientHash() => r'2a4d6c27d48ef43237f9ceae10a88dbf625a4948';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -2,7 +2,7 @@ import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'preference_repository.g.dart';
+part 'preference_provider.g.dart';
 
 enum Preference<T> {
   // bool

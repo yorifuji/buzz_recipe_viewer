@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/model/theme_preference.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'theme_notifier.g.dart';

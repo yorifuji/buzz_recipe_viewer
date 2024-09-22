@@ -1,5 +1,5 @@
 import 'package:buzz_recipe_viewer/model/app_color.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_color_notifier.g.dart';

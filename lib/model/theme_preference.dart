@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 enum ThemePreference {
-  system('システム', ThemeMode.system),
-  light('ライト', ThemeMode.light),
-  dark('ダーク', ThemeMode.dark);
+  system(ThemeMode.system),
+  light(ThemeMode.light),
+  dark(ThemeMode.dark);
 
-  const ThemePreference(this.title, this.themeMode);
+  const ThemePreference(this.themeMode);
 
   factory ThemePreference.fromIndex(int index) => ThemePreference.values[index];
-
-  final String title;
   final ThemeMode themeMode;
 }
