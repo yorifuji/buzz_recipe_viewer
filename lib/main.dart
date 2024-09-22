@@ -1,10 +1,13 @@
 import 'package:buzz_recipe_viewer/app.dart';
 import 'package:buzz_recipe_viewer/firebase_options.dart';
+import 'package:buzz_recipe_viewer/model/remote_config_settings.dart';
 import 'package:buzz_recipe_viewer/provider/firebase_messaging_token_provider.dart';
 import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
 import 'package:buzz_recipe_viewer/provider/shared_preferences_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,7 +26,20 @@ void main() async {
     )
   ).wait;
 
+  // Firebase Analytics
   await FirebaseAnalytics.instance.logAppOpen();
+
+  // Firebase Remote Config
+  final remoteConfig = FirebaseRemoteConfig.instance;
+  await remoteConfig.setDefaults(RemoteConfigSetting.allKeyAndDefaults());
+  await remoteConfig.setConfigSettings(
+    RemoteConfigSettings(
+      fetchTimeout: const Duration(minutes: 1),
+      minimumFetchInterval:
+          kDebugMode ? const Duration(minutes: 3) : const Duration(hours: 12),
+    ),
+  );
+  await remoteConfig.fetchAndActivate();
 
   runApp(
     ProviderScope(

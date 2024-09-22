@@ -5,6 +5,11 @@ tab:
   video: Video
   favorite: Favorite
   settings: Settings
+maintenance:
+  title: Maintenance
+  body: |-
+    We're currently performing
+    maintenance.
 walkthrough:
   intro1:
     title: Make every day delicious
