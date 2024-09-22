@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image/image_source.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/image_source.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
