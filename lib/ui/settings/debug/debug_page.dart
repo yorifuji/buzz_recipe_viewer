@@ -150,27 +150,25 @@ class DebugPage extends ConsumerWidget {
                   },
                 ),
                 SettingsTile(
-                  title: InkWell(
-                    child: Text(
-                      t.settings.debug.sections.firebase.fcmToken.title,
-                      style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                    ),
-                    onTap: () async {
-                      await HapticFeedback.mediumImpact();
-                      final token = await NotificationService.getFcmToken();
-                      if (token != null && context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              '${t.settings.debug.sections.firebase.authUid.title}: $token',
-                            ),
-                            duration: const Duration(seconds: 1),
-                          ),
-                        );
-                        await Clipboard.setData(ClipboardData(text: token));
-                      }
-                    },
+                  title: Text(
+                    t.settings.debug.sections.firebase.fcmToken.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
+                  onPressed: (context) async {
+                    await HapticFeedback.mediumImpact();
+                    final token = await NotificationService.getFcmToken();
+                    if (token != null && context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            '${t.settings.debug.sections.firebase.authUid.title}: $token',
+                          ),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                      await Clipboard.setData(ClipboardData(text: token));
+                    }
+                  },
                 ),
               ],
             ),
