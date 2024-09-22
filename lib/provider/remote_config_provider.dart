@@ -14,7 +14,6 @@ class BoolRemoteConfig extends _$BoolRemoteConfig {
       state = remoteConfig.getBool(remoteConfigSetting.key);
     });
     ref.onDispose(subscription.cancel);
-    remoteConfig.fetch();
     return remoteConfig.getBool(remoteConfigSetting.key);
   }
 }
