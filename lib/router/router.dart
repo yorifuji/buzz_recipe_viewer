@@ -27,6 +27,8 @@ enum Route {
 
 @riverpod
 GoRouter router(RouterRef ref) {
+  final isMaintenance =
+      ref.watch(boolRemoteConfigProvider(RemoteConfigSetting.isMaintenance));
   final shouldShowWalkthrough = ref.watch(
     boolPreferenceProvider(Preference.shouldShowWalkthrough),
   );
@@ -34,8 +36,6 @@ GoRouter router(RouterRef ref) {
     boolPreferenceProvider(Preference.shouldProvisioning),
   );
   final userStream = ref.watch(userStreamProvider);
-  final isMaintenance =
-      ref.watch(boolRemoteConfigProvider(RemoteConfigSetting.isMaintenance));
 
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
