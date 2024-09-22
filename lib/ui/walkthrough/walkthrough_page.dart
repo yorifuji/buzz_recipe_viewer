@@ -1,7 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
 import 'package:buzz_recipe_viewer/service/notification_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

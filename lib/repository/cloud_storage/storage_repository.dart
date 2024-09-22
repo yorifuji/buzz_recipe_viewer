@@ -4,7 +4,7 @@ import 'package:buzz_recipe_viewer/model/content_type.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/model/storage_exception.dart';
 import 'package:buzz_recipe_viewer/model/storage_image.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/storage_path_provider.dart';
+import 'package:buzz_recipe_viewer/repository/cloud_storage/storage_path_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';

@@ -1,7 +1,7 @@
 import 'package:buzz_recipe_viewer/model/remote_config_settings.dart';
+import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
 import 'package:buzz_recipe_viewer/provider/remote_config_provider.dart';
 import 'package:buzz_recipe_viewer/provider/user_stream_provider.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
 import 'package:buzz_recipe_viewer/ui/maintenance/maintenance_page.dart';
 import 'package:buzz_recipe_viewer/ui/navigation/navigation_page.dart';
 import 'package:buzz_recipe_viewer/ui/provisioning/provisioning_page.dart';

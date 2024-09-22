@@ -4,7 +4,7 @@ import 'package:buzz_recipe_viewer/model/auth_exception_reason.dart';
 import 'package:buzz_recipe_viewer/model/auth_result.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:buzz_recipe_viewer/provider/anonymous_signin_provider.dart';
-import 'package:buzz_recipe_viewer/repository/preference_repository.dart';
+import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
