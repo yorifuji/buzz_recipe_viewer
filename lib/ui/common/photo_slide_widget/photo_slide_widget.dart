@@ -44,7 +44,7 @@ class PhotoSlideWidget extends HookWidget {
   Widget build(BuildContext context) {
     final state = _isEditable
         ? useValueListenable(controller!)
-        : PhotoSlideState(urls: urls ?? []);
+        : PhotoSlideState.fromUrl(urls ?? []);
 
     return PageView.builder(
       controller: PageController(viewportFraction: 0.85),
@@ -99,20 +99,15 @@ class PhotoSlideWidget extends HookWidget {
                     image: state.getImageProviderAtIndex(index),
                     fit: BoxFit.cover,
                     loadingBuilder: (
-                      BuildContext context,
+                      _,
                       Widget child,
                       ImageChunkEvent? loadingProgress,
-                    ) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    },
+                    ) =>
+                        loadingProgress == null
+                            ? child
+                            : const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                   ),
           ),
         ),

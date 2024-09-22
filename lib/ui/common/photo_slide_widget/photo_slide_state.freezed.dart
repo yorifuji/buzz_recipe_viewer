@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PhotoSlideState {
-  List<String> get urls => throw _privateConstructorUsedError;
-  List<XFile> get files => throw _privateConstructorUsedError;
+  List<ImageSource> get imageSources => throw _privateConstructorUsedError;
 
   /// Create a copy of PhotoSlideState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +31,7 @@ abstract class $PhotoSlideStateCopyWith<$Res> {
           PhotoSlideState value, $Res Function(PhotoSlideState) then) =
       _$PhotoSlideStateCopyWithImpl<$Res, PhotoSlideState>;
   @useResult
-  $Res call({List<String> urls, List<XFile> files});
+  $Res call({List<ImageSource> imageSources});
 }
 
 /// @nodoc
@@ -50,18 +49,13 @@ class _$PhotoSlideStateCopyWithImpl<$Res, $Val extends PhotoSlideState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? urls = null,
-    Object? files = null,
+    Object? imageSources = null,
   }) {
     return _then(_value.copyWith(
-      urls: null == urls
-          ? _value.urls
-          : urls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      files: null == files
-          ? _value.files
-          : files // ignore: cast_nullable_to_non_nullable
-              as List<XFile>,
+      imageSources: null == imageSources
+          ? _value.imageSources
+          : imageSources // ignore: cast_nullable_to_non_nullable
+              as List<ImageSource>,
     ) as $Val);
   }
 }
@@ -74,7 +68,7 @@ abstract class _$$PhotoSlideStateImplCopyWith<$Res>
       __$$PhotoSlideStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> urls, List<XFile> files});
+  $Res call({List<ImageSource> imageSources});
 }
 
 /// @nodoc
@@ -90,52 +84,45 @@ class __$$PhotoSlideStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? urls = null,
-    Object? files = null,
+    Object? imageSources = null,
   }) {
     return _then(_$PhotoSlideStateImpl(
-      urls: null == urls
-          ? _value._urls
-          : urls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      files: null == files
-          ? _value._files
-          : files // ignore: cast_nullable_to_non_nullable
-              as List<XFile>,
+      imageSources: null == imageSources
+          ? _value._imageSources
+          : imageSources // ignore: cast_nullable_to_non_nullable
+              as List<ImageSource>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$PhotoSlideStateImpl extends _PhotoSlideState {
-  const _$PhotoSlideStateImpl(
-      {final List<String> urls = const [], final List<XFile> files = const []})
-      : _urls = urls,
-        _files = files,
+class _$PhotoSlideStateImpl extends _PhotoSlideState
+    with DiagnosticableTreeMixin {
+  const _$PhotoSlideStateImpl({final List<ImageSource> imageSources = const []})
+      : _imageSources = imageSources,
         super._();
 
-  final List<String> _urls;
+  final List<ImageSource> _imageSources;
   @override
   @JsonKey()
-  List<String> get urls {
-    if (_urls is EqualUnmodifiableListView) return _urls;
+  List<ImageSource> get imageSources {
+    if (_imageSources is EqualUnmodifiableListView) return _imageSources;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_urls);
-  }
-
-  final List<XFile> _files;
-  @override
-  @JsonKey()
-  List<XFile> get files {
-    if (_files is EqualUnmodifiableListView) return _files;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_files);
+    return EqualUnmodifiableListView(_imageSources);
   }
 
   @override
-  String toString() {
-    return 'PhotoSlideState(urls: $urls, files: $files)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PhotoSlideState(imageSources: $imageSources)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PhotoSlideState'))
+      ..add(DiagnosticsProperty('imageSources', imageSources));
   }
 
   @override
@@ -143,15 +130,13 @@ class _$PhotoSlideStateImpl extends _PhotoSlideState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PhotoSlideStateImpl &&
-            const DeepCollectionEquality().equals(other._urls, _urls) &&
-            const DeepCollectionEquality().equals(other._files, _files));
+            const DeepCollectionEquality()
+                .equals(other._imageSources, _imageSources));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_urls),
-      const DeepCollectionEquality().hash(_files));
+      runtimeType, const DeepCollectionEquality().hash(_imageSources));
 
   /// Create a copy of PhotoSlideState
   /// with the given fields replaced by the non-null parameter values.
@@ -164,15 +149,12 @@ class _$PhotoSlideStateImpl extends _PhotoSlideState {
 }
 
 abstract class _PhotoSlideState extends PhotoSlideState {
-  const factory _PhotoSlideState(
-      {final List<String> urls,
-      final List<XFile> files}) = _$PhotoSlideStateImpl;
+  const factory _PhotoSlideState({final List<ImageSource> imageSources}) =
+      _$PhotoSlideStateImpl;
   const _PhotoSlideState._() : super._();
 
   @override
-  List<String> get urls;
-  @override
-  List<XFile> get files;
+  List<ImageSource> get imageSources;
 
   /// Create a copy of PhotoSlideState
   /// with the given fields replaced by the non-null parameter values.
