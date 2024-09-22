@@ -45,16 +45,17 @@ dependencies:
   firebase_auth: ^5.2.0
   cloud_firestore: ^5.4.0
   firebase_messaging: ^15.1.0
+  firebase_analytics: ^11.3.2
+  firebase_storage: ^12.3.0
+  firebase_remote_config: ^5.1.2
+
   flutter_use: ^0.0.4
   algoliasearch: ^1.24.0
   algolia_helper_flutter: ^1.1.0
-  firebase_analytics: ^11.3.2
-  firebase_storage: ^12.3.0
   image_picker: ^1.1.2
   uuid: ^4.5.0
   cross_file: ^0.3.4+2
   modal_bottom_sheet: ^3.0.0
-  firebase_remote_config: ^5.1.2
 
 dev_dependencies:
   flutter_test:
