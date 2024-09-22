@@ -1,10 +1,10 @@
-import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image_widget/html_mock/html_import.dart';
-import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image_widget/platform_view_registry_mock/platform_view_registry.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image/html_mock/html_import.dart';
+import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/html_image/platform_view_registry/platform_view_registry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class HtmlImageWidget extends HookWidget {
-  const HtmlImageWidget({
+class HtmlImage extends HookWidget {
+  const HtmlImage({
     required this.imageUrl,
     super.key,
   });
