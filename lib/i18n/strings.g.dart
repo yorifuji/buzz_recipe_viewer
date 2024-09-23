@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 273 (136 per locale)
+/// Strings: 275 (137 per locale)
 ///
-/// Built on 2024-09-23 at 02:06 UTC
+/// Built on 2024-09-23 at 08:44 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -874,6 +874,9 @@ class _StringsSettingsDebugSectionsFirebaseEn {
       _StringsSettingsDebugSectionsFirebaseAuthUidEn._(_root);
   late final _StringsSettingsDebugSectionsFirebaseFcmTokenEn fcmToken =
       _StringsSettingsDebugSectionsFirebaseFcmTokenEn._(_root);
+  late final _StringsSettingsDebugSectionsFirebaseInstallationIdEn
+      installationId =
+      _StringsSettingsDebugSectionsFirebaseInstallationIdEn._(_root);
 }
 
 // Path: settings.general.row.theme.theme
@@ -1001,6 +1004,16 @@ class _StringsSettingsDebugSectionsFirebaseFcmTokenEn {
 
   // Translations
   String get title => 'Copy FCM Token';
+}
+
+// Path: settings.debug.sections.firebase.installationId
+class _StringsSettingsDebugSectionsFirebaseInstallationIdEn {
+  _StringsSettingsDebugSectionsFirebaseInstallationIdEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Copy Firebase Installation ID';
 }
 
 // Path: <root>
@@ -1970,6 +1983,10 @@ class _StringsSettingsDebugSectionsFirebaseJa
   @override
   late final _StringsSettingsDebugSectionsFirebaseFcmTokenJa fcmToken =
       _StringsSettingsDebugSectionsFirebaseFcmTokenJa._(_root);
+  @override
+  late final _StringsSettingsDebugSectionsFirebaseInstallationIdJa
+      installationId =
+      _StringsSettingsDebugSectionsFirebaseInstallationIdJa._(_root);
 }
 
 // Path: settings.general.row.theme.theme
@@ -2134,6 +2151,19 @@ class _StringsSettingsDebugSectionsFirebaseFcmTokenJa
   // Translations
   @override
   String get title => 'FCMトークンをコピー';
+}
+
+// Path: settings.debug.sections.firebase.installationId
+class _StringsSettingsDebugSectionsFirebaseInstallationIdJa
+    implements _StringsSettingsDebugSectionsFirebaseInstallationIdEn {
+  _StringsSettingsDebugSectionsFirebaseInstallationIdJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Firebase Installation IDをコピー';
 }
 
 /// Flat map(s) containing all translations.
@@ -2318,6 +2348,8 @@ extension on Translations {
         return 'Copy Firebase Auth UID';
       case 'settings.debug.sections.firebase.fcmToken.title':
         return 'Copy FCM Token';
+      case 'settings.debug.sections.firebase.installationId.title':
+        return 'Copy Firebase Installation ID';
       case 'settings.common.selected':
         return 'Selected';
       case 'imagePicker.title':
@@ -2599,6 +2631,8 @@ extension on _StringsJa {
         return 'Firebase Auth UIDをコピー';
       case 'settings.debug.sections.firebase.fcmToken.title':
         return 'FCMトークンをコピー';
+      case 'settings.debug.sections.firebase.installationId.title':
+        return 'Firebase Installation IDをコピー';
       case 'settings.common.selected':
         return '選択中';
       case 'imagePicker.title':

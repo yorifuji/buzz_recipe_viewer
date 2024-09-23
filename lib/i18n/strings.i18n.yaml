@@ -152,6 +152,8 @@ settings:
           title: Copy Firebase Auth UID
         fcmToken:
           title: Copy FCM Token
+        installationId:
+          title: Copy Firebase Installation ID
   common:
     selected: Selected
 imagePicker:

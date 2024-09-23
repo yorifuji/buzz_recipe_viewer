@@ -6,6 +6,7 @@ import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/service/notification_service.dart';
 import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
+import 'package:firebase_app_installations/firebase_app_installations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -140,9 +141,7 @@ class DebugPage extends ConsumerWidget {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            '${t.settings.debug.sections.firebase.authUid.title}: ${user.value!.uid}',
-                          ),
+                          content: Text(user.value!.uid),
                           duration: const Duration(seconds: 1),
                         ),
                       );
@@ -160,13 +159,30 @@ class DebugPage extends ConsumerWidget {
                     if (token != null && context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            '${t.settings.debug.sections.firebase.authUid.title}: $token',
-                          ),
+                          content: Text(token),
                           duration: const Duration(seconds: 1),
                         ),
                       );
                       await Clipboard.setData(ClipboardData(text: token));
+                    }
+                  },
+                ),
+                SettingsTile(
+                  title: Text(
+                    t.settings.debug.sections.firebase.installationId.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) async {
+                    await HapticFeedback.mediumImpact();
+                    final token = await FirebaseInstallations.instance.getId();
+                    await Clipboard.setData(ClipboardData(text: token));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(token),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
                     }
                   },
                 ),

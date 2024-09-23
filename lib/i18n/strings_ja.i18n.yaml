@@ -150,6 +150,8 @@ settings:
           title: Firebase Auth UIDをコピー
         fcmToken:
           title: FCMトークンをコピー
+        installationId:
+          title: Firebase Installation IDをコピー
   common:
     selected: 選択中
 imagePicker:
