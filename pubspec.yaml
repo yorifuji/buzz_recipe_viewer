@@ -55,7 +55,6 @@ dependencies:
   image_picker: ^1.1.2
   uuid: ^4.5.0
   cross_file: ^0.3.4+2
-  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -69,7 +68,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.3
   riverpod_lint: ^2.3.13
   custom_lint: ^0.6.5
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.0
   slang_build_runner: ^3.31.0
   golden_toolkit: ^0.15.0
   flutter_gen_runner: ^5.7.0
