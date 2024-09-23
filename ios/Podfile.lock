@@ -18,6 +18,9 @@ PODS:
   - Firebase/Firestore (11.0.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 11.0.0)
+  - Firebase/InAppMessaging (11.0.0):
+    - Firebase/CoreOnly
+    - FirebaseInAppMessaging (~> 11.0.0-beta)
   - Firebase/Messaging (11.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.0.0)
@@ -37,6 +40,10 @@ PODS:
     - Flutter
   - firebase_core (3.5.0):
     - Firebase/CoreOnly (= 11.0.0)
+    - Flutter
+  - firebase_in_app_messaging (0.8.0-7):
+    - Firebase/InAppMessaging (= 11.0.0)
+    - firebase_core
     - Flutter
   - firebase_messaging (15.1.2):
     - Firebase/Messaging (= 11.0.0)
@@ -109,6 +116,13 @@ PODS:
     - FirebaseFirestoreAbseilBinary (= 1.2024011602.0)
     - FirebaseFirestoreGRPCCPPBinary (= 1.65.1)
     - leveldb-library (~> 1.22)
+    - nanopb (~> 3.30910.0)
+  - FirebaseInAppMessaging (11.0.0-beta):
+    - FirebaseABTesting (~> 11.0)
+    - FirebaseCore (~> 11.0)
+    - FirebaseInstallations (~> 11.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
   - FirebaseInstallations (11.2.0):
     - FirebaseCore (~> 11.0)
@@ -232,6 +246,7 @@ DEPENDENCIES:
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_in_app_messaging (from `.symlinks/plugins/firebase_in_app_messaging/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
@@ -263,6 +278,7 @@ SPEC REPOS:
     - FirebaseFirestoreGRPCCoreBinary
     - FirebaseFirestoreGRPCCPPBinary
     - FirebaseFirestoreInternalBinary
+    - FirebaseInAppMessaging
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseRemoteConfig
@@ -290,6 +306,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_in_app_messaging:
+    :path: ".symlinks/plugins/firebase_in_app_messaging/ios"
   firebase_messaging:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_remote_config:
@@ -330,6 +348,7 @@ SPEC CHECKSUMS:
   firebase_analytics: 4fd10182fd08bb8358f26ac8aca8dad7b6d0f592
   firebase_auth: f27287630c4d9e2c3c63e64d9240822ad6b07e5b
   firebase_core: 2ec6b789859c7c24766344ec71fdf78639402d56
+  firebase_in_app_messaging: 744ba5057e618eec004de3c75adc668d2b21dc43
   firebase_messaging: a18e1e02b2e8e69097c8173e0c851be223b21c50
   firebase_remote_config: e9540adfc076899bf326f934a9dc722dd7795310
   firebase_storage: 9e484b4e90a239066e535a2ee2b6d662b140372b
@@ -348,6 +367,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreGRPCCoreBinary: 472bd808e1886a5efb2fd03dd09b98d34641a335
   FirebaseFirestoreGRPCCPPBinary: db76d83d2b7517623f8426ed7f7a17bad2478084
   FirebaseFirestoreInternalBinary: 9b233680572ca2bc2c3654c3c3b22b2699cb14eb
+  FirebaseInAppMessaging: 5e7e71b9b6d790c01c6a404acba09010eff9cb0a
   FirebaseInstallations: 771177d89d6c451dc6e50085ec82e2fc77ed0a4a
   FirebaseMessaging: d2d1d9c62c46dd2db49a952f7deb5b16ad2c9742
   FirebaseRemoteConfig: fe8b7e6d6770fefbde27b0cac3f3deffba6e7326
