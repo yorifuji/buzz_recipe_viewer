@@ -37,7 +37,6 @@ class RecipeEditPage extends HookConsumerWidget {
         context,
         isShow: loadingState == LoadingState.loading,
         message: t.recipe.common.saving,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
       );
     });
 
