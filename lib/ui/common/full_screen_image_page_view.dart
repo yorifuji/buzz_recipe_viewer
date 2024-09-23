@@ -42,6 +42,7 @@ void showFullscreenImageDialog(
                                 ? loadingProgress.cumulativeBytesLoaded /
                                     loadingProgress.expectedTotalBytes!
                                 : null,
+                            strokeWidth: 2,
                           ),
                         );
                       },

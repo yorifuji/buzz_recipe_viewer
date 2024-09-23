@@ -108,7 +108,9 @@ class PhotoSlideWidget extends HookWidget {
                         loadingProgress == null
                             ? child
                             : const Center(
-                                child: CircularProgressIndicator(),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               ),
                   ),
           ),

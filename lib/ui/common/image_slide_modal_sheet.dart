@@ -39,6 +39,7 @@ void showImageSlideModalSheet(
                               ? loadingProgress.cumulativeBytesLoaded /
                                   loadingProgress.expectedTotalBytes!
                               : null,
+                          strokeWidth: 2,
                         ),
                       );
                     },
