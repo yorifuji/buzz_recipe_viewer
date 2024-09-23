@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 271 (135 per locale)
+/// Strings: 273 (136 per locale)
 ///
-/// Built on 2024-09-22 at 12:06 UTC
+/// Built on 2024-09-23 at 02:06 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -436,6 +436,7 @@ class _StringsRecipeCommonEn {
 
   // Translations
   String get pickImage => 'Pick Image';
+  String get saving => 'Saving...';
 }
 
 // Path: settings.general
@@ -1376,6 +1377,8 @@ class _StringsRecipeCommonJa implements _StringsRecipeCommonEn {
   // Translations
   @override
   String get pickImage => '画像を選択';
+  @override
+  String get saving => '保存中...';
 }
 
 // Path: settings.general
@@ -2211,6 +2214,8 @@ extension on Translations {
         return 'Delete';
       case 'recipe.common.pickImage':
         return 'Pick Image';
+      case 'recipe.common.saving':
+        return 'Saving...';
       case 'video.title':
         return 'Video';
       case 'video.refresh':
@@ -2490,6 +2495,8 @@ extension on _StringsJa {
         return '削除';
       case 'recipe.common.pickImage':
         return '画像を選択';
+      case 'recipe.common.saving':
+        return '保存中...';
       case 'video.title':
         return '動画';
       case 'video.refresh':

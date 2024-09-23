@@ -46,7 +46,9 @@ class VideoPlayerPage extends HookConsumerWidget {
                       const AspectRatio(
                         aspectRatio: 16 / 9,
                         child: Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
                         ),
                       ),
                     const SizedBox(height: 8),

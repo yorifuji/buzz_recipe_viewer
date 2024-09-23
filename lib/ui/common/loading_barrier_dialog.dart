@@ -10,7 +10,11 @@ void toggleLoadingBarrierDialog(BuildContext context, {required bool isShow}) {
         animation,
         secondaryAnimation,
       ) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+          ),
+        );
       },
     );
   } else {

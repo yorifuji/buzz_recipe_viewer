@@ -2,7 +2,7 @@ import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/loading_state.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/ui/common/image_picker_bottom_sheet.dart';
-import 'package:buzz_recipe_viewer/ui/common/loading_barrier_dialog.dart';
+import 'package:buzz_recipe_viewer/ui/common/loading_popup.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_controller.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_widget.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_notifier.dart';
@@ -33,9 +33,10 @@ class RecipeEditPage extends HookConsumerWidget {
     ref.listen(
         recipeEditNotifierProvider(recipe)
             .select((value) => value.loadingState), (_, loadingState) {
-      toggleLoadingBarrierDialog(
+      toggleLoadingPopup(
         context,
         isShow: loadingState == LoadingState.loading,
+        message: t.recipe.common.saving,
       );
     });
 
