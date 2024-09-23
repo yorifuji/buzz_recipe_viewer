@@ -132,26 +132,28 @@ settings:
       title: アカウントを削除
       description: アカウントとデータを削除します
   debug:
-    header: デバッグ
+    title: デバッグ
     sections:
       general:
         title: 一般
         deleteLocalData:
-          title: ローカルデータを削除
-      firebase:
-        title: Firebase
+          title: Shared Preferencesを削除
+      recipe:
+        title: レシピ
         addSampleRecipe:
           title: サンプルレシピを追加
         firestoreCreateData:
-          title: Firestoreにテストデータを追加
+          title: 大量データの追加
+      firebase:
+        title: Firebase
         firestoreDeleteData:
           title: Firestoreのデータを削除
         authUid:
-          title: Firebase Auth UIDをコピー
+          title: Authentication UIDをコピー
         fcmToken:
           title: FCMトークンをコピー
         installationId:
-          title: Firebase Installation IDをコピー
+          title: Installation IDをコピー
   common:
     selected: 選択中
 imagePicker:
@@ -165,7 +167,7 @@ common:
   reload: 再読み込み
   searchEmpty: 検索結果は0件です
   more: もっと見る
-  searchQuery: 検索ワード（例：から揚げ　ナス）
+  searchQuery: 検索ワード（例：から揚げ ナス）
   sortByDate: 登録日（新しい順）
   sortByLikes: 人気順（いいね）
   sortByViews: 人気順（閲覧数）

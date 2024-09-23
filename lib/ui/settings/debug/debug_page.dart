@@ -22,7 +22,7 @@ class DebugPage extends ConsumerWidget {
     final user = ref.watch(userProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(t.settings.debug.header),
+        title: Text(t.settings.debug.title),
       ),
       body: CustomSettingsList(
         sections: [
@@ -58,14 +58,34 @@ class DebugPage extends ConsumerWidget {
           if (user.value != null)
             SettingsSection(
               title: Text(
-                t.settings.debug.sections.firebase.title,
+                t.settings.debug.sections.recipe.title,
                 style: const TextStyle(fontFamily: FontFamily.notoSansJP),
               ),
               tiles: [
                 SettingsTile(
                   title: Text(
-                    t.settings.debug.sections.firebase.firestoreCreateData
-                        .title,
+                    t.settings.debug.sections.recipe.addSampleRecipe.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (_) async {
+                    await HapticFeedback.mediumImpact();
+                    await ref.read(recipeRepositoryProvider).addSampleData();
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            t.settings.debug.sections.recipe.addSampleRecipe
+                                .title,
+                          ),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                SettingsTile(
+                  title: Text(
+                    t.settings.debug.sections.recipe.firestoreCreateData.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (_) async {
@@ -75,8 +95,8 @@ class DebugPage extends ConsumerWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            t.settings.debug.sections.firebase
-                                .firestoreCreateData.title,
+                            t.settings.debug.sections.recipe.firestoreCreateData
+                                .title,
                           ),
                           duration: const Duration(seconds: 1),
                         ),
@@ -84,6 +104,15 @@ class DebugPage extends ConsumerWidget {
                     }
                   },
                 ),
+              ],
+            ),
+          if (user.value != null)
+            SettingsSection(
+              title: Text(
+                t.settings.debug.sections.firebase.title,
+                style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+              ),
+              tiles: [
                 SettingsTile(
                   title: Text(
                     t.settings.debug.sections.firebase.firestoreDeleteData
@@ -100,27 +129,6 @@ class DebugPage extends ConsumerWidget {
                           content: Text(
                             t.settings.debug.sections.firebase
                                 .firestoreDeleteData.title,
-                          ),
-                          duration: const Duration(seconds: 1),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                SettingsTile(
-                  title: Text(
-                    t.settings.debug.sections.firebase.addSampleRecipe.title,
-                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
-                  ),
-                  onPressed: (_) async {
-                    await HapticFeedback.mediumImpact();
-                    await ref.read(recipeRepositoryProvider).addSampleData();
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            t.settings.debug.sections.firebase.addSampleRecipe
-                                .title,
                           ),
                           duration: const Duration(seconds: 1),
                         ),
