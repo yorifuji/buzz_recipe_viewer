@@ -49,25 +49,27 @@ class PhotoSlideWidget extends HookWidget {
     return PageView.builder(
       controller: PageController(viewportFraction: 0.85),
       itemCount: state.totalCount + (_isEditable ? 1 : 0),
-      itemBuilder: (context, index) => _buildItem(state, index),
+      itemBuilder: (context, index) => _buildItem(context, state, index),
     );
   }
 
-  Widget _buildItem(PhotoSlideState state, int index) {
+  Widget _buildItem(BuildContext context, PhotoSlideState state, int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: index == state.totalCount && _isEditable
-          ? _buildAddPhotoWidget()
+          ? _buildAddPhotoWidget(context)
           : _buildPhotoWidget(state, index),
     );
   }
 
-  Widget _buildAddPhotoWidget() {
+  Widget _buildAddPhotoWidget(BuildContext context) {
+    final theme = Theme.of(context);
     return InkWell(
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(),
+          // border: Border.all(color: Colors.transparent),
           borderRadius: BorderRadius.circular(10),
+          color: theme.colorScheme.surfaceContainer,
         ),
         child: Center(child: Text(t.imagePicker.noImageSelected)),
       ),
