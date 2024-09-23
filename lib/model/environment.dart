@@ -5,8 +5,8 @@ enum Environment {
   algoliaSearchOnlyApiKey('ALGOLIA_SEARCH_ONLY_API_KEY'),
   ;
 
-  const Environment(this.key);
-  final String key;
+  const Environment(this._key);
+  final String _key;
 
-  String get value => dotenv.env[key] ?? '';
+  String get value => dotenv.env[_key] ?? '';
 }

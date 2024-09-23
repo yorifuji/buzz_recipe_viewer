@@ -22,10 +22,7 @@ enum StorageException implements Exception {
 
   const StorageException(this.code);
   factory StorageException.from(FirebaseException e) =>
-      StorageException.values.firstWhere(
-        (element) => element.code == e.code,
-        orElse: () => StorageException.unknown,
-      );
+      StorageException.values.firstWhere((element) => element.code == e.code);
 
   final String code;
 }
