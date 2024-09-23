@@ -54,7 +54,7 @@ class _LoadingOverlay extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
-            color: backgroundColor ?? Theme.of(context).colorScheme.secondary,
+            color: backgroundColor ?? Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
@@ -71,8 +71,8 @@ class _LoadingOverlay extends StatelessWidget {
                 width: 40,
                 height: 40,
                 child: CircularProgressIndicator(
-                  color: progressColor ??
-                      Theme.of(context).colorScheme.onSecondary,
+                  color:
+                      progressColor ?? Theme.of(context).colorScheme.onSurface,
                   strokeWidth: 2,
                 ),
               ),
@@ -81,8 +81,7 @@ class _LoadingOverlay extends StatelessWidget {
                 Text(
                   message!,
                   style: TextStyle(
-                    color:
-                        textColor ?? Theme.of(context).colorScheme.onSecondary,
+                    color: textColor ?? Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],
