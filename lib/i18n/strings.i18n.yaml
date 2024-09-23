@@ -51,6 +51,7 @@ recipe:
     delete: Delete
   common:
     pickImage: Pick Image
+    saving: Saving...
 video:
   title: Video
   refresh: refresh
