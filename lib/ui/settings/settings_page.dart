@@ -245,13 +245,13 @@ class SettingsPage extends ConsumerWidget {
           if (kDebugMode || !Flavor.isProd())
             SettingsSection(
               title: Text(
-                t.settings.debug.header,
+                t.settings.debug.title,
                 style: const TextStyle(fontFamily: FontFamily.notoSansJP),
               ),
               tiles: [
                 SettingsTile.navigation(
                   title: Text(
-                    t.settings.debug.header,
+                    t.settings.debug.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (context) async {

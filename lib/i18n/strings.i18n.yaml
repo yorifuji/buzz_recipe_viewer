@@ -134,24 +134,28 @@ settings:
       title: Delete Account
       description: Delete your account and all data
   debug:
-    header: Debug
+    title: Debug
     sections:
       general:
         title: General
         deleteLocalData:
-          title: Delete Local Data
-      firebase:
-        title: General
+          title: Delete Shared Preferences
+      recipe:
+        title: Recipe
         addSampleRecipe:
           title: Add Sample Recipe
         firestoreCreateData:
-          title: Create Data in Firestore
+          title: Create Many Dummy Data
+      firebase:
+        title: General
         firestoreDeleteData:
-          title: Delete Data in Firestore
+          title: Delete Data from Firestore
         authUid:
-          title: Copy Firebase Auth UID
+          title: Copy Authenticated UID
         fcmToken:
           title: Copy FCM Token
+        installationId:
+          title: Copy Installation ID
   common:
     selected: Selected
 imagePicker:

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 273 (136 per locale)
+/// Strings: 277 (138 per locale)
 ///
-/// Built on 2024-09-23 at 02:06 UTC
+/// Built on 2024-09-23 at 09:04 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -508,7 +508,7 @@ class _StringsSettingsDebugEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get header => 'Debug';
+  String get title => 'Debug';
   late final _StringsSettingsDebugSectionsEn sections =
       _StringsSettingsDebugSectionsEn._(_root);
 }
@@ -685,6 +685,8 @@ class _StringsSettingsDebugSectionsEn {
   // Translations
   late final _StringsSettingsDebugSectionsGeneralEn general =
       _StringsSettingsDebugSectionsGeneralEn._(_root);
+  late final _StringsSettingsDebugSectionsRecipeEn recipe =
+      _StringsSettingsDebugSectionsRecipeEn._(_root);
   late final _StringsSettingsDebugSectionsFirebaseEn firebase =
       _StringsSettingsDebugSectionsFirebaseEn._(_root);
 }
@@ -853,6 +855,22 @@ class _StringsSettingsDebugSectionsGeneralEn {
       _StringsSettingsDebugSectionsGeneralDeleteLocalDataEn._(_root);
 }
 
+// Path: settings.debug.sections.recipe
+class _StringsSettingsDebugSectionsRecipeEn {
+  _StringsSettingsDebugSectionsRecipeEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Recipe';
+  late final _StringsSettingsDebugSectionsRecipeAddSampleRecipeEn
+      addSampleRecipe =
+      _StringsSettingsDebugSectionsRecipeAddSampleRecipeEn._(_root);
+  late final _StringsSettingsDebugSectionsRecipeFirestoreCreateDataEn
+      firestoreCreateData =
+      _StringsSettingsDebugSectionsRecipeFirestoreCreateDataEn._(_root);
+}
+
 // Path: settings.debug.sections.firebase
 class _StringsSettingsDebugSectionsFirebaseEn {
   _StringsSettingsDebugSectionsFirebaseEn._(this._root);
@@ -861,12 +879,6 @@ class _StringsSettingsDebugSectionsFirebaseEn {
 
   // Translations
   String get title => 'General';
-  late final _StringsSettingsDebugSectionsFirebaseAddSampleRecipeEn
-      addSampleRecipe =
-      _StringsSettingsDebugSectionsFirebaseAddSampleRecipeEn._(_root);
-  late final _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataEn
-      firestoreCreateData =
-      _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataEn._(_root);
   late final _StringsSettingsDebugSectionsFirebaseFirestoreDeleteDataEn
       firestoreDeleteData =
       _StringsSettingsDebugSectionsFirebaseFirestoreDeleteDataEn._(_root);
@@ -874,6 +886,9 @@ class _StringsSettingsDebugSectionsFirebaseEn {
       _StringsSettingsDebugSectionsFirebaseAuthUidEn._(_root);
   late final _StringsSettingsDebugSectionsFirebaseFcmTokenEn fcmToken =
       _StringsSettingsDebugSectionsFirebaseFcmTokenEn._(_root);
+  late final _StringsSettingsDebugSectionsFirebaseInstallationIdEn
+      installationId =
+      _StringsSettingsDebugSectionsFirebaseInstallationIdEn._(_root);
 }
 
 // Path: settings.general.row.theme.theme
@@ -950,12 +965,12 @@ class _StringsSettingsDebugSectionsGeneralDeleteLocalDataEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Delete Local Data';
+  String get title => 'Delete Shared Preferences';
 }
 
-// Path: settings.debug.sections.firebase.addSampleRecipe
-class _StringsSettingsDebugSectionsFirebaseAddSampleRecipeEn {
-  _StringsSettingsDebugSectionsFirebaseAddSampleRecipeEn._(this._root);
+// Path: settings.debug.sections.recipe.addSampleRecipe
+class _StringsSettingsDebugSectionsRecipeAddSampleRecipeEn {
+  _StringsSettingsDebugSectionsRecipeAddSampleRecipeEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -963,14 +978,14 @@ class _StringsSettingsDebugSectionsFirebaseAddSampleRecipeEn {
   String get title => 'Add Sample Recipe';
 }
 
-// Path: settings.debug.sections.firebase.firestoreCreateData
-class _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataEn {
-  _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataEn._(this._root);
+// Path: settings.debug.sections.recipe.firestoreCreateData
+class _StringsSettingsDebugSectionsRecipeFirestoreCreateDataEn {
+  _StringsSettingsDebugSectionsRecipeFirestoreCreateDataEn._(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Create Data in Firestore';
+  String get title => 'Create Many Dummy Data';
 }
 
 // Path: settings.debug.sections.firebase.firestoreDeleteData
@@ -980,7 +995,7 @@ class _StringsSettingsDebugSectionsFirebaseFirestoreDeleteDataEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Delete Data in Firestore';
+  String get title => 'Delete Data from Firestore';
 }
 
 // Path: settings.debug.sections.firebase.authUid
@@ -990,7 +1005,7 @@ class _StringsSettingsDebugSectionsFirebaseAuthUidEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get title => 'Copy Firebase Auth UID';
+  String get title => 'Copy Authenticated UID';
 }
 
 // Path: settings.debug.sections.firebase.fcmToken
@@ -1001,6 +1016,16 @@ class _StringsSettingsDebugSectionsFirebaseFcmTokenEn {
 
   // Translations
   String get title => 'Copy FCM Token';
+}
+
+// Path: settings.debug.sections.firebase.installationId
+class _StringsSettingsDebugSectionsFirebaseInstallationIdEn {
+  _StringsSettingsDebugSectionsFirebaseInstallationIdEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Copy Installation ID';
 }
 
 // Path: <root>
@@ -1468,7 +1493,7 @@ class _StringsSettingsDebugJa implements _StringsSettingsDebugEn {
 
   // Translations
   @override
-  String get header => 'デバッグ';
+  String get title => 'デバッグ';
   @override
   late final _StringsSettingsDebugSectionsJa sections =
       _StringsSettingsDebugSectionsJa._(_root);
@@ -1721,6 +1746,9 @@ class _StringsSettingsDebugSectionsJa
   late final _StringsSettingsDebugSectionsGeneralJa general =
       _StringsSettingsDebugSectionsGeneralJa._(_root);
   @override
+  late final _StringsSettingsDebugSectionsRecipeJa recipe =
+      _StringsSettingsDebugSectionsRecipeJa._(_root);
+  @override
   late final _StringsSettingsDebugSectionsFirebaseJa firebase =
       _StringsSettingsDebugSectionsFirebaseJa._(_root);
 }
@@ -1941,6 +1969,27 @@ class _StringsSettingsDebugSectionsGeneralJa
       _StringsSettingsDebugSectionsGeneralDeleteLocalDataJa._(_root);
 }
 
+// Path: settings.debug.sections.recipe
+class _StringsSettingsDebugSectionsRecipeJa
+    implements _StringsSettingsDebugSectionsRecipeEn {
+  _StringsSettingsDebugSectionsRecipeJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'レシピ';
+  @override
+  late final _StringsSettingsDebugSectionsRecipeAddSampleRecipeJa
+      addSampleRecipe =
+      _StringsSettingsDebugSectionsRecipeAddSampleRecipeJa._(_root);
+  @override
+  late final _StringsSettingsDebugSectionsRecipeFirestoreCreateDataJa
+      firestoreCreateData =
+      _StringsSettingsDebugSectionsRecipeFirestoreCreateDataJa._(_root);
+}
+
 // Path: settings.debug.sections.firebase
 class _StringsSettingsDebugSectionsFirebaseJa
     implements _StringsSettingsDebugSectionsFirebaseEn {
@@ -1953,14 +2002,6 @@ class _StringsSettingsDebugSectionsFirebaseJa
   @override
   String get title => 'Firebase';
   @override
-  late final _StringsSettingsDebugSectionsFirebaseAddSampleRecipeJa
-      addSampleRecipe =
-      _StringsSettingsDebugSectionsFirebaseAddSampleRecipeJa._(_root);
-  @override
-  late final _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataJa
-      firestoreCreateData =
-      _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataJa._(_root);
-  @override
   late final _StringsSettingsDebugSectionsFirebaseFirestoreDeleteDataJa
       firestoreDeleteData =
       _StringsSettingsDebugSectionsFirebaseFirestoreDeleteDataJa._(_root);
@@ -1970,6 +2011,10 @@ class _StringsSettingsDebugSectionsFirebaseJa
   @override
   late final _StringsSettingsDebugSectionsFirebaseFcmTokenJa fcmToken =
       _StringsSettingsDebugSectionsFirebaseFcmTokenJa._(_root);
+  @override
+  late final _StringsSettingsDebugSectionsFirebaseInstallationIdJa
+      installationId =
+      _StringsSettingsDebugSectionsFirebaseInstallationIdJa._(_root);
 }
 
 // Path: settings.general.row.theme.theme
@@ -2068,13 +2113,13 @@ class _StringsSettingsDebugSectionsGeneralDeleteLocalDataJa
 
   // Translations
   @override
-  String get title => 'ローカルデータを削除';
+  String get title => 'Shared Preferencesを削除';
 }
 
-// Path: settings.debug.sections.firebase.addSampleRecipe
-class _StringsSettingsDebugSectionsFirebaseAddSampleRecipeJa
-    implements _StringsSettingsDebugSectionsFirebaseAddSampleRecipeEn {
-  _StringsSettingsDebugSectionsFirebaseAddSampleRecipeJa._(this._root);
+// Path: settings.debug.sections.recipe.addSampleRecipe
+class _StringsSettingsDebugSectionsRecipeAddSampleRecipeJa
+    implements _StringsSettingsDebugSectionsRecipeAddSampleRecipeEn {
+  _StringsSettingsDebugSectionsRecipeAddSampleRecipeJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
@@ -2084,17 +2129,17 @@ class _StringsSettingsDebugSectionsFirebaseAddSampleRecipeJa
   String get title => 'サンプルレシピを追加';
 }
 
-// Path: settings.debug.sections.firebase.firestoreCreateData
-class _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataJa
-    implements _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataEn {
-  _StringsSettingsDebugSectionsFirebaseFirestoreCreateDataJa._(this._root);
+// Path: settings.debug.sections.recipe.firestoreCreateData
+class _StringsSettingsDebugSectionsRecipeFirestoreCreateDataJa
+    implements _StringsSettingsDebugSectionsRecipeFirestoreCreateDataEn {
+  _StringsSettingsDebugSectionsRecipeFirestoreCreateDataJa._(this._root);
 
   @override
   final _StringsJa _root; // ignore: unused_field
 
   // Translations
   @override
-  String get title => 'Firestoreにテストデータを追加';
+  String get title => '大量データの追加';
 }
 
 // Path: settings.debug.sections.firebase.firestoreDeleteData
@@ -2120,7 +2165,7 @@ class _StringsSettingsDebugSectionsFirebaseAuthUidJa
 
   // Translations
   @override
-  String get title => 'Firebase Auth UIDをコピー';
+  String get title => 'Authentication UIDをコピー';
 }
 
 // Path: settings.debug.sections.firebase.fcmToken
@@ -2134,6 +2179,19 @@ class _StringsSettingsDebugSectionsFirebaseFcmTokenJa
   // Translations
   @override
   String get title => 'FCMトークンをコピー';
+}
+
+// Path: settings.debug.sections.firebase.installationId
+class _StringsSettingsDebugSectionsFirebaseInstallationIdJa
+    implements _StringsSettingsDebugSectionsFirebaseInstallationIdEn {
+  _StringsSettingsDebugSectionsFirebaseInstallationIdJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Installation IDをコピー';
 }
 
 /// Flat map(s) containing all translations.
@@ -2300,24 +2358,28 @@ extension on Translations {
         return 'Delete Account';
       case 'settings.account.delete.description':
         return 'Delete your account and all data';
-      case 'settings.debug.header':
+      case 'settings.debug.title':
         return 'Debug';
       case 'settings.debug.sections.general.title':
         return 'General';
       case 'settings.debug.sections.general.deleteLocalData.title':
-        return 'Delete Local Data';
+        return 'Delete Shared Preferences';
+      case 'settings.debug.sections.recipe.title':
+        return 'Recipe';
+      case 'settings.debug.sections.recipe.addSampleRecipe.title':
+        return 'Add Sample Recipe';
+      case 'settings.debug.sections.recipe.firestoreCreateData.title':
+        return 'Create Many Dummy Data';
       case 'settings.debug.sections.firebase.title':
         return 'General';
-      case 'settings.debug.sections.firebase.addSampleRecipe.title':
-        return 'Add Sample Recipe';
-      case 'settings.debug.sections.firebase.firestoreCreateData.title':
-        return 'Create Data in Firestore';
       case 'settings.debug.sections.firebase.firestoreDeleteData.title':
-        return 'Delete Data in Firestore';
+        return 'Delete Data from Firestore';
       case 'settings.debug.sections.firebase.authUid.title':
-        return 'Copy Firebase Auth UID';
+        return 'Copy Authenticated UID';
       case 'settings.debug.sections.firebase.fcmToken.title':
         return 'Copy FCM Token';
+      case 'settings.debug.sections.firebase.installationId.title':
+        return 'Copy Installation ID';
       case 'settings.common.selected':
         return 'Selected';
       case 'imagePicker.title':
@@ -2581,24 +2643,28 @@ extension on _StringsJa {
         return 'アカウントを削除';
       case 'settings.account.delete.description':
         return 'アカウントとデータを削除します';
-      case 'settings.debug.header':
+      case 'settings.debug.title':
         return 'デバッグ';
       case 'settings.debug.sections.general.title':
         return '一般';
       case 'settings.debug.sections.general.deleteLocalData.title':
-        return 'ローカルデータを削除';
+        return 'Shared Preferencesを削除';
+      case 'settings.debug.sections.recipe.title':
+        return 'レシピ';
+      case 'settings.debug.sections.recipe.addSampleRecipe.title':
+        return 'サンプルレシピを追加';
+      case 'settings.debug.sections.recipe.firestoreCreateData.title':
+        return '大量データの追加';
       case 'settings.debug.sections.firebase.title':
         return 'Firebase';
-      case 'settings.debug.sections.firebase.addSampleRecipe.title':
-        return 'サンプルレシピを追加';
-      case 'settings.debug.sections.firebase.firestoreCreateData.title':
-        return 'Firestoreにテストデータを追加';
       case 'settings.debug.sections.firebase.firestoreDeleteData.title':
         return 'Firestoreのデータを削除';
       case 'settings.debug.sections.firebase.authUid.title':
-        return 'Firebase Auth UIDをコピー';
+        return 'Authentication UIDをコピー';
       case 'settings.debug.sections.firebase.fcmToken.title':
         return 'FCMトークンをコピー';
+      case 'settings.debug.sections.firebase.installationId.title':
+        return 'Installation IDをコピー';
       case 'settings.common.selected':
         return '選択中';
       case 'imagePicker.title':
