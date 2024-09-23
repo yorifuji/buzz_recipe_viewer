@@ -54,7 +54,8 @@ class _LoadingOverlay extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
-            color: backgroundColor ?? Theme.of(context).colorScheme.surface,
+            color:
+                backgroundColor ?? Theme.of(context).colorScheme.surfaceBright,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
