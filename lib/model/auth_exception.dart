@@ -25,10 +25,7 @@ enum AuthException implements Exception {
 
   const AuthException(this.code);
   factory AuthException.from(FirebaseAuthException e) =>
-      AuthException.values.firstWhere(
-        (element) => element.code == e.code,
-        orElse: () => AuthException.unknown,
-      );
+      AuthException.values.firstWhere((element) => element.code == e.code);
 
   final String code;
 }
