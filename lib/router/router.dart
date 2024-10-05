@@ -28,22 +28,22 @@ enum Route {
         Route.maintenance => GoRoute(
             path: path,
             name: path,
-            builder: (context, state) => const MaintenancePage(),
+            builder: (_, __) => const MaintenancePage(),
           ),
         Route.walkthrough => GoRoute(
             path: path,
             name: path,
-            builder: (context, state) => const WalkthroughPage(),
+            builder: (_, __) => const WalkthroughPage(),
           ),
         Route.provisoning => GoRoute(
             path: path,
             name: path,
-            builder: (context, state) => const ProvisioningPage(),
+            builder: (_, __) => const ProvisioningPage(),
           ),
         Route.navigation => GoRoute(
             path: path,
             name: path,
-            builder: (context, state) => const NavigationPage(),
+            builder: (_, __) => const NavigationPage(),
           ),
       };
 }
