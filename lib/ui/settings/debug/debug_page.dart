@@ -182,7 +182,28 @@ class DebugPage extends ConsumerWidget {
                   ),
                   onPressed: (context) async {
                     await HapticFeedback.mediumImpact();
-                    final token = await FirebaseInstallations.instance.getId();
+                    final instllationId =
+                        await FirebaseInstallations.instance.getId();
+                    await Clipboard.setData(ClipboardData(text: instllationId));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(instllationId),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                SettingsTile(
+                  title: Text(
+                    t.settings.debug.sections.firebase.installationId.title,
+                    style: const TextStyle(fontFamily: FontFamily.notoSansJP),
+                  ),
+                  onPressed: (context) async {
+                    await HapticFeedback.mediumImpact();
+                    final token =
+                        await FirebaseInstallations.instance.getToken();
                     await Clipboard.setData(ClipboardData(text: token));
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(

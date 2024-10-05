@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 277 (138 per locale)
+/// Strings: 279 (139 per locale)
 ///
-/// Built on 2024-09-23 at 09:04 UTC
+/// Built on 2024-09-30 at 10:13 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -889,6 +889,9 @@ class _StringsSettingsDebugSectionsFirebaseEn {
   late final _StringsSettingsDebugSectionsFirebaseInstallationIdEn
       installationId =
       _StringsSettingsDebugSectionsFirebaseInstallationIdEn._(_root);
+  late final _StringsSettingsDebugSectionsFirebaseInstallationTokenEn
+      installationToken =
+      _StringsSettingsDebugSectionsFirebaseInstallationTokenEn._(_root);
 }
 
 // Path: settings.general.row.theme.theme
@@ -1026,6 +1029,16 @@ class _StringsSettingsDebugSectionsFirebaseInstallationIdEn {
 
   // Translations
   String get title => 'Copy Installation ID';
+}
+
+// Path: settings.debug.sections.firebase.installationToken
+class _StringsSettingsDebugSectionsFirebaseInstallationTokenEn {
+  _StringsSettingsDebugSectionsFirebaseInstallationTokenEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Copy Installation';
 }
 
 // Path: <root>
@@ -1286,7 +1299,7 @@ class _StringsCommonJa implements _StringsCommonEn {
   @override
   String get more => 'もっと見る';
   @override
-  String get searchQuery => '検索ワード（例：から揚げ　ナス）';
+  String get searchQuery => '検索ワード（例：から揚げ ナス）';
   @override
   String get sortByDate => '登録日（新しい順）';
   @override
@@ -2015,6 +2028,10 @@ class _StringsSettingsDebugSectionsFirebaseJa
   late final _StringsSettingsDebugSectionsFirebaseInstallationIdJa
       installationId =
       _StringsSettingsDebugSectionsFirebaseInstallationIdJa._(_root);
+  @override
+  late final _StringsSettingsDebugSectionsFirebaseInstallationTokenJa
+      installationToken =
+      _StringsSettingsDebugSectionsFirebaseInstallationTokenJa._(_root);
 }
 
 // Path: settings.general.row.theme.theme
@@ -2192,6 +2209,19 @@ class _StringsSettingsDebugSectionsFirebaseInstallationIdJa
   // Translations
   @override
   String get title => 'Installation IDをコピー';
+}
+
+// Path: settings.debug.sections.firebase.installationToken
+class _StringsSettingsDebugSectionsFirebaseInstallationTokenJa
+    implements _StringsSettingsDebugSectionsFirebaseInstallationTokenEn {
+  _StringsSettingsDebugSectionsFirebaseInstallationTokenJa._(this._root);
+
+  @override
+  final _StringsJa _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Installation Tokenをコピー';
 }
 
 /// Flat map(s) containing all translations.
@@ -2380,6 +2410,8 @@ extension on Translations {
         return 'Copy FCM Token';
       case 'settings.debug.sections.firebase.installationId.title':
         return 'Copy Installation ID';
+      case 'settings.debug.sections.firebase.installationToken.title':
+        return 'Copy Installation';
       case 'settings.common.selected':
         return 'Selected';
       case 'imagePicker.title':
@@ -2665,6 +2697,8 @@ extension on _StringsJa {
         return 'FCMトークンをコピー';
       case 'settings.debug.sections.firebase.installationId.title':
         return 'Installation IDをコピー';
+      case 'settings.debug.sections.firebase.installationToken.title':
+        return 'Installation Tokenをコピー';
       case 'settings.common.selected':
         return '選択中';
       case 'imagePicker.title':
@@ -2686,7 +2720,7 @@ extension on _StringsJa {
       case 'common.more':
         return 'もっと見る';
       case 'common.searchQuery':
-        return '検索ワード（例：から揚げ　ナス）';
+        return '検索ワード（例：から揚げ ナス）';
       case 'common.sortByDate':
         return '登録日（新しい順）';
       case 'common.sortByLikes':

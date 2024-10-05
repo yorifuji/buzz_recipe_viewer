@@ -156,6 +156,8 @@ settings:
           title: Copy FCM Token
         installationId:
           title: Copy Installation ID
+        installationToken:
+          title: Copy Installation
   common:
     selected: Selected
 imagePicker:
