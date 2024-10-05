@@ -13,20 +13,3 @@ class StorageImage with _$StorageImage {
   factory StorageImage.fromJson(Map<String, Object?> json) =>
       _$StorageImageFromJson(json);
 }
-
-class StorageImageListField
-    implements JsonConverter<List<StorageImage>, List<dynamic>> {
-  const StorageImageListField();
-
-  @override
-  List<StorageImage> fromJson(List<dynamic> json) {
-    return json
-        .map((e) => StorageImage.fromJson(e as Map<String, dynamic>))
-        .toList();
-  }
-
-  @override
-  List<dynamic> toJson(List<StorageImage> imageList) {
-    return imageList.map((image) => image.toJson()).toList();
-  }
-}

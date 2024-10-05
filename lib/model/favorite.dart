@@ -7,8 +7,9 @@ part 'favorite.g.dart';
 
 @freezed
 class Favorite with _$Favorite {
+  @JsonSerializable(explicitToJson: true)
   const factory Favorite({
-    @SearchHitField() required SearchHit searchHit,
+    required SearchHit searchHit,
     @CreatedAtField() required DateTime createdAt,
     @UpdatedAtField() required DateTime updatedAt,
     String? id,

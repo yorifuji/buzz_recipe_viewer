@@ -7,6 +7,7 @@ part 'recipe.g.dart';
 
 @freezed
 class Recipe with _$Recipe {
+  @JsonSerializable(explicitToJson: true)
   const factory Recipe({
     required String title,
     required String description,
@@ -14,7 +15,7 @@ class Recipe with _$Recipe {
     required List<String> stepList,
     @CreatedAtField() required DateTime createdAt,
     @UpdatedAtField() required DateTime updatedAt,
-    @StorageImageListField() required List<StorageImage> imageList,
+    required List<StorageImage> imageList,
     String? id,
   }) = _Recipe;
 
