@@ -20,7 +20,6 @@ Favorite _$FavoriteFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Favorite {
-  @SearchHitField()
   SearchHit get searchHit => throw _privateConstructorUsedError;
   @CreatedAtField()
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -44,7 +43,7 @@ abstract class $FavoriteCopyWith<$Res> {
       _$FavoriteCopyWithImpl<$Res, Favorite>;
   @useResult
   $Res call(
-      {@SearchHitField() SearchHit searchHit,
+      {SearchHit searchHit,
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
       String? id});
@@ -112,7 +111,7 @@ abstract class _$$FavoriteImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@SearchHitField() SearchHit searchHit,
+      {SearchHit searchHit,
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
       String? id});
@@ -161,10 +160,11 @@ class __$$FavoriteImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$FavoriteImpl extends _Favorite {
   const _$FavoriteImpl(
-      {@SearchHitField() required this.searchHit,
+      {required this.searchHit,
       @CreatedAtField() required this.createdAt,
       @UpdatedAtField() required this.updatedAt,
       this.id})
@@ -174,7 +174,6 @@ class _$FavoriteImpl extends _Favorite {
       _$$FavoriteImplFromJson(json);
 
   @override
-  @SearchHitField()
   final SearchHit searchHit;
   @override
   @CreatedAtField()
@@ -227,7 +226,7 @@ class _$FavoriteImpl extends _Favorite {
 
 abstract class _Favorite extends Favorite {
   const factory _Favorite(
-      {@SearchHitField() required final SearchHit searchHit,
+      {required final SearchHit searchHit,
       @CreatedAtField() required final DateTime createdAt,
       @UpdatedAtField() required final DateTime updatedAt,
       final String? id}) = _$FavoriteImpl;
@@ -237,7 +236,6 @@ abstract class _Favorite extends Favorite {
       _$FavoriteImpl.fromJson;
 
   @override
-  @SearchHitField()
   SearchHit get searchHit;
   @override
   @CreatedAtField()

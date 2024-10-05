@@ -29,17 +29,3 @@ class SearchHitItem with _$SearchHitItem {
     required SearchHit searchHit,
   }) = _SearchHitItem;
 }
-
-class SearchHitField implements JsonConverter<SearchHit, dynamic> {
-  const SearchHitField();
-
-  @override
-  SearchHit fromJson(dynamic json) {
-    return SearchHit.fromJson(json as Map<String, Object?>);
-  }
-
-  @override
-  dynamic toJson(SearchHit searchHit) {
-    return searchHit.toJson();
-  }
-}

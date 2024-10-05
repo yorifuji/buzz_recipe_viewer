@@ -28,7 +28,6 @@ mixin _$Recipe {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @UpdatedAtField()
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  @StorageImageListField()
   List<StorageImage> get imageList => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
@@ -53,7 +52,7 @@ abstract class $RecipeCopyWith<$Res> {
       List<String> stepList,
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
-      @StorageImageListField() List<StorageImage> imageList,
+      List<StorageImage> imageList,
       String? id});
 }
 
@@ -132,7 +131,7 @@ abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       List<String> stepList,
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
-      @StorageImageListField() List<StorageImage> imageList,
+      List<StorageImage> imageList,
       String? id});
 }
 
@@ -196,7 +195,8 @@ class __$$RecipeImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$RecipeImpl implements _Recipe {
   const _$RecipeImpl(
       {required this.title,
@@ -205,7 +205,7 @@ class _$RecipeImpl implements _Recipe {
       required final List<String> stepList,
       @CreatedAtField() required this.createdAt,
       @UpdatedAtField() required this.updatedAt,
-      @StorageImageListField() required final List<StorageImage> imageList,
+      required final List<StorageImage> imageList,
       this.id})
       : _foodList = foodList,
         _stepList = stepList,
@@ -242,7 +242,6 @@ class _$RecipeImpl implements _Recipe {
   final DateTime updatedAt;
   final List<StorageImage> _imageList;
   @override
-  @StorageImageListField()
   List<StorageImage> get imageList {
     if (_imageList is EqualUnmodifiableListView) return _imageList;
     // ignore: implicit_dynamic_type
@@ -313,7 +312,7 @@ abstract class _Recipe implements Recipe {
       required final List<String> stepList,
       @CreatedAtField() required final DateTime createdAt,
       @UpdatedAtField() required final DateTime updatedAt,
-      @StorageImageListField() required final List<StorageImage> imageList,
+      required final List<StorageImage> imageList,
       final String? id}) = _$RecipeImpl;
 
   factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
@@ -333,7 +332,6 @@ abstract class _Recipe implements Recipe {
   @UpdatedAtField()
   DateTime get updatedAt;
   @override
-  @StorageImageListField()
   List<StorageImage> get imageList;
   @override
   String? get id;
