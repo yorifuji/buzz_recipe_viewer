@@ -2,13 +2,14 @@ import 'package:buzz_recipe_viewer/model/auth_exception.dart';
 import 'package:buzz_recipe_viewer/model/auth_result.dart';
 import 'package:buzz_recipe_viewer/model/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'anonymous_signin_provider.g.dart';
 
 @riverpod
 Future<Result<AuthResult, AuthException>> anonymousSignIn(
-  AnonymousSignInRef ref,
+  Ref ref,
 ) async {
   try {
     final user = FirebaseAuth.instance.currentUser;

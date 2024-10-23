@@ -8,7 +8,7 @@ part of 'theme_data_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeDataHash() => r'970ba3d53a67d92d21568111e5cd613ffd15680e';
+String _$themeDataHash() => r'f414bdc90902ce76b3759ba4dac76c0d9a8d98d0';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -143,6 +143,8 @@ class ThemeDataProvider extends AutoDisposeProvider<ThemeData> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ThemeDataRef on AutoDisposeProviderRef<ThemeData> {
   /// The parameter `isDarkMode` of this provider.
   bool get isDarkMode;
@@ -156,4 +158,4 @@ class _ThemeDataProviderElement extends AutoDisposeProviderElement<ThemeData>
   bool get isDarkMode => (origin as ThemeDataProvider).isDarkMode;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

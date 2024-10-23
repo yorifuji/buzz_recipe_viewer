@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'video_repository.g.dart';
 
 @riverpod
-VideoRepository videoRepository(VideoRepositoryRef ref) => VideoRepository(ref);
+VideoRepository videoRepository(Ref ref) => VideoRepository(ref);
 
 class VideoRepository {
   VideoRepository(this.ref);

@@ -1,17 +1,17 @@
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'recipe_repository.g.dart';
 
 @riverpod
-RecipeRepository recipeRepository(RecipeRepositoryRef ref) =>
-    RecipeRepository(ref);
+RecipeRepository recipeRepository(Ref ref) => RecipeRepository(ref);
 
 class RecipeRepository {
   RecipeRepository(this._ref);
-  final RecipeRepositoryRef _ref;
+  final Ref _ref;
 
   // create
   Future<String> create(Recipe recipe) async {

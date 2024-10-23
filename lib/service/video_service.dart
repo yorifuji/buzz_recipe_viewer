@@ -3,12 +3,13 @@ import 'package:buzz_recipe_viewer/model/sort_index.dart';
 import 'package:buzz_recipe_viewer/repository/video_repository.dart';
 import 'package:buzz_recipe_viewer/repository/video_repository_mock.dart';
 import 'package:buzz_recipe_viewer/store/video/search_state_store.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'video_service.g.dart';
 
 @riverpod
-VideoService videoService(VideoServiceRef ref) => VideoService(
+VideoService videoService(Ref ref) => VideoService(
       Flavor.isDev()
           ? ref.watch(videoRepositoryMockProvider)
           : ref.watch(videoRepositoryProvider),

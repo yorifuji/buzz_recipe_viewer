@@ -23,6 +23,8 @@ final recipeCollectionProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RecipeCollectionRef
     = AutoDisposeProviderRef<CollectionReference<Recipe>>;
 String _$recipeDocumentHash() => r'47b9033ed5049e8ec79f71b6fc74f9c40be14a4a';
@@ -162,6 +164,8 @@ class RecipeDocumentProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin RecipeDocumentRef on AutoDisposeProviderRef<DocumentReference<Recipe>> {
   /// The parameter `recipeId` of this provider.
   String get recipeId;
@@ -189,6 +193,8 @@ final recipeQueryProvider = AutoDisposeProvider<Query<Recipe>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RecipeQueryRef = AutoDisposeProviderRef<Query<Recipe>>;
 String _$recipeStreamHash() => r'aa56192419bb8828ee9602fa4537a558a68c1673';
 
@@ -305,6 +311,8 @@ class RecipeStreamProvider extends AutoDisposeStreamProvider<List<Recipe>> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin RecipeStreamRef on AutoDisposeStreamProviderRef<List<Recipe>> {
   /// The parameter `limit` of this provider.
   int get limit;
@@ -319,4 +327,4 @@ class _RecipeStreamProviderElement
   int get limit => (origin as RecipeStreamProvider).limit;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

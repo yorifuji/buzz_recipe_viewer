@@ -4,27 +4,21 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'app_lifecycle_state_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-AppLifecycleState appLifecycleState(AppLifecycleStateRef ref) {
-  final observer = _AppLifecycleObserver((value) => ref.state = value);
-
-  final binding = WidgetsBinding.instance..addObserver(observer);
-  ref.onDispose(() => binding.removeObserver(observer));
-
-  return AppLifecycleState.resumed;
-}
-
-class _AppLifecycleObserver extends WidgetsBindingObserver {
-  _AppLifecycleObserver(this._didChangeState);
-
-  final ValueChanged<AppLifecycleState> _didChangeState;
+class AppLifecycleNotifier extends _$AppLifecycleNotifier
+    with WidgetsBindingObserver {
+  @override
+  AppLifecycleState build() {
+    final binding = WidgetsBinding.instance..addObserver(this);
+    ref.onDispose(() => binding.removeObserver(this));
+    return AppLifecycleState.resumed;
+  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    _didChangeState(state);
-    super.didChangeAppLifecycleState(state);
+    this.state = state;
   }
 }
 
-extension AppLifecycleStateExtension on AppLifecycleState {
+extension AppLifecycleStateExt on AppLifecycleState {
   bool get isResumed => this == AppLifecycleState.resumed;
 }

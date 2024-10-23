@@ -9,7 +9,7 @@ part of 'firebase_messaging_token_provider.dart';
 // **************************************************************************
 
 String _$firebaseMessagingTokenHash() =>
-    r'49f3e8f150df5b366b1cfbb821d2f00b5748c5ab';
+    r'8360ca8df98710926f3f70b61f5c611edee5c7c4';
 
 /// See also [firebaseMessagingToken].
 @ProviderFor(firebaseMessagingToken)
@@ -23,6 +23,8 @@ final firebaseMessagingTokenProvider = AutoDisposeProvider<String?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FirebaseMessagingTokenRef = AutoDisposeProviderRef<String?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -8,7 +8,7 @@ part of 'algolia_client_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$algoliaClientHash() => r'2a4d6c27d48ef43237f9ceae10a88dbf625a4948';
+String _$algoliaClientHash() => r'036859cdc823de13c97891ef0806db31cb8a4b49';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -144,6 +144,8 @@ class AlgoliaClientProvider extends AutoDisposeProvider<HitsSearcher> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin AlgoliaClientRef on AutoDisposeProviderRef<HitsSearcher> {
   /// The parameter `indexName` of this provider.
   String get indexName;
@@ -157,4 +159,4 @@ class _AlgoliaClientProviderElement
   String get indexName => (origin as AlgoliaClientProvider).indexName;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -8,7 +8,7 @@ part of 'preference_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$preferenceServiceHash() => r'32d48fa8405be836516b26a417fca44b86f2a2c2';
+String _$preferenceServiceHash() => r'ad7d7942132de50d430712212874d2a44f1da9f8';
 
 /// See also [preferenceService].
 @ProviderFor(preferenceService)
@@ -23,6 +23,8 @@ final preferenceServiceProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef PreferenceServiceRef = AutoDisposeProviderRef<PreferenceService>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
