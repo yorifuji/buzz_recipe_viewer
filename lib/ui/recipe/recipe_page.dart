@@ -189,7 +189,7 @@ class _RecipeListWidget extends ConsumerWidget {
                 onPressed: () {
                   ref.read(recipeWindowNotifierProvider.notifier).growWindow();
                 },
-                child: const Text('More'),
+                child: Text(t.common.more),
               ),
             );
           } else {
