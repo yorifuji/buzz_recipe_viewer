@@ -28,10 +28,6 @@ defaults:
   run:
     shell: bash -euo pipefail {0}
 
-defaults:
-  run:
-    shell: bash -euo pipefail {0}
-
 jobs:
   android:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
