@@ -8,8 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'video_repository_mock.g.dart';
 
 @riverpod
-VideoRepositoryMock videoRepositoryMock(Ref ref) =>
-    VideoRepositoryMock();
+VideoRepositoryMock videoRepositoryMock(Ref ref) => VideoRepositoryMock();
 
 class VideoRepositoryMock implements VideoRepository {
   @override
