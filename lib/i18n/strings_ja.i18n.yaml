@@ -154,6 +154,8 @@ settings:
           title: FCMトークンをコピー
         installationId:
           title: Installation IDをコピー
+        installationToken:
+          title: Installation Tokenをコピー
   common:
     selected: 選択中
 imagePicker:

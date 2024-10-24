@@ -10,7 +10,7 @@ part of 'favorite.dart';
 
 _$FavoriteImpl _$$FavoriteImplFromJson(Map<String, dynamic> json) =>
     _$FavoriteImpl(
-      searchHit: const SearchHitField().fromJson(json['searchHit']),
+      searchHit: SearchHit.fromJson(json['searchHit'] as Map<String, dynamic>),
       createdAt: const CreatedAtField().fromJson(json['createdAt']),
       updatedAt: const UpdatedAtField().fromJson(json['updatedAt']),
       id: json['id'] as String?,
@@ -18,7 +18,7 @@ _$FavoriteImpl _$$FavoriteImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$FavoriteImplToJson(_$FavoriteImpl instance) =>
     <String, dynamic>{
-      'searchHit': const SearchHitField().toJson(instance.searchHit),
+      'searchHit': instance.searchHit.toJson(),
       'createdAt': const CreatedAtField().toJson(instance.createdAt),
       'updatedAt': const UpdatedAtField().toJson(instance.updatedAt),
       'id': instance.id,

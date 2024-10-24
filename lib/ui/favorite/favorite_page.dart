@@ -112,7 +112,7 @@ class _FavoriteListWidget extends ConsumerWidget {
                       .read(favoriteWindowNotifierProvider.notifier)
                       .growWindow();
                 },
-                child: const Text('More'),
+                child: Text(t.common.more),
               ),
             );
           } else {

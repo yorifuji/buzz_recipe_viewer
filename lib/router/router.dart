@@ -23,6 +23,29 @@ enum Route {
 
   const Route(this.path);
   final String path;
+
+  GoRoute get toGoRoute => switch (this) {
+        Route.maintenance => GoRoute(
+            path: path,
+            name: path,
+            builder: (_, __) => const MaintenancePage(),
+          ),
+        Route.walkthrough => GoRoute(
+            path: path,
+            name: path,
+            builder: (_, __) => const WalkthroughPage(),
+          ),
+        Route.provisoning => GoRoute(
+            path: path,
+            name: path,
+            builder: (_, __) => const ProvisioningPage(),
+          ),
+        Route.navigation => GoRoute(
+            path: path,
+            name: path,
+            builder: (_, __) => const NavigationPage(),
+          ),
+      };
 }
 
 @riverpod
@@ -43,28 +66,7 @@ GoRouter router(RouterRef ref) {
     observers: [
       FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
     ],
-    routes: [
-      GoRoute(
-        path: Route.walkthrough.path,
-        name: Route.walkthrough.path,
-        builder: (context, state) => const WalkthroughPage(),
-      ),
-      GoRoute(
-        path: Route.provisoning.path,
-        name: Route.provisoning.path,
-        builder: (context, state) => const ProvisioningPage(),
-      ),
-      GoRoute(
-        path: Route.navigation.path,
-        name: Route.navigation.path,
-        builder: (context, state) => const NavigationPage(),
-      ),
-      GoRoute(
-        path: Route.maintenance.path,
-        name: Route.maintenance.path,
-        builder: (context, state) => const MaintenancePage(),
-      ),
-    ],
+    routes: Route.values.map((route) => route.toGoRoute).toList(),
     redirect: (BuildContext context, GoRouterState state) {
       if (isMaintenance) {
         return Route.maintenance.path;
