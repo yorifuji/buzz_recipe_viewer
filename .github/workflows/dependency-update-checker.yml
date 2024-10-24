@@ -15,6 +15,10 @@ permissions:
   contents: write
   pull-requests: write
 
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
 jobs:
   dependency-update-checker:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-latest') || 'self-hosted' }}

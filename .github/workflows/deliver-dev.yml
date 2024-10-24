@@ -21,6 +21,10 @@ permissions:
   pages: write
   id-token: write
 
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
 jobs:
   web:
     runs-on: ubuntu-latest

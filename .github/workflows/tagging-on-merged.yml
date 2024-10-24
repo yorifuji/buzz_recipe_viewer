@@ -12,6 +12,10 @@ on:
 permissions:
   contents: write
 
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
 jobs:
   tagged:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')
