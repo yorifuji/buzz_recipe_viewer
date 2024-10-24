@@ -41,7 +41,7 @@ jobs:
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
 
-      - run: make build-runner
+      - run: make prepare-env
 
       - run: flutter pub get
 
