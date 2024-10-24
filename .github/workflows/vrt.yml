@@ -115,7 +115,7 @@ jobs:
 
   compare:
     if: ${{ !cancelled() && !failure() }}
-    needs: [expected, actual]
+    needs: [lookup, expected, actual]
     runs-on: ubuntu-latest
     steps:
       - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
