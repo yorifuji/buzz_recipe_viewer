@@ -50,6 +50,8 @@ class LocaleSettingPage extends ConsumerWidget {
                         locale == e.toLocale ? const Icon(Icons.check) : null,
                     onPressed: (context) async {
                       await ref.read(localeNotiferProvider.notifier).update(e);
+                      await WidgetsFlutterBinding.ensureInitialized()
+                          .performReassemble();
                     },
                   ),
                 )

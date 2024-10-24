@@ -90,8 +90,6 @@ class SettingsPage extends ConsumerWidget {
                       },
                     ),
                   );
-                  await WidgetsFlutterBinding.ensureInitialized()
-                      .performReassemble();
                 },
               ),
               if (!kIsWeb && (Platform.isIOS || Platform.isAndroid))

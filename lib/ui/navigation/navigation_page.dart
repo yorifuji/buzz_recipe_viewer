@@ -1,5 +1,4 @@
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/store/locale_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
@@ -43,11 +42,6 @@ class NavigationPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTab = useState<AppTab>(AppTab.recipe);
-    // to update tab titles when locale changes
-    ref.watch(
-      localeNotiferProvider,
-    );
-
     return PopScope(
       // スタックが存在しない場合はアプリを終了する（バックグラウンドに移動する）
       canPop:
