@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
 jobs:
   check:
     uses: ./.github/workflows/check.yml

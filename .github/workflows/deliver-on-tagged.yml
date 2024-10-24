@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
 jobs:
   prod:
     uses: ./.github/workflows/deliver-prod.yml
