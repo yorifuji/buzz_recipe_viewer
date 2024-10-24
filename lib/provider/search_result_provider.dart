@@ -2,6 +2,7 @@ import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
 import 'package:buzz_recipe_viewer/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/model/search_request.dart';
 import 'package:buzz_recipe_viewer/provider/algolia_client_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_result_provider.g.dart';
@@ -43,7 +44,7 @@ typedef SearchResult = ({SearchMetadata metadata, HitsPage hitsPage});
 
 @riverpod
 Stream<SearchResult> searchResult(
-  SearchResultRef ref, {
+  Ref ref, {
   required String indexName,
   required SearchRequest searchRequest,
 }) async* {

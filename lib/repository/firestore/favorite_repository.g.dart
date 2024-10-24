@@ -9,7 +9,7 @@ part of 'favorite_repository.dart';
 // **************************************************************************
 
 String _$favoriteRepositoryHash() =>
-    r'57550886c5ad3945ec7d0b3ff414dce86b0322bc';
+    r'1cb751b15288de2d5008797db28f22e9a000d2d6';
 
 /// See also [favoriteRepository].
 @ProviderFor(favoriteRepository)
@@ -24,6 +24,8 @@ final favoriteRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FavoriteRepositoryRef = AutoDisposeProviderRef<FavoriteRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

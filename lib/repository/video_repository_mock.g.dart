@@ -9,7 +9,7 @@ part of 'video_repository_mock.dart';
 // **************************************************************************
 
 String _$videoRepositoryMockHash() =>
-    r'dffb62e84480aa3dcb81dcd5c0c9d2314633650e';
+    r'196f1afa89beb59d0d3a18db931f4accfa1edd12';
 
 /// See also [videoRepositoryMock].
 @ProviderFor(videoRepositoryMock)
@@ -24,6 +24,8 @@ final videoRepositoryMockProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef VideoRepositoryMockRef = AutoDisposeProviderRef<VideoRepositoryMock>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

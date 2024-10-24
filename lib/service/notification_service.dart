@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notification_service.g.dart';
@@ -15,7 +16,7 @@ enum NotificationTopic {
 
 @riverpod
 Future<AuthorizationStatus> notificationAuthorizeStatus(
-  NotificationAuthorizeStatusRef ref,
+  Ref ref,
 ) =>
     NotificationService.getAuthorizationStatus();
 

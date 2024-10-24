@@ -1,17 +1,17 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/favorite_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'favorite_repository.g.dart';
 
 @riverpod
-FavoriteRepository favoriteRepository(FavoriteRepositoryRef ref) =>
-    FavoriteRepository(ref);
+FavoriteRepository favoriteRepository(Ref ref) => FavoriteRepository(ref);
 
 class FavoriteRepository {
   FavoriteRepository(this._ref);
-  final FavoriteRepositoryRef _ref;
+  final Ref _ref;
 
   // create
   Future<String> create(Favorite favorite) async {

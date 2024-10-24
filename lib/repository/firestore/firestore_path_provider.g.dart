@@ -8,7 +8,7 @@ part of 'firestore_path_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestorePathHash() => r'0c43fb1e9b448b40ed1b8f91f3a1df307f496b2e';
+String _$firestorePathHash() => r'823f4a4c09d22a6f1638f5d8d91b7c32d87a665b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -144,6 +144,8 @@ class FirestorePathProvider extends AutoDisposeProvider<String> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FirestorePathRef on AutoDisposeProviderRef<String> {
   /// The parameter `databasePath` of this provider.
   FirestorePath get databasePath;
@@ -158,4 +160,4 @@ class _FirestorePathProviderElement extends AutoDisposeProviderElement<String>
       (origin as FirestorePathProvider).databasePath;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

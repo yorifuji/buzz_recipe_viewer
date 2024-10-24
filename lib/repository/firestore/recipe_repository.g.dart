@@ -8,7 +8,7 @@ part of 'recipe_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipeRepositoryHash() => r'def068021904b66c74251ca49a53764d4c81e00d';
+String _$recipeRepositoryHash() => r'0c337fb07c655bf61ba39adb57cd03ea3fa61276';
 
 /// See also [recipeRepository].
 @ProviderFor(recipeRepository)
@@ -22,6 +22,8 @@ final recipeRepositoryProvider = AutoDisposeProvider<RecipeRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RecipeRepositoryRef = AutoDisposeProviderRef<RecipeRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

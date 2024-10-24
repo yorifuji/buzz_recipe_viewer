@@ -24,6 +24,8 @@ final favoriteCollectionProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FavoriteCollectionRef
     = AutoDisposeProviderRef<CollectionReference<Favorite>>;
 String _$favoriteDocumentHash() => r'12c97067e201e8ab855590a208274e91efb2c709';
@@ -163,6 +165,8 @@ class FavoriteDocumentProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FavoriteDocumentRef
     on AutoDisposeProviderRef<DocumentReference<Favorite>> {
   /// The parameter `favoriteId` of this provider.
@@ -192,6 +196,8 @@ final favoriteQueryProvider = AutoDisposeProvider<Query<Favorite>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FavoriteQueryRef = AutoDisposeProviderRef<Query<Favorite>>;
 String _$favoriteStreamHash() => r'6fa1ff682d4d45981303d9cab5b75c441e30851e';
 
@@ -308,6 +314,8 @@ class FavoriteStreamProvider extends AutoDisposeStreamProvider<List<Favorite>> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FavoriteStreamRef on AutoDisposeStreamProviderRef<List<Favorite>> {
   /// The parameter `limit` of this provider.
   int get limit;
@@ -322,4 +330,4 @@ class _FavoriteStreamProviderElement
   int get limit => (origin as FavoriteStreamProvider).limit;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

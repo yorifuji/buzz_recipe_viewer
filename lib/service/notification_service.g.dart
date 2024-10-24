@@ -9,7 +9,7 @@ part of 'notification_service.dart';
 // **************************************************************************
 
 String _$notificationAuthorizeStatusHash() =>
-    r'ad19594c34bda583f62caf4027c0a1d41d6b58b2';
+    r'3f6b45ce2d9013d4b1115d8ebdfe793332d7a8ad';
 
 /// See also [notificationAuthorizeStatus].
 @ProviderFor(notificationAuthorizeStatus)
@@ -24,7 +24,9 @@ final notificationAuthorizeStatusProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef NotificationAuthorizeStatusRef
     = AutoDisposeFutureProviderRef<AuthorizationStatus>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

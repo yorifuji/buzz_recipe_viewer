@@ -9,13 +9,14 @@ import 'package:collection/collection.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 part 'storage_repository.g.dart';
 
 @riverpod
-StorageRepository storageRepository(StorageRepositoryRef ref) =>
+StorageRepository storageRepository(Ref ref) =>
     StorageRepository(ref.watch(storagePathProvider));
 
 class StorageRepository {

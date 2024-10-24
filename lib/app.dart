@@ -16,10 +16,10 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    ref.listen<bool>(
-      appLifecycleStateProvider.select((state) => state.isResumed),
-      (_, resumed) {
-        if (resumed) {
+    ref.listen<AppLifecycleState>(
+      appLifecycleNotifierProvider,
+      (_, state) {
+        if (state.isResumed) {
           ref.invalidate(notificationAuthorizeStatusProvider);
         }
       },
