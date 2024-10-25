@@ -22,13 +22,13 @@ class RecipeRepository {
   // update
   Future<void> update(Recipe recipe) async {
     await _ref
-        .read(recipeDocumentProvider(recipe.id!))
+        .read(recipeDocumentProvider(recipe.recipeId!))
         .set(recipe, SetOptions(merge: true));
   }
 
   // delete
   Future<void> delete(Recipe recipe) async {
-    await _ref.read(recipeDocumentProvider(recipe.id!)).delete();
+    await _ref.read(recipeDocumentProvider(recipe.recipeId!)).delete();
   }
 
   // delete all

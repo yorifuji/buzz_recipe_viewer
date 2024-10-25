@@ -8,7 +8,7 @@ part of 'recipe_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$recipeCollectionHash() => r'f087b5bf6c8e3fb07e714d4c0eb9890b52f11080';
+String _$recipeCollectionHash() => r'111d17e4c856158f54391723815c866a0484cf85';
 
 /// See also [recipeCollection].
 @ProviderFor(recipeCollection)
@@ -27,7 +27,7 @@ final recipeCollectionProvider =
 // ignore: unused_element
 typedef RecipeCollectionRef
     = AutoDisposeProviderRef<CollectionReference<Recipe>>;
-String _$recipeDocumentHash() => r'47b9033ed5049e8ec79f71b6fc74f9c40be14a4a';
+String _$recipeDocumentHash() => r'3dcc34b267361df9d5597b7a869572d0a0b16c69';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -61,7 +61,7 @@ class RecipeDocumentFamily extends Family<DocumentReference<Recipe>> {
 
   /// See also [recipeDocument].
   RecipeDocumentProvider call(
-    String recipeId,
+    RecipeId recipeId,
   ) {
     return RecipeDocumentProvider(
       recipeId,
@@ -97,7 +97,7 @@ class RecipeDocumentProvider
     extends AutoDisposeProvider<DocumentReference<Recipe>> {
   /// See also [recipeDocument].
   RecipeDocumentProvider(
-    String recipeId,
+    RecipeId recipeId,
   ) : this._internal(
           (ref) => recipeDocument(
             ref as RecipeDocumentRef,
@@ -125,7 +125,7 @@ class RecipeDocumentProvider
     required this.recipeId,
   }) : super.internal();
 
-  final String recipeId;
+  final RecipeId recipeId;
 
   @override
   Override overrideWith(
@@ -168,7 +168,7 @@ class RecipeDocumentProvider
 // ignore: unused_element
 mixin RecipeDocumentRef on AutoDisposeProviderRef<DocumentReference<Recipe>> {
   /// The parameter `recipeId` of this provider.
-  String get recipeId;
+  RecipeId get recipeId;
 }
 
 class _RecipeDocumentProviderElement
@@ -177,10 +177,10 @@ class _RecipeDocumentProviderElement
   _RecipeDocumentProviderElement(super.provider);
 
   @override
-  String get recipeId => (origin as RecipeDocumentProvider).recipeId;
+  RecipeId get recipeId => (origin as RecipeDocumentProvider).recipeId;
 }
 
-String _$recipeQueryHash() => r'4f8d7337b6964da67d80e5a375d4c51b98f9825c';
+String _$recipeQueryHash() => r'1bbcfafeeaa6fd6333f3b10a2b30c26b7cb4cbf7';
 
 /// See also [recipeQuery].
 @ProviderFor(recipeQuery)
@@ -196,7 +196,7 @@ final recipeQueryProvider = AutoDisposeProvider<Query<Recipe>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RecipeQueryRef = AutoDisposeProviderRef<Query<Recipe>>;
-String _$recipeStreamHash() => r'aa56192419bb8828ee9602fa4537a558a68c1673';
+String _$recipeStreamHash() => r'93990d7e156614e7f33cf2084dfdb5d2853b61a5';
 
 /// See also [recipeStream].
 @ProviderFor(recipeStream)

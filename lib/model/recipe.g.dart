@@ -20,7 +20,7 @@ _$RecipeImpl _$$RecipeImplFromJson(Map<String, dynamic> json) => _$RecipeImpl(
       imageList: (json['imageList'] as List<dynamic>)
           .map((e) => StorageImage.fromJson(e as Map<String, dynamic>))
           .toList(),
-      id: json['id'] as String?,
+      recipeId: const RecipeIdConverter().fromJson(json['recipeId']),
     );
 
 Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
@@ -32,5 +32,5 @@ Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
       'createdAt': const CreatedAtField().toJson(instance.createdAt),
       'updatedAt': const UpdatedAtField().toJson(instance.updatedAt),
       'imageList': instance.imageList.map((e) => e.toJson()).toList(),
-      'id': instance.id,
+      'recipeId': const RecipeIdConverter().toJson(instance.recipeId),
     };

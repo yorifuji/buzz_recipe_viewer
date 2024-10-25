@@ -31,7 +31,7 @@ class TextItem with _$TextItem {
 class RecipeEditState with _$RecipeEditState {
   const factory RecipeEditState({
     Recipe? recipe,
-    String? id,
+    RecipeId? recipeId,
     @Default('') String title,
     @Default('') String description,
     @Default([]) List<TextItem> foodList,
@@ -49,7 +49,7 @@ class RecipeEditState with _$RecipeEditState {
   factory RecipeEditState.fromRecipe(Recipe recipe) {
     return RecipeEditState(
       recipe: recipe,
-      id: recipe.id,
+      recipeId: recipe.recipeId,
       title: recipe.title,
       description: recipe.description,
       foodList: recipe.foodList.mapIndexed(TextItem.fromIndex).toList(),
@@ -161,7 +161,7 @@ extension RecipeEditStateExtension on RecipeEditState {
   Recipe toRecipe({bool isUpdate = false}) {
     final now = DateTime.now();
     return Recipe(
-      id: id,
+      recipeId: recipeId,
       title: title,
       description: description,
       foodList: foodList.map((item) => item.text).toList(),

@@ -9,7 +9,7 @@ part of 'favorite_provider.dart';
 // **************************************************************************
 
 String _$favoriteCollectionHash() =>
-    r'78fa6834ad8032948078fed1fba2009bc2351b24';
+    r'77698d7e20bcad05eedd71a4c5192266cb621a55';
 
 /// See also [favoriteCollection].
 @ProviderFor(favoriteCollection)
@@ -28,7 +28,7 @@ final favoriteCollectionProvider =
 // ignore: unused_element
 typedef FavoriteCollectionRef
     = AutoDisposeProviderRef<CollectionReference<Favorite>>;
-String _$favoriteDocumentHash() => r'12c97067e201e8ab855590a208274e91efb2c709';
+String _$favoriteDocumentHash() => r'ba8fe2a2819d426bb5a976cd50a7ae7a9c95d8f5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -182,7 +182,7 @@ class _FavoriteDocumentProviderElement
   String get favoriteId => (origin as FavoriteDocumentProvider).favoriteId;
 }
 
-String _$favoriteQueryHash() => r'144f9e1f37b1b4fe175b78d08eedd950771bcdf5';
+String _$favoriteQueryHash() => r'be43d0b1c2e8a03dffa93a098a5850a67ad0cc31';
 
 /// See also [favoriteQuery].
 @ProviderFor(favoriteQuery)
@@ -199,7 +199,7 @@ final favoriteQueryProvider = AutoDisposeProvider<Query<Favorite>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FavoriteQueryRef = AutoDisposeProviderRef<Query<Favorite>>;
-String _$favoriteStreamHash() => r'6fa1ff682d4d45981303d9cab5b75c441e30851e';
+String _$favoriteStreamHash() => r'de69982fb9e255636f1dff3712f421b49dbe335e';
 
 /// See also [favoriteStream].
 @ProviderFor(favoriteStream)

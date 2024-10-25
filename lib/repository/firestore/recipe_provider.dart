@@ -41,7 +41,7 @@ CollectionReference<Recipe> recipeCollection(
 @riverpod
 DocumentReference<Recipe> recipeDocument(
   Ref ref,
-  String recipeId,
+  RecipeId recipeId,
 ) {
   final path = ref.watch(firestorePathProvider(FirestorePath.recipes));
   return FirebaseFirestore.instance.doc('$path/$recipeId').withConverter(
