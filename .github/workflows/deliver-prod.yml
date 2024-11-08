@@ -110,7 +110,7 @@ jobs:
           rm -f ./android/key.properties
 
   ios:
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-15') || 'self-hosted' }}
     environment: production
     timeout-minutes: 30
     steps:
@@ -238,7 +238,7 @@ jobs:
           rm -rf ./private_keys
 
   # macos:
-  #   runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-14') || 'self-hosted' }}
+  #   runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-15') || 'self-hosted' }}
   #   environment: production
   #   timeout-minutes: 30
   #   steps:
