@@ -164,8 +164,8 @@ abstract class _TextItem extends TextItem {
 
 /// @nodoc
 mixin _$RecipeEditState {
+  RecipeId get recipeId => throw _privateConstructorUsedError;
   Recipe? get recipe => throw _privateConstructorUsedError;
-  RecipeId? get recipeId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<TextItem> get foodList => throw _privateConstructorUsedError;
@@ -187,8 +187,8 @@ abstract class $RecipeEditStateCopyWith<$Res> {
       _$RecipeEditStateCopyWithImpl<$Res, RecipeEditState>;
   @useResult
   $Res call(
-      {Recipe? recipe,
-      RecipeId? recipeId,
+      {RecipeId recipeId,
+      Recipe? recipe,
       String title,
       String description,
       List<TextItem> foodList,
@@ -214,8 +214,8 @@ class _$RecipeEditStateCopyWithImpl<$Res, $Val extends RecipeEditState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? recipeId = null,
     Object? recipe = freezed,
-    Object? recipeId = freezed,
     Object? title = null,
     Object? description = null,
     Object? foodList = null,
@@ -224,14 +224,14 @@ class _$RecipeEditStateCopyWithImpl<$Res, $Val extends RecipeEditState>
     Object? loadingState = null,
   }) {
     return _then(_value.copyWith(
+      recipeId: null == recipeId
+          ? _value.recipeId
+          : recipeId // ignore: cast_nullable_to_non_nullable
+              as RecipeId,
       recipe: freezed == recipe
           ? _value.recipe
           : recipe // ignore: cast_nullable_to_non_nullable
               as Recipe?,
-      recipeId: freezed == recipeId
-          ? _value.recipeId
-          : recipeId // ignore: cast_nullable_to_non_nullable
-              as RecipeId?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -283,8 +283,8 @@ abstract class _$$RecipeEditStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Recipe? recipe,
-      RecipeId? recipeId,
+      {RecipeId recipeId,
+      Recipe? recipe,
       String title,
       String description,
       List<TextItem> foodList,
@@ -309,8 +309,8 @@ class __$$RecipeEditStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? recipeId = null,
     Object? recipe = freezed,
-    Object? recipeId = freezed,
     Object? title = null,
     Object? description = null,
     Object? foodList = null,
@@ -319,14 +319,14 @@ class __$$RecipeEditStateImplCopyWithImpl<$Res>
     Object? loadingState = null,
   }) {
     return _then(_$RecipeEditStateImpl(
+      recipeId: null == recipeId
+          ? _value.recipeId
+          : recipeId // ignore: cast_nullable_to_non_nullable
+              as RecipeId,
       recipe: freezed == recipe
           ? _value.recipe
           : recipe // ignore: cast_nullable_to_non_nullable
               as Recipe?,
-      recipeId: freezed == recipeId
-          ? _value.recipeId
-          : recipeId // ignore: cast_nullable_to_non_nullable
-              as RecipeId?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -359,8 +359,8 @@ class __$$RecipeEditStateImplCopyWithImpl<$Res>
 
 class _$RecipeEditStateImpl extends _RecipeEditState {
   const _$RecipeEditStateImpl(
-      {this.recipe,
-      this.recipeId,
+      {required this.recipeId,
+      this.recipe,
       this.title = '',
       this.description = '',
       final List<TextItem> foodList = const [],
@@ -373,9 +373,9 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
         super._();
 
   @override
-  final Recipe? recipe;
+  final RecipeId recipeId;
   @override
-  final RecipeId? recipeId;
+  final Recipe? recipe;
   @override
   @JsonKey()
   final String title;
@@ -415,7 +415,7 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
 
   @override
   String toString() {
-    return 'RecipeEditState(recipe: $recipe, recipeId: $recipeId, title: $title, description: $description, foodList: $foodList, stepList: $stepList, imageList: $imageList, loadingState: $loadingState)';
+    return 'RecipeEditState(recipeId: $recipeId, recipe: $recipe, title: $title, description: $description, foodList: $foodList, stepList: $stepList, imageList: $imageList, loadingState: $loadingState)';
   }
 
   @override
@@ -423,9 +423,9 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecipeEditStateImpl &&
-            (identical(other.recipe, recipe) || other.recipe == recipe) &&
             (identical(other.recipeId, recipeId) ||
                 other.recipeId == recipeId) &&
+            (identical(other.recipe, recipe) || other.recipe == recipe) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -440,8 +440,8 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      recipe,
       recipeId,
+      recipe,
       title,
       description,
       const DeepCollectionEquality().hash(_foodList),
@@ -461,8 +461,8 @@ class _$RecipeEditStateImpl extends _RecipeEditState {
 
 abstract class _RecipeEditState extends RecipeEditState {
   const factory _RecipeEditState(
-      {final Recipe? recipe,
-      final RecipeId? recipeId,
+      {required final RecipeId recipeId,
+      final Recipe? recipe,
       final String title,
       final String description,
       final List<TextItem> foodList,
@@ -472,9 +472,9 @@ abstract class _RecipeEditState extends RecipeEditState {
   const _RecipeEditState._() : super._();
 
   @override
-  Recipe? get recipe;
+  RecipeId get recipeId;
   @override
-  RecipeId? get recipeId;
+  Recipe? get recipe;
   @override
   String get title;
   @override

@@ -29,8 +29,7 @@ mixin _$Recipe {
   @UpdatedAtField()
   DateTime get updatedAt => throw _privateConstructorUsedError;
   List<StorageImage> get imageList => throw _privateConstructorUsedError;
-  @RecipeIdConverter()
-  RecipeId? get recipeId => throw _privateConstructorUsedError;
+  RecipeId get recipeId => throw _privateConstructorUsedError;
 
   /// Serializes this Recipe to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,7 +53,7 @@ abstract class $RecipeCopyWith<$Res> {
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
       List<StorageImage> imageList,
-      @RecipeIdConverter() RecipeId? recipeId});
+      RecipeId recipeId});
 }
 
 /// @nodoc
@@ -79,7 +78,7 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? imageList = null,
-    Object? recipeId = freezed,
+    Object? recipeId = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -110,10 +109,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
           ? _value.imageList
           : imageList // ignore: cast_nullable_to_non_nullable
               as List<StorageImage>,
-      recipeId: freezed == recipeId
+      recipeId: null == recipeId
           ? _value.recipeId
           : recipeId // ignore: cast_nullable_to_non_nullable
-              as RecipeId?,
+              as RecipeId,
     ) as $Val);
   }
 }
@@ -133,7 +132,7 @@ abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       @CreatedAtField() DateTime createdAt,
       @UpdatedAtField() DateTime updatedAt,
       List<StorageImage> imageList,
-      @RecipeIdConverter() RecipeId? recipeId});
+      RecipeId recipeId});
 }
 
 /// @nodoc
@@ -156,7 +155,7 @@ class __$$RecipeImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? imageList = null,
-    Object? recipeId = freezed,
+    Object? recipeId = null,
   }) {
     return _then(_$RecipeImpl(
       title: null == title
@@ -187,10 +186,10 @@ class __$$RecipeImplCopyWithImpl<$Res>
           ? _value._imageList
           : imageList // ignore: cast_nullable_to_non_nullable
               as List<StorageImage>,
-      recipeId: freezed == recipeId
+      recipeId: null == recipeId
           ? _value.recipeId
           : recipeId // ignore: cast_nullable_to_non_nullable
-              as RecipeId?,
+              as RecipeId,
     ));
   }
 }
@@ -207,7 +206,7 @@ class _$RecipeImpl implements _Recipe {
       @CreatedAtField() required this.createdAt,
       @UpdatedAtField() required this.updatedAt,
       required final List<StorageImage> imageList,
-      @RecipeIdConverter() this.recipeId})
+      required this.recipeId})
       : _foodList = foodList,
         _stepList = stepList,
         _imageList = imageList;
@@ -250,8 +249,7 @@ class _$RecipeImpl implements _Recipe {
   }
 
   @override
-  @RecipeIdConverter()
-  final RecipeId? recipeId;
+  final RecipeId recipeId;
 
   @override
   String toString() {
@@ -316,7 +314,7 @@ abstract class _Recipe implements Recipe {
       @CreatedAtField() required final DateTime createdAt,
       @UpdatedAtField() required final DateTime updatedAt,
       required final List<StorageImage> imageList,
-      @RecipeIdConverter() final RecipeId? recipeId}) = _$RecipeImpl;
+      required final RecipeId recipeId}) = _$RecipeImpl;
 
   factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
 
@@ -337,8 +335,7 @@ abstract class _Recipe implements Recipe {
   @override
   List<StorageImage> get imageList;
   @override
-  @RecipeIdConverter()
-  RecipeId? get recipeId;
+  RecipeId get recipeId;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
