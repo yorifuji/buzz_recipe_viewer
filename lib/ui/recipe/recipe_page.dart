@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/recipe.dart';
@@ -85,6 +87,7 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
       onRefresh: () async {
         ref.read(recipeWindowNotifierProvider.notifier).resetWindow();
         ref.invalidate(recipeStreamProvider(windowSize));
+        unawaited(HapticFeedback.mediumImpact());
       },
     );
   }
