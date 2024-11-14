@@ -19,6 +19,7 @@ class LocaleNotifer extends _$LocaleNotifer {
     await ref
         .read(intPreferenceProvider(Preference.locale).notifier)
         .update(localePreference.index);
+    await _applyLocaleSettings(localePreference);
     ref.invalidateSelf();
   }
 
