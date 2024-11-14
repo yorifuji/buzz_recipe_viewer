@@ -17,7 +17,7 @@ void main() {
         overrides: [
           recipeWindowNotifierProvider
               .overrideWith(RecipeWindowNotifierMock.new),
-          recipeStreamProvider(1).overrideWith((ref) => Stream.value([])),
+          recipeStreamProvider.overrideWith((ref) => Stream.value([])),
         ],
         child: const RecipePage(),
       ),
@@ -29,7 +29,7 @@ void main() {
         overrides: [
           recipeWindowNotifierProvider
               .overrideWith(RecipeWindowNotifierMock.new),
-          recipeStreamProvider(1)
+          recipeStreamProvider
               .overrideWith((ref) => Stream.value(FakeRecipe.en())),
         ],
         child: const RecipePage(),
@@ -42,7 +42,7 @@ void main() {
         overrides: [
           recipeWindowNotifierProvider
               .overrideWith(RecipeWindowNotifierMock.new),
-          recipeStreamProvider(1)
+          recipeStreamProvider
               .overrideWith((ref) => Stream.value(FakeRecipe.ja())),
         ],
         child: const RecipePage(),
