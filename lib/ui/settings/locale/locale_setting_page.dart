@@ -55,8 +55,6 @@ class LocaleSettingPage extends ConsumerWidget {
                         await ref
                             .read(localeNotiferProvider.notifier)
                             .updateLocale(e);
-                        await WidgetsFlutterBinding.ensureInitialized()
-                            .performReassemble();
                       },
                     ),
                   )

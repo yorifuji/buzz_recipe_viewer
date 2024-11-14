@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
 import 'package:buzz_recipe_viewer/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/provider/app_lifecycle_state_provider.dart';
@@ -16,16 +18,33 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    final locale = ref.watch(localeNotiferProvider);
+    final locale = ref.watch(localeNotiferProvider).maybeWhen(
+          skipLoadingOnReload: true,
+          data: (data) => data.toLocale,
+          orElse: () => LocalePreference.system.toLocale,
+        );
 
-    ref.listen<AppLifecycleState>(
-      appLifecycleNotifierProvider,
-      (_, state) {
-        if (state.isResumed) {
-          ref.invalidate(notificationAuthorizeStatusProvider);
-        }
-      },
-    );
+    ref
+      ..listen(
+        appLifecycleNotifierProvider,
+        (_, state) {
+          if (state.isResumed) {
+            ref.invalidate(notificationAuthorizeStatusProvider);
+          }
+        },
+      )
+      ..listen(
+        localeNotiferProvider,
+        (previous, current) {
+          if (previous != current) {
+            Future.microtask(() {
+              unawaited(
+                WidgetsFlutterBinding.ensureInitialized().performReassemble(),
+              );
+            });
+          }
+        },
+      );
 
     return TranslationProvider(
       child: MaterialApp.router(
@@ -34,8 +53,7 @@ class App extends ConsumerWidget {
         theme: ref.watch(themeDataProvider()),
         darkTheme: ref.watch(themeDataProvider(isDarkMode: true)),
         themeMode: ref.watch(themeNotiferProvider).themeMode,
-        locale:
-            locale.valueOrNull?.toLocale ?? LocalePreference.system.toLocale,
+        locale: locale,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
