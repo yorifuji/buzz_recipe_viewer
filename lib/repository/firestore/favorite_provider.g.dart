@@ -199,135 +199,23 @@ final favoriteQueryProvider = AutoDisposeProvider<Query<Favorite>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FavoriteQueryRef = AutoDisposeProviderRef<Query<Favorite>>;
-String _$favoriteStreamHash() => r'de69982fb9e255636f1dff3712f421b49dbe335e';
+String _$favoriteStreamHash() => r'f698a54089fbbda38c8db674cd6a8256999e97af';
 
 /// See also [favoriteStream].
 @ProviderFor(favoriteStream)
-const favoriteStreamProvider = FavoriteStreamFamily();
-
-/// See also [favoriteStream].
-class FavoriteStreamFamily extends Family<AsyncValue<List<Favorite>>> {
-  /// See also [favoriteStream].
-  const FavoriteStreamFamily();
-
-  /// See also [favoriteStream].
-  FavoriteStreamProvider call(
-    int limit,
-  ) {
-    return FavoriteStreamProvider(
-      limit,
-    );
-  }
-
-  @override
-  FavoriteStreamProvider getProviderOverride(
-    covariant FavoriteStreamProvider provider,
-  ) {
-    return call(
-      provider.limit,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'favoriteStreamProvider';
-}
-
-/// See also [favoriteStream].
-class FavoriteStreamProvider extends AutoDisposeStreamProvider<List<Favorite>> {
-  /// See also [favoriteStream].
-  FavoriteStreamProvider(
-    int limit,
-  ) : this._internal(
-          (ref) => favoriteStream(
-            ref as FavoriteStreamRef,
-            limit,
-          ),
-          from: favoriteStreamProvider,
-          name: r'favoriteStreamProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$favoriteStreamHash,
-          dependencies: FavoriteStreamFamily._dependencies,
-          allTransitiveDependencies:
-              FavoriteStreamFamily._allTransitiveDependencies,
-          limit: limit,
-        );
-
-  FavoriteStreamProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.limit,
-  }) : super.internal();
-
-  final int limit;
-
-  @override
-  Override overrideWith(
-    Stream<List<Favorite>> Function(FavoriteStreamRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FavoriteStreamProvider._internal(
-        (ref) => create(ref as FavoriteStreamRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        limit: limit,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeStreamProviderElement<List<Favorite>> createElement() {
-    return _FavoriteStreamProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is FavoriteStreamProvider && other.limit == limit;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, limit.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
+final favoriteStreamProvider =
+    AutoDisposeStreamProvider<List<Favorite>>.internal(
+  favoriteStream,
+  name: r'favoriteStreamProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$favoriteStreamHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FavoriteStreamRef on AutoDisposeStreamProviderRef<List<Favorite>> {
-  /// The parameter `limit` of this provider.
-  int get limit;
-}
-
-class _FavoriteStreamProviderElement
-    extends AutoDisposeStreamProviderElement<List<Favorite>>
-    with FavoriteStreamRef {
-  _FavoriteStreamProviderElement(super.provider);
-
-  @override
-  int get limit => (origin as FavoriteStreamProvider).limit;
-}
+typedef FavoriteStreamRef = AutoDisposeStreamProviderRef<List<Favorite>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

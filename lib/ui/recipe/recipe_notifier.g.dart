@@ -25,22 +25,5 @@ final recipeWindowNotifierProvider =
 );
 
 typedef _$RecipeWindowNotifier = AutoDisposeNotifier<int>;
-String _$cachedRecipeNotifierHash() =>
-    r'33c5b2af3bdfe616c0ba3bcb182a03b729d586b2';
-
-/// See also [CachedRecipeNotifier].
-@ProviderFor(CachedRecipeNotifier)
-final cachedRecipeNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    CachedRecipeNotifier, List<Recipe>>.internal(
-  CachedRecipeNotifier.new,
-  name: r'cachedRecipeNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$cachedRecipeNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CachedRecipeNotifier = AutoDisposeAsyncNotifier<List<Recipe>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

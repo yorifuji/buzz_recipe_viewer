@@ -15,7 +15,6 @@ import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,52 +32,38 @@ class FavoritePage extends StatelessWidget {
   }
 }
 
-class _FavoriteDataWidget extends HookConsumerWidget {
+class _FavoriteDataWidget extends ConsumerWidget {
   const _FavoriteDataWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final windowSize = ref.watch(favoriteWindowNotifierProvider);
-    final stream = ref.watch(favoriteStreamProvider(windowSize));
-
-    final cache = useState<List<Favorite>?>(null);
-    ref.listen(favoriteStreamProvider(windowSize), (prev, next) {
-      if (next.hasValue) {
-        cache.value = next.requireValue;
-      }
-    });
-
-    Widget listViewWidget(List<Favorite> data) {
-      final hasReachedEnd = data.length <= windowSize;
-      final value = data.take(windowSize).toList();
-      if (value.isEmpty) {
-        return const _NoFavoritesWidget();
-      } else {
-        return _FavoriteListWidget(
-          favorites: value,
-          hasReachedEnd: hasReachedEnd,
-        );
-      }
-    }
+    final favoriteStream = ref.watch(favoriteStreamProvider);
 
     return RefreshIndicator(
       displacement: 0,
       strokeWidth: 2,
-      child: stream.when(
-        data: listViewWidget,
-        loading: () {
-          if (cache.value != null) {
-            return listViewWidget(cache.value!);
-          } else {}
-          return const Center(
-            child: CircularProgressIndicator(strokeWidth: 2),
-          );
+      child: favoriteStream.when(
+        skipLoadingOnRefresh: true,
+        loading: () => const Center(
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+        data: (data) {
+          final hasReachedEnd = data.length <= windowSize;
+          final value = data.take(windowSize).toList();
+          if (value.isEmpty) {
+            return const _NoFavoritesWidget();
+          } else {
+            return _FavoriteListWidget(
+              favorites: value,
+              hasReachedEnd: hasReachedEnd,
+            );
+          }
         },
         error: (_, __) => const _ErrorWidget(),
       ),
       onRefresh: () async {
         ref.read(favoriteWindowNotifierProvider.notifier).resetWindow();
-        ref.invalidate(favoriteStreamProvider(windowSize));
         unawaited(HapticFeedback.mediumImpact());
       },
     );
@@ -208,14 +193,13 @@ class _ErrorWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final windowSize = ref.watch(favoriteWindowNotifierProvider);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Assets.images.error.image(width: 256, height: 256),
           TextButton(
-            onPressed: () => ref.invalidate(favoriteStreamProvider(windowSize)),
+            onPressed: () => ref.invalidate(favoriteStreamProvider),
             child: Text(t.common.fetchFailed),
           ),
         ],

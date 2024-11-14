@@ -196,135 +196,21 @@ final recipeQueryProvider = AutoDisposeProvider<Query<Recipe>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RecipeQueryRef = AutoDisposeProviderRef<Query<Recipe>>;
-String _$recipeStreamHash() => r'93990d7e156614e7f33cf2084dfdb5d2853b61a5';
+String _$recipeStreamHash() => r'52a36a64efe360e3501b53fe281043554cd8caab';
 
 /// See also [recipeStream].
 @ProviderFor(recipeStream)
-const recipeStreamProvider = RecipeStreamFamily();
-
-/// See also [recipeStream].
-class RecipeStreamFamily extends Family<AsyncValue<List<Recipe>>> {
-  /// See also [recipeStream].
-  const RecipeStreamFamily();
-
-  /// See also [recipeStream].
-  RecipeStreamProvider call(
-    int limit,
-  ) {
-    return RecipeStreamProvider(
-      limit,
-    );
-  }
-
-  @override
-  RecipeStreamProvider getProviderOverride(
-    covariant RecipeStreamProvider provider,
-  ) {
-    return call(
-      provider.limit,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'recipeStreamProvider';
-}
-
-/// See also [recipeStream].
-class RecipeStreamProvider extends AutoDisposeStreamProvider<List<Recipe>> {
-  /// See also [recipeStream].
-  RecipeStreamProvider(
-    int limit,
-  ) : this._internal(
-          (ref) => recipeStream(
-            ref as RecipeStreamRef,
-            limit,
-          ),
-          from: recipeStreamProvider,
-          name: r'recipeStreamProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$recipeStreamHash,
-          dependencies: RecipeStreamFamily._dependencies,
-          allTransitiveDependencies:
-              RecipeStreamFamily._allTransitiveDependencies,
-          limit: limit,
-        );
-
-  RecipeStreamProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.limit,
-  }) : super.internal();
-
-  final int limit;
-
-  @override
-  Override overrideWith(
-    Stream<List<Recipe>> Function(RecipeStreamRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: RecipeStreamProvider._internal(
-        (ref) => create(ref as RecipeStreamRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        limit: limit,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeStreamProviderElement<List<Recipe>> createElement() {
-    return _RecipeStreamProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is RecipeStreamProvider && other.limit == limit;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, limit.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
+final recipeStreamProvider = AutoDisposeStreamProvider<List<Recipe>>.internal(
+  recipeStream,
+  name: r'recipeStreamProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$recipeStreamHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin RecipeStreamRef on AutoDisposeStreamProviderRef<List<Recipe>> {
-  /// The parameter `limit` of this provider.
-  int get limit;
-}
-
-class _RecipeStreamProviderElement
-    extends AutoDisposeStreamProviderElement<List<Recipe>>
-    with RecipeStreamRef {
-  _RecipeStreamProviderElement(super.provider);
-
-  @override
-  int get limit => (origin as RecipeStreamProvider).limit;
-}
+typedef RecipeStreamRef = AutoDisposeStreamProviderRef<List<Recipe>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

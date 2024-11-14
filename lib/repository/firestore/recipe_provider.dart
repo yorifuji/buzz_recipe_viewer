@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/firestore_path.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/firestore_path_provider.dart';
+import 'package:buzz_recipe_viewer/ui/recipe/recipe_notifier.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -69,16 +70,18 @@ Query<Recipe> recipeQuery(
 }
 
 @riverpod
-Stream<List<Recipe>> recipeStream(Ref ref, int limit) =>
-    FirebaseFirestore.instance
-        .collection(
-          ref.watch(firestorePathProvider(FirestorePath.recipes)),
-        )
-        .orderBy('createdAt', descending: true)
-        .limit(limit + 1)
-        .withConverter<Recipe>(
-          fromFirestore: RecipeConverter.from,
-          toFirestore: (_, __) => throw UnimplementedError(),
-        )
-        .snapshots()
-        .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+Stream<List<Recipe>> recipeStream(Ref ref) {
+  final windowSize = ref.watch(recipeWindowNotifierProvider);
+  return FirebaseFirestore.instance
+      .collection(
+        ref.watch(firestorePathProvider(FirestorePath.recipes)),
+      )
+      .orderBy('createdAt', descending: true)
+      .limit(windowSize + 1)
+      .withConverter<Recipe>(
+        fromFirestore: RecipeConverter.from,
+        toFirestore: (_, __) => throw UnimplementedError(),
+      )
+      .snapshots()
+      .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+}

@@ -1,6 +1,7 @@
 import 'package:buzz_recipe_viewer/model/favorite.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/firestore_path.dart';
 import 'package:buzz_recipe_viewer/repository/firestore/firestore_path_provider.dart';
+import 'package:buzz_recipe_viewer/ui/favorite/favorite_notifier.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -77,16 +78,18 @@ Query<Favorite> favoriteQuery(
 }
 
 @riverpod
-Stream<List<Favorite>> favoriteStream(Ref ref, int limit) =>
-    FirebaseFirestore.instance
-        .collection(
-          ref.watch(firestorePathProvider(FirestorePath.favorites)),
-        )
-        .orderBy('createdAt', descending: true)
-        .limit(limit + 1)
-        .withConverter<Favorite>(
-          fromFirestore: FavoriteConverter.from,
-          toFirestore: (_, __) => throw UnimplementedError(),
-        )
-        .snapshots()
-        .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+Stream<List<Favorite>> favoriteStream(Ref ref) {
+  final windowSize = ref.watch(favoriteWindowNotifierProvider);
+  return FirebaseFirestore.instance
+      .collection(
+        ref.watch(firestorePathProvider(FirestorePath.favorites)),
+      )
+      .orderBy('createdAt', descending: true)
+      .limit(windowSize + 1)
+      .withConverter<Favorite>(
+        fromFirestore: FavoriteConverter.from,
+        toFirestore: (_, __) => throw UnimplementedError(),
+      )
+      .snapshots()
+      .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+}

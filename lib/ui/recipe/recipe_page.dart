@@ -11,7 +11,6 @@ import 'package:buzz_recipe_viewer/ui/recipe/recipe_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/view/recipe_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RecipePage extends StatelessWidget {
@@ -23,7 +22,7 @@ class RecipePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, title: t.recipe.title),
-      body: const _RecipeDataWidget1(),
+      body: const _RecipeDataWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await HapticFeedback.mediumImpact();
@@ -43,42 +42,31 @@ class RecipePage extends StatelessWidget {
   }
 }
 
-class _RecipeDataWidget1 extends HookConsumerWidget {
-  const _RecipeDataWidget1();
+class _RecipeDataWidget extends ConsumerWidget {
+  const _RecipeDataWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final windowSize = ref.watch(recipeWindowNotifierProvider);
-    final stream = ref.watch(recipeStreamProvider(windowSize));
-
-    final streamCache = useState<List<Recipe>?>(null);
-    ref.listen(recipeStreamProvider(windowSize), (_, next) {
-      if (next.hasValue) {
-        streamCache.value = next.requireValue;
-      }
-    });
-
-    Widget listViewWidget(List<Recipe> data) {
-      final hasReachedEnd = data.length <= windowSize;
-      final value = data.take(windowSize).toList();
-      if (value.isEmpty) {
-        return const _EmptyWidget();
-      } else {
-        return _RecipeListWidget(recipes: value, hasReachedEnd: hasReachedEnd);
-      }
-    }
+    final recipeStream = ref.watch(recipeStreamProvider);
 
     return RefreshIndicator(
       displacement: 0,
       strokeWidth: 2,
-      child: stream.when(
-        data: listViewWidget,
-        loading: () {
-          if (streamCache.value != null) {
-            return listViewWidget(streamCache.value!);
+      child: recipeStream.when(
+        skipLoadingOnReload: true,
+        loading: () => const Center(
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+        data: (data) {
+          final hasReachedEnd = data.length <= windowSize;
+          final value = data.take(windowSize).toList();
+          if (value.isEmpty) {
+            return const _EmptyWidget();
           } else {
-            return const Center(
-              child: CircularProgressIndicator(strokeWidth: 2),
+            return _RecipeListWidget(
+              recipes: value,
+              hasReachedEnd: hasReachedEnd,
             );
           }
         },
@@ -86,7 +74,6 @@ class _RecipeDataWidget1 extends HookConsumerWidget {
       ),
       onRefresh: () async {
         ref.read(recipeWindowNotifierProvider.notifier).resetWindow();
-        ref.invalidate(recipeStreamProvider(windowSize));
         unawaited(HapticFeedback.mediumImpact());
       },
     );
@@ -198,14 +185,13 @@ class _Errorwidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final windowSize = ref.watch(recipeWindowNotifierProvider);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Assets.images.error.image(width: 256, height: 256),
           TextButton(
-            onPressed: () => ref.invalidate(recipeStreamProvider(windowSize)),
+            onPressed: () => ref.invalidate(recipeStreamProvider),
             child: Text(t.common.fetchFailed),
           ),
         ],
