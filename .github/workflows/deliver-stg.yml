@@ -121,6 +121,12 @@ jobs:
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
           architecture: arm64
 
+      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+        if: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
+        with:
+          path: ios/Pods
+          key: cocoapods-cache-ios-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('ios/Podfile.lock') }}
+  
       - run: flutter pub get
 
       - name: flutterfire configure
