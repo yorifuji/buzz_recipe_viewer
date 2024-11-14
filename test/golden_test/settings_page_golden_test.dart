@@ -38,14 +38,14 @@ void main() {
   group('settings', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      await LocaleSettings.setLocale(locale);
+      // await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(tester, '${locale.languageCode}/settings/page');
     });
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      await LocaleSettings.setLocale(locale);
+      // await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(tester, '${locale.languageCode}/settings/page');
     });

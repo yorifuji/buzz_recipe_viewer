@@ -26,7 +26,7 @@ void main() {
   group(description, () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      await LocaleSettings.setLocale(locale);
+      // await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(deviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
@@ -36,7 +36,7 @@ void main() {
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      await LocaleSettings.setLocale(locale);
+      // await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(deviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
