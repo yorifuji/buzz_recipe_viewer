@@ -12,17 +12,17 @@ extension RecipeConverter on Recipe {
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) =>
-      Recipe.fromJson(snapshot.data()!..['id'] = snapshot.id);
+      Recipe.fromJson(snapshot.data()!..['recipeId'] = snapshot.id);
 
   static Map<String, Object?> toCreate(Recipe recipe, SetOptions? options) =>
       recipe.toJson()
-        ..remove('id')
+        ..remove('recipeId')
         ..['createdAt'] = FieldValue.serverTimestamp()
         ..['updatedAt'] = FieldValue.serverTimestamp();
 
   static Map<String, Object?> toUpdate(Recipe recipe, SetOptions? options) =>
       recipe.toJson()
-        ..remove('id')
+        ..remove('recipeId')
         ..remove('createdAt')
         ..['updatedAt'] = FieldValue.serverTimestamp();
 }
@@ -41,7 +41,7 @@ CollectionReference<Recipe> recipeCollection(
 @riverpod
 DocumentReference<Recipe> recipeDocument(
   Ref ref,
-  String recipeId,
+  RecipeId recipeId,
 ) {
   final path = ref.watch(firestorePathProvider(FirestorePath.recipes));
   return FirebaseFirestore.instance.doc('$path/$recipeId').withConverter(

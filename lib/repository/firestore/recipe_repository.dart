@@ -22,13 +22,13 @@ class RecipeRepository {
   // update
   Future<void> update(Recipe recipe) async {
     await _ref
-        .read(recipeDocumentProvider(recipe.id!))
+        .read(recipeDocumentProvider(recipe.recipeId!))
         .set(recipe, SetOptions(merge: true));
   }
 
   // delete
   Future<void> delete(Recipe recipe) async {
-    await _ref.read(recipeDocumentProvider(recipe.id!)).delete();
+    await _ref.read(recipeDocumentProvider(recipe.recipeId!)).delete();
   }
 
   // delete all
@@ -48,6 +48,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
     List.generate(30, (index) => index).map((index) {
       final now = start.add(Duration(seconds: index));
       final recipe = Recipe(
+        recipeId: RecipeId('$index'),
         title: '$index',
         description: '$index',
         foodList: [
@@ -69,6 +70,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
   Future<void> addSampleData() async {
     final now1 = DateTime.now();
     final recipe1 = Recipe(
+      recipeId: RecipeId('1'),
       title: '星空のフルーツタルト',
       description:
           'このレシピでは、真夜中の星空をイメージした美しいフルーツタルトを作ります。ブルーベリーや黒ぶどうなどの深い色合いのフルーツと、キウイやグリーンアップルなどの鮮やかなフルーツを組み合わせて、美味しくも美しいタルトを作り上げます。',
@@ -101,6 +103,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
 
     final now2 = DateTime.now();
     final recipe2 = Recipe(
+      recipeId: RecipeId('2'),
       title: '砂漠のミラージュカクテル',
       description:
           'このレシピでは、砂漠とミラージュをテーマにしたエキゾチックなカクテルを作ります。さっぱりとした味わいと美しい色彩が特徴です。',
@@ -125,6 +128,7 @@ extension RecipeRepositoryDebug on RecipeRepository {
 
     final now3 = DateTime.now();
     final recipe3 = Recipe(
+      recipeId: RecipeId('3'),
       title: 'レインボーベジタブルピザ',
       description: '色とりどりの野菜を使って虹色に彩られたヘルシーピザを作ります。見た目も楽しく、栄養満点のピザです。',
       foodList: [

@@ -104,6 +104,7 @@ class FakeRecipe {
   static List<Recipe> ja() {
     final now1 = DateTime.now();
     final recipe1 = Recipe(
+      recipeId: RecipeId('1'),
       title: '星空のフルーツタルト',
       description:
           'このレシピでは、真夜中の星空をイメージした美しいフルーツタルトを作ります。ブルーベリーや黒ぶどうなどの深い色合いのフルーツと、キウイやグリーンアップルなどの鮮やかなフルーツを組み合わせて、美味しくも美しいタルトを作り上げます。',
@@ -135,6 +136,7 @@ class FakeRecipe {
 
     final now2 = DateTime.now();
     final recipe2 = Recipe(
+      recipeId: RecipeId('2'),
       title: '砂漠のミラージュカクテル',
       description:
           'このレシピでは、砂漠とミラージュをテーマにしたエキゾチックなカクテルを作ります。さっぱりとした味わいと美しい色彩が特徴です。',
@@ -158,6 +160,7 @@ class FakeRecipe {
 
     final now3 = DateTime.now();
     final recipe3 = Recipe(
+      recipeId: RecipeId('3'),
       title: 'レインボーベジタブルピザ',
       description: '色とりどりの野菜を使って虹色に彩られたヘルシーピザを作ります。見た目も楽しく、栄養満点のピザです。',
       foodList: [
@@ -189,6 +192,7 @@ class FakeRecipe {
   static List<Recipe> en() {
     final now1 = DateTime.now();
     final recipe1 = Recipe(
+      recipeId: RecipeId('1'),
       title: 'Starry Fruit Tart',
       description:
           'In this recipe, we will make a beautiful fruit tart inspired by the midnight sky. We will combine deep-colored fruits like blueberries and black grapes with vibrant fruits like kiwi and green apple to create a delicious and visually stunning tart.',
@@ -220,6 +224,7 @@ class FakeRecipe {
 
     final now2 = DateTime.now();
     final recipe2 = Recipe(
+      recipeId: RecipeId('2'),
       title: 'Desert Mirage Cocktail',
       description:
           'In this recipe, we will make an exotic cocktail inspired by the desert and mirages. It has a refreshing taste and beautiful colors.',
@@ -243,6 +248,7 @@ class FakeRecipe {
 
     final now3 = DateTime.now();
     final recipe3 = Recipe(
+      recipeId: RecipeId('3'),
       title: 'Rainbow Vegetable Pizza',
       description:
           'In this recipe, we will make a healthy pizza that is colorful and vibrant using a variety of vegetables. It is not only visually appealing but also packed with nutrients.',

@@ -30,8 +30,8 @@ class TextItem with _$TextItem {
 @freezed
 class RecipeEditState with _$RecipeEditState {
   const factory RecipeEditState({
+    required RecipeId recipeId,
     Recipe? recipe,
-    String? id,
     @Default('') String title,
     @Default('') String description,
     @Default([]) List<TextItem> foodList,
@@ -42,6 +42,7 @@ class RecipeEditState with _$RecipeEditState {
   const RecipeEditState._();
 
   factory RecipeEditState.empty() => RecipeEditState(
+        recipeId: RecipeId(''),
         foodList: [TextItem.empty()],
         stepList: [TextItem.empty()],
       );
@@ -49,7 +50,7 @@ class RecipeEditState with _$RecipeEditState {
   factory RecipeEditState.fromRecipe(Recipe recipe) {
     return RecipeEditState(
       recipe: recipe,
-      id: recipe.id,
+      recipeId: recipe.recipeId,
       title: recipe.title,
       description: recipe.description,
       foodList: recipe.foodList.mapIndexed(TextItem.fromIndex).toList(),
@@ -161,7 +162,7 @@ extension RecipeEditStateExtension on RecipeEditState {
   Recipe toRecipe({bool isUpdate = false}) {
     final now = DateTime.now();
     return Recipe(
-      id: id,
+      recipeId: recipeId,
       title: title,
       description: description,
       foodList: foodList.map((item) => item.text).toList(),
@@ -177,5 +178,6 @@ class FakeRecipeEditNotifier extends _$RecipeEditNotifier
     with Mock
     implements RecipeEditNotifier {
   @override
-  RecipeEditState build(Recipe? recipe) => const RecipeEditState();
+  RecipeEditState build(Recipe? recipe) =>
+      RecipeEditState(recipeId: RecipeId(''));
 }

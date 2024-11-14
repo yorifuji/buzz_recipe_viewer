@@ -5,6 +5,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'recipe.freezed.dart';
 part 'recipe.g.dart';
 
+extension type RecipeId(String value) {
+  RecipeId.fromJson(String value) : this(value);
+  String toJson() => value;
+}
+
 @freezed
 class Recipe with _$Recipe {
   @JsonSerializable(explicitToJson: true)
@@ -16,7 +21,7 @@ class Recipe with _$Recipe {
     @CreatedAtField() required DateTime createdAt,
     @UpdatedAtField() required DateTime updatedAt,
     required List<StorageImage> imageList,
-    String? id,
+    required RecipeId recipeId,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, Object?> json) => _$RecipeFromJson(json);
