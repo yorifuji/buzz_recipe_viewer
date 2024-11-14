@@ -23,7 +23,7 @@ void main() {
   group('recipe_edit', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
@@ -33,7 +33,7 @@ void main() {
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,

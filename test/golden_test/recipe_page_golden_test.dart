@@ -52,7 +52,7 @@ void main() {
   group('recipe_note', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
@@ -62,7 +62,7 @@ void main() {
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDeviceBuilder, wrapper: wrapper);
       await screenMatchesGolden(
         tester,
@@ -74,7 +74,7 @@ void main() {
   group('list', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(
         japaneseRecipeDeviceBuilder,
         wrapper: wrapper,
@@ -87,7 +87,7 @@ void main() {
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(
         englishRecipeDeviceBuilder,
         wrapper: wrapper,

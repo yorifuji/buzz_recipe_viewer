@@ -30,14 +30,14 @@ void main() {
   group('empty', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDevice, wrapper: wrapper);
       await screenMatchesGolden(tester, '${locale.languageCode}/video/empty');
     });
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(emptyDevice, wrapper: wrapper);
       await screenMatchesGolden(tester, '${locale.languageCode}/video/empty');
     });
@@ -46,14 +46,14 @@ void main() {
   group('error', () {
     testGoldens('ja', (tester) async {
       const locale = AppLocale.ja;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(errorDevice, wrapper: wrapper);
       await screenMatchesGolden(tester, '${locale.languageCode}/video/error');
     });
 
     testGoldens('en', (tester) async {
       const locale = AppLocale.en;
-      LocaleSettings.setLocale(locale);
+      await LocaleSettings.setLocale(locale);
       await tester.pumpDeviceBuilder(errorDevice, wrapper: wrapper);
       await screenMatchesGolden(tester, '${locale.languageCode}/video/error');
     });
