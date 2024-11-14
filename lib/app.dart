@@ -16,6 +16,8 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    final locale = ref.watch(localeNotiferProvider);
+
     ref.listen<AppLifecycleState>(
       appLifecycleNotifierProvider,
       (_, state) {
@@ -32,7 +34,8 @@ class App extends ConsumerWidget {
         theme: ref.watch(themeDataProvider()),
         darkTheme: ref.watch(themeDataProvider(isDarkMode: true)),
         themeMode: ref.watch(themeNotiferProvider).themeMode,
-        locale: ref.watch(localeNotiferProvider).toLocale,
+        locale:
+            locale.valueOrNull?.toLocale ?? LocalePreference.system.toLocale,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

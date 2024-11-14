@@ -8,27 +8,27 @@ part 'locale_notifier.g.dart';
 @riverpod
 class LocaleNotifer extends _$LocaleNotifer {
   @override
-  LocalePreference build() {
+  Future<LocalePreference> build() async {
     final index = ref.watch(intPreferenceProvider(Preference.locale));
     final localePreference = LocalePreference.fromIndex(index);
-    _applyLocaleSettings(localePreference);
+    await _applyLocaleSettings(localePreference);
     return localePreference;
   }
 
-  Future<void> update(LocalePreference localePreference) async {
+  Future<void> updateLocale(LocalePreference localePreference) async {
     await ref
         .read(intPreferenceProvider(Preference.locale).notifier)
         .update(localePreference.index);
     ref.invalidateSelf();
   }
 
-  void _applyLocaleSettings(LocalePreference localePreference) {
+  Future<void> _applyLocaleSettings(LocalePreference localePreference) async {
     switch (localePreference) {
       case LocalePreference.system:
-        LocaleSettings.useDeviceLocale();
+        await LocaleSettings.useDeviceLocale();
       case LocalePreference.en:
       case LocalePreference.ja:
-        LocaleSettings.setLocaleRaw(localePreference.languageCode);
+        await LocaleSettings.setLocaleRaw(localePreference.languageCode);
     }
   }
 }
