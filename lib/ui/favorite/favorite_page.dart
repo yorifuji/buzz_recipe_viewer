@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
@@ -13,6 +14,7 @@ import 'package:buzz_recipe_viewer/ui/favorite/favorite_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/video_player/video_player_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -77,6 +79,7 @@ class _FavoriteDataWidget extends HookConsumerWidget {
       onRefresh: () async {
         ref.read(favoriteWindowNotifierProvider.notifier).resetWindow();
         ref.invalidate(favoriteStreamProvider(windowSize));
+        unawaited(HapticFeedback.mediumImpact());
       },
     );
   }
