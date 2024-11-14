@@ -31,8 +31,8 @@ dependencies:
   custom_text: ^2.0.2
   like_button: ^2.0.5
   collection: ^1.18.0
-  slang: ^3.31.2
-  slang_flutter: ^3.31.0
+  slang: ^4.1.0
+  slang_flutter: ^4.1.0
   mockito: ^5.4.4
   path: ^1.9.0
   introduction_screen: ^3.1.14
@@ -69,9 +69,9 @@ dev_dependencies:
   very_good_analysis: ^6.0.0
   riverpod_generator: ^2.4.3
   riverpod_lint: ^2.3.13
-  custom_lint: ^0.6.5
+  custom_lint: ^0.7.0
   flutter_launcher_icons: ^0.14.0
-  slang_build_runner: ^3.31.0
+  slang_build_runner: ^4.1.0
   golden_toolkit: ^0.15.0
   flutter_gen_runner: ^5.7.0
 
