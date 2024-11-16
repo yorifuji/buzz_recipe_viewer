@@ -70,7 +70,7 @@ Query<Recipe> recipeQuery(
 }
 
 @riverpod
-Stream<List<Recipe>> recipeStream(Ref ref) {
+Stream<({List<Recipe> recipes, bool hasReachedEnd})> recipeStream(Ref ref) {
   final windowSize = ref.watch(recipeWindowNotifierProvider);
   return FirebaseFirestore.instance
       .collection(
@@ -83,5 +83,11 @@ Stream<List<Recipe>> recipeStream(Ref ref) {
         toFirestore: (_, __) => throw UnimplementedError(),
       )
       .snapshots()
-      .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+      .map((snapshot) => snapshot.docs.map((e) => e.data()).toList())
+      .map(
+        (recipes) => (
+          recipes: recipes.take(windowSize).toList(),
+          hasReachedEnd: recipes.length <= windowSize
+        ),
+      );
 }

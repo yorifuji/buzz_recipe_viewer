@@ -17,7 +17,9 @@ void main() {
         overrides: [
           recipeWindowNotifierProvider
               .overrideWith(RecipeWindowNotifierMock.new),
-          recipeStreamProvider.overrideWith((ref) => Stream.value([])),
+          recipeStreamProvider.overrideWith(
+            (ref) => Stream.value((recipes: [], hasReachedEnd: true)),
+          ),
         ],
         child: const RecipePage(),
       ),
@@ -101,7 +103,7 @@ void main() {
 }
 
 class FakeRecipe {
-  static List<Recipe> ja() {
+  static ({List<Recipe> recipes, bool hasReachedEnd}) ja() {
     final now1 = DateTime.now();
     final recipe1 = Recipe(
       recipeId: RecipeId('1'),
@@ -186,10 +188,10 @@ class FakeRecipe {
       createdAt: now3,
       updatedAt: now3,
     );
-    return [recipe1, recipe2, recipe3];
+    return (recipes: [recipe1, recipe2, recipe3], hasReachedEnd: true);
   }
 
-  static List<Recipe> en() {
+  static ({List<Recipe> recipes, bool hasReachedEnd}) en() {
     final now1 = DateTime.now();
     final recipe1 = Recipe(
       recipeId: RecipeId('1'),
@@ -275,6 +277,6 @@ class FakeRecipe {
       createdAt: now3,
       updatedAt: now3,
     );
-    return [recipe1, recipe2, recipe3];
+    return (recipes: [recipe1, recipe2, recipe3], hasReachedEnd: true);
   }
 }

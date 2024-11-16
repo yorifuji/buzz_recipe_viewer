@@ -9,7 +9,7 @@ part of 'favorite_notifier.dart';
 // **************************************************************************
 
 String _$favoriteWindowNotifierHash() =>
-    r'5eaeb87fcf5824dcd9edc63dec03dde0f96cce44';
+    r'db60c7e7217405123146a9b093f51db64af9a066';
 
 /// See also [FavoriteWindowNotifier].
 @ProviderFor(FavoriteWindowNotifier)

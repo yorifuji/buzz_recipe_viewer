@@ -13,16 +13,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RecipePage extends StatelessWidget {
+class RecipePage extends ConsumerWidget {
   const RecipePage({super.key});
 
   static Widget show() => const RecipePage();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final recipeStream = ref.watch(recipeStreamProvider);
     return Scaffold(
       appBar: buildAppBar(context, title: t.recipe.title),
-      body: const _RecipeDataWidget(),
+      body: RefreshIndicator(
+        displacement: 0,
+        strokeWidth: 2,
+        child: recipeStream.when(
+          skipLoadingOnReload: true,
+          loading: () => const Center(
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          data: (data) => _RecipeListWidget(
+            recipes: data.recipes,
+            hasReachedEnd: data.hasReachedEnd,
+            isReloading: recipeStream.isReloading,
+          ),
+          error: (_, __) => const _ErrorWidget(),
+        ),
+        onRefresh: () async {
+          ref.read(recipeWindowNotifierProvider.notifier).resetWindow();
+          ref.invalidate(recipeStreamProvider);
+          unawaited(HapticFeedback.mediumImpact());
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await HapticFeedback.mediumImpact();
@@ -42,75 +63,58 @@ class RecipePage extends StatelessWidget {
   }
 }
 
-class _RecipeDataWidget extends ConsumerWidget {
-  const _RecipeDataWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final windowSize = ref.watch(recipeWindowNotifierProvider);
-    final recipeStream = ref.watch(recipeStreamProvider);
-
-    return RefreshIndicator(
-      displacement: 0,
-      strokeWidth: 2,
-      child: recipeStream.when(
-        skipLoadingOnReload: true,
-        loading: () => const Center(
-          child: CircularProgressIndicator(strokeWidth: 2),
-        ),
-        data: (data) {
-          final hasReachedEnd = data.length <= windowSize;
-          final value = data.take(windowSize).toList();
-          if (value.isEmpty) {
-            return const _EmptyWidget();
-          } else {
-            return _RecipeListWidget(
-              recipes: value,
-              hasReachedEnd: hasReachedEnd,
-            );
-          }
-        },
-        error: (_, __) => const _Errorwidget(),
-      ),
-      onRefresh: () async {
-        ref.read(recipeWindowNotifierProvider.notifier).resetWindow();
-        unawaited(HapticFeedback.mediumImpact());
-      },
-    );
-  }
-}
-
 class _RecipeListWidget extends ConsumerWidget {
-  const _RecipeListWidget({required this.recipes, required this.hasReachedEnd});
+  const _RecipeListWidget({
+    required this.recipes,
+    required this.hasReachedEnd,
+    required this.isReloading,
+  });
 
   final List<Recipe> recipes;
   final bool hasReachedEnd;
+  final bool isReloading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView.builder(
-      itemCount: hasReachedEnd ? recipes.length : recipes.length + 1,
-      itemBuilder: (_, index) {
-        final valuleKey = ValueKey(index);
-        if (hasReachedEnd) {
-          return _RecipeCardWidget(key: valuleKey, recipe: recipes[index]);
-        } else {
-          if (index == recipes.length) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 16),
-              child: TextButton(
-                onPressed: () {
-                  ref.read(recipeWindowNotifierProvider.notifier).growWindow();
-                },
-                child: Text(t.common.more),
-              ),
+    if (recipes.isEmpty) {
+      return const _EmptyWidget();
+    } else {
+      return ListView.builder(
+        itemCount: hasReachedEnd ? recipes.length : recipes.length + 1,
+        itemBuilder: (_, index) {
+          final valuleKey = ValueKey(index);
+          if (hasReachedEnd) {
+            return _RecipeCardWidget(
+              key: valuleKey,
+              recipe: recipes[index],
             );
           } else {
-            return _RecipeCardWidget(key: valuleKey, recipe: recipes[index]);
+            if (index == recipes.length) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 16),
+                child: isReloading
+                    ? const Center(
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : TextButton(
+                        onPressed: () {
+                          ref
+                              .read(recipeWindowNotifierProvider.notifier)
+                              .growWindow();
+                        },
+                        child: Text(t.common.more),
+                      ),
+              );
+            } else {
+              return _RecipeCardWidget(
+                key: valuleKey,
+                recipe: recipes[index],
+              );
+            }
           }
-        }
-      },
-    );
+        },
+      );
+    }
   }
 }
 
@@ -180,8 +184,8 @@ class _EmptyWidget extends StatelessWidget {
   }
 }
 
-class _Errorwidget extends ConsumerWidget {
-  const _Errorwidget();
+class _ErrorWidget extends ConsumerWidget {
+  const _ErrorWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

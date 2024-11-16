@@ -13,7 +13,9 @@ void main() {
         overrides: [
           recipeWindowNotifierProvider
               .overrideWith(RecipeWindowNotifierMock.new),
-          recipeStreamProvider.overrideWith((ref) => Stream.value([])),
+          recipeStreamProvider.overrideWith(
+            (ref) => Stream.value((recipes: [], hasReachedEnd: true)),
+          ),
         ],
         child: const MaterialApp(home: RecipePage()),
       ),

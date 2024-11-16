@@ -78,7 +78,9 @@ Query<Favorite> favoriteQuery(
 }
 
 @riverpod
-Stream<List<Favorite>> favoriteStream(Ref ref) {
+Stream<({List<Favorite> favorites, bool hasReachedEnd})> favoriteStream(
+  Ref ref,
+) {
   final windowSize = ref.watch(favoriteWindowNotifierProvider);
   return FirebaseFirestore.instance
       .collection(
@@ -91,5 +93,11 @@ Stream<List<Favorite>> favoriteStream(Ref ref) {
         toFirestore: (_, __) => throw UnimplementedError(),
       )
       .snapshots()
-      .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+      .map((snapshot) => snapshot.docs.map((e) => e.data()).toList())
+      .map(
+        (favorites) => (
+          favorites: favorites.take(windowSize).toList(),
+          hasReachedEnd: favorites.length <= windowSize
+        ),
+      );
 }
