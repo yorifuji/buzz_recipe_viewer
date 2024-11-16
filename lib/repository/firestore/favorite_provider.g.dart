@@ -199,12 +199,12 @@ final favoriteQueryProvider = AutoDisposeProvider<Query<Favorite>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FavoriteQueryRef = AutoDisposeProviderRef<Query<Favorite>>;
-String _$favoriteStreamHash() => r'f698a54089fbbda38c8db674cd6a8256999e97af';
+String _$favoriteStreamHash() => r'8aff46cbe0a3b53594a4587c10442e140e49e66b';
 
 /// See also [favoriteStream].
 @ProviderFor(favoriteStream)
-final favoriteStreamProvider =
-    AutoDisposeStreamProvider<List<Favorite>>.internal(
+final favoriteStreamProvider = AutoDisposeStreamProvider<
+    ({List<Favorite> favorites, bool hasReachedEnd})>.internal(
   favoriteStream,
   name: r'favoriteStreamProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -216,6 +216,7 @@ final favoriteStreamProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FavoriteStreamRef = AutoDisposeStreamProviderRef<List<Favorite>>;
+typedef FavoriteStreamRef = AutoDisposeStreamProviderRef<
+    ({List<Favorite> favorites, bool hasReachedEnd})>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
