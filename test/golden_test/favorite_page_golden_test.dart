@@ -17,7 +17,9 @@ void main() {
         overrides: [
           favoriteWindowNotifierProvider
               .overrideWith(FavoriteWindowNotifierrMock.new),
-          favoriteStreamProvider.overrideWith((ref) => Stream.value([])),
+          favoriteStreamProvider.overrideWith(
+            (ref) => Stream.value((favorites: [], hasReachedEnd: true)),
+          ),
         ],
         child: const FavoritePage(),
       ),
