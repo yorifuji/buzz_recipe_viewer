@@ -37,7 +37,8 @@ class FavoritePage extends ConsumerWidget {
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
           data: (data) => _FavoriteListWidget(
-            favorites: data,
+            favorites: data.favorites,
+            hasReachedEnd: data.hasReachedEnd,
             isReloading: favoriteStream.isReloading,
           ),
           error: (_, __) => const _ErrorWidget(),
@@ -55,32 +56,30 @@ class FavoritePage extends ConsumerWidget {
 class _FavoriteListWidget extends ConsumerWidget {
   const _FavoriteListWidget({
     required this.favorites,
+    required this.hasReachedEnd,
     required this.isReloading,
   });
 
   final List<Favorite> favorites;
+  final bool hasReachedEnd;
   final bool isReloading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final windowSize = ref.watch(favoriteWindowNotifierProvider);
-    final hasReachedEnd = favorites.length <= windowSize;
-    final takeFavorites = favorites.take(windowSize).toList();
-    if (takeFavorites.isEmpty) {
+    if (favorites.isEmpty) {
       return const _NoFavoritesWidget();
     } else {
       return ListView.builder(
-        itemCount:
-            hasReachedEnd ? takeFavorites.length : takeFavorites.length + 1,
+        itemCount: hasReachedEnd ? favorites.length : favorites.length + 1,
         itemBuilder: (_, index) {
           final valuleKey = ValueKey(index);
           if (hasReachedEnd) {
             return _FavoriteCardWidget(
               key: valuleKey,
-              favorite: takeFavorites[index],
+              favorite: favorites[index],
             );
           } else {
-            if (index == takeFavorites.length) {
+            if (index == favorites.length) {
               return isReloading
                   ? const Center(
                       child: CircularProgressIndicator(strokeWidth: 2),
@@ -99,7 +98,7 @@ class _FavoriteListWidget extends ConsumerWidget {
             } else {
               return _FavoriteCardWidget(
                 key: valuleKey,
-                favorite: takeFavorites[index],
+                favorite: favorites[index],
               );
             }
           }
