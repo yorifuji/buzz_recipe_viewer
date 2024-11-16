@@ -32,7 +32,8 @@ class RecipePage extends ConsumerWidget {
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
           data: (data) => _RecipeListWidget(
-            recipes: data,
+            recipes: data.recipes,
+            hasReachedEnd: data.hasReachedEnd,
             isReloading: recipeStream.isReloading,
           ),
           error: (_, __) => const _ErrorWidget(),
@@ -63,30 +64,32 @@ class RecipePage extends ConsumerWidget {
 }
 
 class _RecipeListWidget extends ConsumerWidget {
-  const _RecipeListWidget({required this.recipes, required this.isReloading});
+  const _RecipeListWidget({
+    required this.recipes,
+    required this.hasReachedEnd,
+    required this.isReloading,
+  });
 
   final List<Recipe> recipes;
+  final bool hasReachedEnd;
   final bool isReloading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final windowSize = ref.watch(recipeWindowNotifierProvider);
-    final hasReachedEnd = recipes.length <= windowSize;
-    final takeRecipes = recipes.take(windowSize).toList();
-    if (takeRecipes.isEmpty) {
+    if (recipes.isEmpty) {
       return const _EmptyWidget();
     } else {
       return ListView.builder(
-        itemCount: hasReachedEnd ? takeRecipes.length : takeRecipes.length + 1,
+        itemCount: hasReachedEnd ? recipes.length : recipes.length + 1,
         itemBuilder: (_, index) {
           final valuleKey = ValueKey(index);
           if (hasReachedEnd) {
             return _RecipeCardWidget(
               key: valuleKey,
-              recipe: takeRecipes[index],
+              recipe: recipes[index],
             );
           } else {
-            if (index == takeRecipes.length) {
+            if (index == recipes.length) {
               return Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
                 child: isReloading
@@ -105,7 +108,7 @@ class _RecipeListWidget extends ConsumerWidget {
             } else {
               return _RecipeCardWidget(
                 key: valuleKey,
-                recipe: takeRecipes[index],
+                recipe: recipes[index],
               );
             }
           }
