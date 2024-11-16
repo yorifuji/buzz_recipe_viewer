@@ -196,11 +196,12 @@ final recipeQueryProvider = AutoDisposeProvider<Query<Recipe>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RecipeQueryRef = AutoDisposeProviderRef<Query<Recipe>>;
-String _$recipeStreamHash() => r'52a36a64efe360e3501b53fe281043554cd8caab';
+String _$recipeStreamHash() => r'cfd7d9254463cdf525ebb01eafbbc4de1fa3631f';
 
 /// See also [recipeStream].
 @ProviderFor(recipeStream)
-final recipeStreamProvider = AutoDisposeStreamProvider<List<Recipe>>.internal(
+final recipeStreamProvider = AutoDisposeStreamProvider<
+    ({List<Recipe> recipes, bool hasReachedEnd})>.internal(
   recipeStream,
   name: r'recipeStreamProvider',
   debugGetCreateSourceHash:
@@ -211,6 +212,7 @@ final recipeStreamProvider = AutoDisposeStreamProvider<List<Recipe>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef RecipeStreamRef = AutoDisposeStreamProviderRef<List<Recipe>>;
+typedef RecipeStreamRef = AutoDisposeStreamProviderRef<
+    ({List<Recipe> recipes, bool hasReachedEnd})>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
