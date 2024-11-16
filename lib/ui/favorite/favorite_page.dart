@@ -18,54 +18,36 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FavoritePage extends StatelessWidget {
+class FavoritePage extends ConsumerWidget {
   const FavoritePage({super.key});
 
   static Widget show() => const FavoritePage();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteStream = ref.watch(favoriteStreamProvider);
     return Scaffold(
       appBar: buildAppBar(context, title: t.favorite.title),
-      body: const _FavoriteDataWidget(),
-    );
-  }
-}
-
-class _FavoriteDataWidget extends ConsumerWidget {
-  const _FavoriteDataWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final windowSize = ref.watch(favoriteWindowNotifierProvider);
-    final favoriteStream = ref.watch(favoriteStreamProvider);
-
-    return RefreshIndicator(
-      displacement: 0,
-      strokeWidth: 2,
-      child: favoriteStream.when(
-        skipLoadingOnRefresh: true,
-        loading: () => const Center(
-          child: CircularProgressIndicator(strokeWidth: 2),
+      body: RefreshIndicator(
+        displacement: 0,
+        strokeWidth: 2,
+        child: favoriteStream.when(
+          skipLoadingOnRefresh: true,
+          loading: () => const Center(
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          data: (data) => _FavoriteListWidget(
+            favorites: data,
+            isReloading: favoriteStream.isReloading,
+          ),
+          error: (_, __) => const _ErrorWidget(),
         ),
-        data: (data) {
-          final hasReachedEnd = data.length <= windowSize;
-          final value = data.take(windowSize).toList();
-          if (value.isEmpty) {
-            return const _NoFavoritesWidget();
-          } else {
-            return _FavoriteListWidget(
-              favorites: value,
-              hasReachedEnd: hasReachedEnd,
-            );
-          }
+        onRefresh: () async {
+          ref.read(favoriteWindowNotifierProvider.notifier).resetWindow();
+          ref.invalidate(favoriteStreamProvider);
+          unawaited(HapticFeedback.mediumImpact());
         },
-        error: (_, __) => const _ErrorWidget(),
       ),
-      onRefresh: () async {
-        ref.read(favoriteWindowNotifierProvider.notifier).resetWindow();
-        unawaited(HapticFeedback.mediumImpact());
-      },
     );
   }
 }
@@ -73,45 +55,53 @@ class _FavoriteDataWidget extends ConsumerWidget {
 class _FavoriteListWidget extends ConsumerWidget {
   const _FavoriteListWidget({
     required this.favorites,
-    required this.hasReachedEnd,
+    required this.isReloading,
   });
 
   final List<Favorite> favorites;
-  final bool hasReachedEnd;
+  final bool isReloading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView.builder(
-      itemCount: hasReachedEnd ? favorites.length : favorites.length + 1,
-      itemBuilder: (_, index) {
-        final valuleKey = ValueKey(index);
-        if (hasReachedEnd) {
-          return _FavoriteCardWidget(
-            key: valuleKey,
-            favorite: favorites[index],
-          );
-        } else {
-          if (index == favorites.length) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 16),
-              child: TextButton(
-                onPressed: () {
-                  ref
-                      .read(favoriteWindowNotifierProvider.notifier)
-                      .growWindow();
-                },
-                child: Text(t.common.more),
-              ),
-            );
-          } else {
+    final windowSize = ref.watch(favoriteWindowNotifierProvider);
+    final hasReachedEnd = favorites.length <= windowSize;
+    final takeFavorites = favorites.take(windowSize).toList();
+    if (takeFavorites.isEmpty) {
+      return const _NoFavoritesWidget();
+    } else {
+      return ListView.builder(
+        itemCount:
+            hasReachedEnd ? takeFavorites.length : takeFavorites.length + 1,
+        itemBuilder: (_, index) {
+          final valuleKey = ValueKey(index);
+          if (hasReachedEnd) {
             return _FavoriteCardWidget(
               key: valuleKey,
-              favorite: favorites[index],
+              favorite: takeFavorites[index],
             );
+          } else {
+            if (index == takeFavorites.length) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 16),
+                child: TextButton(
+                  onPressed: () {
+                    ref
+                        .read(favoriteWindowNotifierProvider.notifier)
+                        .growWindow();
+                  },
+                  child: Text(t.common.more),
+                ),
+              );
+            } else {
+              return _FavoriteCardWidget(
+                key: valuleKey,
+                favorite: takeFavorites[index],
+              );
+            }
           }
-        }
-      },
-    );
+        },
+      );
+    }
   }
 }
 
