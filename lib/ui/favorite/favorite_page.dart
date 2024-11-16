@@ -32,7 +32,7 @@ class FavoritePage extends ConsumerWidget {
         displacement: 0,
         strokeWidth: 2,
         child: favoriteStream.when(
-          skipLoadingOnRefresh: true,
+          skipLoadingOnReload: true,
           loading: () => const Center(
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
@@ -81,17 +81,21 @@ class _FavoriteListWidget extends ConsumerWidget {
             );
           } else {
             if (index == takeFavorites.length) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 16),
-                child: TextButton(
-                  onPressed: () {
-                    ref
-                        .read(favoriteWindowNotifierProvider.notifier)
-                        .growWindow();
-                  },
-                  child: Text(t.common.more),
-                ),
-              );
+              return isReloading
+                  ? const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 16),
+                      child: TextButton(
+                        onPressed: () {
+                          ref
+                              .read(favoriteWindowNotifierProvider.notifier)
+                              .growWindow();
+                        },
+                        child: Text(t.common.more),
+                      ),
+                    );
             } else {
               return _FavoriteCardWidget(
                 key: valuleKey,

@@ -9,7 +9,7 @@ part of 'recipe_notifier.dart';
 // **************************************************************************
 
 String _$recipeWindowNotifierHash() =>
-    r'691f166fcd76a3fb4741ce1080c9a53dada3e47b';
+    r'da899fde5d4f4ba123c8792907b6a161c3d1557e';
 
 /// See also [RecipeWindowNotifier].
 @ProviderFor(RecipeWindowNotifier)
