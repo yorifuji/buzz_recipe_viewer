@@ -26,6 +26,7 @@ class FavoritePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteStream = ref.watch(favoriteStreamProvider);
+    final isLoading = favoriteStream.isReloading;
     return Scaffold(
       appBar: buildAppBar(context, title: t.favorite.title),
       body: RefreshIndicator(
@@ -39,7 +40,7 @@ class FavoritePage extends ConsumerWidget {
           data: (data) => _FavoriteListWidget(
             favorites: data.favorites,
             hasReachedEnd: data.hasReachedEnd,
-            isReloading: favoriteStream.isReloading,
+            isReloading: isLoading,
           ),
           error: (_, __) => const _ErrorWidget(),
         ),
