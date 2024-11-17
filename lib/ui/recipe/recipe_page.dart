@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_provider.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/domain/model/recipe.dart';
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/recipe.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_notifier.dart';
@@ -21,6 +21,7 @@ class RecipePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final recipeStream = ref.watch(recipeStreamProvider);
+    final isReloading = recipeStream.isReloading;
     return Scaffold(
       appBar: buildAppBar(context, title: t.recipe.title),
       body: RefreshIndicator(
@@ -34,7 +35,7 @@ class RecipePage extends ConsumerWidget {
           data: (data) => _RecipeListWidget(
             recipes: data.recipes,
             hasReachedEnd: data.hasReachedEnd,
-            isReloading: recipeStream.isReloading,
+            isReloading: isReloading,
           ),
           error: (_, __) => const _ErrorWidget(),
         ),

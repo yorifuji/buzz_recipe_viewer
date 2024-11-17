@@ -1,7 +1,7 @@
+import 'package:buzz_recipe_viewer/data/repository/firestore/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/domain/model/favorite.dart';
+import 'package:buzz_recipe_viewer/domain/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/model/search_hit.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

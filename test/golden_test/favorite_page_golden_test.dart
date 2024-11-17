@@ -1,6 +1,6 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
+import 'package:buzz_recipe_viewer/data/repository/firestore/favorite_provider.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/favorite_provider.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/favorite/favorite_page.dart';
 import 'package:flutter_test/flutter_test.dart';

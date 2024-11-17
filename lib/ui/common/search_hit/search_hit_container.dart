@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/model/search_hit.dart';
+import 'package:buzz_recipe_viewer/domain/model/search_hit.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';
 import 'package:flutter/material.dart';
 
