@@ -1,8 +1,8 @@
-import 'package:buzz_recipe_viewer/model/loading_state.dart';
-import 'package:buzz_recipe_viewer/model/recipe.dart';
-import 'package:buzz_recipe_viewer/model/storage_image.dart';
-import 'package:buzz_recipe_viewer/repository/cloud_storage/storage_repository.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/data/repository/cloud_storage/storage_repository.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/domain/model/loading_state.dart';
+import 'package:buzz_recipe_viewer/domain/model/recipe.dart';
+import 'package:buzz_recipe_viewer/domain/model/storage_image.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_state.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

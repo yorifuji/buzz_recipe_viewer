@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
+import 'package:buzz_recipe_viewer/data/provider/theme_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';

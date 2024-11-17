@@ -1,7 +1,7 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_provider.dart';
+import 'package:buzz_recipe_viewer/domain/model/recipe.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/recipe.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_page.dart';
 import 'package:flutter_test/flutter_test.dart';

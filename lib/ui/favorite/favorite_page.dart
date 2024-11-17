@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:buzz_recipe_viewer/data/provider/preference_provider.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/favorite_provider.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/domain/model/favorite.dart';
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/favorite.dart';
-import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/favorite_provider.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_image_container.dart';
 import 'package:buzz_recipe_viewer/ui/common/search_hit/video_information_container.dart';

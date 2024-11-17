@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_provider.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/domain/model/recipe.dart';
 import 'package:buzz_recipe_viewer/gen/assets.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/recipe.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_provider.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_page.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/recipe_notifier.dart';

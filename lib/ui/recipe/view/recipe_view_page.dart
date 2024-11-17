@@ -1,6 +1,6 @@
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/domain/model/recipe.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/recipe.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
 import 'package:buzz_recipe_viewer/ui/common/image_slide_modal_sheet.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_widget.dart';
 import 'package:buzz_recipe_viewer/ui/recipe/edit/recipe_edit_page.dart';

@@ -1,6 +1,6 @@
+import 'package:buzz_recipe_viewer/domain/model/loading_state.dart';
+import 'package:buzz_recipe_viewer/domain/model/recipe.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/loading_state.dart';
-import 'package:buzz_recipe_viewer/model/recipe.dart';
 import 'package:buzz_recipe_viewer/ui/common/image_picker_bottom_sheet.dart';
 import 'package:buzz_recipe_viewer/ui/common/loading_popup.dart';
 import 'package:buzz_recipe_viewer/ui/common/photo_slide_widget/photo_slide_controller.dart';

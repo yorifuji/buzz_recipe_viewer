@@ -1,11 +1,11 @@
 import 'dart:io' show Platform;
 
+import 'package:buzz_recipe_viewer/data/provider/package_info_provider.dart';
+import 'package:buzz_recipe_viewer/data/provider/preference_provider.dart';
+import 'package:buzz_recipe_viewer/data/service/preference_service.dart';
+import 'package:buzz_recipe_viewer/domain/model/flavor.dart';
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/flavor.dart';
-import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
-import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
-import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/ui/common/app_bar.dart';
 import 'package:buzz_recipe_viewer/ui/settings/color/color_setting_page.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';

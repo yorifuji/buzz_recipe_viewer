@@ -1,10 +1,10 @@
+import 'package:buzz_recipe_viewer/data/provider/user_provider.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/favorite_repository.dart';
+import 'package:buzz_recipe_viewer/data/repository/firestore/recipe_repository.dart';
+import 'package:buzz_recipe_viewer/data/service/notification_service.dart';
+import 'package:buzz_recipe_viewer/data/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/provider/user_provider.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/favorite_repository.dart';
-import 'package:buzz_recipe_viewer/repository/firestore/recipe_repository.dart';
-import 'package:buzz_recipe_viewer/service/notification_service.dart';
-import 'package:buzz_recipe_viewer/service/preference_service.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:firebase_app_installations/firebase_app_installations.dart';
 import 'package:flutter/material.dart';

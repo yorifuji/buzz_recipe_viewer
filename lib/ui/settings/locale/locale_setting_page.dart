@@ -1,7 +1,7 @@
+import 'package:buzz_recipe_viewer/data/store/locale_notifier.dart';
+import 'package:buzz_recipe_viewer/domain/model/locale_preference.dart';
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/locale_preference.dart';
-import 'package:buzz_recipe_viewer/store/locale_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';

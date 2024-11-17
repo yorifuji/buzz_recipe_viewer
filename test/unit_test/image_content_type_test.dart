@@ -1,4 +1,4 @@
-import 'package:buzz_recipe_viewer/model/content_type.dart';
+import 'package:buzz_recipe_viewer/domain/model/content_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

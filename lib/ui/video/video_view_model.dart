@@ -1,6 +1,6 @@
-import 'package:buzz_recipe_viewer/model/loading_state.dart';
-import 'package:buzz_recipe_viewer/model/sort_index.dart';
-import 'package:buzz_recipe_viewer/service/video_service.dart';
+import 'package:buzz_recipe_viewer/data/service/video_service.dart';
+import 'package:buzz_recipe_viewer/domain/model/loading_state.dart';
+import 'package:buzz_recipe_viewer/domain/model/sort_index.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -1,8 +1,8 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
+import 'package:buzz_recipe_viewer/data/provider/package_info_provider.dart';
+import 'package:buzz_recipe_viewer/data/provider/preference_provider.dart';
+import 'package:buzz_recipe_viewer/data/provider/theme_data_provider.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/provider/package_info_provider.dart';
-import 'package:buzz_recipe_viewer/provider/preference_provider.dart';
-import 'package:buzz_recipe_viewer/provider/theme_data_provider.dart';
 import 'package:buzz_recipe_viewer/ui/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

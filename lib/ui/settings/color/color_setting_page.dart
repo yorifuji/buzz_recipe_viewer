@@ -1,7 +1,7 @@
+import 'package:buzz_recipe_viewer/data/store/app_color_notifier.dart';
+import 'package:buzz_recipe_viewer/domain/model/app_color.dart';
 import 'package:buzz_recipe_viewer/gen/fonts.gen.dart';
 import 'package:buzz_recipe_viewer/i18n/strings.g.dart';
-import 'package:buzz_recipe_viewer/model/app_color.dart';
-import 'package:buzz_recipe_viewer/store/app_color_notifier.dart';
 import 'package:buzz_recipe_viewer/ui/settings/common/custom_settings_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
