@@ -68,7 +68,7 @@ dev_dependencies:
   json_serializable: ^6.8.0
   very_good_analysis: ^6.0.0
   riverpod_generator: ^2.4.3
-  riverpod_lint: ^2.3.13
+  riverpod_lint: ^2.6.3
   custom_lint: ^0.7.0
   flutter_launcher_icons: ^0.14.0
   slang_build_runner: ^4.1.0
