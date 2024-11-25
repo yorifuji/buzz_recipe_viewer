@@ -5,6 +5,8 @@ run-name: PR Labeler ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted
 on:
   pull_request:
     types: opened
+    branches-ignore:
+      - 'dependabot/**'
 
 defaults:
   run:
