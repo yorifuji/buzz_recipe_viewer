@@ -75,6 +75,12 @@ dev_dependencies:
   golden_toolkit: ^0.15.0
   flutter_gen_runner: ^5.8.0
 
+dependency_overrides:
+  algolia_client_core: 1.27.1
+  algolia_client_insights: 1.27.1
+  algolia_client_search: 1.27.1
+  algoliasearch: 1.27.1
+
 flutter:
   uses-material-design: true
 
