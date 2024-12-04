@@ -12,7 +12,7 @@ defaults:
 
 jobs:
   pr-labeler:
-    if: startsWith(github.head_ref, 'dependabot/') == false
+    if: ${{ !contains(github.actor, '[bot]') }}
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     permissions:
       contents: read
