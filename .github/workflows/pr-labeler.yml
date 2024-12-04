@@ -5,8 +5,6 @@ run-name: PR Labeler ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted
 on:
   pull_request:
     types: opened
-    branches-ignore:
-      - 'dependabot/**'
 
 defaults:
   run:
@@ -14,6 +12,7 @@ defaults:
 
 jobs:
   pr-labeler:
+    if: startsWith(github.head_ref, 'dependabot/') == false
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
     permissions:
       contents: read
