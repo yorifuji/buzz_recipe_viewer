@@ -51,7 +51,7 @@ jobs:
         with:
           ref: ${{ needs.lookup.outputs.expected-sha }}
 
-      - uses: subosito/flutter-action@74af56c5ed2697ba4621264652728e8d217e53d3 # v2.17.0
+      - uses: subosito/flutter-action@f2c4f6686ca8e8d6e6d0f28410eeef506ed66aff # v2.18.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
@@ -87,7 +87,7 @@ jobs:
         with:
           ref: ${{ needs.lookup.outputs.actual-sha }}
 
-      - uses: subosito/flutter-action@74af56c5ed2697ba4621264652728e8d217e53d3 # v2.17.0
+      - uses: subosito/flutter-action@f2c4f6686ca8e8d6e6d0f28410eeef506ed66aff # v2.18.0
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
