@@ -197,7 +197,7 @@ class DebugPage extends ConsumerWidget {
                 ),
                 SettingsTile(
                   title: Text(
-                    t.settings.debug.sections.firebase.installationId.title,
+                    t.settings.debug.sections.firebase.installationToken.title,
                     style: const TextStyle(fontFamily: FontFamily.notoSansJP),
                   ),
                   onPressed: (context) async {
