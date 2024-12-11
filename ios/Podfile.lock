@@ -1,7 +1,7 @@
 PODS:
   - app_settings (5.1.1):
     - Flutter
-  - cloud_firestore (5.5.0):
+  - cloud_firestore (5.5.1):
     - Firebase/Firestore (= 11.4.0)
     - firebase_core
     - Flutter
@@ -33,34 +33,34 @@ PODS:
   - Firebase/Storage (11.4.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 11.4.0)
-  - firebase_analytics (11.3.5):
+  - firebase_analytics (11.3.6):
     - Firebase/Analytics (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_app_installations (0.3.1-6):
+  - firebase_app_installations (0.3.1-7):
     - Firebase/Installations (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_auth (5.3.3):
+  - firebase_auth (5.3.4):
     - Firebase/Auth (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_core (3.8.0):
+  - firebase_core (3.8.1):
     - Firebase/CoreOnly (= 11.4.0)
     - Flutter
-  - firebase_in_app_messaging (0.8.0-10):
+  - firebase_in_app_messaging (0.8.0-11):
     - Firebase/InAppMessaging (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (15.1.5):
+  - firebase_messaging (15.1.6):
     - Firebase/Messaging (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_remote_config (5.1.5):
+  - firebase_remote_config (5.2.0):
     - Firebase/RemoteConfig (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_storage (12.3.6):
+  - firebase_storage (12.3.7):
     - Firebase/Storage (= 11.4.0)
     - firebase_core
     - Flutter
@@ -225,7 +225,7 @@ PODS:
   - GTMSessionFetcher/Core (4.1.0)
   - image_picker_ios (0.0.1):
     - Flutter
-  - in_app_review (0.2.0):
+  - in_app_review (2.0.0):
     - Flutter
   - leveldb-library (1.22.6)
   - nanopb (3.30910.0):
@@ -353,16 +353,16 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
-  cloud_firestore: 8794ea2885e367f0a2096338964ddfd49739b2c7
+  cloud_firestore: 3fafe78d755b01fe1fd267a87bb52e80b7dacacc
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
-  firebase_analytics: fa7e5b20c2b58042e3301f5112a473d365bd490c
-  firebase_app_installations: c3aa0a5feb5c04dfe6d14ae6a4789a4fe01ee94b
-  firebase_auth: 42718683069d35d73af7a986b55b194589039e5e
-  firebase_core: 9efc3ecf689cdbc90f13f4dc58108c83ea46b266
-  firebase_in_app_messaging: 8c1f6b6b3cbb71247f06726fea066c335a517cd2
-  firebase_messaging: 6bf60adb4b33a848d135e16bc363fb4924f98fba
-  firebase_remote_config: 96a9b7e79624c5d9d16befdef60791966bb83919
-  firebase_storage: 942caaa628c22c941bff8af058347cc5c38a70bf
+  firebase_analytics: 2815af29d49c1a994652abd37a5b001a88bc7b75
+  firebase_app_installations: 1134fbec8eb64f89f1486dd213c93fefa0b0b167
+  firebase_auth: c4bdd9d7b338ac004008cb5024a643584e0ec03f
+  firebase_core: 418aed674e9a0b8b6088aec16cde82a811f6261f
+  firebase_in_app_messaging: 459ff8bedc57c800ff87b8d4da98c123062528d7
+  firebase_messaging: 98619a0572d82cfb3668e78859ba9f1110e268c9
+  firebase_remote_config: 015a36be218a38943c2273d63b33bc983b3d7bb6
+  firebase_storage: 8826dc971e5029b48826613f7265952e55191585
   FirebaseABTesting: aef1719704fade00b200827e7973f352efc4caee
   FirebaseAnalytics: 3feef9ae8733c567866342a1000691baaa7cad49
   FirebaseAppCheckInterop: d265d9f4484e7ec1c591086408840fdd383d1213
@@ -393,7 +393,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   GTMSessionFetcher: 923b710231ad3d6f3f0495ac1ced35421e07d9a6
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
-  in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
+  in_app_review: a31b5257259646ea78e0e35fc914979b0031d011
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
