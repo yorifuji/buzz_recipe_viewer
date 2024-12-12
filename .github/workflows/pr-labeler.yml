@@ -13,7 +13,7 @@ defaults:
 jobs:
   pr-labeler:
     if: ${{ !contains(github.actor, '[bot]') }}
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     permissions:
       contents: read
       pull-requests: write

@@ -28,7 +28,7 @@ defaults:
 
 jobs:
   android:
-    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-latest') || 'self-hosted' }}
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     environment: staging
     timeout-minutes: 30
     steps:
@@ -289,6 +289,6 @@ jobs:
     needs: [android, ios]
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-stg.yml' }}
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: Kesin11/actions-timeline@3046833d9aacfd7745c5264b7f3af851c3e2a619 # v2.2.1
