@@ -4,11 +4,10 @@ part 'result.freezed.dart';
 
 @freezed
 abstract class Result<T, R> with _$Result<T, R> {
-  const Result._();
-
   const factory Result.success({required T data}) = Success<T, R>;
-
   const factory Result.failure({required R error}) = Failure<T, R>;
+
+  const Result._();
 
   static Result<T, R> guard<T, R>(T Function() body) {
     try {
@@ -25,6 +24,28 @@ abstract class Result<T, R> with _$Result<T, R> {
       return Result.success(data: await future());
     } on Exception catch (e) {
       return Result.failure(error: e as R);
+    }
+  }
+
+  static Result<T, R> guardWithConverter<T, R>(
+    T Function() body,
+    R Function(Object) errorConverter,
+  ) {
+    try {
+      return Result.success(data: body());
+    } catch (e) {
+      return Result.failure(error: errorConverter(e));
+    }
+  }
+
+  static Future<Result<T, R>> guardFutureWithConverter<T, R>(
+    Future<T> Function() future,
+    R Function(Object) errorConverter,
+  ) async {
+    try {
+      return Result.success(data: await future());
+    } catch (e) {
+      return Result.failure(error: errorConverter(e));
     }
   }
 
