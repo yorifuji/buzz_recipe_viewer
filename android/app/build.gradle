@@ -45,6 +45,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
+    namespace "dev.yorifuji.buzz_recipe_viewer"
+
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
