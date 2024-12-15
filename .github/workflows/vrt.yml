@@ -27,29 +27,27 @@ defaults:
     shell: bash -euo pipefail {0}
 
 jobs:
-  lookup:
+  prepare:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
     outputs:
-      actual-sha: ${{ steps.lookup.outputs.actual-sha }}
-      actual-cache-hit: ${{ steps.lookup.outputs.actual-cache-hit }}
-      expected-sha: ${{ steps.lookup.outputs.expected-sha }}
-      expected-cache-hit: ${{ steps.lookup.outputs.expected-cache-hit }}
+      actual-sha: ${{ steps.prepare.outputs.actual-sha }}
+      actual-cache-hit: ${{ steps.prepare.outputs.actual-cache-hit }}
+      expected-sha: ${{ steps.prepare.outputs.expected-sha }}
+      expected-cache-hit: ${{ steps.prepare.outputs.expected-cache-hit }}
     steps:
-      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
-        id: lookup
-        with:
-          mode: lookup
+      - uses: yorifuji/easy-vrt/prepare@develop
+        id: prepare
 
   expected:
-    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.expected-cache-hit != 'true' }}
-    needs: lookup
+    if: ${{ !cancelled() && !failure() && needs.prepare.outputs.expected-cache-hit != 'true' }}
+    needs: prepare
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ needs.lookup.outputs.expected-sha }}
+          ref: ${{ needs.prepare.outputs.expected-sha }}
 
       - uses: subosito/flutter-action@f2c4f6686ca8e8d6e6d0f28410eeef506ed66aff # v2.18.0
         with:
@@ -71,21 +69,20 @@ jobs:
         run: |
           flutter test --update-goldens --tags=golden || exit 0
 
-      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
+      - uses: yorifuji/easy-vrt/expected@develop
         with:
-          mode: expected
           expected-dir: test/golden_test/goldens
-          expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
+          expected-cache-key: ${{ needs.prepare.outputs.expected-sha }}
 
   actual:
-    if: ${{ !cancelled() && !failure() && needs.lookup.outputs.actual-cache-hit != 'true' }}
-    needs: lookup
+    if: ${{ !cancelled() && !failure() && needs.prepare.outputs.actual-cache-hit != 'true' }}
+    needs: prepare
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ needs.lookup.outputs.actual-sha }}
+          ref: ${{ needs.prepare.outputs.actual-sha }}
 
       - uses: subosito/flutter-action@f2c4f6686ca8e8d6e6d0f28410eeef506ed66aff # v2.18.0
         with:
@@ -107,22 +104,20 @@ jobs:
         run: |
           flutter test --update-goldens --tags=golden || exit 0
 
-      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
+      - uses: yorifuji/easy-vrt/actual@develop
         with:
-          mode: actual
           actual-dir: test/golden_test/goldens
-          actual-cache-key: ${{ needs.lookup.outputs.actual-sha }}
+          actual-cache-key: ${{ needs.prepare.outputs.actual-sha }}
 
   compare:
     if: ${{ !cancelled() && !failure() }}
-    needs: [lookup, expected, actual]
+    needs: [prepare, expected, actual]
     runs-on: ubuntu-24.04
     steps:
-      - uses: yorifuji/easy-vrt@fa200819e456c851c11c1a2d534098c8a0e0d9be # v1.0.7
+      - uses: yorifuji/easy-vrt/compare@develop
         with:
-          mode: compare
-          expected-cache-key: ${{ needs.lookup.outputs.expected-sha }}
-          actual-cache-key: ${{ needs.lookup.outputs.actual-sha }}
+          expected-cache-key: ${{ needs.prepare.outputs.expected-sha }}
+          actual-cache-key: ${{ needs.prepare.outputs.actual-sha }}
           summary-comment: true
           review-comment: true
 
