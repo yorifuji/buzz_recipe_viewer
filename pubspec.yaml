@@ -71,7 +71,7 @@ dev_dependencies:
   riverpod_lint: ^2.6.3
   custom_lint: ^0.7.0
   flutter_launcher_icons: ^0.14.1
-  slang_build_runner: ^4.2.0
+  slang_build_runner: ^4.4.0
   golden_toolkit: ^0.15.0
   flutter_gen_runner: ^5.8.0
 
