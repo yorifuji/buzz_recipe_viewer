@@ -32,7 +32,7 @@ dependencies:
   like_button: ^2.0.5
   collection: ^1.18.0
   slang: ^4.2.1
-  slang_flutter: ^4.2.0
+  slang_flutter: ^4.4.0
   mockito: ^5.4.4
   path: ^1.9.0
   introduction_screen: ^3.1.14
