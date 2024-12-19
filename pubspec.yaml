@@ -27,7 +27,7 @@ dependencies:
   youtube_player_flutter: ^9.1.1
   settings_ui: ^2.0.2
   package_info_plus: ^8.1.1
-  shared_preferences: ^2.3.3
+  shared_preferences: ^2.3.4
   custom_text: ^2.0.2
   like_button: ^2.0.5
   collection: ^1.18.0
