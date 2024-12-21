@@ -6,6 +6,7 @@
             "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "args": [
                 "--dart-define=FLAVOR=dev"
             ]
@@ -15,6 +16,7 @@
             "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "args": [
                 "--dart-define=FLAVOR=stg"
             ]
@@ -24,6 +26,7 @@
             "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "args": [
                 "--dart-define=FLAVOR=prod"
             ],
@@ -33,6 +36,7 @@
             "preLaunchTask": "prepareEnvTask",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "args": [
                 "-d",
                 "chrome",
