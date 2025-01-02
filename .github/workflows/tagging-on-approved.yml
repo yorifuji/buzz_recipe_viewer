@@ -24,7 +24,7 @@ jobs:
       github.event.review.state == 'approved' &&
       contains(github.event.pull_request.labels.*.name, 'deliver') == false
     steps:
-      - uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1.11.0
+      - uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
         id: app-token
         with:
           app-id: ${{ secrets.APPS_APP_ID }}
@@ -57,7 +57,7 @@ jobs:
           echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' pubspec.yaml)" >> $GITHUB_ENV
 
       - id: app-token
-        uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1.11.0
+        uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
         with:
           app-id: ${{ secrets.APPS_APP_ID }}
           private-key: ${{ secrets.APPS_PRIVATE_KEY }}
