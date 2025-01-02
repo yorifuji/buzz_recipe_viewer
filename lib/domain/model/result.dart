@@ -33,6 +33,7 @@ abstract class Result<T, R> with _$Result<T, R> {
   ) {
     try {
       return Result.success(data: body());
+      // ignore: avoid_catches_without_on_clauses
     } catch (e) {
       return Result.failure(error: errorConverter(e));
     }
@@ -44,6 +45,7 @@ abstract class Result<T, R> with _$Result<T, R> {
   ) async {
     try {
       return Result.success(data: await future());
+      // ignore: avoid_catches_without_on_clauses
     } catch (e) {
       return Result.failure(error: errorConverter(e));
     }
