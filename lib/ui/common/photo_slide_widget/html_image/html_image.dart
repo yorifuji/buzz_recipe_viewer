@@ -29,6 +29,7 @@ class HtmlImage extends HookWidget {
               ..style.display = 'block'
               ..alt = 'Image',
           );
+          // ignore: avoid_catches_without_on_clauses
         } catch (e) {
           // viewTypeが既に登録されている場合、例外が発生するため無視
         }

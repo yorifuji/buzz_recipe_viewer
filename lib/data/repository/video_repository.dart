@@ -33,6 +33,7 @@ class VideoRepository {
           nextPage: result.hitsPage.nextPageKey ?? 0,
         ),
       );
+      // ignore: avoid_catches_without_on_clauses
     } catch (e) {
       return Result.failure(error: e as Exception);
     }
