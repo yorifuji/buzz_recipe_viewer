@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: daa1d780fdecf8af925680c06c86563cdd445deea995d5c9176f1302a2b10bbe
+      sha256: "27899c95f9e7ec06c8310e6e0eac967707714b9f1450c4a58fa00ca011a4a8ae"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.48"
+    version: "1.3.49"
   _macros:
     dependency: transitive
     description: dart
@@ -498,26 +498,26 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_app_installations
-      sha256: "77271db6dbcdcd0a6850e927078f0f98267b9f6152c79d173882340d2dfeb4d8"
+      sha256: "7c80e0b41c17bbefa22621cc6be868ae4f9b1796b9d42f586c067d7c13b518b9"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1+7"
+    version: "0.3.2"
   firebase_app_installations_platform_interface:
     dependency: transitive
     description:
       name: firebase_app_installations_platform_interface
-      sha256: f331b130886f44a37996220e33ed98e3c2e0b4cf1a025121b024aa96ba6ac3c6
+      sha256: bb968f6553739bc51bc8bebfc9159d2345b28cf2df7c1606d5e56c0c4fe72a46
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.4+47"
+    version: "0.1.4+48"
   firebase_app_installations_web:
     dependency: transitive
     description:
       name: firebase_app_installations_web
-      sha256: "135e03cb4a9494c24b7ff4a63443b3fc1c17d26000ab6a781d4b848a10139b47"
+      sha256: a95b0537b4746ebbd060ff8d42a13fe28b9223ef4c0e0aba3bec1214cd070369
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.6+5"
+    version: "0.1.6+6"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -546,10 +546,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "15d761b95dfa2906dfcc31b7fc6fe293188533d1a3ffe78389ba9e69bd7fdbde"
+      sha256: "0307c1fde82e2b8b97e0be2dab93612aff9a72f31ebe9bfac66ed8b37ef7c568"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.0"
+    version: "3.10.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
