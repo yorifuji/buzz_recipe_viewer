@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: daa1d780fdecf8af925680c06c86563cdd445deea995d5c9176f1302a2b10bbe
+      sha256: e4f2a7ef31b0ab2c89d2bde35ef3e6e6aff1dce5e66069c6540b0e9cfe33ee6b
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.48"
+    version: "1.3.50"
   _macros:
     dependency: transitive
     description: dart
@@ -498,26 +498,26 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_app_installations
-      sha256: "77271db6dbcdcd0a6850e927078f0f98267b9f6152c79d173882340d2dfeb4d8"
+      sha256: f30081592a258f69080297e8f8070ae1fbed121a70db396d57023546fe98fe59
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1+7"
+    version: "0.3.2+1"
   firebase_app_installations_platform_interface:
     dependency: transitive
     description:
       name: firebase_app_installations_platform_interface
-      sha256: f331b130886f44a37996220e33ed98e3c2e0b4cf1a025121b024aa96ba6ac3c6
+      sha256: cde086a58766b1669e4a4f02bc29fde5bbec414945a73e062803fdb05f779daf
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.4+47"
+    version: "0.1.4+49"
   firebase_app_installations_web:
     dependency: transitive
     description:
       name: firebase_app_installations_web
-      sha256: "135e03cb4a9494c24b7ff4a63443b3fc1c17d26000ab6a781d4b848a10139b47"
+      sha256: ec977483fab7aae69faf3c7bf9dcd72cc3b25f7ee5fffdeb0c52f3e597be0368
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.6+5"
+    version: "0.1.6+7"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -546,10 +546,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "15d761b95dfa2906dfcc31b7fc6fe293188533d1a3ffe78389ba9e69bd7fdbde"
+      sha256: d851c1ca98fd5a4c07c747f8c65dacc2edd84a4d9ac055d32a5f0342529069f5
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.0"
+    version: "3.10.1"
   firebase_core_platform_interface:
     dependency: transitive
     description:
