@@ -86,7 +86,7 @@ jobs:
         run: dart run custom_lint --format=json | tee custom_lint.log
 
       - if: ${{ !cancelled() }}
-        uses: yorifuji/flutter-analyze-commenter@b852004b1f3ca8783b010f4ea098946029cbb2cd # v1.2.0
+        uses: yorifuji/flutter-analyze-commenter@814ea7389bc518170c93b4c967c680b28e5e047e # v1.4.0
         with:
           analyze-log: flutter_analyze.log
           custom-lint-log: custom_lint.log
