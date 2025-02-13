@@ -75,8 +75,8 @@ jobs:
         env:
           FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
-          which firebase || curl -sL https://firebase.tools | analytics=false bash
-          dart pub global activate flutterfire_cli 1.0.1-dev.4
+          which firebase || npm install -g firebase-tools@13.30.0
+          dart pub global activate flutterfire_cli 1.0.1 && flutterfire -v
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-dev
 
