@@ -60,7 +60,7 @@ jobs:
         env:
           FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
-          which firebase || curl -sL https://firebase.tools | analytics=false bash
+          which firebase || npm install -g firebase-tools@13.30.0 && firebase --version
           dart pub global activate flutterfire_cli 1.0.1-dev.4
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
@@ -90,7 +90,7 @@ jobs:
         env:
           FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
         run: |
-          which firebase || curl -sL https://firebase.tools | analytics=false bash
+          which firebase || npm install -g firebase-tools@13.30.0 && firebase --version
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk --app $FIREBASE_APP_ID_ANDROID --testers "yorifuji@gmail.com"
 
       - name: Clean up
@@ -127,7 +127,7 @@ jobs:
         env:
           FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
-          which firebase || curl -sL https://firebase.tools | analytics=false bash
+          which firebase || npm install -g firebase-tools@13.30.0 && firebase --version
           dart pub global activate flutterfire_cli 1.0.1-dev.4
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
@@ -225,7 +225,7 @@ jobs:
           FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
           APP_PATH: ${{ steps.info.outputs.app-path }}
         run: |
-          which firebase || curl -sL https://firebase.tools | analytics=false bash
+          which firebase || npm install -g firebase-tools@13.30.0 && firebase --version
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute $APP_PATH --app $FIREBASE_APP_ID_IOS --testers "yorifuji@gmail.com"
 
       - name: Clean up
@@ -264,7 +264,7 @@ jobs:
   #       env:
   #         FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
   #       run: |
-  #         which firebase || curl -sL https://firebase.tools | analytics=false bash
+  #         which firebase || npm install -g firebase-tools@13.30.0 && firebase --version
   #         dart pub global activate flutterfire_cli 1.0.1-dev.4
   #         echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
   #         GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
