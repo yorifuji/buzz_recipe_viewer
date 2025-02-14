@@ -54,7 +54,7 @@ jobs:
           echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
           GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-dev
 
-      - run: flutter build web --release --dart-define=FLAVOR=dev --web-renderer canvaskit
+      - run: flutter build web --release --dart-define=FLAVOR=dev
 
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
         if: ${{ inputs.upload }}
