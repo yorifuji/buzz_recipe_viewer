@@ -31,7 +31,7 @@ dependencies:
   custom_text: ^2.0.2
   like_button: ^2.0.5
   collection: ^1.18.0
-  slang: ^4.2.1
+  slang: ^4.4.1
   slang_flutter: ^4.2.0
   mockito: ^5.4.4
   path: ^1.9.0
