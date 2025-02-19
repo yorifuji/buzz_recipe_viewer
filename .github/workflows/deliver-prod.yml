@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 env:
-  DEVELOPER_DIR: ${{ (vars.DEVELOPER_DIR == null && '/Applications/Xcode_15.0.1.app') || vars.DEVELOPER_DIR }}
+  DEVELOPER_DIR: ${{ (vars.DEVELOPER_DIR == null && '/Applications/Xcode_16.2.app') || vars.DEVELOPER_DIR }}
   GOOGLE_PLAY_TRACK: ${{ (vars.GOOGLE_PLAY_TRACK == '' && 'internal') || vars.GOOGLE_PLAY_TRACK }}
   GOOGLE_PLAY_STATUS: ${{ (vars.GOOGLE_PLAY_STATUS == '' && 'draft') || vars.GOOGLE_PLAY_STATUS }}
 
