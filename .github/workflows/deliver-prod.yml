@@ -97,8 +97,7 @@ jobs:
           echo storeFile=${{ runner.temp }}/release.jks >> android/key.properties
 
       - name: Build app bundle
-        run: |
-          flutter build appbundle --dart-define=FLAVOR=prod
+        run: flutter build appbundle --dart-define=FLAVOR=prod
 
       - name: Get Job Output info
         id: info
