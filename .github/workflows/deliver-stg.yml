@@ -122,24 +122,26 @@ jobs:
             echo "$PREPROCESS_SCRIPT_BASE64" | base64 --decode > ${{ runner.temp }}/pre-process.sh && bash ${{ runner.temp }}/pre-process.sh
           fi
 
-      - uses: actions/cache@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
-        with:
-          path: |
-            ./ios/Pods
-            .symlinks
-            ~/Library/Caches/CocoaPods
-          key: cocoapods-cache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('ios/Podfile.lock') }}
-
       - uses: subosito/flutter-action@f2c4f6686ca8e8d6e6d0f28410eeef506ed66aff # v2.18.0
+        id: flutter-action
         with:
           flutter-version: ${{ (vars.FLUTTER_VERSION != null && vars.FLUTTER_VERSION) || '' }}
           channel: stable
           cache: ${{ (vars.RUNS_ON_SELF_HOSTED == null && true) || false }}
           architecture: arm64
 
+      - uses: actions/cache@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        with:
+          path: |
+            ios/Pods
+            build/ios/pod_inputs.fingerprint
+          key: cocoapods-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.flutter-action.outputs.VERSION }}-${{ hashFiles('ios/Podfile.lock', 'ios/Runner.xcodeproj/project.pbxproj') }}
+
       - run: flutter pub get
 
-      - run: cd ios && pod install
+      - name: Workaround for cocoapods cache
+        run: |
+          if [ -d ios/Pods ]; then cp ios/Podfile.lock ios/Pods/Manifest.lock; fi
 
       - name: flutterfire configure
         env:
