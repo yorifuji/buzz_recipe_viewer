@@ -35,7 +35,7 @@ dependencies:
   slang_flutter: ^4.2.0
   mockito: ^5.4.4
   path: ^1.9.0
-  introduction_screen: ^3.1.14
+  introduction_screen: ^3.1.17
   flutter_inappwebview: ^6.1.5
   in_app_review: ^2.0.10
   app_settings: ^5.1.1
