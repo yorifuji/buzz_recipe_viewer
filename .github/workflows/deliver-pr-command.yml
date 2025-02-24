@@ -14,15 +14,58 @@ defaults:
   run:
     shell: bash -euo pipefail {0}
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   build-stg:
     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/deploy-stg') }}
-    uses: ./.github/workflows/deliver-stg.yml
-    permissions:
-      contents: read
-    secrets: inherit
-    with:
-      upload: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Get PR branch
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          if ! branch_name=$(gh api repos/${{ github.repository }}/pulls/$PR_NUMBER --jq .head.ref); then
+            echo "Failed to get PR branch name"
+            exit 1
+          fi
+          if [ -z "$branch_name" ]; then
+            echo "Branch name is empty"
+            exit 1
+          fi
+          echo "result=$branch_name" >> $GITHUB_OUTPUT
+
+      - name: "Extract Apple API Key"
+        id: extract-apple-api-key
+        env:
+          APPLE_API_KEY_BASE64: ${{ secrets.APPLE_API_AUTHKEY_P8_BASE64 }}
+        run: |
+          if [ -z "$APPLE_API_KEY_BASE64" ]; then
+            echo "Apple API key is empty"
+            exit 1
+          fi
+          echo "apple-api-key=$(echo "$APPLE_API_KEY_BASE64" | base64 --decode)" >> $GITHUB_OUTPUT
+
+      - name: "Generate App Store Connect JWT Token"
+        id: asc
+        uses: yuki0n0/action-appstoreconnect-token@v1.0
+        with:
+          issuer id: ${{ secrets.APPLE_API_ISSUER_ID }}
+          key id: ${{ secrets.APPLE_API_KEY_ID }}
+          key: ${{ steps.extract-apple-api-key.outputs.apple-api-key }}
+
+      - name: "Dispatch Xcode Cloud Workflow"
+        id: xcode-cloud
+        uses: yorifuji/actions-xcode-cloud-dispatcher@main
+        with:
+          appstore-connect-token: ${{ steps.asc.outputs.token }}
+          xcode-cloud-workflow-id: ${{ vars.XCODE_CLOUD_WORKFLOW_ID }}
+          git-branch-name: ${{ steps.pr.outputs.result }}
 
   action-timeline:
     needs: build-stg
