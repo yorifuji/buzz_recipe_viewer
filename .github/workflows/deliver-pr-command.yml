@@ -1,0 +1,33 @@
+name: Deliver from PR command
+
+run-name: Deliver from PR command ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
+on:
+  issue_comment:
+    types: [created]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
+jobs:
+  build-stg:
+    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/deploy-stg') }}
+    uses: ./.github/workflows/deliver-stg.yml
+    permissions:
+      contents: read
+    secrets: inherit
+    with:
+      upload: false
+
+  action-timeline:
+    needs: build-stg
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: Kesin11/actions-timeline@427ee2cf860166e404d0d69b4f2b24012bb7af4f # v2.2.3
