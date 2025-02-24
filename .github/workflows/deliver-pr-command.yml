@@ -40,24 +40,13 @@ jobs:
           fi
           echo "result=$branch_name" >> $GITHUB_OUTPUT
 
-      - name: "Extract Apple API Key"
-        id: extract-apple-api-key
-        env:
-          APPLE_API_KEY_BASE64: ${{ secrets.APPLE_API_AUTHKEY_P8_BASE64 }}
-        run: |
-          if [ -z "$APPLE_API_KEY_BASE64" ]; then
-            echo "Apple API key is empty"
-            exit 1
-          fi
-          echo "apple-api-key=$(echo "$APPLE_API_KEY_BASE64" | base64 --decode)" >> $GITHUB_OUTPUT
-
       - name: "Generate App Store Connect JWT Token"
         id: asc
         uses: yuki0n0/action-appstoreconnect-token@v1.0
         with:
           issuer id: ${{ secrets.APPLE_API_ISSUER_ID }}
           key id: ${{ secrets.APPLE_API_KEY_ID }}
-          key: ${{ steps.extract-apple-api-key.outputs.apple-api-key }}
+          key: ${{ secrets.APPLE_API_AUTHKEY_P8 }}
 
       - name: "Dispatch Xcode Cloud Workflow"
         id: xcode-cloud
