@@ -1,0 +1,78 @@
+name: Dispatch slash command
+
+run-name: Dispatch slash command ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  dispatcher:
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      command: ${{ steps.dispatch.outputs.command }}
+    steps:
+      - id: dispatch
+        name: "Parse slash command from comment"
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            // List of supported slash commands
+            const supportedCommands = ['deploy'];
+
+            // Detect command from comment body
+            const detectedCommand = supportedCommands.find(cmd =>
+              context.payload.comment.body.startsWith(`/${cmd}`)
+            );
+
+            if (detectedCommand) {
+              core.setOutput('command', detectedCommand);
+            } else {
+              core.setOutput('command', 'Unknown command');
+            }
+
+  deploy:
+    needs: dispatcher
+    if: ${{ needs.dispatcher.outputs.command == 'deploy' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: "Get branch from Issue number"
+        id: issue
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            // Get PR info and extract branch name
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            if (!pullRequest.head.ref) {
+              core.setFailed('Failed to get branch name from pull request');
+              return;
+            }
+            core.setOutput('branch-name', pullRequest.head.ref);
+
+      - name: "Generate App Store Connect JWT Token"
+        id: asc
+        uses: yuki0n0/action-appstoreconnect-token@v1.0
+        with:
+          issuer id: ${{ secrets.APPLE_API_ISSUER_ID }}
+          key id: ${{ secrets.APPLE_API_KEY_ID }}
+          key: ${{ secrets.APPLE_API_AUTHKEY_P8 }}
+
+      - name: "Dispatch Xcode Cloud Workflow"
+        uses: yorifuji/actions-xcode-cloud-dispatcher@00664f7341e2e966b164bb95a288ea7c8f47662c # v1.0.2
+        with:
+          appstore-connect-token: ${{ steps.asc.outputs.token }}
+          xcode-cloud-workflow-id: ${{ vars.XCODE_CLOUD_WORKFLOW_ID }}
+          git-branch-name: ${{ steps.issue.outputs.branch-name }}
