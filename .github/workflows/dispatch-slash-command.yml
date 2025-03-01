@@ -62,7 +62,7 @@ jobs:
           key: ${{ secrets.APPLE_API_AUTHKEY_P8 }}
 
       - name: "Dispatch Xcode Cloud Workflow"
-        uses: yorifuji/actions-xcode-cloud-dispatcher@00664f7341e2e966b164bb95a288ea7c8f47662c # v1.0.2
+        uses: yorifuji/actions-xcode-cloud-dispatcher@dcf4ab200b9fb89a20c903bae840f2e2ce96422d # v1.0.3
         with:
           appstore-connect-token: ${{ steps.asc.outputs.token }}
           xcode-cloud-workflow-id: ${{ vars.XCODE_CLOUD_WORKFLOW_ID }}
