@@ -64,6 +64,19 @@ if [ -n "$CI_PULL_REQUEST_NUMBER" ] && [ -n "$GITHUB_TOKEN" ]; then
   
   PR_TITLE=$(printf '%s\n' "$PR_INFO" | jq -r '.title')
   WHAT_TO_TEST="[PR#$CI_PULL_REQUEST_NUMBER]\n$PR_TITLE\n"
+
+  # Add rocket reaction to the triggering issue comment if available
+  if [ -n "$CI_ISSUE_COMMENT_ID" ]; then
+    echo "Adding rocket reaction to the triggering issue comment..."
+    curl -s -X POST \
+      -H "Accept: application/vnd.github+json" \
+      -H "Authorization: Bearer $GITHUB_TOKEN" \
+      -H "X-GitHub-Api-Version: 2022-11-28" \
+      "https://api.github.com/repos/$CI_PULL_REQUEST_TARGET_REPO/issues/comments/$CI_ISSUE_COMMENT_ID/reactions" \
+      -d '{"content":"rocket"}'
+
+    echo "Rocket reaction added to comment ID: $CI_ISSUE_COMMENT_ID"
+  fi
 fi
 
 COMMIT=$(git fetch --deepen 3 && git log -3 --pretty=format:"%s")
