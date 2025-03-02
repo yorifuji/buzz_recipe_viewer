@@ -28,10 +28,19 @@ COMMIT=$(git fetch --deepen 3 && git log -3 --pretty=format:"%s")
 WHAT_TO_TEST=${WHAT_TO_TEST}"[COMMIT]\n$COMMIT"
 
 if [[ -d "$CI_APP_STORE_SIGNED_APP_PATH" ]]; then
-  TESTFLIGHT_DIR_PATH="$CI_PRIMARY_REPOSITORY_PATH/TestFlight"
+  # TestFlight directory should be in the same folder as the Xcode project or workspace
+  # See: https://developer.apple.com/documentation/Xcode/including-notes-for-testers-with-a-beta-release-of-your-app
+  # Create TestFlight directory in the iOS project directory
+  TESTFLIGHT_DIR_PATH="$CI_PRIMARY_REPOSITORY_PATH/ios/TestFlight"
   mkdir -p $TESTFLIGHT_DIR_PATH
+  
+  # Create notes for English (US) users
   echo "$WHAT_TO_TEST" > $TESTFLIGHT_DIR_PATH/WhatToTest.en-US.txt
-  echo "TestFlight What to Test information prepared at $TESTFLIGHT_DIR_PATH"
+  
+  # Create notes for Japanese users (same content)
+  echo "$WHAT_TO_TEST" > $TESTFLIGHT_DIR_PATH/WhatToTest.ja-JP.txt
+  
+  echo "TestFlight What to Test information prepared at $TESTFLIGHT_DIR_PATH for en-US and ja-JP locales"
 else
   echo "Skipping TestFlight What to Test preparation as CI_APP_STORE_SIGNED_APP_PATH is not available"
 fi 
