@@ -51,6 +51,35 @@ flutter pub get
 # .env
 echo $DOT_ENV | base64 --decode > .env
 
+# Prepare TestFlight What to Test information
+WHAT_TO_TEST=""
+
+if [ -n "$CI_PULL_REQUEST_NUMBER" ] && [ -n "$GITHUB_TOKEN" ]; then
+  echo "Fetching PR information for TestFlight..."
+  PR_INFO=$(curl -s \
+    -H "Accept: application/vnd.github+json" \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    "https://api.github.com/repos/$CI_PULL_REQUEST_TARGET_REPO/pulls/$CI_PULL_REQUEST_NUMBER")
+  
+  PR_TITLE=$(printf '%s\n' "$PR_INFO" | jq -r '.title')
+  WHAT_TO_TEST="[PR#$CI_PULL_REQUEST_NUMBER]\n$PR_TITLE\n"
+fi
+
+COMMIT=$(git fetch --deepen 3 && git log -3 --pretty=format:"%s")
+
+WHAT_TO_TEST=${WHAT_TO_TEST}"[COMMIT]\n$COMMIT"
+
+# Only create TestFlight information if we're building for App Store
+if [[ -d "$CI_APP_STORE_SIGNED_APP_PATH" ]]; then
+  TESTFLIGHT_DIR_PATH="$CI_PRIMARY_REPOSITORY_PATH/TestFlight"
+  mkdir -p $TESTFLIGHT_DIR_PATH
+  echo "$WHAT_TO_TEST" > $TESTFLIGHT_DIR_PATH/WhatToTest.en-US.txt
+  echo "TestFlight What to Test information prepared at $TESTFLIGHT_DIR_PATH"
+else
+  echo "Skipping TestFlight What to Test preparation as CI_APP_STORE_SIGNED_APP_PATH is not available"
+fi
+
 # Run flutterfire configure
 echo -n $FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 | base64 --decode > firebase_admin_service_account.json
 flutterfire configure \
