@@ -4,12 +4,19 @@
 set -e
 
 # Check required environment variables
-[ -z "$FLUTTER_VERSION" ] && echo "Error: FLUTTER_VERSION is not set" && exit 1
 [ -z "$DOT_ENV" ] && echo "Error: DOT_ENV is not set" && exit 1
 [ -z "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" ] && echo "Error: FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 is not set" && exit 1
 
 # The default execution directory of this script is the ci_scripts directory.
 cd $CI_PRIMARY_REPOSITORY_PATH # change working directory to the root of your cloned repo.
+
+# Install jq if not available
+which jq || HOMEBREW_NO_AUTO_UPDATE=1 brew install jq
+
+# Get Flutter version from .fvmrc
+FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
+[ -z "$FLUTTER_VERSION" ] && echo "Error: Could not get Flutter version from .fvmrc" && exit 1
+echo "Using Flutter version: $FLUTTER_VERSION from .fvmrc"
 
 # Install Flutter using git.
 git clone https://github.com/flutter/flutter.git -b $FLUTTER_VERSION $HOME/flutter
