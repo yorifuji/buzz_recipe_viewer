@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,86 +10,52 @@ part of 'video_view_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchState {
-  String get query => throw _privateConstructorUsedError;
-  SortIndex get sortType => throw _privateConstructorUsedError;
-  LoadingState get loadingState => throw _privateConstructorUsedError;
-  LoadingState get moreLoadingState => throw _privateConstructorUsedError;
+  String get query;
+  SortIndex get sortType;
+  LoadingState get loadingState;
+  LoadingState get moreLoadingState;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SearchStateCopyWith<SearchState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SearchStateCopyWith<$Res> {
-  factory $SearchStateCopyWith(
-          SearchState value, $Res Function(SearchState) then) =
-      _$SearchStateCopyWithImpl<$Res, SearchState>;
-  @useResult
-  $Res call(
-      {String query,
-      SortIndex sortType,
-      LoadingState loadingState,
-      LoadingState moreLoadingState});
-}
-
-/// @nodoc
-class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
-    implements $SearchStateCopyWith<$Res> {
-  _$SearchStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SearchState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $SearchStateCopyWith<SearchState> get copyWith =>
+      _$SearchStateCopyWithImpl<SearchState>(this as SearchState, _$identity);
+
   @override
-  $Res call({
-    Object? query = null,
-    Object? sortType = null,
-    Object? loadingState = null,
-    Object? moreLoadingState = null,
-  }) {
-    return _then(_value.copyWith(
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-      sortType: null == sortType
-          ? _value.sortType
-          : sortType // ignore: cast_nullable_to_non_nullable
-              as SortIndex,
-      loadingState: null == loadingState
-          ? _value.loadingState
-          : loadingState // ignore: cast_nullable_to_non_nullable
-              as LoadingState,
-      moreLoadingState: null == moreLoadingState
-          ? _value.moreLoadingState
-          : moreLoadingState // ignore: cast_nullable_to_non_nullable
-              as LoadingState,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SearchState &&
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.sortType, sortType) ||
+                other.sortType == sortType) &&
+            (identical(other.loadingState, loadingState) ||
+                other.loadingState == loadingState) &&
+            (identical(other.moreLoadingState, moreLoadingState) ||
+                other.moreLoadingState == moreLoadingState));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, query, sortType, loadingState, moreLoadingState);
+
+  @override
+  String toString() {
+    return 'SearchState(query: $query, sortType: $sortType, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
   }
 }
 
 /// @nodoc
-abstract class _$$SearchStateImplCopyWith<$Res>
-    implements $SearchStateCopyWith<$Res> {
-  factory _$$SearchStateImplCopyWith(
-          _$SearchStateImpl value, $Res Function(_$SearchStateImpl) then) =
-      __$$SearchStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $SearchStateCopyWith<$Res> {
+  factory $SearchStateCopyWith(
+          SearchState value, $Res Function(SearchState) _then) =
+      _$SearchStateCopyWithImpl;
   @useResult
   $Res call(
       {String query,
@@ -98,12 +65,11 @@ abstract class _$$SearchStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SearchStateImplCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$SearchStateImpl>
-    implements _$$SearchStateImplCopyWith<$Res> {
-  __$$SearchStateImplCopyWithImpl(
-      _$SearchStateImpl _value, $Res Function(_$SearchStateImpl) _then)
-      : super(_value, _then);
+class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
+  _$SearchStateCopyWithImpl(this._self, this._then);
+
+  final SearchState _self;
+  final $Res Function(SearchState) _then;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -115,21 +81,21 @@ class __$$SearchStateImplCopyWithImpl<$Res>
     Object? loadingState = null,
     Object? moreLoadingState = null,
   }) {
-    return _then(_$SearchStateImpl(
+    return _then(_self.copyWith(
       query: null == query
-          ? _value.query
+          ? _self.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
       sortType: null == sortType
-          ? _value.sortType
+          ? _self.sortType
           : sortType // ignore: cast_nullable_to_non_nullable
               as SortIndex,
       loadingState: null == loadingState
-          ? _value.loadingState
+          ? _self.loadingState
           : loadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
       moreLoadingState: null == moreLoadingState
-          ? _value.moreLoadingState
+          ? _self.moreLoadingState
           : moreLoadingState // ignore: cast_nullable_to_non_nullable
               as LoadingState,
     ));
@@ -138,8 +104,8 @@ class __$$SearchStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchStateImpl implements _SearchState {
-  const _$SearchStateImpl(
+class _SearchState implements SearchState {
+  const _SearchState(
       {this.query = '',
       this.sortType = SortIndex.timestamp,
       this.loadingState = LoadingState.loadable,
@@ -158,16 +124,19 @@ class _$SearchStateImpl implements _SearchState {
   @JsonKey()
   final LoadingState moreLoadingState;
 
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SearchState(query: $query, sortType: $sortType, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SearchStateCopyWith<_SearchState> get copyWith =>
+      __$SearchStateCopyWithImpl<_SearchState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SearchStateImpl &&
+            other is _SearchState &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.sortType, sortType) ||
                 other.sortType == sortType) &&
@@ -181,35 +150,63 @@ class _$SearchStateImpl implements _SearchState {
   int get hashCode =>
       Object.hash(runtimeType, query, sortType, loadingState, moreLoadingState);
 
+  @override
+  String toString() {
+    return 'SearchState(query: $query, sortType: $sortType, loadingState: $loadingState, moreLoadingState: $moreLoadingState)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SearchStateCopyWith<$Res>
+    implements $SearchStateCopyWith<$Res> {
+  factory _$SearchStateCopyWith(
+          _SearchState value, $Res Function(_SearchState) _then) =
+      __$SearchStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String query,
+      SortIndex sortType,
+      LoadingState loadingState,
+      LoadingState moreLoadingState});
+}
+
+/// @nodoc
+class __$SearchStateCopyWithImpl<$Res> implements _$SearchStateCopyWith<$Res> {
+  __$SearchStateCopyWithImpl(this._self, this._then);
+
+  final _SearchState _self;
+  final $Res Function(_SearchState) _then;
+
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>
-      __$$SearchStateImplCopyWithImpl<_$SearchStateImpl>(this, _$identity);
+  $Res call({
+    Object? query = null,
+    Object? sortType = null,
+    Object? loadingState = null,
+    Object? moreLoadingState = null,
+  }) {
+    return _then(_SearchState(
+      query: null == query
+          ? _self.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      sortType: null == sortType
+          ? _self.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortIndex,
+      loadingState: null == loadingState
+          ? _self.loadingState
+          : loadingState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
+      moreLoadingState: null == moreLoadingState
+          ? _self.moreLoadingState
+          : moreLoadingState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
+    ));
+  }
 }
 
-abstract class _SearchState implements SearchState {
-  const factory _SearchState(
-      {final String query,
-      final SortIndex sortType,
-      final LoadingState loadingState,
-      final LoadingState moreLoadingState}) = _$SearchStateImpl;
-
-  @override
-  String get query;
-  @override
-  SortIndex get sortType;
-  @override
-  LoadingState get loadingState;
-  @override
-  LoadingState get moreLoadingState;
-
-  /// Create a copy of SearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

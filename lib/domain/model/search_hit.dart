@@ -5,7 +5,7 @@ part 'search_hit.freezed.dart';
 part 'search_hit.g.dart';
 
 @freezed
-class SearchHit with _$SearchHit {
+abstract class SearchHit with _$SearchHit {
   const factory SearchHit({
     required String id,
     required String videoId,
@@ -24,7 +24,7 @@ class SearchHit with _$SearchHit {
 }
 
 @freezed
-class SearchHitItem with _$SearchHitItem {
+abstract class SearchHitItem with _$SearchHitItem {
   const factory SearchHitItem({
     required SearchHit searchHit,
   }) = _SearchHitItem;

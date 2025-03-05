@@ -8,13 +8,13 @@ part of 'storage_image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$StorageImageImpl _$$StorageImageImplFromJson(Map<String, dynamic> json) =>
-    _$StorageImageImpl(
+_StorageImage _$StorageImageFromJson(Map<String, dynamic> json) =>
+    _StorageImage(
       imageId: json['imageId'] as String,
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$StorageImageImplToJson(_$StorageImageImpl instance) =>
+Map<String, dynamic> _$StorageImageToJson(_StorageImage instance) =>
     <String, dynamic>{
       'imageId': instance.imageId,
       'url': instance.url,

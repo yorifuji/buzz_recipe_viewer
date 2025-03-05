@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,120 +10,74 @@ part of 'recipe.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Recipe _$RecipeFromJson(Map<String, dynamic> json) {
-  return _Recipe.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Recipe {
-  String get title => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  List<String> get foodList => throw _privateConstructorUsedError;
-  List<String> get stepList => throw _privateConstructorUsedError;
+  String get title;
+  String get description;
+  List<String> get foodList;
+  List<String> get stepList;
   @CreatedAtField()
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @UpdatedAtField()
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  List<StorageImage> get imageList => throw _privateConstructorUsedError;
-  RecipeId get recipeId => throw _privateConstructorUsedError;
-
-  /// Serializes this Recipe to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DateTime get updatedAt;
+  List<StorageImage> get imageList;
+  RecipeId get recipeId;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RecipeCopyWith<Recipe> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RecipeCopyWith<$Res> {
-  factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) then) =
-      _$RecipeCopyWithImpl<$Res, Recipe>;
-  @useResult
-  $Res call(
-      {String title,
-      String description,
-      List<String> foodList,
-      List<String> stepList,
-      @CreatedAtField() DateTime createdAt,
-      @UpdatedAtField() DateTime updatedAt,
-      List<StorageImage> imageList,
-      RecipeId recipeId});
-}
-
-/// @nodoc
-class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
-    implements $RecipeCopyWith<$Res> {
-  _$RecipeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Recipe
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $RecipeCopyWith<Recipe> get copyWith =>
+      _$RecipeCopyWithImpl<Recipe>(this as Recipe, _$identity);
+
+  /// Serializes this Recipe to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? title = null,
-    Object? description = null,
-    Object? foodList = null,
-    Object? stepList = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? imageList = null,
-    Object? recipeId = null,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      foodList: null == foodList
-          ? _value.foodList
-          : foodList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      stepList: null == stepList
-          ? _value.stepList
-          : stepList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      imageList: null == imageList
-          ? _value.imageList
-          : imageList // ignore: cast_nullable_to_non_nullable
-              as List<StorageImage>,
-      recipeId: null == recipeId
-          ? _value.recipeId
-          : recipeId // ignore: cast_nullable_to_non_nullable
-              as RecipeId,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Recipe &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.foodList, foodList) &&
+            const DeepCollectionEquality().equals(other.stepList, stepList) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality().equals(other.imageList, imageList) &&
+            (identical(other.recipeId, recipeId) ||
+                other.recipeId == recipeId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      title,
+      description,
+      const DeepCollectionEquality().hash(foodList),
+      const DeepCollectionEquality().hash(stepList),
+      createdAt,
+      updatedAt,
+      const DeepCollectionEquality().hash(imageList),
+      recipeId);
+
+  @override
+  String toString() {
+    return 'Recipe(title: $title, description: $description, foodList: $foodList, stepList: $stepList, createdAt: $createdAt, updatedAt: $updatedAt, imageList: $imageList, recipeId: $recipeId)';
   }
 }
 
 /// @nodoc
-abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
-  factory _$$RecipeImplCopyWith(
-          _$RecipeImpl value, $Res Function(_$RecipeImpl) then) =
-      __$$RecipeImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $RecipeCopyWith<$Res> {
+  factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) _then) =
+      _$RecipeCopyWithImpl;
   @useResult
   $Res call(
       {String title,
@@ -136,12 +91,11 @@ abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$RecipeImplCopyWithImpl<$Res>
-    extends _$RecipeCopyWithImpl<$Res, _$RecipeImpl>
-    implements _$$RecipeImplCopyWith<$Res> {
-  __$$RecipeImplCopyWithImpl(
-      _$RecipeImpl _value, $Res Function(_$RecipeImpl) _then)
-      : super(_value, _then);
+class _$RecipeCopyWithImpl<$Res> implements $RecipeCopyWith<$Res> {
+  _$RecipeCopyWithImpl(this._self, this._then);
+
+  final Recipe _self;
+  final $Res Function(Recipe) _then;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
@@ -157,37 +111,37 @@ class __$$RecipeImplCopyWithImpl<$Res>
     Object? imageList = null,
     Object? recipeId = null,
   }) {
-    return _then(_$RecipeImpl(
+    return _then(_self.copyWith(
       title: null == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       foodList: null == foodList
-          ? _value._foodList
+          ? _self.foodList
           : foodList // ignore: cast_nullable_to_non_nullable
               as List<String>,
       stepList: null == stepList
-          ? _value._stepList
+          ? _self.stepList
           : stepList // ignore: cast_nullable_to_non_nullable
               as List<String>,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       imageList: null == imageList
-          ? _value._imageList
+          ? _self.imageList
           : imageList // ignore: cast_nullable_to_non_nullable
               as List<StorageImage>,
       recipeId: null == recipeId
-          ? _value.recipeId
+          ? _self.recipeId
           : recipeId // ignore: cast_nullable_to_non_nullable
               as RecipeId,
     ));
@@ -197,8 +151,8 @@ class __$$RecipeImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$RecipeImpl implements _Recipe {
-  const _$RecipeImpl(
+class _Recipe implements Recipe {
+  const _Recipe(
       {required this.title,
       required this.description,
       required final List<String> foodList,
@@ -210,9 +164,7 @@ class _$RecipeImpl implements _Recipe {
       : _foodList = foodList,
         _stepList = stepList,
         _imageList = imageList;
-
-  factory _$RecipeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RecipeImplFromJson(json);
+  factory _Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 
   @override
   final String title;
@@ -251,16 +203,26 @@ class _$RecipeImpl implements _Recipe {
   @override
   final RecipeId recipeId;
 
+  /// Create a copy of Recipe
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Recipe(title: $title, description: $description, foodList: $foodList, stepList: $stepList, createdAt: $createdAt, updatedAt: $updatedAt, imageList: $imageList, recipeId: $recipeId)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RecipeCopyWith<_Recipe> get copyWith =>
+      __$RecipeCopyWithImpl<_Recipe>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$RecipeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RecipeImpl &&
+            other is _Recipe &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -289,58 +251,85 @@ class _$RecipeImpl implements _Recipe {
       const DeepCollectionEquality().hash(_imageList),
       recipeId);
 
-  /// Create a copy of Recipe
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$RecipeImplCopyWith<_$RecipeImpl> get copyWith =>
-      __$$RecipeImplCopyWithImpl<_$RecipeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$RecipeImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Recipe(title: $title, description: $description, foodList: $foodList, stepList: $stepList, createdAt: $createdAt, updatedAt: $updatedAt, imageList: $imageList, recipeId: $recipeId)';
   }
 }
 
-abstract class _Recipe implements Recipe {
-  const factory _Recipe(
-      {required final String title,
-      required final String description,
-      required final List<String> foodList,
-      required final List<String> stepList,
-      @CreatedAtField() required final DateTime createdAt,
-      @UpdatedAtField() required final DateTime updatedAt,
-      required final List<StorageImage> imageList,
-      required final RecipeId recipeId}) = _$RecipeImpl;
+/// @nodoc
+abstract mixin class _$RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
+  factory _$RecipeCopyWith(_Recipe value, $Res Function(_Recipe) _then) =
+      __$RecipeCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String title,
+      String description,
+      List<String> foodList,
+      List<String> stepList,
+      @CreatedAtField() DateTime createdAt,
+      @UpdatedAtField() DateTime updatedAt,
+      List<StorageImage> imageList,
+      RecipeId recipeId});
+}
 
-  factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
+/// @nodoc
+class __$RecipeCopyWithImpl<$Res> implements _$RecipeCopyWith<$Res> {
+  __$RecipeCopyWithImpl(this._self, this._then);
 
-  @override
-  String get title;
-  @override
-  String get description;
-  @override
-  List<String> get foodList;
-  @override
-  List<String> get stepList;
-  @override
-  @CreatedAtField()
-  DateTime get createdAt;
-  @override
-  @UpdatedAtField()
-  DateTime get updatedAt;
-  @override
-  List<StorageImage> get imageList;
-  @override
-  RecipeId get recipeId;
+  final _Recipe _self;
+  final $Res Function(_Recipe) _then;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RecipeImplCopyWith<_$RecipeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+    Object? foodList = null,
+    Object? stepList = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? imageList = null,
+    Object? recipeId = null,
+  }) {
+    return _then(_Recipe(
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      foodList: null == foodList
+          ? _self._foodList
+          : foodList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      stepList: null == stepList
+          ? _self._stepList
+          : stepList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      imageList: null == imageList
+          ? _self._imageList
+          : imageList // ignore: cast_nullable_to_non_nullable
+              as List<StorageImage>,
+      recipeId: null == recipeId
+          ? _self.recipeId
+          : recipeId // ignore: cast_nullable_to_non_nullable
+              as RecipeId,
+    ));
+  }
 }
+
+// dart format on

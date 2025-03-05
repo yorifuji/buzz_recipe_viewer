@@ -13,7 +13,7 @@ part 'recipe_edit_notifier.freezed.dart';
 part 'recipe_edit_notifier.g.dart';
 
 @freezed
-class TextItem with _$TextItem {
+abstract class TextItem with _$TextItem {
   const factory TextItem({
     required String text,
     required DateTime dateTime,
@@ -28,7 +28,7 @@ class TextItem with _$TextItem {
 }
 
 @freezed
-class RecipeEditState with _$RecipeEditState {
+abstract class RecipeEditState with _$RecipeEditState {
   const factory RecipeEditState({
     required RecipeId recipeId,
     Recipe? recipe,

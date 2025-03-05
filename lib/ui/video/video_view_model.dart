@@ -9,7 +9,7 @@ part 'video_view_model.freezed.dart';
 part 'video_view_model.g.dart';
 
 @freezed
-class SearchState with _$SearchState {
+abstract class SearchState with _$SearchState {
   const factory SearchState({
     @Default('') String query,
     @Default(SortIndex.timestamp) SortIndex sortType,

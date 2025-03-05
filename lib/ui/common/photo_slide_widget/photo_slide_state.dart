@@ -7,7 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'photo_slide_state.freezed.dart';
 
 @freezed
-class PhotoSlideState with _$PhotoSlideState {
+abstract class PhotoSlideState with _$PhotoSlideState {
   const factory PhotoSlideState({
     @Default([]) List<ImageSource> imageSources,
   }) = _PhotoSlideState;

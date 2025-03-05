@@ -4,7 +4,7 @@ part 'storage_image.freezed.dart';
 part 'storage_image.g.dart';
 
 @freezed
-class StorageImage with _$StorageImage {
+abstract class StorageImage with _$StorageImage {
   const factory StorageImage({
     required String imageId,
     required String url,

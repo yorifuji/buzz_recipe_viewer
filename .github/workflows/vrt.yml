@@ -36,7 +36,7 @@ jobs:
       expected-sha: ${{ steps.prepare.outputs.expected-sha }}
       expected-cache-hit: ${{ steps.prepare.outputs.expected-cache-hit }}
     steps:
-      - uses: yorifuji/easy-vrt/prepare@768a9164b6969de17cbcdfb559cb011383a4a059 # v2.0.0
+      - uses: yorifuji/easy-vrt/prepare@5a06f323dc6c5e97d20ad11cd264262ef334df41 # v2.0.1
         id: prepare
 
   expected:
@@ -69,7 +69,7 @@ jobs:
         run: |
           flutter test --update-goldens --tags=golden || exit 0
 
-      - uses: yorifuji/easy-vrt/expected@768a9164b6969de17cbcdfb559cb011383a4a059 # v2.0.0
+      - uses: yorifuji/easy-vrt/expected@5a06f323dc6c5e97d20ad11cd264262ef334df41 # v2.0.1
         with:
           expected-dir: test/golden_test/goldens
           expected-cache-key: ${{ needs.prepare.outputs.expected-sha }}
@@ -104,7 +104,7 @@ jobs:
         run: |
           flutter test --update-goldens --tags=golden || exit 0
 
-      - uses: yorifuji/easy-vrt/actual@768a9164b6969de17cbcdfb559cb011383a4a059 # v2.0.0
+      - uses: yorifuji/easy-vrt/actual@5a06f323dc6c5e97d20ad11cd264262ef334df41 # v2.0.1
         with:
           actual-dir: test/golden_test/goldens
           actual-cache-key: ${{ needs.prepare.outputs.actual-sha }}
@@ -114,7 +114,7 @@ jobs:
     needs: [prepare, expected, actual]
     runs-on: ubuntu-24.04
     steps:
-      - uses: yorifuji/easy-vrt/compare@768a9164b6969de17cbcdfb559cb011383a4a059 # v2.0.0
+      - uses: yorifuji/easy-vrt/compare@5a06f323dc6c5e97d20ad11cd264262ef334df41 # v2.0.1
         with:
           expected-cache-key: ${{ needs.prepare.outputs.expected-sha }}
           actual-cache-key: ${{ needs.prepare.outputs.actual-sha }}

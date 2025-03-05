@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,75 +10,63 @@ part of 'photo_slide_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$PhotoSlideState {
-  List<ImageSource> get imageSources => throw _privateConstructorUsedError;
+mixin _$PhotoSlideState implements DiagnosticableTreeMixin {
+  List<ImageSource> get imageSources;
 
   /// Create a copy of PhotoSlideState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PhotoSlideStateCopyWith<PhotoSlideState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PhotoSlideStateCopyWith<$Res> {
-  factory $PhotoSlideStateCopyWith(
-          PhotoSlideState value, $Res Function(PhotoSlideState) then) =
-      _$PhotoSlideStateCopyWithImpl<$Res, PhotoSlideState>;
-  @useResult
-  $Res call({List<ImageSource> imageSources});
-}
-
-/// @nodoc
-class _$PhotoSlideStateCopyWithImpl<$Res, $Val extends PhotoSlideState>
-    implements $PhotoSlideStateCopyWith<$Res> {
-  _$PhotoSlideStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PhotoSlideState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PhotoSlideStateCopyWith<PhotoSlideState> get copyWith =>
+      _$PhotoSlideStateCopyWithImpl<PhotoSlideState>(
+          this as PhotoSlideState, _$identity);
+
   @override
-  $Res call({
-    Object? imageSources = null,
-  }) {
-    return _then(_value.copyWith(
-      imageSources: null == imageSources
-          ? _value.imageSources
-          : imageSources // ignore: cast_nullable_to_non_nullable
-              as List<ImageSource>,
-    ) as $Val);
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'PhotoSlideState'))
+      ..add(DiagnosticsProperty('imageSources', imageSources));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PhotoSlideState &&
+            const DeepCollectionEquality()
+                .equals(other.imageSources, imageSources));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(imageSources));
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PhotoSlideState(imageSources: $imageSources)';
   }
 }
 
 /// @nodoc
-abstract class _$$PhotoSlideStateImplCopyWith<$Res>
-    implements $PhotoSlideStateCopyWith<$Res> {
-  factory _$$PhotoSlideStateImplCopyWith(_$PhotoSlideStateImpl value,
-          $Res Function(_$PhotoSlideStateImpl) then) =
-      __$$PhotoSlideStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PhotoSlideStateCopyWith<$Res> {
+  factory $PhotoSlideStateCopyWith(
+          PhotoSlideState value, $Res Function(PhotoSlideState) _then) =
+      _$PhotoSlideStateCopyWithImpl;
   @useResult
   $Res call({List<ImageSource> imageSources});
 }
 
 /// @nodoc
-class __$$PhotoSlideStateImplCopyWithImpl<$Res>
-    extends _$PhotoSlideStateCopyWithImpl<$Res, _$PhotoSlideStateImpl>
-    implements _$$PhotoSlideStateImplCopyWith<$Res> {
-  __$$PhotoSlideStateImplCopyWithImpl(
-      _$PhotoSlideStateImpl _value, $Res Function(_$PhotoSlideStateImpl) _then)
-      : super(_value, _then);
+class _$PhotoSlideStateCopyWithImpl<$Res>
+    implements $PhotoSlideStateCopyWith<$Res> {
+  _$PhotoSlideStateCopyWithImpl(this._self, this._then);
+
+  final PhotoSlideState _self;
+  final $Res Function(PhotoSlideState) _then;
 
   /// Create a copy of PhotoSlideState
   /// with the given fields replaced by the non-null parameter values.
@@ -86,9 +75,9 @@ class __$$PhotoSlideStateImplCopyWithImpl<$Res>
   $Res call({
     Object? imageSources = null,
   }) {
-    return _then(_$PhotoSlideStateImpl(
+    return _then(_self.copyWith(
       imageSources: null == imageSources
-          ? _value._imageSources
+          ? _self.imageSources
           : imageSources // ignore: cast_nullable_to_non_nullable
               as List<ImageSource>,
     ));
@@ -97,9 +86,8 @@ class __$$PhotoSlideStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PhotoSlideStateImpl extends _PhotoSlideState
-    with DiagnosticableTreeMixin {
-  const _$PhotoSlideStateImpl({final List<ImageSource> imageSources = const []})
+class _PhotoSlideState extends PhotoSlideState with DiagnosticableTreeMixin {
+  const _PhotoSlideState({final List<ImageSource> imageSources = const []})
       : _imageSources = imageSources,
         super._();
 
@@ -112,14 +100,16 @@ class _$PhotoSlideStateImpl extends _PhotoSlideState
     return EqualUnmodifiableListView(_imageSources);
   }
 
+  /// Create a copy of PhotoSlideState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PhotoSlideState(imageSources: $imageSources)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PhotoSlideStateCopyWith<_PhotoSlideState> get copyWith =>
+      __$PhotoSlideStateCopyWithImpl<_PhotoSlideState>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PhotoSlideState'))
       ..add(DiagnosticsProperty('imageSources', imageSources));
@@ -129,7 +119,7 @@ class _$PhotoSlideStateImpl extends _PhotoSlideState
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PhotoSlideStateImpl &&
+            other is _PhotoSlideState &&
             const DeepCollectionEquality()
                 .equals(other._imageSources, _imageSources));
   }
@@ -138,28 +128,45 @@ class _$PhotoSlideStateImpl extends _PhotoSlideState
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_imageSources));
 
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PhotoSlideState(imageSources: $imageSources)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PhotoSlideStateCopyWith<$Res>
+    implements $PhotoSlideStateCopyWith<$Res> {
+  factory _$PhotoSlideStateCopyWith(
+          _PhotoSlideState value, $Res Function(_PhotoSlideState) _then) =
+      __$PhotoSlideStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<ImageSource> imageSources});
+}
+
+/// @nodoc
+class __$PhotoSlideStateCopyWithImpl<$Res>
+    implements _$PhotoSlideStateCopyWith<$Res> {
+  __$PhotoSlideStateCopyWithImpl(this._self, this._then);
+
+  final _PhotoSlideState _self;
+  final $Res Function(_PhotoSlideState) _then;
+
   /// Create a copy of PhotoSlideState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PhotoSlideStateImplCopyWith<_$PhotoSlideStateImpl> get copyWith =>
-      __$$PhotoSlideStateImplCopyWithImpl<_$PhotoSlideStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? imageSources = null,
+  }) {
+    return _then(_PhotoSlideState(
+      imageSources: null == imageSources
+          ? _self._imageSources
+          : imageSources // ignore: cast_nullable_to_non_nullable
+              as List<ImageSource>,
+    ));
+  }
 }
 
-abstract class _PhotoSlideState extends PhotoSlideState {
-  const factory _PhotoSlideState({final List<ImageSource> imageSources}) =
-      _$PhotoSlideStateImpl;
-  const _PhotoSlideState._() : super._();
-
-  @override
-  List<ImageSource> get imageSources;
-
-  /// Create a copy of PhotoSlideState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PhotoSlideStateImplCopyWith<_$PhotoSlideStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
