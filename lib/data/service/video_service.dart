@@ -38,7 +38,7 @@ class VideoService {
           ..setNextPage(data.nextPage)
           ..setSearchHits(data.searchHits);
       case Failure():
-        // TODO: handle error
+      // TODO: handle error
     }
 
     return result.isSuccess;
@@ -57,7 +57,7 @@ class VideoService {
           ..setNextPage(data.nextPage)
           ..addSearchHits(data.searchHits);
       case Failure():
-        // TODO: handle error
+      // TODO: handle error
     }
 
     return result.isSuccess;

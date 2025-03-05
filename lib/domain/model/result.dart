@@ -52,17 +52,17 @@ sealed class Result<T, R> with _$Result<T, R> {
   }
 
   bool get isSuccess => switch (this) {
-    Success() => true,
-    Failure() => false,
-  };
+        Success() => true,
+        Failure() => false,
+      };
   bool get isFailure => !isSuccess;
 
   T get data => switch (this) {
-    Success(:final data) => data,
-    Failure() => throw UnsupportedError("Can't get data from error"),
-  };
+        Success(:final data) => data,
+        Failure() => throw UnsupportedError("Can't get data from error"),
+      };
   R get error => switch (this) {
-    Success() => throw UnsupportedError("Can't get error from success"),
-    Failure(:final error) => error,
-  };
+        Success() => throw UnsupportedError("Can't get error from success"),
+        Failure(:final error) => error,
+      };
 }
