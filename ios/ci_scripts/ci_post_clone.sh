@@ -64,10 +64,53 @@ FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
 [ -z "$FLUTTER_VERSION" ] && echo "Error: Could not get Flutter version from .fvmrc" && exit 1
 echo "Using Flutter version: $FLUTTER_VERSION from .fvmrc"
 
-# Install Flutter using git.
-git clone https://github.com/flutter/flutter.git -b $FLUTTER_VERSION $HOME/flutter
-export PATH="$PATH:$HOME/flutter/bin"
-export PATH="$PATH:$HOME/.pub-cache/bin"
+# Determine architecture and set appropriate URL suffix
+ARCH=$(uname -m)
+case "$ARCH" in
+    "arm64"|"aarch64")
+        URL_SUFFIX="_arm64"
+        ;;
+    "x86_64")
+        URL_SUFFIX=""
+        ;;
+    *)
+        echo "Error: Unsupported architecture: $ARCH"
+        exit 1
+        ;;
+esac
+
+# Download and install Flutter
+FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos${URL_SUFFIX}_${FLUTTER_VERSION}-stable.zip"
+echo "Downloading Flutter from: $FLUTTER_URL"
+
+# Create temporary directory for download
+TEMP_DIR=$(mktemp -d)
+if ! curl -L $FLUTTER_URL -o $TEMP_DIR/flutter.zip; then
+    echo "Error: Failed to download Flutter"
+    rm -rf $TEMP_DIR
+    exit 1
+fi
+
+# Extract to temporary directory first
+if ! unzip -q $TEMP_DIR/flutter.zip -d $TEMP_DIR; then
+    echo "Error: Failed to extract Flutter"
+    rm -rf $TEMP_DIR
+    exit 1
+fi
+
+# Move Flutter to final location
+rm -rf $HOME/flutter
+mv $TEMP_DIR/flutter_macos* $HOME/flutter
+rm -rf $TEMP_DIR
+
+# Verify Flutter installation
+if ! $HOME/flutter/bin/flutter --version; then
+    echo "Error: Flutter installation verification failed"
+    exit 1
+fi
+
+export PATH="$HOME/flutter/bin:$PATH"
+export PATH="$HOME/.pub-cache/bin:$PATH"
 
 # Install Flutter artifacts for iOS (--ios), or macOS (--macos) platforms.
 flutter precache --ios
@@ -85,14 +128,22 @@ export GEM_HOME="$HOME/.gem"
 export PATH="$PATH:$GEM_HOME/bin"
 gem install xcodeproj
 
-# Install CocoaPods using Homebrew.
-HOMEBREW_NO_AUTO_UPDATE=1 brew install cocoapods
+# Install CocoaPods using Homebrew if not already installed
+if ! command -v pod &> /dev/null; then
+    echo "Installing CocoaPods..."
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install cocoapods
+else
+    echo "CocoaPods is already installed"
+fi
 
-# Install Flutter dependencies.
-flutter pub get
+# Show CocoaPods version
+echo "CocoaPods version: $(pod --version)"
 
 # Install CocoaPods dependencies.
 (cd ios && pod install) # run `pod install` in the `ios` directory.
+
+# Install Flutter dependencies.
+flutter pub get
 
 # .env
 echo $DOT_ENV | base64 --decode > .env
