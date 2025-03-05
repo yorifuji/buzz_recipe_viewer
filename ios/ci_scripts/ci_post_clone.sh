@@ -138,12 +138,6 @@ fi
 # Show CocoaPods version
 echo "CocoaPods version: $(pod --version)"
 
-# Install CocoaPods dependencies.
-(cd ios && pod install) # run `pod install` in the `ios` directory.
-
-# Install Flutter dependencies.
-flutter pub get
-
 # .env
 echo $DOT_ENV | base64 --decode > .env
 
@@ -155,6 +149,12 @@ flutterfire configure \
    --platforms=ios \
    --ios-bundle-id=dev.yorifuji.buzzRecipeViewer \
    --service-account=firebase_admin_service_account.json
+
+# Install Flutter dependencies first
+flutter pub get
+
+# Then install CocoaPods dependencies
+(cd ios && pod install) # run `pod install` in the `ios` directory
 
 # Run flutter build for config only with flavor prod
 flutter build ios --config-only --dart-define=FLAVOR=prod
