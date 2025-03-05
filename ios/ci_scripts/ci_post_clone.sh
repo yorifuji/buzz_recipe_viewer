@@ -86,11 +86,21 @@ echo "Downloading Flutter from: $FLUTTER_URL"
 # Remove existing Flutter installation
 rm -rf $HOME/flutter
 
-# Download and extract Flutter directly to $HOME
-if ! curl -L $FLUTTER_URL | unzip -q -d $HOME -; then
-    echo "Error: Failed to download or extract Flutter"
+# Download Flutter
+if ! curl -L $FLUTTER_URL -o $HOME/flutter.zip; then
+    echo "Error: Failed to download Flutter"
     exit 1
 fi
+
+# Extract Flutter
+if ! unzip -q $HOME/flutter.zip -d $HOME; then
+    echo "Error: Failed to extract Flutter"
+    rm -f $HOME/flutter.zip
+    exit 1
+fi
+
+# Clean up
+rm -f $HOME/flutter.zip
 
 # Verify Flutter installation
 if ! $HOME/flutter/bin/flutter --version; then
