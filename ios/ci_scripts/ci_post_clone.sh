@@ -83,25 +83,14 @@ esac
 FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos${URL_SUFFIX}_${FLUTTER_VERSION}-stable.zip"
 echo "Downloading Flutter from: $FLUTTER_URL"
 
-# Create temporary directory for download
-TEMP_DIR=$(mktemp -d)
-if ! curl -L $FLUTTER_URL -o $TEMP_DIR/flutter.zip; then
-    echo "Error: Failed to download Flutter"
-    rm -rf $TEMP_DIR
-    exit 1
-fi
-
-# Extract to temporary directory first
-if ! unzip -q $TEMP_DIR/flutter.zip -d $TEMP_DIR; then
-    echo "Error: Failed to extract Flutter"
-    rm -rf $TEMP_DIR
-    exit 1
-fi
-
-# Move Flutter to final location
+# Remove existing Flutter installation
 rm -rf $HOME/flutter
-mv $TEMP_DIR/flutter_macos* $HOME/flutter
-rm -rf $TEMP_DIR
+
+# Download and extract Flutter directly to $HOME
+if ! curl -L $FLUTTER_URL | unzip -q -d $HOME -; then
+    echo "Error: Failed to download or extract Flutter"
+    exit 1
+fi
 
 # Verify Flutter installation
 if ! $HOME/flutter/bin/flutter --version; then
