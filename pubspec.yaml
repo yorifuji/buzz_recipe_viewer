@@ -52,7 +52,7 @@ dependencies:
   firebase_app_installations: ^0.3.1
 
   flutter_use: ^0.0.4
-  algoliasearch: ^1.24.0
+  algoliasearch: ^1.30.2
   algolia_helper_flutter: ^1.1.0
   image_picker: ^1.1.2
   uuid: ^4.5.1
