@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'result.freezed.dart';
 
 @freezed
-abstract class Result<T, R> with _$Result<T, R> {
+sealed class Result<T, R> with _$Result<T, R> {
   const factory Result.success({required T data}) = Success<T, R>;
   const factory Result.failure({required R error}) = Failure<T, R>;
 
@@ -51,15 +51,18 @@ abstract class Result<T, R> with _$Result<T, R> {
     }
   }
 
-  bool get isSuccess => when(success: (data) => true, failure: (e) => false);
+  bool get isSuccess => switch (this) {
+    Success() => true,
+    Failure() => false,
+  };
   bool get isFailure => !isSuccess;
 
-  T get data => when(
-        success: (data) => data,
-        failure: (_) => throw UnsupportedError("Can't get data from error"),
-      );
-  R get error => when(
-        success: (_) => throw UnsupportedError("Can't get error from success"),
-        failure: (e) => e,
-      );
+  T get data => switch (this) {
+    Success(:final data) => data,
+    Failure() => throw UnsupportedError("Can't get data from error"),
+  };
+  R get error => switch (this) {
+    Success() => throw UnsupportedError("Can't get error from success"),
+    Failure(:final error) => error,
+  };
 }

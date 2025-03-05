@@ -8,16 +8,14 @@ part of 'favorite.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FavoriteImpl _$$FavoriteImplFromJson(Map<String, dynamic> json) =>
-    _$FavoriteImpl(
+_Favorite _$FavoriteFromJson(Map<String, dynamic> json) => _Favorite(
       searchHit: SearchHit.fromJson(json['searchHit'] as Map<String, dynamic>),
       createdAt: const CreatedAtField().fromJson(json['createdAt']),
       updatedAt: const UpdatedAtField().fromJson(json['updatedAt']),
       id: json['id'] as String?,
     );
 
-Map<String, dynamic> _$$FavoriteImplToJson(_$FavoriteImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FavoriteToJson(_Favorite instance) => <String, dynamic>{
       'searchHit': instance.searchHit.toJson(),
       'createdAt': const CreatedAtField().toJson(instance.createdAt),
       'updatedAt': const UpdatedAtField().toJson(instance.updatedAt),

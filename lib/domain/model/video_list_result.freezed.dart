@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,81 +10,59 @@ part of 'video_list_result.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VideoListResult {
-  List<SearchHit> get searchHits => throw _privateConstructorUsedError;
-  int get nextPage => throw _privateConstructorUsedError;
+  List<SearchHit> get searchHits;
+  int get nextPage;
 
   /// Create a copy of VideoListResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $VideoListResultCopyWith<VideoListResult> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $VideoListResultCopyWith<$Res> {
-  factory $VideoListResultCopyWith(
-          VideoListResult value, $Res Function(VideoListResult) then) =
-      _$VideoListResultCopyWithImpl<$Res, VideoListResult>;
-  @useResult
-  $Res call({List<SearchHit> searchHits, int nextPage});
-}
-
-/// @nodoc
-class _$VideoListResultCopyWithImpl<$Res, $Val extends VideoListResult>
-    implements $VideoListResultCopyWith<$Res> {
-  _$VideoListResultCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of VideoListResult
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $VideoListResultCopyWith<VideoListResult> get copyWith =>
+      _$VideoListResultCopyWithImpl<VideoListResult>(
+          this as VideoListResult, _$identity);
+
   @override
-  $Res call({
-    Object? searchHits = null,
-    Object? nextPage = null,
-  }) {
-    return _then(_value.copyWith(
-      searchHits: null == searchHits
-          ? _value.searchHits
-          : searchHits // ignore: cast_nullable_to_non_nullable
-              as List<SearchHit>,
-      nextPage: null == nextPage
-          ? _value.nextPage
-          : nextPage // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is VideoListResult &&
+            const DeepCollectionEquality()
+                .equals(other.searchHits, searchHits) &&
+            (identical(other.nextPage, nextPage) ||
+                other.nextPage == nextPage));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(searchHits), nextPage);
+
+  @override
+  String toString() {
+    return 'VideoListResult(searchHits: $searchHits, nextPage: $nextPage)';
   }
 }
 
 /// @nodoc
-abstract class _$$VideoListResultImplCopyWith<$Res>
-    implements $VideoListResultCopyWith<$Res> {
-  factory _$$VideoListResultImplCopyWith(_$VideoListResultImpl value,
-          $Res Function(_$VideoListResultImpl) then) =
-      __$$VideoListResultImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $VideoListResultCopyWith<$Res> {
+  factory $VideoListResultCopyWith(
+          VideoListResult value, $Res Function(VideoListResult) _then) =
+      _$VideoListResultCopyWithImpl;
   @useResult
   $Res call({List<SearchHit> searchHits, int nextPage});
 }
 
 /// @nodoc
-class __$$VideoListResultImplCopyWithImpl<$Res>
-    extends _$VideoListResultCopyWithImpl<$Res, _$VideoListResultImpl>
-    implements _$$VideoListResultImplCopyWith<$Res> {
-  __$$VideoListResultImplCopyWithImpl(
-      _$VideoListResultImpl _value, $Res Function(_$VideoListResultImpl) _then)
-      : super(_value, _then);
+class _$VideoListResultCopyWithImpl<$Res>
+    implements $VideoListResultCopyWith<$Res> {
+  _$VideoListResultCopyWithImpl(this._self, this._then);
+
+  final VideoListResult _self;
+  final $Res Function(VideoListResult) _then;
 
   /// Create a copy of VideoListResult
   /// with the given fields replaced by the non-null parameter values.
@@ -93,13 +72,13 @@ class __$$VideoListResultImplCopyWithImpl<$Res>
     Object? searchHits = null,
     Object? nextPage = null,
   }) {
-    return _then(_$VideoListResultImpl(
+    return _then(_self.copyWith(
       searchHits: null == searchHits
-          ? _value._searchHits
+          ? _self.searchHits
           : searchHits // ignore: cast_nullable_to_non_nullable
               as List<SearchHit>,
       nextPage: null == nextPage
-          ? _value.nextPage
+          ? _self.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -108,8 +87,8 @@ class __$$VideoListResultImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$VideoListResultImpl implements _VideoListResult {
-  const _$VideoListResultImpl(
+class _VideoListResult implements VideoListResult {
+  const _VideoListResult(
       {final List<SearchHit> searchHits = const <SearchHit>[],
       this.nextPage = 0})
       : _searchHits = searchHits;
@@ -127,16 +106,19 @@ class _$VideoListResultImpl implements _VideoListResult {
   @JsonKey()
   final int nextPage;
 
+  /// Create a copy of VideoListResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'VideoListResult(searchHits: $searchHits, nextPage: $nextPage)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$VideoListResultCopyWith<_VideoListResult> get copyWith =>
+      __$VideoListResultCopyWithImpl<_VideoListResult>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VideoListResultImpl &&
+            other is _VideoListResult &&
             const DeepCollectionEquality()
                 .equals(other._searchHits, _searchHits) &&
             (identical(other.nextPage, nextPage) ||
@@ -147,30 +129,50 @@ class _$VideoListResultImpl implements _VideoListResult {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_searchHits), nextPage);
 
+  @override
+  String toString() {
+    return 'VideoListResult(searchHits: $searchHits, nextPage: $nextPage)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$VideoListResultCopyWith<$Res>
+    implements $VideoListResultCopyWith<$Res> {
+  factory _$VideoListResultCopyWith(
+          _VideoListResult value, $Res Function(_VideoListResult) _then) =
+      __$VideoListResultCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<SearchHit> searchHits, int nextPage});
+}
+
+/// @nodoc
+class __$VideoListResultCopyWithImpl<$Res>
+    implements _$VideoListResultCopyWith<$Res> {
+  __$VideoListResultCopyWithImpl(this._self, this._then);
+
+  final _VideoListResult _self;
+  final $Res Function(_VideoListResult) _then;
+
   /// Create a copy of VideoListResult
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VideoListResultImplCopyWith<_$VideoListResultImpl> get copyWith =>
-      __$$VideoListResultImplCopyWithImpl<_$VideoListResultImpl>(
-          this, _$identity);
+  $Res call({
+    Object? searchHits = null,
+    Object? nextPage = null,
+  }) {
+    return _then(_VideoListResult(
+      searchHits: null == searchHits
+          ? _self._searchHits
+          : searchHits // ignore: cast_nullable_to_non_nullable
+              as List<SearchHit>,
+      nextPage: null == nextPage
+          ? _self.nextPage
+          : nextPage // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
-abstract class _VideoListResult implements VideoListResult {
-  const factory _VideoListResult(
-      {final List<SearchHit> searchHits,
-      final int nextPage}) = _$VideoListResultImpl;
-
-  @override
-  List<SearchHit> get searchHits;
-  @override
-  int get nextPage;
-
-  /// Create a copy of VideoListResult
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VideoListResultImplCopyWith<_$VideoListResultImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -9,7 +9,7 @@ part 'search_state_store.freezed.dart';
 part 'search_state_store.g.dart';
 
 @freezed
-class SearchState with _$SearchState {
+abstract class SearchState with _$SearchState {
   const factory SearchState({
     @Default('') String query,
     @Default(SortIndex.timestamp) SortIndex sortType,

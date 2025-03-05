@@ -11,7 +11,7 @@ extension type RecipeId(String value) {
 }
 
 @freezed
-class Recipe with _$Recipe {
+abstract class Recipe with _$Recipe {
   @JsonSerializable(explicitToJson: true)
   const factory Recipe({
     required String title,

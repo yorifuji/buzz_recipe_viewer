@@ -8,7 +8,7 @@ part of 'recipe.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RecipeImpl _$$RecipeImplFromJson(Map<String, dynamic> json) => _$RecipeImpl(
+_Recipe _$RecipeFromJson(Map<String, dynamic> json) => _Recipe(
       title: json['title'] as String,
       description: json['description'] as String,
       foodList:
@@ -23,8 +23,7 @@ _$RecipeImpl _$$RecipeImplFromJson(Map<String, dynamic> json) => _$RecipeImpl(
       recipeId: RecipeId.fromJson(json['recipeId'] as String),
     );
 
-Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'foodList': instance.foodList,

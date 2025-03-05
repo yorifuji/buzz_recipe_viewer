@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,133 +10,30 @@ part of 'storage_image.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-StorageImage _$StorageImageFromJson(Map<String, dynamic> json) {
-  return _StorageImage.fromJson(json);
-}
 
 /// @nodoc
 mixin _$StorageImage {
-  String get imageId => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
-
-  /// Serializes this StorageImage to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get imageId;
+  String get url;
 
   /// Create a copy of StorageImage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $StorageImageCopyWith<StorageImage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$StorageImageCopyWithImpl<StorageImage>(
+          this as StorageImage, _$identity);
 
-/// @nodoc
-abstract class $StorageImageCopyWith<$Res> {
-  factory $StorageImageCopyWith(
-          StorageImage value, $Res Function(StorageImage) then) =
-      _$StorageImageCopyWithImpl<$Res, StorageImage>;
-  @useResult
-  $Res call({String imageId, String url});
-}
-
-/// @nodoc
-class _$StorageImageCopyWithImpl<$Res, $Val extends StorageImage>
-    implements $StorageImageCopyWith<$Res> {
-  _$StorageImageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of StorageImage
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? imageId = null,
-    Object? url = null,
-  }) {
-    return _then(_value.copyWith(
-      imageId: null == imageId
-          ? _value.imageId
-          : imageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$StorageImageImplCopyWith<$Res>
-    implements $StorageImageCopyWith<$Res> {
-  factory _$$StorageImageImplCopyWith(
-          _$StorageImageImpl value, $Res Function(_$StorageImageImpl) then) =
-      __$$StorageImageImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String imageId, String url});
-}
-
-/// @nodoc
-class __$$StorageImageImplCopyWithImpl<$Res>
-    extends _$StorageImageCopyWithImpl<$Res, _$StorageImageImpl>
-    implements _$$StorageImageImplCopyWith<$Res> {
-  __$$StorageImageImplCopyWithImpl(
-      _$StorageImageImpl _value, $Res Function(_$StorageImageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of StorageImage
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? imageId = null,
-    Object? url = null,
-  }) {
-    return _then(_$StorageImageImpl(
-      imageId: null == imageId
-          ? _value.imageId
-          : imageId // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$StorageImageImpl implements _StorageImage {
-  const _$StorageImageImpl({required this.imageId, required this.url});
-
-  factory _$StorageImageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StorageImageImplFromJson(json);
-
-  @override
-  final String imageId;
-  @override
-  final String url;
-
-  @override
-  String toString() {
-    return 'StorageImage(imageId: $imageId, url: $url)';
-  }
+  /// Serializes this StorageImage to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StorageImageImpl &&
+            other is StorageImage &&
             (identical(other.imageId, imageId) || other.imageId == imageId) &&
             (identical(other.url, url) || other.url == url));
   }
@@ -144,39 +42,133 @@ class _$StorageImageImpl implements _StorageImage {
   @override
   int get hashCode => Object.hash(runtimeType, imageId, url);
 
-  /// Create a copy of StorageImage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$StorageImageImplCopyWith<_$StorageImageImpl> get copyWith =>
-      __$$StorageImageImplCopyWithImpl<_$StorageImageImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StorageImageImplToJson(
-      this,
-    );
+  String toString() {
+    return 'StorageImage(imageId: $imageId, url: $url)';
   }
 }
 
-abstract class _StorageImage implements StorageImage {
-  const factory _StorageImage(
-      {required final String imageId,
-      required final String url}) = _$StorageImageImpl;
+/// @nodoc
+abstract mixin class $StorageImageCopyWith<$Res> {
+  factory $StorageImageCopyWith(
+          StorageImage value, $Res Function(StorageImage) _then) =
+      _$StorageImageCopyWithImpl;
+  @useResult
+  $Res call({String imageId, String url});
+}
 
-  factory _StorageImage.fromJson(Map<String, dynamic> json) =
-      _$StorageImageImpl.fromJson;
+/// @nodoc
+class _$StorageImageCopyWithImpl<$Res> implements $StorageImageCopyWith<$Res> {
+  _$StorageImageCopyWithImpl(this._self, this._then);
+
+  final StorageImage _self;
+  final $Res Function(StorageImage) _then;
+
+  /// Create a copy of StorageImage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? imageId = null,
+    Object? url = null,
+  }) {
+    return _then(_self.copyWith(
+      imageId: null == imageId
+          ? _self.imageId
+          : imageId // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _self.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _StorageImage implements StorageImage {
+  const _StorageImage({required this.imageId, required this.url});
+  factory _StorageImage.fromJson(Map<String, dynamic> json) =>
+      _$StorageImageFromJson(json);
 
   @override
-  String get imageId;
+  final String imageId;
   @override
-  String get url;
+  final String url;
 
   /// Create a copy of StorageImage
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StorageImageImplCopyWith<_$StorageImageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$StorageImageCopyWith<_StorageImage> get copyWith =>
+      __$StorageImageCopyWithImpl<_StorageImage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$StorageImageToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _StorageImage &&
+            (identical(other.imageId, imageId) || other.imageId == imageId) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, imageId, url);
+
+  @override
+  String toString() {
+    return 'StorageImage(imageId: $imageId, url: $url)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$StorageImageCopyWith<$Res>
+    implements $StorageImageCopyWith<$Res> {
+  factory _$StorageImageCopyWith(
+          _StorageImage value, $Res Function(_StorageImage) _then) =
+      __$StorageImageCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String imageId, String url});
+}
+
+/// @nodoc
+class __$StorageImageCopyWithImpl<$Res>
+    implements _$StorageImageCopyWith<$Res> {
+  __$StorageImageCopyWithImpl(this._self, this._then);
+
+  final _StorageImage _self;
+  final $Res Function(_StorageImage) _then;
+
+  /// Create a copy of StorageImage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? imageId = null,
+    Object? url = null,
+  }) {
+    return _then(_StorageImage(
+      imageId: null == imageId
+          ? _self.imageId
+          : imageId // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _self.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

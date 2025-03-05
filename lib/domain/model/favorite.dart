@@ -6,7 +6,7 @@ part 'favorite.freezed.dart';
 part 'favorite.g.dart';
 
 @freezed
-class Favorite with _$Favorite {
+abstract class Favorite with _$Favorite {
   @JsonSerializable(explicitToJson: true)
   const factory Favorite({
     required SearchHit searchHit,

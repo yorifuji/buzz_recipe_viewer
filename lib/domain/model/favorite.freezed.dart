@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,191 +10,33 @@ part of 'favorite.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Favorite _$FavoriteFromJson(Map<String, dynamic> json) {
-  return _Favorite.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Favorite {
-  SearchHit get searchHit => throw _privateConstructorUsedError;
+  SearchHit get searchHit;
   @CreatedAtField()
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @UpdatedAtField()
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
-
-  /// Serializes this Favorite to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DateTime get updatedAt;
+  String? get id;
 
   /// Create a copy of Favorite
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $FavoriteCopyWith<Favorite> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$FavoriteCopyWithImpl<Favorite>(this as Favorite, _$identity);
 
-/// @nodoc
-abstract class $FavoriteCopyWith<$Res> {
-  factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) then) =
-      _$FavoriteCopyWithImpl<$Res, Favorite>;
-  @useResult
-  $Res call(
-      {SearchHit searchHit,
-      @CreatedAtField() DateTime createdAt,
-      @UpdatedAtField() DateTime updatedAt,
-      String? id});
-
-  $SearchHitCopyWith<$Res> get searchHit;
-}
-
-/// @nodoc
-class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
-    implements $FavoriteCopyWith<$Res> {
-  _$FavoriteCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Favorite
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchHit = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? id = freezed,
-  }) {
-    return _then(_value.copyWith(
-      searchHit: null == searchHit
-          ? _value.searchHit
-          : searchHit // ignore: cast_nullable_to_non_nullable
-              as SearchHit,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-
-  /// Create a copy of Favorite
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SearchHitCopyWith<$Res> get searchHit {
-    return $SearchHitCopyWith<$Res>(_value.searchHit, (value) {
-      return _then(_value.copyWith(searchHit: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$FavoriteImplCopyWith<$Res>
-    implements $FavoriteCopyWith<$Res> {
-  factory _$$FavoriteImplCopyWith(
-          _$FavoriteImpl value, $Res Function(_$FavoriteImpl) then) =
-      __$$FavoriteImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {SearchHit searchHit,
-      @CreatedAtField() DateTime createdAt,
-      @UpdatedAtField() DateTime updatedAt,
-      String? id});
-
-  @override
-  $SearchHitCopyWith<$Res> get searchHit;
-}
-
-/// @nodoc
-class __$$FavoriteImplCopyWithImpl<$Res>
-    extends _$FavoriteCopyWithImpl<$Res, _$FavoriteImpl>
-    implements _$$FavoriteImplCopyWith<$Res> {
-  __$$FavoriteImplCopyWithImpl(
-      _$FavoriteImpl _value, $Res Function(_$FavoriteImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Favorite
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchHit = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? id = freezed,
-  }) {
-    return _then(_$FavoriteImpl(
-      searchHit: null == searchHit
-          ? _value.searchHit
-          : searchHit // ignore: cast_nullable_to_non_nullable
-              as SearchHit,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$FavoriteImpl extends _Favorite {
-  const _$FavoriteImpl(
-      {required this.searchHit,
-      @CreatedAtField() required this.createdAt,
-      @UpdatedAtField() required this.updatedAt,
-      this.id})
-      : super._();
-
-  factory _$FavoriteImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FavoriteImplFromJson(json);
-
-  @override
-  final SearchHit searchHit;
-  @override
-  @CreatedAtField()
-  final DateTime createdAt;
-  @override
-  @UpdatedAtField()
-  final DateTime updatedAt;
-  @override
-  final String? id;
-
-  @override
-  String toString() {
-    return 'Favorite(searchHit: $searchHit, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
-  }
+  /// Serializes this Favorite to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FavoriteImpl &&
+            other is Favorite &&
             (identical(other.searchHit, searchHit) ||
                 other.searchHit == searchHit) &&
             (identical(other.createdAt, createdAt) ||
@@ -208,48 +51,201 @@ class _$FavoriteImpl extends _Favorite {
   int get hashCode =>
       Object.hash(runtimeType, searchHit, createdAt, updatedAt, id);
 
-  /// Create a copy of Favorite
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FavoriteImplCopyWith<_$FavoriteImpl> get copyWith =>
-      __$$FavoriteImplCopyWithImpl<_$FavoriteImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FavoriteImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Favorite(searchHit: $searchHit, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
   }
 }
 
-abstract class _Favorite extends Favorite {
-  const factory _Favorite(
-      {required final SearchHit searchHit,
-      @CreatedAtField() required final DateTime createdAt,
-      @UpdatedAtField() required final DateTime updatedAt,
-      final String? id}) = _$FavoriteImpl;
-  const _Favorite._() : super._();
+/// @nodoc
+abstract mixin class $FavoriteCopyWith<$Res> {
+  factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) _then) =
+      _$FavoriteCopyWithImpl;
+  @useResult
+  $Res call(
+      {SearchHit searchHit,
+      @CreatedAtField() DateTime createdAt,
+      @UpdatedAtField() DateTime updatedAt,
+      String? id});
 
-  factory _Favorite.fromJson(Map<String, dynamic> json) =
-      _$FavoriteImpl.fromJson;
+  $SearchHitCopyWith<$Res> get searchHit;
+}
+
+/// @nodoc
+class _$FavoriteCopyWithImpl<$Res> implements $FavoriteCopyWith<$Res> {
+  _$FavoriteCopyWithImpl(this._self, this._then);
+
+  final Favorite _self;
+  final $Res Function(Favorite) _then;
+
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchHit = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? id = freezed,
+  }) {
+    return _then(_self.copyWith(
+      searchHit: null == searchHit
+          ? _self.searchHit
+          : searchHit // ignore: cast_nullable_to_non_nullable
+              as SearchHit,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SearchHitCopyWith<$Res> get searchHit {
+    return $SearchHitCopyWith<$Res>(_self.searchHit, (value) {
+      return _then(_self.copyWith(searchHit: value));
+    });
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _Favorite extends Favorite {
+  const _Favorite(
+      {required this.searchHit,
+      @CreatedAtField() required this.createdAt,
+      @UpdatedAtField() required this.updatedAt,
+      this.id})
+      : super._();
+  factory _Favorite.fromJson(Map<String, dynamic> json) =>
+      _$FavoriteFromJson(json);
 
   @override
-  SearchHit get searchHit;
+  final SearchHit searchHit;
   @override
   @CreatedAtField()
-  DateTime get createdAt;
+  final DateTime createdAt;
   @override
   @UpdatedAtField()
-  DateTime get updatedAt;
+  final DateTime updatedAt;
   @override
-  String? get id;
+  final String? id;
 
   /// Create a copy of Favorite
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FavoriteImplCopyWith<_$FavoriteImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$FavoriteCopyWith<_Favorite> get copyWith =>
+      __$FavoriteCopyWithImpl<_Favorite>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FavoriteToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Favorite &&
+            (identical(other.searchHit, searchHit) ||
+                other.searchHit == searchHit) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, searchHit, createdAt, updatedAt, id);
+
+  @override
+  String toString() {
+    return 'Favorite(searchHit: $searchHit, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$FavoriteCopyWith<$Res>
+    implements $FavoriteCopyWith<$Res> {
+  factory _$FavoriteCopyWith(_Favorite value, $Res Function(_Favorite) _then) =
+      __$FavoriteCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {SearchHit searchHit,
+      @CreatedAtField() DateTime createdAt,
+      @UpdatedAtField() DateTime updatedAt,
+      String? id});
+
+  @override
+  $SearchHitCopyWith<$Res> get searchHit;
+}
+
+/// @nodoc
+class __$FavoriteCopyWithImpl<$Res> implements _$FavoriteCopyWith<$Res> {
+  __$FavoriteCopyWithImpl(this._self, this._then);
+
+  final _Favorite _self;
+  final $Res Function(_Favorite) _then;
+
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? searchHit = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? id = freezed,
+  }) {
+    return _then(_Favorite(
+      searchHit: null == searchHit
+          ? _self.searchHit
+          : searchHit // ignore: cast_nullable_to_non_nullable
+              as SearchHit,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of Favorite
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SearchHitCopyWith<$Res> get searchHit {
+    return $SearchHitCopyWith<$Res>(_self.searchHit, (value) {
+      return _then(_self.copyWith(searchHit: value));
+    });
+  }
+}
+
+// dart format on

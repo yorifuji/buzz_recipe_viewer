@@ -2,6 +2,7 @@ import 'package:buzz_recipe_viewer/data/repository/video_repository.dart';
 import 'package:buzz_recipe_viewer/data/repository/video_repository_mock.dart';
 import 'package:buzz_recipe_viewer/data/store/video/search_state_store.dart';
 import 'package:buzz_recipe_viewer/domain/model/flavor.dart';
+import 'package:buzz_recipe_viewer/domain/model/result.dart';
 import 'package:buzz_recipe_viewer/domain/model/sort_index.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -29,16 +30,16 @@ class VideoService {
     final result =
         await _videoRepository.getVideoList(query, sortIndex.indexName, 0);
 
-    result.when(
-      success: (data) {
+    switch (result) {
+      case Success(:final data):
         _searchStateStore
           ..setQuery(query)
           ..setSortType(sortIndex)
           ..setNextPage(data.nextPage)
           ..setSearchHits(data.searchHits);
-      },
-      failure: (error) {},
-    );
+      case Failure():
+        // TODO: handle error
+    }
 
     return result.isSuccess;
   }
@@ -50,14 +51,14 @@ class VideoService {
       _searchStateStore.nextPage(),
     );
 
-    result.when(
-      success: (data) {
+    switch (result) {
+      case Success(:final data):
         _searchStateStore
           ..setNextPage(data.nextPage)
           ..addSearchHits(data.searchHits);
-      },
-      failure: (error) {},
-    );
+      case Failure():
+        // TODO: handle error
+    }
 
     return result.isSuccess;
   }
