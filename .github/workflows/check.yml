@@ -143,7 +143,7 @@ jobs:
 
       - run: flutter test -x golden --reporter json > test_report.json
 
-      - uses: dorny/test-reporter@31a54ee7ebcacc03a09ea97a7e5465a47b84aea5
+      - uses: dorny/test-reporter@6e6a65b7a0bd2c9197df7d0ae36ac5cee784230c
         if: success() || failure() # ignore cancelled
         with:
           name: flutter test report
