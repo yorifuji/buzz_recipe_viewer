@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       command:
-        description: 'Command to dispatch, starts with "/"'
+        description: 'Command to dispatch (without slash)'
         required: true
-        default: '/deploy'
+        default: 'deploy'
 
 permissions:
   contents: read
@@ -26,8 +26,7 @@ jobs:
         startsWith(github.event.comment.body, '/')
       ) ||
       (
-        github.event_name == 'workflow_dispatch' &&
-        startsWith(github.event.inputs.command, '/')
+        github.event_name == 'workflow_dispatch'
       )
       }}
     timeout-minutes: 30
@@ -40,11 +39,17 @@ jobs:
           PR_COMMENT: ${{ github.event.comment.body }}
           WORKFLOW_COMMAND: ${{ github.event.inputs.command }}
           IS_PR: ${{ github.event.issue.pull_request != null }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           if [[ "$IS_PR" == "true" ]]; then
             echo "command=$PR_COMMENT" >> $GITHUB_OUTPUT
           else
-            echo "command=$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
+            # For workflow_dispatch, add slash prefix if not present
+            if [[ "$WORKFLOW_COMMAND" != /* ]]; then
+              echo "command=/$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
+            else
+              echo "command=$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
+            fi
           fi
 
   dispatcher:
