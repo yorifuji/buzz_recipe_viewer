@@ -295,12 +295,12 @@ jobs:
 
   #     - name: flutterfire configure
   #       env:
-  #         FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
+  #         FIREBASE_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}
   #       run: |
   #         which firebase || curl -sL https://firebase.tools | analytics=false bash
   #         dart pub global activate flutterfire_cli && flutterfire -v
-  #         echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
-  #         GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-prod
+  #         echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
+  #         GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-prod
 
   #     - run: flutter build macos --dart-define=FLAVOR=prod
 
