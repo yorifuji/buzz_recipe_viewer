@@ -9,8 +9,15 @@ updates:
     open-pull-requests-limit: 10
   - package-ecosystem: 'github-actions'
     directory: '/'
+    open-pull-requests-limit: 10
     schedule:
       interval: 'daily'
       time: '00:00'
       timezone: 'Asia/Tokyo'
-    open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - "actions/*"
+        update-types:
+          - "minor"
+          - "patch"
