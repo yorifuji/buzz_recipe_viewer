@@ -25,22 +25,33 @@ jobs:
         contains(fromJson('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
         startsWith(github.event.comment.body, '/')
       ) ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.command != '')
+      github.event_name == 'workflow_dispatch'
       }}
     timeout-minutes: 30
     outputs:
       command: ${{ steps.set-command.outputs.command }}
     steps:
+      - name: Debug event info
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Is PR: ${{ github.event.issue.pull_request != null }}"
+          echo "Ref name: ${{ github.ref_name }}"
+          echo "Workflow command: ${{ github.event.inputs.command }}"
+          
       - id: set-command
         name: "Set command output"
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
           WORKFLOW_COMMAND: ${{ github.event.inputs.command }}
           IS_PR: ${{ github.event.issue.pull_request != null }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
+          echo "EVENT_NAME: $EVENT_NAME"
           if [[ "$IS_PR" == "true" ]]; then
+            echo "Setting command from PR comment: $PR_COMMENT"
             echo "command=$PR_COMMENT" >> $GITHUB_OUTPUT
           else
+            echo "Setting command from workflow input: $WORKFLOW_COMMAND"
             echo "command=$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
           fi
 
@@ -52,6 +63,11 @@ jobs:
       command: ${{ steps.parser.outputs.command }}
       branch: ${{ steps.parser.outputs.branch }}
     steps:
+      - name: Debug pre-process outputs
+        run: |
+          echo "Pre-process command output: ${{ needs.pre-process.outputs.command }}"
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref name: ${{ github.ref_name }}"
       - id: parser
         name: "Parse slash command"
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
@@ -63,35 +79,52 @@ jobs:
           CURRENT_BRANCH: ${{ github.ref_name }}
         with:
           script: |
+            console.log('Command text:', process.env.COMMAND_TEXT);
+            console.log('Is PR:', process.env.IS_PR);
+            console.log('Event name:', process.env.EVENT_NAME);
+            console.log('Current branch:', process.env.CURRENT_BRANCH);
+            
             // List of supported slash commands
             const supportedCommands = ['deploy'].sort((a, b) => b.length - a.length);
 
             // Get command text from pre-process job
-            const commandText = process.env.COMMAND_TEXT;
-
+            const commandText = process.env.COMMAND_TEXT || '';
+            
             // Detect command from command text
             const command = supportedCommands.find(cmd =>
               commandText.startsWith(`/${cmd}`)
             );
+            console.log('Detected command:', command || 'none');
             core.setOutput('command', command || '')
 
             // Only get PR info if this is from a pull request comment
             if (process.env.IS_PR === 'true') {
-              // Get PR info and extract branch name
-              const { data: pullRequest } = await github.rest.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: parseInt(process.env.ISSUE_NUMBER)
-              });
-              if (!pullRequest.head.ref) {
-                core.setFailed('Failed to get branch name from pull request');
-                return;
+              console.log('Processing PR comment');
+              try {
+                // Get PR info and extract branch name
+                const { data: pullRequest } = await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: parseInt(process.env.ISSUE_NUMBER || '0')
+                });
+                if (!pullRequest.head.ref) {
+                  core.setFailed('Failed to get branch name from pull request');
+                  return;
+                }
+                console.log('PR branch:', pullRequest.head.ref);
+                core.setOutput('branch', pullRequest.head.ref);
+              } catch (error) {
+                console.error('Error getting PR info:', error);
+                core.setFailed(`Error getting PR info: ${error.message}`);
               }
-              core.setOutput('branch', pullRequest.head.ref);
             } else if (process.env.EVENT_NAME === 'workflow_dispatch') {
+              console.log('Processing workflow_dispatch');
               // For workflow_dispatch, use the current branch where the workflow is running
               core.setOutput('branch', process.env.CURRENT_BRANCH);
               console.log(`Using current branch: ${process.env.CURRENT_BRANCH} for workflow_dispatch`);
+            } else {
+              console.log('Unknown event type, using current branch as fallback');
+              core.setOutput('branch', process.env.CURRENT_BRANCH || 'main');
             }
 
   deploy:
@@ -100,6 +133,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
+      - name: Debug dispatcher outputs
+        run: |
+          echo "Dispatcher command output: ${{ needs.dispatcher.outputs.command }}"
+          echo "Dispatcher branch output: ${{ needs.dispatcher.outputs.branch }}"
+          
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: "Generate App Store Connect JWT Token"
