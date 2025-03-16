@@ -76,6 +76,12 @@ jobs:
             const command = supportedCommands.find(cmd =>
               commandText.startsWith(`/${cmd}`)
             );
+            
+            if (!command && commandText) {
+              core.setFailed(`Unsupported command: ${commandText}. Supported commands: ${supportedCommands.map(cmd => '/' + cmd).join(', ')}`);
+              return;
+            }
+            
             core.setOutput('command', command || '')
 
             // Only get PR info if this is from a pull request comment
