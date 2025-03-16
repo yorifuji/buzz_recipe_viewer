@@ -1,6 +1,6 @@
-name: 03 Deliver for staging
+name: 04-1 Deliver for production Firebase
 
-run-name: Deliver for staging ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
+run-name: Deliver for production Firebase ${{ (vars.RUNS_ON_SELF_HOSTED == null && '(on GitHub-hosted)') || '(on self-hosted)' }}
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ defaults:
 jobs:
   android:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
-    environment: staging
+    environment: production
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -73,7 +73,7 @@ jobs:
           which flutterfire || dart pub global activate flutterfire_cli
           flutterfire -v
           echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-stg
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-prod
 
       - name: Extract key.properties file
         env:
@@ -85,7 +85,7 @@ jobs:
           echo storeFile=${{ runner.temp }}/release.jks >> android/key.properties
 
       - name: Build app bundle
-        run: flutter build apk --dart-define=FLAVOR=stg
+        run: flutter build apk --dart-define=FLAVOR=prod
 
       - name: Extract Firebase App Distribution Service Account file
         if: ${{ inputs.upload }}
@@ -108,7 +108,7 @@ jobs:
 
   ios:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-15') || 'self-hosted' }}
-    environment: staging
+    environment: production
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -148,7 +148,7 @@ jobs:
           which flutterfire || dart pub global activate flutterfire_cli
           flutterfire -v
           echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-stg
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-prod
 
       - name: Import Apple Development Certificate(Required xcodebuild archive with entitlements)
         env:
@@ -204,7 +204,7 @@ jobs:
           flutter build ios \
             --config-only \
             --no-codesign \
-            --dart-define=FLAVOR=stg
+            --dart-define=FLAVOR=prod
           xcodebuild archive \
             -archivePath ./build/ios/Runner.xcarchive \
             -workspace ./ios/Runner.xcworkspace \
@@ -304,7 +304,7 @@ jobs:
 
   action-timeline:
     needs: [android, ios]
-    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-stg.yml' }}
+    if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-prod-firebase.yml' }}
     timeout-minutes: 30
     runs-on: ubuntu-24.04
     steps:
