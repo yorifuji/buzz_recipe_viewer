@@ -66,14 +66,14 @@ jobs:
 
       - name: flutterfire configure
         env:
-          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
+          FIREBASE_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
           which firebase || curl -sL https://firebase.tools | analytics=false bash
           firebase --version
           which flutterfire || dart pub global activate flutterfire_cli
           flutterfire -v
-          echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
+          echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-stg
 
       - name: Extract key.properties file
         env:
@@ -87,19 +87,19 @@ jobs:
       - name: Build app bundle
         run: flutter build apk --dart-define=FLAVOR=stg
 
-      - name: Extract Firebase Service Account file
+      - name: Extract Firebase App Distribution Service Account file
         if: ${{ inputs.upload }}
         env:
-          FIREBASE_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}
+          FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
-          echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
+          echo -n "$FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_app_distribution_service_account.json
 
       - name: Upload to Firebase App Distribution
         if: ${{ inputs.upload }}
         env:
           FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
         run: |
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk --app $FIREBASE_APP_ID_ANDROID --testers "yorifuji@gmail.com"
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_app_distribution_service_account.json firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk --app $FIREBASE_APP_ID_ANDROID --testers "yorifuji@gmail.com"
 
       - name: Clean up
         if: ${{ always() }}
@@ -139,20 +139,16 @@ jobs:
             build/ios/pod_inputs.fingerprint
           key: cocoapods-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.flutter-action.outputs.VERSION }}-${{ hashFiles('ios/Podfile.lock', 'ios/Runner.xcodeproj/project.pbxproj') }}
 
-      # - name: Workaround for cocoapods cache
-      #   run: |
-      #     if [ -d ios/Pods ]; then cp ios/Podfile.lock ios/Pods/Manifest.lock; fi
-
       - name: flutterfire configure
         env:
-          FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64 }}
+          FIREBASE_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
           which firebase || curl -sL https://firebase.tools | analytics=false bash
           firebase --version
           which flutterfire || dart pub global activate flutterfire_cli
           flutterfire -v
-          echo -n "$FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_admin_service_account.json
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_admin_service_account.json make flutterfire-configure-stg
+          echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json make flutterfire-configure-stg
 
       - name: Import Apple Development Certificate(Required xcodebuild archive with entitlements)
         env:
@@ -234,12 +230,12 @@ jobs:
         run: |
           echo "app-path=$(pwd)/$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_OUTPUT
 
-      - name: Extract Firebase Service Account file
+      - name: Extract Firebase App Distribution Service Account file
         if: ${{ inputs.upload }}
         env:
-          FIREBASE_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}
+          FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_JSON_BASE64 }}
         run: |
-          echo -n "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_service_account.json
+          echo -n "$FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_JSON_BASE64" | base64 --decode > ${{ runner.temp }}/firebase_app_distribution_service_account.json
 
       - name: Upload to Firebase App Distribution
         if: ${{ inputs.upload }}
@@ -247,7 +243,7 @@ jobs:
           FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
           APP_PATH: ${{ steps.info.outputs.app-path }}
         run: |
-          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_service_account.json firebase appdistribution:distribute $APP_PATH --app $FIREBASE_APP_ID_IOS --testers "yorifuji@gmail.com"
+          GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase_app_distribution_service_account.json firebase appdistribution:distribute $APP_PATH --app $FIREBASE_APP_ID_IOS --testers "yorifuji@gmail.com"
 
       - name: Clean up
         if: ${{ always() }}
