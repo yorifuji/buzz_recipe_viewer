@@ -42,14 +42,12 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           if [[ "$IS_PR" == "true" ]]; then
-            echo "command=$PR_COMMENT" >> $GITHUB_OUTPUT
+            # For PR comments, remove the leading slash
+            COMMAND=${PR_COMMENT#/}
+            echo "command=$COMMAND" >> $GITHUB_OUTPUT
           else
-            # For workflow_dispatch, add slash prefix if not present
-            if [[ "$WORKFLOW_COMMAND" != /* ]]; then
-              echo "command=/$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
-            else
-              echo "command=$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
-            fi
+            # For workflow_dispatch, use the command as is (without slash)
+            echo "command=$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
           fi
 
   dispatcher:
@@ -77,13 +75,13 @@ jobs:
             // Get command text from pre-process job
             const commandText = process.env.COMMAND_TEXT || '';
             
-            // Detect command from command text
+            // Detect command from command text (without slash)
             const command = supportedCommands.find(cmd =>
-              commandText.startsWith(`/${cmd}`)
+              commandText === cmd
             );
             
             if (!command && commandText) {
-              core.setFailed(`Unsupported command: ${commandText}. Supported commands: ${supportedCommands.map(cmd => '/' + cmd).join(', ')}`);
+              core.setFailed(`Unsupported command: ${commandText}. Supported commands: ${supportedCommands.join(', ')}`);
               return;
             }
             
