@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       command:
-        description: 'Command to dispatch, starts with "/"'
+        description: 'Command to dispatch (without slash)'
         required: true
-        default: '/deploy'
+        default: 'deploy'
 
 permissions:
   contents: read
@@ -25,7 +25,9 @@ jobs:
         contains(fromJson('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
         startsWith(github.event.comment.body, '/')
       ) ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.command != '')
+      (
+        github.event_name == 'workflow_dispatch'
+      )
       }}
     timeout-minutes: 30
     outputs:
@@ -37,10 +39,14 @@ jobs:
           PR_COMMENT: ${{ github.event.comment.body }}
           WORKFLOW_COMMAND: ${{ github.event.inputs.command }}
           IS_PR: ${{ github.event.issue.pull_request != null }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           if [[ "$IS_PR" == "true" ]]; then
-            echo "command=$PR_COMMENT" >> $GITHUB_OUTPUT
+            # For PR comments, remove the leading slash
+            COMMAND=${PR_COMMENT#/}
+            echo "command=$COMMAND" >> $GITHUB_OUTPUT
           else
+            # For workflow_dispatch, use the command as is (without slash)
             echo "command=$WORKFLOW_COMMAND" >> $GITHUB_OUTPUT
           fi
 
@@ -67,31 +73,42 @@ jobs:
             const supportedCommands = ['deploy'].sort((a, b) => b.length - a.length);
 
             // Get command text from pre-process job
-            const commandText = process.env.COMMAND_TEXT;
-
-            // Detect command from command text
+            const commandText = process.env.COMMAND_TEXT || '';
+            
+            // Detect command from command text (without slash)
             const command = supportedCommands.find(cmd =>
-              commandText.startsWith(`/${cmd}`)
+              commandText === cmd
             );
+            
+            if (!command && commandText) {
+              core.setFailed(`Unsupported command: ${commandText}. Supported commands: ${supportedCommands.join(', ')}`);
+              return;
+            }
+            
             core.setOutput('command', command || '')
 
             // Only get PR info if this is from a pull request comment
             if (process.env.IS_PR === 'true') {
-              // Get PR info and extract branch name
-              const { data: pullRequest } = await github.rest.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: parseInt(process.env.ISSUE_NUMBER)
-              });
-              if (!pullRequest.head.ref) {
-                core.setFailed('Failed to get branch name from pull request');
-                return;
+              try {
+                // Get PR info and extract branch name
+                const { data: pullRequest } = await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: parseInt(process.env.ISSUE_NUMBER || '0')
+                });
+                if (!pullRequest.head.ref) {
+                  core.setFailed('Failed to get branch name from pull request');
+                  return;
+                }
+                core.setOutput('branch', pullRequest.head.ref);
+              } catch (error) {
+                core.setFailed(`Error getting PR info: ${error.message}`);
               }
-              core.setOutput('branch', pullRequest.head.ref);
             } else if (process.env.EVENT_NAME === 'workflow_dispatch') {
               // For workflow_dispatch, use the current branch where the workflow is running
               core.setOutput('branch', process.env.CURRENT_BRANCH);
-              console.log(`Using current branch: ${process.env.CURRENT_BRANCH} for workflow_dispatch`);
+            } else {
+              core.setOutput('branch', process.env.CURRENT_BRANCH || 'main');
             }
 
   deploy:
