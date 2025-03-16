@@ -67,6 +67,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           CURRENT_BRANCH: ${{ github.ref_name }}
+          COMMENT_ID: ${{ github.event.comment.id }}
         with:
           script: |
             // List of supported slash commands
@@ -86,6 +87,22 @@ jobs:
             }
             
             core.setOutput('command', command || '')
+
+            // Add reaction to comment if this is from a PR comment and command is valid
+            if (process.env.IS_PR === 'true' && command && process.env.COMMENT_ID) {
+              try {
+                await github.rest.reactions.createForIssueComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: parseInt(process.env.COMMENT_ID),
+                  content: 'eyes'
+                });
+                console.log('Added eyes reaction to comment');
+              } catch (error) {
+                console.log(`Error adding reaction: ${error.message}`);
+                // Continue execution even if reaction fails
+              }
+            }
 
             // Only get PR info if this is from a pull request comment
             if (process.env.IS_PR === 'true') {
