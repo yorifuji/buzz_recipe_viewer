@@ -13,8 +13,8 @@ on:
         default: 'deploy'
 
 permissions:
-  contents: read
-  pull-requests: read
+  contents: write
+  pull-requests: write
   issues: write
 
 jobs:
@@ -92,15 +92,24 @@ jobs:
             // Add reaction to comment if this is from a PR comment and command is valid
             if (process.env.IS_PR === 'true' && command && process.env.COMMENT_ID) {
               try {
-                await github.rest.reactions.createForIssueComment({
+                console.log(`Attempting to add reaction to comment ID: ${process.env.COMMENT_ID}`);
+                
+                // Log available context information for debugging
+                console.log(`Repository: ${context.repo.owner}/${context.repo.repo}`);
+                console.log(`Event type: ${context.eventName}`);
+                console.log(`Actor: ${context.actor}`);
+                
+                const response = await github.rest.reactions.createForIssueComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   comment_id: parseInt(process.env.COMMENT_ID),
                   content: 'eyes'
                 });
-                console.log('Added eyes reaction to comment');
+                
+                console.log(`Added eyes reaction to comment. Response status: ${response.status}`);
               } catch (error) {
                 console.log(`Error adding reaction: ${error.message}`);
+                console.log(`Error details: ${JSON.stringify(error)}`);
                 // Continue execution even if reaction fails
               }
             }
