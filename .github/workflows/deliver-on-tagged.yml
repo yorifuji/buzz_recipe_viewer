@@ -8,9 +8,6 @@ on:
       - v*
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 defaults:
   run:
     shell: bash -euo pipefail {0}
@@ -19,10 +16,14 @@ jobs:
   prod:
     uses: ./.github/workflows/deliver-prod.yml
     secrets: inherit
+    permissions:
+      contents: read
 
   stg:
     uses: ./.github/workflows/deliver-stg.yml
     secrets: inherit
+    permissions:
+      contents: read
 
   pages:
     uses: ./.github/workflows/deliver-dev.yml
@@ -37,5 +38,6 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    permissions: {}
     steps:
       - uses: Kesin11/actions-timeline@427ee2cf860166e404d0d69b4f2b24012bb7af4f # v2.2.3

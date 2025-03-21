@@ -14,10 +14,6 @@ on:
       - '.github/workflows/vrt.yml' # this file
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pull-requests: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -30,6 +26,8 @@ jobs:
   prepare:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
+    permissions:
+      contents: read
     outputs:
       actual-sha: ${{ steps.prepare.outputs.actual-sha }}
       actual-cache-hit: ${{ steps.prepare.outputs.actual-cache-hit }}
@@ -44,6 +42,8 @@ jobs:
     needs: prepare
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -80,6 +80,8 @@ jobs:
     needs: prepare
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -115,6 +117,10 @@ jobs:
     if: ${{ !cancelled() && !failure() }}
     needs: [prepare, expected, actual]
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+    timeout-minutes: 30
     steps:
       - uses: yorifuji/easy-vrt/compare@5a06f323dc6c5e97d20ad11cd264262ef334df41 # v2.0.1
         with:
@@ -127,5 +133,7 @@ jobs:
     needs: [compare]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
+    permissions: {}
+    timeout-minutes: 30
     steps:
       - uses: Kesin11/actions-timeline@427ee2cf860166e404d0d69b4f2b24012bb7af4f # v2.2.3

@@ -16,11 +16,6 @@ on:
         type: boolean
         default: true
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 defaults:
   run:
     shell: bash -euo pipefail {0}
@@ -29,6 +24,10 @@ jobs:
   web:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: development
       url: ${{ steps.deployment.outputs.page_url }}
@@ -94,5 +93,6 @@ jobs:
     if: ${{ !cancelled() && github.event.workflow == '.github/workflows/deliver-dev.yml' }}
     timeout-minutes: 30
     runs-on: ubuntu-24.04
+    permissions: {}
     steps:
       - uses: Kesin11/actions-timeline@427ee2cf860166e404d0d69b4f2b24012bb7af4f # v2.2.3

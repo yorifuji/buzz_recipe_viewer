@@ -12,11 +12,6 @@ on:
         required: true
         default: 'deploy'
 
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-
 jobs:
   pre-process:
     runs-on: ubuntu-24.04
@@ -33,6 +28,7 @@ jobs:
     timeout-minutes: 30
     outputs:
       command: ${{ steps.set-command.outputs.command }}
+    permissions: {}
     steps:
       - id: set-command
         name: "Set command output"
@@ -58,6 +54,10 @@ jobs:
     outputs:
       command: ${{ steps.parser.outputs.command }}
       branch: ${{ steps.parser.outputs.branch }}
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
       - id: parser
         name: "Parse slash command"
@@ -143,6 +143,8 @@ jobs:
     if: ${{ needs.dispatcher.outputs.command == 'deploy' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:

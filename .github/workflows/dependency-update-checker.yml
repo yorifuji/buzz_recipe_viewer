@@ -11,10 +11,6 @@ env:
   GIT_USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
   GIT_USER_NAME: 'github-actions[bot]'
 
-permissions:
-  contents: write
-  pull-requests: write
-
 defaults:
   run:
     shell: bash -euo pipefail {0}
@@ -23,6 +19,9 @@ jobs:
   dependency-update-checker:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-latest') || 'self-hosted' }}
     timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
