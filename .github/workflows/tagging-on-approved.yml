@@ -7,10 +7,6 @@ on:
     types: [submitted]
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
-
 defaults:
   run:
     shell: bash -euo pipefail {0}
@@ -19,6 +15,9 @@ jobs:
   check-approved:
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
     if: |
       startsWith(github.event.pull_request.head.ref, 'releases/') &&
       github.event.review.state == 'approved' &&
@@ -38,6 +37,8 @@ jobs:
           ADD_LABEL: 'deliver'
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: add comment to pull requset
         env:
@@ -49,8 +50,13 @@ jobs:
     needs: check-approved
     runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'ubuntu-24.04') || 'self-hosted' }}
     timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: get version from pubspec.yaml
         run: |
