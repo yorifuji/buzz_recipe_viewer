@@ -79,7 +79,7 @@ jobs:
             
             // Detect command from command text (without slash)
             const command = supportedCommands.find(cmd =>
-              commandText === cmd
+              commandText.startsWith(cmd)
             );
             
             if (!command && commandText) {
