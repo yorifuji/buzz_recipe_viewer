@@ -1,0 +1,30 @@
+excludes:
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/deliver-on-tagged.yml
+    job_name: prod
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/deliver-on-tagged.yml
+    job_name: stg
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/deliver-on-tagged.yml
+    job_name: pages
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/deliver-pages-on-push.yml
+    job_name: pages
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/deliver-pages-on-push.yml
+    job_name: check
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/nightly-build.yml
+    job_name: check
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/nightly-build.yml
+    job_name: build-prod
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/nightly-build.yml
+    job_name: build-stg
+  - policy_name: deny_inherit_secrets
+    workflow_file_path: .github/workflows/nightly-build.yml
+    job_name: build-dev
+  # - policy_name: action_ref_should_be_full_length_commit_sha
+  #   action_name: yuki0n0/action-appstoreconnect-token/.github/workflows/dispatch-slash-command.yml
