@@ -28,3 +28,9 @@ excludes:
     job_name: build-dev
   # - policy_name: action_ref_should_be_full_length_commit_sha
   #   action_name: yuki0n0/action-appstoreconnect-token/.github/workflows/dispatch-slash-command.yml
+  - policy_name: checkout_persist_credentials_should_be_false
+    workflow_file_path: .github/workflows/bump-pull-request.yml
+    job_name: bump
+  - policy_name: checkout_persist_credentials_should_be_false
+    workflow_file_path: .github/workflows/bump.yml
+    job_name: bump
