@@ -51,12 +51,6 @@ jobs:
           git config --local user.name $GIT_USER_NAME
           git config --local user.email $GIT_USER_EMAIL
 
-      - id: app-token
-        uses: actions/create-github-app-token@af35edadc00be37caa72ed9f3e6d5f7801bfdf09 # v1.11.7
-        with:
-          app-id: ${{ secrets.APPS_APP_ID }}
-          private-key: ${{ secrets.APPS_PRIVATE_KEY }}
-
       - name: bump up version
         run: |
           echo choice: ${{ github.event.inputs.bump }}
@@ -65,13 +59,26 @@ jobs:
 
       - name: commit pubspec.yaml
         run: |
+          git checkout -b releases/$BUMP_VERSION
           git add -u pubspec.yaml
           echo "Bumped version: $BUMP_VERSION" | git commit --file=-
+
+      - id: app-token
+        uses: actions/create-github-app-token@af35edadc00be37caa72ed9f3e6d5f7801bfdf09 # v1.11.7
+        with:
+          app-id: ${{ secrets.APPS_APP_ID }}
+          private-key: ${{ secrets.APPS_PRIVATE_KEY }}
+
+      - name: push branch
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        uses: suzuki-shunsuke/commit-action@9faad521ea6a1e768439ffbe6b25b6cb3fc1b181 # v0.0.6
+        with:
+          github_token: ${{ steps.app-token.outputs.token }}
+          branch: releases/$BUMP_VERSION
 
       - name: create pull request
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git checkout -b releases/$BUMP_VERSION
-          git push -f -u origin releases/$BUMP_VERSION
           gh pr create --base ${{ github.ref_name }} --head releases/$BUMP_VERSION --title "Release $BUMP_VERSION" --body "Release $BUMP_VERSION"

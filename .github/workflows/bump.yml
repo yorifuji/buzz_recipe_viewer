@@ -69,7 +69,9 @@ jobs:
         run: |
           git add -u pubspec.yaml
           echo "Bumped version: $BUMP_VERSION" | git commit --file=-
-          git push
+
+      - name: Push changes to the remote branch
+        uses: suzuki-shunsuke/commit-action@9faad521ea6a1e768439ffbe6b25b6cb3fc1b181 # v0.0.6
 
       - name: create tag and release note
         env:
