@@ -58,3 +58,6 @@ firebase-deploy-stg:
 .PHONY: firebase-deploy-prod
 firebase-deploy-prod:
 	firebase deploy --config firebase/firebase.json --project buzzrecipeviewer --only firestore:rules,storage
+
+ghalint:
+	ghalint -c .ghalint run
