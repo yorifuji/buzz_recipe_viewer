@@ -34,6 +34,3 @@ excludes:
   - policy_name: checkout_persist_credentials_should_be_false
     workflow_file_path: .github/workflows/bump.yml
     job_name: bump
-  - policy_name: checkout_persist_credentials_should_be_false
-    workflow_file_path: .github/workflows/dependency-update-checker.yml
-    job_name: dependency-update-checker
