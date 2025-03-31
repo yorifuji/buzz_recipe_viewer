@@ -188,6 +188,8 @@ jobs:
           echo -n "$APPLE_API_AUTHKEY_P8_BASE64" | base64 --decode > ./private_keys/AuthKey_$APPLE_API_KEY_ID.p8
 
       - name: Create ExportOptions.plist and Runner.entitlements
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
           cat << EOS > ./ios/ExportOptions.plist
           <?xml version="1.0" encoding="UTF-8"?>
@@ -200,6 +202,8 @@ jobs:
             <false/>
             <key>method</key>
             <string>app-store-connect</string>
+            <key>teamID</key>
+            <string>${APPLE_TEAM_ID}</string>
           </dict>
           </plist>
           EOS
