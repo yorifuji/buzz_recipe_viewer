@@ -14,6 +14,13 @@ updates:
         update-types:
           - "minor"
           - "patch"
+      firebase:
+        patterns:
+          - "*firebase*"
+          - "cloud_firestore"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: 'github-actions'
     directory: '/'
     open-pull-requests-limit: 10
