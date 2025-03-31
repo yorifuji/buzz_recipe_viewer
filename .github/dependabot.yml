@@ -16,8 +16,7 @@ updates:
           - "patch"
       firebase:
         patterns:
-          - "*firebase*"
-          - "cloud_firestore"
+          - "firebase*"
         update-types:
           - "minor"
           - "patch"
