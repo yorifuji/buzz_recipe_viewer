@@ -219,7 +219,7 @@ jobs:
             -workspace ./ios/Runner.xcworkspace \
             -scheme Runner \
             -configuration Release \
-            -destination "generic/platform=iOS"
+            -destination "generic/platform=iOS" | xcbeautify
           codesign \
             --entitlements ios/Runner/Runner.entitlements \
             --force \
