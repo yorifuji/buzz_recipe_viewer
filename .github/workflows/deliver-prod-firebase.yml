@@ -232,7 +232,6 @@ jobs:
       - name: Clean up
         if: ${{ always() }}
         run: |
-          security delete-keychain ${{ runner.temp }}/app-signing.keychain-db
           rm -rf ~/Library/MobileDevice/Provisioning\ Profiles
           rm -rf ./private_keys
 
