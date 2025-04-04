@@ -218,6 +218,14 @@ jobs:
         run: |
           echo "app-path=$(pwd)/$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_OUTPUT
 
+      - name: Upload IPA file
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+        with:
+          name: ipa-file
+          path: ${{ steps.info.outputs.app-path }}
+          overwrite: true
+          retention-days: 1
+
       - name: Extract Firebase App Distribution Service Account file
         if: ${{ inputs.upload }}
         env:
@@ -238,6 +246,22 @@ jobs:
         run: |
           rm -rf ~/Library/MobileDevice/Provisioning\ Profiles
           rm -rf ./private_keys
+
+  ios-download-ipa:
+    runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-15') || 'self-hosted' }}
+    environment: staging
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Download IPA file
+        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4.2.1
+        with:
+          name: ipa-file
+          path: build/ios/ipa
+
+      - name: Extract IPA file
+        run: ls -al build/ios/ipa
 
   # macos:
   #   runs-on: ${{ (vars.RUNS_ON_SELF_HOSTED == null && 'macos-15') || 'self-hosted' }}
