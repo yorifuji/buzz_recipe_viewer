@@ -63,7 +63,7 @@ dev_dependencies:
     sdk: flutter
 
   cider: ^0.2.8
-  freezed: ^3.0.3
+  freezed: ^3.0.6
   build_runner: ^2.4.13
   json_serializable: ^6.9.0
   very_good_analysis: ^7.0.0
