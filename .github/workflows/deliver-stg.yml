@@ -221,7 +221,7 @@ jobs:
           echo $GITHUB_WORKSPACE
           find "${GITHUB_WORKSPACE}/build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM"
           ./ios/Pods/FirebaseCrashlytics/upload-symbols \
-            -v \
+            -d \
             -gsp "${GITHUB_WORKSPACE}/ios/Runner/GoogleService-Info.plist" \
             -p ios \
             -b "${GITHUB_WORKSPACE}/build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM"
