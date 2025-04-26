@@ -218,13 +218,10 @@ jobs:
 
       - name: upload dSYM
         run: |
-          echo $GITHUB_WORKSPACE
-          find "${GITHUB_WORKSPACE}/build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM"
-          ./ios/Pods/FirebaseCrashlytics/upload-symbols \
-            -d \
-            -gsp "${GITHUB_WORKSPACE}/ios/Runner/GoogleService-Info.plist" \
+          ios/Pods/FirebaseCrashlytics/upload-symbols \
+            -gsp ios/Runner/GoogleService-Info.plist \
             -p ios \
-            "${GITHUB_WORKSPACE}/build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM"
+            build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM
 
       - name: Find ipa file path
         id: info
