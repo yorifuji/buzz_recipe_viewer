@@ -224,7 +224,7 @@ jobs:
             -d \
             -gsp "${GITHUB_WORKSPACE}/ios/Runner/GoogleService-Info.plist" \
             -p ios \
-            -b "${GITHUB_WORKSPACE}/build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM"
+            "${GITHUB_WORKSPACE}/build/ios/Runner.xcarchive/dSYMs/Runner.app.dSYM"
 
       - name: Find ipa file path
         id: info
