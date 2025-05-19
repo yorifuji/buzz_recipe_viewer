@@ -29,7 +29,7 @@ dependencies:
   package_info_plus: ^8.1.1
   shared_preferences: ^2.3.3
   custom_text: ^2.0.2
-  like_button: ^2.0.5
+  like_button: ^2.1.0
   collection: ^1.18.0
   slang: ^4.2.1
   slang_flutter: ^4.2.0
