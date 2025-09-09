@@ -189,10 +189,10 @@ packages:
     dependency: transitive
     description:
       name: change
-      sha256: "65db7f966dc7e786687f49900a94c5f08b0eb9ca8c4a3e7eed3a55e980b455e2"
+      sha256: "3bda1ce98526b21927cdea05688563c7065fd7e66d1abbe176c354fef3b2057b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.4"
+    version: "0.7.5"
   characters:
     dependency: transitive
     description:
@@ -413,10 +413,10 @@ packages:
     dependency: transitive
     description:
       name: fake_async
-      sha256: "6a95e56b2449df2273fd8c45a662d6947ce1ebb7aafe80e550a3f68297f3cacc"
+      sha256: "5368f224a74523e8d2e7399ea1638b37aecfca824a3cc4dfdf77bf1fa905ac44"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.2"
+    version: "1.3.3"
   ffi:
     dependency: transitive
     description:
@@ -1065,10 +1065,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.20.2"
   introduction_screen:
     dependency: "direct main"
     description:
@@ -1093,14 +1093,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2"
-  json2yaml:
-    dependency: transitive
-    description:
-      name: json2yaml
-      sha256: da94630fbc56079426fdd167ae58373286f603371075b69bf46d848d63ba3e51
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   json_annotation:
     dependency: "direct main"
     description:
@@ -1121,26 +1113,26 @@ packages:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: c35baad643ba394b40aac41080300150a4f08fd0fd6a10378f8f7c6bc161acec
+      sha256: "8dcda04c3fc16c14f48a7bb586d4be1f0d1572731b6d81d51772ef47c02081e0"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.8"
+    version: "11.0.1"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
       name: leak_tracker_flutter_testing
-      sha256: f8b613e7e6a13ec79cfdc0e97638fddb3ab848452eff057653abd3edba760573
+      sha256: "1dbc140bb5a23c75ea9c4811222756104fbcd1a27173f0c34ca01e16bea473c1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.9"
+    version: "3.0.10"
   leak_tracker_testing:
     dependency: transitive
     description:
       name: leak_tracker_testing
-      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
+      sha256: "8d5a2d49f4a66b49744b23b018848400d23e54caf9463f4eb20df3eb8acb2eb1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   like_button:
     dependency: "direct main"
     description:
@@ -1502,26 +1494,26 @@ packages:
     dependency: "direct main"
     description:
       name: slang
-      sha256: "354283dfe5d6b5bb72d17a52c2acba0ad08c98f8de317a00aa2c801814093982"
+      sha256: b02c531f453c328a1343818c64d730357ac140860147c9a29030fdfc82039266
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.0"
+    version: "4.8.1"
   slang_build_runner:
     dependency: "direct dev"
     description:
       name: slang_build_runner
-      sha256: b96f23d5b518fbabdb4e0328d1b260b1af0149b2603b2c98f670c1ce46188bbb
+      sha256: c1cf6525aee9afa9411d689908e6638f2da0ad581ce59eb11132d5f976450c8c
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.0"
+    version: "4.8.1"
   slang_flutter:
     dependency: "direct main"
     description:
       name: slang_flutter
-      sha256: "6891526b13641dd2667ce60a9a65ef2c1611f838105396e5e8ad39edc4ecb191"
+      sha256: "7a5e55f2b1ec99e06354a5213b992d34017efacccba8ffc6066cfc5517cc0282"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.0"
+    version: "4.8.0"
   source_gen:
     dependency: transitive
     description:
@@ -1606,10 +1598,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: fb31f383e2ee25fbbfe06b40fe21e1e458d14080e3c67e7ba0acfde4df4e0bbd
+      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.4"
+    version: "0.7.6"
   text_parser:
     dependency: transitive
     description:
@@ -1734,10 +1726,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
+      sha256: d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.2.0"
   version_manipulation:
     dependency: transitive
     description:
